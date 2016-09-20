@@ -8,6 +8,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".view.AdminRatesActivity" />
+        <activity android:name=".view.ProjectionTimeFrameActivity" />
+        <activity android:name=".view.SurveySummaryActivity" />
+        <activity android:name=".view.UnitsActivity"></activity>
         <activity android:name=".view.MainActivity" />
         <activity android:name=".view.RegistrationActivity" />
         <activity android:name=".view.LoginActivity" />
