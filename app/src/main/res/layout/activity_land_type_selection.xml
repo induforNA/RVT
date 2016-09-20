@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu_drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- The main content view -->
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/image_view_menu_icon"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_menu_black_36dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <!--<TextView-->
+                <!--android:textColor="#000000"-->
+                <!--android:layout_marginRight="56dp"-->
+                <!--android:layout_marginTop="30dp"-->
+                <!--android:textSize="30sp"-->
+                <!--android:gravity="center"-->
+                <!--android:text="Start Servey"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="40sp"
+                android:textColor="#000000"
+                android:text="What kinds of land use are valued on your land?"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:textSize="30sp"
+                android:text="Forestland"
+                android:id="@+id/forestland"
+                android:onClick="slectedLandKind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:textSize="30sp"
+                android:text="Cropland"
+                android:id="@+id/cropland"
+                android:onClick="slectedLandKind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:textSize="30sp"
+                android:text="Pastureland"
+                android:id="@+id/pastureland"
+                android:onClick="slectedLandKind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:textSize="30sp"
+                android:text="Mining land"
+                android:id="@+id/miningland"
+                android:onClick="slectedLandKind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:gravity="right"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:textAllCaps="false"
+                android:textColor="#ffffff"
+                android:layout_gravity="right"
+                android:text="Back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/next_button"
+                android:textAllCaps="false"
+                android:textColor="#ffffff"
+                android:layout_gravity="right"
+                android:text="Next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+    <!-- The navigation drawer -->
+    <include
+        android:id="@+id/left_drawer"
+        layout="@layout/navigation_drawer_menu"/>
+</android.support.v4.widget.DrawerLayout>

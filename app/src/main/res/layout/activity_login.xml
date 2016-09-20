@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:hint="@string/surveyor_hint"
+        android:layout_weight="1"
+        android:layout_width="300dp"
+        android:gravity="center"
+        android:paddingTop="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_surveyor"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:layout_width="300dp"
+        android:hint="@string/community_hint"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_community"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:layout_width="300dp"
+        android:gravity="center"
+        android:hint="@string/survey_hint"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:id="@+id/edittext_survey"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:text="@string/login_button"
+        android:id="@+id/button_login"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/sign_up_button"
+        android:background="@android:color/transparent"
+        android:id="@+id/button_sign_up"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:text="@string/admin_login_button"
+        android:id="@+id/button_admin_login"
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>

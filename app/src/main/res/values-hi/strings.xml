@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">ओमिडयर</string>
+    <string-array name="country_array">
+        <item>देश चुनिए</item>
+        <item>इंडिया</item>
+        <item>ऑस्ट्रेलिया</item>
+        <item>यूयेसे</item>
+        <item>छीना</item>
+        <item>जॅमेका</item>
+        <item>जापान</item>
+        <item>ब्रासिल</item>
+        <item>इंग्लेंड</item>
+    </string-array>
+    <string-array name="language_array">
+        <item>भाषा चुनिए</item>
+        <item>इंग्लीश</item>
+        <item>हिन्दी</item>
+    </string-array>
+    <string-array name="currency_array">
+        <item>मुद्रा चुनें</item>
+        <item>INR</item>
+        <item>USD</item>
+        <item>UR</item>
+        <item>AUD</item>
+    </string-array>
+    <string name="about_this_app">के बारे में इस उपकरण</string>
+</resources>
