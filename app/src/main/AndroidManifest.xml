@@ -11,7 +11,7 @@
         <activity android:name=".view.AdminRatesActivity" />
         <activity android:name=".view.ProjectionTimeFrameActivity" />
         <activity android:name=".view.SurveySummaryActivity" />
-        <activity android:name=".view.UnitsActivity"></activity>
+        <activity android:name=".view.UnitsActivity" />
         <activity android:name=".view.MainActivity" />
         <activity android:name=".view.RegistrationActivity" />
         <activity android:name=".view.LoginActivity" />
@@ -22,9 +22,11 @@
         <activity android:name=".view.FlashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.CertificateActivity"></activity>
     </application>
 
 </manifest>

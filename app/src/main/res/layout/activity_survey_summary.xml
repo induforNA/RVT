@@ -11,12 +11,12 @@
     tools:context="com.sayone.omidyar.view.SurveySummaryActivity">
 
     <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Summary of surveys"
         android:layout_gravity="center"
-        android:textSize="@dimen/heading_size"
-        android:id="@+id/textView3" />
+        android:text="@string/summary_of_survey_heading"
+        android:textSize="@dimen/heading_size" />
 
     <View
         android:layout_width="300dp"
@@ -24,5 +24,128 @@
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:background="#000000" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textfield_size"
+            android:text="@string/in_progress_text" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:textSize="@dimen/textfield_size"
+            android:layout_gravity="center_horizontal"
+            android:text="New Text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textfield_size"
+            android:text="@string/completed_text" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:textSize="@dimen/textfield_size"
+            android:layout_gravity="center_horizontal"
+            android:text="New Text" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/textfield_size"
+        android:layout_gravity="end"
+        android:id="@+id/select_all"
+        android:text="@string/select_all" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textfield_size"
+            android:layout_weight="1"
+            android:text="@string/text_survey1" />
+
+        <CheckBox
+            android:id="@+id/checkBox_survey1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textfield_size"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/text_survey2" />
+
+        <CheckBox
+            android:id="@+id/checkBox_survey2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_reset_data"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_reset_data" />
+
+        <Button
+            android:id="@+id/button_send_data_to_server"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="@string/button_send_to_server" />
+
+    </LinearLayout>
 
 </LinearLayout>
