@@ -57,6 +57,7 @@
             android:name=".view.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -71,6 +72,10 @@
         <activity
             android:screenOrientation="landscape"
             android:name=".view.SocialCapitalActivity">
+        </activity>
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".view.CertificateActivity">
         </activity>
     </application>
 
