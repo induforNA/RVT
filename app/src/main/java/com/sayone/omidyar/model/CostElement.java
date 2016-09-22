@@ -11,6 +11,8 @@ public class CostElement extends RealmObject {
     @PrimaryKey
     private long id;
 
+    private String surveyId;
+
     private String name;
 
     private int expenseFrequencyValue;
@@ -107,5 +109,13 @@ public class CostElement extends RealmObject {
 
     public void setSubtotal(double subtotal) {
         this.subtotal = subtotal;
+    }
+
+    public String getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(String surveyId) {
+        this.surveyId = surveyId;
     }
 }

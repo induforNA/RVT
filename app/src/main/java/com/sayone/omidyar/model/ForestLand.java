@@ -11,6 +11,8 @@ public class ForestLand extends RealmObject {
     @PrimaryKey
     private long id;
 
+    private String surveyId;
+
     private RevenueProduct revenueProducts;
 
     private CostElement costElements;
@@ -97,5 +99,13 @@ public class ForestLand extends RealmObject {
 
     public void setNetPresentValue(double netPresentValue) {
         this.netPresentValue = netPresentValue;
+    }
+
+    public String getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(String surveyId) {
+        this.surveyId = surveyId;
     }
 }

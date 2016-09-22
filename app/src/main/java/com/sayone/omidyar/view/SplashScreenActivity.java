@@ -6,7 +6,7 @@ import android.os.Bundle;
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 
-public class FlashScreenActivity extends BaseActivity {
+public class SplashScreenActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class FlashScreenActivity extends BaseActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-                    Intent intent = new Intent(getApplicationContext(), RegistrationActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), LoadingActivity.class);
                     startActivity(intent);
                 }
             }

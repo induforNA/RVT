@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
+import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.Survey;
 
 import java.text.DateFormat;
@@ -27,6 +28,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 
 /**
  * Created by sayone on 16/9/16.
@@ -152,6 +154,9 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
     }
 
     public int getNextKeySurvey() {
+        if(realm.where(Survey.class).max("id") == null){
+            return 1;
+        }
         return realm.where(Survey.class).max("id").intValue() + 1;
     }
 
@@ -213,17 +218,25 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
     }
 
     public void insertData() {
+        surveyId = getNextKeySurvey();
+        String formattediId = String.format("%04d", surveyId);
+        RealmList<LandKind> landKinds = new RealmList<>();
+
+        landKinds.add(insertAllLandKinds(formattediId,"Forestland"));
+        landKinds.add(insertAllLandKinds(formattediId,"Cropland"));
+        landKinds.add(insertAllLandKinds(formattediId,"Pastureland"));
+        landKinds.add(insertAllLandKinds(formattediId,"Mining Land"));
+
         realm.beginTransaction();
         Survey survey = realm.createObject(Survey.class);
-        surveyId = getNextKeySurvey();
         survey.setId(surveyId);
-        String formattediId = String.format("%04d", surveyId);
         survey.setSurveyId(formattediId);
         editor = preferences.edit();
         editor.putString("surveyId", formattediId);
         editor.apply();
         survey.setSurveyor(surveyor.getText().toString());
         survey.setRespondentGroup(respondentGroup.getText().toString());
+        survey.setLandKinds(landKinds);
         survey.setState(state.getText().toString());
         survey.setDistrict(district.getText().toString());
         survey.setCommunity(community.getText().toString());
@@ -234,5 +247,20 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         realm.commitTransaction();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
+    }
+
+    public LandKind insertAllLandKinds(String serveyIdForLand, String landTypeName){
+        realm.beginTransaction();
+        LandKind landKind = realm.createObject(LandKind.class);
+        landKind.setId(getNextKeyLandKind());
+        landKind.setSurveyId(serveyIdForLand);
+        landKind.setName(landTypeName);
+        landKind.setStatus("deleted");
+        realm.commitTransaction();
+        return landKind;
+    }
+
+    public int getNextKeyLandKind() {
+        return realm.where(LandKind.class).max("id").intValue() + 1;
     }
 }

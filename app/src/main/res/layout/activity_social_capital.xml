@@ -23,14 +23,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <!--<TextView-->
-                <!--android:textColor="#000000"-->
-                <!--android:layout_marginRight="56dp"-->
-                <!--android:layout_marginTop="30dp"-->
-                <!--android:textSize="30sp"-->
-                <!--android:gravity="center"-->
-                <!--android:text="Start Servey"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content" />-->
+            <!--android:textColor="#000000"-->
+            <!--android:layout_marginRight="56dp"-->
+            <!--android:layout_marginTop="30dp"-->
+            <!--android:textSize="30sp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="Start Servey"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
         </LinearLayout>
         <LinearLayout
             android:layout_weight="1"
@@ -40,36 +40,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/question"
                 android:textSize="40sp"
                 android:textColor="#000000"
-                android:text="What kinds of land use are valued on your land?"
+                android:text="question?"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <CheckBox
                 android:textSize="30sp"
-                android:text="Forestland"
-                android:id="@+id/forestland"
+                android:text="option 1"
+                android:id="@+id/option_a"
                 android:onClick="slectedLandKind"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <CheckBox
                 android:textSize="30sp"
                 android:text="Cropland"
-                android:id="@+id/cropland"
+                android:id="@+id/option_b"
                 android:onClick="slectedLandKind"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <CheckBox
                 android:textSize="30sp"
                 android:text="Pastureland"
-                android:id="@+id/pastureland"
+                android:id="@+id/option_c"
                 android:onClick="slectedLandKind"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <CheckBox
                 android:textSize="30sp"
                 android:text="Mining land"
-                android:id="@+id/miningland"
+                android:id="@+id/option_d"
+                android:onClick="slectedLandKind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:textSize="30sp"
+                android:text="Mining land"
+                android:id="@+id/option_e"
                 android:onClick="slectedLandKind"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

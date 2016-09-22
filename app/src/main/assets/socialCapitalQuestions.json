@@ -1,0 +1,366 @@
+{
+  "socialCapitalQuestions": [
+    {
+      "question": "What rights do households in this community have over this parcel?",
+      "questionHindi": "What rights do households in this community have over this parcel?",
+      "weight": "20",
+      "optiontype": "multiple",
+      "options": [
+        {
+          "opt": "Right to access and use the parcel",
+          "optHindi": "Right to access and use the parcel",
+          "val": "0"
+        },
+        {
+          "opt": "Right to benefit from the parcel",
+          "optHindi": "Right to benefit from the parcel",
+          "val": "5"
+        },
+        {
+          "opt": "Right to control how the parcel will be used",
+          "optHindi": "Right to control how the parcel will be used",
+          "val": "10"
+        },
+        {
+          "opt": "Right to exclude others from unauthorized use of the parcel",
+          "optHindi": "Right to exclude others from unauthorized use of the parcel",
+          "val": "15"
+        },
+        {
+          "opt": "Right to pass rights to the parcel down to future generations or sell rights to others",
+          "optHindi": "Right to pass rights to the parcel down to future generations or sell rights to others",
+          "val": "20"
+        }
+      ]
+    },
+    {
+      "question": "What rights to this parcel are provided through a state-backed and legally recognized record (i.e. title, lease, etc.)?",
+      "questionHindi": "What rights to this parcel are provided through a state-backed and legally recognized record (i.e. title, lease, etc.)?",
+      "weight": "20",
+      "optiontype": "multiple",
+      "options": [
+        {
+          "opt": "Right to access and use the parcel",
+          "optHindi": "Right to access and use the parcel",
+          "val": "0"
+        },
+        {
+          "opt": "Right to benefit from the parcel",
+          "optHindi": "Right to benefit from the parcel",
+          "val": "5"
+        },
+        {
+          "opt": "Right to control how the parcel will be used",
+          "optHindi": "Right to control how the parcel will be used",
+          "val": "10"
+        },
+        {
+          "opt": "Right to exclude others from unauthorized use of the parcel",
+          "optHindi": "Right to exclude others from unauthorized use of the parcel",
+          "val": "15"
+        },
+        {
+          "opt": "Right to pass rights to the parcel down to future generations or sell rights to others",
+          "optHindi": "Right to pass rights to the parcel down to future generations or sell rights to others",
+          "val": "20"
+        }
+      ]
+    },
+    {
+      "question": "Are the boundaries for this parcel well known and understood by government authorities and/or community members?",
+      "questionHindi": "Are the boundaries for this parcel well known and understood by government authorities and/or community members?",
+      "weight": "5",
+      "optiontype": "single",
+      "options": [
+        {
+          "opt": "Both",
+          "optHindi": "Both",
+          "val": "0"
+        },
+        {
+          "opt": "Government or community only",
+          "optHindi": "Government or community only",
+          "val": "10"
+        },
+        {
+          "opt": "None",
+          "optHindi": "None",
+          "val": "20"
+        }
+      ]
+    },
+    {
+      "question": "Does this group feel confident that they will be able to continue to use the parcel for this land use without constraints indefinitely into the future?",
+      "questionHindi": "Does this group feel confident that they will be able to continue to use the parcel for this land use without constraints indefinitely into the future?",
+      "weight": "5",
+      "optiontype": "single",
+      "options": [
+        {
+          "opt": "Yes",
+          "optHindi": "Yes",
+          "val": "0"
+        },
+        {
+          "opt": "Mostly",
+          "optHindi": "Mostly",
+          "val": "5"
+        },
+        {
+          "opt": "Somewhat",
+          "optHindi": "Somewhat",
+          "val": "10"
+        },
+        {
+          "opt": "Maybe",
+          "optHindi": "Maybe",
+          "val": "15"
+        },
+        {
+          "opt": "No",
+          "optHindi": "No",
+          "val": "20"
+        }
+      ]
+    },
+    {
+      "question": "Are there any current disputes related to the boundaries or rights associated with this parcel?",
+      "questionHindi": "Are there any current disputes related to the boundaries or rights associated with this parcel?",
+      "weight": "5",
+      "optiontype": "single",
+      "options": [
+        {
+          "opt": "No",
+          "optHindi": "No",
+          "val": "0"
+        },
+        {
+          "opt": "One low level",
+          "optHindi": "One low level",
+          "val": "5"
+        },
+        {
+          "opt": "Multiple low level",
+          "optHindi": "Multiple low level",
+          "val": "10"
+        },
+        {
+          "opt": "Open conflict",
+          "optHindi": "Open conflict",
+          "val": "20"
+        }
+      ]
+    },
+    {
+      "question": "If the resource rights are not legally recognized, do households in this community use the parcel and access the resource based upon locally recognized customary norms?",
+      "questionHindi": "If the resource rights are not legally recognized, do households in this community use the parcel and access the resource based upon locally recognized customary norms?",
+      "weight": "5",
+      "optiontype": "single",
+      "options": [
+        {
+          "opt": "Yes",
+          "optHindi": "Yes",
+          "val": "0"
+        },
+        {
+          "opt": "Somewhat",
+          "optHindi": "Somewhat",
+          "val": "10"
+        },
+        {
+          "opt": "No",
+          "optHindi": "No",
+          "val": "20"
+        }
+      ]
+    },
+    {
+      "question": "Is there a group or committee in this community with specific responsibility to manage or oversee matters related to use of this parcel?",
+      "questionHindi": "Is there a group or committee in this community with specific responsibility to manage or oversee matters related to use of this parcel?",
+      "weight": "5",
+      "optiontype": "single",
+      "options": [
+        {
+          "opt": "Yes",
+          "optHindi": "Yes",
+          "val": "0"
+        },
+        {
+          "opt": "No",
+          "optHindi": "No",
+          "val": "20"
+        }
+      ]
+    },
+    {
+      "question": "Are there rules and regulations associated with this parcel that were created by the community itself?",
+      "questionHindi": "Are there rules and regulations associated with this parcel that were created by the community itself?",
+      "weight": "5",
+      "optiontype": "single",
+      "options": [
+        {
+          "opt": "Yes",
+          "optHindi": "Yes",
+          "val": "0"
+        },
+        {
+          "opt": "Some",
+          "optHindi": "Some",
+          "val": "10"
+        },
+        {
+          "opt": "No",
+          "optHindi": "No",
+          "val": "20"
+        }
+      ]
+    },
+    {
+      "question": "Do all stakeholders within the community generally have equal access to the parcel?",
+      "questionHindi": "Do all stakeholders within the community generally have equal access to the parcel?",
+      "weight": "5",
+      "optiontype": "single",
+      "options": [
+        {
+          "opt": "Yes",
+          "optHindi": "Yes",
+          "val": "0"
+        },
+        {
+          "opt": "Somewhat",
+          "optHindi": "Somewhat",
+          "val": "10"
+        },
+        {
+          "opt": "No",
+          "optHindi": "No",
+          "val": "20"
+        }
+      ]
+    },
+    {
+      "question": "Does the management group include representatives from all segments of the community?",
+      "questionHindi": "Does the management group include representatives from all segments of the community?",
+      "weight": "5",
+      "optiontype": "single",
+      "options": [
+        {
+          "opt": "Yes",
+          "optHindi": "Yes",
+          "val": "0"
+        },
+        {
+          "opt": "Half",
+          "optHindi": "Half",
+          "val": "10"
+        },
+        {
+          "opt": "None",
+          "optHindi": "None",
+          "val": "20"
+        }
+      ]
+    },
+    {
+      "question": "Are the rules and regulations associated with this parcel generally viewed as fair and legitimate?",
+      "questionHindi": "Are the rules and regulations associated with this parcel generally viewed as fair and legitimate?",
+      "weight": "5",
+      "optiontype": "single",
+      "options": [
+        {
+          "opt": "Yes",
+          "optHindi": "Yes",
+          "val": "0"
+        },
+        {
+          "opt": "By many",
+          "optHindi": "By many",
+          "val": "10"
+        },
+        {
+          "opt": "No",
+          "optHindi": "No",
+          "val": "20"
+        }
+      ]
+    },
+    {
+      "question": "How long have the institutions for this parcel been operating?",
+      "questionHindi": "How long have the institutions for this parcel been operating?",
+      "weight": "5",
+      "optiontype": "single",
+      "options": [
+        {
+          "opt": "20+",
+          "optHindi": "20+",
+          "val": "0"
+        },
+        {
+          "opt": "15 to 20",
+          "optHindi": "15 to 20",
+          "val": "5"
+        },
+        {
+          "opt": "10 to 15",
+          "optHindi": "10 to 15",
+          "val": "10"
+        },
+        {
+          "opt": "5 to 10",
+          "optHindi": "5 to 10",
+          "val": "15"
+        },
+        {
+          "opt": "0 to 5",
+          "optHindi": "0 to 5",
+          "val": "20"
+        }
+      ]
+    },
+    {
+      "question": "How often are decisions made by the committee ignored or not implemented?",
+      "questionHindi": "How often are decisions made by the committee ignored or not implemented?",
+      "weight": "5",
+      "optiontype": "single",
+      "options": [
+        {
+          "opt": "Never",
+          "optHindi": "Never",
+          "val": "0"
+        },
+        {
+          "opt": "Sometimes",
+          "optHindi": "Sometimes",
+          "val": "10"
+        },
+        {
+          "opt": "Always",
+          "optHindi": "Always",
+          "val": "20"
+        }
+      ]
+    },
+    {
+      "question": "How much of your community's livelihoods is generated by this parcel?",
+      "questionHindi": "How much of your community's livelihoods is generated by this parcel?",
+      "weight": "5",
+      "optiontype": "single",
+      "options": [
+        {
+          "opt": "100%",
+          "optHindi": "100%",
+          "val": "0"
+        },
+        {
+          "opt": "50%",
+          "optHindi": "50%",
+          "val": "10"
+        },
+        {
+          "opt": "Less than 10%",
+          "optHindi": "Less than 10%",
+          "val": "20"
+        }
+      ]
+    }
+  ]
+}

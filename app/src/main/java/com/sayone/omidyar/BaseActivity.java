@@ -33,7 +33,8 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        RealmConfiguration config = new RealmConfiguration.Builder(this).build();
+        RealmConfiguration config = new RealmConfiguration.Builder(this).deleteRealmIfMigrationNeeded().build();
+
         Realm.setDefaultConfiguration(config);
 
 ///

@@ -12,6 +12,8 @@ public class LandKind extends RealmObject {
     @PrimaryKey
     private long id;
 
+    private String surveyId;
+
     @Required
     private String name;
 
@@ -24,6 +26,8 @@ public class LandKind extends RealmObject {
     private PastureLand pastureLand;
 
     private MiningLand miningLand;
+
+    private String status;
 
     public long getId() {
         return id;
@@ -79,5 +83,21 @@ public class LandKind extends RealmObject {
 
     public void setMiningLand(MiningLand miningLand) {
         this.miningLand = miningLand;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(String surveyId) {
+        this.surveyId = surveyId;
     }
 }

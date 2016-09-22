@@ -11,6 +11,8 @@ public class Component extends RealmObject {
     @PrimaryKey
     private long id;
 
+    private String surveyId;
+
     private double croplandValue;
 
     private double croplandCompleteness;
@@ -157,5 +159,13 @@ public class Component extends RealmObject {
 
     public void setTotalSocialCapitalScore(double totalSocialCapitalScore) {
         this.totalSocialCapitalScore = totalSocialCapitalScore;
+    }
+
+    public String getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(String surveyId) {
+        this.surveyId = surveyId;
     }
 }

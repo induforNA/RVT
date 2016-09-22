@@ -11,6 +11,8 @@ public class Outlay extends RealmObject {
     @PrimaryKey
     private long id;
 
+    private String surveyId;
+
     private String type;
 
     private String itemName;
@@ -67,5 +69,13 @@ public class Outlay extends RealmObject {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public String getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(String surveyId) {
+        this.surveyId = surveyId;
     }
 }

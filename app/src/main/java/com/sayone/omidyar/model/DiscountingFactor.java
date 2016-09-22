@@ -11,6 +11,8 @@ public class DiscountingFactor extends RealmObject {
     @PrimaryKey
     private long id;
 
+    private String surveyId;
+
     private int year;
 
     private double value;
@@ -37,5 +39,13 @@ public class DiscountingFactor extends RealmObject {
 
     public void setValue(double value) {
         this.value = value;
+    }
+
+    public String getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(String surveyId) {
+        this.surveyId = surveyId;
     }
 }

@@ -12,6 +12,8 @@ public class Participant extends RealmObject {
     @PrimaryKey
     private long id;
 
+    private String surveyId;
+
     @Required
     private String name;
 
@@ -69,6 +71,14 @@ public class Participant extends RealmObject {
 
     public void setOccupation(String occupation) {
         this.occupation = occupation;
+    }
+
+    public String getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(String surveyId) {
+        this.surveyId = surveyId;
     }
 
     @Override

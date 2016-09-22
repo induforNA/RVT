@@ -10,4 +10,6 @@ public class MiningLand extends RealmObject {
 
     @PrimaryKey
     private long id;
+
+    private String surveyId;
 }

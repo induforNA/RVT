@@ -6,10 +6,12 @@ import io.realm.annotations.PrimaryKey;
 /**
  * Created by sayone on 15/9/16.
  */
-public class CashFlow extends RealmObject{
+public class CashFlow extends RealmObject {
 
     @PrimaryKey
     private long id;
+
+    private String surveyId;
 
     private int year;
 
@@ -37,5 +39,13 @@ public class CashFlow extends RealmObject{
 
     public void setValue(double value) {
         this.value = value;
+    }
+
+    public String getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(String surveyId) {
+        this.surveyId = surveyId;
     }
 }

@@ -1,5 +1,6 @@
 package com.sayone.omidyar.model;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -17,9 +18,7 @@ public class SocialCapitalQuestions extends RealmObject {
 
     private String optionType;
 
-//    private HashMap<String,String> options;
-//
-//    private HashMap<String,String> optionsHindi;
+    private RealmList<SocialCapitalAnswerOptions> socialCapitalAnswerOptionses;
 
     private int weight;
 
@@ -55,27 +54,20 @@ public class SocialCapitalQuestions extends RealmObject {
         this.optionType = optionType;
     }
 
-//    public HashMap<String, String> getOptions() {
-//        return options;
-//    }
-//
-//    public void setOptions(HashMap<String, String> options) {
-//        this.options = options;
-//    }
-//
-//    public HashMap<String, String> getOptionsHindi() {
-//        return optionsHindi;
-//    }
-//
-//    public void setOptionsHindi(HashMap<String, String> optionsHindi) {
-//        this.optionsHindi = optionsHindi;
-//    }
-
     public int getWeight() {
         return weight;
     }
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+
+    public RealmList<SocialCapitalAnswerOptions> getSocialCapitalAnswerOptionses() {
+        return socialCapitalAnswerOptionses;
+    }
+
+    public void setSocialCapitalAnswerOptionses(RealmList<SocialCapitalAnswerOptions> socialCapitalAnswerOptionses) {
+        this.socialCapitalAnswerOptionses = socialCapitalAnswerOptionses;
     }
 }
