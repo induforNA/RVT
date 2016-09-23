@@ -12,11 +12,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.Participant;
+import com.sayone.omidyar.model.SocialCapital;
 import com.sayone.omidyar.model.Survey;
 
 import java.util.HashSet;
@@ -143,14 +145,36 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
         Log.e("CHECKED STATUS ", checked+" "+name);
         if (checked) {
             LandKind landKind = realm.where(LandKind.class).equalTo("name",name).findFirst();
+            SocialCapital socialCapital = null;
+            if(landKind.getSocialCapitals() == null){
+                realm.beginTransaction();
+                socialCapital = realm.createObject(SocialCapital.class);
+                socialCapital.setId(getNextKeySocialCapital());
+                socialCapital.setSurveyId(serveyId);
+                realm.commitTransaction();
+            }
+
             realm.beginTransaction();
             landKind.setStatus("active");
+            if(landKind.getSocialCapitals() == null) {
+                landKind.setSocialCapitals(socialCapital);
+            }
             realm.commitTransaction();
             landTypeNames.add(name);
         }else{
             LandKind landKind = realm.where(LandKind.class).equalTo("name",name).findFirst();
+            SocialCapital socialCapital = null;
+            if(landKind.getSocialCapitals() == null){
+                realm.beginTransaction();
+                socialCapital = realm.createObject(SocialCapital.class);
+                socialCapital.setId(getNextKeySocialCapital());
+                socialCapital.setSurveyId(serveyId);
+                realm.commitTransaction();
+            }
+
             realm.beginTransaction();
             landKind.setStatus("deleted");
+            landKind.setSocialCapitals(socialCapital);
             realm.commitTransaction();
             landTypeNames.remove(name);
         }
@@ -185,32 +209,36 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
     }
 
     public void saveLandKind(){
-        Log.e("CLICK ","CHECK");
-//        for (String landTypeName : landTypeNames) {
-//            LandKind landKind = realm.where(LandKind.class).equalTo("name",landTypeName).findFirst();
-//            realm.beginTransaction();
-//            landKind.setStatus("active");
-//            realm.commitTransaction();
-//
-//            landKinds.add(landKind);
-//        }
+        RealmResults<LandKind> landKindRealmResults = realm.where(LandKind.class)
+                .equalTo("surveyId",serveyId)
+                .equalTo("status","active")
+                .findAll();
+        if(landKindRealmResults.size() != 0) {
 
-        // Log.e(TAG,survey1.toString());
+            RealmResults<LandKind> results = realm.where(LandKind.class)
+                    .equalTo("surveyId", serveyId)
+                    .equalTo("status", "active")
+                    .findAll();
+            for (LandKind survey1 : results) {
+                Log.e(TAG, survey1.toString());
+                //Log.e(TAG, String.valueOf(survey1.getParticipants().size()));
+            }
 
-        RealmResults<LandKind> results = realm.where(LandKind.class).findAll();
-        for (LandKind survey1 : results) {
-            Log.e(TAG,survey1.toString());
-            //Log.e(TAG, String.valueOf(survey1.getParticipants().size()));
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("currentSocialCapitalServey", landKindRealmResults.get(0).getName());
+            editor.apply();
+
+            Intent intent = new Intent(LandTypeSelectionActivity.this, SocialCapitalStartActivity.class);
+            startActivity(intent);
+        }else{
+            Toast.makeText(context,"Select atleast one",Toast.LENGTH_SHORT).show();
         }
-//        realm.beginTransaction();
-//        survey.setLandKinds(landKinds);
-//        realm.commitTransaction();
-
-        Intent intent = new Intent(LandTypeSelectionActivity.this, SocialCapitalStartActivity.class);
-        startActivity(intent);
     }
 
     public int getNextKeyLandKind() {
         return realm.where(LandKind.class).max("id").intValue() + 1;
+    }
+    public int getNextKeySocialCapital() {
+        return realm.where(SocialCapital.class).max("id").intValue() + 1;
     }
 }

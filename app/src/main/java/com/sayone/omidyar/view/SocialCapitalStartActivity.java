@@ -68,6 +68,15 @@ public class SocialCapitalStartActivity extends BaseActivity implements View.OnC
 //                Log.e("NAME ",landKind.getName());
 //            }
         }
+//        else if(currentSocialCapitalServey.equals("Forestland")){
+//
+//        }else if(currentSocialCapitalServey.equals("Cropland")){
+//
+//        }else if(currentSocialCapitalServey.equals("Pastureland")){
+//
+//        }else if(currentSocialCapitalServey.equals("Mining Land")){
+//
+//        }
 
         landType.setText(currentSocialCapitalServey);
     }

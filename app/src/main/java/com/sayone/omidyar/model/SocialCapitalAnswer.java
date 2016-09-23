@@ -1,5 +1,6 @@
 package com.sayone.omidyar.model;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -16,9 +17,47 @@ public class SocialCapitalAnswer extends RealmObject {
 
     private SocialCapitalQuestions socialCapitalQuestion;
 
-    private int answer;
+    private MultipleAnswer multipleAnswer;
 
     private int factorScore;
 
+    public long getId() {
+        return id;
+    }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(String surveyId) {
+        this.surveyId = surveyId;
+    }
+
+    public SocialCapitalQuestions getSocialCapitalQuestion() {
+        return socialCapitalQuestion;
+    }
+
+    public void setSocialCapitalQuestion(SocialCapitalQuestions socialCapitalQuestion) {
+        this.socialCapitalQuestion = socialCapitalQuestion;
+    }
+
+    public MultipleAnswer getMultipleAnswer() {
+        return multipleAnswer;
+    }
+
+    public void setMultipleAnswer(MultipleAnswer multipleAnswer) {
+        this.multipleAnswer = multipleAnswer;
+    }
+
+    public int getFactorScore() {
+        return factorScore;
+    }
+
+    public void setFactorScore(int factorScore) {
+        this.factorScore = factorScore;
+    }
 }
