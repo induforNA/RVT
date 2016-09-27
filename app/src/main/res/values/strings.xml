@@ -30,6 +30,48 @@
         <item>Pastureland</item>
         <item>Mining Land</item>
     </string-array>
+    <string-array name="unit_array">
+        <item>Select unit</item>
+        <item>Cubic Meter</item>
+        <item>Cubic Kilometer</item>
+        <item>Cubic Centimeter</item>
+        <item>Cubic Millimeter</item>
+        <item>Liter</item>
+        <item>Milliliter</item>
+        <item>Kilogram</item>
+        <item>Gram</item>
+        <item>Milligram</item>
+        <item>Pound</item>
+        <item>Ounce</item>
+    </string-array>
+    <string-array name="time_period_array">
+        <item>Select time period</item>
+        <item>one-time</item>
+        <item>per day</item>
+        <item>per week</item>
+        <item>per month</item>
+        <item>per year</item>
+    </string-array>
+    <string-array name="number_of_harvests">
+        <item>Select choice</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+
+    </string-array>
     <string-array name="year_array">
         <item>year</item>
         <item>2016</item>
@@ -109,4 +151,26 @@
     <string name="text_survey2">Survey2</string>
     <string name="button_reset_data">Reset all data</string>
     <string name="button_send_to_server">Send data to server</string>
+    <string name="parcel_id">Parcel id</string>
+    <string name="site">Site</string>
+    <string name="surveyor_name">Surveyor Name</string>
+    <string name="date_to_valuation">Date to valuation</string>
+    <string name="inflation_rate">Inflation rate</string>
+    <string name="title_cropland">Cropland</string>
+    <string name="value">Value</string>
+    <string name="social_capital_score">Social capital score</string>
+    <string name="questions_completed">Questions completed</string>
+    <string name="total">Total -</string>
+    <string name="qn_completed">Questions completed -</string>
+    <string name="type_species1">Type species 1</string>
+    <string name="type_species2">Type species 2</string>
+    <string name="type_species3">Type species 3</string>
+    <string name="number_of_years">No of years</string>
+    <string name="button_add_year">Add years</string>
+    <string name="enter_year_heading">Enter Years</string>
+    <string name="enter_year_hint">enter year</string>
+    <string name="button_back">Back</string>
+    <string name="button_next">Next</string>
+    <string name="radio_button_yes">Yes</string>
+    <string name="radio_button_no">No</string>
 </resources>

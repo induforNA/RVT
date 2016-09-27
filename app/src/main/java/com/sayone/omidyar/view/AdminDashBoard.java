@@ -6,9 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 
-public class AdminDashBoard extends AppCompatActivity implements View.OnClickListener  {
+public class AdminDashBoard extends BaseActivity implements View.OnClickListener  {
     TextView rates,projectionTimeFrame,units,summaryOfSurveys;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

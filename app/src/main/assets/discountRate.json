@@ -1,0 +1,142 @@
+{
+  "discountRate": [
+    {
+      "moreThan":0.0,
+      "lessThan":1.50,
+      "rating":"Aaa",
+      "spread":0.0
+    },
+    {
+      "moreThan":1.5,
+      "lessThan":2.50,
+      "rating":"Aa1",
+      "spread":0.4
+    },
+    {
+      "moreThan":2.5,
+      "lessThan":3.50,
+      "rating":"Aa2",
+      "spread":0.5
+    },
+    {
+      "moreThan":3.5,
+      "lessThan":4.50,
+      "rating":"Aa3",
+      "spread":0.6
+
+    },
+    {
+      "moreThan":4.5,
+      "lessThan":5.50,
+      "rating":"A1",
+      "spread":0.7
+
+    },
+    {
+      "moreThan":5.5,
+      "lessThan":6.50,
+      "rating":"A2",
+      "spread":0.9
+
+    },
+    {
+      "moreThan":6.5,
+      "lessThan":7.50,
+      "rating":"A3",
+      "spread":1.2
+
+    },
+    {
+      "moreThan":7.5,
+      "lessThan":8.50,
+      "rating":"Baa1",
+      "spread":1.6
+
+    },
+    {
+      "moreThan":8.5,
+      "lessThan":9.50,
+      "rating":"Baa2",
+      "spread":1.9
+
+    },
+    {
+      "moreThan":9.5,
+      "lessThan":10.50,
+      "rating":"Baa3",
+      "spread":2.2
+
+    },
+    {
+      "moreThan":10.5,
+      "lessThan":11.50,
+      "rating":"Ba1",
+      "spread":2.5
+
+    },
+    {
+      "moreThan":11.5,
+      "lessThan":12.50,
+      "rating":"Ba2",
+      "spread":3.0
+
+    },
+    {
+      "moreThan":12.5,
+      "lessThan":13.50,
+      "rating":"Ba3",
+      "spread":3.6
+
+    },
+    {
+      "moreThan":13.5,
+      "lessThan":14.50,
+      "rating":"B1",
+      "spread":4.5
+
+    },
+    {
+      "moreThan":14.5,
+      "lessThan":15.50,
+      "rating":"B2",
+      "spread":5.5
+
+    },
+    {
+      "moreThan":15.5,
+      "lessThan":16.50,
+      "rating":"B3",
+      "spread":6.5
+
+    },
+    {
+      "moreThan":16.5,
+      "lessThan":17.50,
+      "rating":"Caa1",
+      "spread":7.5
+
+    },
+    {
+      "moreThan":17.5,
+      "lessThan":18.50,
+      "rating":"Caa2",
+      "spread":9.0
+
+    },
+    {
+      "moreThan":18.5,
+      "lessThan":19.50,
+      "rating":"Caa3",
+      "spread":10.0
+
+    },
+    {
+      "moreThan":19.5,
+      "lessThan":20.00,
+      "rating":"Ca",
+      "spread":12.0
+
+    }
+
+  ]
+}

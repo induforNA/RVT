@@ -6,11 +6,11 @@ import android.os.Bundle;
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 
-public class CertificateActivity extends BaseActivity {
+public class NaturalCapitalSurveyActivity1 extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_certificate);
+        setContentView(R.layout.activity_natural_capital_survey1);
     }
 }

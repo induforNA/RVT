@@ -69,14 +69,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
         serveyId = sharedPref.getString("surveyId","");
-        // serveyId = "0004";
-        //getServeyId(androidId);
-
-//        RealmResults<LandKind> results1 = realm.where(LandKind.class).findAll();
-//        for (LandKind survey1 : results1) {
-//            Log.e(TAG,survey1.toString());
-//            //Log.e(TAG, String.valueOf(survey1.getParticipants().size()));
-//        }
 
 
         menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);

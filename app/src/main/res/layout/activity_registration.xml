@@ -45,8 +45,7 @@
                 style="@style/Widget.AppCompat.Spinner.Underlined"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:spinnerMode="dialog" />
+                android:layout_weight="1" />
 
             <Spinner
                 android:id="@+id/spinner_currency"
@@ -56,8 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:hint="Currency"
-                android:spinnerMode="dialog" />
+                android:hint="Currency" />
 
         </LinearLayout>
 
@@ -93,8 +91,7 @@
                 android:layout_width="300dp"
                 style="@style/Widget.AppCompat.Spinner.Underlined"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:spinnerMode="dialog" />
+                android:layout_gravity="center_horizontal"/>
 
 
         </LinearLayout>
