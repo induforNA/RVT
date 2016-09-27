@@ -144,7 +144,10 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
     public void addLandTyeInSet(boolean checked, String name){
         Log.e("CHECKED STATUS ", checked+" "+name);
         if (checked) {
-            LandKind landKind = realm.where(LandKind.class).equalTo("name",name).findFirst();
+            LandKind landKind = realm.where(LandKind.class)
+                    .equalTo("name",name)
+                    .equalTo("surveyId",serveyId)
+                    .findFirst();
             SocialCapital socialCapital = null;
             if(landKind.getSocialCapitals() == null){
                 realm.beginTransaction();
@@ -162,7 +165,10 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
             realm.commitTransaction();
             landTypeNames.add(name);
         }else{
-            LandKind landKind = realm.where(LandKind.class).equalTo("name",name).findFirst();
+            LandKind landKind = realm.where(LandKind.class)
+                    .equalTo("surveyId",serveyId)
+                    .equalTo("name",name)
+                    .findFirst();
             SocialCapital socialCapital = null;
             if(landKind.getSocialCapitals() == null){
                 realm.beginTransaction();

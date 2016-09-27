@@ -62,7 +62,7 @@
                     android:id="@+id/option_a"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="slectedLandKind"
+                    android:onClick="slectedItems"
                     android:text="option 1"
                     android:textSize="30sp" />
 
@@ -70,7 +70,7 @@
                     android:id="@+id/option_b"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="slectedLandKind"
+                    android:onClick="slectedItems"
                     android:text="Cropland"
                     android:textSize="30sp" />
 
@@ -78,7 +78,7 @@
                     android:id="@+id/option_c"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="slectedLandKind"
+                    android:onClick="slectedItems"
                     android:text="Pastureland"
                     android:textSize="30sp" />
 
@@ -86,7 +86,7 @@
                     android:id="@+id/option_d"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="slectedLandKind"
+                    android:onClick="slectedItems"
                     android:text="Mining land"
                     android:textSize="30sp" />
 
@@ -94,7 +94,7 @@
                     android:id="@+id/option_e"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="slectedLandKind"
+                    android:onClick="slectedItems"
                     android:text="Mining land"
                     android:textSize="30sp" />
             </LinearLayout>
@@ -103,6 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <RadioButton
+                    android:onClick="slectedItemsRadio"
                     android:id="@+id/option_a_radio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

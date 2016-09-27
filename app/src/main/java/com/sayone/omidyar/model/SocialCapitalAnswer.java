@@ -17,7 +17,7 @@ public class SocialCapitalAnswer extends RealmObject {
 
     private SocialCapitalQuestions socialCapitalQuestion;
 
-    private MultipleAnswer multipleAnswer;
+    private RealmList<MultipleAnswer> multipleAnswers;
 
     private int factorScore;
 
@@ -45,19 +45,19 @@ public class SocialCapitalAnswer extends RealmObject {
         this.socialCapitalQuestion = socialCapitalQuestion;
     }
 
-    public MultipleAnswer getMultipleAnswer() {
-        return multipleAnswer;
-    }
-
-    public void setMultipleAnswer(MultipleAnswer multipleAnswer) {
-        this.multipleAnswer = multipleAnswer;
-    }
-
     public int getFactorScore() {
         return factorScore;
     }
 
     public void setFactorScore(int factorScore) {
         this.factorScore = factorScore;
+    }
+
+    public RealmList<MultipleAnswer> getMultipleAnswers() {
+        return multipleAnswers;
+    }
+
+    public void setMultipleAnswers(RealmList<MultipleAnswer> multipleAnswers) {
+        this.multipleAnswers = multipleAnswers;
     }
 }
