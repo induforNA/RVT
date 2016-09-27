@@ -22,10 +22,7 @@ import com.sayone.omidyar.model.SocialCapitalAnswerOptions;
 import com.sayone.omidyar.model.SocialCapitalQuestions;
 import com.sayone.omidyar.model.Survey;
 
-import java.util.List;
-
 import io.realm.Realm;
-import io.realm.RealmChangeListener;
 import io.realm.RealmList;
 import io.realm.RealmResults;
 
@@ -33,9 +30,9 @@ import io.realm.RealmResults;
  * Created by sayone on 21/9/16.
  */
 
-public class SocialCapitalActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener{
+public class SocialCapitalActivity1 extends BaseActivity {
 
-    public static final String TAG = SocialCapitalActivity.class.getName();
+    public static final String TAG = SocialCapitalActivity1.class.getName();
     private Realm realm;
     private SharedPreferences preferences;
     Context context;
@@ -89,7 +86,6 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
 
         checkboxgroup = (LinearLayout) findViewById(R.id.checkboxgroup);
         radiobuttongroup = (RadioGroup) findViewById(R.id.radiobuttongroup);
-        radiobuttongroup.setOnCheckedChangeListener(this);
 
         question = (TextView) findViewById(R.id.question);
 
@@ -105,14 +101,46 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
         optionDRadio = (RadioButton) findViewById(R.id.option_d_radio);
         optionERadio = (RadioButton) findViewById(R.id.option_e_radio);
 
+//        socialCapitalQuestionses = realm.where(SocialCapitalQuestions.class).findAll();
+//        for (SocialCapitalQuestions socialCapitalQuestions : socialCapitalQuestionses) {
+//            Log.e("Social capital", socialCapitalQuestions.getId() + " " + socialCapitalQuestions.getQuestion());
+//        }
+
+//        final RealmResults<Survey> surveys = realm.where(Survey.class).findAll();
+//        for (SocialCapitalQuestions socialCapitalQuestions : socialCapitalQuestionses) {
+//            Log.e("Servey", socialCapitalQuestions.getQuestion());
+//
+//        }
+
         landKind = realm.where(LandKind.class)
                 .equalTo("surveyId", serveyId)
                 .equalTo("status", "active")
                 .equalTo("name", currentSocialCapitalServey)
                 .findFirst();
 
+        Log.e("LandKind", landKind.getSocialCapitals().getSocialCapitalAnswers().get(0).getSocialCapitalQuestion() + "");
+//        for(SocialCapitalAnswer socialCapitalAnswer:landKind.getSocialCapitals().getSocialCapitalAnswers()){
+//            SocialCapitalQuestions socialCapitalQuestionsLandKind = socialCapitalQuestionses.get(currentQuestionId);
+//            setQuestionView(socialCapitalQuestionsLandKind.getOptionType(), socialCapitalQuestionsLandKind.getQuestion(), socialCapitalQuestionsLandKind.getSocialCapitalAnswerOptionses());
+//        }
+
         currentQuestionId = 0;
-        loadQuestion(currentQuestionId);
+        SocialCapitalQuestions socialCapitalQuestionsLandKind = landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getSocialCapitalQuestion();
+        setQuestionView(socialCapitalQuestionsLandKind.getOptionType(),
+                socialCapitalQuestionsLandKind.getQuestion(),
+                socialCapitalQuestionsLandKind.getSocialCapitalAnswerOptionses(),
+                landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers());
+
+
+        Log.e("MULTIPLE ",landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers().toString());
+
+
+
+//        if (landKind.getSocialCapitals().getSocialCapitalAnswers().size() == 0) {
+//            currentQuestionId = 0;
+//            SocialCapitalQuestions socialCapitalQuestionsLandKind = socialCapitalQuestionses.get(currentQuestionId);
+//            setQuestionView(socialCapitalQuestionsLandKind.getOptionType(), socialCapitalQuestionsLandKind.getQuestion(), socialCapitalQuestionsLandKind.getSocialCapitalAnswerOptionses());
+//        }
 
 
         backButton = (Button) findViewById(R.id.back_button);
@@ -122,23 +150,112 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
         nextButton.setOnClickListener(this);
     }
 
-    public void loadQuestion(int currentQId) {
-        LandKind landKindLoad = realm.where(LandKind.class)
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.back_button:
+                if (currentQuestionId > 0) {
+                    int nextQuestionId = currentQuestionId - 1;
+                    Log.e("Current id ", nextQuestionId + "");
+                    SocialCapitalQuestions socialCapitalQuestionsLandKind = landKind.getSocialCapitals().getSocialCapitalAnswers().get(nextQuestionId).getSocialCapitalQuestion();
+                    setQuestionView(socialCapitalQuestionsLandKind.getOptionType(),
+                            socialCapitalQuestionsLandKind.getQuestion(),
+                            socialCapitalQuestionsLandKind.getSocialCapitalAnswerOptionses(),
+                            landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers());
+                    currentQuestionId = nextQuestionId;
+                } else {
+                    finish();
+                }
+                break;
+            case R.id.next_button:
+                if (currentQuestionId < 13) {
+                    Log.e("Current id ", currentQuestionId + "");
+                    RealmList<MultipleAnswer> multipleAnswers;
+                    multipleAnswers = new RealmList<>();
+                    for (SocialCapitalAnswerOptions socialCapitalAnswerOptions : socialCapitalAnswerOptionsesList) {
+                        multipleAnswers.add(addAnswer(socialCapitalAnswerOptions.getId()));
+                    }
+                    realm.beginTransaction();
+                    landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).setMultipleAnswers(multipleAnswers);
+                    realm.commitTransaction();
+//                    if(landKind.getSocialCapitals().getSocialCapitalAnswers().size() == 0){
+//                        RealmList<MultipleAnswer> multipleAnswers;
+//                        multipleAnswers = new RealmList<>();
+//                        for(SocialCapitalAnswerOptions socialCapitalAnswerOptions : socialCapitalAnswerOptionsesList){
+//                            multipleAnswers.add(addAnswer(socialCapitalAnswerOptions.getId()));
+//                        }
+//
+//                        realm.beginTransaction();
+//                        SocialCapitalAnswer socialCapitalAnswer = realm.createObject(SocialCapitalAnswer.class);
+//                        socialCapitalAnswer.setId(getNextKeySocialCapitalAnswer());
+//                        socialCapitalAnswer.setSurveyId(serveyId);
+//                        socialCapitalAnswer.setSocialCapitalQuestion(socialCapitalQuestionses.get(currentQuestionId));
+//                        socialCapitalAnswer.setMultipleAnswers(multipleAnswers);
+//                        realm.commitTransaction();
+//
+//                        RealmList<SocialCapitalAnswer> socialCapitalAnswers = new RealmList<SocialCapitalAnswer>();
+//                        socialCapitalAnswers.add(socialCapitalAnswer);
+//                    }
+
+                    socialCapitalAnswerOptionsesList.clear();
+                    clearOptions();
+
+
+                    Log.e("MULTIPLE ",landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers().toString());
+
+
+                    int preQuestionId = currentQuestionId + 1;
+                    SocialCapitalQuestions socialCapitalQuestionsLandKind = landKind.getSocialCapitals().getSocialCapitalAnswers().get(preQuestionId).getSocialCapitalQuestion();
+                    setQuestionView(socialCapitalQuestionsLandKind.getOptionType(),
+                            socialCapitalQuestionsLandKind.getQuestion(),
+                            socialCapitalQuestionsLandKind.getSocialCapitalAnswerOptionses(),
+                            landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers());
+                    currentQuestionId = preQuestionId;
+
+
+                }
+//                Intent intent = new Intent(SocialCapitalActivity.this, SocialCapitalActivity.class);
+//                startActivity(intent);
+                break;
+        }
+    }
+
+    public void clearOptions(){
+        optionA.setChecked(false);
+        optionB.setChecked(false);
+        optionC.setChecked(false);
+        optionD.setChecked(false);
+        optionE.setChecked(false);
+
+        optionARadio.setChecked(false);
+        optionBRadio.setChecked(false);
+        optionCRadio.setChecked(false);
+        optionDRadio.setChecked(false);
+        optionERadio.setChecked(false);
+    }
+
+    public MultipleAnswer addAnswer(long answerId) {
+        realm.beginTransaction();
+        MultipleAnswer multipleAnswer = realm.createObject(MultipleAnswer.class);
+        multipleAnswer.setId(getNextKeyMultipleAnswer());
+        multipleAnswer.setAnswer((int) answerId);
+        realm.commitTransaction();
+        return multipleAnswer;
+    }
+
+
+    public void setQuestionView(String type, String questionval,
+                                RealmList<SocialCapitalAnswerOptions> options,
+                                RealmList<MultipleAnswer> multipleAnswers1) {
+        LandKind landKind1 = realm.where(LandKind.class)
                 .equalTo("surveyId", serveyId)
                 .equalTo("status", "active")
                 .equalTo("name", currentSocialCapitalServey)
                 .findFirst();
-        SocialCapitalQuestions socialCapitalQuestionsLandKindLoad = landKindLoad.getSocialCapitals().getSocialCapitalAnswers().get(currentQId).getSocialCapitalQuestion();
-        setQuestionView(socialCapitalQuestionsLandKindLoad.getOptionType(),
-                socialCapitalQuestionsLandKindLoad.getQuestion(),
-                socialCapitalQuestionsLandKindLoad.getSocialCapitalAnswerOptionses(),
-                landKindLoad.getSocialCapitals().getSocialCapitalAnswers().get(currentQId).getMultipleAnswers());
-    }
 
-    public void setQuestionView(String type,
-                                String questionval,
-                                RealmList<SocialCapitalAnswerOptions> options,
-                                RealmList<MultipleAnswer> multipleAnswers) {
+        RealmList<MultipleAnswer> multipleAnswers = landKind1.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers();
+        //RealmList<SocialCapitalAnswerOptions> options = landKind1.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getSocialCapitalQuestion();
+
         question.setText(questionval);
 
         optionA.setVisibility(View.GONE);
@@ -194,16 +311,22 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                               int index, CheckBox checkBox, RadioButton radioButton,
                               RealmList<MultipleAnswer> multipleAnswers) {
 
+        LandKind landKind1 = realm.where(LandKind.class)
+                .equalTo("surveyId", serveyId)
+                .equalTo("status", "active")
+                .equalTo("name", currentSocialCapitalServey)
+                .findFirst();
+
         if (type.equals("multiple")) {
             checkboxgroup.setVisibility(View.VISIBLE);
             radiobuttongroup.setVisibility(View.GONE);
             if (options.get(index) == null) {
                 checkBox.setVisibility(View.GONE);
             } else {
-                for (MultipleAnswer multipleAnswerItr : multipleAnswers) {
-                    Log.e("AFTER ", options.get(index).getId() + " " + multipleAnswerItr.getAnswer());
-                    if (options.get(index).getId() == multipleAnswerItr.getAnswer()) {
-                        Log.e("AFTER ", "CLEAR CHANGE DISPLAY TEST");
+                for(MultipleAnswer multipleAnswerItr : landKind1.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers()){
+                    Log.e("AFTER ",options.get(index).getId()+" "+multipleAnswerItr.getAnswer());
+                    if(options.get(index).getId() == multipleAnswerItr.getAnswer()){
+                        Log.e("AFTER ","CLEAR CHANGE DISPLAY TEST");
                         checkBox.setChecked(true);
                         socialCapitalAnswerOptionsesList.add(options.get(index));
                     }
@@ -218,8 +341,8 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
             if (options.get(index) == null) {
                 radioButton.setVisibility(View.GONE);
             } else {
-                for (MultipleAnswer multipleAnswerItr : multipleAnswers) {
-                    if (options.get(index).getId() == multipleAnswerItr.getAnswer()) {
+                for(MultipleAnswer multipleAnswerItr : landKind1.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers()){
+                    if(options.get(index).getId() == multipleAnswerItr.getAnswer()){
                         radioButton.setChecked(true);
                         socialCapitalAnswerOptionsesList.add(options.get(index));
                     }
@@ -232,90 +355,9 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
         }
     }
 
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.back_button:
-                if (currentQuestionId > 0) {
-                    int nextQuestionId = currentQuestionId - 1;
-                    Log.e("Current id ", nextQuestionId + "");
-
-                    socialCapitalAnswerOptionsesList.clear();
-                    clearOptions();
-
-                    loadQuestion(nextQuestionId);
-                    currentQuestionId = nextQuestionId;
-                } else {
-                    finish();
-                }
-                break;
-            case R.id.next_button:
-                if (currentQuestionId < 13) {
-                    Log.e("Current id ", socialCapitalAnswerOptionsesList.size() + "");
-                    RealmList<MultipleAnswer> multipleAnswers;
-                    multipleAnswers = new RealmList<>();
-                    for (SocialCapitalAnswerOptions socialCapitalAnswerOptions : socialCapitalAnswerOptionsesList) {
-                        multipleAnswers.add(addAnswer(socialCapitalAnswerOptions.getId()));
-                    }
-                    realm.beginTransaction();
-                    landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).setMultipleAnswers(multipleAnswers);
-                    realm.commitTransaction();
-
-
-                    socialCapitalAnswerOptionsesList.clear();
-                    clearOptions();
-
-                    Log.e("MULTIPLE ",landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers().toString());
-
-
-                    int preQuestionId = currentQuestionId + 1;
-                    loadQuestion(preQuestionId);
-
-                    currentQuestionId = preQuestionId;
-
-
-                }
-//                Intent intent = new Intent(SocialCapitalActivity.this, SocialCapitalActivity.class);
-//                startActivity(intent);
-                break;
-        }
-    }
-
-    public void clearOptions() {
-        optionA.setChecked(false);
-        optionB.setChecked(false);
-        optionC.setChecked(false);
-        optionD.setChecked(false);
-        optionE.setChecked(false);
-
-        optionARadio.setChecked(false);
-        optionBRadio.setChecked(false);
-        optionCRadio.setChecked(false);
-        optionDRadio.setChecked(false);
-        optionERadio.setChecked(false);
-    }
-
-    public MultipleAnswer addAnswer(long answerId) {
-        realm.beginTransaction();
-        MultipleAnswer multipleAnswer = realm.createObject(MultipleAnswer.class);
-        multipleAnswer.setId(getNextKeyMultipleAnswer());
-        multipleAnswer.setAnswer((int) answerId);
-        realm.commitTransaction();
-        return multipleAnswer;
-    }
-
     public void slectedItems(View view) {
         boolean checked = ((CheckBox) view).isChecked();
-        socialCapitalQuestionsSelectedItem = realm.where(LandKind.class)
-                .equalTo("surveyId", serveyId)
-                .equalTo("status", "active")
-                .equalTo("name", currentSocialCapitalServey)
-                .findFirst()
-                .getSocialCapitals()
-                .getSocialCapitalAnswers()
-                .get(currentQuestionId)
-                .getSocialCapitalQuestion();
+        socialCapitalQuestionsSelectedItem = landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getSocialCapitalQuestion();
         switch (view.getId()) {
             case R.id.option_a:
                 Log.e("PP ", optionA.getTag(R.string.checkbox_id).toString());
@@ -366,70 +408,6 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
         }
     }
 
-    public void slectedItemsRadio(View view) {
-        Log.e("SELECTED ITEMS ","HERE");
-        boolean checked = ((RadioButton) view).isChecked();
-        socialCapitalQuestionsSelectedItem = realm.where(LandKind.class)
-                .equalTo("surveyId", serveyId)
-                .equalTo("status", "active")
-                .equalTo("name", currentSocialCapitalServey)
-                .findFirst()
-                .getSocialCapitals()
-                .getSocialCapitalAnswers()
-                .get(currentQuestionId)
-                .getSocialCapitalQuestion();
-
-        Log.e("SELECTED ITEMS ",socialCapitalAnswerOptionsesList.size()+"");
-        switch (view.getId()) {
-            case R.id.option_a_radio:
-                Log.e("PP ", optionARadio.getTag(R.string.checkbox_id).toString());
-                for (SocialCapitalAnswerOptions socialCapitalAnswerOptions : socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses()) {
-                    Log.e("ZZ ", socialCapitalAnswerOptions.toString());
-                }
-                if (checked) {
-                    socialCapitalAnswerOptionsesList.add(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionARadio.getTag(R.string.checkbox_id).toString())));
-                } else {
-                    socialCapitalAnswerOptionsesList.remove(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionARadio.getTag(R.string.checkbox_id).toString())));
-                }
-                break;
-            case R.id.option_b_radio:
-                Log.e("PP ", optionBRadio.getTag(R.string.checkbox_id).toString());
-                if (checked) {
-                    socialCapitalAnswerOptionsesList.add(
-                            socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(
-                                    Integer.parseInt(
-                                            optionBRadio.getTag(R.string.checkbox_id).toString())));
-                } else {
-                    socialCapitalAnswerOptionsesList.remove(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionBRadio.getTag(R.string.checkbox_id).toString())));
-                }
-                break;
-            case R.id.option_c_radio:
-                Log.e("PP ", optionCRadio.getTag(R.string.checkbox_id).toString());
-                if (checked) {
-                    socialCapitalAnswerOptionsesList.add(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionCRadio.getTag(R.string.checkbox_id).toString())));
-                } else {
-                    socialCapitalAnswerOptionsesList.remove(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionCRadio.getTag(R.string.checkbox_id).toString())));
-                }
-                break;
-            case R.id.option_d_radio:
-                Log.e("PP ", optionDRadio.getTag(R.string.checkbox_id).toString());
-                if (checked) {
-                    socialCapitalAnswerOptionsesList.add(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionDRadio.getTag(R.string.checkbox_id).toString())));
-                } else {
-                    socialCapitalAnswerOptionsesList.remove(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionDRadio.getTag(R.string.checkbox_id).toString())));
-                }
-                break;
-            case R.id.option_e_radio:
-                Log.e("PP ", optionERadio.getTag(R.string.checkbox_id).toString());
-                if (checked) {
-                    socialCapitalAnswerOptionsesList.add(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionERadio.getTag(R.string.checkbox_id).toString())));
-                } else {
-                    socialCapitalAnswerOptionsesList.remove(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionERadio.getTag(R.string.checkbox_id).toString())));
-                }
-                break;
-        }
-    }
-
     public int getNextKeySocialCapitalAnswer() {
         return realm.where(SocialCapitalAnswer.class).max("id").intValue() + 1;
     }
@@ -444,35 +422,5 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                 .equalTo("surveyId", serveyId)
                 .findFirst();
 
-    }
-
-    @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        socialCapitalQuestionsSelectedItem = realm.where(LandKind.class)
-                .equalTo("surveyId", serveyId)
-                .equalTo("status", "active")
-                .equalTo("name", currentSocialCapitalServey)
-                .findFirst()
-                .getSocialCapitals()
-                .getSocialCapitalAnswers()
-                .get(currentQuestionId)
-                .getSocialCapitalQuestion();
-        switch(checkedId){
-            case R.id.option_a_radio:
-                // TODO Something
-                break;
-            case R.id.option_b_radio:
-                // TODO Something
-                break;
-            case R.id.option_c_radio:
-                // TODO Something
-                break;
-            case R.id.option_d_radio:
-                // TODO Something
-                break;
-            case R.id.option_e_radio:
-                // TODO Something
-                break;
-        }
     }
 }

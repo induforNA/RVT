@@ -13,11 +13,14 @@ import android.widget.TextView;
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.LandKind;
+import com.sayone.omidyar.model.Participant;
 import com.sayone.omidyar.model.SocialCapital;
+import com.sayone.omidyar.model.SocialCapitalAnswer;
 import com.sayone.omidyar.model.SocialCapitalQuestions;
 import com.sayone.omidyar.model.Survey;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmResults;
 
 /**
@@ -78,6 +81,46 @@ public class SocialCapitalStartActivity extends BaseActivity implements View.OnC
 //
 //        }
 
+        LandKind landKind = realm.where(LandKind.class)
+                .equalTo("surveyId",serveyId)
+                .equalTo("name",currentSocialCapitalServey)
+                .equalTo("status","active")
+                .findFirst();
+        if(landKind.getSocialCapitals().getSocialCapitalAnswers().size() == 0) {
+            Log.e("Here ", "NULL");
+
+
+            RealmResults<SocialCapitalQuestions> socialCapitalQuestionses = realm.where(SocialCapitalQuestions.class).findAll();
+            RealmList<SocialCapitalAnswer> socialCapitalAnswers = new RealmList<>();
+            for (SocialCapitalQuestions socialCapitalQuestions : socialCapitalQuestionses) {
+                Log.e("Social capital", socialCapitalQuestions.getId() + " " + socialCapitalQuestions.getQuestion());
+                realm.beginTransaction();
+                SocialCapitalAnswer socialCapitalAnswer = realm.createObject(SocialCapitalAnswer.class);
+                socialCapitalAnswer.setId(getNextKeySocialCapitalAnswer());
+                socialCapitalAnswer.setSurveyId(serveyId);
+                socialCapitalAnswer.setSocialCapitalQuestion(socialCapitalQuestions);
+                realm.commitTransaction();
+                socialCapitalAnswers.add(socialCapitalAnswer);
+            }
+            realm.beginTransaction();
+            landKind.getSocialCapitals().setSocialCapitalAnswers(socialCapitalAnswers);
+            realm.commitTransaction();
+        }
+
+
+
+
+        LandKind landKind1 = realm.where(LandKind.class)
+                .equalTo("surveyId",serveyId)
+                .equalTo("name",currentSocialCapitalServey)
+                .equalTo("status","active")
+                .findFirst();
+
+        Log.e("LLL ", landKind1.getSocialCapitals().getSocialCapitalAnswers().toString());
+
+
+
+
         landType.setText(currentSocialCapitalServey);
     }
 
@@ -92,5 +135,9 @@ public class SocialCapitalStartActivity extends BaseActivity implements View.OnC
                 startActivity(intent);
                 break;
         }
+    }
+
+    public int getNextKeySocialCapitalAnswer() {
+        return realm.where(SocialCapitalAnswer.class).max("id").intValue() + 1;
     }
 }
