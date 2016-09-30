@@ -1,5 +1,6 @@
 package com.sayone.omidyar.model;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -13,19 +14,19 @@ public class ForestLand extends RealmObject {
 
     private String surveyId;
 
-    private RevenueProduct revenueProducts;
+    private RealmList<RevenueProduct> revenueProducts;
 
-    private CostElement costElements;
+    private RealmList<CostElement> costElements;
 
-    private Outlay outlay;
+    private RealmList<Outlay> outlays;
 
-    private CashFlow cashFlow;
+    private RealmList<CashFlow> cashFlows;
 
     private int discountPercentage;
 
-    private DiscountingFactor discountingFactor;
+    private RealmList<DiscountingFactor> discountingFactors;
 
-    private DiscountedCashFlow discountedCashFlow;
+    private RealmList<DiscountedCashFlow> discountedCashFlows;
 
     private double netPresentValue;
 
@@ -37,36 +38,44 @@ public class ForestLand extends RealmObject {
         this.id = id;
     }
 
-    public RevenueProduct getRevenueProducts() {
+    public String getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(String surveyId) {
+        this.surveyId = surveyId;
+    }
+
+    public RealmList<RevenueProduct> getRevenueProducts() {
         return revenueProducts;
     }
 
-    public void setRevenueProducts(RevenueProduct revenueProducts) {
+    public void setRevenueProducts(RealmList<RevenueProduct> revenueProducts) {
         this.revenueProducts = revenueProducts;
     }
 
-    public CostElement getCostElements() {
+    public RealmList<CostElement> getCostElements() {
         return costElements;
     }
 
-    public void setCostElements(CostElement costElements) {
+    public void setCostElements(RealmList<CostElement> costElements) {
         this.costElements = costElements;
     }
 
-    public Outlay getOutlay() {
-        return outlay;
+    public RealmList<Outlay> getOutlays() {
+        return outlays;
     }
 
-    public void setOutlay(Outlay outlay) {
-        this.outlay = outlay;
+    public void setOutlays(RealmList<Outlay> outlays) {
+        this.outlays = outlays;
     }
 
-    public CashFlow getCashFlow() {
-        return cashFlow;
+    public RealmList<CashFlow> getCashFlows() {
+        return cashFlows;
     }
 
-    public void setCashFlow(CashFlow cashFlow) {
-        this.cashFlow = cashFlow;
+    public void setCashFlows(RealmList<CashFlow> cashFlows) {
+        this.cashFlows = cashFlows;
     }
 
     public int getDiscountPercentage() {
@@ -77,20 +86,20 @@ public class ForestLand extends RealmObject {
         this.discountPercentage = discountPercentage;
     }
 
-    public DiscountingFactor getDiscountingFactor() {
-        return discountingFactor;
+    public RealmList<DiscountingFactor> getDiscountingFactors() {
+        return discountingFactors;
     }
 
-    public void setDiscountingFactor(DiscountingFactor discountingFactor) {
-        this.discountingFactor = discountingFactor;
+    public void setDiscountingFactors(RealmList<DiscountingFactor> discountingFactors) {
+        this.discountingFactors = discountingFactors;
     }
 
-    public DiscountedCashFlow getDiscountedCashFlow() {
-        return discountedCashFlow;
+    public RealmList<DiscountedCashFlow> getDiscountedCashFlows() {
+        return discountedCashFlows;
     }
 
-    public void setDiscountedCashFlow(DiscountedCashFlow discountedCashFlow) {
-        this.discountedCashFlow = discountedCashFlow;
+    public void setDiscountedCashFlows(RealmList<DiscountedCashFlow> discountedCashFlows) {
+        this.discountedCashFlows = discountedCashFlows;
     }
 
     public double getNetPresentValue() {
@@ -99,13 +108,5 @@ public class ForestLand extends RealmObject {
 
     public void setNetPresentValue(double netPresentValue) {
         this.netPresentValue = netPresentValue;
-    }
-
-    public String getSurveyId() {
-        return surveyId;
-    }
-
-    public void setSurveyId(String surveyId) {
-        this.surveyId = surveyId;
     }
 }

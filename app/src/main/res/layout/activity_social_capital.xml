@@ -111,6 +111,7 @@
                     android:textSize="30sp" />
 
                 <RadioButton
+                    android:onClick="slectedItemsRadio"
                     android:id="@+id/option_b_radio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -118,6 +119,7 @@
                     android:textSize="30sp" />
 
                 <RadioButton
+                    android:onClick="slectedItemsRadio"
                     android:id="@+id/option_c_radio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -125,6 +127,7 @@
                     android:textSize="30sp" />
 
                 <RadioButton
+                    android:onClick="slectedItemsRadio"
                     android:id="@+id/option_d_radio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -132,6 +135,7 @@
                     android:textSize="30sp" />
 
                 <RadioButton
+                    android:onClick="slectedItemsRadio"
                     android:id="@+id/option_e_radio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

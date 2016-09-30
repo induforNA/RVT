@@ -368,6 +368,7 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
 
     public void slectedItemsRadio(View view) {
         Log.e("SELECTED ITEMS ","HERE");
+        socialCapitalAnswerOptionsesList.clear();
         boolean checked = ((RadioButton) view).isChecked();
         socialCapitalQuestionsSelectedItem = realm.where(LandKind.class)
                 .equalTo("surveyId", serveyId)
@@ -448,31 +449,56 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        socialCapitalQuestionsSelectedItem = realm.where(LandKind.class)
-                .equalTo("surveyId", serveyId)
-                .equalTo("status", "active")
-                .equalTo("name", currentSocialCapitalServey)
-                .findFirst()
-                .getSocialCapitals()
-                .getSocialCapitalAnswers()
-                .get(currentQuestionId)
-                .getSocialCapitalQuestion();
-        switch(checkedId){
-            case R.id.option_a_radio:
-                // TODO Something
-                break;
-            case R.id.option_b_radio:
-                // TODO Something
-                break;
-            case R.id.option_c_radio:
-                // TODO Something
-                break;
-            case R.id.option_d_radio:
-                // TODO Something
-                break;
-            case R.id.option_e_radio:
-                // TODO Something
-                break;
-        }
+//        socialCapitalQuestionsSelectedItem = realm.where(LandKind.class)
+//                .equalTo("surveyId", serveyId)
+//                .equalTo("status", "active")
+//                .equalTo("name", currentSocialCapitalServey)
+//                .findFirst()
+//                .getSocialCapitals()
+//                .getSocialCapitalAnswers()
+//                .get(currentQuestionId)
+//                .getSocialCapitalQuestion();
+//        switch(checkedId){
+//            case R.id.option_a_radio:
+//                socialCapitalAnswerOptionsesList.clear();
+//                socialCapitalAnswerOptionsesList.add(
+//                        socialCapitalQuestionsSelectedItem
+//                                .getSocialCapitalAnswerOptionses()
+//                                .get(Integer.parseInt(
+//                                        optionARadio.getTag(R.string.checkbox_id).toString())));
+//                break;
+//            case R.id.option_b_radio:
+//                socialCapitalAnswerOptionsesList.clear();
+//                socialCapitalAnswerOptionsesList.add(
+//                        socialCapitalQuestionsSelectedItem
+//                                .getSocialCapitalAnswerOptionses()
+//                                .get(Integer.parseInt(
+//                                        optionBRadio.getTag(R.string.checkbox_id).toString())));
+//                break;
+//            case R.id.option_c_radio:
+//                socialCapitalAnswerOptionsesList.clear();
+//                socialCapitalAnswerOptionsesList.add(
+//                        socialCapitalQuestionsSelectedItem
+//                                .getSocialCapitalAnswerOptionses()
+//                                .get(Integer.parseInt(
+//                                        optionCRadio.getTag(R.string.checkbox_id).toString())));
+//                break;
+//            case R.id.option_d_radio:
+//                socialCapitalAnswerOptionsesList.clear();
+//                socialCapitalAnswerOptionsesList.add(
+//                        socialCapitalQuestionsSelectedItem
+//                                .getSocialCapitalAnswerOptionses()
+//                                .get(Integer.parseInt(
+//                                        optionDRadio.getTag(R.string.checkbox_id).toString())));
+//                break;
+//            case R.id.option_e_radio:
+//                socialCapitalAnswerOptionsesList.clear();
+//                socialCapitalAnswerOptionsesList.add(
+//                        socialCapitalQuestionsSelectedItem
+//                                .getSocialCapitalAnswerOptionses()
+//                                .get(Integer.parseInt(
+//                                        optionCRadio.getTag(R.string.checkbox_id).toString())));
+//                break;
+//        }
     }
 }
