@@ -7,9 +7,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 
-public class ProjectionTimeFrameActivity extends AppCompatActivity {
+public class ProjectionTimeFrameActivity extends BaseActivity {
 
     public Spinner yearSpinner1,yearSpinner2,yearSpinner3;
     String year1,year2,year3;

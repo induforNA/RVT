@@ -1,0 +1,24 @@
+{
+  "frequency": [
+    {
+      "harvestFrequency": "one-time",
+      "value": 1
+    },
+    {
+      "harvestFrequency": "per day",
+      "value": 365
+    },
+    {
+      "harvestFrequency": "per week",
+      "value": 52
+    },
+    {
+      "harvestFrequency": "per month",
+      "value": 12
+    },
+    {
+      "harvestFrequency": "per year",
+      "value": 1
+    }
+  ]
+}

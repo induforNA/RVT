@@ -1,6 +1,7 @@
 package com.sayone.omidyar.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -276,9 +277,12 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
 
 
                 }
-//                Intent intent = new Intent(SocialCapitalActivity.this, SocialCapitalActivity.class);
-//                startActivity(intent);
+                else {
+                Intent intent = new Intent(SocialCapitalActivity.this,NaturalCapitalSurveyStartActivity.class);
+                startActivity(intent);
+                }
                 break;
+
         }
     }
 

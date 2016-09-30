@@ -3,9 +3,10 @@ package com.sayone.omidyar.view;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 
-public class CertificateActivity extends AppCompatActivity {
+public class CertificateActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -69,14 +69,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
         serveyId = sharedPref.getString("surveyId","");
-        // serveyId = "0004";
-        //getServeyId(androidId);
-
-//        RealmResults<LandKind> results1 = realm.where(LandKind.class).findAll();
-//        for (LandKind survey1 : results1) {
-//            Log.e(TAG,survey1.toString());
-//            //Log.e(TAG, String.valueOf(survey1.getParticipants().size()));
-//        }
 
 
         menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);
@@ -162,29 +154,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         return realm.where(Participant.class).max("id").intValue() + 1;
     }
 
-//    protected String getServeyId(String androidId){
-//        int min = 11111;
-//        int max = 99999;
-//        long num = 2555L;
-//        final int B = androidId.length();
-//
-//        StringBuilder sb = new StringBuilder();
-//        Random rn = new Random();
-//
-//        while (num != 0) {
-//            sb.append(androidId.charAt((int) (num % B)));
-//            num /= B;
-//        }
-//
-//        int result = rn.nextInt(max - min + 1) + min;
-//        String serveyId = sb.reverse().append(String.valueOf(result)).toString();
-//
-//        if(realm.where(Survey.class).equalTo("surveyId",serveyId).findAll().size() == 0){
-//            return serveyId.toUpperCase();
-//        }else {
-//            return getServeyId(androidId);
-//        }
-//    }
+
 
     @Override
     public void onClick(View v) {

@@ -5,8 +5,9 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textview2"
-        android:layout_width="wrap_content"
+        android:id="@+id/textview_about_heading"
+        android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/about_this_app"
@@ -29,41 +30,44 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textview"
+                android:id="@+id/textview_about_para1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:text="@string/about_this_tool_para1"
-                android:textSize="25sp" />
+                android:textSize="@dimen/textfield_size" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:id="@+id/textview_about_para2"
                 android:layout_marginTop="15dp"
                 android:text="@string/about_this_tool_para2"
-                android:textSize="25sp" />
+                android:textSize="@dimen/textfield_size" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:id="@+id/textview_about_para3"
                 android:layout_marginTop="15dp"
                 android:text="@string/about_this_tool_para3"
-                android:textSize="25sp" />
+                android:textSize="@dimen/textfield_size" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:id="@+id/textview_about_para4"
                 android:layout_marginTop="15dp"
                 android:text="@string/about_this_tool_para4"
-                android:textSize="25sp" />
+                android:textSize="@dimen/textfield_size" />
         </LinearLayout>
     </ScrollView>
 

@@ -6,9 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 
-public class AdminDashBoard extends AppCompatActivity implements View.OnClickListener  {
+public class AdminDashBoard extends BaseActivity implements View.OnClickListener  {
     TextView rates,projectionTimeFrame,units,summaryOfSurveys;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +19,7 @@ public class AdminDashBoard extends AppCompatActivity implements View.OnClickLis
         rates=(TextView)findViewById(R.id.textview_rates);
         projectionTimeFrame=(TextView)findViewById(R.id.textview_projection);
         units=(TextView)findViewById(R.id.textview_units);
-        summaryOfSurveys=(TextView)findViewById(R.id.textview_summary);
+        summaryOfSurveys=(TextView)findViewById(R.id.textview_summary_surveys);
 
         rates.setOnClickListener(this);
         projectionTimeFrame.setOnClickListener(this);
@@ -48,7 +49,7 @@ public class AdminDashBoard extends AppCompatActivity implements View.OnClickLis
                 startActivity(intent);
                 break;
 
-            case R.id.textview_summary:
+            case R.id.textview_summary_surveys:
                 intent=new Intent(getApplicationContext(),SurveySummaryActivity.class);
                 startActivity(intent);
                 break;

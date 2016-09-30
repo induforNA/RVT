@@ -22,12 +22,14 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:onClick="setDate"
+                android:textSize="@dimen/textfield_size"
                 android:layout_gravity="center_horizontal"
                 android:hint="@string/date_hint" />
 
             <EditText
                 android:id="@+id/edittext_respondent_group"
                 android:layout_width="300dp"
+                android:textSize="@dimen/textfield_size"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:hint="@string/respondent_group_hint" />
@@ -35,6 +37,7 @@
             <EditText
                 android:id="@+id/edittext_surveyor"
                 android:layout_width="300dp"
+                android:textSize="@dimen/textfield_size"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:hint="@string/surveyor_hint" />
@@ -45,8 +48,7 @@
                 style="@style/Widget.AppCompat.Spinner.Underlined"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:spinnerMode="dialog" />
+                android:layout_weight="1" />
 
             <Spinner
                 android:id="@+id/spinner_currency"
@@ -56,8 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:hint="Currency"
-                android:spinnerMode="dialog" />
+                android:hint="Currency" />
 
         </LinearLayout>
 
@@ -70,6 +71,7 @@
             <EditText
                 android:id="@+id/edittext_community"
                 android:layout_width="300dp"
+                android:textSize="@dimen/textfield_size"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:hint="@string/community_hint" />
@@ -77,6 +79,7 @@
             <EditText
                 android:id="@+id/edittext_district"
                 android:layout_width="300dp"
+                android:textSize="@dimen/textfield_size"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:hint="@string/district_hint" />
@@ -84,6 +87,7 @@
             <EditText
                 android:id="@+id/edittext_state"
                 android:layout_width="300dp"
+                android:textSize="@dimen/textfield_size"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:hint="@string/state_hint" />
@@ -93,8 +97,7 @@
                 android:layout_width="300dp"
                 style="@style/Widget.AppCompat.Spinner.Underlined"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:spinnerMode="dialog" />
+                android:layout_gravity="center_horizontal"/>
 
 
         </LinearLayout>

@@ -1,0 +1,64 @@
+{
+  "quantity":[
+    {
+      "quantityName":"Cubic Meter",
+      "quantityType":"Volume",
+      "quantityValue":1000
+    },
+    {
+      "quantityName":"Cubic Kilometer",
+      "quantityType":"Volume",
+      "quantityValue":1000000000000
+    },
+    {
+      "quantityName":"Cubic Centimeter",
+      "quantityType":"Volume",
+      "quantityValue":0.001
+    },
+    {
+      "quantityName":"Cubic Millimeter",
+      "quantityType":"Volume",
+      "quantityValue":0.000001
+    },
+    {
+      "quantityName":"Liter",
+      "quantityType":"Volume",
+      "quantityValue":1
+    },
+    {
+      "quantityName":"Milliliter",
+      "quantityType":"Volume",
+      "quantityValue":0.001
+    },
+    {
+      "quantityName":"Kilogram",
+      "quantityType":"Weight",
+      "quantityValue":1
+    },
+    {
+      "quantityName":"Gram",
+      "quantityType":"Weight",
+      "quantityValue":0.001
+    },
+    {
+      "quantityName":"Milligram",
+      "quantityType":"Weight",
+      "quantityValue":0.000001
+    },
+    {
+      "quantityName":"Pound",
+      "quantityType":"Weight",
+      "quantityValue":0.453592
+    },
+    {
+      "quantityName":"Ounce",
+      "quantityType":"Weight",
+      "quantityValue":0.02834950000001049
+    },
+    {
+      "quantityName":"Meter",
+      "quantityType":"Distance",
+      "quantityValue":1
+    }
+  ]
+}

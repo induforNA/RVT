@@ -65,12 +65,14 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
         signUp = (Button) findViewById(R.id.button_sign_up);
         login = (Button) findViewById(R.id.button_login);
+
         respondentGroup = (EditText) findViewById(R.id.edittext_respondent_group);
         state = (EditText) findViewById(R.id.edittext_state);
         district = (EditText) findViewById(R.id.edittext_district);
         community = (EditText) findViewById(R.id.edittext_community);
         surveyor = (EditText) findViewById(R.id.edittext_surveyor);
         dateView = (EditText) findViewById(R.id.edittext_date);
+
         countrySpinner = (Spinner) findViewById(R.id.spinner_country);
         currencySpinner = (Spinner) findViewById(R.id.spinner_currency);
         languageSpinner = (Spinner) findViewById(R.id.spinner_language);
