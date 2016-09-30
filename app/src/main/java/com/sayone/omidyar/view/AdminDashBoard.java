@@ -19,7 +19,7 @@ public class AdminDashBoard extends BaseActivity implements View.OnClickListener
         rates=(TextView)findViewById(R.id.textview_rates);
         projectionTimeFrame=(TextView)findViewById(R.id.textview_projection);
         units=(TextView)findViewById(R.id.textview_units);
-        summaryOfSurveys=(TextView)findViewById(R.id.textview_summary);
+        summaryOfSurveys=(TextView)findViewById(R.id.textview_summary_surveys);
 
         rates.setOnClickListener(this);
         projectionTimeFrame.setOnClickListener(this);
@@ -49,7 +49,7 @@ public class AdminDashBoard extends BaseActivity implements View.OnClickListener
                 startActivity(intent);
                 break;
 
-            case R.id.textview_summary:
+            case R.id.textview_summary_surveys:
                 intent=new Intent(getApplicationContext(),SurveySummaryActivity.class);
                 startActivity(intent);
                 break;

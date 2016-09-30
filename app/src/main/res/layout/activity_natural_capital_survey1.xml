@@ -109,7 +109,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="120dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:orientation="horizontal">
@@ -130,17 +130,17 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Back"
+                android:text="@string/button_back"
                 android:textColor="@android:color/white"
                 android:textAllCaps="false"
-                android:id="@+id/button4" />
+                android:id="@+id/button_back" />
 
             <Button
-                android:id="@+id/next_button"
+                android:id="@+id/button_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:text="Next"
+                android:text="@string/button_next"
                 android:textAllCaps="false"
                 android:textColor="#ffffff" />
         </LinearLayout>

@@ -174,4 +174,8 @@
     <string name="button_next">Next</string>
     <string name="radio_button_yes">Yes</string>
     <string name="radio_button_no">No</string>
+    <string name="text_rates">Rates</string>
+    <string name="text_project_time_frame">Projection time frame</string>
+    <string name="text_units">Units</string>
+    <string name="text_summary_surveys">Summary of surveys</string>
 </resources>

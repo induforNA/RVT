@@ -64,7 +64,9 @@
         <activity
             android:name=".view.CertificateActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".view.NaturalCapitalSurveyActivity"></activity>
+        <activity android:name=".view.NaturalCapitalSurveyActivity">
+
+        </activity>
         <activity android:name=".view.NaturalCapitalSurveyActivity1" />
         <activity android:name=".view.NaturalCapitalSurveyActivity2"></activity>
         <activity android:name=".view.NaturalCapitalSurveyActivity3"></activity>

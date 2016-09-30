@@ -1,19 +1,23 @@
 package com.sayone.omidyar.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 
-public class NaturalCapitalSurveyActivity extends BaseActivity {
+public class NaturalCapitalSurveyActivity extends BaseActivity implements View.OnClickListener {
 
     Spinner spinnerYear,spinnerUnit,spinnerCurrency,spinnerNumberTimes,spinnerTimePeriod;
     String year,unit,currency,numberTimes,timePeriod;
+    Button buttonBack,buttonNext;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,8 @@ public class NaturalCapitalSurveyActivity extends BaseActivity {
         spinnerCurrency=(Spinner)findViewById(R.id.spinner_currency);
         spinnerNumberTimes=(Spinner)findViewById(R.id.spinner_number_times);
         spinnerTimePeriod=(Spinner)findViewById(R.id.spinner_time_period);
+        buttonBack=(Button)findViewById(R.id.button_back);
+        buttonNext=(Button)findViewById(R.id.button_next);
 
         ArrayAdapter<CharSequence> year_adapter = ArrayAdapter.createFromResource(this,
                 R.array.year_array, android.R.layout.simple_spinner_item);
@@ -53,6 +59,11 @@ public class NaturalCapitalSurveyActivity extends BaseActivity {
         currency= spinnerCurrency.getSelectedItem().toString();
         numberTimes= spinnerNumberTimes.getSelectedItem().toString();
         timePeriod= spinnerTimePeriod.getSelectedItem().toString();
+
+        buttonNext.setOnClickListener(this);
+        buttonBack.setOnClickListener(this);
+
+
 
         spinnerYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -120,5 +131,23 @@ public class NaturalCapitalSurveyActivity extends BaseActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent;
+        switch (view.getId())
+        {
+            case R.id.button_next:
+                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivity1.class);
+                startActivity(intent);
+                break;
+
+            case R.id.button_back:
+                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyStartActivity.class);
+                startActivity(intent);
+                break;
+
+        }
     }
 }
