@@ -251,7 +251,7 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                 }
                 break;
             case R.id.next_button:
-                if (currentQuestionId < 13) {
+                if (currentQuestionId <= 13) {
                     Log.e("Current id ", socialCapitalAnswerOptionsesList.size() + "");
                     RealmList<MultipleAnswer> multipleAnswers;
                     multipleAnswers = new RealmList<>();
