@@ -1,0 +1,172 @@
+{
+  "id": 10,
+  "surveyor": "Manu",
+  "surveyId": "0001",
+  "community": "community",
+  "district": "district",
+  "state": "state",
+  "country": "country",
+  "language": "English",
+  "currency": "INR",
+  "respondentGroup": "group 1",
+  "date": "2015-01-01",
+  "participants": [
+    {
+      "id": 10,
+      "surveyId": "0001",
+      "name": "Jhone",
+      "occupation": "occupation",
+      "gender": "Male",
+      "age": 24,
+      "yearsOfEdu": 18
+    },
+    {
+      "id": 11,
+      "surveyId": "0001",
+      "name": "Rahul",
+      "occupation": "occupation",
+      "gender": "Male",
+      "age": 25,
+      "yearsOfEdu": 16
+    }
+  ],
+  "landKinds": [
+    {
+      "id": 8,
+      "surveyId": "0001",
+      "name": "Forestland",
+      "socialCapitals": {
+        "id": 20,
+        "surveyId": "0001",
+        "socialCapitalAnswers": [
+          {
+            "id": 31,
+            "surveyId": "0001",
+            "socialCapitalQuestion": {
+              "id": 10,
+              "question": "What ??",
+              "questionHindi": "What ??",
+              "optionType": "Multiple",
+              "socialCapitalAnswerOptionses": [
+                {
+                  "id": 11,
+                  "options": "Aaaaaaaa",
+                  "optionsHindi": "Aaaaaaaa",
+                  "val": 12
+                }
+              ],
+              "weight": 10
+            },
+            "multipleAnswers": [
+              {
+                "id": 10,
+                "answer": "answer"
+              }
+            ],
+            "factorScore": 6
+          }
+        ],
+        "score": 18,
+        "rating": "AA",
+        "sovereign": "12",
+        "spread": "spread",
+        "discountRate": "discountRate"
+      },
+      "forestLand": {
+        "id": 1,
+        "surveyId": "0001",
+        "revenueProducts": [
+          {
+            "id": 8,
+            "surveyId": "0001",
+            "name": "Timber",
+            "type": "Type",
+            "harvestFrequencyValue": 30.3,
+            "harvestFrequencyUnit": "",
+            "quantityValue": "",
+            "quantityUnit": "",
+            "marketPriceValue": "",
+            "marketPriceCurrency": "",
+            "year": "2016",
+            "projectedIndex": "",
+            "subtotal": 1000
+          }
+        ],
+        "costElements": [
+          {
+            "id": 10,
+            "surveyId": "0001",
+            "name": "Water",
+            "expenseFrequencyValue": 10,
+            "expenseFrequencyUnit": "unit",
+            "costPerPeriodValue": "value",
+            "costPerPeriodUnit": "unit",
+            "costPerUnitValue": "",
+            "costPerUnitUnit": "",
+            "year": "",
+            "subtotal": 100.00
+          }
+        ],
+        "outlays": [
+          {
+            "id": 33,
+            "surveyId": "0001",
+            "type": "type",
+            "itemName": "itemName",
+            "unit": "unit",
+            "price": 20.33,
+            "year": 2016
+          }
+        ],
+        "cashFlows": [
+          {
+            "id": 12,
+            "surveyId": "0001",
+            "year": 2016,
+            "value": 20.33
+          }
+        ],
+        "discountPercentage": 23,
+        "discountingFactors": [
+          {
+            "id": 10,
+            "surveyId": "0001",
+            "year": 2016,
+            "value": 20.3
+          }
+        ],
+        "discountedCashFlows": [
+          {
+            "id": 22,
+            "surveyId": "0001",
+            "year": 2016,
+            "value": 10.2
+          }
+        ],
+        "netPresentValue": 20
+      },
+      "cropLand": null,
+      "pastureLand": null,
+      "miningLand": null
+    }
+  ],
+  "inflationRate": 7,
+  "components": {
+    "id": 20,
+    "surveyId":"0001",
+    "croplandValue":122322,
+    "croplandCompleteness":10,
+    "croplandSocialCapitalScore":11,
+    "forestValue":12,
+    "forestCompleteness":100,
+    "forestSocialCapitalScore":18,
+    "pastureValue":23552,
+    "pastureCompleteness":83,
+    "pastureSocialCapitalScore":20,
+    "miningLandValue":3265656,
+    "miningLandCompleteness":99,
+    "miningSocialCapitalScore":20,
+    "totalValue":5454545425,
+    "totalSocialCapitalScore":12
+  }
+}
