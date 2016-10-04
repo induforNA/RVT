@@ -34,7 +34,7 @@ import io.realm.RealmResults;
  * Created by sayone on 21/9/16.
  */
 
-public class SocialCapitalActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener{
+public class SocialCapitalActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
 
     public static final String TAG = SocialCapitalActivity.class.getName();
     private Realm realm;
@@ -252,7 +252,7 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                 }
                 break;
             case R.id.next_button:
-                if (currentQuestionId <= 13) {
+                if (currentQuestionId < 14) {
                     Log.e("Current id ", socialCapitalAnswerOptionsesList.size() + "");
                     RealmList<MultipleAnswer> multipleAnswers;
                     multipleAnswers = new RealmList<>();
@@ -263,23 +263,25 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                     landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).setMultipleAnswers(multipleAnswers);
                     realm.commitTransaction();
 
+                    if (currentQuestionId < 13) {
+                        socialCapitalAnswerOptionsesList.clear();
+                        clearOptions();
 
-                    socialCapitalAnswerOptionsesList.clear();
-                    clearOptions();
-
-                    Log.e("MULTIPLE ",landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers().toString());
-
-
-                    int preQuestionId = currentQuestionId + 1;
-                    loadQuestion(preQuestionId);
-
-                    currentQuestionId = preQuestionId;
+                        Log.e("MULTIPLE ", landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers().toString());
 
 
-                }
-                else {
-                Intent intent = new Intent(SocialCapitalActivity.this,NaturalCapitalSurveyStartActivity.class);
-                startActivity(intent);
+                        int preQuestionId = currentQuestionId + 1;
+                        loadQuestion(preQuestionId);
+
+                        currentQuestionId = preQuestionId;
+                    } else {
+                        Intent intent = new Intent(SocialCapitalActivity.this, NaturalCapitalSurveyStartActivity.class);
+                        startActivity(intent);
+                    }
+
+                } else {
+                    Intent intent = new Intent(SocialCapitalActivity.this, NaturalCapitalSurveyStartActivity.class);
+                    startActivity(intent);
                 }
                 break;
 
@@ -371,7 +373,7 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
     }
 
     public void slectedItemsRadio(View view) {
-        Log.e("SELECTED ITEMS ","HERE");
+        Log.e("SELECTED ITEMS ", "HERE");
         socialCapitalAnswerOptionsesList.clear();
         boolean checked = ((RadioButton) view).isChecked();
         socialCapitalQuestionsSelectedItem = realm.where(LandKind.class)
@@ -384,7 +386,7 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                 .get(currentQuestionId)
                 .getSocialCapitalQuestion();
 
-        Log.e("SELECTED ITEMS ",socialCapitalAnswerOptionsesList.size()+"");
+        Log.e("SELECTED ITEMS ", socialCapitalAnswerOptionsesList.size() + "");
         switch (view.getId()) {
             case R.id.option_a_radio:
                 Log.e("PP ", optionARadio.getTag(R.string.checkbox_id).toString());

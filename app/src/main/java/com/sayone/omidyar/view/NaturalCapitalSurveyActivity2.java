@@ -1,7 +1,6 @@
 package com.sayone.omidyar.view;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -64,7 +63,7 @@ public class NaturalCapitalSurveyActivity2 extends BaseActivity implements View.
                 break;
 
             case R.id.button_back:
-                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivity1.class);
+                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivityA.class);
                 startActivity(intent);
                 break;
         }

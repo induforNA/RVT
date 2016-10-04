@@ -69,6 +69,9 @@ public class NaturalCapitalSurveyStartActivity extends BaseActivity implements V
                 intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.button_back:
+                finish();
+                break;
 
         }
     }
