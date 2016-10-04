@@ -66,7 +66,7 @@ public class NaturalCapitalSurveyStartActivity extends BaseActivity implements V
         switch (view.getId()){
 
             case R.id.button_next:
-                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivity.class);
+                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivityA.class);
                 startActivity(intent);
                 break;
             case R.id.button_back:
