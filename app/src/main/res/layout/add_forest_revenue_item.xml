@@ -5,35 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <EditText
-        android:id="@+id/edit_text_participant"
+        android:id="@+id/edit_text_wood"
         android:layout_gravity="center"
-        android:hint="Name of participant"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/edit_text_occupation"
-        android:layout_gravity="center"
-        android:hint="Occupation"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/edit_text_gender"
-        android:layout_gravity="center"
-        android:hint="Gender"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:inputType="number"
-        android:id="@+id/edit_text_age"
-        android:layout_gravity="center"
-        android:hint="Age"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:inputType="number"
-        android:id="@+id/edit_text_education"
-        android:layout_gravity="center"
-        android:hint="Years of Education"
+        android:hint="Name of wood"
         android:layout_width="300dp"
         android:layout_height="wrap_content" />
     <LinearLayout
