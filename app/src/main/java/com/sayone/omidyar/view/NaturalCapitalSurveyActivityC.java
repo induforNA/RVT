@@ -20,7 +20,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_natural_capital_survey2);
+        setContentView(R.layout.activity_natural_capital_survey_c);
 
         spinnerYear=(Spinner)findViewById(R.id.spinner_year);
         buttonBack=(Button)findViewById(R.id.button_back);
