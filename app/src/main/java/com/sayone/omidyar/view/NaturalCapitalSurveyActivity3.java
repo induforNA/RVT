@@ -1,10 +1,12 @@
 package com.sayone.omidyar.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.sayone.omidyar.BaseActivity;
@@ -14,7 +16,7 @@ public class NaturalCapitalSurveyActivity3 extends BaseActivity {
 
     Spinner spinnerInfrastructure1,spinnerInfrastructure2,spinnerInfrastructure3,spinnerInfrastructure4,spinnerInfrastructure5,spinnerInfrastructure6,spinnerInfrastructure7,spinnerInfrastructure8;
     String infrastructure1,infrastructure2,infrastructure3,infrastructure4,infrastructure5,infrastructure6,infrastructure7,infrastructure8;
-
+    Button buttonNext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +30,7 @@ public class NaturalCapitalSurveyActivity3 extends BaseActivity {
         spinnerInfrastructure6=(Spinner)findViewById(R.id.spinner_infrastructure6);
         spinnerInfrastructure7=(Spinner)findViewById(R.id.spinner_infrastructure7);
         spinnerInfrastructure8=(Spinner)findViewById(R.id.spinner_infrastructure8);
+        buttonNext=(Button)findViewById(R.id.button_next);
 
         ArrayAdapter<CharSequence> infrastructureAdapter1 = ArrayAdapter.createFromResource(this,
                 R.array.number_of_harvests, android.R.layout.simple_spinner_item);
@@ -165,6 +168,13 @@ public class NaturalCapitalSurveyActivity3 extends BaseActivity {
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
 
+            }
+        });
+        buttonNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(),CroplandSurveyA.class);
+                startActivity(intent);
             }
         });
 
