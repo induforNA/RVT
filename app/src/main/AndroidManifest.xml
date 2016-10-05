@@ -68,10 +68,15 @@
 
         </activity>
         <activity android:name=".view.NaturalCapitalSurveyActivityA" />
-        <activity android:name=".view.NaturalCapitalSurveyActivity2" />
+        <activity android:name=".view.NaturalCapitalSurveyActivityC" />
         <activity android:name=".view.NaturalCapitalSurveyActivity3" />
         <activity android:name=".view.NaturalCapitalSurveyStartActivity" />
         <activity android:name=".view.CroplandSurveyA">
+        </activity>
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".view.NaturalCapitalSurveyActivityB">
+
         </activity>
     </application>
 

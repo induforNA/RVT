@@ -11,7 +11,7 @@ import android.widget.Spinner;
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 
-public class NaturalCapitalSurveyActivity2 extends BaseActivity implements View.OnClickListener {
+public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.OnClickListener {
 
     Spinner spinnerYear;
     String year;

@@ -80,6 +80,7 @@
             android:text="what wood do you harvest,if any?"
             android:textSize="@dimen/heading_size" />
         <LinearLayout
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"

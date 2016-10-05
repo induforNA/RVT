@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
+import com.sayone.omidyar.adapter.RevenueAdapter;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.Participant;
 import com.sayone.omidyar.model.RevenueProduct;
@@ -35,8 +38,10 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
     Button buttonBack,buttonNext;
     ImageView buttonAddWood;
     RealmList<RevenueProduct> revenueProducts;
+    RealmList<RevenueProduct> revenueProductsToSave;
 
     RecyclerView timberList;
+    RevenueAdapter revenueAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,19 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
         serveyId = sharedPref.getString("surveyId","");
 
         revenueProducts = new RealmList<>();
+        revenueProductsToSave = new RealmList<>();
+        Survey survey = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
+        for(LandKind landKind:survey.getLandKinds()){
+            if(landKind.getName().equals("Forestland")){
+                //revenueProducts = landKind.getForestLand().getRevenueProducts();
+                for(RevenueProduct revenueProduct:landKind.getForestLand().getRevenueProducts()){
+                    revenueProductsToSave.add(revenueProduct);
+                    if(revenueProduct.getType().equals("Timber")){
+                        revenueProducts.add(revenueProduct);
+                    }
+                }
+            }
+        }
 
 
         buttonBack=(Button)findViewById(R.id.button_back);
@@ -57,6 +75,14 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
         buttonAddWood = (ImageView) findViewById(R.id.button_add_wood);
 
         timberList = (RecyclerView) findViewById(R.id.timber_list);
+
+        revenueAdapter = new RevenueAdapter(revenueProducts);
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        timberList.setLayoutManager(mLayoutManager);
+        timberList.setItemAnimator(new DefaultItemAnimator());
+        timberList.setAdapter(revenueAdapter);
+
 
         buttonNext.setOnClickListener(this);
         buttonBack.setOnClickListener(this);
@@ -69,13 +95,12 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
         switch (view.getId()) {
 
             case R.id.button_next:
-                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivity2.class);
+                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivityB.class);
                 startActivity(intent);
                 break;
 
             case R.id.button_back:
-                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivity.class);
-                startActivity(intent);
+                finish();
                 break;
 
             case R.id.button_add_wood:
@@ -109,6 +134,7 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
                         realm.commitTransaction();
 
                         revenueProducts.add(revenueProduct);
+                        revenueProductsToSave.add(revenueProduct);
                         Survey surveyRevenueProduct = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
 
 
@@ -118,7 +144,7 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
                                 Log.e("BBB ",revenueProducts.size()+"");
                                 Log.e("AAA ",landKind.getForestLand().getRevenueProducts().toString());
                                 realm.beginTransaction();
-                                landKind.getForestLand().setRevenueProducts(revenueProducts);
+                                landKind.getForestLand().setRevenueProducts(revenueProductsToSave);
                                 realm.commitTransaction();
                             }
                         }
@@ -131,6 +157,8 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
                                 }
                             }
                         }
+
+                        revenueAdapter.notifyDataSetChanged();
 
 //                        noParticipantLayout.setVisibility(View.GONE);
 //                        participantLayout.setVisibility(View.VISIBLE);
