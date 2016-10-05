@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Social capital survey"
-                    android:textSize="@dimen/heading_size" />
+                    android:textSize="@dimen/textfield_size" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -60,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:text="Forestland"
                     android:id="@+id/land_type"
-                    android:textSize="@dimen/heading_size" />
+                    android:textSize="@dimen/textfield_size" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:text="1/14"
                     android:id="@+id/page_number"
-                    android:textSize="@dimen/heading_size" />
+                    android:textSize="@dimen/textfield_size" />
 
             </LinearLayout>
 
@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:text="question?"
                 android:textColor="#000000"
-                android:textSize="40sp" />
+                android:textSize="@dimen/heading_size" />
 
             <LinearLayout
                 android:id="@+id/checkboxgroup"
@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:onClick="slectedItems"
                     android:text="option 1"
-                    android:textSize="30sp" />
+                    android:textSize="@dimen/textfield_size" />
 
                 <CheckBox
                     android:id="@+id/option_b"
@@ -116,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:onClick="slectedItems"
                     android:text="Cropland"
-                    android:textSize="30sp" />
+                    android:textSize="@dimen/textfield_size" />
 
                 <CheckBox
                     android:id="@+id/option_c"
@@ -124,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:onClick="slectedItems"
                     android:text="Pastureland"
-                    android:textSize="30sp" />
+                    android:textSize="@dimen/textfield_size" />
 
                 <CheckBox
                     android:id="@+id/option_d"
@@ -132,7 +132,7 @@
                     android:layout_height="wrap_content"
                     android:onClick="slectedItems"
                     android:text="Mining land"
-                    android:textSize="30sp" />
+                    android:textSize="@dimen/textfield_size" />
 
                 <CheckBox
                     android:id="@+id/option_e"
@@ -140,7 +140,7 @@
                     android:layout_height="wrap_content"
                     android:onClick="slectedItems"
                     android:text="Mining land"
-                    android:textSize="30sp" />
+                    android:textSize="@dimen/textfield_size" />
             </LinearLayout>
             <RadioGroup
                 android:id="@+id/radiobuttongroup"
@@ -152,7 +152,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="option 1"
-                    android:textSize="30sp" />
+                    android:textSize="@dimen/textfield_size" />
 
                 <RadioButton
                     android:onClick="slectedItemsRadio"
@@ -160,7 +160,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="option 2"
-                    android:textSize="30sp" />
+                    android:textSize="@dimen/textfield_size" />
 
                 <RadioButton
                     android:onClick="slectedItemsRadio"
@@ -168,7 +168,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="option 3"
-                    android:textSize="30sp" />
+                    android:textSize="@dimen/textfield_size" />
 
                 <RadioButton
                     android:onClick="slectedItemsRadio"
@@ -176,7 +176,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="option 4"
-                    android:textSize="30sp" />
+                    android:textSize="@dimen/textfield_size" />
 
                 <RadioButton
                     android:onClick="slectedItemsRadio"
@@ -184,7 +184,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="option 4"
-                    android:textSize="30sp" />
+                    android:textSize="@dimen/textfield_size" />
             </RadioGroup>
         </LinearLayout>
 

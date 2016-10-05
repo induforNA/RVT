@@ -31,7 +31,7 @@
             android:layout_gravity="center"
             android:text="survey id"
             android:textColor="#ffffff"
-            android:textSize="20sp" />
+            android:textSize="@dimen/textfield_size" />
 
         <TextView
             android:id="@+id/text_view_id"
@@ -53,7 +53,7 @@
         android:paddingLeft="20dp"
         android:text="About This Tool"
         android:textColor="#ffffff"
-        android:textSize="20sp" />
+        android:textSize="@dimen/textfield_size" />
 
     <TextView
         android:layout_width="match_parent"
@@ -63,7 +63,7 @@
         android:id="@+id/text_start_survey"
         android:text="Start Survey "
         android:textColor="#ffffff"
-        android:textSize="20sp" />
+        android:textSize="@dimen/textfield_size" />
 
     <TextView
         android:id="@+id/logout"
@@ -73,5 +73,5 @@
         android:paddingLeft="20dp"
         android:text="Logout"
         android:textColor="#ffffff"
-        android:textSize="20sp" />
+        android:textSize="@dimen/textfield_size" />
 </LinearLayout>

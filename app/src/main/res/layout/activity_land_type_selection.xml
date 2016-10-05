@@ -40,34 +40,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:textSize="40sp"
+                android:textSize="@dimen/heading_size"
                 android:textColor="#000000"
                 android:text="What kinds of land use are valued on your land?"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <CheckBox
-                android:textSize="30sp"
+                android:textSize="@dimen/textfield_size"
                 android:text="Forestland"
                 android:id="@+id/forestland"
                 android:onClick="slectedLandKind"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <CheckBox
-                android:textSize="30sp"
+                android:textSize="@dimen/textfield_size"
                 android:text="Cropland"
                 android:id="@+id/cropland"
                 android:onClick="slectedLandKind"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <CheckBox
-                android:textSize="30sp"
+                android:textSize="@dimen/textfield_size"
                 android:text="Pastureland"
                 android:id="@+id/pastureland"
                 android:onClick="slectedLandKind"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <CheckBox
-                android:textSize="30sp"
+                android:textSize="@dimen/textfield_size"
                 android:text="Mining land"
                 android:id="@+id/miningland"
                 android:onClick="slectedLandKind"
