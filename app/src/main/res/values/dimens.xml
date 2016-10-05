@@ -3,5 +3,5 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="heading_size">30sp</dimen>
-    <dimen name="textfield_size">20sp</dimen>
+    <dimen name="textfield_size">25sp</dimen>
 </resources>

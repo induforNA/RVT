@@ -13,6 +13,7 @@ import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.Participant;
 import com.sayone.omidyar.model.SocialCapitalAnswerOptions;
 import com.sayone.omidyar.model.SocialCapitalQuestions;
+import com.sayone.omidyar.model.SpredTable;
 import com.sayone.omidyar.model.Survey;
 
 import org.json.JSONArray;
@@ -36,6 +37,7 @@ public class LoadingActivity extends BaseActivity {
     Context context;
     private SharedPreferences preferences;
     String quetionsLoadStatus;
+    String spredTableLoadStatus;
 
     public static final String TAG = LoadingActivity.class.getName();
 
@@ -50,7 +52,7 @@ public class LoadingActivity extends BaseActivity {
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
         quetionsLoadStatus = preferences.getString("questionsLoaded", "false");
-
+        spredTableLoadStatus = preferences.getString("spredTableLoaded", "false");
 
         if (quetionsLoadStatus.equals("false")) {
 
@@ -85,6 +87,31 @@ public class LoadingActivity extends BaseActivity {
             }
         }
 
+        if (spredTableLoadStatus.equals("false")) {
+
+            try {
+                JSONObject reader = new JSONObject(loadSpredJSONFromAsset());
+                JSONArray jsonArray = reader.getJSONArray("discountRate");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = new JSONObject(jsonArray.get(i).toString());
+
+                    realm.beginTransaction();
+                    SpredTable spredTable = realm.createObject(SpredTable.class);
+                    spredTable.setId(getNextKeySpred());
+                    spredTable.setMoreThan(jsonObject.getDouble("moreThan"));
+                    spredTable.setLessThan(jsonObject.getDouble("lessThan"));
+                    spredTable.setRating(jsonObject.getString("rating"));
+                    spredTable.setSpread(jsonObject.getDouble("spread"));
+                    realm.commitTransaction();
+                }
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("spredTableLoaded", "true");
+                editor.apply();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
 
         RealmResults<SocialCapitalQuestions> results = realm.where(SocialCapitalQuestions.class).findAll();
         for (SocialCapitalQuestions socialCapitalQuestions1 : results) {
@@ -94,6 +121,11 @@ public class LoadingActivity extends BaseActivity {
             for (SocialCapitalAnswerOptions socialCapitalAnswerOptions : socialCapitalQuestions1.getSocialCapitalAnswerOptionses()) {
                 Log.e(TAG + "abcd", socialCapitalAnswerOptions.toString());
             }
+        }
+
+        RealmResults<SpredTable> results1 = realm.where(SpredTable.class).findAll();
+        for (SpredTable spredTable : results1) {
+            Log.e(TAG + "abcd", spredTable.getRating());
         }
 
 //
@@ -122,6 +154,13 @@ public class LoadingActivity extends BaseActivity {
         return realm.where(SocialCapitalQuestions.class).max("id").intValue() + 1;
     }
 
+    public int getNextKeySpred() {
+        if (realm.where(SpredTable.class).max("id") == null) {
+            return 1;
+        }
+        return realm.where(SpredTable.class).max("id").intValue() + 1;
+    }
+
     public int getNextKeySocialCapitalAnswerOptions() {
         if (realm.where(SocialCapitalAnswerOptions.class).max("id") == null) {
             return 1;
@@ -134,6 +173,31 @@ public class LoadingActivity extends BaseActivity {
         try {
 
             InputStream is = getAssets().open("socialCapitalQuestions.json");
+
+            int size = is.available();
+
+            byte[] buffer = new byte[size];
+
+            is.read(buffer);
+
+            is.close();
+
+            json = new String(buffer, "UTF-8");
+
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+
+    }
+
+    public String loadSpredJSONFromAsset() {
+        String json = null;
+        try {
+
+            InputStream is = getAssets().open("discountRate.json");
 
             int size = is.available();
 

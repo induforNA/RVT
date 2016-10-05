@@ -16,15 +16,15 @@ public class SocialCapital extends RealmObject {
 
     RealmList<SocialCapitalAnswer> socialCapitalAnswers;
 
-    int score;
+    double score;
 
     String rating;
 
-    String sovereign;
+    double sovereign;
 
-    String spread;
+    double spread;
 
-    String discountRate;
+    double discountRate;
 
     public long getId() {
         return id;
@@ -50,11 +50,11 @@ public class SocialCapital extends RealmObject {
         this.socialCapitalAnswers = socialCapitalAnswers;
     }
 
-    public int getScore() {
+    public double getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(double score) {
         this.score = score;
     }
 
@@ -66,27 +66,27 @@ public class SocialCapital extends RealmObject {
         this.rating = rating;
     }
 
-    public String getSovereign() {
+    public double getSovereign() {
         return sovereign;
     }
 
-    public void setSovereign(String sovereign) {
+    public void setSovereign(double sovereign) {
         this.sovereign = sovereign;
     }
 
-    public String getSpread() {
+    public double getSpread() {
         return spread;
     }
 
-    public void setSpread(String spread) {
+    public void setSpread(double spread) {
         this.spread = spread;
     }
 
-    public String getDiscountRate() {
+    public double getDiscountRate() {
         return discountRate;
     }
 
-    public void setDiscountRate(String discountRate) {
+    public void setDiscountRate(double discountRate) {
         this.discountRate = discountRate;
     }
 }

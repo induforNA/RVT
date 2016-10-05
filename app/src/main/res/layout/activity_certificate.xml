@@ -227,6 +227,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="new text"
+                        android:id="@+id/forest_social_capital_score"
                         android:textSize="@dimen/textfield_size" />
 
                     <TextView
@@ -308,6 +309,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="new text"
+                        android:id="@+id/crop_social_capital_score"
                         android:textSize="@dimen/textfield_size" />
 
                     <TextView
@@ -389,6 +391,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="new text"
+                        android:id="@+id/pasture_social_capital_score"
                         android:textSize="@dimen/textfield_size" />
 
                     <TextView
@@ -470,6 +473,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="new text"
+                        android:id="@+id/minimg_social_capital_score"
                         android:textSize="@dimen/textfield_size" />
 
                     <TextView

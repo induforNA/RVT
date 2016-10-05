@@ -21,9 +21,11 @@ import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.MultipleAnswer;
+import com.sayone.omidyar.model.SocialCapital;
 import com.sayone.omidyar.model.SocialCapitalAnswer;
 import com.sayone.omidyar.model.SocialCapitalAnswerOptions;
 import com.sayone.omidyar.model.SocialCapitalQuestions;
+import com.sayone.omidyar.model.SpredTable;
 import com.sayone.omidyar.model.Survey;
 
 import java.util.List;
@@ -295,6 +297,8 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                     landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).setMultipleAnswers(multipleAnswers);
                     realm.commitTransaction();
 
+                    calculateFactorScore(landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId));
+
                     if (currentQuestionId < 13) {
                         socialCapitalAnswerOptionsesList.clear();
                         clearOptions();
@@ -307,12 +311,16 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
 
                         currentQuestionId = preQuestionId;
                     } else {
-                        Intent intent = new Intent(SocialCapitalActivity.this, NaturalCapitalSurveyStartActivity.class);
+                      //  Intent intent = new Intent(SocialCapitalActivity.this, NaturalCapitalSurveyStartActivity.class);
+                      //  startActivity(intent);
+                        Intent intent = new Intent(SocialCapitalActivity.this,CertificateActivity.class);
                         startActivity(intent);
                     }
 
                 } else {
-                    Intent intent = new Intent(SocialCapitalActivity.this, NaturalCapitalSurveyStartActivity.class);
+                   // Intent intent = new Intent(SocialCapitalActivity.this, NaturalCapitalSurveyStartActivity.class);
+                   // startActivity(intent);
+                    Intent intent = new Intent(SocialCapitalActivity.this, CertificateActivity.class);
                     startActivity(intent);
                 }
                 break;
@@ -338,6 +346,57 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                 break;
 
         }
+    }
+
+    public void calculateFactorScore(SocialCapitalAnswer socialCapitalAnswer){
+        int factoreScore = 0;
+        SocialCapitalQuestions socialCapitalQuestionsCalculate = socialCapitalAnswer.getSocialCapitalQuestion();
+        int questionWt = socialCapitalQuestionsCalculate.getWeight();
+
+        for(MultipleAnswer multipleAnswer:socialCapitalAnswer.getMultipleAnswers()){
+            for(SocialCapitalAnswerOptions socialCapitalAnswerOptions:socialCapitalQuestionsCalculate.getSocialCapitalAnswerOptionses()){
+                if(multipleAnswer.getAnswer() == socialCapitalAnswerOptions.getId()){
+                    socialCapitalAnswerOptions.getVal();
+                    factoreScore = factoreScore + (socialCapitalAnswerOptions.getVal()*questionWt)/100;
+                }
+            }
+        }
+
+        realm.beginTransaction();
+        socialCapitalAnswer.setFactorScore(factoreScore);
+        realm.commitTransaction();
+
+        saveSocialCapitalValues();
+    }
+
+    public void saveSocialCapitalValues(){
+        LandKind landKindLoad = realm.where(LandKind.class)
+                .equalTo("surveyId", serveyId)
+                .equalTo("status", "active")
+                .equalTo("name", currentSocialCapitalServey)
+                .findFirst();
+        double totalFactorScore = 0.0;
+        RealmList<SocialCapitalAnswer> socialCapitalAnswers = landKindLoad.getSocialCapitals().getSocialCapitalAnswers();
+        for(SocialCapitalAnswer socialCapitalAnswer:socialCapitalAnswers){
+            totalFactorScore = totalFactorScore + socialCapitalAnswer.getFactorScore();
+        }
+
+        Log.e("Factores Score",totalFactorScore+"");
+
+        SpredTable spredTable = realm.where(SpredTable.class)
+                .lessThan("moreThan",totalFactorScore)
+                .greaterThanOrEqualTo("lessThan",totalFactorScore)
+                .findFirst();
+
+        Log.e("SPRED TABLE ", spredTable.toString());
+
+        realm.beginTransaction();
+        landKindLoad.getSocialCapitals().setScore(totalFactorScore);
+        landKindLoad.getSocialCapitals().setSovereign(7.16);
+        landKindLoad.getSocialCapitals().setSpread(spredTable.getSpread());
+        landKindLoad.getSocialCapitals().setRating(spredTable.getRating());
+        landKindLoad.getSocialCapitals().setDiscountRate(spredTable.getSpread() + 7.16);
+        realm.commitTransaction();
     }
 
     public void clearOptions() {

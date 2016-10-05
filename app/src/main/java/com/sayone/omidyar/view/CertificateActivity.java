@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
+import com.sayone.omidyar.model.LandKind;
+import com.sayone.omidyar.model.SocialCapital;
+import com.sayone.omidyar.model.SocialCapitalQuestions;
 import com.sayone.omidyar.model.Survey;
 
 import java.text.Format;
@@ -17,7 +20,7 @@ import io.realm.Realm;
 
 public class CertificateActivity extends BaseActivity {
 
-    TextView parcelId,community,site,surveyorName,valuationDate,inflationRate;
+    TextView parcelId,community,site,surveyorName,valuationDate,inflationRate,socialCapitalForest,socialCapitalCrop,socialCapitalPasture,socialCapitalMining;
     SharedPreferences sharedPref;
     private Realm realm;
     private String surveyId;
@@ -34,6 +37,10 @@ public class CertificateActivity extends BaseActivity {
         surveyorName=(TextView)findViewById(R.id.surveyor_name);
         valuationDate=(TextView)findViewById(R.id.valuation_date);
         inflationRate=(TextView)findViewById(R.id.inflation_rate);
+        socialCapitalForest=(TextView)findViewById(R.id.forest_social_capital_score);
+        socialCapitalCrop=(TextView)findViewById(R.id.crop_social_capital_score);
+        socialCapitalPasture=(TextView)findViewById(R.id.pasture_social_capital_score);
+        socialCapitalMining=(TextView)findViewById(R.id.minimg_social_capital_score);
 
         context=this;
 
@@ -48,10 +55,21 @@ public class CertificateActivity extends BaseActivity {
         Format formatter = new SimpleDateFormat("dd/MM/yyyy");
         String s = formatter.format(surveyCheck.getDate());
 
+        LandKind landKindLoad = realm.where(LandKind.class)
+                .equalTo("surveyId", surveyId)
+                .equalTo("status", "active")
+                .findFirst();
+        SocialCapital socialCapital = landKindLoad.getSocialCapitals();
+
+
         community.setText(surveyCheck.getCommunity().toString());
         parcelId.setText(surveyCheck.getSurveyId().toString());
         surveyorName.setText(surveyCheck.getSurveyor().toString());
         valuationDate.setText(s);
+        socialCapitalForest.setText(""+socialCapital.getScore());
+        socialCapitalCrop.setText("0");
+        socialCapitalPasture.setText("0");
+        socialCapitalMining.setText("0");
       //  inflationRate.setText(surveyCheck.getInflationRate().toString());
 
     }
