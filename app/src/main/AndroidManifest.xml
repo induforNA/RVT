@@ -16,9 +16,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.SurveySummaryActivity"
-            android:screenOrientation="landscape" >
-
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".view.UnitsActivity"
             android:screenOrientation="landscape" />
@@ -27,14 +25,10 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.RegistrationActivity"
-            android:screenOrientation="landscape" >
-
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".view.LoginActivity"
-            android:screenOrientation="landscape" >
-
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".view.AboutActivity"
             android:screenOrientation="landscape" />
@@ -52,7 +46,6 @@
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -64,21 +57,22 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.SocialCapitalActivity"
-            android:screenOrientation="landscape">
-
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".view.CertificateActivity"
             android:screenOrientation="landscape">
 
         </activity>
-        <activity android:name=".view.NaturalCapitalSurveyActivity">
+        <activity android:name=".view.NaturalCapitalSurveyActivity"
+            android:screenOrientation="landscape">
 
         </activity>
         <activity android:name=".view.NaturalCapitalSurveyActivityA" />
-        <activity android:name=".view.NaturalCapitalSurveyActivity2"></activity>
-        <activity android:name=".view.NaturalCapitalSurveyActivity3"></activity>
-        <activity android:name=".view.NaturalCapitalSurveyStartActivity"></activity>
+        <activity android:name=".view.NaturalCapitalSurveyActivity2" />
+        <activity android:name=".view.NaturalCapitalSurveyActivity3" />
+        <activity android:name=".view.NaturalCapitalSurveyStartActivity" />
+        <activity android:name=".view.CroplandSurveyA">
+        </activity>
     </application>
 
 </manifest>
