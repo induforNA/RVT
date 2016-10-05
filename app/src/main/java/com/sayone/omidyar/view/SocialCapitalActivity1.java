@@ -1,13 +1,17 @@
 package com.sayone.omidyar.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -60,6 +64,14 @@ public class SocialCapitalActivity1 extends BaseActivity {
     private RadioButton optionDRadio;
     private RadioButton optionERadio;
 
+    private DrawerLayout menuDrawerLayout;
+    private ImageView imageViewMenuIcon;
+    private ImageView drawerCloseBtn;
+    private TextView textViewAbout;
+    private TextView surveyIdDrawer;
+    private TextView logout;
+    private TextView startSurvey;
+
     private int currentQuestionId = 0;
 
     RealmResults<SocialCapitalQuestions> socialCapitalQuestionses;
@@ -100,6 +112,14 @@ public class SocialCapitalActivity1 extends BaseActivity {
         optionCRadio = (RadioButton) findViewById(R.id.option_c_radio);
         optionDRadio = (RadioButton) findViewById(R.id.option_d_radio);
         optionERadio = (RadioButton) findViewById(R.id.option_e_radio);
+
+        menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);
+        imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
+        drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
+        textViewAbout = (TextView) findViewById(R.id.text_view_about);
+        surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
+        logout = (TextView) findViewById(R.id.logout);
+        startSurvey=(TextView)findViewById(R.id.text_start_survey);
 
 //        socialCapitalQuestionses = realm.where(SocialCapitalQuestions.class).findAll();
 //        for (SocialCapitalQuestions socialCapitalQuestions : socialCapitalQuestionses) {
@@ -146,8 +166,16 @@ public class SocialCapitalActivity1 extends BaseActivity {
         backButton = (Button) findViewById(R.id.back_button);
         nextButton = (Button) findViewById(R.id.next_button);
 
+        surveyIdDrawer.setText(serveyId);
+
+        imageViewMenuIcon.setOnClickListener(this);
+        surveyIdDrawer.setText(serveyId);
+        drawerCloseBtn.setOnClickListener(this);
+        textViewAbout.setOnClickListener(this);
+        logout.setOnClickListener(this);
         backButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
+        startSurvey.setOnClickListener(this);
     }
 
     @Override
@@ -216,6 +244,26 @@ public class SocialCapitalActivity1 extends BaseActivity {
                 }
 //                Intent intent = new Intent(SocialCapitalActivity.this, SocialCapitalActivity.class);
 //                startActivity(intent);
+                break;
+            case R.id.image_view_menu_icon:
+                toggleMenuDrawer();
+                break;
+            case  R.id.drawer_close_btn:
+                toggleMenuDrawer();
+                break;
+            case  R.id.text_view_about:
+                Intent i = new Intent(getApplicationContext(),AboutActivity.class);
+                startActivity(i);
+                break;
+            case R.id.logout:
+                Intent intent = new Intent(getApplicationContext(),RegistrationActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                break;
+            case R.id.text_start_survey:
+                Intent intents = new Intent(getApplicationContext(),MainActivity.class);
+                intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intents);
                 break;
         }
     }
@@ -422,5 +470,12 @@ public class SocialCapitalActivity1 extends BaseActivity {
                 .equalTo("surveyId", serveyId)
                 .findFirst();
 
+    }
+    public void toggleMenuDrawer(){
+        if(menuDrawerLayout.isDrawerOpen(GravityCompat.START)){
+            menuDrawerLayout.closeDrawer(GravityCompat.START);
+        }else{
+            menuDrawerLayout.openDrawer(GravityCompat.START);
+        }
     }
 }
