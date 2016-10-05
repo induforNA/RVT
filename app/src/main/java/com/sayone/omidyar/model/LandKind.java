@@ -100,4 +100,20 @@ public class LandKind extends RealmObject {
     public void setSurveyId(String surveyId) {
         this.surveyId = surveyId;
     }
+
+
+    @Override
+    public String toString() {
+        return "LandKind{" +
+                "id=" + id +
+                ", surveyId='" + surveyId + '\'' +
+                ", name='" + name + '\'' +
+                ", socialCapitals=" + socialCapitals +
+                ", forestLand=" + forestLand +
+                ", cropLand=" + cropLand +
+                ", pastureLand=" + pastureLand +
+                ", miningLand=" + miningLand +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

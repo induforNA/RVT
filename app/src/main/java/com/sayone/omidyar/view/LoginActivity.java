@@ -82,6 +82,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                 editor.apply();
                                 intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
+                                finish();
                                 break;
                             } else {
                                 toastfunction(getApplicationContext(), getResources().getString(R.string.login_failed));

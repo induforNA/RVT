@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +36,8 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
     ImageView buttonAddWood;
     RealmList<RevenueProduct> revenueProducts;
 
+    RecyclerView timberList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +55,8 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
         buttonBack=(Button)findViewById(R.id.button_back);
         buttonNext=(Button)findViewById(R.id.button_next);
         buttonAddWood = (ImageView) findViewById(R.id.button_add_wood);
+
+        timberList = (RecyclerView) findViewById(R.id.timber_list);
 
         buttonNext.setOnClickListener(this);
         buttonBack.setOnClickListener(this);
@@ -111,10 +116,10 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
                             Log.e("BBB ",landKind.getName()+" "+landKind.getForestLand());
                             if(landKind.getName().equals("Forestland")){
                                 Log.e("BBB ",revenueProducts.size()+"");
-//                                Log.e("AAA ",landKind.getForestLand().getRevenueProducts().toString());
-//                                realm.beginTransaction();
-//                                landKind.getForestLand().setRevenueProducts(revenueProducts);
-//                                realm.commitTransaction();
+                                Log.e("AAA ",landKind.getForestLand().getRevenueProducts().toString());
+                                realm.beginTransaction();
+                                landKind.getForestLand().setRevenueProducts(revenueProducts);
+                                realm.commitTransaction();
                             }
                         }
 

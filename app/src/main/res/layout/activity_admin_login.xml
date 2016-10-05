@@ -1,44 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
+    <LinearLayout
+        android:elevation="3dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+        <TextView
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:textSize="22dp"
+            android:text="admin login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <EditText
+        android:id="@+id/edittext_passcode"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="150dp"
         android:gravity="center"
-        android:hint="@string/passcode_hint"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/edittext_passcode" />
+        android:hint="@string/passcode_hint" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/login_button"
-        android:textColor="@android:color/white"
         android:id="@+id/button_login"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
-        android:layout_gravity="center_horizontal" />
+        android:text="@string/login_button"
+        android:textColor="@android:color/white" />
 
     <Button
         android:id="@+id/button_surveyor_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@android:color/transparent"
         android:layout_marginTop="10dp"
+        android:background="@android:color/transparent"
         android:text="@string/surveyor_login_button" />
 
     <Button
-        android:background="@android:color/transparent"
         android:id="@+id/button_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
+        android:background="@android:color/transparent"
         android:text="@string/sign_up_button" />
 
 </LinearLayout>

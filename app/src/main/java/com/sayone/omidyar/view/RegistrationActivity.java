@@ -18,7 +18,11 @@ import android.widget.Toast;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
+import com.sayone.omidyar.model.CropLand;
+import com.sayone.omidyar.model.ForestLand;
 import com.sayone.omidyar.model.LandKind;
+import com.sayone.omidyar.model.MiningLand;
+import com.sayone.omidyar.model.PastureLand;
 import com.sayone.omidyar.model.Survey;
 
 import java.text.DateFormat;
@@ -249,20 +253,70 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         realm.commitTransaction();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public LandKind insertAllLandKinds(String serveyIdForLand, String landTypeName){
+        ForestLand forestLand = null;
+        CropLand cropLand = null;
+        PastureLand pastureLand = null;
+        MiningLand miningLand = null;
+        if(landTypeName.equals("Forestland")){
+            realm.beginTransaction();
+            forestLand = realm.createObject(ForestLand.class);
+            forestLand.setId(getNextKeyForestLand());
+            realm.commitTransaction();
+        }else if(landTypeName.equals("Cropland")){
+            realm.beginTransaction();
+            cropLand = realm.createObject(CropLand.class);
+            cropLand.setId(getNextKeyCropLand());
+            realm.commitTransaction();
+        }else if(landTypeName.equals("Pastureland")){
+            realm.beginTransaction();
+            pastureLand = realm.createObject(PastureLand.class);
+            pastureLand.setId(getNextKeyPastureLand());
+            realm.commitTransaction();
+        }else if(landTypeName.equals("Mining Land")){
+            realm.beginTransaction();
+            miningLand = realm.createObject(MiningLand.class);
+            miningLand.setId(getNextKeyMiningLand());
+            realm.commitTransaction();
+        }
+
+
         realm.beginTransaction();
         LandKind landKind = realm.createObject(LandKind.class);
         landKind.setId(getNextKeyLandKind());
         landKind.setSurveyId(serveyIdForLand);
         landKind.setName(landTypeName);
         landKind.setStatus("deleted");
+        landKind.setForestLand(forestLand);
+        landKind.setCropLand(cropLand);
+        landKind.setPastureLand(pastureLand);
+        landKind.setMiningLand(miningLand);
         realm.commitTransaction();
+
+
         return landKind;
     }
 
     public int getNextKeyLandKind() {
         return realm.where(LandKind.class).max("id").intValue() + 1;
+    }
+
+    public int getNextKeyForestLand() {
+        return realm.where(ForestLand.class).max("id").intValue() + 1;
+    }
+
+    public int getNextKeyCropLand() {
+        return realm.where(CropLand.class).max("id").intValue() + 1;
+    }
+
+    public int getNextKeyPastureLand() {
+        return realm.where(PastureLand.class).max("id").intValue() + 1;
+    }
+
+    public int getNextKeyMiningLand() {
+        return realm.where(MiningLand.class).max("id").intValue() + 1;
     }
 }

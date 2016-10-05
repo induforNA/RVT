@@ -2,6 +2,7 @@ package com.sayone.omidyar.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
@@ -26,26 +27,46 @@ public class SplashScreenActivity extends BaseActivity {
         final ImageView splash = (ImageView) findViewById(R.id.icon);
         splash.setAnimation(null);*/
         final ImageView imageView= (ImageView)findViewById(R.id.icon);
-        final Animation fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fadein);
+        //final Animation fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fadein);
 
 
 
 
-        Thread timerThread = new Thread() {
+//        Thread timerThread = new Thread() {
+//            public void run() {
+////                try {
+////                    imageView.startAnimation(fadeInAnimation );
+////                    sleep(3000);
+////                } catch (InterruptedException e) {
+////                    e.printStackTrace();
+////                } finally {
+//                   Intent intent = new Intent(getApplicationContext(), LoadingActivity.class);
+//                    startActivity(intent);
+//
+//                //}
+//            }
+//        };
+//        timerThread.start();
+
+
+        new Handler().postDelayed(new Runnable() {
+
+            /*
+             * Showing splash screen with a timer. This will be useful when you
+             * want to show case your app logo / company
+             */
+
+            @Override
             public void run() {
-                try {
-                    imageView.startAnimation(fadeInAnimation );
-                    sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } finally {
-                   Intent intent = new Intent(getApplicationContext(), LoadingActivity.class);
-                    startActivity(intent);
+                // This method will be executed once the timer is over
+                // Start your app main activity
+                Intent i = new Intent(SplashScreenActivity.this, LoadingActivity.class);
+                startActivity(i);
 
-                }
+                // close this activity
+                finish();
             }
-        };
-        timerThread.start();
+        }, 3000);
     }
 
     @Override

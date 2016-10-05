@@ -4,110 +4,148 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <LinearLayout
+        android:elevation="3dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+        <TextView
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:textSize="22dp"
+            android:text="register survey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
         <LinearLayout
+            android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical" >
 
             <EditText
+                android:gravity="center"
                 android:id="@+id/edittext_date"
                 android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:onClick="setDate"
                 android:textSize="@dimen/textfield_size"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="right"
                 android:hint="@string/date_hint" />
 
             <EditText
+                android:gravity="center"
                 android:id="@+id/edittext_respondent_group"
                 android:layout_width="300dp"
                 android:textSize="@dimen/textfield_size"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_height="60dp"
+                android:layout_gravity="right"
                 android:hint="@string/respondent_group_hint" />
 
             <EditText
+                android:gravity="center"
                 android:id="@+id/edittext_surveyor"
                 android:layout_width="300dp"
                 android:textSize="@dimen/textfield_size"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_height="60dp"
+                android:layout_gravity="right"
                 android:hint="@string/surveyor_hint" />
 
-            <Spinner
-                android:id="@+id/spinner_language"
-                android:layout_width="300dp"
-                style="@style/Widget.AppCompat.Spinner.Underlined"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1" />
 
-            <Spinner
-                android:id="@+id/spinner_currency"
-                style="@style/Widget.AppCompat.Spinner.Underlined"
-                android:layout_width="300dp"
-                android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:hint="Currency" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <EditText
+                android:gravity="center"
                 android:id="@+id/edittext_community"
                 android:layout_width="300dp"
                 android:textSize="@dimen/textfield_size"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_height="60dp"
+                android:layout_gravity="left"
                 android:hint="@string/community_hint" />
 
             <EditText
+                android:gravity="center"
                 android:id="@+id/edittext_district"
                 android:layout_width="300dp"
                 android:textSize="@dimen/textfield_size"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_height="60dp"
+                android:layout_gravity="left"
                 android:hint="@string/district_hint" />
 
             <EditText
+                android:gravity="center"
                 android:id="@+id/edittext_state"
                 android:layout_width="300dp"
                 android:textSize="@dimen/textfield_size"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_height="60dp"
+                android:layout_gravity="left"
                 android:hint="@string/state_hint" />
 
-            <Spinner
-                android:id="@+id/spinner_country"
-                android:layout_width="300dp"
-                style="@style/Widget.AppCompat.Spinner.Underlined"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"/>
+
 
 
         </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <Spinner
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:id="@+id/spinner_language"
+            android:layout_width="300dp"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal" />
+
+        <Spinner
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:id="@+id/spinner_currency"
+            android:layout_width="300dp"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            android:hint="Currency" />
+        <Spinner
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:id="@+id/spinner_country"
+            android:layout_width="300dp"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"/>
+
     </LinearLayout>
 
     <Button
         android:id="@+id/button_sign_up"
         android:textColor="@android:color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
         android:text="@string/sign_up_button" />
@@ -116,8 +154,8 @@
         android:background="@android:color/transparent"
         android:id="@+id/button_login"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="4dp"
         android:text="@string/login_button" />
 </LinearLayout>

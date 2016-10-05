@@ -65,38 +65,57 @@
 
     </LinearLayout>
 
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:gravity="center"
-        android:text="what wood do you harvest,if any?"
-        android:textSize="@dimen/heading_size" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/editText4"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:hint="@string/type_species1"
-        android:textSize="@dimen/textfield_size" />
 
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:hint="Type species 2"
-        android:textSize="@dimen/textfield_size" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:text="what wood do you harvest,if any?"
+            android:textSize="@dimen/heading_size" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/editText5"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:hint="Type species 3"
-        android:textSize="@dimen/textfield_size" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/timber_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <!--<EditText-->
+            <!--android:id="@+id/editText4"-->
+            <!--android:layout_width="300dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:hint="@string/type_species1"-->
+            <!--android:textSize="@dimen/textfield_size" />-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/editText3"-->
+            <!--android:layout_width="300dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:hint="Type species 2"-->
+            <!--android:textSize="@dimen/textfield_size" />-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/editText5"-->
+            <!--android:layout_width="300dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:hint="Type species 3"-->
+            <!--android:textSize="@dimen/textfield_size" />-->
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -109,9 +128,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginTop="120dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -128,12 +147,12 @@
                 android:layout_weight="1" />
 
             <Button
+                android:id="@+id/button_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/button_back"
-                android:textColor="@android:color/white"
                 android:textAllCaps="false"
-                android:id="@+id/button_back" />
+                android:textColor="@android:color/white" />
 
             <Button
                 android:id="@+id/button_next"

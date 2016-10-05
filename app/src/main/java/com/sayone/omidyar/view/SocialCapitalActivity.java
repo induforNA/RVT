@@ -295,11 +295,13 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
         optionD.setChecked(false);
         optionE.setChecked(false);
 
-        optionARadio.setChecked(false);
-        optionBRadio.setChecked(false);
-        optionCRadio.setChecked(false);
-        optionDRadio.setChecked(false);
-        optionERadio.setChecked(false);
+        radiobuttongroup.clearCheck();
+
+//        optionARadio.setChecked(false);
+//        optionBRadio.setChecked(false);
+//        optionCRadio.setChecked(false);
+//        optionDRadio.setChecked(false);
+//        optionERadio.setChecked(false);
     }
 
     public MultipleAnswer addAnswer(long answerId) {

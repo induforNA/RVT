@@ -101,6 +101,7 @@ public class LoadingActivity extends BaseActivity {
 //
         Intent intent = new Intent(LoadingActivity.this,RegistrationActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public SocialCapitalAnswerOptions insertOptions(String option, String optionHindi, String val) {

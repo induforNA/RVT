@@ -51,6 +51,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     private Button nextButton;
     private LinearLayout noParticipantLayout;
     private LinearLayout participantLayout;
+    private TextView logout;
 
     RealmList<Participant> participants;
     private ParticipantsAdapter participantsAdapter;
@@ -81,6 +82,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         nextButton = (Button) findViewById(R.id.next_button);
         noParticipantLayout = (LinearLayout) findViewById(R.id.no_participant_layout);
         participantLayout = (LinearLayout) findViewById(R.id.participant_layout);
+        logout = (TextView) findViewById(R.id.logout);
 
         serveyIdTextView.setText(serveyId);
 
@@ -98,6 +100,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         textViewAbout.setOnClickListener(this);
         buttonAddParticipant.setOnClickListener(this);
         nextButton.setOnClickListener(this);
+        logout.setOnClickListener(this);
 
 
         //realm.beginTransaction();
@@ -245,6 +248,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             case R.id.next_button:
                 Intent intentToLandTypeSelectionActivity = new Intent(MainActivity.this,LandTypeSelectionActivity.class);
                 startActivity(intentToLandTypeSelectionActivity);
+                break;
+            case R.id.logout:
+                Intent intent = new Intent(MainActivity.this,RegistrationActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
                 break;
         }
     }
