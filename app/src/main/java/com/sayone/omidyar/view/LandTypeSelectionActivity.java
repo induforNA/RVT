@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sayone.omidyar.BaseActivity;
@@ -41,15 +42,21 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
     Survey survey;
     RealmList<LandKind> landKinds;
 
-    private DrawerLayout menuDrawerLayout;
-    private ImageView imageViewMenuIcon;
-    private ImageView drawerCloseBtn;
+
     private Button nextButton;
     private Button backButton;
     private CheckBox forestland;
     private CheckBox cropland;
     private CheckBox pastureland;
     private CheckBox miningland;
+
+    private DrawerLayout menuDrawerLayout;
+    private ImageView imageViewMenuIcon;
+    private ImageView drawerCloseBtn;
+    private TextView textViewAbout;
+    private TextView surveyIdDrawer;
+    private TextView logout;
+    private TextView startSurvey;
 
     Set<String> landTypeNames;
 
@@ -77,6 +84,15 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
         pastureland = (CheckBox) findViewById(R.id.pastureland);
         miningland = (CheckBox) findViewById(R.id.miningland);
 
+        menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);
+        imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
+        drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
+        textViewAbout = (TextView) findViewById(R.id.text_view_about);
+        surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
+        logout = (TextView) findViewById(R.id.logout);
+        startSurvey=(TextView)findViewById(R.id.text_start_survey);
+
+
         survey = realm.where(Survey.class)
                 .equalTo("surveyId",serveyId)
                 .findFirst();
@@ -97,10 +113,18 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
             }
         }
 
+        surveyIdDrawer.setText(serveyId);
+
+        imageViewMenuIcon.setOnClickListener(this);
+        surveyIdDrawer.setText(serveyId);
+        drawerCloseBtn.setOnClickListener(this);
+        textViewAbout.setOnClickListener(this);
+        logout.setOnClickListener(this);
         imageViewMenuIcon.setOnClickListener(this);
         drawerCloseBtn.setOnClickListener(this);
         nextButton.setOnClickListener(this);
         backButton.setOnClickListener(this);
+        startSurvey.setOnClickListener(this);
     }
 
     public void slectedLandKind(View view) {
@@ -202,6 +226,20 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
                 break;
             case R.id.back_button:
                 finish();
+                break;
+            case  R.id.text_view_about:
+                Intent i = new Intent(LandTypeSelectionActivity.this,AboutActivity.class);
+                startActivity(i);
+                break;
+            case R.id.logout:
+                Intent intent = new Intent(LandTypeSelectionActivity.this,RegistrationActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                break;
+            case R.id.text_start_survey:
+                Intent intents = new Intent(getApplicationContext(),MainActivity.class);
+                intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intents);
                 break;
         }
     }

@@ -45,10 +45,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     private ImageView imageViewMenuIcon;
     private ImageView drawerCloseBtn;
     private TextView textViewAbout;
+    private TextView startSurvey;
     private ImageView buttonAddParticipant;
     private RecyclerView recyclerView;
     private TextView serveyIdTextView;
     private Button nextButton;
+    private TextView surveyIdDrawer;
     private LinearLayout noParticipantLayout;
     private LinearLayout participantLayout;
     private TextView logout;
@@ -76,6 +78,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
         drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
         textViewAbout = (TextView) findViewById(R.id.text_view_about);
+        surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
         buttonAddParticipant = (ImageView) findViewById(R.id.button_add_participant);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         serveyIdTextView = (TextView) findViewById(R.id.servey_id);
@@ -83,6 +86,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         noParticipantLayout = (LinearLayout) findViewById(R.id.no_participant_layout);
         participantLayout = (LinearLayout) findViewById(R.id.participant_layout);
         logout = (TextView) findViewById(R.id.logout);
+        startSurvey=(TextView)findViewById(R.id.text_start_survey);
 
         serveyIdTextView.setText(serveyId);
 
@@ -96,11 +100,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         //serveyIdPrefix = encodeDeviceId(androidId);
 
         imageViewMenuIcon.setOnClickListener(this);
+        surveyIdDrawer.setText(serveyId);
         drawerCloseBtn.setOnClickListener(this);
         textViewAbout.setOnClickListener(this);
         buttonAddParticipant.setOnClickListener(this);
         nextButton.setOnClickListener(this);
         logout.setOnClickListener(this);
+        startSurvey.setOnClickListener(this);
 
 
         //realm.beginTransaction();
@@ -171,6 +177,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             case  R.id.text_view_about:
                 Intent i = new Intent(MainActivity.this,AboutActivity.class);
                 startActivity(i);
+                break;
+            case R.id.text_start_survey:
+                Intent intent = new Intent(MainActivity.this,MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
                 break;
             case R.id.button_add_participant:
                 final Dialog dialog = new Dialog(context);
@@ -250,9 +261,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 startActivity(intentToLandTypeSelectionActivity);
                 break;
             case R.id.logout:
-                Intent intent = new Intent(MainActivity.this,RegistrationActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                Intent intents = new Intent(MainActivity.this,RegistrationActivity.class);
+                intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intents);
                 break;
         }
     }
