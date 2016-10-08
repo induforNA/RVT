@@ -12,6 +12,8 @@ public class RevenueProduct extends RealmObject {
     @PrimaryKey
     private long id;
 
+    private String landKind;
+
     private String surveyId;
 
     private String name;
@@ -58,5 +60,13 @@ public class RevenueProduct extends RealmObject {
 
     public void setRevenueProductYearses(RealmList<RevenueProductYears> revenueProductYearses) {
         this.revenueProductYearses = revenueProductYearses;
+    }
+
+    public String getLandKind() {
+        return landKind;
+    }
+
+    public void setLandKind(String landKind) {
+        this.landKind = landKind;
     }
 }

@@ -63,7 +63,7 @@
             android:screenOrientation="landscape">
 
         </activity>
-        <activity android:name=".view.NaturalCapitalSurveyActivity"
+        <activity android:name=".view.NaturalCapitalSurveyActivityD"
             android:screenOrientation="landscape">
 
         </activity>

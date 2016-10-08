@@ -311,17 +311,17 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
 
                         currentQuestionId = preQuestionId;
                     } else {
-                      //  Intent intent = new Intent(SocialCapitalActivity.this, NaturalCapitalSurveyStartActivity.class);
-                      //  startActivity(intent);
-                        Intent intent = new Intent(SocialCapitalActivity.this,CertificateActivity.class);
+                        Intent intent = new Intent(SocialCapitalActivity.this, NaturalCapitalSurveyStartActivity.class);
                         startActivity(intent);
+//                        Intent intent = new Intent(SocialCapitalActivity.this,CertificateActivity.class);
+//                        startActivity(intent);
                     }
 
                 } else {
-                   // Intent intent = new Intent(SocialCapitalActivity.this, NaturalCapitalSurveyStartActivity.class);
-                   // startActivity(intent);
-                    Intent intent = new Intent(SocialCapitalActivity.this, CertificateActivity.class);
+                    Intent intent = new Intent(SocialCapitalActivity.this, NaturalCapitalSurveyStartActivity.class);
                     startActivity(intent);
+//                    Intent intent = new Intent(SocialCapitalActivity.this, CertificateActivity.class);
+//                    startActivity(intent);
                 }
                 break;
             case R.id.image_view_menu_icon:
@@ -382,11 +382,17 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
         }
 
         Log.e("Factores Score",totalFactorScore+"");
-
-        SpredTable spredTable = realm.where(SpredTable.class)
-                .lessThan("moreThan",totalFactorScore)
-                .greaterThanOrEqualTo("lessThan",totalFactorScore)
-                .findFirst();
+        SpredTable spredTable;
+        if(totalFactorScore == 0.0){
+            spredTable = realm.where(SpredTable.class)
+                    .equalTo("moreThan",totalFactorScore)
+                    .findFirst();
+        }else {
+            spredTable = realm.where(SpredTable.class)
+                    .lessThanOrEqualTo("moreThan", totalFactorScore)
+                    .greaterThanOrEqualTo("lessThan", totalFactorScore)
+                    .findFirst();
+        }
 
         Log.e("SPRED TABLE ", spredTable.toString());
 

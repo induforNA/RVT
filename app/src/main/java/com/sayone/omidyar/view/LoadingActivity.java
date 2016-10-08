@@ -148,9 +148,9 @@ public class LoadingActivity extends BaseActivity {
     }
 
     public int getNextKeySocialCapitalQuestions() {
-        if (realm.where(SocialCapitalQuestions.class).max("id") == null) {
-            return 1;
-        }
+//        if (realm.where(SocialCapitalQuestions.class).max("id") == null) {
+//            return 1;
+//        }
         return realm.where(SocialCapitalQuestions.class).max("id").intValue() + 1;
     }
 

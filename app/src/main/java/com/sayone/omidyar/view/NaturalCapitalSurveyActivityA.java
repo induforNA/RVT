@@ -43,6 +43,8 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
     RecyclerView timberList;
     RevenueAdapter revenueAdapter;
 
+    String landKindName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +61,7 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
         Survey survey = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
         for(LandKind landKind:survey.getLandKinds()){
             if(landKind.getName().equals("Forestland")){
+                landKindName = landKind.getName();
                 //revenueProducts = landKind.getForestLand().getRevenueProducts();
                 for(RevenueProduct revenueProduct:landKind.getForestLand().getRevenueProducts()){
                     revenueProductsToSave.add(revenueProduct);
@@ -131,6 +134,7 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
                         revenueProduct.setId(getNextKeyRevenueProduct());
                         revenueProduct.setName(name);
                         revenueProduct.setType("Timber");
+                        revenueProduct.setLandKind(landKindName);
                         realm.commitTransaction();
 
                         revenueProducts.add(revenueProduct);
@@ -171,7 +175,7 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
                 });
                 dialog.show();
 
-//                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivity.class);
+//                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivityD.class);
 //                startActivity(intent);
                 break;
 

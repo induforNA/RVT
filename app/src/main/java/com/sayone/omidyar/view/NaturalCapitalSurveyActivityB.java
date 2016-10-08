@@ -168,7 +168,7 @@ public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.
                 });
                 dialog.show();
 
-//                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivity.class);
+//                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivityD.class);
 //                startActivity(intent);
                 break;
 
