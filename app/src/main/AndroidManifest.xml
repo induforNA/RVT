@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sayone.omidyar">
 
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,7 +23,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.SurveySummaryActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".view.UnitsActivity"
             android:screenOrientation="landscape" />
@@ -25,10 +32,10 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.RegistrationActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".view.LoginActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".view.AboutActivity"
             android:screenOrientation="landscape" />
@@ -46,6 +53,7 @@
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -57,7 +65,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.SocialCapitalActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".view.CertificateActivity"
             android:screenOrientation="landscape">
@@ -67,15 +75,35 @@
             android:screenOrientation="landscape">
 
         </activity>
-        <activity android:name=".view.NaturalCapitalSurveyActivityA" />
-        <activity android:name=".view.NaturalCapitalSurveyActivityC" />
-        <activity android:name=".view.NaturalCapitalSurveyActivity3" />
-        <activity android:name=".view.NaturalCapitalSurveyStartActivity" />
-        <activity android:name=".view.CroplandSurveyA">
-        </activity>
+        <activity android:name=".view.NaturalCapitalSurveyActivityA"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".view.NaturalCapitalSurveyActivityC"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".view.NaturalCapitalSurveyActivity3"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".view.NaturalCapitalSurveyStartActivity"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".view.CroplandSurveyA"
+            android:screenOrientation="landscape"></activity>
         <activity
-            android:screenOrientation="landscape"
-            android:name=".view.NaturalCapitalSurveyActivityB">
+            android:name=".view.NaturalCapitalSurveyActivityB"
+            android:screenOrientation="landscape"></activity>
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".view.OmidyarMap"
+            android:label="@string/title_activity_omidyar_map"
+            android:screenOrientation="landscape">
 
         </activity>
     </application>

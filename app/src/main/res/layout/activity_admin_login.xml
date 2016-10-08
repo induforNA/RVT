@@ -14,7 +14,7 @@
             android:textAllCaps="true"
             android:textStyle="bold"
             android:textColor="#ffffff"
-            android:textSize="22dp"
+            android:textSize="22sp"
             android:text="admin login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

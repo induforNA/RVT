@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="20sp"
+        android:textSize="@dimen/textfield_size"
         android:layout_marginTop="50dp"
         android:text="@string/text_rates"
         android:id="@+id/textview_rates" />
@@ -32,7 +32,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="@dimen/textfield_size"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:text="@string/text_project_time_frame"
@@ -41,7 +41,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="@dimen/textfield_size"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:text="@string/text_units"
@@ -51,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="20sp"
+        android:textSize="@dimen/textfield_size"
         android:text="Summary of surveys"
         android:layout_marginTop="20dp"
         android:id="@+id/textview_summary_surveys"/>
