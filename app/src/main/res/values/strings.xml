@@ -21,7 +21,7 @@
         <item>Select currency</item>
         <item>INR</item>
         <item>USD</item>
-        <item>UR</item>
+        <item>EUR</item>
         <item>AUD</item>
     </string-array>
     <string-array name="land_use_array">
@@ -178,4 +178,5 @@
     <string name="text_project_time_frame">Projection time frame</string>
     <string name="text_units">Units</string>
     <string name="text_summary_surveys">Summary of surveys</string>
+    <string name="title_activity_omidyar_map">Map</string>
 </resources>
