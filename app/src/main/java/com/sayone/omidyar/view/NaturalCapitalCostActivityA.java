@@ -25,7 +25,7 @@ import com.sayone.omidyar.model.Survey;
 import io.realm.Realm;
 import io.realm.RealmList;
 
-public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.OnClickListener {
+public class NaturalCapitalCostActivityA extends BaseActivity implements View.OnClickListener {
 
     Context context;
     Realm realm;
@@ -40,10 +40,12 @@ public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.
     RecyclerView timberList;
     RevenueAdapter revenueAdapter;
 
+    String landKindName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_natural_capital_survey_b);
+        setContentView(R.layout.activity_natural_cost_survey_a);
 
         context = this;
         realm = Realm.getDefaultInstance();
@@ -56,10 +58,11 @@ public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.
         Survey survey = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
         for(LandKind landKind:survey.getLandKinds()){
             if(landKind.getName().equals("Forestland")){
+                landKindName = landKind.getName();
                 //revenueProducts = landKind.getForestLand().getRevenueProducts();
                 for(RevenueProduct revenueProduct:landKind.getForestLand().getRevenueProducts()){
                     revenueProductsToSave.add(revenueProduct);
-                    if(revenueProduct.getType().equals("Non Timber")){
+                    if(revenueProduct.getType().equals("Timber")){
                         revenueProducts.add(revenueProduct);
                     }
                 }
@@ -92,7 +95,7 @@ public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.
         switch (view.getId()) {
 
             case R.id.button_next:
-                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivityC.class);
+                intent=new Intent(getApplicationContext(),NaturalCapitalCostActivityB.class);
                 startActivity(intent);
                 break;
 
@@ -120,51 +123,52 @@ public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.
                 saveParticipant.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String name = editTextWood.getText().toString();
+                    String name = editTextWood.getText().toString();
 
-                        if(!name.equals("")) {
-                            realm.beginTransaction();
-                            RevenueProduct revenueProduct = realm.createObject(RevenueProduct.class);
-                            revenueProduct.setId(getNextKeyRevenueProduct());
-                            revenueProduct.setName(name);
-                            revenueProduct.setType("Non Timber");
-                            revenueProduct.setSurveyId(serveyId);
-                            realm.commitTransaction();
+                    if(!name.equals("")) {
+                        realm.beginTransaction();
+                        RevenueProduct revenueProduct = realm.createObject(RevenueProduct.class);
+                        revenueProduct.setId(getNextKeyRevenueProduct());
+                        revenueProduct.setName(name);
+                        revenueProduct.setType("Timber");
+                        revenueProduct.setLandKind(landKindName);
+                        revenueProduct.setSurveyId(serveyId);
+                        realm.commitTransaction();
 
-                            revenueProductsToSave.add(revenueProduct);
-                            revenueProducts.add(revenueProduct);
-                            Survey surveyRevenueProduct = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
+                        revenueProducts.add(revenueProduct);
+                        revenueProductsToSave.add(revenueProduct);
+                        Survey surveyRevenueProduct = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
 
 
-                            for(LandKind landKind:surveyRevenueProduct.getLandKinds()){
-                                Log.e("BBB ",landKind.getName()+" "+landKind.getForestLand());
-                                if(landKind.getName().equals("Forestland")){
-                                    Log.e("BBB ",revenueProducts.size()+"");
-                                    Log.e("AAA ",landKind.getForestLand().getRevenueProducts().toString());
-                                    realm.beginTransaction();
-                                    landKind.getForestLand().setRevenueProducts(revenueProductsToSave);
-                                    realm.commitTransaction();
+                        for(LandKind landKind:surveyRevenueProduct.getLandKinds()){
+                            Log.e("BBB ",landKind.getName()+" "+landKind.getForestLand());
+                            if(landKind.getName().equals("Forestland")){
+                                Log.e("BBB ",revenueProducts.size()+"");
+                                Log.e("AAA ",landKind.getForestLand().getRevenueProducts().toString());
+                                realm.beginTransaction();
+                                landKind.getForestLand().setRevenueProducts(revenueProductsToSave);
+                                realm.commitTransaction();
+                            }
+                        }
+
+                        Survey results = realm.where(Survey.class).findFirst();
+                        for(LandKind landKind:results.getLandKinds()){
+                            if(landKind.getName().equals("Forestland")){
+                                for (RevenueProduct revenueProduct1: landKind.getForestLand().getRevenueProducts()){
+                                    Log.e("LAND ", revenueProduct1.getName());
                                 }
                             }
+                        }
 
-                            Survey results = realm.where(Survey.class).findFirst();
-                            for(LandKind landKind:results.getLandKinds()){
-                                if(landKind.getName().equals("Forestland")){
-                                    for (RevenueProduct revenueProduct1: landKind.getForestLand().getRevenueProducts()){
-                                        Log.e("LAND ", revenueProduct1.getName());
-                                    }
-                                }
-                            }
-
-                            revenueAdapter.notifyDataSetChanged();
+                        revenueAdapter.notifyDataSetChanged();
 
 //                        noParticipantLayout.setVisibility(View.GONE);
 //                        participantLayout.setVisibility(View.VISIBLE);
 //                        participantsAdapter.notifyDataSetChanged();
-                            dialog.cancel();
-                        }else {
-                            Toast.makeText(context,"Fill name",Toast.LENGTH_SHORT).show();
-                        }
+                        dialog.cancel();
+                    }else {
+                        Toast.makeText(context,"Fill name",Toast.LENGTH_SHORT).show();
+                    }
                     }
                 });
                 dialog.show();

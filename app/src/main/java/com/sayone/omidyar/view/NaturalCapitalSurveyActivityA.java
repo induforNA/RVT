@@ -135,6 +135,7 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
                         revenueProduct.setName(name);
                         revenueProduct.setType("Timber");
                         revenueProduct.setLandKind(landKindName);
+                        revenueProduct.setSurveyId(serveyId);
                         realm.commitTransaction();
 
                         revenueProducts.add(revenueProduct);

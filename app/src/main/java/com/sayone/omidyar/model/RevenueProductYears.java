@@ -18,17 +18,17 @@ public class RevenueProductYears extends RealmObject {
 
     private long revenueProductId;
 
-    private double harvestFrequencyValue;
+    private int harvestFrequencyValue;
 
     private double harvestFrequencyUnit;
 
     private double quantityValue;
 
-    private double quantityUnit;
+    private String quantityUnit;
 
     private double marketPriceValue;
 
-    private double marketPriceCurrency;
+    private String marketPriceCurrency;
 
     private int year;
 
@@ -44,11 +44,11 @@ public class RevenueProductYears extends RealmObject {
         this.id = id;
     }
 
-    public double getHarvestFrequencyValue() {
+    public int getHarvestFrequencyValue() {
         return harvestFrequencyValue;
     }
 
-    public void setHarvestFrequencyValue(double harvestFrequencyValue) {
+    public void setHarvestFrequencyValue(int harvestFrequencyValue) {
         this.harvestFrequencyValue = harvestFrequencyValue;
     }
 
@@ -68,11 +68,11 @@ public class RevenueProductYears extends RealmObject {
         this.quantityValue = quantityValue;
     }
 
-    public double getQuantityUnit() {
+    public String getQuantityUnit() {
         return quantityUnit;
     }
 
-    public void setQuantityUnit(double quantityUnit) {
+    public void setQuantityUnit(String quantityUnit) {
         this.quantityUnit = quantityUnit;
     }
 
@@ -84,11 +84,11 @@ public class RevenueProductYears extends RealmObject {
         this.marketPriceValue = marketPriceValue;
     }
 
-    public double getMarketPriceCurrency() {
+    public String getMarketPriceCurrency() {
         return marketPriceCurrency;
     }
 
-    public void setMarketPriceCurrency(double marketPriceCurrency) {
+    public void setMarketPriceCurrency(String marketPriceCurrency) {
         this.marketPriceCurrency = marketPriceCurrency;
     }
 

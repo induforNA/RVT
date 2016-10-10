@@ -69,4 +69,16 @@ public class RevenueProduct extends RealmObject {
     public void setLandKind(String landKind) {
         this.landKind = landKind;
     }
+
+    @Override
+    public String toString() {
+        return "RevenueProduct{" +
+                "id=" + id +
+                ", landKind='" + landKind + '\'' +
+                ", surveyId='" + surveyId + '\'' +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", revenueProductYearses=" + revenueProductYearses +
+                '}';
+    }
 }

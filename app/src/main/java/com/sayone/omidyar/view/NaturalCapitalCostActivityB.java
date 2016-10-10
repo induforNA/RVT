@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -13,15 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.LandKind;
-import com.sayone.omidyar.model.Participant;
 import com.sayone.omidyar.model.RevenueProduct;
 import com.sayone.omidyar.model.RevenueProductYears;
 import com.sayone.omidyar.model.Survey;
@@ -31,7 +27,7 @@ import java.util.ArrayList;
 import io.realm.Realm;
 import io.realm.RealmList;
 
-public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.OnClickListener {
+public class NaturalCapitalCostActivityB extends BaseActivity implements View.OnClickListener {
 
     Realm realm;
     SharedPreferences sharedPref;
@@ -51,7 +47,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_natural_capital_survey_c);
+        setContentView(R.layout.activity_natural_cost_survey_b);
 
         context = this;
         realm = Realm.getDefaultInstance();
@@ -164,7 +160,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                 saveYears();
 
 
-                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivityD.class);
+                intent=new Intent(getApplicationContext(),NaturalCapitalCostActivityC.class);
                 startActivity(intent);
                 break;
 

@@ -24,13 +24,12 @@ import com.sayone.omidyar.model.Survey;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
 
-public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.OnClickListener {
+public class NaturalCapitalCostActivityC extends BaseActivity implements View.OnClickListener {
 
     Realm realm;
     SharedPreferences sharedPref;
@@ -67,7 +66,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_natural_capital_survey_d);
+        setContentView(R.layout.activity_natural_cost_survey_c);
 
         context = this;
         realm = Realm.getDefaultInstance();
@@ -232,12 +231,12 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         Intent intent;
         switch (view.getId()){
             case R.id.button_next:
-                intent=new Intent(getApplicationContext(),NaturalCapitalCostActivityA.class);
+                intent=new Intent(getApplicationContext(),CertificateActivity.class);
                 startActivity(intent);
                 break;
 
             case R.id.button_back:
-                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivityD.class);
+                intent=new Intent(getApplicationContext(),NaturalCapitalCostActivityC.class);
                 startActivity(intent);
                 break;
 

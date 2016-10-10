@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
+import com.sayone.omidyar.model.Frequency;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.Participant;
 import com.sayone.omidyar.model.SocialCapitalAnswerOptions;
@@ -38,6 +39,7 @@ public class LoadingActivity extends BaseActivity {
     private SharedPreferences preferences;
     String quetionsLoadStatus;
     String spredTableLoadStatus;
+    String frequencyLoadStatus;
 
     public static final String TAG = LoadingActivity.class.getName();
 
@@ -53,6 +55,7 @@ public class LoadingActivity extends BaseActivity {
 
         quetionsLoadStatus = preferences.getString("questionsLoaded", "false");
         spredTableLoadStatus = preferences.getString("spredTableLoaded", "false");
+        frequencyLoadStatus = preferences.getString("frequencyLoadStatus", "false");
 
         if (quetionsLoadStatus.equals("false")) {
 
@@ -112,6 +115,31 @@ public class LoadingActivity extends BaseActivity {
             }
         }
 
+        if (frequencyLoadStatus.equals("false")) {
+
+            try {
+                JSONObject reader = new JSONObject(loadFrequencyJSONFromAsset());
+                JSONArray jsonArray = reader.getJSONArray("frequency");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = new JSONObject(jsonArray.get(i).toString());
+                    Log.e("AA ", jsonObject.getString("harvestFrequency"));
+                    Log.e("BB ", jsonObject.getInt("value")+"");
+
+                    realm.beginTransaction();
+                    Frequency frequency = realm.createObject(Frequency.class);
+                    frequency.setId(getNextKeyFrequency());
+                    frequency.setHarvestFrequency(jsonObject.getString("harvestFrequency"));
+                    frequency.setFrequencyValue(jsonObject.getInt("value"));
+                    realm.commitTransaction();
+                }
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("frequencyLoadStatus", "true");
+                editor.apply();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
 
         RealmResults<SocialCapitalQuestions> results = realm.where(SocialCapitalQuestions.class).findAll();
         for (SocialCapitalQuestions socialCapitalQuestions1 : results) {
@@ -128,9 +156,14 @@ public class LoadingActivity extends BaseActivity {
             Log.e(TAG + "abcd", spredTable.getRating());
         }
 
-//
-//
-//
+        RealmResults<Frequency> results2 = realm.where(Frequency.class).findAll();
+        for (Frequency frequency : results2) {
+            Log.e(TAG + "Frequency ", frequency.getHarvestFrequency());
+        }
+
+
+
+
         Intent intent = new Intent(LoadingActivity.this,RegistrationActivity.class);
         startActivity(intent);
         finish();
@@ -159,6 +192,13 @@ public class LoadingActivity extends BaseActivity {
             return 1;
         }
         return realm.where(SpredTable.class).max("id").intValue() + 1;
+    }
+
+    public int getNextKeyFrequency() {
+        if (realm.where(Frequency.class).max("id") == null) {
+            return 1;
+        }
+        return realm.where(Frequency.class).max("id").intValue() + 1;
     }
 
     public int getNextKeySocialCapitalAnswerOptions() {
@@ -198,6 +238,31 @@ public class LoadingActivity extends BaseActivity {
         try {
 
             InputStream is = getAssets().open("discountRate.json");
+
+            int size = is.available();
+
+            byte[] buffer = new byte[size];
+
+            is.read(buffer);
+
+            is.close();
+
+            json = new String(buffer, "UTF-8");
+
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+
+    }
+
+    public String loadFrequencyJSONFromAsset() {
+        String json = null;
+        try {
+
+            InputStream is = getAssets().open("frequency.json");
 
             int size = is.available();
 
