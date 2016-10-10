@@ -2,8 +2,11 @@ package com.sayone.omidyar.view;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sayone.omidyar.BaseActivity;
@@ -12,7 +15,9 @@ import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.SocialCapital;
 import com.sayone.omidyar.model.SocialCapitalQuestions;
 import com.sayone.omidyar.model.Survey;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 
@@ -25,6 +30,7 @@ public class CertificateActivity extends BaseActivity {
     private Realm realm;
     private String surveyId;
     Context context;
+    ImageView mapImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,7 @@ public class CertificateActivity extends BaseActivity {
         socialCapitalCrop=(TextView)findViewById(R.id.crop_social_capital_score);
         socialCapitalPasture=(TextView)findViewById(R.id.pasture_social_capital_score);
         socialCapitalMining=(TextView)findViewById(R.id.minimg_social_capital_score);
+        mapImage=(ImageView)findViewById(R.id.map_image);
 
         context=this;
 
@@ -60,6 +67,11 @@ public class CertificateActivity extends BaseActivity {
                 .equalTo("status", "active")
                 .findFirst();
         SocialCapital socialCapital = landKindLoad.getSocialCapitals();
+
+        String path = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"screen.jpg/";
+        mapImage.setVisibility(View.VISIBLE);
+        File f = new File(path);
+        Picasso.with(context).load(f).into(mapImage);
 
 
         community.setText(surveyCheck.getCommunity().toString());
