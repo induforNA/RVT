@@ -232,7 +232,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         Intent intent;
         switch (view.getId()){
             case R.id.button_next:
-                intent=new Intent(getApplicationContext(),NaturalCapitalCostActivityA.class);
+                intent=new Intent(getApplicationContext(),CertificateActivity.class);
                 startActivity(intent);
                 break;
 
