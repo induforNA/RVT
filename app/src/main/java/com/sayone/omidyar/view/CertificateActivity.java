@@ -1,12 +1,17 @@
 package com.sayone.omidyar.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sayone.omidyar.BaseActivity;
@@ -23,14 +28,22 @@ import java.text.SimpleDateFormat;
 
 import io.realm.Realm;
 
-public class CertificateActivity extends BaseActivity {
+public class CertificateActivity extends BaseActivity implements View.OnClickListener {
 
     TextView parcelId,community,site,surveyorName,valuationDate,inflationRate,socialCapitalForest,socialCapitalCrop,socialCapitalPasture,socialCapitalMining;
     SharedPreferences sharedPref;
     private Realm realm;
+    TextView headingForest,headingCrop,headingPasture,headingMining;
     private String surveyId;
+    LinearLayout forestlandLayout,croplandLayout,pasturelandLayout,mininglandLayout,fullscreen;
     Context context;
-    ImageView mapImage;
+    ImageView mapImageForest,mapImageCrop,mapImagePasture,mapImageMining,mapFullScreen;
+    private String currentSocialCapitalServey;
+    private File fforest;
+    private File fcrop;
+    private File fpasture;
+    private File fmining;
+    private Animation scaleAnim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +60,36 @@ public class CertificateActivity extends BaseActivity {
         socialCapitalCrop=(TextView)findViewById(R.id.crop_social_capital_score);
         socialCapitalPasture=(TextView)findViewById(R.id.pasture_social_capital_score);
         socialCapitalMining=(TextView)findViewById(R.id.minimg_social_capital_score);
-        mapImage=(ImageView)findViewById(R.id.map_image);
+        mapImageForest=(ImageView)findViewById(R.id.map_image_forest);
+        mapImageCrop=(ImageView)findViewById(R.id.map_image_crop);
+        mapImagePasture=(ImageView)findViewById(R.id.map_image_pasture);
+        mapImageMining=(ImageView)findViewById(R.id.map_image_mining);
+        forestlandLayout=(LinearLayout)findViewById(R.id.forestland_layout);
+        croplandLayout=(LinearLayout)findViewById(R.id.cropland_layout);
+        pasturelandLayout=(LinearLayout)findViewById(R.id.pastureland_layout);
+        mininglandLayout=(LinearLayout)findViewById(R.id.miningland_layout);
+        headingCrop=(TextView)findViewById(R.id.heading_cropland);
+        headingForest=(TextView)findViewById(R.id.heading_forest);
+        headingPasture=(TextView)findViewById(R.id.heading_pastureland);
+        headingMining=(TextView)findViewById(R.id.heading_miningland);
+        mapFullScreen=(ImageView)findViewById(R.id.map_fullscreen);
+        fullscreen=(LinearLayout)findViewById(R.id.fullscreen);
+
+        mapImageForest.setOnClickListener(this);
+        mapImageCrop.setOnClickListener(this);
+        mapImagePasture.setOnClickListener(this);
+        mapImageMining.setOnClickListener(this);
+
+
+
+
 
         context=this;
 
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         surveyId = sharedPref.getString("surveyId","");
+        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey","");
         Realm realm = Realm.getDefaultInstance();
         Survey surveyCheck = realm.where(Survey.class)
                 .equalTo("surveyId",surveyId)
@@ -68,10 +104,38 @@ public class CertificateActivity extends BaseActivity {
                 .findFirst();
         SocialCapital socialCapital = landKindLoad.getSocialCapitals();
 
-        String path = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"screen.jpg/";
-        mapImage.setVisibility(View.VISIBLE);
-        File f = new File(path);
-        Picasso.with(context).load(f).into(mapImage);
+        String pathForestMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Forestland"+surveyId+"screen.jpg/";
+        mapImageForest.setVisibility(View.VISIBLE);
+        fforest = new File(pathForestMap);
+        if(!fforest.exists()) {
+            forestlandLayout.setVisibility(View.GONE);
+            headingForest.setVisibility(View.GONE);
+        }
+        Picasso.with(context).load(fforest).into(mapImageForest);
+        String pathCropMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Cropland"+surveyId+"screen.jpg/";
+        mapImageCrop.setVisibility(View.VISIBLE);
+        fcrop = new File(pathCropMap);
+        if(!fcrop.exists()){
+            croplandLayout.setVisibility(View.GONE);
+            headingCrop.setVisibility(View.GONE);
+        }
+        Picasso.with(context).load(fcrop).into(mapImageCrop);
+        String pathPastureMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Pastureland"+surveyId+"screen.jpg/";
+        mapImagePasture.setVisibility(View.VISIBLE);
+        fpasture = new File(pathPastureMap);
+        if(!fpasture.exists()){
+            pasturelandLayout.setVisibility(View.GONE);
+            headingPasture.setVisibility(View.GONE);
+        }
+        Picasso.with(context).load(fpasture).into(mapImagePasture);
+        String pathminingMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Mining Land"+surveyId+"screen.jpg/";
+        mapImageMining.setVisibility(View.VISIBLE);
+        fmining = new File(pathminingMap);
+        if(!fmining.exists()){
+            mininglandLayout.setVisibility(View.GONE);
+            headingMining.setVisibility(View.GONE);
+        }
+        Picasso.with(context).load(fmining).into(mapImageMining);
 
 
         community.setText(surveyCheck.getCommunity().toString());
@@ -85,4 +149,55 @@ public class CertificateActivity extends BaseActivity {
       //  inflationRate.setText(surveyCheck.getInflationRate().toString());
 
     }
+
+    @Override
+    public void onBackPressed() {
+        if (mapFullScreen.getVisibility() == View.VISIBLE) {
+            mapFullScreen.setVisibility(View.GONE);
+            fullscreen.setVisibility(View.VISIBLE);
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.map_image_forest:
+                fullscreen.setVisibility(View.GONE);
+                Picasso.with(context).load(fforest).into(mapFullScreen);
+                mapFullScreen.setVisibility(View.VISIBLE);
+                scaleAnim = AnimationUtils.loadAnimation(this, R.anim.fadein);
+                mapFullScreen.startAnimation( scaleAnim );
+                break;
+
+            case R.id.map_image_crop:
+                fullscreen.setVisibility(View.GONE);
+                Picasso.with(context).load(fcrop).into(mapFullScreen);
+                mapFullScreen.setVisibility(View.VISIBLE);
+                scaleAnim = AnimationUtils.loadAnimation(this, R.anim.fadein);
+                mapFullScreen.startAnimation( scaleAnim );
+                break;
+            case R.id.map_image_pasture:
+                fullscreen.setVisibility(View.GONE);
+                Picasso.with(context).load(fpasture).into(mapFullScreen);
+                mapFullScreen.setVisibility(View.VISIBLE);
+                scaleAnim = AnimationUtils.loadAnimation(this, R.anim.fadein);
+                mapFullScreen.startAnimation( scaleAnim );
+                break;
+
+            case R.id.map_image_mining:
+                fullscreen.setVisibility(View.GONE);
+                Picasso.with(context).load(fmining).into(mapFullScreen);
+                mapFullScreen.setVisibility(View.VISIBLE);
+                scaleAnim = AnimationUtils.loadAnimation(this, R.anim.fadein);
+                mapFullScreen.startAnimation( scaleAnim );
+                break;
+
+        }
+    }
+
+
+
 }
