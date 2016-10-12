@@ -56,7 +56,7 @@ public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.
         Survey survey = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
         for(LandKind landKind:survey.getLandKinds()){
             if(landKind.getName().equals("Forestland")){
-                //revenueProducts = landKind.getForestLand().getRevenueProducts();
+                //costElements = landKind.getForestLand().getRevenueProducts();
                 for(RevenueProduct revenueProduct:landKind.getForestLand().getRevenueProducts()){
                     revenueProductsToSave.add(revenueProduct);
                     if(revenueProduct.getType().equals("Non Timber")){

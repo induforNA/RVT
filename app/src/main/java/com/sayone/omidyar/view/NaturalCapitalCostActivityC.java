@@ -35,6 +35,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
     SharedPreferences sharedPref;
     String serveyId;
     Context context;
+    String currentSocialCapitalServey;
 
     Spinner spinnerYear,spinnerUnit,spinnerCurrency,spinnerTimePeriod;
     String year,unit,currency,numberTimes,timePeriod;
@@ -73,6 +74,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         serveyId = sharedPref.getString("surveyId","");
+        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey", "");
 
         spinnerYear = (Spinner)findViewById(R.id.spinner_year);
         spinnerUnit = (Spinner)findViewById(R.id.spinner_unit);
@@ -231,8 +233,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         Intent intent;
         switch (view.getId()){
             case R.id.button_next:
-                intent=new Intent(getApplicationContext(),CertificateActivity.class);
-                startActivity(intent);
+                nextLandKind();
+//                intent=new Intent(getApplicationContext(),CertificateActivity.class);
+//                startActivity(intent);
                 break;
 
             case R.id.button_back:
@@ -251,6 +254,35 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 }
                 break;
 
+        }
+    }
+
+    public void nextLandKind(){
+        RealmResults<LandKind> landKindRealmResults = realm.where(LandKind.class)
+                .equalTo("surveyId",serveyId)
+                .equalTo("status","active")
+                .findAll();
+        int j = 0;
+        int i = 0;
+        for (LandKind landKind : landKindRealmResults) {
+            Log.e("TAG ", landKind.toString());
+            //Log.e(TAG, String.valueOf(survey1.getParticipants().size()));
+            if(landKind.getName().equals(currentSocialCapitalServey)){
+                j = i + 1;
+            }
+            i++;
+        }
+
+        if(j < i){
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("currentSocialCapitalServey", landKindRealmResults.get(j).getName());
+            editor.apply();
+
+            Intent intent = new Intent(getApplicationContext(),OmidyarMap.class);
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(getApplicationContext(),CertificateActivity.class);
+            startActivity(intent);
         }
     }
 

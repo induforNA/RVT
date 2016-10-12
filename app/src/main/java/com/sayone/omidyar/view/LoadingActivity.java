@@ -40,6 +40,7 @@ public class LoadingActivity extends BaseActivity {
     String quetionsLoadStatus;
     String spredTableLoadStatus;
     String frequencyLoadStatus;
+    int flagVlue = 0;
 
     public static final String TAG = LoadingActivity.class.getName();
 
@@ -47,6 +48,8 @@ public class LoadingActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
+
+        flagVlue = 0;
 
         context = this;
         realm = Realm.getDefaultInstance();
@@ -56,6 +59,8 @@ public class LoadingActivity extends BaseActivity {
         quetionsLoadStatus = preferences.getString("questionsLoaded", "false");
         spredTableLoadStatus = preferences.getString("spredTableLoaded", "false");
         frequencyLoadStatus = preferences.getString("frequencyLoadStatus", "false");
+
+        goToNext();
 
         if (quetionsLoadStatus.equals("false")) {
 
@@ -85,6 +90,8 @@ public class LoadingActivity extends BaseActivity {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("questionsLoaded", "true");
                 editor.apply();
+                flagVlue++;
+                goToNext();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -110,6 +117,8 @@ public class LoadingActivity extends BaseActivity {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("spredTableLoaded", "true");
                 editor.apply();
+                flagVlue++;
+                goToNext();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -135,6 +144,8 @@ public class LoadingActivity extends BaseActivity {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("frequencyLoadStatus", "true");
                 editor.apply();
+                flagVlue++;
+                goToNext();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -164,9 +175,15 @@ public class LoadingActivity extends BaseActivity {
 
 
 
-        Intent intent = new Intent(LoadingActivity.this,RegistrationActivity.class);
-        startActivity(intent);
-        finish();
+
+    }
+
+    public void goToNext(){
+        if((flagVlue >= 3) || (quetionsLoadStatus.equals("true") && spredTableLoadStatus.equals("true") && frequencyLoadStatus.equals("true"))){
+            Intent intent = new Intent(LoadingActivity.this,RegistrationActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     public SocialCapitalAnswerOptions insertOptions(String option, String optionHindi, String val) {

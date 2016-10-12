@@ -97,7 +97,7 @@ public class CroplandSurveyA extends BaseActivity implements View.OnClickListene
                             revenueProduct.setSurveyId(surveyId);
                             revenueProduct.setType("crop");
                             realm.commitTransaction();
-                            revenueProducts.add(revenueProduct);
+                            costElements.add(revenueProduct);
 
                             //Survey survey = realm.createObject(Survey.class);
                             Survey survey = realm.where(Survey.class).equalTo("surveyId", surveyId).findFirst();
@@ -105,7 +105,7 @@ public class CroplandSurveyA extends BaseActivity implements View.OnClickListene
                             for(LandKind l:landKind){
                                 if(l.getName().equals("Cropland")){
                                     realm.beginTransaction();
-                                    l.getCropLand().setRevenueProducts(revenueProducts);*/
+                                    l.getCropLand().setRevenueProducts(costElements);*/
                                     cropName.setText(name);
                                    /* realm.commitTransaction();
                                 }

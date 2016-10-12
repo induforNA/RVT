@@ -88,6 +88,18 @@
         <activity
             android:name=".view.NaturalCapitalSurveyActivityB"
             android:screenOrientation="landscape"></activity>
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".view.NaturalCapitalCostActivityA">
+        </activity>
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".view.NaturalCapitalCostActivityB">
+        </activity>
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".view.NaturalCapitalCostActivityC">
+        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

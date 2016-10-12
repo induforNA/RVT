@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sayone.omidyar.BaseActivity;
@@ -42,6 +43,7 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
 
     RecyclerView timberList;
     RevenueAdapter revenueAdapter;
+    TextView landType;
 
     String landKindName;
 
@@ -62,7 +64,7 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
         for(LandKind landKind:survey.getLandKinds()){
             if(landKind.getName().equals("Forestland")){
                 landKindName = landKind.getName();
-                //revenueProducts = landKind.getForestLand().getRevenueProducts();
+                //costElements = landKind.getForestLand().getRevenueProducts();
                 for(RevenueProduct revenueProduct:landKind.getForestLand().getRevenueProducts()){
                     revenueProductsToSave.add(revenueProduct);
                     if(revenueProduct.getType().equals("Timber")){
@@ -76,6 +78,7 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
         buttonBack=(Button)findViewById(R.id.button_back);
         buttonNext=(Button)findViewById(R.id.button_next);
         buttonAddWood = (ImageView) findViewById(R.id.button_add_wood);
+        landType = (TextView) findViewById(R.id.land_type);
 
         timberList = (RecyclerView) findViewById(R.id.timber_list);
 

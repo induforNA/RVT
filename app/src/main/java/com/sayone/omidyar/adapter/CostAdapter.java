@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sayone.omidyar.R;
+import com.sayone.omidyar.model.CostElement;
 import com.sayone.omidyar.model.RevenueProduct;
 
 import java.util.List;
@@ -15,39 +16,39 @@ import java.util.List;
  * Created by sayone on 5/10/16.
  */
 
-public class CostAdapter extends RecyclerView.Adapter<CostAdapter.RevenueProductViewHolder>{
+public class CostAdapter extends RecyclerView.Adapter<CostAdapter.CostProductViewHolder>{
 
-    private List<RevenueProduct> revenueProducts;
+    private List<CostElement> costElements;
 
-    public class RevenueProductViewHolder extends RecyclerView.ViewHolder {
-        public TextView revenueProductName;
-        public RevenueProductViewHolder(View itemView) {
+    public class CostProductViewHolder extends RecyclerView.ViewHolder {
+        public TextView costProductName;
+        public CostProductViewHolder(View itemView) {
             super(itemView);
-            revenueProductName = (TextView) itemView.findViewById(R.id.revenue_product_name);
+            costProductName = (TextView) itemView.findViewById(R.id.revenue_product_name);
         }
     }
 
-    public CostAdapter(List<RevenueProduct> revenueProducts) {
-        this.revenueProducts = revenueProducts;
+    public CostAdapter(List<CostElement> costElements) {
+        this.costElements = costElements;
     }
 
     @Override
-    public RevenueProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CostProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.revenue_product_list_item, parent, false);
 
-        return new CostAdapter.RevenueProductViewHolder(itemView);
+        return new CostAdapter.CostProductViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(RevenueProductViewHolder holder, int position) {
-        RevenueProduct revenueProduct = revenueProducts.get(position);
-        holder.revenueProductName.setText(revenueProduct.getName());
+    public void onBindViewHolder(CostProductViewHolder holder, int position) {
+        CostElement costElement = costElements.get(position);
+        holder.costProductName.setText(costElement.getName());
     }
 
     @Override
     public int getItemCount() {
-        return revenueProducts.size();
+        return costElements.size();
     }
 
 
