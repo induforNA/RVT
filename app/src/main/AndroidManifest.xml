@@ -32,7 +32,9 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.RegistrationActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape">
+
+        </activity>
         <activity
             android:name=".view.LoginActivity"
             android:screenOrientation="landscape" />

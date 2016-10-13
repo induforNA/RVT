@@ -35,7 +35,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Natural capital(tangible)"
+                android:text="@string/title_natural_capital"
                 android:textSize="@dimen/textfield_size" />
 
             <ImageView
@@ -46,7 +46,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Forestland"
+                android:text="@string/string_forestland"
                 android:textSize="@dimen/textfield_size" />
 
             <ImageView
@@ -71,13 +71,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:gravity="center"
-        android:text="what crops do you harvest,if any?"
+        android:text="@string/qn_what_crop_doyou_harvest"
         android:textSize="@dimen/heading_size" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
+        android:text="@string/button_add"
         android:id="@+id/button_add"
         android:layout_gravity="center"/>
 

@@ -18,12 +18,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Powered by"/>
+        android:text="@string/string_powered_by"/>
 
     <TextView
         android:textSize="24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Indufor North America and Foundation for Ecological Security"/>
+        android:text="@string/sponsor_name"/>
 
 </LinearLayout>

@@ -47,28 +47,28 @@
                 android:layout_height="wrap_content" />
             <CheckBox
                 android:textSize="@dimen/textfield_size"
-                android:text="Forestland"
+                android:text="@string/string_forestland"
                 android:id="@+id/forestland"
                 android:onClick="slectedLandKind"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <CheckBox
                 android:textSize="@dimen/textfield_size"
-                android:text="Cropland"
+                android:text="@string/title_cropland"
                 android:id="@+id/cropland"
                 android:onClick="slectedLandKind"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <CheckBox
                 android:textSize="@dimen/textfield_size"
-                android:text="Pastureland"
+                android:text="@string/string_pastureland"
                 android:id="@+id/pastureland"
                 android:onClick="slectedLandKind"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <CheckBox
                 android:textSize="@dimen/textfield_size"
-                android:text="Mining land"
+                android:text="@string/string_miningland"
                 android:id="@+id/miningland"
                 android:onClick="slectedLandKind"
                 android:layout_width="wrap_content"
@@ -91,7 +91,7 @@
                 android:textAllCaps="false"
                 android:textColor="#ffffff"
                 android:layout_gravity="right"
-                android:text="Back"
+                android:text="@string/button_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <Button
@@ -99,7 +99,7 @@
                 android:textAllCaps="false"
                 android:textColor="#ffffff"
                 android:layout_gravity="right"
-                android:text="Next"
+                android:text="@string/button_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
