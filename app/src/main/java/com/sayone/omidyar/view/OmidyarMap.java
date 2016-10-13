@@ -2,7 +2,9 @@ package com.sayone.omidyar.view;
 
 import android.Manifest;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -44,6 +46,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+import io.realm.Realm;
+
 public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -62,6 +66,7 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
     private Location mLastLocation = null;
     boolean flag = true,initFlag=true;
     Bitmap bitmap;
+    private SharedPreferences preferences;
 
 
     ArrayList<Double> x,y;
@@ -70,6 +75,9 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
     private PolylineOptions polylineOptions;
     private int temp;
     private View map;
+    private Context context;
+    private String serveyId;
+    private String currentSocialCapitalServey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +86,12 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        context = this;
+        preferences = context.getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        serveyId = preferences.getString("surveyId","");
+        currentSocialCapitalServey = preferences.getString("currentSocialCapitalServey","");
         x=new ArrayList<>();
         y=new ArrayList<>();
         if (mGoogleApiClient == null) {
@@ -288,7 +302,7 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
         if(!dir.exists()) {
             dir.mkdirs();
         }
-        File file = new File(path + "/MapImagesNew/", "screen.jpg");
+        File file = new File(path + "/MapImagesNew/",currentSocialCapitalServey+serveyId+"screen.jpg");
         try {
             fOutputStream = new FileOutputStream(file);
 
