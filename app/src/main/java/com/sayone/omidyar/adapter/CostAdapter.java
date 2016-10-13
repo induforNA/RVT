@@ -37,7 +37,7 @@ public class CostAdapter extends RecyclerView.Adapter<CostAdapter.CostProductVie
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.revenue_product_list_item, parent, false);
 
-        return new CostAdapter.CostProductViewHolder(itemView);
+        return new CostProductViewHolder(itemView);
     }
 
     @Override

@@ -37,7 +37,7 @@ public class RevenueAdapter extends RecyclerView.Adapter<RevenueAdapter.RevenueP
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.revenue_product_list_item, parent, false);
 
-        return new RevenueAdapter.RevenueProductViewHolder(itemView);
+        return new RevenueProductViewHolder(itemView);
     }
 
     @Override

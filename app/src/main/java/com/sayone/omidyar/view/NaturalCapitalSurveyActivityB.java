@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sayone.omidyar.BaseActivity;
@@ -32,6 +33,7 @@ public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.
     SharedPreferences sharedPref;
 
     String serveyId;
+    String currentSocialCapitalServey;
     Button buttonBack,buttonNext;
     ImageView buttonAddWood;
     RealmList<RevenueProduct> revenueProducts;
@@ -39,6 +41,8 @@ public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.
 
     RecyclerView timberList;
     RevenueAdapter revenueAdapter;
+
+    TextView landTypeName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,7 @@ public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         serveyId = sharedPref.getString("surveyId","");
+        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey","");
 
         revenueProducts = new RealmList<>();
         revenueProductsToSave = new RealmList<>();
@@ -70,6 +75,8 @@ public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.
         buttonBack=(Button)findViewById(R.id.button_back);
         buttonNext=(Button)findViewById(R.id.button_next);
         buttonAddWood = (ImageView) findViewById(R.id.button_add_wood);
+        landTypeName = (TextView) findViewById(R.id.land_type_name);
+        landTypeName.setText(currentSocialCapitalServey);
 
         timberList = (RecyclerView) findViewById(R.id.timber_list);
 

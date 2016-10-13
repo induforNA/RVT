@@ -12,6 +12,7 @@ import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.Frequency;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.Participant;
+import com.sayone.omidyar.model.Quantity;
 import com.sayone.omidyar.model.SocialCapitalAnswerOptions;
 import com.sayone.omidyar.model.SocialCapitalQuestions;
 import com.sayone.omidyar.model.SpredTable;
@@ -40,6 +41,7 @@ public class LoadingActivity extends BaseActivity {
     String quetionsLoadStatus;
     String spredTableLoadStatus;
     String frequencyLoadStatus;
+    String quanityLoadStatus;
     int flagVlue = 0;
 
     public static final String TAG = LoadingActivity.class.getName();
@@ -59,6 +61,7 @@ public class LoadingActivity extends BaseActivity {
         quetionsLoadStatus = preferences.getString("questionsLoaded", "false");
         spredTableLoadStatus = preferences.getString("spredTableLoaded", "false");
         frequencyLoadStatus = preferences.getString("frequencyLoadStatus", "false");
+        quanityLoadStatus = preferences.getString("quanityLoadStatus", "false");
 
         goToNext();
 
@@ -151,6 +154,34 @@ public class LoadingActivity extends BaseActivity {
             }
         }
 
+        if (quanityLoadStatus.equals("false")) {
+
+            try {
+                JSONObject reader = new JSONObject(loadQuantityJSONFromAsset());
+                JSONArray jsonArray = reader.getJSONArray("quantity");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = new JSONObject(jsonArray.get(i).toString());
+//                    Log.e("AA ", jsonObject.getString("harvestFrequency"));
+//                    Log.e("BB ", jsonObject.getInt("value")+"");
+
+                    realm.beginTransaction();
+                    Quantity quantity = realm.createObject(Quantity.class);
+                    quantity.setId(getNextKeyQuantity());
+                    quantity.setQuantityName(jsonObject.getString("quantityName"));
+                    quantity.setQuantityType(jsonObject.getString("quantityType"));
+                    quantity.setQuantityValue(Double.parseDouble(jsonObject.getString("quantityValue")));
+                    realm.commitTransaction();
+                }
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("quanityLoadStatus", "true");
+                editor.apply();
+                flagVlue++;
+                goToNext();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
 
         RealmResults<SocialCapitalQuestions> results = realm.where(SocialCapitalQuestions.class).findAll();
         for (SocialCapitalQuestions socialCapitalQuestions1 : results) {
@@ -172,14 +203,17 @@ public class LoadingActivity extends BaseActivity {
             Log.e(TAG + "Frequency ", frequency.getHarvestFrequency());
         }
 
-
+        RealmResults<Quantity> results3 = realm.where(Quantity.class).findAll();
+        for (Quantity quantity : results3) {
+            Log.e(TAG + "Quantity ", quantity.getQuantityName());
+        }
 
 
 
     }
 
     public void goToNext(){
-        if((flagVlue >= 3) || (quetionsLoadStatus.equals("true") && spredTableLoadStatus.equals("true") && frequencyLoadStatus.equals("true"))){
+        if((flagVlue >= 4) || (quetionsLoadStatus.equals("true") && spredTableLoadStatus.equals("true") && frequencyLoadStatus.equals("true") && quanityLoadStatus.equals("true"))){
             Intent intent = new Intent(LoadingActivity.this,RegistrationActivity.class);
             startActivity(intent);
             finish();
@@ -216,6 +250,13 @@ public class LoadingActivity extends BaseActivity {
             return 1;
         }
         return realm.where(Frequency.class).max("id").intValue() + 1;
+    }
+
+    public int getNextKeyQuantity() {
+        if (realm.where(Quantity.class).max("id") == null) {
+            return 1;
+        }
+        return realm.where(Quantity.class).max("id").intValue() + 1;
     }
 
     public int getNextKeySocialCapitalAnswerOptions() {
@@ -280,6 +321,31 @@ public class LoadingActivity extends BaseActivity {
         try {
 
             InputStream is = getAssets().open("frequency.json");
+
+            int size = is.available();
+
+            byte[] buffer = new byte[size];
+
+            is.read(buffer);
+
+            is.close();
+
+            json = new String(buffer, "UTF-8");
+
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+
+    }
+
+    public String loadQuantityJSONFromAsset() {
+        String json = null;
+        try {
+
+            InputStream is = getAssets().open("quantity.json");
 
             int size = is.available();
 
