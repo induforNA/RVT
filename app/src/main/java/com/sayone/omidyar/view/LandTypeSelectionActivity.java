@@ -41,6 +41,7 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
     private String serveyId;
     Survey survey;
     RealmList<LandKind> landKinds;
+    String currentSocialCapitalServey;
 
 
     private Button nextButton;
@@ -70,6 +71,9 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         serveyId = sharedPref.getString("surveyId","");
+        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey", "");
+
+
         landKinds = new RealmList<>();
         landTypeNames = new HashSet<String>();
 

@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -56,6 +57,7 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
 
 
     Button nextButton, backButton,drawPolygon,clear,submit;
+    TextView landName;
     private static final int MY_PERMISSIONS_REQUEST = 0;
     private GoogleMap mMap;
     double lat = 0, lon = 0,initLat,initLon;
@@ -107,9 +109,10 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
         clear = (Button)findViewById(R.id.clear_button);
         submit = (Button)findViewById(R.id.submit_button);
         mapImage = (ImageView)findViewById(R.id.map_image);
+        landName=(TextView)findViewById(R.id.land_name);
         map = (View)findViewById(R.id.map);
 
-
+        landName.setText(currentSocialCapitalServey);
         nextButton.setOnClickListener(this);
         backButton.setOnClickListener(this);
         drawPolygon.setOnClickListener(this);
@@ -117,16 +120,6 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
         submit.setOnClickListener(this);
     }
 
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
@@ -142,10 +135,7 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
                         flag=false;
                     }
                     latLng1=latLng;
-                    // Creating a marker
                     MarkerOptions markerOptions = new MarkerOptions();
-
-                    // Setting the position for the marker
                     markerOptions.position(latLng);
                     if(initFlag){
                         initLat=latLng.latitude;
@@ -154,38 +144,11 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
                     }
                     x.add(latLng.latitude);
                     y.add(latLng.longitude);
-
-
-                    // Setting the title for the marker.
-                    // This will be displayed on taping the marker
                     markerOptions.title(latLng.latitude + " : " + latLng.longitude);
-
-                    // Clears the previously touched position
-                   // googleMap.clear();
-
-                    // Animating to the touched position
                     googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-
-                    // Placing a marker on the touched position
                     googleMap.addMarker(markerOptions);
-
-
-
-                    // polylineOptions = new PolylineOptions();
-
-
-
-
                 }
             });
-
-
-
-
-
-
-
-
     }
 
     @Override
@@ -206,13 +169,11 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
                 v.setDrawingCacheEnabled(true);
                 mMap.snapshot(this);
                 mapImage.setImageBitmap(bitmap);
-
-
-
+                Toast toast = Toast.makeText(context,"Image saved", Toast.LENGTH_SHORT);
+                toast.show();
                 break;
 
             case R.id.clear_button:
-
                 x.clear();
                 y.clear();
                 initLon=0;
@@ -233,7 +194,6 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
                     temp=i;
                     mMap.addPolyline(polylineOptions).setWidth(3);
                 }
-                // polylineOptions.add(new LatLng(x.get(temp),y.get(temp)));
                 polylineOptions.add(new LatLng(initLat,initLon));
                 mMap.addPolyline(polylineOptions).setWidth(3);
                 break;
@@ -256,9 +216,7 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
                 mMap.addMarker(new MarkerOptions().position(sydney).title("your location"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
                 return;
-
             }
-
         }
         else{
 
@@ -352,6 +310,7 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
 
             fOutputStream.flush();
             fOutputStream.close();
+
 
             MediaStore.Images.Media.insertImage(getContentResolver(), file.getAbsolutePath(), file.getName(), file.getName());
         } catch (FileNotFoundException e) {

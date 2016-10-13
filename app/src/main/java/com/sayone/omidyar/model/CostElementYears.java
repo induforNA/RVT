@@ -14,9 +14,13 @@ public class CostElementYears extends RealmObject {
 
     private String surveyId;
 
-    private int expenseFrequencyValue;
+    private String landKind;
 
-    private int expenseFrequencyUnit;
+    private long costElementId;
+
+    private int costFrequencyValue;
+
+    private int costFrequencyUnit;
 
     private int costPerPeriodValue;
 
@@ -46,20 +50,20 @@ public class CostElementYears extends RealmObject {
         this.surveyId = surveyId;
     }
 
-    public int getExpenseFrequencyValue() {
-        return expenseFrequencyValue;
+    public int getCostFrequencyValue() {
+        return costFrequencyValue;
     }
 
-    public void setExpenseFrequencyValue(int expenseFrequencyValue) {
-        this.expenseFrequencyValue = expenseFrequencyValue;
+    public void setCostFrequencyValue(int costFrequencyValue) {
+        this.costFrequencyValue = costFrequencyValue;
     }
 
-    public int getExpenseFrequencyUnit() {
-        return expenseFrequencyUnit;
+    public int getCostFrequencyUnit() {
+        return costFrequencyUnit;
     }
 
-    public void setExpenseFrequencyUnit(int expenseFrequencyUnit) {
-        this.expenseFrequencyUnit = expenseFrequencyUnit;
+    public void setCostFrequencyUnit(int costFrequencyUnit) {
+        this.costFrequencyUnit = costFrequencyUnit;
     }
 
     public int getCostPerPeriodValue() {
@@ -108,5 +112,21 @@ public class CostElementYears extends RealmObject {
 
     public void setSubtotal(double subtotal) {
         this.subtotal = subtotal;
+    }
+
+    public long getCostElementId() {
+        return costElementId;
+    }
+
+    public void setCostElementId(long costElementId) {
+        this.costElementId = costElementId;
+    }
+
+    public String getLandKind() {
+        return landKind;
+    }
+
+    public void setLandKind(String landKind) {
+        this.landKind = landKind;
     }
 }

@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="survey id"
+            android:text="@string/string_survey_id"
             android:textColor="#ffffff"
             android:textSize="@dimen/textfield_size" />
 
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:paddingLeft="20dp"
-        android:text="About This Tool"
+        android:text="@string/about_this_app"
         android:textColor="#ffffff"
         android:textSize="@dimen/textfield_size" />
 
@@ -61,7 +61,7 @@
         android:layout_marginTop="10dp"
         android:paddingLeft="20dp"
         android:id="@+id/text_start_survey"
-        android:text="Start Survey "
+        android:text="@string/string_start_survey"
         android:textColor="#ffffff"
         android:textSize="@dimen/textfield_size" />
 
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:paddingLeft="20dp"
-        android:text="Logout"
+        android:text="@string/string_logout"
         android:textColor="#ffffff"
         android:textSize="@dimen/textfield_size" />
 </LinearLayout>

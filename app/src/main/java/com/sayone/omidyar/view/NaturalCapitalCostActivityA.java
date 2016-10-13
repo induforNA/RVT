@@ -17,7 +17,8 @@ import android.widget.Toast;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
-import com.sayone.omidyar.adapter.RevenueAdapter;
+import com.sayone.omidyar.adapter.CostAdapter;
+import com.sayone.omidyar.model.CostElement;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.RevenueProduct;
 import com.sayone.omidyar.model.Survey;
@@ -34,11 +35,11 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
     String serveyId;
     Button buttonBack,buttonNext;
     ImageView buttonAddWood;
-    RealmList<RevenueProduct> revenueProducts;
-    RealmList<RevenueProduct> revenueProductsToSave;
+    RealmList<CostElement> costElements;
+    RealmList<CostElement> costProductsToSave;
 
     RecyclerView timberList;
-    RevenueAdapter revenueAdapter;
+    CostAdapter costAdapter;
 
     String landKindName;
 
@@ -53,17 +54,17 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         serveyId = sharedPref.getString("surveyId","");
 
-        revenueProducts = new RealmList<>();
-        revenueProductsToSave = new RealmList<>();
+        costElements = new RealmList<>();
+        costProductsToSave = new RealmList<>();
         Survey survey = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
         for(LandKind landKind:survey.getLandKinds()){
             if(landKind.getName().equals("Forestland")){
                 landKindName = landKind.getName();
-                //revenueProducts = landKind.getForestLand().getRevenueProducts();
-                for(RevenueProduct revenueProduct:landKind.getForestLand().getRevenueProducts()){
-                    revenueProductsToSave.add(revenueProduct);
-                    if(revenueProduct.getType().equals("Timber")){
-                        revenueProducts.add(revenueProduct);
+                //costElements = landKind.getForestLand().getRevenueProducts();
+                for(CostElement costElement:landKind.getForestLand().getCostElements()){
+                    costProductsToSave.add(costElement);
+                    if(costElement.getType().equals("Timber")){
+                        costElements.add(costElement);
                     }
                 }
             }
@@ -76,12 +77,12 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
 
         timberList = (RecyclerView) findViewById(R.id.timber_list);
 
-        revenueAdapter = new RevenueAdapter(revenueProducts);
+        costAdapter = new CostAdapter(costElements);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         timberList.setLayoutManager(mLayoutManager);
         timberList.setItemAnimator(new DefaultItemAnimator());
-        timberList.setAdapter(revenueAdapter);
+        timberList.setAdapter(costAdapter);
 
 
         buttonNext.setOnClickListener(this);
@@ -106,7 +107,7 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
             case R.id.button_add_wood:
                 final Dialog dialog = new Dialog(context);
                 dialog.setContentView(R.layout.add_forest_revenue_item);
-                dialog.setTitle("Add a participant");
+                dialog.setTitle("Add a cost element");
                 dialog.setCancelable(false);
 
                 Button popupCancel = (Button) dialog.findViewById(R.id.popup_cancel);
@@ -127,26 +128,26 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
 
                     if(!name.equals("")) {
                         realm.beginTransaction();
-                        RevenueProduct revenueProduct = realm.createObject(RevenueProduct.class);
-                        revenueProduct.setId(getNextKeyRevenueProduct());
-                        revenueProduct.setName(name);
-                        revenueProduct.setType("Timber");
-                        revenueProduct.setLandKind(landKindName);
-                        revenueProduct.setSurveyId(serveyId);
+                        CostElement costElement = realm.createObject(CostElement.class);
+                        costElement.setId(getNextKeyCostElement());
+                        costElement.setName(name);
+                        costElement.setType("Timber");
+                        costElement.setLandKind(landKindName);
+                        costElement.setSurveyId(serveyId);
                         realm.commitTransaction();
 
-                        revenueProducts.add(revenueProduct);
-                        revenueProductsToSave.add(revenueProduct);
+                        costElements.add(costElement);
+                        costProductsToSave.add(costElement);
                         Survey surveyRevenueProduct = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
 
 
                         for(LandKind landKind:surveyRevenueProduct.getLandKinds()){
                             Log.e("BBB ",landKind.getName()+" "+landKind.getForestLand());
                             if(landKind.getName().equals("Forestland")){
-                                Log.e("BBB ",revenueProducts.size()+"");
-                                Log.e("AAA ",landKind.getForestLand().getRevenueProducts().toString());
+                                Log.e("BBB ", costElements.size()+"");
+                                Log.e("AAA ",landKind.getForestLand().getCostElements().toString());
                                 realm.beginTransaction();
-                                landKind.getForestLand().setRevenueProducts(revenueProductsToSave);
+                                landKind.getForestLand().setCostElements(costProductsToSave);
                                 realm.commitTransaction();
                             }
                         }
@@ -154,13 +155,13 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
                         Survey results = realm.where(Survey.class).findFirst();
                         for(LandKind landKind:results.getLandKinds()){
                             if(landKind.getName().equals("Forestland")){
-                                for (RevenueProduct revenueProduct1: landKind.getForestLand().getRevenueProducts()){
-                                    Log.e("LAND ", revenueProduct1.getName());
+                                for (CostElement costElement1: landKind.getForestLand().getCostElements()){
+                                    Log.e("LAND ", costElement1.getName());
                                 }
                             }
                         }
 
-                        revenueAdapter.notifyDataSetChanged();
+                        costAdapter.notifyDataSetChanged();
 
 //                        noParticipantLayout.setVisibility(View.GONE);
 //                        participantLayout.setVisibility(View.VISIBLE);
@@ -180,7 +181,7 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
         }
     }
 
-    public int getNextKeyRevenueProduct() {
-        return realm.where(RevenueProduct.class).max("id").intValue() + 1;
+    public int getNextKeyCostElement() {
+        return realm.where(CostElement.class).max("id").intValue() + 1;
     }
 }

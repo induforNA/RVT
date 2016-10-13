@@ -33,15 +33,15 @@ public class YearsAdapter extends RecyclerView.Adapter<YearsAdapter.YearViewHold
     }
 
     @Override
-    public YearsAdapter.YearViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public YearViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.revenue_year_list_item, parent, false);
 
-        return new YearsAdapter.YearViewHolder(itemView);
+        return new YearViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(YearsAdapter.YearViewHolder holder, int position) {
+    public void onBindViewHolder(YearViewHolder holder, int position) {
         RevenueProductYears revenueProductYears = revenueProductYearses.get(position);
         holder.revenueProductYear.setText(revenueProductYears.getYear());
     }

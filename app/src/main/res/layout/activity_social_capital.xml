@@ -47,7 +47,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Social capital survey"
+                    android:text="@string/title_social_capital"
                     android:textSize="@dimen/textfield_size" />
 
                 <ImageView
@@ -58,7 +58,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Forestland"
+                    android:text="@string/string_forestland"
                     android:id="@+id/land_type"
                     android:textSize="@dimen/textfield_size" />
 
@@ -107,7 +107,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="slectedItems"
-                    android:text="option 1"
+                    android:text="@string/string_option1"
                     android:textSize="@dimen/textfield_size" />
 
                 <CheckBox
@@ -115,7 +115,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="slectedItems"
-                    android:text="Cropland"
+                    android:text="@string/title_cropland"
                     android:textSize="@dimen/textfield_size" />
 
                 <CheckBox
@@ -123,7 +123,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="slectedItems"
-                    android:text="Pastureland"
+                    android:text="@string/string_pastureland"
                     android:textSize="@dimen/textfield_size" />
 
                 <CheckBox
@@ -131,7 +131,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="slectedItems"
-                    android:text="Mining land"
+                    android:text="@string/string_miningland"
                     android:textSize="@dimen/textfield_size" />
 
                 <CheckBox
@@ -139,7 +139,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="slectedItems"
-                    android:text="Mining land"
+                    android:text="@string/string_miningland"
                     android:textSize="@dimen/textfield_size" />
             </LinearLayout>
             <RadioGroup
@@ -151,7 +151,7 @@
                     android:id="@+id/option_a_radio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="option 1"
+                    android:text="@string/string_option1"
                     android:textSize="@dimen/textfield_size" />
 
                 <RadioButton
@@ -159,7 +159,7 @@
                     android:id="@+id/option_b_radio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="option 2"
+                    android:text="@string/string_option2"
                     android:textSize="@dimen/textfield_size" />
 
                 <RadioButton
@@ -167,7 +167,7 @@
                     android:id="@+id/option_c_radio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="option 3"
+                    android:text="@string/string_option3"
                     android:textSize="@dimen/textfield_size" />
 
                 <RadioButton
@@ -175,7 +175,7 @@
                     android:id="@+id/option_d_radio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="option 4"
+                    android:text="@string/string_option4"
                     android:textSize="@dimen/textfield_size" />
 
                 <RadioButton
@@ -183,7 +183,7 @@
                     android:id="@+id/option_e_radio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="option 4"
+                    android:text="@string/string_option4"
                     android:textSize="@dimen/textfield_size" />
             </RadioGroup>
         </LinearLayout>
@@ -202,7 +202,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:text="Back"
+                android:text="@string/button_back"
                 android:textAllCaps="false"
                 android:textColor="#ffffff" />
 
@@ -211,7 +211,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:text="Next"
+                android:text="@string/button_next"
                 android:textAllCaps="false"
                 android:textColor="#ffffff" />
         </LinearLayout>

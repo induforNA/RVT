@@ -44,6 +44,7 @@
                 android:src="@drawable/ic_keyboard_arrow_right_black_36dp" />
 
             <TextView
+                android:id="@+id/land_type_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Forestland"

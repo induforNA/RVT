@@ -32,7 +32,9 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.RegistrationActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape">
+
+        </activity>
         <activity
             android:name=".view.LoginActivity"
             android:screenOrientation="landscape" />
@@ -51,11 +53,7 @@
         <activity
             android:name=".view.SplashScreenActivity"
             android:screenOrientation="landscape">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".view.SocialCapitalStartActivity"
@@ -69,7 +67,11 @@
         <activity
             android:name=".view.CertificateActivity"
             android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".view.NaturalCapitalSurveyActivityD"
             android:screenOrientation="landscape">
@@ -88,6 +90,18 @@
         <activity
             android:name=".view.NaturalCapitalSurveyActivityB"
             android:screenOrientation="landscape"></activity>
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".view.NaturalCapitalCostActivityA">
+        </activity>
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".view.NaturalCapitalCostActivityB">
+        </activity>
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".view.NaturalCapitalCostActivityC">
+        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

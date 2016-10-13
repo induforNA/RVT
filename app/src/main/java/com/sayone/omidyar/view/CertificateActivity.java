@@ -20,6 +20,7 @@ import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.SocialCapital;
 import com.sayone.omidyar.model.SocialCapitalQuestions;
 import com.sayone.omidyar.model.Survey;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -111,7 +112,8 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
             forestlandLayout.setVisibility(View.GONE);
             headingForest.setVisibility(View.GONE);
         }
-        Picasso.with(context).load(fforest).into(mapImageForest);
+        Picasso.with(context).load(fforest).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageForest);
+
         String pathCropMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Cropland"+surveyId+"screen.jpg/";
         mapImageCrop.setVisibility(View.VISIBLE);
         fcrop = new File(pathCropMap);
@@ -119,7 +121,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
             croplandLayout.setVisibility(View.GONE);
             headingCrop.setVisibility(View.GONE);
         }
-        Picasso.with(context).load(fcrop).into(mapImageCrop);
+        Picasso.with(context).load(fcrop).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageCrop);
         String pathPastureMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Pastureland"+surveyId+"screen.jpg/";
         mapImagePasture.setVisibility(View.VISIBLE);
         fpasture = new File(pathPastureMap);
@@ -127,7 +129,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
             pasturelandLayout.setVisibility(View.GONE);
             headingPasture.setVisibility(View.GONE);
         }
-        Picasso.with(context).load(fpasture).into(mapImagePasture);
+        Picasso.with(context).load(fpasture).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImagePasture);
         String pathminingMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Mining Land"+surveyId+"screen.jpg/";
         mapImageMining.setVisibility(View.VISIBLE);
         fmining = new File(pathminingMap);
@@ -135,8 +137,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
             mininglandLayout.setVisibility(View.GONE);
             headingMining.setVisibility(View.GONE);
         }
-        Picasso.with(context).load(fmining).into(mapImageMining);
-
+        Picasso.with(context).load(fmining).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageMining);
 
         community.setText(surveyCheck.getCommunity().toString());
         parcelId.setText(surveyCheck.getSurveyId().toString());

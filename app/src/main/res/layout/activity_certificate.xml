@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Community asset valuation certificate"
+            android:text="@string/heading_certificate"
             android:textSize="@dimen/heading_size" />
 
     </LinearLayout>
@@ -183,7 +183,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Forestland"
+                    android:text="@string/string_forestland"
                     android:textSize="@dimen/textfield_size" />
 
                 <LinearLayout
@@ -269,7 +269,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Cropland"
+                    android:text="@string/title_cropland"
                     android:textSize="@dimen/textfield_size" />
 
                 <LinearLayout
@@ -354,7 +354,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Pastureland"
+                    android:text="@string/string_pastureland"
                     android:textSize="@dimen/textfield_size" />
 
                 <LinearLayout
@@ -440,7 +440,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Mining land"
+                    android:text="@string/string_miningland"
                     android:textSize="@dimen/textfield_size" />
 
                 <LinearLayout
