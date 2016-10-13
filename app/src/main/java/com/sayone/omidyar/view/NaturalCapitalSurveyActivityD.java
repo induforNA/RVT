@@ -171,7 +171,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                     }
                 }
             }else if(landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")){
-                if(landKind.getForestLand().getRevenueProducts().size() > 0){
+                if(landKind.getCropLand().getRevenueProducts().size() > 0){
                     //loadYears(landKind.getForestLand().getRevenueProducts().get(0).getRevenueProductYearses());
                     revenueProducts = landKind.getCropLand().getRevenueProducts();
                     totalCostProductCount = revenueProducts.size();
@@ -182,7 +182,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                     }
                 }
             }else if(landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")){
-                if(landKind.getForestLand().getRevenueProducts().size() > 0){
+                if(landKind.getPastureLand().getRevenueProducts().size() > 0){
                     //loadYears(landKind.getForestLand().getRevenueProducts().get(0).getRevenueProductYearses());
                     revenueProducts = landKind.getPastureLand().getRevenueProducts();
                     totalCostProductCount = revenueProducts.size();
@@ -193,7 +193,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                     }
                 }
             }else if(landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")){
-                if(landKind.getForestLand().getRevenueProducts().size() > 0){
+                if(landKind.getMiningLand().getRevenueProducts().size() > 0){
                     //loadYears(landKind.getForestLand().getRevenueProducts().get(0).getRevenueProductYearses());
                     revenueProducts = landKind.getMiningLand().getRevenueProducts();
                     totalCostProductCount = revenueProducts.size();
@@ -286,8 +286,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 break;
 
             case R.id.button_back:
-                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivityD.class);
-                startActivity(intent);
+//                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivityD.class);
+//                startActivity(intent);
+                finish();
                 break;
 
             case R.id.save_btn:

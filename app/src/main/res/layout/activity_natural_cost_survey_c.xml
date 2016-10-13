@@ -38,12 +38,12 @@
                 android:textSize="@dimen/heading_size" />
 
             <!--<CheckBox-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:textSize="@dimen/textfield_size"-->
-                <!--android:text="One time"-->
-                <!--android:id="@+id/checkBox" />-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:textSize="@dimen/textfield_size"-->
+            <!--android:text="One time"-->
+            <!--android:id="@+id/checkBox" />-->
 
             <TextView
                 android:layout_width="match_parent"

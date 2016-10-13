@@ -20,17 +20,19 @@ public class CostElementYears extends RealmObject {
 
     private int costFrequencyValue;
 
-    private int costFrequencyUnit;
+    private double costFrequencyUnit;
 
-    private int costPerPeriodValue;
+    private double costPerPeriodValue;
 
-    private int costPerPeriodUnit;
+    private String costPerPeriodUnit;
 
-    private int costPerUnitValue;
+    private double costPerUnitValue;
 
-    private int costPerUnitUnit;
+    private String costPerUnitUnit;
 
     private int year;
+
+    private int projectedIndex;
 
     private double subtotal;
 
@@ -58,43 +60,43 @@ public class CostElementYears extends RealmObject {
         this.costFrequencyValue = costFrequencyValue;
     }
 
-    public int getCostFrequencyUnit() {
+    public double getCostFrequencyUnit() {
         return costFrequencyUnit;
     }
 
-    public void setCostFrequencyUnit(int costFrequencyUnit) {
+    public void setCostFrequencyUnit(double costFrequencyUnit) {
         this.costFrequencyUnit = costFrequencyUnit;
     }
 
-    public int getCostPerPeriodValue() {
+    public double getCostPerPeriodValue() {
         return costPerPeriodValue;
     }
 
-    public void setCostPerPeriodValue(int costPerPeriodValue) {
+    public void setCostPerPeriodValue(double costPerPeriodValue) {
         this.costPerPeriodValue = costPerPeriodValue;
     }
 
-    public int getCostPerPeriodUnit() {
+    public String getCostPerPeriodUnit() {
         return costPerPeriodUnit;
     }
 
-    public void setCostPerPeriodUnit(int costPerPeriodUnit) {
+    public void setCostPerPeriodUnit(String costPerPeriodUnit) {
         this.costPerPeriodUnit = costPerPeriodUnit;
     }
 
-    public int getCostPerUnitValue() {
+    public double getCostPerUnitValue() {
         return costPerUnitValue;
     }
 
-    public void setCostPerUnitValue(int costPerUnitValue) {
+    public void setCostPerUnitValue(double costPerUnitValue) {
         this.costPerUnitValue = costPerUnitValue;
     }
 
-    public int getCostPerUnitUnit() {
+    public String getCostPerUnitUnit() {
         return costPerUnitUnit;
     }
 
-    public void setCostPerUnitUnit(int costPerUnitUnit) {
+    public void setCostPerUnitUnit(String costPerUnitUnit) {
         this.costPerUnitUnit = costPerUnitUnit;
     }
 
@@ -128,5 +130,13 @@ public class CostElementYears extends RealmObject {
 
     public void setLandKind(String landKind) {
         this.landKind = landKind;
+    }
+
+    public int getProjectedIndex() {
+        return projectedIndex;
+    }
+
+    public void setProjectedIndex(int projectedIndex) {
+        this.projectedIndex = projectedIndex;
     }
 }
