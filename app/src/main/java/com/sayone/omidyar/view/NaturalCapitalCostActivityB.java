@@ -140,7 +140,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
             int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 
             Log.e("YEAR PEEEEEEEEE",costElementYears.getYear()+" "+currentYear);
-            if(costElementYears.getYear() < currentYear && costElementYears.getYear() != 0){
+            if(costElementYears.getYear() <= currentYear && costElementYears.getYear() != 0){
                 EditText myEditText = new EditText(context);
                 myEditText.setLayoutParams(mRparams);
                 myEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -214,9 +214,9 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
 
                     int year = Calendar.getInstance().get(Calendar.YEAR);
                     costElementYearsArrayList.add(saveTrend(costElements1.getId(), "Forestland"));
-                    for(int k=1;k<=15;k++){
-                        year++;
+                    for(int k=0;k<=15;k++){
                         costElementYearsArrayList.add(saveProjectionYears(year, costElements1.getId(), "Forestland", k));
+                        year++;
                     }
 
 
@@ -240,9 +240,9 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
 
                     int year = Calendar.getInstance().get(Calendar.YEAR);
                     costElementYearsArrayList.add(saveTrend(costElements1.getId(), "Cropland"));
-                    for(int k=1;k<=5;k++){
-                        year++;
+                    for(int k=0;k<=5;k++){
                         costElementYearsArrayList.add(saveProjectionYears(year, costElements1.getId(), "Cropland", k));
+                        year++;
                     }
 
 
@@ -265,9 +265,9 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
 
                     int year = Calendar.getInstance().get(Calendar.YEAR);
                     costElementYearsArrayList.add(saveTrend(costElements1.getId(), "Pastureland"));
-                    for(int k=1;k<=8;k++){
-                        year++;
+                    for(int k=0;k<=8;k++){
                         costElementYearsArrayList.add(saveProjectionYears(year, costElements1.getId(), "Pastureland", k));
+                        year++;
                     }
 
 
@@ -290,9 +290,9 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
 
                     int year = Calendar.getInstance().get(Calendar.YEAR);
                     costElementYearsArrayList.add(saveTrend(costElements1.getId(), "Mining Land"));
-                    for(int k=1;k<=5;k++){
-                        year++;
+                    for(int k=0;k<=5;k++){
                         costElementYearsArrayList.add(saveProjectionYears(year, costElements1.getId(), "Mining Land", k));
+                        year++;
                     }
 
 

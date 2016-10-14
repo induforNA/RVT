@@ -17,6 +17,10 @@ public class CashFlow extends RealmObject {
 
     private double value;
 
+    private double discountingFactor;
+
+    private double discountedCashFlow;
+
     public long getId() {
         return id;
     }
@@ -47,5 +51,21 @@ public class CashFlow extends RealmObject {
 
     public void setSurveyId(String surveyId) {
         this.surveyId = surveyId;
+    }
+
+    public double getDiscountingFactor() {
+        return discountingFactor;
+    }
+
+    public void setDiscountingFactor(double discountingFactor) {
+        this.discountingFactor = discountingFactor;
+    }
+
+    public double getDiscountedCashFlow() {
+        return discountedCashFlow;
+    }
+
+    public void setDiscountedCashFlow(double discountedCashFlow) {
+        this.discountedCashFlow = discountedCashFlow;
     }
 }

@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
+import com.sayone.omidyar.model.CashFlow;
+import com.sayone.omidyar.model.Component;
 import com.sayone.omidyar.model.CostElement;
 import com.sayone.omidyar.model.CostElementYears;
 import com.sayone.omidyar.model.Frequency;
@@ -282,6 +284,8 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         Intent intent;
         switch (view.getId()){
             case R.id.button_next:
+                allCashFlow();
+                calculateNPV();
                 nextLandKind();
 //                intent=new Intent(getApplicationContext(),NaturalCapitalCostActivityA.class);
 //                startActivity(intent);
@@ -574,5 +578,231 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 //        revenueProductYears1.setProjectedIndex(yearIndex);
 //        revenueProductYears1.setSubtotal(total);
 //        realm.commitTransaction();
+    }
+
+
+    public void allCashFlow(){
+        Survey results = realm.where(Survey.class)
+                .equalTo("surveyId",serveyId)
+                .findFirst();
+        RealmList<CashFlow> cashFlows = new RealmList<>();
+        for(LandKind landKind:results.getLandKinds()){
+
+            if(landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")){
+                Log.e("DIS RATE ", landKind.getSocialCapitals().getDiscountRate()+"");
+                int k = 0;
+                for(RevenueProduct revenueProduct:landKind.getForestLand().getRevenueProducts()){
+                    if(k <= 0) {
+                        for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
+                            cashFlows.add(calculateCashFlow("Forestland",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
+                        }
+                    }
+                    k++;
+                }
+                realm.beginTransaction();
+                landKind.getForestLand().setCashFlows(cashFlows);
+                realm.commitTransaction();
+            }else if(landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")){
+                int k = 0;
+                for(RevenueProduct revenueProduct:landKind.getCropLand().getRevenueProducts()){
+                    if(k <= 0) {
+                        for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
+                            cashFlows.add(calculateCashFlow("Cropland",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
+                        }
+                    }
+                    k++;
+                }
+                realm.beginTransaction();
+                landKind.getCropLand().setCashFlows(cashFlows);
+                realm.commitTransaction();
+            }else if(landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")){
+                int k = 0;
+                for(RevenueProduct revenueProduct:landKind.getPastureLand().getRevenueProducts()){
+                    if(k <= 0) {
+                        for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
+                            cashFlows.add(calculateCashFlow("Pastureland",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
+                        }
+                    }
+                    k++;
+                }
+                realm.beginTransaction();
+                landKind.getPastureLand().setCashFlows(cashFlows);
+                realm.commitTransaction();
+            }else if(landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")){
+                int k = 0;
+                for(RevenueProduct revenueProduct:landKind.getMiningLand().getRevenueProducts()){
+                    if(k <= 0) {
+                        for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
+                            cashFlows.add(calculateCashFlow("Mining Land",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
+                        }
+                    }
+                    k++;
+                }
+                realm.beginTransaction();
+                landKind.getMiningLand().setCashFlows(cashFlows);
+                realm.commitTransaction();
+            }
+        }
+
+
+    }
+
+    public CashFlow calculateCashFlow(String landKind, int year, double disRatePersent){
+        RevenueProductYears revenueProductYears = realm.where(RevenueProductYears.class)
+                .equalTo("surveyId",serveyId)
+                .equalTo("landKind",landKind)
+                .equalTo("year",year)
+                .findFirst();
+
+        CostElementYears costElementYears = realm.where(CostElementYears.class)
+                .equalTo("surveyId",serveyId)
+                .equalTo("landKind",landKind)
+                .equalTo("year",year)
+                .findFirst();
+
+
+        double revenueTotal = 0;
+        double costTotal = 0;
+        double disRate = disRatePersent/100;
+
+        double disFactor = 0;
+
+        if(revenueProductYears != null){
+            revenueTotal = revenueProductYears.getSubtotal();
+            disFactor = 1 / Math.pow(1+disRate,revenueProductYears.getProjectedIndex());
+        }
+        if(costElementYears != null){
+            costTotal = costElementYears.getSubtotal();
+            disFactor = 1 / Math.pow(1+disRate,costElementYears.getProjectedIndex());
+        }
+        double cashFlowVal = revenueTotal - costTotal;
+
+
+        double discountedCashFlow = cashFlowVal * disFactor;
+
+        Log.e("DIS FACT ",disFactor+"");
+
+        realm.beginTransaction();
+        CashFlow cashFlow = realm.createObject(CashFlow.class);
+        cashFlow.setId(getNextKeyCashFlow());
+        cashFlow.setSurveyId(serveyId);
+        cashFlow.setYear(year);
+        cashFlow.setValue(cashFlowVal);
+        cashFlow.setDiscountingFactor(disFactor);
+        cashFlow.setDiscountedCashFlow(discountedCashFlow);
+        realm.commitTransaction();
+        return cashFlow;
+    }
+
+    public void calculateNPV(){
+        Survey results = realm.where(Survey.class)
+                .equalTo("surveyId",serveyId)
+                .findFirst();
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        for(LandKind landKind:results.getLandKinds()){
+            if(landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")){
+
+                double npv = 0;
+                for(CashFlow cashFlow :landKind.getForestLand().getCashFlows()){
+                    if(cashFlow.getYear() >= year){
+                        npv = npv + cashFlow.getDiscountedCashFlow();
+                    }
+                }
+                if(results.getComponents() == null){
+                    realm.beginTransaction();
+                    Component component = realm.createObject(Component.class);
+                    component.setId(getNextKeyComponent());
+                    component.setSurveyId(serveyId);
+                    component.setForestValue(npv);
+                    realm.commitTransaction();
+
+                    realm.beginTransaction();
+                    results.setComponents(component);
+                    realm.commitTransaction();
+                }else{
+                    realm.beginTransaction();
+                    results.getComponents().setForestValue(npv);
+                    realm.commitTransaction();
+                }
+            }else if(landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")){
+                double npv = 0;
+                for(CashFlow cashFlow :landKind.getCropLand().getCashFlows()){
+                    if(cashFlow.getYear() >= year){
+                        npv = npv + cashFlow.getDiscountedCashFlow();
+                    }
+                }
+                if(results.getComponents() == null){
+                    realm.beginTransaction();
+                    Component component = realm.createObject(Component.class);
+                    component.setId(getNextKeyComponent());
+                    component.setSurveyId(serveyId);
+                    component.setCroplandValue(npv);
+                    realm.commitTransaction();
+
+                    realm.beginTransaction();
+                    results.setComponents(component);
+                    realm.commitTransaction();
+                }else{
+                    realm.beginTransaction();
+                    results.getComponents().setCroplandValue(npv);
+                    realm.commitTransaction();
+                }
+
+            }else if(landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")){
+                double npv = 0;
+                for(CashFlow cashFlow :landKind.getPastureLand().getCashFlows()){
+                    if(cashFlow.getYear() >= year){
+                        npv = npv + cashFlow.getDiscountedCashFlow();
+                    }
+                }
+                if(results.getComponents() == null){
+                    realm.beginTransaction();
+                    Component component = realm.createObject(Component.class);
+                    component.setId(getNextKeyComponent());
+                    component.setSurveyId(serveyId);
+                    component.setPastureValue(npv);
+                    realm.commitTransaction();
+
+                    realm.beginTransaction();
+                    results.setComponents(component);
+                    realm.commitTransaction();
+                }else{
+                    realm.beginTransaction();
+                    results.getComponents().setPastureValue(npv);
+                    realm.commitTransaction();
+                }
+            }else if(landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")){
+                double npv = 0;
+                for(CashFlow cashFlow :landKind.getMiningLand().getCashFlows()){
+                    if(cashFlow.getYear() >= year){
+                        npv = npv + cashFlow.getDiscountedCashFlow();
+                    }
+                }
+                if(results.getComponents() == null){
+                    realm.beginTransaction();
+                    Component component = realm.createObject(Component.class);
+                    component.setId(getNextKeyComponent());
+                    component.setSurveyId(serveyId);
+                    component.setMiningLandValue(npv);
+                    realm.commitTransaction();
+
+                    realm.beginTransaction();
+                    results.setComponents(component);
+                    realm.commitTransaction();
+                }else{
+                    realm.beginTransaction();
+                    results.getComponents().setMiningLandValue(npv);
+                    realm.commitTransaction();
+                }
+            }
+        }
+    }
+
+    public int getNextKeyCashFlow() {
+        return realm.where(CashFlow.class).max("id").intValue() + 1;
+    }
+
+    public int getNextKeyComponent() {
+        return realm.where(Component.class).max("id").intValue() + 1;
     }
 }

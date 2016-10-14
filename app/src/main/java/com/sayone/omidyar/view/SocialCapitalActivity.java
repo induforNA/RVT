@@ -394,7 +394,7 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                     .findFirst();
         }
 
-        Log.e("SPRED TABLE ", spredTable.toString());
+        Log.e("SPRED TABLE ", spredTable.getSpread() + 7.16 +"");
 
         realm.beginTransaction();
         landKindLoad.getSocialCapitals().setScore(totalFactorScore);

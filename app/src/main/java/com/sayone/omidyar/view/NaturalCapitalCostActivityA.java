@@ -42,6 +42,7 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
     CostAdapter costAdapter;
 
     String landKindName;
+    String currentSocialCapitalServey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +54,43 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         serveyId = sharedPref.getString("surveyId","");
+        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey","");
 
         costElements = new RealmList<>();
         costProductsToSave = new RealmList<>();
         Survey survey = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
         for(LandKind landKind:survey.getLandKinds()){
-            if(landKind.getName().equals("Forestland")){
+            if(landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")){
                 landKindName = landKind.getName();
                 //costElements = landKind.getForestLand().getRevenueProducts();
                 for(CostElement costElement:landKind.getForestLand().getCostElements()){
+                    costProductsToSave.add(costElement);
+                    if(costElement.getType().equals("Timber")){
+                        costElements.add(costElement);
+                    }
+                }
+            }else if(landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")){
+                landKindName = landKind.getName();
+                //costElements = landKind.getForestLand().getRevenueProducts();
+                for(CostElement costElement:landKind.getCropLand().getCostElements()){
+                    costProductsToSave.add(costElement);
+                    if(costElement.getType().equals("Timber")){
+                        costElements.add(costElement);
+                    }
+                }
+            }else if(landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")){
+                landKindName = landKind.getName();
+                //costElements = landKind.getForestLand().getRevenueProducts();
+                for(CostElement costElement:landKind.getPastureLand().getCostElements()){
+                    costProductsToSave.add(costElement);
+                    if(costElement.getType().equals("Timber")){
+                        costElements.add(costElement);
+                    }
+                }
+            }else if(landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")){
+                landKindName = landKind.getName();
+                //costElements = landKind.getForestLand().getRevenueProducts();
+                for(CostElement costElement:landKind.getMiningLand().getCostElements()){
                     costProductsToSave.add(costElement);
                     if(costElement.getType().equals("Timber")){
                         costElements.add(costElement);
@@ -143,23 +172,41 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
 
                         for(LandKind landKind:surveyRevenueProduct.getLandKinds()){
                             Log.e("BBB ",landKind.getName()+" "+landKind.getForestLand());
-                            if(landKind.getName().equals("Forestland")){
+                            if(landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")){
                                 Log.e("BBB ", costElements.size()+"");
                                 Log.e("AAA ",landKind.getForestLand().getCostElements().toString());
                                 realm.beginTransaction();
                                 landKind.getForestLand().setCostElements(costProductsToSave);
                                 realm.commitTransaction();
+                            }else if(landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")){
+                                Log.e("BBB ", costElements.size()+"");
+                                Log.e("AAA ",landKind.getCropLand().getCostElements().toString());
+                                realm.beginTransaction();
+                                landKind.getCropLand().setCostElements(costProductsToSave);
+                                realm.commitTransaction();
+                            }else if(landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")){
+                                Log.e("BBB ", costElements.size()+"");
+                                Log.e("AAA ",landKind.getPastureLand().getCostElements().toString());
+                                realm.beginTransaction();
+                                landKind.getPastureLand().setCostElements(costProductsToSave);
+                                realm.commitTransaction();
+                            }else if(landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")){
+                                Log.e("BBB ", costElements.size()+"");
+                                Log.e("AAA ",landKind.getMiningLand().getCostElements().toString());
+                                realm.beginTransaction();
+                                landKind.getMiningLand().setCostElements(costProductsToSave);
+                                realm.commitTransaction();
                             }
                         }
 
-                        Survey results = realm.where(Survey.class).findFirst();
-                        for(LandKind landKind:results.getLandKinds()){
-                            if(landKind.getName().equals("Forestland")){
-                                for (CostElement costElement1: landKind.getForestLand().getCostElements()){
-                                    Log.e("LAND ", costElement1.getName());
-                                }
-                            }
-                        }
+//                        Survey results = realm.where(Survey.class).findFirst();
+//                        for(LandKind landKind:results.getLandKinds()){
+//                            if(landKind.getName().equals("Forestland")){
+//                                for (CostElement costElement1: landKind.getForestLand().getCostElements()){
+//                                    Log.e("LAND ", costElement1.getName());
+//                                }
+//                            }
+//                        }
 
                         costAdapter.notifyDataSetChanged();
 
