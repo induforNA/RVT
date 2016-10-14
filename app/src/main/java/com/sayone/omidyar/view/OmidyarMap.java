@@ -169,7 +169,7 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
                 v.setDrawingCacheEnabled(true);
                 mMap.snapshot(this);
                 mapImage.setImageBitmap(bitmap);
-                Toast toast = Toast.makeText(context,"Image saved", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(context,getResources().getString(R.string.image_saved), Toast.LENGTH_SHORT);
                 toast.show();
                 break;
 
@@ -315,11 +315,11 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
             MediaStore.Images.Media.insertImage(getContentResolver(), file.getAbsolutePath(), file.getName(), file.getName());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Save Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,getResources().getString(R.string.save_failed), Toast.LENGTH_SHORT).show();
             return;
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Save Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,getResources().getString(R.string.save_failed), Toast.LENGTH_SHORT).show();
             return;
         }
 

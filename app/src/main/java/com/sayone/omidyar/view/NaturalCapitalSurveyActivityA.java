@@ -25,6 +25,8 @@ import com.sayone.omidyar.model.Participant;
 import com.sayone.omidyar.model.RevenueProduct;
 import com.sayone.omidyar.model.Survey;
 
+import java.util.Locale;
+
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
@@ -48,6 +50,7 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
 
     String landKindName;
     String currentSocialCapitalServey;
+    private String language;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,7 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
         setContentView(R.layout.activity_natural_capital_survey_a);
 
         context = this;
+        language = Locale.getDefault().getDisplayLanguage();
         realm = Realm.getDefaultInstance();
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
@@ -114,13 +118,17 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
         timberList = (RecyclerView) findViewById(R.id.timber_list);
 
         if(currentSocialCapitalServey.equals("Forestland")){
-            questionRevenue.setText("what wood do you harvest,if any?");
+                questionRevenue.setText(getResources().getString(R.string.qn_natural_A_1));
+
         }else if(currentSocialCapitalServey.equals("Cropland")){
-            questionRevenue.setText("What crops do you harvest, if any?");
+                questionRevenue.setText(getResources().getString(R.string.qn_natural_A_2));
+
         }else if(currentSocialCapitalServey.equals("Pastureland")){
-            questionRevenue.setText("What livestock do you raise, if any?");
+                questionRevenue.setText(getResources().getString(R.string.qn_natural_A_3));
+
         }else if(currentSocialCapitalServey.equals("Mining Land")){
-            questionRevenue.setText("What do you extract, if anything?");
+                questionRevenue.setText(getResources().getString(R.string.qn_natural_A_4));
+
         }
 
         landType.setText(currentSocialCapitalServey);
@@ -160,7 +168,7 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
             case R.id.button_add_wood:
                 final Dialog dialog = new Dialog(context);
                 dialog.setContentView(R.layout.add_forest_revenue_item);
-                dialog.setTitle("Add a revenue product");
+                dialog.setTitle(getResources().getString(R.string.string_add_revenue));
                 dialog.setCancelable(false);
 
                 Button popupCancel = (Button) dialog.findViewById(R.id.popup_cancel);
@@ -243,7 +251,7 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
 //                        participantsAdapter.notifyDataSetChanged();
                         dialog.cancel();
                     }else {
-                        Toast.makeText(context,"Fill name",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,getResources().getString(R.string.string_fill_name),Toast.LENGTH_SHORT).show();
                     }
                     }
                 });

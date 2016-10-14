@@ -110,7 +110,7 @@ public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.
             case R.id.button_add_wood:
                 final Dialog dialog = new Dialog(context);
                 dialog.setContentView(R.layout.add_forest_revenue_item);
-                dialog.setTitle("Add a participant");
+                dialog.setTitle(getResources().getString(R.string.string_add_participant));
                 dialog.setCancelable(false);
 
                 Button popupCancel = (Button) dialog.findViewById(R.id.popup_cancel);
@@ -170,7 +170,7 @@ public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.
 //                        participantsAdapter.notifyDataSetChanged();
                             dialog.cancel();
                         }else {
-                            Toast.makeText(context,"Fill name",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context,getResources().getString(R.string.string_fill_name),Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

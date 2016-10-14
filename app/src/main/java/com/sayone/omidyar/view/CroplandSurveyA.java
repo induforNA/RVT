@@ -22,6 +22,8 @@ import com.sayone.omidyar.model.Participant;
 import com.sayone.omidyar.model.RevenueProduct;
 import com.sayone.omidyar.model.Survey;
 
+import java.util.Locale;
+
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
@@ -37,12 +39,14 @@ public class CroplandSurveyA extends BaseActivity implements View.OnClickListene
     SharedPreferences sharedPref;
     private String surveyId;
     RealmList<RevenueProduct> revenueProducts;
+    private String language;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cropland_survey);
         context=this;
+        language = Locale.getDefault().getDisplayLanguage();
         realm = Realm.getDefaultInstance();
         revenueProducts=new RealmList<>();
         sharedPref = context.getSharedPreferences(
@@ -70,7 +74,9 @@ public class CroplandSurveyA extends BaseActivity implements View.OnClickListene
 
                 final Dialog dialog = new Dialog(context);
                 dialog.setContentView(R.layout.add_cropland);
-                dialog.setTitle("Add a crop");
+
+                    dialog.setTitle(getResources().getString(R.string.string_add_crop));
+
                 dialog.setCancelable(false);
 
                 Button popupCancel = (Button) dialog.findViewById(R.id.popup_cancel);
@@ -116,7 +122,8 @@ public class CroplandSurveyA extends BaseActivity implements View.OnClickListene
                            // participantsAdapter.notifyDataSetChanged();*/
                             dialog.cancel();
                         }else {
-                            Toast.makeText(context,"Fill name",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context,getResources().getString(R.string.string_fill_name), Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 });

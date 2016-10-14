@@ -256,7 +256,12 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                     }
                 }
                 checkBox.setVisibility(View.VISIBLE);
-                checkBox.setText(options.get(index).getOptions());
+                if(language.equals("हिन्दी")) {
+                    checkBox.setText(options.get(index).getOptionsHindi());
+                }
+                else{
+                    checkBox.setText(options.get(index).getOptions());
+                }
                 checkBox.setTag(R.string.checkbox_id, index);
             }
         } else {
@@ -273,7 +278,12 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                 }
 
                 radioButton.setVisibility(View.VISIBLE);
-                radioButton.setText(options.get(index).getOptions());
+                if(language.equals("हिन्दी")) {
+                    radioButton.setText(options.get(index).getOptionsHindi());
+                }
+                else{
+                    radioButton.setText(options.get(index).getOptions());
+                }
                 radioButton.setTag(R.string.checkbox_id, index);
             }
         }

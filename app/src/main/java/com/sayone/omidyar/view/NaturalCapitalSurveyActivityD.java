@@ -313,17 +313,17 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
     public void loadRevenueProduct(RevenueProduct revenueProductLoad){
         if(revenueProductLoad.getType().equals("Timber")){
-            loadQuestions.setText("How often do you harvest "+revenueProductLoad.getName()+"?");
-            quantityQuestion.setText("What was the quantity of "+revenueProductLoad.getName()+" harvested each time?");
-            productQuestion.setText("What was the price of the "+revenueProductLoad.getName()+" per unit?");
+            loadQuestions.setText(getResources().getString(R.string.qn_natural_complex_1_1)+revenueProductLoad.getName()+getResources().getString(R.string.qn_natural_complex_1_2)+"?");
+            quantityQuestion.setText(getResources().getString(R.string.qn_natural_complex_2_1)+revenueProductLoad.getName()+getResources().getString(R.string.qn_natural_complex_2_2));
+            productQuestion.setText(getResources().getString(R.string.qn_natural_complex_3_1)+revenueProductLoad.getName()+getResources().getString(R.string.qn_natural_complex_3_2));
         }else if(revenueProductLoad.getType().equals("Non Timber")){
-            loadQuestions.setText("How often do you harvest "+revenueProductLoad.getName()+"?");
-            quantityQuestion.setText("What was the quantity of "+revenueProductLoad.getName()+" harvested each time?");
-            productQuestion.setText("What was the price of the "+revenueProductLoad.getName()+" per unit?");
+            loadQuestions.setText(getResources().getString(R.string.qn_natural_complex_1_1)+revenueProductLoad.getName()+getResources().getString(R.string.qn_natural_complex_1_2)+"?");
+            quantityQuestion.setText(getResources().getString(R.string.qn_natural_complex_2_1)+revenueProductLoad.getName()+getResources().getString(R.string.qn_natural_complex_2_2));
+            productQuestion.setText(getResources().getString(R.string.qn_natural_complex_3_1)+revenueProductLoad.getName()+getResources().getString(R.string.qn_natural_complex_3_2));
         }else {
-            loadQuestions.setText("How often do you harvest "+revenueProductLoad.getName()+"?");
-            quantityQuestion.setText("What was the quantity of "+revenueProductLoad.getName()+" harvested each time?");
-            productQuestion.setText("What was the price of the "+revenueProductLoad.getName()+" per unit?");
+            loadQuestions.setText(getResources().getString(R.string.qn_natural_complex_1_1)+revenueProductLoad.getName()+getResources().getString(R.string.qn_natural_complex_1_2)+"?");
+            quantityQuestion.setText(getResources().getString(R.string.qn_natural_complex_2_1)+revenueProductLoad.getName()+getResources().getString(R.string.qn_natural_complex_2_2));
+            productQuestion.setText(getResources().getString(R.string.qn_natural_complex_3_1)+revenueProductLoad.getName()+getResources().getString(R.string.qn_natural_complex_3_2));
         }
 
 

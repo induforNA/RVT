@@ -42,7 +42,7 @@
             <TextView
                 android:textSize="@dimen/heading_size"
                 android:textColor="#000000"
-                android:text="What kinds of land use are valued on your land?"
+                android:text="@string/qn_land_selection_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <CheckBox

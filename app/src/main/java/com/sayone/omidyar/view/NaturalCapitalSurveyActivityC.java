@@ -147,7 +147,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                 myEditText.setLayoutParams(mRparams);
                 myEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
                 myEditText.setId(i);
-                myEditText.setHint("Enter year "+i);
+                myEditText.setHint(getResources().getString(R.string.enter_year_hint)+" "+i);
                 myEditText.setText(revenueProductYears.getYear()+"");
                 allEditText.addView(myEditText);
                 editTexts.add(myEditText);
@@ -164,7 +164,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
             myEditText.setLayoutParams(mRparams);
             myEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
             myEditText.setId(k);
-            myEditText.setHint("Enter year "+k);
+            myEditText.setHint(getResources().getString(R.string.string_atleast_one)+" "+k);
             allEditText.addView(myEditText);
             editTexts.add(myEditText);
         }
@@ -192,7 +192,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                 if(!year.equals("year")){
                     generateYearFields(Integer.parseInt(year));
                 }else{
-                    Toast.makeText(context,"Select no of years",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,getResources().getString(R.string.select_no_of_years),Toast.LENGTH_SHORT).show();
                 }
                 break;
         }

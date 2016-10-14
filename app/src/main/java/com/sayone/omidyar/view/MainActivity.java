@@ -27,6 +27,8 @@ import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.Participant;
 import com.sayone.omidyar.model.Survey;
 
+import java.util.Locale;
+
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
@@ -57,6 +59,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     RealmList<Participant> participants;
     private ParticipantsAdapter participantsAdapter;
+    private String language;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
         participants = new RealmList<>();
         context = this;
+        language = Locale.getDefault().getDisplayLanguage();
         realm = Realm.getDefaultInstance();
         androidId = Settings.Secure.getString(getContentResolver(),
                 Settings.Secure.ANDROID_ID);
@@ -186,7 +190,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             case R.id.button_add_participant:
                 final Dialog dialog = new Dialog(context);
                 dialog.setContentView(R.layout.add_participant_form);
-                dialog.setTitle("Add a participant");
+                dialog.setTitle(getResources().getString(R.string.string_add_participant));
                 dialog.setCancelable(false);
 
                 Button popupCancel = (Button) dialog.findViewById(R.id.popup_cancel);
@@ -250,7 +254,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                             participantsAdapter.notifyDataSetChanged();
                             dialog.cancel();
                         }else {
-                            Toast.makeText(context,"Fill name",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, getResources().getString(R.string.string_fill_name), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

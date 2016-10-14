@@ -161,4 +161,24 @@
     <string name="string_currency">मुद्रा</string>
     <string name="qn_natural_3_1">क्या भविष्य की लागत वसूल करने पर योजना है जो पहले से ही वसूल किया लागत की अलावा है?</string>
     <string name="qn_natural_3_2">कोनसा लगत?</string>
+    <string name="qn_land_selection_1">भूमि के किस प्रकार का उपयोग अपनी जमीन पर मूल्यवान हैं?</string>
+    <string name="string_add_participant">एक भागीदार जोड़े</string>
+    <string name="string_add_crop">एक फसल जोड़े</string>
+    <string name="string_fill_name">नाम भरें</string>
+    <string name="string_atleast_one">कम से कम एक चुने </string>
+    <string name="string_add_cost_element">एक लागत अंश जोड़ें</string>
+    <string name="select_no_of_years">साल की संख्या चुने </string>
+    <string name="qn_natural_A_1">आप क्या लकड़ी फसल करते है, यदि कोई हो?</string>
+    <string name="qn_natural_A_2">कोनसा फसल आप काटते है, यदि कोई हो?</string>
+    <string name="qn_natural_A_3">आप क्या पशुधन बढ़ा है, यदि कोई हो?</string>
+    <string name="qn_natural_A_4">आप क्या निकालने करते हैं, अगर कुछ है तो?</string>
+    <string name="string_add_revenue">एक राजस्व उत्पाद जोड़ें</string>
+    <string name="image_saved">चित्र सवे हुवा </string>
+    <string name="save_failed">सेव फेल हुआ</string>
+    <string name="qn_natural_complex_1_1">How often do you harvest </string>
+    <string name="qn_natural_complex_1_2"> कटता है</string>
+    <string name="qn_natural_complex_2_1">हर बार काटा </string>
+    <string name="qn_natural_complex_2_2"> की मात्रा क्या था?</string>
+    <string name="qn_natural_complex_3_1">प्रति यूनिट</string>
+    <string name="qn_natural_complex_3_2">की कीमत क्या थी?</string>
 </resources>

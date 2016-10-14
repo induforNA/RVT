@@ -26,6 +26,7 @@ import com.sayone.omidyar.model.Survey;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -47,6 +48,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
     RealmList<CostElementYears> costElementYearsArrayList;
 
     int i = 0;
+    private String language;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
         setContentView(R.layout.activity_natural_cost_survey_b);
 
         context = this;
+        language = Locale.getDefault().getDisplayLanguage();
         realm = Realm.getDefaultInstance();
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
@@ -145,7 +148,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
                 myEditText.setLayoutParams(mRparams);
                 myEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
                 myEditText.setId(i);
-                myEditText.setHint("Enter year "+i);
+                myEditText.setHint(getResources().getString(R.string.enter_year_hint)+" " + i);
                 myEditText.setText(costElementYears.getYear()+"");
                 allEditText.addView(myEditText);
                 editTexts.add(myEditText);
@@ -162,7 +165,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
             myEditText.setLayoutParams(mRparams);
             myEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
             myEditText.setId(k);
-            myEditText.setHint("Enter year "+k);
+            myEditText.setHint(getResources().getString(R.string.enter_year_hint)+" "+ k);
             allEditText.addView(myEditText);
             editTexts.add(myEditText);
         }
@@ -190,7 +193,8 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
                 if(!year.equals("year")){
                     generateYearFields(Integer.parseInt(year));
                 }else{
-                    Toast.makeText(context,"Select no of years",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,getResources().getString(R.string.select_no_of_years), Toast.LENGTH_SHORT).show();
+
                 }
                 break;
         }
