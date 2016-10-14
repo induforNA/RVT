@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="How often do you harvest Timber?"
+                android:text="@string/qn_natural_d_1"
                 android:textSize="@dimen/heading_size" />
 
             <!--<CheckBox-->
@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Number of times"
+                android:text="@string/qn_natural_d_2"
                 android:textSize="@dimen/textfield_size" />
 
             <EditText
@@ -61,7 +61,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Time period"
+                android:text="@string/qn_natural_d_3"
                 android:layout_marginTop="20dp"
                 android:textSize="@dimen/textfield_size" />
 
@@ -95,7 +95,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Natural capital(tangible)"
+                    android:text="@string/title_natural_capital"
                     android:textSize="@dimen/textfield_size" />
 
                 <ImageView
@@ -106,7 +106,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Forestland"
+                    android:text="@string/string_forestland"
                     android:textSize="@dimen/textfield_size" />
 
                 <ImageView
@@ -132,7 +132,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Select year"
+                    android:text="@string/qn_natural_d_4"
                     android:textSize="@dimen/heading_size" />
 
                 <Spinner
@@ -154,7 +154,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="What was the quantity of products harvested each time?"
+                android:text="@string/qn_natural_d_5"
                 android:textSize="@dimen/heading_size" />
 
             <LinearLayout
@@ -167,7 +167,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Quantity"
+                    android:text="@string/string_quantity"
                     android:textSize="@dimen/textfield_size" />
 
                 <EditText
@@ -177,7 +177,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="1"
-                    android:hint="number"
+                    android:hint="@string/hint_number"
                     android:textSize="@dimen/textfield_size" />
 
 
@@ -193,7 +193,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Unit"
+                    android:text="@string/text_unit"
                     android:textSize="@dimen/textfield_size" />
 
                 <Spinner
@@ -212,7 +212,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="What was the price of the product per unit?"
+                android:text="@string/qn_natural_d_6"
                 android:textSize="@dimen/heading_size" />
 
             <LinearLayout
@@ -225,7 +225,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Price"
+                    android:text="@string/price"
                     android:textSize="@dimen/textfield_size" />
 
                 <EditText
@@ -234,7 +234,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="1"
-                    android:hint="price"
+                    android:hint="@string/price"
                     android:textSize="@dimen/textfield_size" />
 
 
@@ -250,7 +250,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Currency"
+                    android:text="@string/string_currency"
                     android:textSize="@dimen/textfield_size" />
 
                 <Spinner
@@ -270,7 +270,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="Save" />
+                android:text="@string/button_save" />
 
             <LinearLayout
                 android:layout_width="match_parent"

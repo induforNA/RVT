@@ -35,7 +35,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Natural capital(tangible)"
+                android:text="@string/title_natural_capital"
                 android:textSize="@dimen/textfield_size" />
 
             <ImageView
@@ -46,7 +46,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Forestland"
+                android:text="@string/string_forestland"
                 android:textSize="@dimen/textfield_size" />
 
             <ImageView
@@ -67,7 +67,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Do you plan on incurring any new future costs, seperate from those already entered for the past?"
+        android:text="@string/qn_natural_3_1"
         android:textSize="@dimen/heading_size" />
 
     <LinearLayout
@@ -94,7 +94,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="What type of costs?"
+        android:text="@string/qn_natural_3_2"
         android:layout_marginTop="10dp"
         android:textSize="@dimen/heading_size" />
 

@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="100dp"
-            android:text="Natural Capital (tangible)"
+            android:text="@string/title_natural_capital"
             android:textSize="@dimen/heading_size" />
 
         <TextView

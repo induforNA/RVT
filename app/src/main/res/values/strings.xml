@@ -212,4 +212,23 @@
     <string name="string_start_survey">Start Survey</string>
     <string name="string_logout">Logout</string>
 
+
+    <string name="name_of_wood">Name of wood</string>
+    <string name="string_crop">Crop</string>
+    <string name="qn_natural_a">what wood do you harvest,if any?</string>
+    <string name="qn_natural_b">What non-timber forest products (e.g. food, herbal medicine) do you harvest, if any?</string>
+    <string name="qn_natural_c">How many years of data do you have on harvest activities?</string>
+    <string name="qn_natural_d_1">How often do you harvest Product?</string>
+    <string name="qn_natural_d_2">Number of times</string>
+    <string name="qn_natural_d_3">Time period</string>
+    <string name="qn_natural_d_4">Select year</string>
+    <string name="qn_natural_d_5">What was the quantity of products harvested each time?</string>
+    <string name="string_quantity">Quantity</string>
+    <string name="hint_number">quantity</string>
+    <string name="text_unit">Unit</string>
+    <string name="qn_natural_d_6">What was the price of the product per unit?</string>
+    <string name="price">Price</string>
+    <string name="string_currency">Currency</string>
+    <string name="qn_natural_3_1">Do you plan on incurring any new future costs, seperate from those already entered for the past?</string>
+    <string name="qn_natural_3_2">What type of costs?</string>
 </resources>

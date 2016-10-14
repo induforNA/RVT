@@ -35,7 +35,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Natural capital(tangible)"
+                android:text="@string/title_natural_capital"
                 android:textSize="@dimen/textfield_size" />
 
             <ImageView
@@ -47,7 +47,7 @@
                 android:id="@+id/land_type_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Forestland"
+                android:text="@string/string_forestland"
                 android:textSize="@dimen/textfield_size" />
 
             <ImageView
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:gravity="center"
-            android:text="What non-timber forest products (e.g. food, herbal medicine) do you harvest, if any?"
+            android:text="@string/qn_natural_b"
             android:textSize="@dimen/heading_size" />
         <LinearLayout
             android:layout_marginTop="20dp"
