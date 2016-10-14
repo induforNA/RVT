@@ -29,6 +29,7 @@ import com.sayone.omidyar.model.SpredTable;
 import com.sayone.omidyar.model.Survey;
 
 import java.util.List;
+import java.util.Locale;
 
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
@@ -85,6 +86,7 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
     RealmList<SocialCapitalAnswerOptions> socialCapitalAnswerOptionsesList;
 
     LandKind landKind;
+    String language;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,6 +101,9 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         serveyId = preferences.getString("surveyId", "");
         currentSocialCapitalServey = preferences.getString("currentSocialCapitalServey", "");
+        Log.e("Languade :",Locale.getDefault().getDisplayLanguage());
+
+        language = Locale.getDefault().getDisplayLanguage();
 
         socialCapitalAnswerOptionsesList = new RealmList<>();
 
@@ -162,10 +167,17 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                 .equalTo("name", currentSocialCapitalServey)
                 .findFirst();
         SocialCapitalQuestions socialCapitalQuestionsLandKindLoad = landKindLoad.getSocialCapitals().getSocialCapitalAnswers().get(currentQId).getSocialCapitalQuestion();
-        setQuestionView(socialCapitalQuestionsLandKindLoad.getOptionType(),
-                socialCapitalQuestionsLandKindLoad.getQuestion(),
-                socialCapitalQuestionsLandKindLoad.getSocialCapitalAnswerOptionses(),
-                landKindLoad.getSocialCapitals().getSocialCapitalAnswers().get(currentQId).getMultipleAnswers());
+        if(language.equals("हिन्दी")){
+            setQuestionView(socialCapitalQuestionsLandKindLoad.getOptionType(),
+                    socialCapitalQuestionsLandKindLoad.getQuestionHindi(),
+                    socialCapitalQuestionsLandKindLoad.getSocialCapitalAnswerOptionses(),
+                    landKindLoad.getSocialCapitals().getSocialCapitalAnswers().get(currentQId).getMultipleAnswers());
+        }else{
+            setQuestionView(socialCapitalQuestionsLandKindLoad.getOptionType(),
+                    socialCapitalQuestionsLandKindLoad.getQuestion(),
+                    socialCapitalQuestionsLandKindLoad.getSocialCapitalAnswerOptionses(),
+                    landKindLoad.getSocialCapitals().getSocialCapitalAnswers().get(currentQId).getMultipleAnswers());
+        }
         pageNumber.setText(currentQId+1+"/14");
         landType.setText(currentSocialCapitalServey);
     }

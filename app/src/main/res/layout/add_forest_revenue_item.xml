@@ -7,7 +7,7 @@
     <EditText
         android:id="@+id/edit_text_wood"
         android:layout_gravity="center"
-        android:hint="Name of wood"
+        android:hint="@string/name_of_wood"
         android:layout_width="300dp"
         android:layout_height="wrap_content" />
     <LinearLayout
@@ -22,14 +22,14 @@
             android:id="@+id/popup_cancel"
             android:textAllCaps="false"
             android:textColor="#ffffff"
-            android:text="Cancel"
+            android:text="@string/button_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Button
             android:id="@+id/save_participant"
             android:textAllCaps="false"
             android:textColor="#ffffff"
-            android:text="Save"
+            android:text="@string/button_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
