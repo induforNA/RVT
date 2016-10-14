@@ -34,7 +34,7 @@
                 android:textStyle="bold"
                 android:textColor="#ffffff"
                 android:textSize="22dp"
-                android:text="start survey"
+                android:text="@string/string_start_survey"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
         </LinearLayout>

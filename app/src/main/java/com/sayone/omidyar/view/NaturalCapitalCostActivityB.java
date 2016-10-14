@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -11,8 +13,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sayone.omidyar.BaseActivity;
@@ -44,7 +48,14 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
     LinearLayout allEditText;
     Context context;
     Button addYearsButton;
+    private ImageView imageViewMenuIcon;
+    private ImageView drawerCloseBtn;
+    private TextView textViewAbout;
+    private TextView logout;
+    private TextView startSurvey;
+    private DrawerLayout menuDrawerLayout;
     ArrayList<EditText> editTexts;
+    private TextView surveyIdDrawer;
     RealmList<CostElementYears> costElementYearsArrayList;
 
     int i = 0;
@@ -74,10 +85,23 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
         buttonNext=(Button)findViewById(R.id.button_next);
         allEditText = (LinearLayout) findViewById(R.id.all_edit_text);
         addYearsButton = (Button) findViewById(R.id.add_years_button);
+        menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);
+        imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
+        drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
+        textViewAbout = (TextView) findViewById(R.id.text_view_about);
+        logout = (TextView) findViewById(R.id.logout);
+        startSurvey=(TextView)findViewById(R.id.text_start_survey);
+        surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
 
         buttonNext.setOnClickListener(this);
         buttonBack.setOnClickListener(this);
         addYearsButton.setOnClickListener(this);
+        imageViewMenuIcon.setOnClickListener(this);
+        drawerCloseBtn.setOnClickListener(this);
+        textViewAbout.setOnClickListener(this);
+        logout.setOnClickListener(this);
+        startSurvey.setOnClickListener(this);
+        surveyIdDrawer.setText(serveyId);
 
         Survey results = realm.where(Survey.class)
                 .equalTo("surveyId",serveyId)
@@ -196,6 +220,27 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
                         Toast.makeText(context,getResources().getString(R.string.select_no_of_years), Toast.LENGTH_SHORT).show();
 
                 }
+                break;
+
+            case R.id.image_view_menu_icon:
+                toggleMenuDrawer();
+                break;
+            case  R.id.drawer_close_btn:
+                toggleMenuDrawer();
+                break;
+            case  R.id.text_view_about:
+                Intent i = new Intent(getApplicationContext(),AboutActivity.class);
+                startActivity(i);
+                break;
+            case R.id.text_start_survey:
+                Intent intentt = new Intent(getApplicationContext(),MainActivity.class);
+                intentt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intentt);
+                break;
+            case R.id.logout:
+                Intent intents = new Intent(getApplicationContext(),RegistrationActivity.class);
+                intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intents);
                 break;
         }
 
@@ -408,5 +453,12 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
 
     public int getNextKeyCostElementYears() {
         return realm.where(CostElementYears.class).max("id").intValue() + 1;
+    }
+    public void toggleMenuDrawer(){
+        if(menuDrawerLayout.isDrawerOpen(GravityCompat.START)){
+            menuDrawerLayout.closeDrawer(GravityCompat.START);
+        }else{
+            menuDrawerLayout.openDrawer(GravityCompat.START);
+        }
     }
 }

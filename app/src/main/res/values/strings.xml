@@ -165,7 +165,7 @@
     <string name="type_species1">Type species 1</string>
     <string name="type_species2">Type species 2</string>
     <string name="type_species3">Type species 3</string>
-    <string name="number_of_years">No of years</string>
+    <string name="number_of_years">Number of years</string>
     <string name="button_add_year">Add years</string>
     <string name="enter_year_heading">Enter Years</string>
     <string name="enter_year_hint">enter year</string>
@@ -179,13 +179,13 @@
     <string name="text_summary_surveys">Summary of surveys</string>
     <string name="title_activity_omidyar_map">Map</string>
     <string name="heading_admin_dashboard">Admin Dashboard</string>
-    <string name="heading_certificate">Community asset valuation certificate</string>
+    <string name="heading_certificate">Community Asset Valuation Certificate</string>
     <string name="string_forestland">Forestland</string>
     <string name="string_pastureland">Pastureland</string>
     <string name="string_miningland">Mining land</string>
-    <string name="title_natural_capital">Natural capital(tangible)</string>
+    <string name="title_natural_capital">Natural capital (tangible)</string>
     <string name="title_social_capital">Social capital survey</string>
-    <string name="qn_what_crop_doyou_harvest">what crops do you harvest,if any?</string>
+    <string name="qn_what_crop_doyou_harvest">What crops do you harvest, if any?</string>
     <string name="button_add">Add</string>
     <string name="string_powered_by">Powered by</string>
     <string name="sponsor_name">Indufor North America and Foundation for Ecological Security</string>
@@ -211,11 +211,9 @@
     <string name="string_survey_id">survey id</string>
     <string name="string_start_survey">Start Survey</string>
     <string name="string_logout">Logout</string>
-
-
     <string name="name_of_wood">Name of wood</string>
     <string name="string_crop">Crop</string>
-    <string name="qn_natural_a">what wood do you harvest,if any?</string>
+    <string name="qn_natural_a">What wood do you harvest, if any?</string>
     <string name="qn_natural_b">What non-timber forest products (e.g. food, herbal medicine) do you harvest, if any?</string>
     <string name="qn_natural_c">How many years of data do you have on harvest activities?</string>
     <string name="qn_natural_d_1">How often do you harvest Product?</string>
@@ -231,7 +229,6 @@
     <string name="string_currency">Currency</string>
     <string name="qn_natural_3_1">Do you plan on incurring any new future costs, seperate from those already entered for the past?</string>
     <string name="qn_natural_3_2">What type of costs?</string>
-
     <string name="qn_land_selection_1">What kinds of land use are valued on your land?</string>
     <string name="string_add_participant">Add a participant</string>
     <string name="string_add_crop">Add a crop</string>
@@ -239,18 +236,19 @@
     <string name="string_atleast_one">Select atleast one</string>
     <string name="string_add_cost_element">Add a cost element</string>
     <string name="select_no_of_years">Select number of years</string>
-    <string name="qn_natural_A_1">what wood do you harvest,if any?</string>
+    <string name="qn_natural_A_1">What wood do you harvest, if any?</string>
     <string name="qn_natural_A_2">What crops do you harvest, if any?</string>
     <string name="qn_natural_A_3">What livestock do you raise, if any?</string>
     <string name="qn_natural_A_4">What do you extract, if anything?</string>
     <string name="string_add_revenue">Add a revenue product</string>
     <string name="image_saved">Image saved</string>
-    <string name="save_failed">Save_failed</string>
-
+    <string name="save_failed">Save failed</string>
     <string name="qn_natural_complex_1_1">How often do you harvest </string>
     <string name="qn_natural_complex_1_2"></string>
     <string name="qn_natural_complex_2_1">What was the quantity of </string>
     <string name="qn_natural_complex_2_2"> harvested each time?</string>
     <string name="qn_natural_complex_3_1">What was the price of the </string>
     <string name="qn_natural_complex_3_2"> per unit?</string>
+    <string name="costs_incur">What types of costs do you incur in the harvesting of products?</string>
+    <string name="data_on_harvest_activities">How many years of data do you have on harvest activities?</string>
 </resources>
