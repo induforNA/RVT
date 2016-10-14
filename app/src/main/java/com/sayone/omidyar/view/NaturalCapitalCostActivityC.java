@@ -335,7 +335,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             editor.putString("currentSocialCapitalServey", landKindRealmResults.get(j).getName());
             editor.apply();
 
-            Intent intent = new Intent(getApplicationContext(),OmidyarMap.class);
+            Intent intent = new Intent(getApplicationContext(),StartLandTypeActivity.class);
             startActivity(intent);
         }else{
             Intent intent = new Intent(getApplicationContext(),CertificateActivity.class);
