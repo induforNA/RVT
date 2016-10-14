@@ -140,7 +140,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
             int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 
             Log.e("YEAR PEEEEEEEEE",costElementYears.getYear()+" "+currentYear);
-            if(costElementYears.getYear() <= currentYear && costElementYears.getYear() != 0){
+            if(costElementYears.getYear() < currentYear && costElementYears.getYear() != 0){
                 EditText myEditText = new EditText(context);
                 myEditText.setLayoutParams(mRparams);
                 myEditText.setInputType(InputType.TYPE_CLASS_NUMBER);

@@ -77,19 +77,28 @@
             android:screenOrientation="landscape">
 
         </activity>
-        <activity android:name=".view.NaturalCapitalSurveyActivityA"
-            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".view.NaturalCapitalSurveyActivityA"
+            android:screenOrientation="landscape">
+        </activity>
         <activity android:name=".view.NaturalCapitalSurveyActivityC"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".view.NaturalCapitalSurveyActivity3"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name=".view.NaturalCapitalSurveyActivity3"
+            android:screenOrientation="landscape">
+        </activity>
         <activity android:name=".view.NaturalCapitalSurveyStartActivity"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".view.CroplandSurveyA"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name=".view.CroplandSurveyA"
+            android:screenOrientation="landscape">
+        </activity>
         <activity
             android:name=".view.NaturalCapitalSurveyActivityB"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape">
+        </activity>
         <activity
             android:screenOrientation="landscape"
             android:name=".view.NaturalCapitalCostActivityA">
@@ -101,6 +110,11 @@
         <activity
             android:screenOrientation="landscape"
             android:name=".view.NaturalCapitalCostActivityC">
+        </activity>
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".view.StartLandTypeActivity">
+
         </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

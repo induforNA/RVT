@@ -142,7 +142,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
             int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 
             Log.e("YEAR PEEEEEEEEE",revenueProductYears.getYear()+" "+currentYear);
-            if(revenueProductYears.getYear() <= currentYear && revenueProductYears.getYear() != 0){
+            if(revenueProductYears.getYear() < currentYear && revenueProductYears.getYear() != 0){
                 EditText myEditText = new EditText(context);
                 myEditText.setLayoutParams(mRparams);
                 myEditText.setInputType(InputType.TYPE_CLASS_NUMBER);

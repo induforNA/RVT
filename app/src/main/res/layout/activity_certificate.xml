@@ -156,7 +156,7 @@
                     android:id="@+id/inflation_rate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
+                    android:text="5%"
                     android:textSize="@dimen/textfield_size" />
 
             </LinearLayout>
@@ -241,6 +241,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/forest_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
@@ -327,6 +328,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/crop_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
@@ -413,6 +415,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/pasture_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
@@ -499,6 +502,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/mining_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
@@ -539,6 +543,7 @@
                 android:textSize="35dp" />
 
             <TextView
+                android:id="@+id/total_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
