@@ -23,6 +23,74 @@
         <item>UR</item>
         <item>AUD</item>
     </string-array>
+
+        <string-array name="land_use_array">
+            <item>भूमि उपयोग के प्रकारचुनें</item>
+            <item>खेती</item>
+            <item>वन भूम</item>
+            <item>चरागाह भूमि</item>
+            <item>खनन भूमि</item>
+        </string-array>
+        <string-array name="unit_array">
+            <item>मात्रक चुनें</item>
+            <item>Cubic Meter</item>
+            <item>Cubic Kilometer</item>
+            <item>Cubic Centimeter</item>
+            <item>Cubic Millimeter</item>
+            <item>Liter</item>
+            <item>Milliliter</item>
+            <item>Kilogram</item>
+            <item>Gram</item>
+            <item>Milligram</item>
+            <item>Pound</item>
+            <item>Ounce</item>
+        </string-array>
+        <string-array name="time_period_array">
+            <item>समय अवधिचुनें</item>
+            <item>एक बार</item>
+            <item>हर दिन</item>
+            <item>प्रति सप्ताह</item>
+            <item>प्रति माह</item>
+            <item>प्रति वर्ष</item>
+        </string-array>
+        <string-array name="number_of_harvests">
+            <item>गिनती का चयन</item>
+            <item>0</item>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+            <item>4</item>
+            <item>5</item>
+            <item>6</item>
+            <item>7</item>
+            <item>8</item>
+            <item>9</item>
+            <item>10</item>
+            <item>11</item>
+            <item>12</item>
+            <item>13</item>
+            <item>14</item>
+            <item>15</item>
+        </string-array>
+        <string-array name="year_array">
+            <item>साल</item>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+            <item>4</item>
+            <item>5</item>
+            <item>6</item>
+            <item>7</item>
+            <item>8</item>
+            <item>9</item>
+            <item>10</item>
+            <item>11</item>
+            <item>12</item>
+            <item>13</item>
+            <item>14</item>
+            <item>15</item>
+        </string-array>
+
     <string name="about_this_app">के बारे में इस उपकरण</string>
     <string name="preference_file_key">com.sayone.omidyar.PREFERENCE_FILE_KEY</string>
     <string name="sign_up_button">साइन अप</string>
@@ -115,7 +183,7 @@
     <string name="string_forestland">वन भूमि</string>
     <string name="string_pastureland">चरागाह भूमि</string>
     <string name="string_miningland">खनन भूमि</string>
-    <string name="title_natural_capital">प्राकृतिक पूंजी(वास्तविक)</string>
+    <string name="title_natural_capital">प्राकृतिक पूंजी (वास्तविक)</string>
     <string name="title_social_capital">सामाजिक पूंजी सर्वेक्षण</string>
     <string name="qn_what_crop_doyou_harvest">आप क्या  फसलों काटते हैं, यदि कोई हो?</string>
     <string name="button_add">जोड़ना</string>
@@ -175,10 +243,12 @@
     <string name="string_add_revenue">एक राजस्व उत्पाद जोड़ें</string>
     <string name="image_saved">चित्र सवे हुवा </string>
     <string name="save_failed">सेव फेल हुआ</string>
-    <string name="qn_natural_complex_1_1">How often do you harvest </string>
+    <string name="qn_natural_complex_1_1">आप कितनी बार </string>
     <string name="qn_natural_complex_1_2"> कटता है</string>
     <string name="qn_natural_complex_2_1">हर बार काटा </string>
     <string name="qn_natural_complex_2_2"> की मात्रा क्या था?</string>
     <string name="qn_natural_complex_3_1">प्रति यूनिट</string>
     <string name="qn_natural_complex_3_2">की कीमत क्या थी?</string>
+    <string name="costs_incur">इस उत्पाद की कटाई में किस प्रकार की लागत अपने ऊपर लेना है?</string>
+    <string name="data_on_harvest_activities">आप के पास फसल की गतिविधियों पर कितने साल के डेटा है ?</string>
 </resources>

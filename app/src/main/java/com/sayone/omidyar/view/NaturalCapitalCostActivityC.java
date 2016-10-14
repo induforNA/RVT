@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +50,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
     String year,unit,currency,numberTimes,timePeriod;
     Button buttonBack,buttonNext;
     TextView loadQuestions;
+    private TextView surveyIdDrawer;
     Button saveBtn;
 
     RealmList<CostElement> costElements;
@@ -56,6 +60,12 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
     int currentYearIndex = 0;
     int currentCostProductIndexSave = 0;
     int currentYearIndexSave = 0;
+    private ImageView imageViewMenuIcon;
+    private ImageView drawerCloseBtn;
+    private TextView textViewAbout;
+    private TextView logout;
+    private TextView startSurvey;
+    private DrawerLayout menuDrawerLayout;
 
     ArrayAdapter<String> timePeriod_adapter;
     ArrayList<String> timePeriodList;
@@ -103,6 +113,14 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         noOfTimesEdit = (EditText) findViewById(R.id.no_of_times_edit);
         quanityEdit = (EditText) findViewById(R.id.quanity_edit);
         priceEdit = (EditText) findViewById(R.id.price_edit);
+        menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);
+        imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
+        drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
+        textViewAbout = (TextView) findViewById(R.id.text_view_about);
+        logout = (TextView) findViewById(R.id.logout);
+        startSurvey=(TextView)findViewById(R.id.text_start_survey);
+        surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
+
 
         costElements = new RealmList<>();
         totalCostProductCount = 0;
@@ -163,6 +181,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         spinnerUnit.setAdapter(unit_adapter);
         spinnerCurrency.setAdapter(currency_adapter);
         spinnerTimePeriod.setAdapter(timePeriod_adapter);
+        surveyIdDrawer.setText(serveyId);
 
 
         for(LandKind landKind:results.getLandKinds()){
@@ -225,6 +244,11 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         buttonNext.setOnClickListener(this);
         buttonBack.setOnClickListener(this);
         saveBtn.setOnClickListener(this);
+        imageViewMenuIcon.setOnClickListener(this);
+        drawerCloseBtn.setOnClickListener(this);
+        textViewAbout.setOnClickListener(this);
+        logout.setOnClickListener(this);
+        startSurvey.setOnClickListener(this);
 
 
 
@@ -309,6 +333,27 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 }else{
                         Toast.makeText(context, getResources().getString(R.string.completed_text), Toast.LENGTH_SHORT).show();
                 }
+                break;
+
+            case R.id.image_view_menu_icon:
+                toggleMenuDrawer();
+                break;
+            case  R.id.drawer_close_btn:
+                toggleMenuDrawer();
+                break;
+            case  R.id.text_view_about:
+                Intent i = new Intent(getApplicationContext(),AboutActivity.class);
+                startActivity(i);
+                break;
+            case R.id.text_start_survey:
+                Intent intentt = new Intent(getApplicationContext(),MainActivity.class);
+                intentt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intentt);
+                break;
+            case R.id.logout:
+                Intent intents = new Intent(getApplicationContext(),RegistrationActivity.class);
+                intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intents);
                 break;
 
         }
@@ -808,5 +853,12 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
     public int getNextKeyComponent() {
         return realm.where(Component.class).max("id").intValue() + 1;
+    }
+    public void toggleMenuDrawer(){
+        if(menuDrawerLayout.isDrawerOpen(GravityCompat.START)){
+            menuDrawerLayout.closeDrawer(GravityCompat.START);
+        }else{
+            menuDrawerLayout.openDrawer(GravityCompat.START);
+        }
     }
 }

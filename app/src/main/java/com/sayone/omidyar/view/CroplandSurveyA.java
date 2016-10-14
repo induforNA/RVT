@@ -2,7 +2,10 @@ package com.sayone.omidyar.view;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +43,13 @@ public class CroplandSurveyA extends BaseActivity implements View.OnClickListene
     private String surveyId;
     RealmList<RevenueProduct> revenueProducts;
     private String language;
+    private ImageView imageViewMenuIcon;
+    private ImageView drawerCloseBtn;
+    private TextView textViewAbout;
+    private TextView logout;
+    private TextView startSurvey;
+    private DrawerLayout menuDrawerLayout;
+    private TextView surveyIdDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +71,21 @@ public class CroplandSurveyA extends BaseActivity implements View.OnClickListene
 
         addCropType=(ImageView)findViewById(R.id.button_add_crop_type);
         cropName=(TextView)findViewById(R.id.crop);
+        menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);
+        imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
+        drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
+        textViewAbout = (TextView) findViewById(R.id.text_view_about);
+        logout = (TextView) findViewById(R.id.logout);
+        startSurvey=(TextView)findViewById(R.id.text_start_survey);
+        surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
 
         addCropType.setOnClickListener(this);
+        imageViewMenuIcon.setOnClickListener(this);
+        drawerCloseBtn.setOnClickListener(this);
+        textViewAbout.setOnClickListener(this);
+        logout.setOnClickListener(this);
+        startSurvey.setOnClickListener(this);
+        surveyIdDrawer.setText(surveyId);
 
     }
 
@@ -129,11 +152,38 @@ public class CroplandSurveyA extends BaseActivity implements View.OnClickListene
                 });
                 dialog.show();
                 break;
+            case R.id.image_view_menu_icon:
+                toggleMenuDrawer();
+                break;
+            case  R.id.drawer_close_btn:
+                toggleMenuDrawer();
+                break;
+            case  R.id.text_view_about:
+                Intent i = new Intent(getApplicationContext(),AboutActivity.class);
+                startActivity(i);
+                break;
+            case R.id.text_start_survey:
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                break;
+            case R.id.logout:
+                Intent intents = new Intent(getApplicationContext(),RegistrationActivity.class);
+                intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intents);
+                break;
 
 
         }
     }
     public int getNextKey() {
         return realm.where(RevenueProduct.class).max("id").intValue() + 1;
+    }
+    public void toggleMenuDrawer(){
+        if(menuDrawerLayout.isDrawerOpen(GravityCompat.START)){
+            menuDrawerLayout.closeDrawer(GravityCompat.START);
+        }else{
+            menuDrawerLayout.openDrawer(GravityCompat.START);
+        }
     }
 }

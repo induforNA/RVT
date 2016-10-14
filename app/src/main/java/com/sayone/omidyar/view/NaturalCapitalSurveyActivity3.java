@@ -1,22 +1,38 @@
 package com.sayone.omidyar.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 
-public class NaturalCapitalSurveyActivity3 extends BaseActivity {
+public class NaturalCapitalSurveyActivity3 extends BaseActivity implements View.OnClickListener {
 
     Spinner spinnerInfrastructure1,spinnerInfrastructure2,spinnerInfrastructure3,spinnerInfrastructure4,spinnerInfrastructure5,spinnerInfrastructure6,spinnerInfrastructure7,spinnerInfrastructure8;
     String infrastructure1,infrastructure2,infrastructure3,infrastructure4,infrastructure5,infrastructure6,infrastructure7,infrastructure8;
     Button buttonNext;
+    private ImageView imageViewMenuIcon;
+    private ImageView drawerCloseBtn;
+    private TextView textViewAbout;
+    private TextView logout;
+    private TextView startSurvey;
+    private DrawerLayout menuDrawerLayout;
+    private TextView surveyIdDrawer;
+    private SharedPreferences sharedPref;
+    private String serveyId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +46,18 @@ public class NaturalCapitalSurveyActivity3 extends BaseActivity {
         spinnerInfrastructure6=(Spinner)findViewById(R.id.spinner_infrastructure6);
         spinnerInfrastructure7=(Spinner)findViewById(R.id.spinner_infrastructure7);
         spinnerInfrastructure8=(Spinner)findViewById(R.id.spinner_infrastructure8);
+        menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);
+        imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
+        drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
+        textViewAbout = (TextView) findViewById(R.id.text_view_about);
+        logout = (TextView) findViewById(R.id.logout);
+        startSurvey=(TextView)findViewById(R.id.text_start_survey);
         buttonNext=(Button)findViewById(R.id.button_next);
+        surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
+        Context context=this;
+        sharedPref = context.getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        serveyId = sharedPref.getString("surveyId","");
 
         ArrayAdapter<CharSequence> infrastructureAdapter1 = ArrayAdapter.createFromResource(this,
                 R.array.number_of_harvests, android.R.layout.simple_spinner_item);
@@ -65,6 +92,12 @@ public class NaturalCapitalSurveyActivity3 extends BaseActivity {
         spinnerInfrastructure6.setAdapter(infrastructureAdapter6);
         spinnerInfrastructure7.setAdapter(infrastructureAdapter7);
         spinnerInfrastructure8.setAdapter(infrastructureAdapter8);
+        imageViewMenuIcon.setOnClickListener(this);
+        drawerCloseBtn.setOnClickListener(this);
+        textViewAbout.setOnClickListener(this);
+        logout.setOnClickListener(this);
+        startSurvey.setOnClickListener(this);
+        surveyIdDrawer.setText(serveyId);
 
         spinnerInfrastructure1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -178,5 +211,38 @@ public class NaturalCapitalSurveyActivity3 extends BaseActivity {
             }
         });
 
+    }
+    @Override
+    public void onClick(View view) {
+        Intent intent;
+        switch (view.getId()){
+            case R.id.image_view_menu_icon:
+                toggleMenuDrawer();
+                break;
+            case  R.id.drawer_close_btn:
+                toggleMenuDrawer();
+                break;
+            case  R.id.text_view_about:
+                Intent i = new Intent(getApplicationContext(),AboutActivity.class);
+                startActivity(i);
+                break;
+            case R.id.text_start_survey:
+                Intent intentt = new Intent(getApplicationContext(),MainActivity.class);
+                intentt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intentt);
+                break;
+            case R.id.logout:
+                Intent intents = new Intent(getApplicationContext(),RegistrationActivity.class);
+                intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intents);
+                break;
+        }
+    }
+    public void toggleMenuDrawer(){
+        if(menuDrawerLayout.isDrawerOpen(GravityCompat.START)){
+            menuDrawerLayout.closeDrawer(GravityCompat.START);
+        }else{
+            menuDrawerLayout.openDrawer(GravityCompat.START);
+        }
     }
 }
