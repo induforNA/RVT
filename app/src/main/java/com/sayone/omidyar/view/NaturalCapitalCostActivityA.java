@@ -23,6 +23,8 @@ import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.RevenueProduct;
 import com.sayone.omidyar.model.Survey;
 
+import java.util.Locale;
+
 import io.realm.Realm;
 import io.realm.RealmList;
 
@@ -43,6 +45,7 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
 
     String landKindName;
     String currentSocialCapitalServey;
+    private String language;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
         setContentView(R.layout.activity_natural_cost_survey_a);
 
         context = this;
+        language = Locale.getDefault().getDisplayLanguage();
         realm = Realm.getDefaultInstance();
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
@@ -136,9 +140,8 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
             case R.id.button_add_wood:
                 final Dialog dialog = new Dialog(context);
                 dialog.setContentView(R.layout.add_forest_revenue_item);
-                dialog.setTitle("Add a cost element");
+                dialog.setTitle(getResources().getString(R.string.string_add_cost_element));
                 dialog.setCancelable(false);
-
                 Button popupCancel = (Button) dialog.findViewById(R.id.popup_cancel);
                 Button saveParticipant = (Button) dialog.findViewById(R.id.save_participant);
                 final EditText editTextWood = (EditText) dialog.findViewById(R.id.edit_text_wood);
@@ -215,7 +218,8 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
 //                        participantsAdapter.notifyDataSetChanged();
                         dialog.cancel();
                     }else {
-                        Toast.makeText(context,"Fill name",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context,getResources().getString(R.string.string_fill_name), Toast.LENGTH_SHORT).show();
+
                     }
                     }
                 });

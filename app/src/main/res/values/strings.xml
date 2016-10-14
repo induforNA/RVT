@@ -231,4 +231,26 @@
     <string name="string_currency">Currency</string>
     <string name="qn_natural_3_1">Do you plan on incurring any new future costs, seperate from those already entered for the past?</string>
     <string name="qn_natural_3_2">What type of costs?</string>
+
+    <string name="qn_land_selection_1">What kinds of land use are valued on your land?</string>
+    <string name="string_add_participant">Add a participant</string>
+    <string name="string_add_crop">Add a crop</string>
+    <string name="string_fill_name">Fill name</string>
+    <string name="string_atleast_one">Select atleast one</string>
+    <string name="string_add_cost_element">Add a cost element</string>
+    <string name="select_no_of_years">Select number of years</string>
+    <string name="qn_natural_A_1">what wood do you harvest,if any?</string>
+    <string name="qn_natural_A_2">What crops do you harvest, if any?</string>
+    <string name="qn_natural_A_3">What livestock do you raise, if any?</string>
+    <string name="qn_natural_A_4">What do you extract, if anything?</string>
+    <string name="string_add_revenue">Add a revenue product</string>
+    <string name="image_saved">Image saved</string>
+    <string name="save_failed">Save_failed</string>
+
+    <string name="qn_natural_complex_1_1">How often do you harvest </string>
+    <string name="qn_natural_complex_1_2"></string>
+    <string name="qn_natural_complex_2_1">What was the quantity of </string>
+    <string name="qn_natural_complex_2_2"> harvested each time?</string>
+    <string name="qn_natural_complex_3_1">What was the price of the </string>
+    <string name="qn_natural_complex_3_2"> per unit?</string>
 </resources>

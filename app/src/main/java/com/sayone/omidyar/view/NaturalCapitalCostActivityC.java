@@ -29,6 +29,7 @@ import com.sayone.omidyar.model.Survey;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -72,6 +73,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
     EditText priceEdit;
 
     double inflationRate = 0.05;
+    private String language;
 
 
     @Override
@@ -80,6 +82,8 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         setContentView(R.layout.activity_natural_cost_survey_c);
 
         context = this;
+        language = Locale.getDefault().getDisplayLanguage();
+
         realm = Realm.getDefaultInstance();
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
@@ -303,7 +307,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                     loadRevenueProduct(costElements.get(currentCostProductIndex));
                     //currentCostProductIndex++;
                 }else{
-                    Toast.makeText(context,"Completed ",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, getResources().getString(R.string.completed_text), Toast.LENGTH_SHORT).show();
                 }
                 break;
 
@@ -341,17 +345,17 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
     public void loadRevenueProduct(CostElement costElementLoad){
         if(costElementLoad.getType().equals("Timber")){
-            loadQuestions.setText("How often do you harvest "+costElementLoad.getName()+"?");
-            quantityQuestion.setText("What was the quantity of "+costElementLoad.getName()+" harvested each time?");
-            productQuestion.setText("What was the price of the "+costElementLoad.getName()+" per unit?");
+            loadQuestions.setText(getResources().getString(R.string.qn_natural_complex_1_1)+costElementLoad.getName()+getResources().getString(R.string.qn_natural_complex_1_2)+"?");
+            quantityQuestion.setText(getResources().getString(R.string.qn_natural_complex_2_1)+costElementLoad.getName()+getResources().getString(R.string.qn_natural_complex_2_2));
+            productQuestion.setText(getResources().getString(R.string.qn_natural_complex_3_1)+costElementLoad.getName()+getResources().getString(R.string.qn_natural_complex_3_2));
         }else if(costElementLoad.getType().equals("Non Timber")){
-            loadQuestions.setText("How often do you harvest "+costElementLoad.getName()+"?");
-            quantityQuestion.setText("What was the quantity of "+costElementLoad.getName()+" harvested each time?");
-            productQuestion.setText("What was the price of the "+costElementLoad.getName()+" per unit?");
+            loadQuestions.setText(getResources().getString(R.string.qn_natural_complex_1_1)+costElementLoad.getName()+getResources().getString(R.string.qn_natural_complex_1_2)+"?");
+            quantityQuestion.setText(getResources().getString(R.string.qn_natural_complex_2_1)+costElementLoad.getName()+getResources().getString(R.string.qn_natural_complex_2_2));
+            productQuestion.setText(getResources().getString(R.string.qn_natural_complex_3_1)+costElementLoad.getName()+getResources().getString(R.string.qn_natural_complex_3_2));
         }else {
-            loadQuestions.setText("How often do you harvest "+costElementLoad.getName()+"?");
-            quantityQuestion.setText("What was the quantity of "+costElementLoad.getName()+" harvested each time?");
-            productQuestion.setText("What was the price of the "+costElementLoad.getName()+" per unit?");
+            loadQuestions.setText(getResources().getString(R.string.qn_natural_complex_1_1)+costElementLoad.getName()+getResources().getString(R.string.qn_natural_complex_1_2)+"?");
+            quantityQuestion.setText(getResources().getString(R.string.qn_natural_complex_2_1)+costElementLoad.getName()+getResources().getString(R.string.qn_natural_complex_2_2));
+            productQuestion.setText(getResources().getString(R.string.qn_natural_complex_3_1)+costElementLoad.getName()+getResources().getString(R.string.qn_natural_complex_3_2));
         }
 
 

@@ -23,6 +23,7 @@ import com.sayone.omidyar.model.SocialCapital;
 import com.sayone.omidyar.model.Survey;
 
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import io.realm.Realm;
@@ -60,6 +61,7 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
     private TextView startSurvey;
 
     Set<String> landTypeNames;
+    private String language;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,6 +69,7 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
         setContentView(R.layout.activity_land_type_selection);
 
         context = this;
+        language = Locale.getDefault().getDisplayLanguage();
         realm = Realm.getDefaultInstance();
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
@@ -279,7 +282,8 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
             Intent intent = new Intent(LandTypeSelectionActivity.this, OmidyarMap.class);
             startActivity(intent);
         }else{
-            Toast.makeText(context,"Select atleast one",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,getResources().getString(R.string.string_atleast_one), Toast.LENGTH_SHORT).show();
+
         }
     }
 
