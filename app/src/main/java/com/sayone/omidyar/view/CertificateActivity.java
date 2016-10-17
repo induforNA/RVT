@@ -30,6 +30,7 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class CertificateActivity extends BaseActivity implements View.OnClickListener {
 
@@ -55,6 +56,10 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
     private TextView surveyIdDrawer;
     private DrawerLayout menuDrawerLayout;
     private String serveyId;
+
+    double totalVal = 0;
+
+    TextView forestValue, cropValue, pastureValue, miningValue, totalText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +99,13 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         startSurvey=(TextView)findViewById(R.id.text_start_survey);
         surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
 
+        forestValue = (TextView) findViewById(R.id.forest_value);
+        cropValue = (TextView) findViewById(R.id.crop_value);
+        pastureValue = (TextView) findViewById(R.id.pasture_value);
+        miningValue = (TextView) findViewById(R.id.mining_value);
+
+        totalText = (TextView) findViewById(R.id.total_text);
+
         mapImageForest.setOnClickListener(this);
         mapImageCrop.setOnClickListener(this);
         mapImagePasture.setOnClickListener(this);
@@ -105,11 +117,9 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         startSurvey.setOnClickListener(this);
         surveyIdDrawer.setText(serveyId);
 
-
-
-
-
         context=this;
+
+        totalVal = 0;
 
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
@@ -123,54 +133,117 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         Format formatter = new SimpleDateFormat("dd/MM/yyyy");
         String s = formatter.format(surveyCheck.getDate());
 
-        LandKind landKindLoad = realm.where(LandKind.class)
+
+        RealmResults<LandKind> landKinds = realm.where(LandKind.class)
                 .equalTo("surveyId", surveyId)
                 .equalTo("status", "active")
-                .findFirst();
-        SocialCapital socialCapital = landKindLoad.getSocialCapitals();
+                .findAll();
 
-        String pathForestMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Forestland"+surveyId+"screen.jpg/";
-        mapImageForest.setVisibility(View.VISIBLE);
-        fforest = new File(pathForestMap);
-        if(!fforest.exists()) {
-            forestlandLayout.setVisibility(View.GONE);
-            headingForest.setVisibility(View.GONE);
-        }
-        Picasso.with(context).load(fforest).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageForest);
+        forestlandLayout.setVisibility(View.GONE);
+        headingForest.setVisibility(View.GONE);
 
-        String pathCropMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Cropland"+surveyId+"screen.jpg/";
-        mapImageCrop.setVisibility(View.VISIBLE);
-        fcrop = new File(pathCropMap);
-        if(!fcrop.exists()){
-            croplandLayout.setVisibility(View.GONE);
-            headingCrop.setVisibility(View.GONE);
+        croplandLayout.setVisibility(View.GONE);
+        headingCrop.setVisibility(View.GONE);
+
+        pasturelandLayout.setVisibility(View.GONE);
+        headingPasture.setVisibility(View.GONE);
+
+        mininglandLayout.setVisibility(View.GONE);
+        headingMining.setVisibility(View.GONE);
+
+        for(LandKind landKind: landKinds){
+            if(landKind.getName().equals("Forestland")){
+                forestlandLayout.setVisibility(View.VISIBLE);
+                headingForest.setVisibility(View.VISIBLE);
+
+
+                String pathForestMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Forestland"+surveyId+"screen.jpg/";
+                mapImageForest.setVisibility(View.VISIBLE);
+                fforest = new File(pathForestMap);
+//                if(!fforest.exists()) {
+//                    forestlandLayout.setVisibility(View.GONE);
+//                    headingForest.setVisibility(View.GONE);
+//                }
+                Picasso.with(context).load(fforest).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageForest);
+                socialCapitalForest.setText(""+landKind.getSocialCapitals().getScore());
+                forestValue.setText(surveyCheck.getComponents().getForestValue()+"");
+
+                totalVal = totalVal + surveyCheck.getComponents().getForestValue();
+            }
+
+            if(landKind.getName().equals("Cropland")){
+                croplandLayout.setVisibility(View.VISIBLE);
+                headingCrop.setVisibility(View.VISIBLE);
+
+                String pathCropMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Cropland"+surveyId+"screen.jpg/";
+                mapImageCrop.setVisibility(View.VISIBLE);
+                fcrop = new File(pathCropMap);
+//                if(!fcrop.exists()){
+//                    croplandLayout.setVisibility(View.GONE);
+//                    headingCrop.setVisibility(View.GONE);
+//                }
+                Picasso.with(context).load(fcrop).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageCrop);
+                socialCapitalCrop.setText(""+landKind.getSocialCapitals().getScore());
+                cropValue.setText(surveyCheck.getComponents().getCroplandValue()+"");
+
+                totalVal = totalVal + surveyCheck.getComponents().getCroplandValue();
+            }
+
+            if(landKind.getName().equals("Pastureland")){
+                pasturelandLayout.setVisibility(View.VISIBLE);
+                headingPasture.setVisibility(View.VISIBLE);
+
+                String pathPastureMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Pastureland"+surveyId+"screen.jpg/";
+                mapImagePasture.setVisibility(View.VISIBLE);
+                fpasture = new File(pathPastureMap);
+//                if(!fpasture.exists()){
+//                    pasturelandLayout.setVisibility(View.GONE);
+//                    headingPasture.setVisibility(View.GONE);
+//                }
+                Picasso.with(context).load(fpasture).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImagePasture);
+                socialCapitalPasture.setText(""+landKind.getSocialCapitals().getScore());
+                pastureValue.setText(surveyCheck.getComponents().getPastureValue()+""+"");
+
+                totalVal = totalVal + surveyCheck.getComponents().getPastureValue();
+            }
+
+            if(landKind.getName().equals("Mining Land")){
+                String pathminingMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Mining Land"+surveyId+"screen.jpg/";
+                mapImageMining.setVisibility(View.VISIBLE);
+                fmining = new File(pathminingMap);
+                if(!fmining.exists()){
+                    mininglandLayout.setVisibility(View.GONE);
+                    headingMining.setVisibility(View.GONE);
+                }
+                Picasso.with(context).load(fmining).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageMining);
+                socialCapitalMining.setText(""+landKind.getSocialCapitals().getScore());
+                miningValue.setText(surveyCheck.getComponents().getMiningLandValue()+"");
+
+                totalVal = totalVal + surveyCheck.getComponents().getMiningLandValue();
+            }
         }
-        Picasso.with(context).load(fcrop).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageCrop);
-        String pathPastureMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Pastureland"+surveyId+"screen.jpg/";
-        mapImagePasture.setVisibility(View.VISIBLE);
-        fpasture = new File(pathPastureMap);
-        if(!fpasture.exists()){
-            pasturelandLayout.setVisibility(View.GONE);
-            headingPasture.setVisibility(View.GONE);
-        }
-        Picasso.with(context).load(fpasture).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImagePasture);
-        String pathminingMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Mining Land"+surveyId+"screen.jpg/";
-        mapImageMining.setVisibility(View.VISIBLE);
-        fmining = new File(pathminingMap);
-        if(!fmining.exists()){
-            mininglandLayout.setVisibility(View.GONE);
-            headingMining.setVisibility(View.GONE);
-        }
-        Picasso.with(context).load(fmining).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageMining);
+
+
+
+
+
+
+
+
+
+
+
 
         community.setText(surveyCheck.getCommunity().toString());
         parcelId.setText(surveyCheck.getSurveyId().toString());
         surveyorName.setText(surveyCheck.getSurveyor().toString());
         valuationDate.setText(s);
-        socialCapitalForest.setText(""+socialCapital.getScore());
-        socialCapitalCrop.setText("0");
-        socialCapitalPasture.setText("0");
-        socialCapitalMining.setText("0");
+
+        totalText.setText(totalVal+"");
+
+//        socialCapitalCrop.setText("0");
+//        socialCapitalPasture.setText("0");
+//        socialCapitalMining.setText("0");
       //  inflationRate.setText(surveyCheck.getInflationRate().toString());
 
     }
@@ -180,8 +253,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         if (mapFullScreen.getVisibility() == View.VISIBLE) {
             mapFullScreen.setVisibility(View.GONE);
             fullscreen.setVisibility(View.VISIBLE);
-        }
-        else {
+        }else {
             super.onBackPressed();
         }
     }

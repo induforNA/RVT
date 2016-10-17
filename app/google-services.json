@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "1001940237216",
+    "project_id": "firebase-omidyar"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1001940237216:android:6b46fd79b814b48a",
+        "android_client_info": {
+          "package_name": "com.sayone.omidyar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKwTOokxS5_DCgRfsP_v1GFRTSC7fZX_I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

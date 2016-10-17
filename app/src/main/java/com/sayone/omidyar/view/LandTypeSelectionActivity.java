@@ -279,7 +279,7 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
             editor.putString("currentSocialCapitalServey", landKindRealmResults.get(0).getName());
             editor.apply();
 
-            Intent intent = new Intent(LandTypeSelectionActivity.this, OmidyarMap.class);
+            Intent intent = new Intent(LandTypeSelectionActivity.this, StartLandTypeActivity.class);
             startActivity(intent);
         }else{
                 Toast.makeText(context,getResources().getString(R.string.string_atleast_one), Toast.LENGTH_SHORT).show();
