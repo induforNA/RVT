@@ -1,8 +1,6 @@
 package com.sayone.omidyar.view;
 
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -21,31 +18,20 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
-import com.sayone.omidyar.adapter.ParticipantsAdapter;
 import com.sayone.omidyar.adapter.SurveyAdapter;
-import com.sayone.omidyar.model.Component;
-import com.sayone.omidyar.model.LandKind;
-import com.sayone.omidyar.model.Participant;
-import com.sayone.omidyar.model.SocialCapitalQuestions;
 import com.sayone.omidyar.model.Survey;
-import com.sayone.omidyar.serializer.SurveySerializer;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmList;
-import io.realm.RealmObject;
 import io.realm.RealmResults;
 
 public class SurveySummaryActivity extends BaseActivity implements View.OnClickListener {
