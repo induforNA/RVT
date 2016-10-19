@@ -36,9 +36,8 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:gravity="end"
                 android:orientation="horizontal">
 
@@ -60,23 +59,25 @@
                     android:text="@string/string_forestland"
                     android:textSize="@dimen/textfield_size" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_keyboard_arrow_right_black_36dp" />
+                <!--<ImageView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:src="@drawable/ic_keyboard_arrow_right_black_36dp" />-->
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1/14"
-                    android:textSize="@dimen/textfield_size" />
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="1/14"-->
+                    <!--android:textSize="@dimen/textfield_size" />-->
 
             </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -84,11 +85,12 @@
 
 
             <TextView
+                android:textStyle="bold"
                 android:id="@+id/question_revenue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:gravity="left"
                 android:text="@string/qn_natural_a"
                 android:textSize="@dimen/heading_size" />
 
@@ -134,7 +136,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:orientation="horizontal">

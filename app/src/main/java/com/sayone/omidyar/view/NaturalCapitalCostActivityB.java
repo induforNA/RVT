@@ -247,7 +247,9 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
     }
 
     public void saveYears(){
-        Survey results = realm.where(Survey.class).findFirst();
+        Survey results = realm.where(Survey.class)
+                .equalTo("surveyId",serveyId)
+                .findFirst();
         for(LandKind landKind:results.getLandKinds()){
             if(landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")){
                 for (CostElement costElements1: landKind.getForestLand().getCostElements()){
