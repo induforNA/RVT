@@ -57,6 +57,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
     ArrayList<EditText> editTexts;
     private TextView surveyIdDrawer;
     RealmList<CostElementYears> costElementYearsArrayList;
+    TextView enterYearHeading;
 
     int i = 0;
     private String language;
@@ -92,6 +93,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
         logout = (TextView) findViewById(R.id.logout);
         startSurvey=(TextView)findViewById(R.id.text_start_survey);
         surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
+        enterYearHeading = (TextView) findViewById(R.id.enter_year_heading);
 
         buttonNext.setOnClickListener(this);
         buttonBack.setOnClickListener(this);
@@ -215,6 +217,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
             case R.id.add_years_button:
                 //Log.e("Year ",year);
                 if(!year.equals("year")){
+                    enterYearHeading.setVisibility(View.VISIBLE);
                     generateYearFields(Integer.parseInt(year));
                 }else{
                         Toast.makeText(context,getResources().getString(R.string.select_no_of_years), Toast.LENGTH_SHORT).show();

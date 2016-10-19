@@ -58,6 +58,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
     private TextView startSurvey;
     private DrawerLayout menuDrawerLayout;
     private TextView surveyIdDrawer;
+    private TextView areaQuestion;
+    private EditText areaEdit;
 
     RealmList<RevenueProduct> revenueProducts;
     int totalCostProductCount = 0;
@@ -108,7 +110,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         buttonBack = (Button)findViewById(R.id.button_back);
         buttonNext = (Button)findViewById(R.id.button_next);
         loadQuestions = (TextView) findViewById(R.id.load_questions);
-        saveBtn = (Button) findViewById(R.id.save_btn);
+        // saveBtn = (Button) findViewById(R.id.save_btn);
         quantityQuestion = (TextView) findViewById(R.id.quantity_question);
         productQuestion = (TextView) findViewById(R.id.product_question);
         noOfTimesEdit = (EditText) findViewById(R.id.no_of_times_edit);
@@ -121,6 +123,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         logout = (TextView) findViewById(R.id.logout);
         startSurvey=(TextView)findViewById(R.id.text_start_survey);
         surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
+        areaQuestion = (TextView) findViewById(R.id.area_question);
+        areaEdit = (EditText) findViewById(R.id.area_edit);
 
         revenueProducts = new RealmList<>();
         totalCostProductCount = 0;
@@ -312,6 +316,13 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             public void onItemSelected(AdapterView<?> parent,
                                        View view, int pos, long id) {
                 timePeriod= parent.getItemAtPosition(pos).toString();
+                Log.e("Time period ",timePeriod);
+                if(timePeriod.equals("one-time")){
+                    noOfTimesEdit.setText("1");
+                    noOfTimesEdit.setEnabled(false);
+                }else{
+                    noOfTimesEdit.setEnabled(true);
+                }
             }
 
             @Override
@@ -389,11 +400,11 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 break;
 
 
-            case R.id.save_btn:
-                // saveYearlyDatas(revenueProducts.get(currentCostProductIndexSave));
-
-
-                break;
+//            case R.id.save_btn:
+//                // saveYearlyDatas(revenueProducts.get(currentCostProductIndexSave));
+//
+//
+//                break;
 
         }
     }
@@ -405,14 +416,17 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             loadQuestions.setText(getResources().getString(R.string.qn_natural_complex_1_1)+" "+revenueProductLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_1_2)+"?");
             quantityQuestion.setText(getResources().getString(R.string.qn_natural_complex_2_1)+" "+revenueProductLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_2_2));
             productQuestion.setText(getResources().getString(R.string.qn_natural_complex_3_1)+" "+revenueProductLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_3_2));
+            areaQuestion.setText("% area harvested each time");
         }else if(revenueProductLoad.getType().equals("Non Timber")){
             loadQuestions.setText(getResources().getString(R.string.qn_natural_complex_1_1)+" "+revenueProductLoad.getName()+getResources().getString(R.string.qn_natural_complex_1_2)+"?");
             quantityQuestion.setText(getResources().getString(R.string.qn_natural_complex_2_1)+" "+revenueProductLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_2_2));
             productQuestion.setText(getResources().getString(R.string.qn_natural_complex_3_1)+" "+revenueProductLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_3_2));
+            areaQuestion.setText("% area harvested each time");
         }else {
             loadQuestions.setText(getResources().getString(R.string.qn_natural_complex_1_1)+" "+revenueProductLoad.getName()+getResources().getString(R.string.qn_natural_complex_1_2)+"?");
             quantityQuestion.setText(getResources().getString(R.string.qn_natural_complex_2_1)+" "+revenueProductLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_2_2));
             productQuestion.setText(getResources().getString(R.string.qn_natural_complex_3_1)+" "+revenueProductLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_3_2));
+            areaQuestion.setText("% area harvested each time");
         }
         productReveneIdCheck = revenueProductLoad.getId();
 
@@ -473,6 +487,12 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             priceEdit.setText(revenueProductYearsLoad.getMarketPriceValue()+"");
         }else{
             priceEdit.setText("0");
+        }
+
+        if(revenueProductYearsLoad.getHarvestArea() != 0){
+            areaEdit.setText(revenueProductYearsLoad.getHarvestArea()+"");
+        }else{
+            areaEdit.setText("0");
         }
 
 
@@ -554,6 +574,14 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                                 * Double.parseDouble(priceEdit.getText().toString())
                                 * Double.parseDouble(quanityEdit.getText().toString());
 
+                        String areaEditStr = areaEdit.getText().toString();
+                        double harverArea = 0;
+                        if(areaEditStr.equals("")){
+                            harverArea = 0;
+                        }else{
+                            harverArea = Double.parseDouble(areaEditStr);
+                        }
+
 
 
                         //realm.beginTransaction();
@@ -565,6 +593,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                         revenueProductYears1.setMarketPriceCurrency(spinnerCurrency.getSelectedItem().toString());
                         revenueProductYears1.setProjectedIndex(yearIndex);
                         revenueProductYears1.setSubtotal(total);
+                        revenueProductYears1.setHarvestArea(harverArea);
+                        //revenueProductYears1.setHarvestArea();
                         //realm.commitTransaction();
 
                         // Log.e("RE CHECK ",revenueProductYears1.toString());
