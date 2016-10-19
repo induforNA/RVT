@@ -8,6 +8,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -39,7 +40,8 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
     private Realm realm;
     TextView headingForest,headingCrop,headingPasture,headingMining;
     private String surveyId;
-    LinearLayout forestlandLayout,croplandLayout,pasturelandLayout,mininglandLayout,fullscreen;
+    LinearLayout fullscreen;
+    CardView forestlandLayout,croplandLayout,pasturelandLayout,mininglandLayout;
     Context context;
     ImageView mapImageForest,mapImageCrop,mapImagePasture,mapImageMining,mapFullScreen;
     private String currentSocialCapitalServey;
@@ -65,7 +67,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_certificate);
-     
+
 
         parcelId=(TextView)findViewById(R.id.parcel_id);
         community=(TextView)findViewById(R.id.community_name);
@@ -81,10 +83,10 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         mapImageCrop=(ImageView)findViewById(R.id.map_image_crop);
         mapImagePasture=(ImageView)findViewById(R.id.map_image_pasture);
         mapImageMining=(ImageView)findViewById(R.id.map_image_mining);
-        forestlandLayout=(LinearLayout)findViewById(R.id.forestland_layout);
-        croplandLayout=(LinearLayout)findViewById(R.id.cropland_layout);
-        pasturelandLayout=(LinearLayout)findViewById(R.id.pastureland_layout);
-        mininglandLayout=(LinearLayout)findViewById(R.id.miningland_layout);
+        forestlandLayout=(CardView) findViewById(R.id.forestland_layout);
+        croplandLayout=(CardView) findViewById(R.id.cropland_layout);
+        pasturelandLayout=(CardView) findViewById(R.id.pastureland_layout);
+        mininglandLayout=(CardView) findViewById(R.id.miningland_layout);
         headingCrop=(TextView)findViewById(R.id.heading_cropland);
         headingForest=(TextView)findViewById(R.id.heading_forest);
         headingPasture=(TextView)findViewById(R.id.heading_pastureland);

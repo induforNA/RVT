@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="300dp"
+    android:background="@android:color/white"
     android:layout_height="300dp">
 
     <EditText
@@ -24,6 +25,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#29b7ab"
         android:text="@string/button_save"
         android:layout_weight="1"
         android:id="@+id/save_cropland" />
@@ -32,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_cancel"
+        android:backgroundTint="#29b7ab"
         android:layout_weight="1"
         android:id="@+id/popup_cancel" />
 

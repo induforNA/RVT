@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="@android:color/white"
     android:padding="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -23,6 +24,7 @@
             android:textAllCaps="false"
             android:textColor="#ffffff"
             android:text="@string/button_cancel"
+            android:backgroundTint="#29b7ab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Button
@@ -30,6 +32,7 @@
             android:textAllCaps="false"
             android:textColor="#ffffff"
             android:text="@string/button_save"
+            android:backgroundTint="#29b7ab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>

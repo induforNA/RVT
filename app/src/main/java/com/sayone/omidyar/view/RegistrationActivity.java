@@ -217,6 +217,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
                 } else if (country.equals(getResources().getString(R.string.empty_country_filed))) {
                     toastfunction(getApplicationContext(), getResources().getString(R.string.empty_country_filed));
                 } else {
+                    toastfunction(getApplicationContext(), getResources().getString(R.string.registration_successful));
                     insertData();
                 }
                 break;

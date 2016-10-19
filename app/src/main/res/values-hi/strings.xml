@@ -20,7 +20,7 @@
         <item>मुद्रा चुनें</item>
         <item>INR</item>
         <item>USD</item>
-        <item>UR</item>
+        <item>EUR</item>
         <item>AUD</item>
     </string-array>
 
@@ -33,17 +33,17 @@
         </string-array>
         <string-array name="unit_array">
             <item>मात्रक चुनें</item>
-            <item>Cubic Meter</item>
-            <item>Cubic Kilometer</item>
-            <item>Cubic Centimeter</item>
-            <item>Cubic Millimeter</item>
-            <item>Liter</item>
-            <item>Milliliter</item>
-            <item>Kilogram</item>
-            <item>Gram</item>
-            <item>Milligram</item>
-            <item>Pound</item>
-            <item>Ounce</item>
+            <item>क्यूबिक मीटर </item>
+            <item>क्यूबिक किलोमीटर </item>
+            <item>क्यूबिक सेनटीमीटर</item>
+            <item>क्यूबिक मिल्लीमीटर</item>
+            <item>लिटेर</item>
+            <item>मिल्लीलीटेर </item>
+            <item>किलोग्राम</item>
+            <item>ग्राम</item>
+            <item>मिलिग्रॅम </item>
+            <item>पौंड </item>
+            <item>आउन्स </item>
         </string-array>
         <string-array name="time_period_array">
             <item>समय अवधिचुनें</item>
@@ -187,7 +187,6 @@
     <string name="title_social_capital">सामाजिक पूंजी सर्वेक्षण</string>
     <string name="qn_what_crop_doyou_harvest">आप क्या  फसलों काटते हैं, यदि कोई हो?</string>
     <string name="button_add">जोड़ना</string>
-    <string name="string_powered_by">Powered by</string>
     <string name="sponsor_name">इंडुफोर उत्तरी अमेरिका और पारिस्थितिक सुरक्षा  फाउंडेशन</string>
     <string name="heading_survey_login">सर्वेक्षण लॉगिन</string>
     <string name="survey_hash">सर्वेक्षण #</string>
@@ -251,4 +250,6 @@
     <string name="qn_natural_complex_3_2">की कीमत क्या थी?</string>
     <string name="costs_incur">इस उत्पाद की कटाई में किस प्रकार की लागत अपने ऊपर लेना है?</string>
     <string name="data_on_harvest_activities">आप के पास फसल की गतिविधियों पर कितने साल के डेटा है ?</string>
+    <string name="registration_successful">पंजीकरण सफल</string>
+    <string name="string_powered_by">Powered by</string>
 </resources>
