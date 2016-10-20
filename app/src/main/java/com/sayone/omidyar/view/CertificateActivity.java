@@ -167,8 +167,8 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 //                    headingForest.setVisibility(View.GONE);
 //                }
                 Picasso.with(context).load(fforest).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageForest);
-                socialCapitalForest.setText(""+landKind.getSocialCapitals().getScore());
-                forestValue.setText(surveyCheck.getComponents().getForestValue()+"");
+                socialCapitalForest.setText(""+landKind.getSocialCapitals().getScore()+"/20");
+                forestValue.setText(roundTwo(surveyCheck.getComponents().getForestValue())+"");
 
                 totalVal = totalVal + surveyCheck.getComponents().getForestValue();
             }
@@ -185,8 +185,8 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 //                    headingCrop.setVisibility(View.GONE);
 //                }
                 Picasso.with(context).load(fcrop).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageCrop);
-                socialCapitalCrop.setText(""+landKind.getSocialCapitals().getScore());
-                cropValue.setText(surveyCheck.getComponents().getCroplandValue()+"");
+                socialCapitalCrop.setText(""+landKind.getSocialCapitals().getScore()+"/20");
+                cropValue.setText(roundTwo(surveyCheck.getComponents().getCroplandValue())+"");
 
                 totalVal = totalVal + surveyCheck.getComponents().getCroplandValue();
             }
@@ -203,8 +203,8 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 //                    headingPasture.setVisibility(View.GONE);
 //                }
                 Picasso.with(context).load(fpasture).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImagePasture);
-                socialCapitalPasture.setText(""+landKind.getSocialCapitals().getScore());
-                pastureValue.setText(surveyCheck.getComponents().getPastureValue()+""+"");
+                socialCapitalPasture.setText(""+landKind.getSocialCapitals().getScore()+"/20");
+                pastureValue.setText(roundTwo(surveyCheck.getComponents().getPastureValue())+""+"");
 
                 totalVal = totalVal + surveyCheck.getComponents().getPastureValue();
             }
@@ -218,8 +218,8 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                     headingMining.setVisibility(View.GONE);
                 }
                 Picasso.with(context).load(fmining).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageMining);
-                socialCapitalMining.setText(""+landKind.getSocialCapitals().getScore());
-                miningValue.setText(surveyCheck.getComponents().getMiningLandValue()+"");
+                socialCapitalMining.setText(""+landKind.getSocialCapitals().getScore()+"/20");
+                miningValue.setText(roundTwo(surveyCheck.getComponents().getMiningLandValue())+"");
 
                 totalVal = totalVal + surveyCheck.getComponents().getMiningLandValue();
             }
@@ -241,13 +241,20 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         surveyorName.setText(surveyCheck.getSurveyor().toString());
         valuationDate.setText(s);
 
-        totalText.setText(totalVal+"");
+        totalText.setText(roundTwo(totalVal)+"");
 
 //        socialCapitalCrop.setText("0");
 //        socialCapitalPasture.setText("0");
 //        socialCapitalMining.setText("0");
       //  inflationRate.setText(surveyCheck.getInflationRate().toString());
 
+    }
+
+    public double roundTwo(double val){
+        val = val*100;
+        val = Math.round(val);
+        val = val /100;
+        return val;
     }
 
     @Override

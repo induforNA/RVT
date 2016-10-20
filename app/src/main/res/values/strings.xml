@@ -160,7 +160,7 @@
     <string name="value">Value</string>
     <string name="social_capital_score">Social capital score</string>
     <string name="questions_completed">Questions completed</string>
-    <string name="total">Total -</string>
+    <string name="total">Total :</string>
     <string name="qn_completed">Questions completed -</string>
     <string name="type_species1">Type species 1</string>
     <string name="type_species2">Type species 2</string>
