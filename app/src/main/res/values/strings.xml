@@ -252,4 +252,14 @@
     <string name="costs_incur">What types of costs do you incur in the harvesting of products?</string>
     <string name="data_on_harvest_activities">How many years of data do you have on harvest activities?</string>
     <string name="registration_successful">Registration successful</string>
+    <string name="percentage_area_harvested">Area harvested (in %)</string>
+    <string name="qn_cost_1">How many years of data do you have on cost ?</string>
+    <string name="qn_natural_cost_1_2" ></string>
+    <string name="qn_natural_cost_1_1" >How often do you incur costs for</string>
+    <string name="qn_natural_cost_2_1" >What was the cost of</string>
+    <string name="qn_natural_cost_2_2" >per time period</string>
+    <string name="qn_natural_cost_3_1" >What was the price of the</string>
+    <string name="qn_natural_cost_3_2">per unit?</string>
+    <string name="title_start_survey">Start Survey</string>
+
 </resources>

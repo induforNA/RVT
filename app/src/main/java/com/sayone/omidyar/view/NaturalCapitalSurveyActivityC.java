@@ -60,6 +60,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
     private TextView startSurvey;
     private DrawerLayout menuDrawerLayout;
     private TextView surveyIdDrawer;
+    private TextView landType;
     TextView enterYearHeading;
 
     int i = 0;
@@ -95,6 +96,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
         startSurvey=(TextView)findViewById(R.id.text_start_survey);
         surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
         enterYearHeading = (TextView) findViewById(R.id.enter_year_heading);
+        landType=(TextView)findViewById(R.id.land_type);
 
 
         buttonNext.setOnClickListener(this);
@@ -106,6 +108,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
         logout.setOnClickListener(this);
         startSurvey.setOnClickListener(this);
         surveyIdDrawer.setText(serveyId);
+        landType.setText(currentSocialCapitalServey);
 
         Survey results = realm.where(Survey.class)
                 .equalTo("surveyId",serveyId)

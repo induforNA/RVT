@@ -175,7 +175,7 @@
     <string name="radio_button_no">नहीं</string>
     <string name="text_rates">दरें</string>
     <string name="text_project_time_frame">अनुमानित समय सीमा</string>
-    <string name="text_units">मात्रक</string>
+    <string name="text_units">यूनिट</string>
     <string name="text_summary_surveys">सर्वेक्षणों का सारांश</string>
     <string name="title_activity_omidyar_map">नक्शे</string>
     <string name="heading_admin_dashboard">व्यवस्थापक डैशबोर्ड</string>
@@ -222,7 +222,7 @@
     <string name="qn_natural_d_5">हर बार काटा उत्पाद की मात्रा क्या था?</string>
     <string name="string_quantity">मात्रा</string>
     <string name="hint_number">मात्रा</string>
-    <string name="text_unit">इकाई</string>
+    <string name="text_unit">यूनिट</string>
     <string name="qn_natural_d_6">प्रति यूनिट उत्पाद की कीमत क्या थी?</string>
     <string name="price">मूल्य</string>
     <string name="string_currency">मुद्रा</string>
@@ -251,5 +251,15 @@
     <string name="costs_incur">इस उत्पाद की कटाई में किस प्रकार की लागत अपने ऊपर लेना है?</string>
     <string name="data_on_harvest_activities">आप के पास फसल की गतिविधियों पर कितने साल के डेटा है ?</string>
     <string name="registration_successful">पंजीकरण सफल</string>
-    <string name="string_powered_by">Powered by</string>
+    <string name="title_start_survey">सर्वेक्षण शुरू करें</string>
+    <string name="string_powered_by">संचालक</string>
+    <string name="percentage_area_harvested">काटा  क्षेत्र (% में)</string>
+    <string name="qn_cost_1">लागत पर कितने साल के डेटा आप के पास हे?</string>
+    <string name="qn_natural_cost_1_2" >केलिए आप कितनी बार अपने ऊपर लागत लेते है?</string>
+    <string name="qn_natural_cost_1_1" ></string>
+    <string name="qn_natural_cost_2_1" >समय अवधि के प्रति </string>
+    <string name="qn_natural_cost_2_2" >की लागत क्या था?</string>
+    <string name="qn_natural_cost_3_1" >प्रति यूनिट</string>
+    <string name="qn_natural_cost_3_2">  की कीमत क्या थी?</string>
+
 </resources>

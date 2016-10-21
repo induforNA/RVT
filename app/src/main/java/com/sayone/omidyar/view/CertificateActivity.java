@@ -169,7 +169,6 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 Picasso.with(context).load(fforest).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageForest);
                 socialCapitalForest.setText(""+landKind.getSocialCapitals().getScore()+"/20");
                 forestValue.setText(roundTwo(surveyCheck.getComponents().getForestValue())+"");
-
                 totalVal = totalVal + surveyCheck.getComponents().getForestValue();
             }
 
@@ -210,13 +209,15 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
             }
 
             if(landKind.getName().equals("Mining Land")){
+                mininglandLayout.setVisibility(View.VISIBLE);
+                headingMining.setVisibility(View.VISIBLE);
                 String pathminingMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Mining Land"+surveyId+"screen.jpg/";
                 mapImageMining.setVisibility(View.VISIBLE);
                 fmining = new File(pathminingMap);
-                if(!fmining.exists()){
-                    mininglandLayout.setVisibility(View.GONE);
-                    headingMining.setVisibility(View.GONE);
-                }
+//                if(!fmining.exists()){
+//                    mininglandLayout.setVisibility(View.GONE);
+//                    headingMining.setVisibility(View.GONE);
+//                }
                 Picasso.with(context).load(fmining).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageMining);
                 socialCapitalMining.setText(""+landKind.getSocialCapitals().getScore()+"/20");
                 miningValue.setText(roundTwo(surveyCheck.getComponents().getMiningLandValue())+"");
@@ -224,15 +225,6 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 totalVal = totalVal + surveyCheck.getComponents().getMiningLandValue();
             }
         }
-
-
-
-
-
-
-
-
-
 
 
 

@@ -38,6 +38,7 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
     SharedPreferences sharedPref;
     private ImageView imageViewMenuIcon;
     private ImageView drawerCloseBtn;
+    private TextView landType;
     private TextView textViewAbout;
     private TextView logout;
     private TextView startSurvey;
@@ -124,6 +125,8 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
         logout = (TextView) findViewById(R.id.logout);
         startSurvey=(TextView)findViewById(R.id.text_start_survey);
         surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
+        landType=(TextView)findViewById(R.id.land_type);
+        landType.setText(currentSocialCapitalServey);
 
         timberList = (RecyclerView) findViewById(R.id.timber_list);
 

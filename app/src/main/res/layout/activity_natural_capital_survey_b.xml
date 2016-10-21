@@ -22,7 +22,7 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
@@ -37,9 +37,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
+                android:layout_marginRight="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -141,6 +142,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginRight="20dp"
             android:orientation="horizontal">
 
@@ -148,16 +150,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:gravity="bottom"
                 android:layout_marginTop="120dp"
                 android:orientation="horizontal">
 
-                <ImageView
+                <android.support.design.widget.FloatingActionButton
                     android:id="@+id/button_add_wood"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/ic_add_black_36dp" />
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/ic_add_white_36dp" />
 
 
                 <View
@@ -177,7 +181,6 @@
                     android:id="@+id/button_next"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
                     android:text="@string/button_next"
                     android:textAllCaps="false"
                     android:textColor="#ffffff" />

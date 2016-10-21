@@ -127,18 +127,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/string_forestland"
-                        android:textSize="@dimen/textfield_size" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_keyboard_arrow_right_black_36dp" />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="1/14"
+                        android:id="@+id/land_type"
                         android:textSize="@dimen/textfield_size" />
 
                 </LinearLayout>
@@ -295,7 +284,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="% area harvested each time"
+                        android:text="@string/percentage_area_harvested"
                         android:textSize="@dimen/heading_size" />
                     <EditText
                         android:inputType="number"

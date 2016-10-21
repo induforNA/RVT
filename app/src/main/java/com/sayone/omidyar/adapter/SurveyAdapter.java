@@ -1,5 +1,7 @@
 package com.sayone.omidyar.adapter;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +13,9 @@ import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.Participant;
 import com.sayone.omidyar.model.Survey;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by sayone on 3/10/16.
@@ -22,11 +26,13 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private List<Survey>surveyList;
     private final int viewTypeHeader=0,viewTypeList=1;
     private Boolean flag;
+    Set<String> set = new HashSet<String>();
 
 
     public class SurveyViewHolder extends RecyclerView.ViewHolder {
         private TextView surveyName;
         private CheckBox checkBoxSurvey;
+
 
         public SurveyViewHolder(View itemView) {
             super(itemView);
@@ -99,6 +105,7 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             ((SurveyViewHolder)holder).surveyName.setText(survey.getSurveyId());
           if(flag){
               ((SurveyViewHolder)holder).checkBoxSurvey.setChecked(true);
+              set.add(survey.getSurveyId());
            } else {
               ((SurveyViewHolder)holder).checkBoxSurvey.setChecked(false);
           }

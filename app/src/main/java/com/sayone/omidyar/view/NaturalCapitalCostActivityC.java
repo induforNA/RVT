@@ -60,6 +60,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
     private DrawerLayout menuDrawerLayout;
     private TextView surveyIdDrawer;
     private TextView areaQuestion;
+    private TextView landType;
     private EditText areaEdit;
 
     RealmList<CostElement> revenueProducts;
@@ -126,6 +127,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
         areaQuestion = (TextView) findViewById(R.id.area_question);
         areaEdit = (EditText) findViewById(R.id.area_edit);
+        landType=(TextView)findViewById(R.id.land_type);
 
         revenueProducts = new RealmList<>();
         totalCostProductCount = 0;
@@ -190,6 +192,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         spinnerUnit.setAdapter(unit_adapter);
         spinnerCurrency.setAdapter(currency_adapter);
         spinnerTimePeriod.setAdapter(timePeriod_adapter);
+        landType.setText(currentSocialCapitalServey);
 
 
         for(LandKind landKind:results.getLandKinds()){
@@ -349,7 +352,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 break;
 
             case R.id.button_back:
-
+                finish();
                 Log.e("YEAR ","PRE "+previousYearIndex+" Cur "+currentYearIndex);
                 Log.e("COST ","PRE "+previousCostProductIndex+" Cur "+currentCostProductIndex   );
 
@@ -414,17 +417,17 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         // Log.e("LOAD ","REVENUE 11111");
 
         if(costElementLoad.getType().equals("Timber")){
-            loadQuestions.setText("How often do you incur costs for"+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_1_2)+"?");
-            quantityQuestion.setText("What was the cost of"+" "+costElementLoad.getName()+" "+"per time period");
-            productQuestion.setText("What was the price of the"+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_3_2));
+            loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_1_2)+"?");
+            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_2_2));
+            productQuestion.setText(getResources().getString(R.string.qn_natural_cost_3_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_3_2));
         }else if(costElementLoad.getType().equals("Non Timber")){
-            loadQuestions.setText("How often do you incur costs for"+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_1_2)+"?");
-            quantityQuestion.setText("What was the cost of"+" "+costElementLoad.getName()+" "+"per time period");
-            productQuestion.setText("What was the price of the"+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_3_2));
+            loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_1_2)+"?");
+            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_2_2));
+            productQuestion.setText(getResources().getString(R.string.qn_natural_cost_3_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_3_2));
         }else {
-            loadQuestions.setText("How often do you incur costs for"+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_1_2)+"?");
-            quantityQuestion.setText("What was the cost of"+" "+costElementLoad.getName()+" "+"per time period");
-            productQuestion.setText("What was the price of the"+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_3_2));
+            loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_1_2)+"?");
+            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_2_2));
+            productQuestion.setText(getResources().getString(R.string.qn_natural_cost_3_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_3_2));
         }
         productReveneIdCheck = costElementLoad.getId();
 
@@ -562,6 +565,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                                 if(priceEdit.getText().toString().equals("")){
                                     priceEdit.setText("0");
                                 }
+                                if(areaEdit.getText().toString().equals("")){
+                                    areaEdit.setText("0");
+                                }
                             }
                         });
 
@@ -637,18 +643,6 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 // Log.e("REALM", " ERROR ."+error.toString());
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 
@@ -871,7 +865,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 realm.commitTransaction();
             }else if(landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")){
                 int k = 0;
-                for(CostElement costElement:landKind.getPastureLand().getCostElements()){
+                for(CostElement costElement:landKind.getMiningLand().getCostElements()){
                     if(k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
                             cashFlows.add(calculateCashFlow("Mining Land",costElementYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));

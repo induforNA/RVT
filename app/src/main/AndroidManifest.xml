@@ -73,7 +73,7 @@
             android:name=".view.CertificateActivity"
             android:screenOrientation="landscape">
 
-                    </activity>
+        </activity>
         <activity android:name=".view.NaturalCapitalSurveyActivityD"
             android:screenOrientation="landscape">
 

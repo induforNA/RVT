@@ -55,6 +55,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
     private ImageView drawerCloseBtn;
     private TextView textViewAbout;
     private TextView logout;
+    private TextView landType;
     private TextView startSurvey;
     private DrawerLayout menuDrawerLayout;
     private TextView surveyIdDrawer;
@@ -125,6 +126,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
         areaQuestion = (TextView) findViewById(R.id.area_question);
         areaEdit = (EditText) findViewById(R.id.area_edit);
+        landType=(TextView)findViewById(R.id.land_type);
 
         revenueProducts = new RealmList<>();
         totalCostProductCount = 0;
@@ -136,6 +138,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         previousYearIndex = 0;
         previousCostProductIndex = 0;
         productReveneIdCheck = 0;
+        landType.setText(currentSocialCapitalServey);
 
         inflationRate = 0.05;
 
@@ -416,17 +419,17 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             loadQuestions.setText(getResources().getString(R.string.qn_natural_complex_1_1)+" "+revenueProductLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_1_2)+"?");
             quantityQuestion.setText(getResources().getString(R.string.qn_natural_complex_2_1)+" "+revenueProductLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_2_2));
             productQuestion.setText(getResources().getString(R.string.qn_natural_complex_3_1)+" "+revenueProductLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_3_2));
-            areaQuestion.setText("% area harvested each time");
+            areaQuestion.setText(getResources().getString(R.string.percentage_area_harvested));
         }else if(revenueProductLoad.getType().equals("Non Timber")){
             loadQuestions.setText(getResources().getString(R.string.qn_natural_complex_1_1)+" "+revenueProductLoad.getName()+getResources().getString(R.string.qn_natural_complex_1_2)+"?");
             quantityQuestion.setText(getResources().getString(R.string.qn_natural_complex_2_1)+" "+revenueProductLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_2_2));
             productQuestion.setText(getResources().getString(R.string.qn_natural_complex_3_1)+" "+revenueProductLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_3_2));
-            areaQuestion.setText("% area harvested each time");
+            areaQuestion.setText(getResources().getString(R.string.percentage_area_harvested));
         }else {
             loadQuestions.setText(getResources().getString(R.string.qn_natural_complex_1_1)+" "+revenueProductLoad.getName()+getResources().getString(R.string.qn_natural_complex_1_2)+"?");
             quantityQuestion.setText(getResources().getString(R.string.qn_natural_complex_2_1)+" "+revenueProductLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_2_2));
             productQuestion.setText(getResources().getString(R.string.qn_natural_complex_3_1)+" "+revenueProductLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_3_2));
-            areaQuestion.setText("% area harvested each time");
+            areaQuestion.setText(getResources().getString(R.string.percentage_area_harvested));
         }
         productReveneIdCheck = revenueProductLoad.getId();
 
@@ -563,6 +566,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                                 }
                                 if(priceEdit.getText().toString().equals("")){
                                     priceEdit.setText("0");
+                                }
+                                if(areaEdit.getText().toString().equals("")){
+                                    areaEdit.setText("0");
                                 }
                             }
                         });
