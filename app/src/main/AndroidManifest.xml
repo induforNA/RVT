@@ -24,13 +24,19 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.SurveySummaryActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape" >
+
+
+        </activity>
+
         <activity
             android:name=".view.UnitsActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.MainActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape" >
+
+        </activity>
         <activity
             android:name=".view.RegistrationActivity"
             android:screenOrientation="landscape">
@@ -38,7 +44,9 @@
         </activity>
         <activity
             android:name=".view.LoginActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape" >
+
+        </activity>
         <activity
             android:name=".view.AboutActivity"
             android:screenOrientation="landscape" />
@@ -50,15 +58,18 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.AdminDashBoard"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".view.SplashScreenActivity"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".view.SplashScreenActivity"
+            android:screenOrientation="landscape">
+
         </activity>
         <activity
             android:name=".view.SocialCapitalStartActivity"

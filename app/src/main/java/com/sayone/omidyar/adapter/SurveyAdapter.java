@@ -3,10 +3,12 @@ package com.sayone.omidyar.adapter;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.sayone.omidyar.R;
@@ -25,17 +27,20 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private List<Survey>surveyList;
     private final int viewTypeHeader=0,viewTypeList=1;
-    private Boolean flag;
-    Set<String> set = new HashSet<String>();
+    private Boolean flag,flag1=true;
+    private SharedPreferences sharedPref;
+    private String surveyId;
+    Set<String> set;
+    private SharedPreferences.Editor editor;
 
 
     public class SurveyViewHolder extends RecyclerView.ViewHolder {
         private TextView surveyName;
         private CheckBox checkBoxSurvey;
 
-
         public SurveyViewHolder(View itemView) {
             super(itemView);
+            set = new HashSet<String>();
             surveyName = (TextView) itemView.findViewById(R.id.survey_name);
             checkBoxSurvey=(CheckBox)itemView.findViewById(R.id.checkbox_survey);
 
@@ -60,6 +65,11 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = null;
+        sharedPref = parent.getContext().getSharedPreferences(
+                "com.sayone.omidyar.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE);
+        editor=sharedPref.edit();
+        editor.clear();
+        editor.putStringSet("surveySet",set);
         switch(viewType)
         {
 
@@ -81,7 +91,7 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
 
         if (holder instanceof HeaderViewHolder){
             if(flag){
@@ -100,20 +110,60 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
         if (holder instanceof SurveyViewHolder){
             int pos=position-1;
-            Survey survey = surveyList.get(pos);
+            final Survey survey = surveyList.get(pos);
 
+            ((SurveyViewHolder)holder).checkBoxSurvey.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if(flag1) {
+                        ((SurveyViewHolder) holder).checkBoxSurvey.setChecked(true);
+                        set.add(survey.getSurveyId());
+                        editor = sharedPref.edit();
+                        editor.clear();
+                        editor.putStringSet("surveySet", set);
+                        editor.apply();
+                    }
+                    else{
+                       ((SurveyViewHolder) holder).checkBoxSurvey.setChecked(false);
+                        set.remove(survey.getSurveyId());
+                        editor = sharedPref.edit();
+                        editor.clear();
+                        editor.putStringSet("surveySet", set);
+                        editor.apply();
+                    }
+// notifyDataSetChanged();
+                    flag1=toggle1();
+                }
+            });
             ((SurveyViewHolder)holder).surveyName.setText(survey.getSurveyId());
           if(flag){
               ((SurveyViewHolder)holder).checkBoxSurvey.setChecked(true);
-              set.add(survey.getSurveyId());
+
            } else {
               ((SurveyViewHolder)holder).checkBoxSurvey.setChecked(false);
+              set.clear();
           }
+            if(((SurveyViewHolder)holder).checkBoxSurvey.isChecked()){
+                set.add(survey.getSurveyId());
+            }
+
+
         }
+        editor=sharedPref.edit();
+        editor.clear();
+        editor.putStringSet("surveySet",set);
+        editor.apply();
+
+
     }
 
     private boolean toggle() {
         return !flag;
+    }
+
+    private boolean toggle1() {
+        return !flag1;
     }
 
     @Override

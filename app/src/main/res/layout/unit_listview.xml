@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" android:layout_width="wrap_content">
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/label"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dip"
+    android:textSize="@dimen/textfield_size"/>
+<Button
+    android:id="@+id/save_participant"
+    android:textAllCaps="false"
+    android:backgroundTint="#29b7ab"
+    android:textColor="#ffffff"
+    android:text="@string/button_save"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+</LinearLayout>
+
+
+

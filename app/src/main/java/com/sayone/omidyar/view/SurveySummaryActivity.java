@@ -1,6 +1,8 @@
 package com.sayone.omidyar.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +59,7 @@ import org.json.JSONObject;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -74,17 +78,25 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
     int surveyCount;
 
     JSONObject jsonObject;
+    private Context context;
+    private Button sendDataToServer;
+    private SharedPreferences sharedPref;
+    private Set<String> set = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey_summary);
+        context = this;
 
 
         // checkBoxSurvey1=(CheckBox)findViewById(R.id.checkBox_survey1);
         // checkBoxSurvey2=(CheckBox)findViewById(R.id.checkBox_survey2);
         completedSurveys = (TextView) findViewById(R.id.completed_surveys);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_survey_list);
+        sendDataToServer = (Button) findViewById(R.id.button_send_data_to_server);
+        sharedPref = context.getSharedPreferences(
+                "com.sayone.omidyar.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE);
 
 
         Realm realm = Realm.getDefaultInstance();
@@ -96,6 +108,8 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(surveyAdapter);
+        sendDataToServer.setOnClickListener(this);
+
 
         completedSurveys.setText("" + surveyCount);
 
@@ -150,7 +164,9 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 //                Log.e("REALM", "errrrrrrrrrrrrrrrrrrrrrroooooooooooooooooooooooooooooooooooorrrrrrrrrr "+error.getMessage());
 //            }
 //        });
-        new LongOperation().execute("");
+
+       // new LongOperation().execute("");
+
 
     }
 
@@ -163,97 +179,91 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             Realm.setDefaultConfiguration(config);
             Realm realm = Realm.getDefaultInstance();
 
-            Survey survey = realm.where(Survey.class).findFirst();
+            RealmResults<Survey> surveys = realm.where(Survey.class).findAll();
+            for (String setsend : set) {
+                for (Survey survey : surveys) {
+                    Log.e("setsend:",setsend);
+                    Log.e("surveyId:",survey.getSurveyId());
+                    if (survey.getSurveyId().equals(setsend)) {
+                        jsonObject = new JSONObject();
+                        try {
+                            if (survey.getId() == 0) {
+                                jsonObject.put("id", "");
+                            } else
+                                jsonObject.put("id", survey.getId());
+                            if (survey.getSurveyor() == null) {
+                                jsonObject.put("surveyor", survey.getSurveyor());
+                            } else
+                                jsonObject.put("surveyor", survey.getSurveyor());
+                            if (survey.getSurveyId() == null) {
+                                jsonObject.put("surveyId", "");
+                            } else
+                                jsonObject.put("surveyId", survey.getSurveyId());
+                            if (survey.getCommunity() == null) {
+                                jsonObject.put("community", "");
+                            } else
+                                jsonObject.put("community", survey.getCommunity());
+                            if (survey.getDistrict() == null) {
+                                jsonObject.put("district", "");
+                            } else
+                                jsonObject.put("district", survey.getDistrict());
+                            if (survey.getState() == null) {
+                                jsonObject.put("state", "");
+                            } else
+                                jsonObject.put("state", survey.getState());
+                            if (survey.getCountry() == null) {
+                                jsonObject.put("country", "");
+                            } else
+                                jsonObject.put("country", survey.getCountry());
+                            if (survey.getLanguage() == null) {
+                                jsonObject.put("language", "");
+                            } else
+                                jsonObject.put("language", survey.getLanguage());
+                            if (survey.getCurrency() == null) {
+                                jsonObject.put("currency", "");
+                            } else
+                                jsonObject.put("currency", survey.getCurrency());
+                            if (survey.getRespondentGroup() == null) {
+                                jsonObject.put("respondentGroup", "");
+                            } else
+                                jsonObject.put("respondentGroup", survey.getRespondentGroup());
+                            if (survey.getDate() == null) {
+                                jsonObject.put("date", "");
+                            } else
+                                jsonObject.put("date", survey.getDate());
+                            if (survey.getParticipants() == null) {
+                                jsonObject.put("participants", "");
+                            } else
+                                jsonObject.put("participants", getParticipentArray(survey.getParticipants()));
+                            if (survey.getLandKinds() == null) {
+                                jsonObject.put("landKinds", "");
+                            } else
+                                jsonObject.put("landKinds", getLandKindArray(survey.getLandKinds()));
+                            if (survey.getInflationRate() == null) {
+                                jsonObject.put("inflationRate", "");
+                            } else
+                                jsonObject.put("inflationRate", survey.getInflationRate());
+                            if (survey.getComponents() == null) {
+                                jsonObject.put("components", "");
+                            } else
+                                jsonObject.put("components", getComponent(survey.getComponents()));
+                            makeJsonObjectRequest();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-
-            jsonObject = new JSONObject();
-            try {
-                if(survey.getId()==0){
-                    jsonObject.put("id","");
+                    }
                 }
-                else
-                jsonObject.put("id", survey.getId());
-                if(survey.getSurveyor()==null){
-                    jsonObject.put("surveyor", survey.getSurveyor());
-                }
-                else
-                jsonObject.put("surveyor", survey.getSurveyor());
-                if(survey.getSurveyId()==null){
-                    jsonObject.put("surveyId","");
-                }else
-                jsonObject.put("surveyId", survey.getSurveyId());
-                if(survey.getCommunity()==null){
-                    jsonObject.put("community","");
-                }else
-                jsonObject.put("community", survey.getCommunity());
-                if(survey.getDistrict()==null){
-                    jsonObject.put("district","");
-                }else
-                jsonObject.put("district", survey.getDistrict());
-                if(survey.getState()==null){
-                    jsonObject.put("state","");
-                }else
-                jsonObject.put("state", survey.getState());
-                if(survey.getCountry()==null){
-                    jsonObject.put("country","");
-                }else
-                jsonObject.put("country", survey.getCountry());
-                if(survey.getLanguage()==null){
-                    jsonObject.put("language","");
-                }else
-                jsonObject.put("language", survey.getLanguage());
-                if(survey.getCurrency()==null){
-                    jsonObject.put("currency","");
-                }else
-                jsonObject.put("currency", survey.getCurrency());
-                if(survey.getRespondentGroup()==null){
-                    jsonObject.put("respondentGroup","");
-                }else
-                jsonObject.put("respondentGroup", survey.getRespondentGroup());
-                if(survey.getDate()==null){
-                    jsonObject.put("date","");
-                }else
-                jsonObject.put("date", survey.getDate());
-                if(survey.getParticipants()==null){
-                    jsonObject.put("participants","");
-                }
-                else
-                jsonObject.put("participants",  getParticipentArray(survey.getParticipants()));
-                if(survey.getLandKinds()==null){
-                    jsonObject.put("landKinds","");
-                }else
-                jsonObject.put("landKinds",  getLandKindArray(survey.getLandKinds()));
-                if(survey.getInflationRate()==null){
-                    jsonObject.put("inflationRate","");
-                }else
-                jsonObject.put("inflationRate", survey.getInflationRate());
-                if(survey.getComponents()==null){
-                    jsonObject.put("components","");
-                }else
-                jsonObject.put("components", getComponent(survey.getComponents()));
-
-
-
-//
-//                private String inflationRate;
-//
-//                private Component components;
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
 
-
-            //realm.where(Survey.class).findFirst();
-
-//            Gson gson = new Gson();
-//            String json = gson.toJson(realm.where(SocialCapitalQuestions.class).findFirst());
-//            Log.e("JSON ",json);
             return "Executed";
+
         }
+
 
         @Override
         protected void onPostExecute(String result) {
-            makeJsonObjectRequest();
+         //   makeJsonObjectRequest();
         }
 
         @Override
@@ -262,10 +272,9 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
         @Override
         protected void onProgressUpdate(Void... values) {
+
         }
     }
-
-
 
 
     private void makeJsonObjectRequest() {
@@ -283,8 +292,8 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
         JSONObject object = new JSONObject();
         try {
-            object.put("survey_no","0001");
-            object.put("content",jsonObject);
+            object.put("survey_no", "0001");
+            object.put("content", jsonObject);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -321,7 +330,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         };
 
         try {
-            Log.e("Re ",jsonObjReq.getBody()+" "+jsonObjReq.getHeaders().get("Authorization").toString() );
+            Log.e("Re ", jsonObjReq.getBody() + " " + jsonObjReq.getHeaders().get("Authorization").toString());
         } catch (AuthFailureError authFailureError) {
             authFailureError.printStackTrace();
         }
@@ -332,39 +341,39 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         //AppController.getInstance().addToRequestQueue(jsonObjReq);
     }
 
-    public JSONArray getParticipentArray(RealmList<Participant> participants){
+    public JSONArray getParticipentArray(RealmList<Participant> participants) {
         JSONArray jsonArray = new JSONArray();
-        for(Participant participant:participants) {
+        for (Participant participant : participants) {
             JSONObject jsonObjectParticipant = new JSONObject();
             try {
-                if(participant.getId()==0){
-                    jsonObjectParticipant.put("id","");
-                }else
-                jsonObjectParticipant.put("id",participant.getId());
-                if(participant.getSurveyId()==null){
-                    jsonObjectParticipant.put("surveyId","");
-                }else
-                jsonObjectParticipant.put("surveyId",participant.getSurveyId());
-                if(participant.getName()==null){
-                    jsonObjectParticipant.put("name","");
-                }else
-                jsonObjectParticipant.put("name",participant.getName());
-                if(participant.getOccupation()==null){
-                    jsonObjectParticipant.put("occupation","");
-                }else
-                jsonObjectParticipant.put("occupation",participant.getOccupation());
-                if(participant.getGender()==null){
-                    jsonObjectParticipant.put("gender","");
-                }else
-                jsonObjectParticipant.put("gender",participant.getGender());
-                if(participant.getYearsOfEdu()==0){
-                    jsonObjectParticipant.put("yearsOfEdu","");
-                }else
-                jsonObjectParticipant.put("yearsOfEdu",participant.getYearsOfEdu());
-                if(participant.getAge()==0){
-                    jsonObjectParticipant.put("age","");
-                }else
-                jsonObjectParticipant.put("age",participant.getAge());
+                if (participant.getId() == 0) {
+                    jsonObjectParticipant.put("id", "");
+                } else
+                    jsonObjectParticipant.put("id", participant.getId());
+                if (participant.getSurveyId() == null) {
+                    jsonObjectParticipant.put("surveyId", "");
+                } else
+                    jsonObjectParticipant.put("surveyId", participant.getSurveyId());
+                if (participant.getName() == null) {
+                    jsonObjectParticipant.put("name", "");
+                } else
+                    jsonObjectParticipant.put("name", participant.getName());
+                if (participant.getOccupation() == null) {
+                    jsonObjectParticipant.put("occupation", "");
+                } else
+                    jsonObjectParticipant.put("occupation", participant.getOccupation());
+                if (participant.getGender() == null) {
+                    jsonObjectParticipant.put("gender", "");
+                } else
+                    jsonObjectParticipant.put("gender", participant.getGender());
+                if (participant.getYearsOfEdu() == 0) {
+                    jsonObjectParticipant.put("yearsOfEdu", "");
+                } else
+                    jsonObjectParticipant.put("yearsOfEdu", participant.getYearsOfEdu());
+                if (participant.getAge() == 0) {
+                    jsonObjectParticipant.put("age", "");
+                } else
+                    jsonObjectParticipant.put("age", participant.getAge());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -373,47 +382,47 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         return jsonArray;
     }
 
-    public JSONArray getLandKindArray(RealmList<LandKind> landKinds){
+    public JSONArray getLandKindArray(RealmList<LandKind> landKinds) {
         JSONArray jsonArray = new JSONArray();
-        for(LandKind landKind:landKinds) {
+        for (LandKind landKind : landKinds) {
             JSONObject jsonObjectLandKind = new JSONObject();
             try {
-                if(landKind.getId()==0){
-                    jsonObjectLandKind.put("id","");
-                }else
-                jsonObjectLandKind.put("id",landKind.getId());
-                if(landKind.getSurveyId()==null){
-                    jsonObjectLandKind.put("surveyId","");
-                }else
-                jsonObjectLandKind.put("surveyId",landKind.getSurveyId());
-                if(landKind.getName()==null){
-                    jsonObjectLandKind.put("name","");
-                }else
-                jsonObjectLandKind.put("name",landKind.getName());
-                if(landKind.getSocialCapitals()==null){
-                    jsonObjectLandKind.put("socialCapitals","");
-                }else
-                jsonObjectLandKind.put("socialCapitals",getSocialCapital(landKind.getSocialCapitals()));
-                if(landKind.getForestLand()==null){
-                    jsonObjectLandKind.put("forestLand","");
-                }else
-                jsonObjectLandKind.put("forestLand",getForestLand(landKind.getForestLand()));
-                if(landKind.getCropLand()==null){
-                    jsonObjectLandKind.put("cropLand","");
-                }else
-                jsonObjectLandKind.put("cropLand",getCropLand(landKind.getCropLand()));
-                if(landKind.getPastureLand()==null){
-                    jsonObjectLandKind.put("pastureLand","");
-                }else
-                jsonObjectLandKind.put("pastureLand",getPastureLand(landKind.getPastureLand()));
-                if(landKind.getMiningLand()==null){
-                    jsonObjectLandKind.put("miningLand","");
-                }else
-                jsonObjectLandKind.put("miningLand",getMiningLand(landKind.getMiningLand()));
-                if(landKind.getStatus()==null){
-                    jsonObjectLandKind.put("status","");
-                }else
-                jsonObjectLandKind.put("status",landKind.getStatus());
+                if (landKind.getId() == 0) {
+                    jsonObjectLandKind.put("id", "");
+                } else
+                    jsonObjectLandKind.put("id", landKind.getId());
+                if (landKind.getSurveyId() == null) {
+                    jsonObjectLandKind.put("surveyId", "");
+                } else
+                    jsonObjectLandKind.put("surveyId", landKind.getSurveyId());
+                if (landKind.getName() == null) {
+                    jsonObjectLandKind.put("name", "");
+                } else
+                    jsonObjectLandKind.put("name", landKind.getName());
+                if (landKind.getSocialCapitals() == null) {
+                    jsonObjectLandKind.put("socialCapitals", "");
+                } else
+                    jsonObjectLandKind.put("socialCapitals", getSocialCapital(landKind.getSocialCapitals()));
+                if (landKind.getForestLand() == null) {
+                    jsonObjectLandKind.put("forestLand", "");
+                } else
+                    jsonObjectLandKind.put("forestLand", getForestLand(landKind.getForestLand()));
+                if (landKind.getCropLand() == null) {
+                    jsonObjectLandKind.put("cropLand", "");
+                } else
+                    jsonObjectLandKind.put("cropLand", getCropLand(landKind.getCropLand()));
+                if (landKind.getPastureLand() == null) {
+                    jsonObjectLandKind.put("pastureLand", "");
+                } else
+                    jsonObjectLandKind.put("pastureLand", getPastureLand(landKind.getPastureLand()));
+                if (landKind.getMiningLand() == null) {
+                    jsonObjectLandKind.put("miningLand", "");
+                } else
+                    jsonObjectLandKind.put("miningLand", getMiningLand(landKind.getMiningLand()));
+                if (landKind.getStatus() == null) {
+                    jsonObjectLandKind.put("status", "");
+                } else
+                    jsonObjectLandKind.put("status", landKind.getStatus());
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -426,46 +435,46 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
     private JSONObject getMiningLand(MiningLand miningLand) {
         JSONObject jsonObjectMiningLand = new JSONObject();
         try {
-            if(miningLand.getId()==0){
-                jsonObjectMiningLand.put("id","");
-            }else
-            jsonObjectMiningLand.put("id",miningLand.getId());
-            if(miningLand.getSurveyId()==null){
-                jsonObjectMiningLand.put("surveyId","");
-            }else
-            jsonObjectMiningLand.put("surveyId",miningLand.getSurveyId());
-            if(miningLand.getDiscountingFactors()==null){
-                jsonObjectMiningLand.put("discountingFactors","");
-            }else
-            jsonObjectMiningLand.put("discountingFactors",getDiscountingFactors(miningLand.getDiscountingFactors()));
-            if(miningLand.getOutlays()==null){
-                jsonObjectMiningLand.put("outlays","");
-            }else
-            jsonObjectMiningLand.put("outlays",getOutLays(miningLand.getOutlays()));
-            if(miningLand.getDiscountPercentage()==0){
-                jsonObjectMiningLand.put("discountPercentage","");
-            }else
-            jsonObjectMiningLand.put("discountPercentage",miningLand.getDiscountPercentage());
-            if(miningLand.getNetPresentValue()==0){
-                jsonObjectMiningLand.put("netPresentValue","");
-            }else
-            jsonObjectMiningLand.put("netPresentValue",miningLand.getNetPresentValue());
-            if(miningLand.getCashFlows()==null){
-                jsonObjectMiningLand.put("cashFlows","");
-            }else
-            jsonObjectMiningLand.put("cashFlows",getCashFlows(miningLand.getCashFlows()));
-            if(miningLand.getCostElements()==null){
-                jsonObjectMiningLand.put("costElements","");
-            }else
-            jsonObjectMiningLand.put("costElements",getCostElement(miningLand.getCostElements()));
-            if(miningLand.getRevenueProducts()==null){
-                jsonObjectMiningLand.put("revenueProducts","");
-            }else
-            jsonObjectMiningLand.put("revenueProducts",getRevenueProducts(miningLand.getRevenueProducts()));
-            if(miningLand.getDiscountedCashFlows()==null){
-                jsonObjectMiningLand.put("discountedCashFlows","");
-            }else
-            jsonObjectMiningLand.put("discountedCashFlows",getDiscountedCashFlows(miningLand.getDiscountedCashFlows()));
+            if (miningLand.getId() == 0) {
+                jsonObjectMiningLand.put("id", "");
+            } else
+                jsonObjectMiningLand.put("id", miningLand.getId());
+            if (miningLand.getSurveyId() == null) {
+                jsonObjectMiningLand.put("surveyId", "");
+            } else
+                jsonObjectMiningLand.put("surveyId", miningLand.getSurveyId());
+            if (miningLand.getDiscountingFactors() == null) {
+                jsonObjectMiningLand.put("discountingFactors", "");
+            } else
+                jsonObjectMiningLand.put("discountingFactors", getDiscountingFactors(miningLand.getDiscountingFactors()));
+            if (miningLand.getOutlays() == null) {
+                jsonObjectMiningLand.put("outlays", "");
+            } else
+                jsonObjectMiningLand.put("outlays", getOutLays(miningLand.getOutlays()));
+            if (miningLand.getDiscountPercentage() == 0) {
+                jsonObjectMiningLand.put("discountPercentage", "");
+            } else
+                jsonObjectMiningLand.put("discountPercentage", miningLand.getDiscountPercentage());
+            if (miningLand.getNetPresentValue() == 0) {
+                jsonObjectMiningLand.put("netPresentValue", "");
+            } else
+                jsonObjectMiningLand.put("netPresentValue", miningLand.getNetPresentValue());
+            if (miningLand.getCashFlows() == null) {
+                jsonObjectMiningLand.put("cashFlows", "");
+            } else
+                jsonObjectMiningLand.put("cashFlows", getCashFlows(miningLand.getCashFlows()));
+            if (miningLand.getCostElements() == null) {
+                jsonObjectMiningLand.put("costElements", "");
+            } else
+                jsonObjectMiningLand.put("costElements", getCostElement(miningLand.getCostElements()));
+            if (miningLand.getRevenueProducts() == null) {
+                jsonObjectMiningLand.put("revenueProducts", "");
+            } else
+                jsonObjectMiningLand.put("revenueProducts", getRevenueProducts(miningLand.getRevenueProducts()));
+            if (miningLand.getDiscountedCashFlows() == null) {
+                jsonObjectMiningLand.put("discountedCashFlows", "");
+            } else
+                jsonObjectMiningLand.put("discountedCashFlows", getDiscountedCashFlows(miningLand.getDiscountedCashFlows()));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -477,46 +486,46 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
         JSONObject jsonObjectPastureLand = new JSONObject();
         try {
-            if(pastureLand.getId()==0){
-                jsonObjectPastureLand.put("id","");
-            }else
-            jsonObjectPastureLand.put("id",pastureLand.getId());
-            if(pastureLand.getSurveyId()==null){
-                jsonObjectPastureLand.put("surveyId","");
-            }else
-            jsonObjectPastureLand.put("surveyId",pastureLand.getSurveyId());
-            if(pastureLand.getDiscountingFactors()==null){
-                jsonObjectPastureLand.put("discountingFactors","");
-            }else
-            jsonObjectPastureLand.put("discountingFactors",getDiscountingFactors(pastureLand.getDiscountingFactors()));
-            if(pastureLand.getOutlays()==null){
-                jsonObjectPastureLand.put("outlays","");
-            }else
-            jsonObjectPastureLand.put("outlays",getOutLays(pastureLand.getOutlays()));
-            if(pastureLand.getDiscountPercentage()==0){
-                jsonObjectPastureLand.put("discountPercentage","");
-            }else
-            jsonObjectPastureLand.put("discountPercentage",pastureLand.getDiscountPercentage());
-            if(pastureLand.getNetPresentValue()==0){
-                jsonObjectPastureLand.put("netPresentValue","");
-            }else
-            jsonObjectPastureLand.put("netPresentValue",pastureLand.getNetPresentValue());
-            if(pastureLand.getCashFlows()==null){
-                jsonObjectPastureLand.put("cashFlows","");
-            }else
-            jsonObjectPastureLand.put("cashFlows",getCashFlows(pastureLand.getCashFlows()));
-            if(pastureLand.getCostElements()==null){
-                jsonObjectPastureLand.put("costElements","");
-            }else
-            jsonObjectPastureLand.put("costElements",getCostElement(pastureLand.getCostElements()));
-            if(pastureLand.getRevenueProducts()==null){
-                jsonObjectPastureLand.put("revenueProducts","");
-            }else
-            jsonObjectPastureLand.put("revenueProducts",getRevenueProducts(pastureLand.getRevenueProducts()));
-            if(pastureLand.getDiscountedCashFlows()==null){
-                jsonObjectPastureLand.put("discountedCashFlows","");
-            }else
-            jsonObjectPastureLand.put("discountedCashFlows",getDiscountedCashFlows(pastureLand.getDiscountedCashFlows()));
+            if (pastureLand.getId() == 0) {
+                jsonObjectPastureLand.put("id", "");
+            } else
+                jsonObjectPastureLand.put("id", pastureLand.getId());
+            if (pastureLand.getSurveyId() == null) {
+                jsonObjectPastureLand.put("surveyId", "");
+            } else
+                jsonObjectPastureLand.put("surveyId", pastureLand.getSurveyId());
+            if (pastureLand.getDiscountingFactors() == null) {
+                jsonObjectPastureLand.put("discountingFactors", "");
+            } else
+                jsonObjectPastureLand.put("discountingFactors", getDiscountingFactors(pastureLand.getDiscountingFactors()));
+            if (pastureLand.getOutlays() == null) {
+                jsonObjectPastureLand.put("outlays", "");
+            } else
+                jsonObjectPastureLand.put("outlays", getOutLays(pastureLand.getOutlays()));
+            if (pastureLand.getDiscountPercentage() == 0) {
+                jsonObjectPastureLand.put("discountPercentage", "");
+            } else
+                jsonObjectPastureLand.put("discountPercentage", pastureLand.getDiscountPercentage());
+            if (pastureLand.getNetPresentValue() == 0) {
+                jsonObjectPastureLand.put("netPresentValue", "");
+            } else
+                jsonObjectPastureLand.put("netPresentValue", pastureLand.getNetPresentValue());
+            if (pastureLand.getCashFlows() == null) {
+                jsonObjectPastureLand.put("cashFlows", "");
+            } else
+                jsonObjectPastureLand.put("cashFlows", getCashFlows(pastureLand.getCashFlows()));
+            if (pastureLand.getCostElements() == null) {
+                jsonObjectPastureLand.put("costElements", "");
+            } else
+                jsonObjectPastureLand.put("costElements", getCostElement(pastureLand.getCostElements()));
+            if (pastureLand.getRevenueProducts() == null) {
+                jsonObjectPastureLand.put("revenueProducts", "");
+            } else
+                jsonObjectPastureLand.put("revenueProducts", getRevenueProducts(pastureLand.getRevenueProducts()));
+            if (pastureLand.getDiscountedCashFlows() == null) {
+                jsonObjectPastureLand.put("discountedCashFlows", "");
+            } else
+                jsonObjectPastureLand.put("discountedCashFlows", getDiscountedCashFlows(pastureLand.getDiscountedCashFlows()));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -527,46 +536,46 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
     private JSONObject getCropLand(CropLand cropLand) {
         JSONObject jsonObjectCropLand = new JSONObject();
         try {
-            if(cropLand.getId()==0){
-                jsonObjectCropLand.put("id","");
-            }else
-            jsonObjectCropLand.put("id",cropLand.getId());
-            if(cropLand.getSurveyId()==null){
-                jsonObjectCropLand.put("surveyId","");
-            }else
-            jsonObjectCropLand.put("surveyId",cropLand.getSurveyId());
-            if(cropLand.getNetPresentValue()==0){
-                jsonObjectCropLand.put("netPresentValue","");
-            }else
-            jsonObjectCropLand.put("netPresentValue",cropLand.getNetPresentValue());
-            if(cropLand.getCashFlows()==null){
-                jsonObjectCropLand.put("cashFlows","");
-            }else
-            jsonObjectCropLand.put("cashFlows",getCashFlows(cropLand.getCashFlows()));
-            if(cropLand.getCostElements()==null){
-                jsonObjectCropLand.put("costElements","");
-            }else
-            jsonObjectCropLand.put("costElements",getCostElement(cropLand.getCostElements()));
-            if(cropLand.getDiscountedCashFlows()==null){
-                jsonObjectCropLand.put("discountedCashFlows","");
-            }else
-            jsonObjectCropLand.put("discountedCashFlows",getDiscountedCashFlows(cropLand.getDiscountedCashFlows()));
-            if(cropLand.getDiscountPercentage()==0){
-                jsonObjectCropLand.put("discountPercentage","");
-            }else
-            jsonObjectCropLand.put("discountPercentage",cropLand.getDiscountPercentage());
-            if(cropLand.getOutlays()==null){
-                jsonObjectCropLand.put("outlays","");
-            }else
-            jsonObjectCropLand.put("outlays",getOutLays(cropLand.getOutlays()));
-            if(cropLand.getRevenueProducts()==null){
-                jsonObjectCropLand.put("revenueProducts","");
-            }else
-            jsonObjectCropLand.put("revenueProducts",getRevenueProducts(cropLand.getRevenueProducts()));
-            if(cropLand.getDiscountingFactors()==null){
-                jsonObjectCropLand.put("discountingFactors","");
-            }else
-            jsonObjectCropLand.put("discountingFactors",getDiscountingFactors(cropLand.getDiscountingFactors()));
+            if (cropLand.getId() == 0) {
+                jsonObjectCropLand.put("id", "");
+            } else
+                jsonObjectCropLand.put("id", cropLand.getId());
+            if (cropLand.getSurveyId() == null) {
+                jsonObjectCropLand.put("surveyId", "");
+            } else
+                jsonObjectCropLand.put("surveyId", cropLand.getSurveyId());
+            if (cropLand.getNetPresentValue() == 0) {
+                jsonObjectCropLand.put("netPresentValue", "");
+            } else
+                jsonObjectCropLand.put("netPresentValue", cropLand.getNetPresentValue());
+            if (cropLand.getCashFlows() == null) {
+                jsonObjectCropLand.put("cashFlows", "");
+            } else
+                jsonObjectCropLand.put("cashFlows", getCashFlows(cropLand.getCashFlows()));
+            if (cropLand.getCostElements() == null) {
+                jsonObjectCropLand.put("costElements", "");
+            } else
+                jsonObjectCropLand.put("costElements", getCostElement(cropLand.getCostElements()));
+            if (cropLand.getDiscountedCashFlows() == null) {
+                jsonObjectCropLand.put("discountedCashFlows", "");
+            } else
+                jsonObjectCropLand.put("discountedCashFlows", getDiscountedCashFlows(cropLand.getDiscountedCashFlows()));
+            if (cropLand.getDiscountPercentage() == 0) {
+                jsonObjectCropLand.put("discountPercentage", "");
+            } else
+                jsonObjectCropLand.put("discountPercentage", cropLand.getDiscountPercentage());
+            if (cropLand.getOutlays() == null) {
+                jsonObjectCropLand.put("outlays", "");
+            } else
+                jsonObjectCropLand.put("outlays", getOutLays(cropLand.getOutlays()));
+            if (cropLand.getRevenueProducts() == null) {
+                jsonObjectCropLand.put("revenueProducts", "");
+            } else
+                jsonObjectCropLand.put("revenueProducts", getRevenueProducts(cropLand.getRevenueProducts()));
+            if (cropLand.getDiscountingFactors() == null) {
+                jsonObjectCropLand.put("discountingFactors", "");
+            } else
+                jsonObjectCropLand.put("discountingFactors", getDiscountingFactors(cropLand.getDiscountingFactors()));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -577,46 +586,46 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
     private JSONObject getForestLand(ForestLand forestLand) {
         JSONObject jsonObjectForestLand = new JSONObject();
         try {
-            if(forestLand.getId()==0){
-                jsonObjectForestLand.put("id","");
-            }else
-            jsonObjectForestLand.put("id",forestLand.getId());
-            if(forestLand.getNetPresentValue()==0){
-                jsonObjectForestLand.put("netPresentValue","");
-            }else
-            jsonObjectForestLand.put("netPresentValue",forestLand.getNetPresentValue());
-            if(forestLand.getCashFlows()==null){
-                jsonObjectForestLand.put("cashFlows","");
-            }else
-            jsonObjectForestLand.put("cashFlows",getCashFlows(forestLand.getCashFlows()));
-            if(forestLand.getCostElements()==null){
-                jsonObjectForestLand.put("costElements","");
-            }else
-            jsonObjectForestLand.put("costElements",getCostElement(forestLand.getCostElements()));
-            if(forestLand.getDiscountedCashFlows()==null){
-                jsonObjectForestLand.put("discountedCashFlows","");
-            }else
-            jsonObjectForestLand.put("discountedCashFlows",getDiscountedCashFlows(forestLand.getDiscountedCashFlows()));
-            if(forestLand.getDiscountingFactors()==null){
-                jsonObjectForestLand.put("discountingFactors","");
-            }else
-            jsonObjectForestLand.put("discountingFactors",getDiscountingFactors(forestLand.getDiscountingFactors()));
-            if(forestLand.getDiscountPercentage()==0){
-                jsonObjectForestLand.put("discountPercentage","");
-            }else
-            jsonObjectForestLand.put("discountPercentage",forestLand.getDiscountPercentage());
-            if(forestLand.getOutlays()==null){
-                jsonObjectForestLand.put("Outlays","");
-            }else
-            jsonObjectForestLand.put("Outlays",getOutLays(forestLand.getOutlays()));
-            if(forestLand.getRevenueProducts()==null){
-                jsonObjectForestLand.put("revenueProducts","");
-            }else
-            jsonObjectForestLand.put("revenueProducts",getRevenueProducts(forestLand.getRevenueProducts()));
-            if(forestLand.getSurveyId()==null){
-                jsonObjectForestLand.put("surveyId","");
-            }else
-            jsonObjectForestLand.put("surveyId",forestLand.getSurveyId());
+            if (forestLand.getId() == 0) {
+                jsonObjectForestLand.put("id", "");
+            } else
+                jsonObjectForestLand.put("id", forestLand.getId());
+            if (forestLand.getNetPresentValue() == 0) {
+                jsonObjectForestLand.put("netPresentValue", "");
+            } else
+                jsonObjectForestLand.put("netPresentValue", forestLand.getNetPresentValue());
+            if (forestLand.getCashFlows() == null) {
+                jsonObjectForestLand.put("cashFlows", "");
+            } else
+                jsonObjectForestLand.put("cashFlows", getCashFlows(forestLand.getCashFlows()));
+            if (forestLand.getCostElements() == null) {
+                jsonObjectForestLand.put("costElements", "");
+            } else
+                jsonObjectForestLand.put("costElements", getCostElement(forestLand.getCostElements()));
+            if (forestLand.getDiscountedCashFlows() == null) {
+                jsonObjectForestLand.put("discountedCashFlows", "");
+            } else
+                jsonObjectForestLand.put("discountedCashFlows", getDiscountedCashFlows(forestLand.getDiscountedCashFlows()));
+            if (forestLand.getDiscountingFactors() == null) {
+                jsonObjectForestLand.put("discountingFactors", "");
+            } else
+                jsonObjectForestLand.put("discountingFactors", getDiscountingFactors(forestLand.getDiscountingFactors()));
+            if (forestLand.getDiscountPercentage() == 0) {
+                jsonObjectForestLand.put("discountPercentage", "");
+            } else
+                jsonObjectForestLand.put("discountPercentage", forestLand.getDiscountPercentage());
+            if (forestLand.getOutlays() == null) {
+                jsonObjectForestLand.put("Outlays", "");
+            } else
+                jsonObjectForestLand.put("Outlays", getOutLays(forestLand.getOutlays()));
+            if (forestLand.getRevenueProducts() == null) {
+                jsonObjectForestLand.put("revenueProducts", "");
+            } else
+                jsonObjectForestLand.put("revenueProducts", getRevenueProducts(forestLand.getRevenueProducts()));
+            if (forestLand.getSurveyId() == null) {
+                jsonObjectForestLand.put("surveyId", "");
+            } else
+                jsonObjectForestLand.put("surveyId", forestLand.getSurveyId());
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -626,33 +635,33 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
     private JSONArray getRevenueProducts(RealmList<RevenueProduct> revenueProducts) {
         JSONArray jsonRevenueProductsArray = new JSONArray();
-        for(RevenueProduct revenueProduct:revenueProducts) {
+        for (RevenueProduct revenueProduct : revenueProducts) {
             JSONObject jsonObjectRevenueProducts = new JSONObject();
             try {
-                if(revenueProduct.getId()==0){
-                    jsonObjectRevenueProducts.put("id","");
-                }else
-                jsonObjectRevenueProducts.put("id",revenueProduct.getId());
-                if(revenueProduct.getSurveyId()==null){
-                    jsonObjectRevenueProducts.put("surveyId","");
-                }else
-                jsonObjectRevenueProducts.put("surveyId",revenueProduct.getSurveyId());
-                if(revenueProduct.getType()==null){
-                    jsonObjectRevenueProducts.put("type","");
-                }else
-                jsonObjectRevenueProducts.put("type",revenueProduct.getType());
-                if(revenueProduct.getLandKind()==null){
-                    jsonObjectRevenueProducts.put("landKind","");
-                }else
-                jsonObjectRevenueProducts.put("landKind",revenueProduct.getLandKind());
-                if(revenueProduct.getName()==null){
-                    jsonObjectRevenueProducts.put("name","");
-                }else
-                jsonObjectRevenueProducts.put("name",revenueProduct.getName());
-                if(revenueProduct.getRevenueProductYearses()==null){
-                    jsonObjectRevenueProducts.put("revenueProductYearses","");
-                }else
-                jsonObjectRevenueProducts.put("revenueProductYearses",getRevenueProductYear(revenueProduct.getRevenueProductYearses()));
+                if (revenueProduct.getId() == 0) {
+                    jsonObjectRevenueProducts.put("id", "");
+                } else
+                    jsonObjectRevenueProducts.put("id", revenueProduct.getId());
+                if (revenueProduct.getSurveyId() == null) {
+                    jsonObjectRevenueProducts.put("surveyId", "");
+                } else
+                    jsonObjectRevenueProducts.put("surveyId", revenueProduct.getSurveyId());
+                if (revenueProduct.getType() == null) {
+                    jsonObjectRevenueProducts.put("type", "");
+                } else
+                    jsonObjectRevenueProducts.put("type", revenueProduct.getType());
+                if (revenueProduct.getLandKind() == null) {
+                    jsonObjectRevenueProducts.put("landKind", "");
+                } else
+                    jsonObjectRevenueProducts.put("landKind", revenueProduct.getLandKind());
+                if (revenueProduct.getName() == null) {
+                    jsonObjectRevenueProducts.put("name", "");
+                } else
+                    jsonObjectRevenueProducts.put("name", revenueProduct.getName());
+                if (revenueProduct.getRevenueProductYearses() == null) {
+                    jsonObjectRevenueProducts.put("revenueProductYearses", "");
+                } else
+                    jsonObjectRevenueProducts.put("revenueProductYearses", getRevenueProductYear(revenueProduct.getRevenueProductYearses()));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -664,61 +673,61 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
     private JSONArray getRevenueProductYear(RealmList<RevenueProductYears> revenueProductYearses) {
 
         JSONArray jsonRevenueProductYearArray = new JSONArray();
-        for(RevenueProductYears revenueProductYear:revenueProductYearses) {
+        for (RevenueProductYears revenueProductYear : revenueProductYearses) {
             JSONObject jsonObjectRevenueProductYear = new JSONObject();
             try {
-                if(revenueProductYear.getId()==0){
-                    jsonObjectRevenueProductYear.put("id","");
-                }else
-                jsonObjectRevenueProductYear.put("id",revenueProductYear.getId());
-                if(revenueProductYear.getSurveyId()==null){
-                    jsonObjectRevenueProductYear.put("surveyId","");
-                }else
-                jsonObjectRevenueProductYear.put("surveyId",revenueProductYear.getSurveyId());
-                if(revenueProductYear.getLandKind()==null){
-                    jsonObjectRevenueProductYear.put("landKind","");
-                }else
-                jsonObjectRevenueProductYear.put("landKind",revenueProductYear.getLandKind());
-                if(revenueProductYear.getQuantityValue()==0){
-                    jsonObjectRevenueProductYear.put("quantityValue","");
-                }else
-                jsonObjectRevenueProductYear.put("quantityValue",revenueProductYear.getQuantityValue());
-                if(revenueProductYear.getHarvestFrequencyValue()==0){
-                    jsonObjectRevenueProductYear.put("harvestFrequencyValue","");
-                }else
-                jsonObjectRevenueProductYear.put("harvestFrequencyValue",revenueProductYear.getHarvestFrequencyValue());
-                if(revenueProductYear.getMarketPriceValue()==0){
-                    jsonObjectRevenueProductYear.put("marketPriceValue","");
-                }else
-                jsonObjectRevenueProductYear.put("marketPriceValue",revenueProductYear.getMarketPriceValue());
-                if(revenueProductYear.getHarvestFrequencyUnit()==0){
-                    jsonObjectRevenueProductYear.put("harvestFrequencyUnit","");
-                }else
-                jsonObjectRevenueProductYear.put("harvestFrequencyUnit",revenueProductYear.getHarvestFrequencyUnit());
-                if(revenueProductYear.getMarketPriceCurrency()==null){
-                    jsonObjectRevenueProductYear.put("marketPriceCurrency","");
-                }else
-                jsonObjectRevenueProductYear.put("marketPriceCurrency",revenueProductYear.getMarketPriceCurrency());
-                if(revenueProductYear.getProjectedIndex()==0){
-                    jsonObjectRevenueProductYear.put("projectedIndex","");
-                }else
-                jsonObjectRevenueProductYear.put("projectedIndex",revenueProductYear.getProjectedIndex());
-                if(revenueProductYear.getQuantityUnit()==null){
-                    jsonObjectRevenueProductYear.put("quantityUnit","");
-                }else
-                jsonObjectRevenueProductYear.put("quantityUnit",revenueProductYear.getQuantityUnit());
-                if(revenueProductYear.getRevenueProductId()==0){
-                    jsonObjectRevenueProductYear.put("revenueProductId","");
-                }else
-                jsonObjectRevenueProductYear.put("revenueProductId",revenueProductYear.getRevenueProductId());
-                if(revenueProductYear.getSubtotal()==0){
-                    jsonObjectRevenueProductYear.put("subtotal","");
-                }else
-                jsonObjectRevenueProductYear.put("subtotal",revenueProductYear.getSubtotal());
-                if(revenueProductYear.getYear()==0){
-                    jsonObjectRevenueProductYear.put("year","");
-                }else
-                jsonObjectRevenueProductYear.put("year",revenueProductYear.getYear());
+                if (revenueProductYear.getId() == 0) {
+                    jsonObjectRevenueProductYear.put("id", "");
+                } else
+                    jsonObjectRevenueProductYear.put("id", revenueProductYear.getId());
+                if (revenueProductYear.getSurveyId() == null) {
+                    jsonObjectRevenueProductYear.put("surveyId", "");
+                } else
+                    jsonObjectRevenueProductYear.put("surveyId", revenueProductYear.getSurveyId());
+                if (revenueProductYear.getLandKind() == null) {
+                    jsonObjectRevenueProductYear.put("landKind", "");
+                } else
+                    jsonObjectRevenueProductYear.put("landKind", revenueProductYear.getLandKind());
+                if (revenueProductYear.getQuantityValue() == 0) {
+                    jsonObjectRevenueProductYear.put("quantityValue", "");
+                } else
+                    jsonObjectRevenueProductYear.put("quantityValue", revenueProductYear.getQuantityValue());
+                if (revenueProductYear.getHarvestFrequencyValue() == 0) {
+                    jsonObjectRevenueProductYear.put("harvestFrequencyValue", "");
+                } else
+                    jsonObjectRevenueProductYear.put("harvestFrequencyValue", revenueProductYear.getHarvestFrequencyValue());
+                if (revenueProductYear.getMarketPriceValue() == 0) {
+                    jsonObjectRevenueProductYear.put("marketPriceValue", "");
+                } else
+                    jsonObjectRevenueProductYear.put("marketPriceValue", revenueProductYear.getMarketPriceValue());
+                if (revenueProductYear.getHarvestFrequencyUnit() == 0) {
+                    jsonObjectRevenueProductYear.put("harvestFrequencyUnit", "");
+                } else
+                    jsonObjectRevenueProductYear.put("harvestFrequencyUnit", revenueProductYear.getHarvestFrequencyUnit());
+                if (revenueProductYear.getMarketPriceCurrency() == null) {
+                    jsonObjectRevenueProductYear.put("marketPriceCurrency", "");
+                } else
+                    jsonObjectRevenueProductYear.put("marketPriceCurrency", revenueProductYear.getMarketPriceCurrency());
+                if (revenueProductYear.getProjectedIndex() == 0) {
+                    jsonObjectRevenueProductYear.put("projectedIndex", "");
+                } else
+                    jsonObjectRevenueProductYear.put("projectedIndex", revenueProductYear.getProjectedIndex());
+                if (revenueProductYear.getQuantityUnit() == null) {
+                    jsonObjectRevenueProductYear.put("quantityUnit", "");
+                } else
+                    jsonObjectRevenueProductYear.put("quantityUnit", revenueProductYear.getQuantityUnit());
+                if (revenueProductYear.getRevenueProductId() == 0) {
+                    jsonObjectRevenueProductYear.put("revenueProductId", "");
+                } else
+                    jsonObjectRevenueProductYear.put("revenueProductId", revenueProductYear.getRevenueProductId());
+                if (revenueProductYear.getSubtotal() == 0) {
+                    jsonObjectRevenueProductYear.put("subtotal", "");
+                } else
+                    jsonObjectRevenueProductYear.put("subtotal", revenueProductYear.getSubtotal());
+                if (revenueProductYear.getYear() == 0) {
+                    jsonObjectRevenueProductYear.put("year", "");
+                } else
+                    jsonObjectRevenueProductYear.put("year", revenueProductYear.getYear());
 
 
             } catch (JSONException e) {
@@ -732,37 +741,37 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
     private JSONArray getOutLays(RealmList<Outlay> outlays) {
 
         JSONArray jsonOutLaysArray = new JSONArray();
-        for(Outlay outlay:outlays) {
+        for (Outlay outlay : outlays) {
             JSONObject jsonObjectOutLays = new JSONObject();
             try {
-                if(outlay.getId()==0){
-                    jsonObjectOutLays.put("id","");
-                }else
-                jsonObjectOutLays.put("id",outlay.getId());
-                if(outlay.getSurveyId()==null){
-                    jsonObjectOutLays.put("surveyId","");
-                }else
-                jsonObjectOutLays.put("surveyId",outlay.getSurveyId());
-                if(outlay.getYear()==0){
-                    jsonObjectOutLays.put("year","");
-                }else
-                jsonObjectOutLays.put("year",outlay.getYear());
-                if(outlay.getItemName()==null){
-                    jsonObjectOutLays.put("itemName","");
-                }else
-                jsonObjectOutLays.put("itemName",outlay.getItemName());
-                if(outlay.getPrice()==0){
-                    jsonObjectOutLays.put("price","");
-                }else
-                jsonObjectOutLays.put("price",outlay.getPrice());
-                if(outlay.getType()==null){
-                    jsonObjectOutLays.put("type","");
-                }else
-                jsonObjectOutLays.put("type",outlay.getType());
-                if(outlay.getUnit()==null){
-                    jsonObjectOutLays.put("unit","");
-                }else
-                jsonObjectOutLays.put("unit",outlay.getUnit());
+                if (outlay.getId() == 0) {
+                    jsonObjectOutLays.put("id", "");
+                } else
+                    jsonObjectOutLays.put("id", outlay.getId());
+                if (outlay.getSurveyId() == null) {
+                    jsonObjectOutLays.put("surveyId", "");
+                } else
+                    jsonObjectOutLays.put("surveyId", outlay.getSurveyId());
+                if (outlay.getYear() == 0) {
+                    jsonObjectOutLays.put("year", "");
+                } else
+                    jsonObjectOutLays.put("year", outlay.getYear());
+                if (outlay.getItemName() == null) {
+                    jsonObjectOutLays.put("itemName", "");
+                } else
+                    jsonObjectOutLays.put("itemName", outlay.getItemName());
+                if (outlay.getPrice() == 0) {
+                    jsonObjectOutLays.put("price", "");
+                } else
+                    jsonObjectOutLays.put("price", outlay.getPrice());
+                if (outlay.getType() == null) {
+                    jsonObjectOutLays.put("type", "");
+                } else
+                    jsonObjectOutLays.put("type", outlay.getType());
+                if (outlay.getUnit() == null) {
+                    jsonObjectOutLays.put("unit", "");
+                } else
+                    jsonObjectOutLays.put("unit", outlay.getUnit());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -774,25 +783,25 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
     private JSONArray getDiscountingFactors(RealmList<DiscountingFactor> discountingFactors) {
 
         JSONArray jsonDiscountingFactorsArray = new JSONArray();
-        for(DiscountingFactor discountingFactor:discountingFactors) {
+        for (DiscountingFactor discountingFactor : discountingFactors) {
             JSONObject jsonObjectDiscountingFactor = new JSONObject();
             try {
-                if(discountingFactor.getId()==0){
-                    jsonObjectDiscountingFactor.put("id","");
-                }else
-                jsonObjectDiscountingFactor.put("id",discountingFactor.getId());
-                if(discountingFactor.getSurveyId()==null){
-                    jsonObjectDiscountingFactor.put("surveyId","");
-                }else
-                jsonObjectDiscountingFactor.put("surveyId",discountingFactor.getSurveyId());
-                if(discountingFactor.getValue()==0){
-                    jsonObjectDiscountingFactor.put("value","");
-                }else
-                jsonObjectDiscountingFactor.put("value",discountingFactor.getValue());
-                if(discountingFactor.getYear()==0){
-                    jsonObjectDiscountingFactor.put("year","");
-                }else
-                jsonObjectDiscountingFactor.put("year",discountingFactor.getYear());
+                if (discountingFactor.getId() == 0) {
+                    jsonObjectDiscountingFactor.put("id", "");
+                } else
+                    jsonObjectDiscountingFactor.put("id", discountingFactor.getId());
+                if (discountingFactor.getSurveyId() == null) {
+                    jsonObjectDiscountingFactor.put("surveyId", "");
+                } else
+                    jsonObjectDiscountingFactor.put("surveyId", discountingFactor.getSurveyId());
+                if (discountingFactor.getValue() == 0) {
+                    jsonObjectDiscountingFactor.put("value", "");
+                } else
+                    jsonObjectDiscountingFactor.put("value", discountingFactor.getValue());
+                if (discountingFactor.getYear() == 0) {
+                    jsonObjectDiscountingFactor.put("year", "");
+                } else
+                    jsonObjectDiscountingFactor.put("year", discountingFactor.getYear());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -803,25 +812,25 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
     private JSONArray getDiscountedCashFlows(RealmList<DiscountedCashFlow> discountedCashFlows) {
         JSONArray jsonDiscountedCashFlowArray = new JSONArray();
-        for(DiscountedCashFlow discountedCashFlow:discountedCashFlows) {
+        for (DiscountedCashFlow discountedCashFlow : discountedCashFlows) {
             JSONObject jsonObjectDiscountedCashFlow = new JSONObject();
             try {
-                if(discountedCashFlow.getId()==0){
-                    jsonObjectDiscountedCashFlow.put("id","");
-                }else
-                jsonObjectDiscountedCashFlow.put("id",discountedCashFlow.getId());
-                if(discountedCashFlow.getSurveyId()==null){
-                    jsonObjectDiscountedCashFlow.put("surveyId","");
-                }else
-                jsonObjectDiscountedCashFlow.put("surveyId",discountedCashFlow.getSurveyId());
-                if(discountedCashFlow.getYear()==0){
-                    jsonObjectDiscountedCashFlow.put("year","");
-                }else
-                jsonObjectDiscountedCashFlow.put("year",discountedCashFlow.getYear());
-                if(discountedCashFlow.getValue()==0){
-                    jsonObjectDiscountedCashFlow.put("value","");
-                }else
-                jsonObjectDiscountedCashFlow.put("value",discountedCashFlow.getValue());
+                if (discountedCashFlow.getId() == 0) {
+                    jsonObjectDiscountedCashFlow.put("id", "");
+                } else
+                    jsonObjectDiscountedCashFlow.put("id", discountedCashFlow.getId());
+                if (discountedCashFlow.getSurveyId() == null) {
+                    jsonObjectDiscountedCashFlow.put("surveyId", "");
+                } else
+                    jsonObjectDiscountedCashFlow.put("surveyId", discountedCashFlow.getSurveyId());
+                if (discountedCashFlow.getYear() == 0) {
+                    jsonObjectDiscountedCashFlow.put("year", "");
+                } else
+                    jsonObjectDiscountedCashFlow.put("year", discountedCashFlow.getYear());
+                if (discountedCashFlow.getValue() == 0) {
+                    jsonObjectDiscountedCashFlow.put("value", "");
+                } else
+                    jsonObjectDiscountedCashFlow.put("value", discountedCashFlow.getValue());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -833,33 +842,33 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
     private JSONArray getCostElement(RealmList<CostElement> costElements) {
 
         JSONArray jsonCostElementArray = new JSONArray();
-        for(CostElement costelement:costElements) {
+        for (CostElement costelement : costElements) {
             JSONObject jsonObjectCostElement = new JSONObject();
             try {
-                if(costelement.getId()==0){
-                    jsonObjectCostElement.put("id","");
-                }else
-                jsonObjectCostElement.put("id",costelement.getId());
-                if(costelement.getSurveyId()==null){
-                    jsonObjectCostElement.put("surveyId","");
-                }else
-                jsonObjectCostElement.put("surveyId",costelement.getSurveyId());
-                if(costelement.getCostElementYearses()==null){
-                    jsonObjectCostElement.put("costElementYearses","");
-                }else
-                jsonObjectCostElement.put("costElementYearses",getCostElementYears(costelement.getCostElementYearses()));
-                if(costelement.getLandKind()==null){
-                    jsonObjectCostElement.put("landKind","");
-                }else
-                jsonObjectCostElement.put("landKind",costelement.getLandKind());
-                if(costelement.getName()==null){
-                    jsonObjectCostElement.put("name","");
-                }else
-                jsonObjectCostElement.put("name",costelement.getName());
-                if(costelement.getType()==null){
-                    jsonObjectCostElement.put("type","");
-                }else
-                jsonObjectCostElement.put("type",costelement.getType());
+                if (costelement.getId() == 0) {
+                    jsonObjectCostElement.put("id", "");
+                } else
+                    jsonObjectCostElement.put("id", costelement.getId());
+                if (costelement.getSurveyId() == null) {
+                    jsonObjectCostElement.put("surveyId", "");
+                } else
+                    jsonObjectCostElement.put("surveyId", costelement.getSurveyId());
+                if (costelement.getCostElementYearses() == null) {
+                    jsonObjectCostElement.put("costElementYearses", "");
+                } else
+                    jsonObjectCostElement.put("costElementYearses", getCostElementYears(costelement.getCostElementYearses()));
+                if (costelement.getLandKind() == null) {
+                    jsonObjectCostElement.put("landKind", "");
+                } else
+                    jsonObjectCostElement.put("landKind", costelement.getLandKind());
+                if (costelement.getName() == null) {
+                    jsonObjectCostElement.put("name", "");
+                } else
+                    jsonObjectCostElement.put("name", costelement.getName());
+                if (costelement.getType() == null) {
+                    jsonObjectCostElement.put("type", "");
+                } else
+                    jsonObjectCostElement.put("type", costelement.getType());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -871,61 +880,61 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
     private JSONArray getCostElementYears(RealmList<CostElementYears> costElementYearses) {
 
         JSONArray jsonCostElementYearsArray = new JSONArray();
-        for(CostElementYears costElementYears:costElementYearses) {
+        for (CostElementYears costElementYears : costElementYearses) {
             JSONObject jsonObjectCostElementYears = new JSONObject();
             try {
-                if(costElementYears.getSurveyId()==null){
-                    jsonObjectCostElementYears.put("surveyI1d","");
-                }else
-                jsonObjectCostElementYears.put("surveyI1d", costElementYears.getSurveyId());
-                if(costElementYears.getLandKind()==null){
-                    jsonObjectCostElementYears.put("landKind","");
-                }else
-                jsonObjectCostElementYears.put("landKind", costElementYears.getLandKind());
-                if(costElementYears.getId()==0){
-                    jsonObjectCostElementYears.put("id","");
-                }else
-                jsonObjectCostElementYears.put("id", costElementYears.getId());
-                if(costElementYears.getCostFrequencyValue()==0){
-                    jsonObjectCostElementYears.put("costFrequencyValue","");
-                }else
-                jsonObjectCostElementYears.put("costFrequencyValue", costElementYears.getCostFrequencyValue());
-                if(costElementYears.getCostPerPeriodValue()==0){
-                    jsonObjectCostElementYears.put("costPerPeriodValue","");
-                }else
-                jsonObjectCostElementYears.put("costPerPeriodValue", costElementYears.getCostPerPeriodValue());
-                if(costElementYears.getCostPerUnitValue()==0){
-                    jsonObjectCostElementYears.put("costPerUnitValue","");
-                }else
-                jsonObjectCostElementYears.put("costPerUnitValue", costElementYears.getCostPerUnitValue());
-                if(costElementYears.getCostElementId()==0){
-                    jsonObjectCostElementYears.put("costElementId","");
-                }else
-                jsonObjectCostElementYears.put("costElementId", costElementYears.getCostElementId());
-                if(costElementYears.getCostFrequencyUnit()==0){
-                    jsonObjectCostElementYears.put("costFrequencyUnit","");
-                }else
-                jsonObjectCostElementYears.put("costFrequencyUnit", costElementYears.getCostFrequencyUnit());
-                if(costElementYears.getCostPerPeriodUnit()==null){
-                    jsonObjectCostElementYears.put("costPerPeriodUni","");
-                }else
-                jsonObjectCostElementYears.put("costPerPeriodUni", costElementYears.getCostPerPeriodUnit());
-                if(costElementYears.getProjectedIndex()==0){
-                    jsonObjectCostElementYears.put("projectedIndex","");
-                }else
-                jsonObjectCostElementYears.put("projectedIndex", costElementYears.getProjectedIndex());
-                if(costElementYears.getSubtotal()==0){
-                    jsonObjectCostElementYears.put("subtotal","");
-                }else
-                jsonObjectCostElementYears.put("subtotal", costElementYears.getSubtotal());
-                if(costElementYears.getYear()==0){
-                    jsonObjectCostElementYears.put("year","");
-                }else
-                jsonObjectCostElementYears.put("year", costElementYears.getYear());
-                if(costElementYears.getCostPerUnitUnit()==null){
-                    jsonObjectCostElementYears.put("costPerUnitUnit","");
-                }else
-                jsonObjectCostElementYears.put("costPerUnitUnit", costElementYears.getCostPerUnitUnit());
+                if (costElementYears.getSurveyId() == null) {
+                    jsonObjectCostElementYears.put("surveyI1d", "");
+                } else
+                    jsonObjectCostElementYears.put("surveyI1d", costElementYears.getSurveyId());
+                if (costElementYears.getLandKind() == null) {
+                    jsonObjectCostElementYears.put("landKind", "");
+                } else
+                    jsonObjectCostElementYears.put("landKind", costElementYears.getLandKind());
+                if (costElementYears.getId() == 0) {
+                    jsonObjectCostElementYears.put("id", "");
+                } else
+                    jsonObjectCostElementYears.put("id", costElementYears.getId());
+                if (costElementYears.getCostFrequencyValue() == 0) {
+                    jsonObjectCostElementYears.put("costFrequencyValue", "");
+                } else
+                    jsonObjectCostElementYears.put("costFrequencyValue", costElementYears.getCostFrequencyValue());
+                if (costElementYears.getCostPerPeriodValue() == 0) {
+                    jsonObjectCostElementYears.put("costPerPeriodValue", "");
+                } else
+                    jsonObjectCostElementYears.put("costPerPeriodValue", costElementYears.getCostPerPeriodValue());
+                if (costElementYears.getCostPerUnitValue() == 0) {
+                    jsonObjectCostElementYears.put("costPerUnitValue", "");
+                } else
+                    jsonObjectCostElementYears.put("costPerUnitValue", costElementYears.getCostPerUnitValue());
+                if (costElementYears.getCostElementId() == 0) {
+                    jsonObjectCostElementYears.put("costElementId", "");
+                } else
+                    jsonObjectCostElementYears.put("costElementId", costElementYears.getCostElementId());
+                if (costElementYears.getCostFrequencyUnit() == 0) {
+                    jsonObjectCostElementYears.put("costFrequencyUnit", "");
+                } else
+                    jsonObjectCostElementYears.put("costFrequencyUnit", costElementYears.getCostFrequencyUnit());
+                if (costElementYears.getCostPerPeriodUnit() == null) {
+                    jsonObjectCostElementYears.put("costPerPeriodUni", "");
+                } else
+                    jsonObjectCostElementYears.put("costPerPeriodUni", costElementYears.getCostPerPeriodUnit());
+                if (costElementYears.getProjectedIndex() == 0) {
+                    jsonObjectCostElementYears.put("projectedIndex", "");
+                } else
+                    jsonObjectCostElementYears.put("projectedIndex", costElementYears.getProjectedIndex());
+                if (costElementYears.getSubtotal() == 0) {
+                    jsonObjectCostElementYears.put("subtotal", "");
+                } else
+                    jsonObjectCostElementYears.put("subtotal", costElementYears.getSubtotal());
+                if (costElementYears.getYear() == 0) {
+                    jsonObjectCostElementYears.put("year", "");
+                } else
+                    jsonObjectCostElementYears.put("year", costElementYears.getYear());
+                if (costElementYears.getCostPerUnitUnit() == null) {
+                    jsonObjectCostElementYears.put("costPerUnitUnit", "");
+                } else
+                    jsonObjectCostElementYears.put("costPerUnitUnit", costElementYears.getCostPerUnitUnit());
 
 
             } catch (JSONException e) {
@@ -938,34 +947,33 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
     private JSONArray getCashFlows(RealmList<CashFlow> cashFlows) {
         JSONArray jsonCashFlowArray = new JSONArray();
-        for(CashFlow cashFlow:cashFlows) {
+        for (CashFlow cashFlow : cashFlows) {
             JSONObject jsonObjectCashFlow = new JSONObject();
             try {
-                if(cashFlow.getSurveyId()==null){
-                    jsonObjectCashFlow.put("surveyId","");
-                }else
-                jsonObjectCashFlow.put("surveyId",cashFlow.getSurveyId());
-                if(cashFlow.getValue()==0){
-                    jsonObjectCashFlow.put("value","");
-                }else
-                jsonObjectCashFlow.put("value",cashFlow.getValue());
-                if(cashFlow.getDiscountedCashFlow()==0){
-                    jsonObjectCashFlow.put("discountedCashFlow","");
-                }else
-                jsonObjectCashFlow.put("discountedCashFlow",cashFlow.getDiscountedCashFlow());
-                if(cashFlow.getDiscountingFactor()==0){
-                    jsonObjectCashFlow.put("discountingFactor","");
-                }else
-                jsonObjectCashFlow.put("discountingFactor",cashFlow.getDiscountingFactor());
-                if(cashFlow.getYear()==0){
-                    jsonObjectCashFlow.put("year","");
-                }else
-                jsonObjectCashFlow.put("year",cashFlow.getYear());
-                if(cashFlow.getId()==0){
-                    jsonObjectCashFlow.put("id","");
-                }else
-                jsonObjectCashFlow.put("id",cashFlow.getId());
-
+                if (cashFlow.getSurveyId() == null) {
+                    jsonObjectCashFlow.put("surveyId", "");
+                } else
+                    jsonObjectCashFlow.put("surveyId", cashFlow.getSurveyId());
+                if (cashFlow.getValue() == 0) {
+                    jsonObjectCashFlow.put("value", "");
+                } else
+                    jsonObjectCashFlow.put("value", cashFlow.getValue());
+                if (cashFlow.getDiscountedCashFlow() == 0) {
+                    jsonObjectCashFlow.put("discountedCashFlow", "");
+                } else
+                    jsonObjectCashFlow.put("discountedCashFlow", cashFlow.getDiscountedCashFlow());
+                if (cashFlow.getDiscountingFactor() == 0) {
+                    jsonObjectCashFlow.put("discountingFactor", "");
+                } else
+                    jsonObjectCashFlow.put("discountingFactor", cashFlow.getDiscountingFactor());
+                if (cashFlow.getYear() == 0) {
+                    jsonObjectCashFlow.put("year", "");
+                } else
+                    jsonObjectCashFlow.put("year", cashFlow.getYear());
+                if (cashFlow.getId() == 0) {
+                    jsonObjectCashFlow.put("id", "");
+                } else
+                    jsonObjectCashFlow.put("id", cashFlow.getId());
 
 
             } catch (JSONException e) {
@@ -981,38 +989,38 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
     public JSONObject getSocialCapital(SocialCapital socialCapitals) {
         JSONObject jsonObjectSocialCapital = new JSONObject();
         try {
-            if(socialCapitals.getId()==0){
-                jsonObjectSocialCapital.put("id","");
-            }else
-            jsonObjectSocialCapital.put("id",socialCapitals.getId());
-            if(socialCapitals.getSurveyId()==null){
-                jsonObjectSocialCapital.put("surveyId","");
-            }else
-            jsonObjectSocialCapital.put("surveyId",socialCapitals.getSurveyId());
-            if(socialCapitals.getScore()==0){
-                jsonObjectSocialCapital.put("score","");
-            }else
-            jsonObjectSocialCapital.put("score",socialCapitals.getScore());
-            if(socialCapitals.getRating()==null){
-                jsonObjectSocialCapital.put("rating","");
-            }else
-            jsonObjectSocialCapital.put("rating",socialCapitals.getRating());
-            if(socialCapitals.getSovereign()==0){
-                jsonObjectSocialCapital.put("sovereign","");
-            }else
-            jsonObjectSocialCapital.put("sovereign",socialCapitals.getSovereign());
-            if(socialCapitals.getDiscountRate()==0){
-                jsonObjectSocialCapital.put("discountRate","");
-            }else
-            jsonObjectSocialCapital.put("discountRate",socialCapitals.getDiscountRate());
-            if(socialCapitals.getSpread()==0){
-                jsonObjectSocialCapital.put("spread","");
-            }else
-            jsonObjectSocialCapital.put("spread",socialCapitals.getSpread());
-            if(socialCapitals.getSocialCapitalAnswers()==null){
-                jsonObjectSocialCapital.put("socialCapitalAnswers","");
-            }else
-            jsonObjectSocialCapital.put("socialCapitalAnswers",getSocialCapitalAnswerArray(socialCapitals.getSocialCapitalAnswers()));
+            if (socialCapitals.getId() == 0) {
+                jsonObjectSocialCapital.put("id", "");
+            } else
+                jsonObjectSocialCapital.put("id", socialCapitals.getId());
+            if (socialCapitals.getSurveyId() == null) {
+                jsonObjectSocialCapital.put("surveyId", "");
+            } else
+                jsonObjectSocialCapital.put("surveyId", socialCapitals.getSurveyId());
+            if (socialCapitals.getScore() == 0) {
+                jsonObjectSocialCapital.put("score", "");
+            } else
+                jsonObjectSocialCapital.put("score", socialCapitals.getScore());
+            if (socialCapitals.getRating() == null) {
+                jsonObjectSocialCapital.put("rating", "");
+            } else
+                jsonObjectSocialCapital.put("rating", socialCapitals.getRating());
+            if (socialCapitals.getSovereign() == 0) {
+                jsonObjectSocialCapital.put("sovereign", "");
+            } else
+                jsonObjectSocialCapital.put("sovereign", socialCapitals.getSovereign());
+            if (socialCapitals.getDiscountRate() == 0) {
+                jsonObjectSocialCapital.put("discountRate", "");
+            } else
+                jsonObjectSocialCapital.put("discountRate", socialCapitals.getDiscountRate());
+            if (socialCapitals.getSpread() == 0) {
+                jsonObjectSocialCapital.put("spread", "");
+            } else
+                jsonObjectSocialCapital.put("spread", socialCapitals.getSpread());
+            if (socialCapitals.getSocialCapitalAnswers() == null) {
+                jsonObjectSocialCapital.put("socialCapitalAnswers", "");
+            } else
+                jsonObjectSocialCapital.put("socialCapitalAnswers", getSocialCapitalAnswerArray(socialCapitals.getSocialCapitalAnswers()));
 
 
         } catch (JSONException e) {
@@ -1025,29 +1033,29 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
     public JSONArray getSocialCapitalAnswerArray(RealmList<SocialCapitalAnswer> socialCapitalAnswers) {
         JSONArray jsonSocialCapitalAnswerArray = new JSONArray();
-        for(SocialCapitalAnswer socialCapitalAnswer:socialCapitalAnswers) {
+        for (SocialCapitalAnswer socialCapitalAnswer : socialCapitalAnswers) {
             JSONObject jsonObjectSocialCapitalAnswer = new JSONObject();
             try {
-                if(socialCapitalAnswer.getId()==0){
-                    jsonObjectSocialCapitalAnswer.put("id","");
-                }else
-                jsonObjectSocialCapitalAnswer.put("id",socialCapitalAnswer.getId());
-                if(socialCapitalAnswer.getSurveyId()==null){
-                    jsonObjectSocialCapitalAnswer.put("surveyId","");
-                }else
-                jsonObjectSocialCapitalAnswer.put("surveyId",socialCapitalAnswer.getSurveyId());
-                if(socialCapitalAnswer.getFactorScore()==0){
-                    jsonObjectSocialCapitalAnswer.put("factorScore","");
-                }else
-                jsonObjectSocialCapitalAnswer.put("factorScore",socialCapitalAnswer.getFactorScore());
+                if (socialCapitalAnswer.getId() == 0) {
+                    jsonObjectSocialCapitalAnswer.put("id", "");
+                } else
+                    jsonObjectSocialCapitalAnswer.put("id", socialCapitalAnswer.getId());
+                if (socialCapitalAnswer.getSurveyId() == null) {
+                    jsonObjectSocialCapitalAnswer.put("surveyId", "");
+                } else
+                    jsonObjectSocialCapitalAnswer.put("surveyId", socialCapitalAnswer.getSurveyId());
+                if (socialCapitalAnswer.getFactorScore() == 0) {
+                    jsonObjectSocialCapitalAnswer.put("factorScore", "");
+                } else
+                    jsonObjectSocialCapitalAnswer.put("factorScore", socialCapitalAnswer.getFactorScore());
 //                if(socialCapitalAnswer.getSocialCapitalQuestion()==null){
 //                    jsonObjectSocialCapitalAnswer.put("socialCapitalQuestion","");
 //                }else
 //                jsonObjectSocialCapitalAnswer.put("socialCapitalQuestion",getSocialCapitalQuestions(socialCapitalAnswer.getSocialCapitalQuestion()));
-                if(socialCapitalAnswer.getMultipleAnswers()==null){
-                    jsonObjectSocialCapitalAnswer.put("multipleAnswers","");
-                }else
-                jsonObjectSocialCapitalAnswer.put("multipleAnswers",getMultipleAnswers(socialCapitalAnswer.getMultipleAnswers()));
+                if (socialCapitalAnswer.getMultipleAnswers() == null) {
+                    jsonObjectSocialCapitalAnswer.put("multipleAnswers", "");
+                } else
+                    jsonObjectSocialCapitalAnswer.put("multipleAnswers", getMultipleAnswers(socialCapitalAnswer.getMultipleAnswers()));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -1060,17 +1068,17 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
     private JSONArray getMultipleAnswers(RealmList<MultipleAnswer> multipleAnswers) {
 
         JSONArray jsonMultipleAnswerArray = new JSONArray();
-        for(MultipleAnswer multipleAnswer:multipleAnswers) {
+        for (MultipleAnswer multipleAnswer : multipleAnswers) {
             JSONObject jsonObjectMultipleAnwser = new JSONObject();
             try {
-                if(multipleAnswer.getId()==0){
-                    jsonObjectMultipleAnwser.put("id","");
-                }else
-                jsonObjectMultipleAnwser.put("id",multipleAnswer.getId());
-                if(multipleAnswer.getAnswer()==0){
-                    jsonObjectMultipleAnwser.put("answer","");
-                }else
-                jsonObjectMultipleAnwser.put("answer",multipleAnswer.getAnswer());
+                if (multipleAnswer.getId() == 0) {
+                    jsonObjectMultipleAnwser.put("id", "");
+                } else
+                    jsonObjectMultipleAnwser.put("id", multipleAnswer.getId());
+                if (multipleAnswer.getAnswer() == 0) {
+                    jsonObjectMultipleAnwser.put("answer", "");
+                } else
+                    jsonObjectMultipleAnwser.put("answer", multipleAnswer.getAnswer());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -1082,30 +1090,30 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
     private JSONObject getSocialCapitalQuestions(SocialCapitalQuestions socialCapitalQuestion) {
         JSONObject jsonObjectSocialCapitalQuestion = new JSONObject();
         try {
-            if(socialCapitalQuestion.getId()==0){
-                jsonObjectSocialCapitalQuestion.put("id","");
-            }else
-            jsonObjectSocialCapitalQuestion.put("id",socialCapitalQuestion.getId());
-            if(socialCapitalQuestion.getOptionType()==null){
-                jsonObjectSocialCapitalQuestion.put("optionType","");
-            }else
-            jsonObjectSocialCapitalQuestion.put("optionType",socialCapitalQuestion.getOptionType());
-            if(socialCapitalQuestion.getQuestion()==null){
-                jsonObjectSocialCapitalQuestion.put("question","");
-            }else
-            jsonObjectSocialCapitalQuestion.put("question",socialCapitalQuestion.getQuestion());
-            if(socialCapitalQuestion.getQuestionHindi()==null){
-                jsonObjectSocialCapitalQuestion.put("questionHindi","");
-            }else
-            jsonObjectSocialCapitalQuestion.put("questionHindi",socialCapitalQuestion.getQuestionHindi());
-            if(socialCapitalQuestion.getSocialCapitalAnswerOptionses()==null){
-                jsonObjectSocialCapitalQuestion.put("socialCapitalAnswerOptionses","");
-            }else
-            jsonObjectSocialCapitalQuestion.put("socialCapitalAnswerOptionses",getSocialCapitalAnswerOptions(socialCapitalQuestion.getSocialCapitalAnswerOptionses()));
-            if(socialCapitalQuestion.getWeight()==0){
-                jsonObjectSocialCapitalQuestion.put("weight","");
-            }else
-            jsonObjectSocialCapitalQuestion.put("weight",socialCapitalQuestion.getWeight());
+            if (socialCapitalQuestion.getId() == 0) {
+                jsonObjectSocialCapitalQuestion.put("id", "");
+            } else
+                jsonObjectSocialCapitalQuestion.put("id", socialCapitalQuestion.getId());
+            if (socialCapitalQuestion.getOptionType() == null) {
+                jsonObjectSocialCapitalQuestion.put("optionType", "");
+            } else
+                jsonObjectSocialCapitalQuestion.put("optionType", socialCapitalQuestion.getOptionType());
+            if (socialCapitalQuestion.getQuestion() == null) {
+                jsonObjectSocialCapitalQuestion.put("question", "");
+            } else
+                jsonObjectSocialCapitalQuestion.put("question", socialCapitalQuestion.getQuestion());
+            if (socialCapitalQuestion.getQuestionHindi() == null) {
+                jsonObjectSocialCapitalQuestion.put("questionHindi", "");
+            } else
+                jsonObjectSocialCapitalQuestion.put("questionHindi", socialCapitalQuestion.getQuestionHindi());
+            if (socialCapitalQuestion.getSocialCapitalAnswerOptionses() == null) {
+                jsonObjectSocialCapitalQuestion.put("socialCapitalAnswerOptionses", "");
+            } else
+                jsonObjectSocialCapitalQuestion.put("socialCapitalAnswerOptionses", getSocialCapitalAnswerOptions(socialCapitalQuestion.getSocialCapitalAnswerOptionses()));
+            if (socialCapitalQuestion.getWeight() == 0) {
+                jsonObjectSocialCapitalQuestion.put("weight", "");
+            } else
+                jsonObjectSocialCapitalQuestion.put("weight", socialCapitalQuestion.getWeight());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1116,25 +1124,25 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
     private JSONArray getSocialCapitalAnswerOptions(RealmList<SocialCapitalAnswerOptions> socialCapitalAnswerOptionses) {
 
         JSONArray jsonSocialCapitalAnswerOptionsArray = new JSONArray();
-        for(SocialCapitalAnswerOptions socialCapitalAnswerOptions:socialCapitalAnswerOptionses) {
+        for (SocialCapitalAnswerOptions socialCapitalAnswerOptions : socialCapitalAnswerOptionses) {
             JSONObject jsonObjectSocialCapitalAnswerOptions = new JSONObject();
             try {
-                if(socialCapitalAnswerOptions.getId()==0){
-                    jsonObjectSocialCapitalAnswerOptions.put("id","");
-                }else
-                jsonObjectSocialCapitalAnswerOptions.put("id",socialCapitalAnswerOptions.getId());
-                if(socialCapitalAnswerOptions.getOptions()==null){
-                    jsonObjectSocialCapitalAnswerOptions.put("options","");
-                }else
-                jsonObjectSocialCapitalAnswerOptions.put("options",socialCapitalAnswerOptions.getOptions());
-                if(socialCapitalAnswerOptions.getOptionsHindi()==null){
-                    jsonObjectSocialCapitalAnswerOptions.put("optionsHindi","");
-                }else
-                jsonObjectSocialCapitalAnswerOptions.put("optionsHindi",socialCapitalAnswerOptions.getOptionsHindi());
-                if(socialCapitalAnswerOptions.getVal()==0){
-                    jsonObjectSocialCapitalAnswerOptions.put("val","");
-                }else
-                jsonObjectSocialCapitalAnswerOptions.put("val",socialCapitalAnswerOptions.getVal());
+                if (socialCapitalAnswerOptions.getId() == 0) {
+                    jsonObjectSocialCapitalAnswerOptions.put("id", "");
+                } else
+                    jsonObjectSocialCapitalAnswerOptions.put("id", socialCapitalAnswerOptions.getId());
+                if (socialCapitalAnswerOptions.getOptions() == null) {
+                    jsonObjectSocialCapitalAnswerOptions.put("options", "");
+                } else
+                    jsonObjectSocialCapitalAnswerOptions.put("options", socialCapitalAnswerOptions.getOptions());
+                if (socialCapitalAnswerOptions.getOptionsHindi() == null) {
+                    jsonObjectSocialCapitalAnswerOptions.put("optionsHindi", "");
+                } else
+                    jsonObjectSocialCapitalAnswerOptions.put("optionsHindi", socialCapitalAnswerOptions.getOptionsHindi());
+                if (socialCapitalAnswerOptions.getVal() == 0) {
+                    jsonObjectSocialCapitalAnswerOptions.put("val", "");
+                } else
+                    jsonObjectSocialCapitalAnswerOptions.put("val", socialCapitalAnswerOptions.getVal());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -1143,72 +1151,87 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         return jsonSocialCapitalAnswerOptionsArray;
     }
 
-    public JSONObject getComponent(Component component){
+    public JSONObject getComponent(Component component) {
         JSONObject jsonObjectComponent = new JSONObject();
         try {
-            if(component.getId()==0){
-                jsonObjectComponent.put("id","");
-            }else
-            jsonObjectComponent.put("id",component.getId());
-            if(component.getCroplandValue()==0){
-                jsonObjectComponent.put("croplandValue","");
-            }else
-            jsonObjectComponent.put("croplandValue",component.getCroplandValue());
-            if(component.getCroplandCompleteness()==0){
-                jsonObjectComponent.put("croplandCompleteness","");
-            }else
-            jsonObjectComponent.put("croplandCompleteness",component.getCroplandCompleteness());
-            if(component.getCroplandSocialCapitalScore()==0){
-                jsonObjectComponent.put("croplandSocialCapitalScore","");
-            }else
-            jsonObjectComponent.put("croplandSocialCapitalScore",component.getCroplandSocialCapitalScore());
-            if(component.getForestValue()==0){
-                jsonObjectComponent.put("forestValue","");
-            }else
-            jsonObjectComponent.put("forestValue",component.getForestValue());
-            if(component.getForestCompleteness()==0){
-                jsonObjectComponent.put("forestCompleteness","");
-            }else
-            jsonObjectComponent.put("forestCompleteness",component.getForestCompleteness());
-            if(component.getForestSocialCapitalScore()==0){
-                jsonObjectComponent.put("forestSocialCapitalScore","");
-            }else
-            jsonObjectComponent.put("forestSocialCapitalScore",component.getForestSocialCapitalScore());
-            if(component.getPastureValue()==0){
-                jsonObjectComponent.put("pastureValue","");
-            }else
-            jsonObjectComponent.put("pastureValue",component.getPastureValue());
-            if(component.getPastureCompleteness()==0){
-                jsonObjectComponent.put("pastureCompleteness","");
-            }else
-            jsonObjectComponent.put("pastureCompleteness",component.getPastureCompleteness());
-            if(component.getPastureSocialCapitalScore()==0){
-                jsonObjectComponent.put("pastureSocialCapitalScore","");
-            }else
-            jsonObjectComponent.put("pastureSocialCapitalScore",component.getPastureSocialCapitalScore());
-            if(component.getMiningLandValue()==0){
-                jsonObjectComponent.put("miningLandValue","");
-            }else
-            jsonObjectComponent.put("miningLandValue",component.getMiningLandValue());
-            if(component.getMiningLandCompleteness()==0){
-                jsonObjectComponent.put("miningLandCompleteness","");
-            }else
-            jsonObjectComponent.put("miningLandCompleteness",component.getMiningLandCompleteness());
-            if(component.getMiningSocialCapitalScore()==0){
-                jsonObjectComponent.put("miningSocialCapitalScore","");
-            }else
-            jsonObjectComponent.put("miningSocialCapitalScore",component.getMiningSocialCapitalScore());
-            if(component.getTotalValue()==0){
-                jsonObjectComponent.put("totalValue","");
-            }else
-            jsonObjectComponent.put("totalValue",component.getTotalValue());
-            if(component.getTotalSocialCapitalScore()==0){
-                jsonObjectComponent.put("totalSocialCapitalScore","");
-            }else
-            jsonObjectComponent.put("totalSocialCapitalScore",component.getTotalSocialCapitalScore());
+            if (component.getId() == 0) {
+                jsonObjectComponent.put("id", "");
+            } else
+                jsonObjectComponent.put("id", component.getId());
+            if (component.getCroplandValue() == 0) {
+                jsonObjectComponent.put("croplandValue", "");
+            } else
+                jsonObjectComponent.put("croplandValue", component.getCroplandValue());
+            if (component.getCroplandCompleteness() == 0) {
+                jsonObjectComponent.put("croplandCompleteness", "");
+            } else
+                jsonObjectComponent.put("croplandCompleteness", component.getCroplandCompleteness());
+            if (component.getCroplandSocialCapitalScore() == 0) {
+                jsonObjectComponent.put("croplandSocialCapitalScore", "");
+            } else
+                jsonObjectComponent.put("croplandSocialCapitalScore", component.getCroplandSocialCapitalScore());
+            if (component.getForestValue() == 0) {
+                jsonObjectComponent.put("forestValue", "");
+            } else
+                jsonObjectComponent.put("forestValue", component.getForestValue());
+            if (component.getForestCompleteness() == 0) {
+                jsonObjectComponent.put("forestCompleteness", "");
+            } else
+                jsonObjectComponent.put("forestCompleteness", component.getForestCompleteness());
+            if (component.getForestSocialCapitalScore() == 0) {
+                jsonObjectComponent.put("forestSocialCapitalScore", "");
+            } else
+                jsonObjectComponent.put("forestSocialCapitalScore", component.getForestSocialCapitalScore());
+            if (component.getPastureValue() == 0) {
+                jsonObjectComponent.put("pastureValue", "");
+            } else
+                jsonObjectComponent.put("pastureValue", component.getPastureValue());
+            if (component.getPastureCompleteness() == 0) {
+                jsonObjectComponent.put("pastureCompleteness", "");
+            } else
+                jsonObjectComponent.put("pastureCompleteness", component.getPastureCompleteness());
+            if (component.getPastureSocialCapitalScore() == 0) {
+                jsonObjectComponent.put("pastureSocialCapitalScore", "");
+            } else
+                jsonObjectComponent.put("pastureSocialCapitalScore", component.getPastureSocialCapitalScore());
+            if (component.getMiningLandValue() == 0) {
+                jsonObjectComponent.put("miningLandValue", "");
+            } else
+                jsonObjectComponent.put("miningLandValue", component.getMiningLandValue());
+            if (component.getMiningLandCompleteness() == 0) {
+                jsonObjectComponent.put("miningLandCompleteness", "");
+            } else
+                jsonObjectComponent.put("miningLandCompleteness", component.getMiningLandCompleteness());
+            if (component.getMiningSocialCapitalScore() == 0) {
+                jsonObjectComponent.put("miningSocialCapitalScore", "");
+            } else
+                jsonObjectComponent.put("miningSocialCapitalScore", component.getMiningSocialCapitalScore());
+            if (component.getTotalValue() == 0) {
+                jsonObjectComponent.put("totalValue", "");
+            } else
+                jsonObjectComponent.put("totalValue", component.getTotalValue());
+            if (component.getTotalSocialCapitalScore() == 0) {
+                jsonObjectComponent.put("totalSocialCapitalScore", "");
+            } else
+                jsonObjectComponent.put("totalSocialCapitalScore", component.getTotalSocialCapitalScore());
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return jsonObjectComponent;
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+            case R.id.button_send_data_to_server:
+                set = sharedPref.getStringSet("surveySet", null);
+
+                for (String temp : set) {
+                    Log.e("Sirvey : ", temp);
+                }
+                new LongOperation().execute("");
+                break;
+        }
     }
 }
