@@ -468,9 +468,9 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             } else
                 jsonObjectMiningLand.put("costElements", getCostElement(miningLand.getCostElements()));
             if (miningLand.getRevenueProducts() == null) {
-                jsonObjectMiningLand.put("revenueProducts", "");
+                jsonObjectMiningLand.put("costOutlays", "");
             } else
-                jsonObjectMiningLand.put("revenueProducts", getRevenueProducts(miningLand.getRevenueProducts()));
+                jsonObjectMiningLand.put("costOutlays", getRevenueProducts(miningLand.getRevenueProducts()));
             if (miningLand.getDiscountedCashFlows() == null) {
                 jsonObjectMiningLand.put("discountedCashFlows", "");
             } else
@@ -519,9 +519,9 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             } else
                 jsonObjectPastureLand.put("costElements", getCostElement(pastureLand.getCostElements()));
             if (pastureLand.getRevenueProducts() == null) {
-                jsonObjectPastureLand.put("revenueProducts", "");
+                jsonObjectPastureLand.put("costOutlays", "");
             } else
-                jsonObjectPastureLand.put("revenueProducts", getRevenueProducts(pastureLand.getRevenueProducts()));
+                jsonObjectPastureLand.put("costOutlays", getRevenueProducts(pastureLand.getRevenueProducts()));
             if (pastureLand.getDiscountedCashFlows() == null) {
                 jsonObjectPastureLand.put("discountedCashFlows", "");
             } else
@@ -569,9 +569,9 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             } else
                 jsonObjectCropLand.put("outlays", getOutLays(cropLand.getOutlays()));
             if (cropLand.getRevenueProducts() == null) {
-                jsonObjectCropLand.put("revenueProducts", "");
+                jsonObjectCropLand.put("costOutlays", "");
             } else
-                jsonObjectCropLand.put("revenueProducts", getRevenueProducts(cropLand.getRevenueProducts()));
+                jsonObjectCropLand.put("costOutlays", getRevenueProducts(cropLand.getRevenueProducts()));
             if (cropLand.getDiscountingFactors() == null) {
                 jsonObjectCropLand.put("discountingFactors", "");
             } else
@@ -619,9 +619,9 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             } else
                 jsonObjectForestLand.put("Outlays", getOutLays(forestLand.getOutlays()));
             if (forestLand.getRevenueProducts() == null) {
-                jsonObjectForestLand.put("revenueProducts", "");
+                jsonObjectForestLand.put("costOutlays", "");
             } else
-                jsonObjectForestLand.put("revenueProducts", getRevenueProducts(forestLand.getRevenueProducts()));
+                jsonObjectForestLand.put("costOutlays", getRevenueProducts(forestLand.getRevenueProducts()));
             if (forestLand.getSurveyId() == null) {
                 jsonObjectForestLand.put("surveyId", "");
             } else
@@ -752,26 +752,26 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                     jsonObjectOutLays.put("surveyId", "");
                 } else
                     jsonObjectOutLays.put("surveyId", outlay.getSurveyId());
-                if (outlay.getYear() == 0) {
-                    jsonObjectOutLays.put("year", "");
-                } else
-                    jsonObjectOutLays.put("year", outlay.getYear());
-                if (outlay.getItemName() == null) {
-                    jsonObjectOutLays.put("itemName", "");
-                } else
-                    jsonObjectOutLays.put("itemName", outlay.getItemName());
-                if (outlay.getPrice() == 0) {
-                    jsonObjectOutLays.put("price", "");
-                } else
-                    jsonObjectOutLays.put("price", outlay.getPrice());
-                if (outlay.getType() == null) {
-                    jsonObjectOutLays.put("type", "");
-                } else
-                    jsonObjectOutLays.put("type", outlay.getType());
-                if (outlay.getUnit() == null) {
-                    jsonObjectOutLays.put("unit", "");
-                } else
-                    jsonObjectOutLays.put("unit", outlay.getUnit());
+//                if (outlay.getYear() == 0) {
+//                    jsonObjectOutLays.put("year", "");
+//                } else
+//                    jsonObjectOutLays.put("year", outlay.getYear());
+//                if (outlay.getItemName() == null) {
+//                    jsonObjectOutLays.put("itemName", "");
+//                } else
+//                    jsonObjectOutLays.put("itemName", outlay.getItemName());
+//                if (outlay.getPrice() == 0) {
+//                    jsonObjectOutLays.put("price", "");
+//                } else
+//                    jsonObjectOutLays.put("price", outlay.getPrice());
+//                if (outlay.getType() == null) {
+//                    jsonObjectOutLays.put("type", "");
+//                } else
+//                    jsonObjectOutLays.put("type", outlay.getType());
+//                if (outlay.getUnit() == null) {
+//                    jsonObjectOutLays.put("unit", "");
+//                } else
+//                    jsonObjectOutLays.put("unit", outlay.getUnit());
             } catch (JSONException e) {
                 e.printStackTrace();
             }

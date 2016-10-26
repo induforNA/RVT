@@ -52,24 +52,23 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         GoogleMap.OnMapLongClickListener,
-        GoogleMap.SnapshotReadyCallback{
+        GoogleMap.SnapshotReadyCallback {
 
 
-
-    Button nextButton, backButton,drawPolygon,clear,submit;
+    Button nextButton, backButton, drawPolygon, clear, submit;
     TextView landName;
     private static final int MY_PERMISSIONS_REQUEST = 0;
     private GoogleMap mMap;
-    double lat = 0, lon = 0,initLat,initLon;
+    double lat = 0, lon = 0, initLat, initLon;
     GoogleApiClient mGoogleApiClient = null;
     ImageView mapImage;
     private Location mLastLocation = null;
-    boolean flag = true,initFlag=true;
+    boolean flag = true, initFlag = true;
     Bitmap bitmap;
     private SharedPreferences preferences;
 
 
-    ArrayList<Double> x,y;
+    ArrayList<Double> x, y;
     private LatLng latLng1;
     private LatLng point;
     private PolylineOptions polylineOptions;
@@ -90,10 +89,10 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
         context = this;
         preferences = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        serveyId = preferences.getString("surveyId","");
-        currentSocialCapitalServey = preferences.getString("currentSocialCapitalServey","");
-        x=new ArrayList<>();
-        y=new ArrayList<>();
+        serveyId = preferences.getString("surveyId", "");
+        currentSocialCapitalServey = preferences.getString("currentSocialCapitalServey", "");
+        x = new ArrayList<>();
+        y = new ArrayList<>();
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .addConnectionCallbacks(this)
@@ -105,12 +104,12 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
 
         nextButton = (Button) findViewById(R.id.next_button);
         backButton = (Button) findViewById(R.id.back_button);
-        drawPolygon = (Button)findViewById(R.id.draw_map_button);
-        clear = (Button)findViewById(R.id.clear_button);
-        submit = (Button)findViewById(R.id.submit_button);
-        mapImage = (ImageView)findViewById(R.id.map_image);
-        landName=(TextView)findViewById(R.id.land_name);
-        map = (View)findViewById(R.id.map);
+        drawPolygon = (Button) findViewById(R.id.draw_map_button);
+        clear = (Button) findViewById(R.id.clear_button);
+        submit = (Button) findViewById(R.id.submit_button);
+        mapImage = (ImageView) findViewById(R.id.map_image);
+        landName = (TextView) findViewById(R.id.land_name);
+        map = (View) findViewById(R.id.map);
 
         landName.setText(currentSocialCapitalServey);
         nextButton.setOnClickListener(this);
@@ -125,6 +124,18 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
         mMap = googleMap;
         Log.e("lat ", "" + lat);
         Log.e("lon ", "" + lon);
+        mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
         googleMap.setOnMapLongClickListener(this);
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 

@@ -1,5 +1,6 @@
 package com.sayone.omidyar.model;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -13,15 +14,13 @@ public class Outlay extends RealmObject {
 
     private String surveyId;
 
+    private String landKind;
+
     private String type;
 
     private String itemName;
 
-    private String unit;
-
-    private double price;
-
-    private int year;
+    private RealmList<OutlayYears> outlayYearses;
 
     public long getId() {
         return id;
@@ -29,6 +28,22 @@ public class Outlay extends RealmObject {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(String surveyId) {
+        this.surveyId = surveyId;
+    }
+
+    public String getLandKind() {
+        return landKind;
+    }
+
+    public void setLandKind(String landKind) {
+        this.landKind = landKind;
     }
 
     public String getType() {
@@ -47,35 +62,11 @@ public class Outlay extends RealmObject {
         this.itemName = itemName;
     }
 
-    public String getUnit() {
-        return unit;
+    public RealmList<OutlayYears> getOutlayYearses() {
+        return outlayYearses;
     }
 
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public String getSurveyId() {
-        return surveyId;
-    }
-
-    public void setSurveyId(String surveyId) {
-        this.surveyId = surveyId;
+    public void setOutlayYearses(RealmList<OutlayYears> outlayYearses) {
+        this.outlayYearses = outlayYearses;
     }
 }

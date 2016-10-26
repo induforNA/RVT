@@ -4,22 +4,16 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.RecyclerView;
-import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +21,6 @@ import android.widget.Toast;
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.LandKind;
-import com.sayone.omidyar.model.Participant;
 import com.sayone.omidyar.model.RevenueProduct;
 import com.sayone.omidyar.model.RevenueProductYears;
 import com.sayone.omidyar.model.Survey;
@@ -51,7 +44,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
     LinearLayout allEditText;
     Context context;
     Button addYearsButton;
-    ArrayList<EditText> editTexts;
+    ArrayList<Spinner> editTexts;
     RealmList<RevenueProductYears> revenueProductYearsArrayList;
     private ImageView imageViewMenuIcon;
     private ImageView drawerCloseBtn;
@@ -175,15 +168,43 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
 
             Log.e("YEAR PEEEEEEEEE",revenueProductYears.getYear()+" "+currentYear);
             if(revenueProductYears.getYear() < currentYear && revenueProductYears.getYear() != 0){
-                EditText myEditText = new EditText(context);
-                myEditText.setLayoutParams(mRparams);
-                myEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-                myEditText.setId(i);
-                myEditText.setHint(getResources().getString(R.string.enter_year_hint)+" "+i);
-                myEditText.setText(revenueProductYears.getYear()+"");
-                allEditText.addView(myEditText);
-                editTexts.add(myEditText);
+                ArrayList yearArray = new ArrayList();
+                int year = currentYear - 1;
+                while(year >= 1990){
+                    yearArray.add(String.valueOf(year));
+                    year--;
+                }
+
+
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, yearArray);
+                //ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,yearArray);
+
+                Spinner spinner=new Spinner(this);
+                spinner.setAdapter(arrayAdapter);
+                spinner.setSelection(arrayAdapter.getPosition(revenueProductYears.getYear()+""));
+                spinner.setLayoutParams(mRparams);
+
+                spinner.setId(i);
+                allEditText.addView(spinner);
+                editTexts.add(spinner);
+
+                arrayAdapter.notifyDataSetChanged();
+                //setContentView();
+                //layout.addView(spinner);
                 i++;
+
+
+
+
+//                EditText myEditText = new EditText(context);
+//                myEditText.setLayoutParams(mRparams);
+//                myEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
+//                myEditText.setId(i);
+//                myEditText.setHint(getResources().getString(R.string.enter_year_hint)+" "+i);
+//                myEditText.setText(revenueProductYears.getYear()+"");
+//                allEditText.addView(myEditText);
+//                editTexts.add(myEditText);
+//                i++;
             }
         }
     }
@@ -191,14 +212,33 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
     public void generateYearFields(int j){
         LinearLayout.LayoutParams mRparams = new LinearLayout.LayoutParams(400, LinearLayout.LayoutParams.WRAP_CONTENT);
         int k;
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
         for(k=1; k<=j; k++){
-            EditText myEditText = new EditText(context);
-            myEditText.setLayoutParams(mRparams);
-            myEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-            myEditText.setId(k);
-            myEditText.setHint(getResources().getString(R.string.string_atleast_one)+" "+k);
-            allEditText.addView(myEditText);
-            editTexts.add(myEditText);
+            ArrayList yearArray = new ArrayList();
+            int year = currentYear - 1;
+            while(year >= 1990){
+                yearArray.add(year--);
+            }
+
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, yearArray);
+
+            Spinner spinner=new Spinner(this);
+            spinner.setLayoutParams(mRparams);
+            spinner.setAdapter(arrayAdapter);
+            spinner.setId(k);
+            allEditText.addView(spinner);
+            editTexts.add(spinner);
+            //layout.addView(spinner);
+            i++;
+
+
+//            EditText myEditText = new EditText(context);
+//            myEditText.setLayoutParams(mRparams);
+//            myEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
+//            myEditText.setId(k);
+//            myEditText.setHint(getResources().getString(R.string.string_atleast_one)+" "+k);
+//            allEditText.addView(myEditText);
+//            editTexts.add(myEditText);
         }
     }
 
@@ -271,11 +311,11 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                             //Log.e("LAND AA ", revenueProduct1.getRevenueProductYearses().size()+"");
 
 
-                            for(EditText editText : editTexts) {
+                            for(Spinner editText : editTexts) {
                                 //editText.setText("233");
                                 //Log.e("SSS ",editText.getText().toString());
-                                if (!editText.getText().toString().equals("")) {
-                                    revenueProductYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getText().toString()), revenueProduct1.getId(), "Forestland", realm));
+                                if (!editText.getSelectedItem().toString().equals("")) {
+                                    revenueProductYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), revenueProduct1.getId(), "Forestland", realm));
 
                                 }
                             }
@@ -299,10 +339,10 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                             //Log.e("LAND AA ", revenueProduct1.getRevenueProductYearses().size()+"");
 
 
-                            for(EditText editText : editTexts){
+                            for(Spinner editText : editTexts){
                                 //editText.setText("233");
                                 //Log.e("SSS ",editText.getText().toString());
-                                revenueProductYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getText().toString()), revenueProduct1.getId(), "Cropland", realm));
+                                revenueProductYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), revenueProduct1.getId(), "Cropland", realm));
                             }
 
                             int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -324,10 +364,10 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                             //Log.e("LAND AA ", revenueProduct1.getRevenueProductYearses().size()+"");
 
 
-                            for(EditText editText : editTexts){
+                            for(Spinner editText : editTexts){
                                 //editText.setText("233");
                                 //Log.e("SSS ",editText.getText().toString());
-                                revenueProductYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getText().toString()), revenueProduct1.getId(), "Pastureland",realm));
+                                revenueProductYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), revenueProduct1.getId(), "Pastureland",realm));
                             }
 
                             int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -349,10 +389,10 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                             //Log.e("LAND AA ", revenueProduct1.getRevenueProductYearses().size()+"");
 
 
-                            for(EditText editText : editTexts){
+                            for(Spinner editText : editTexts){
                                 //editText.setText("233");
                                 //Log.e("SSS ",editText.getText().toString());
-                                revenueProductYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getText().toString()), revenueProduct1.getId(), "Mining Land",realm));
+                                revenueProductYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), revenueProduct1.getId(), "Mining Land",realm));
                             }
 
                             int year = Calendar.getInstance().get(Calendar.YEAR);

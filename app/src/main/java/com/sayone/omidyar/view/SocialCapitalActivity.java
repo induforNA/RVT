@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
@@ -93,7 +94,7 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social_capital);
 
-        Log.e("Current Activity ", "4454");
+        // Log.e("Current Activity ", "4454");
 
         context = this;
         realm = Realm.getDefaultInstance();
@@ -101,7 +102,7 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         serveyId = preferences.getString("surveyId", "");
         currentSocialCapitalServey = preferences.getString("currentSocialCapitalServey", "");
-        Log.e("Languade :",Locale.getDefault().getDisplayLanguage());
+        // Log.e("Languade :",Locale.getDefault().getDisplayLanguage());
 
         language = Locale.getDefault().getDisplayLanguage();
 
@@ -204,33 +205,33 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
         for (SocialCapitalAnswerOptions socialCapitalAnswerOptions : options) {
             if (i == 0) {
                 if (type.equals("multiple")) {
-                    changeDisplay(type, options, i, optionA, null, multipleAnswers);
+                    changeDisplay(type, options, i, optionA, null, multipleAnswers,"optionA");
                 } else {
-                    changeDisplay(type, options, i, null, optionARadio, multipleAnswers);
+                    changeDisplay(type, options, i, null, optionARadio, multipleAnswers,"");
                 }
             } else if (i == 1) {
                 if (type.equals("multiple")) {
-                    changeDisplay(type, options, i, optionB, null, multipleAnswers);
+                    changeDisplay(type, options, i, optionB, null, multipleAnswers,"optionB");
                 } else {
-                    changeDisplay(type, options, i, null, optionBRadio, multipleAnswers);
+                    changeDisplay(type, options, i, null, optionBRadio, multipleAnswers,"");
                 }
             } else if (i == 2) {
                 if (type.equals("multiple")) {
-                    changeDisplay(type, options, i, optionC, null, multipleAnswers);
+                    changeDisplay(type, options, i, optionC, null, multipleAnswers,"optionC");
                 } else {
-                    changeDisplay(type, options, i, null, optionCRadio, multipleAnswers);
+                    changeDisplay(type, options, i, null, optionCRadio, multipleAnswers,"");
                 }
             } else if (i == 3) {
                 if (type.equals("multiple")) {
-                    changeDisplay(type, options, i, optionD, null, multipleAnswers);
+                    changeDisplay(type, options, i, optionD, null, multipleAnswers,"optionD");
                 } else {
-                    changeDisplay(type, options, i, null, optionDRadio, multipleAnswers);
+                    changeDisplay(type, options, i, null, optionDRadio, multipleAnswers,"");
                 }
             } else if (i == 4) {
                 if (type.equals("multiple")) {
-                    changeDisplay(type, options, i, optionE, null, multipleAnswers);
+                    changeDisplay(type, options, i, optionE, null, multipleAnswers,"optionE");
                 } else {
-                    changeDisplay(type, options, i, null, optionERadio, multipleAnswers);
+                    changeDisplay(type, options, i, null, optionERadio, multipleAnswers,"");
                 }
             }
             i++;
@@ -239,7 +240,7 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
 
     public void changeDisplay(String type, RealmList<SocialCapitalAnswerOptions> options,
                               int index, CheckBox checkBox, RadioButton radioButton,
-                              RealmList<MultipleAnswer> multipleAnswers) {
+                              RealmList<MultipleAnswer> multipleAnswers, String btnName) {
 
         if (type.equals("multiple")) {
             checkboxgroup.setVisibility(View.VISIBLE);
@@ -248,11 +249,22 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                 checkBox.setVisibility(View.GONE);
             } else {
                 for (MultipleAnswer multipleAnswerItr : multipleAnswers) {
-                    Log.e("AFTER ", options.get(index).getId() + " " + multipleAnswerItr.getAnswer());
+                    //Log.e("AFTER ", options.get(index).getId() + " " + multipleAnswerItr.getAnswer());
                     if (options.get(index).getId() == multipleAnswerItr.getAnswer()) {
-                        Log.e("AFTER ", "CLEAR CHANGE DISPLAY TEST");
+                        //Log.e("AFTER ", "CLEAR CHANGE DISPLAY TEST");
                         checkBox.setChecked(true);
                         socialCapitalAnswerOptionsesList.add(options.get(index));
+                        if(btnName.equals("optionA")){
+                            checkA();
+                        }else if(btnName.equals("optionB")){
+                            checkB();
+                        }else if(btnName.equals("optionC")){
+                            checkC();
+                        }else if(btnName.equals("optionD")){
+                            checkD();
+                        }else if(btnName.equals("optionE")){
+                            checkE();
+                        }
                     }
                 }
                 checkBox.setVisibility(View.VISIBLE);
@@ -296,7 +308,7 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
             case R.id.back_button:
                 if (currentQuestionId > 0) {
                     int nextQuestionId = currentQuestionId - 1;
-                    Log.e("Current id ", nextQuestionId + "");
+                    //Log.e("Current id ", nextQuestionId + "");
 
                     socialCapitalAnswerOptionsesList.clear();
                     clearOptions();
@@ -308,42 +320,46 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                 }
                 break;
             case R.id.next_button:
-                if (currentQuestionId < 14) {
-                    Log.e("Current id ", socialCapitalAnswerOptionsesList.size() + "");
-                    RealmList<MultipleAnswer> multipleAnswers;
-                    multipleAnswers = new RealmList<>();
-                    for (SocialCapitalAnswerOptions socialCapitalAnswerOptions : socialCapitalAnswerOptionsesList) {
-                        multipleAnswers.add(addAnswer(socialCapitalAnswerOptions.getId()));
-                    }
-                    realm.beginTransaction();
-                    landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).setMultipleAnswers(multipleAnswers);
-                    realm.commitTransaction();
+                if(socialCapitalAnswerOptionsesList.size() > 0) {
+                    if (currentQuestionId < 14) {
+                        //Log.e("Current id ", socialCapitalAnswerOptionsesList.size() + "");
+                        RealmList<MultipleAnswer> multipleAnswers;
+                        multipleAnswers = new RealmList<>();
+                        for (SocialCapitalAnswerOptions socialCapitalAnswerOptions : socialCapitalAnswerOptionsesList) {
+                            multipleAnswers.add(addAnswer(socialCapitalAnswerOptions.getId()));
+                        }
+                        realm.beginTransaction();
+                        landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).setMultipleAnswers(multipleAnswers);
+                        realm.commitTransaction();
 
-                    calculateFactorScore(landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId));
+                        calculateFactorScore(landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId));
 
-                    if (currentQuestionId < 13) {
-                        socialCapitalAnswerOptionsesList.clear();
-                        clearOptions();
+                        if (currentQuestionId < 13) {
+                            socialCapitalAnswerOptionsesList.clear();
+                            clearOptions();
 
-                        Log.e("MULTIPLE ", landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers().toString());
+                            //Log.e("MULTIPLE ", landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers().toString());
 
 
-                        int preQuestionId = currentQuestionId + 1;
-                        loadQuestion(preQuestionId);
+                            int preQuestionId = currentQuestionId + 1;
+                            loadQuestion(preQuestionId);
 
-                        currentQuestionId = preQuestionId;
+                            currentQuestionId = preQuestionId;
+                        } else {
+                            Intent intent = new Intent(SocialCapitalActivity.this, NaturalCapitalSurveyStartActivity.class);
+                            startActivity(intent);
+//                        Intent intent = new Intent(SocialCapitalActivity.this,CertificateActivity.class);
+//                        startActivity(intent);
+                        }
+
                     } else {
                         Intent intent = new Intent(SocialCapitalActivity.this, NaturalCapitalSurveyStartActivity.class);
                         startActivity(intent);
-//                        Intent intent = new Intent(SocialCapitalActivity.this,CertificateActivity.class);
-//                        startActivity(intent);
-                    }
-
-                } else {
-                    Intent intent = new Intent(SocialCapitalActivity.this, NaturalCapitalSurveyStartActivity.class);
-                    startActivity(intent);
 //                    Intent intent = new Intent(SocialCapitalActivity.this, CertificateActivity.class);
 //                    startActivity(intent);
+                    }
+                }else{
+                    Toast.makeText(context,"Select an option",Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.image_view_menu_icon:
@@ -371,7 +387,7 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
     }
 
     public void calculateFactorScore(SocialCapitalAnswer socialCapitalAnswer){
-        int factoreScore = 0;
+        double factoreScore = 0;
         SocialCapitalQuestions socialCapitalQuestionsCalculate = socialCapitalAnswer.getSocialCapitalQuestion();
         int questionWt = socialCapitalQuestionsCalculate.getWeight();
 
@@ -379,7 +395,10 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
             for(SocialCapitalAnswerOptions socialCapitalAnswerOptions:socialCapitalQuestionsCalculate.getSocialCapitalAnswerOptionses()){
                 if(multipleAnswer.getAnswer() == socialCapitalAnswerOptions.getId()){
                     socialCapitalAnswerOptions.getVal();
-                    factoreScore = factoreScore + (socialCapitalAnswerOptions.getVal()*questionWt)/100;
+//                    Log.e("Q wt ",socialCapitalAnswerOptions.getVal()+" "+questionWt);
+//                    Log.e("Q wt ",socialCapitalAnswerOptions.getVal()+" "+(double) questionWt/100);
+//                    Log.e("SCORE ", (socialCapitalAnswerOptions.getVal()*questionWt)/100 +"");
+                    factoreScore = factoreScore + (socialCapitalAnswerOptions.getVal()*(double)questionWt)/100;
                 }
             }
         }
@@ -411,12 +430,14 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                     .findFirst();
         }else {
             spredTable = realm.where(SpredTable.class)
-                    .lessThanOrEqualTo("moreThan", totalFactorScore)
+                    .lessThan("moreThan", totalFactorScore)
                     .greaterThanOrEqualTo("lessThan", totalFactorScore)
                     .findFirst();
         }
-
-        Log.e("SPRED TABLE ", spredTable.getSpread() + 7.16 +"");
+        Log.e("Rating ", spredTable.getRating());
+        Log.e("Sovereign ", 7.16 +"");
+        Log.e("Spred ", spredTable.getSpread() +"");
+        Log.e("Discount rate ", spredTable.getSpread() + 7.16 +"");
 
         realm.beginTransaction();
         landKindLoad.getSocialCapitals().setScore(totalFactorScore);
@@ -465,52 +486,111 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                 .getSocialCapitalQuestion();
         switch (view.getId()) {
             case R.id.option_a:
-                Log.e("PP ", optionA.getTag(R.string.checkbox_id).toString());
-                for (SocialCapitalAnswerOptions socialCapitalAnswerOptions : socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses()) {
-                    Log.e("ZZ ", socialCapitalAnswerOptions.toString());
-                }
-                if (checked) {
-                    socialCapitalAnswerOptionsesList.add(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionA.getTag(R.string.checkbox_id).toString())));
-                } else {
-                    socialCapitalAnswerOptionsesList.remove(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionA.getTag(R.string.checkbox_id).toString())));
-                }
+                checkA();
+                checkBoxChecked(checked, optionA);
+//                Log.e("PP ", optionA.getTag(R.string.checkbox_id).toString());
+//                for (SocialCapitalAnswerOptions socialCapitalAnswerOptions : socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses()) {
+//                    Log.e("ZZ ", socialCapitalAnswerOptions.toString());
+//                }
+//                if (checked) {
+//                    socialCapitalAnswerOptionsesList.add(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionA.getTag(R.string.checkbox_id).toString())));
+//                } else {
+//                    socialCapitalAnswerOptionsesList.remove(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionA.getTag(R.string.checkbox_id).toString())));
+//                }
                 break;
             case R.id.option_b:
-                Log.e("PP ", optionB.getTag(R.string.checkbox_id).toString());
-                if (checked) {
-                    socialCapitalAnswerOptionsesList.add(
-                            socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(
-                                    Integer.parseInt(
-                                            optionB.getTag(R.string.checkbox_id).toString())));
-                } else {
-                    socialCapitalAnswerOptionsesList.remove(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionB.getTag(R.string.checkbox_id).toString())));
-                }
+                checkB();
+                checkBoxChecked(checked, optionB);
+//                Log.e("PP ", optionB.getTag(R.string.checkbox_id).toString());
+//                if (checked) {
+//                    socialCapitalAnswerOptionsesList.add(
+//                            socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(
+//                                    Integer.parseInt(
+//                                            optionB.getTag(R.string.checkbox_id).toString())));
+//                } else {
+//                    socialCapitalAnswerOptionsesList.remove(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionB.getTag(R.string.checkbox_id).toString())));
+//                }
                 break;
             case R.id.option_c:
-                Log.e("PP ", optionC.getTag(R.string.checkbox_id).toString());
-                if (checked) {
-                    socialCapitalAnswerOptionsesList.add(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionC.getTag(R.string.checkbox_id).toString())));
-                } else {
-                    socialCapitalAnswerOptionsesList.remove(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionC.getTag(R.string.checkbox_id).toString())));
-                }
+                checkC();
+                checkBoxChecked(checked, optionB);
+//                Log.e("PP ", optionC.getTag(R.string.checkbox_id).toString());
+//                if (checked) {
+//                    socialCapitalAnswerOptionsesList.add(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionC.getTag(R.string.checkbox_id).toString())));
+//                } else {
+//                    socialCapitalAnswerOptionsesList.remove(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionC.getTag(R.string.checkbox_id).toString())));
+//                }
                 break;
             case R.id.option_d:
-                Log.e("PP ", optionD.getTag(R.string.checkbox_id).toString());
-                if (checked) {
-                    socialCapitalAnswerOptionsesList.add(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionD.getTag(R.string.checkbox_id).toString())));
-                } else {
-                    socialCapitalAnswerOptionsesList.remove(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionD.getTag(R.string.checkbox_id).toString())));
-                }
+                checkD();
+                checkBoxChecked(checked, optionD);
+//                Log.e("PP ", optionD.getTag(R.string.checkbox_id).toString());
+//                if (checked) {
+//                    socialCapitalAnswerOptionsesList.add(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionD.getTag(R.string.checkbox_id).toString())));
+//                } else {
+//                    socialCapitalAnswerOptionsesList.remove(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionD.getTag(R.string.checkbox_id).toString())));
+//                }
                 break;
             case R.id.option_e:
-                Log.e("PP ", optionE.getTag(R.string.checkbox_id).toString());
-                if (checked) {
-                    socialCapitalAnswerOptionsesList.add(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionE.getTag(R.string.checkbox_id).toString())));
-                } else {
-                    socialCapitalAnswerOptionsesList.remove(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionE.getTag(R.string.checkbox_id).toString())));
-                }
+                checkE();
+                checkBoxChecked(checked, optionE);
+//                Log.e("PP ", optionE.getTag(R.string.checkbox_id).toString());
+//                if (checked) {
+//                    socialCapitalAnswerOptionsesList.add(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionE.getTag(R.string.checkbox_id).toString())));
+//                } else {
+//                    socialCapitalAnswerOptionsesList.remove(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionE.getTag(R.string.checkbox_id).toString())));
+//                }
                 break;
         }
+    }
+
+    public void checkBoxChecked(boolean checked, CheckBox checkBox){
+        if (checked) {
+            socialCapitalAnswerOptionsesList.clear();
+            socialCapitalAnswerOptionsesList.add(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(checkBox.getTag(R.string.checkbox_id).toString())));
+        } else {
+            uncheckAll();
+            //socialCapitalAnswerOptionsesList.remove(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(checkBox.getTag(R.string.checkbox_id).toString())));
+        }
+    }
+
+    public void uncheckAll(){
+        optionA.setChecked(false);
+        optionB.setChecked(false);
+        optionC.setChecked(false);
+        optionD.setChecked(false);
+        optionE.setChecked(false);
+        socialCapitalAnswerOptionsesList.clear();
+    }
+
+    public void checkA(){
+        optionA.setChecked(true);
+    }
+
+    public void checkB(){
+        optionA.setChecked(true);
+        optionB.setChecked(true);
+    }
+
+    public void checkC(){
+        optionA.setChecked(true);
+        optionB.setChecked(true);
+        optionC.setChecked(true);
+    }
+
+    public void checkD(){
+        optionA.setChecked(true);
+        optionB.setChecked(true);
+        optionC.setChecked(true);
+        optionD.setChecked(true);
+    }
+
+    public void checkE(){
+        optionA.setChecked(true);
+        optionB.setChecked(true);
+        optionC.setChecked(true);
+        optionD.setChecked(true);
+        optionE.setChecked(true);
     }
 
     public void slectedItemsRadio(View view) {

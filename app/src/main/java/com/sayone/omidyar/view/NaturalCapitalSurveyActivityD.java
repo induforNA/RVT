@@ -25,6 +25,7 @@ import com.sayone.omidyar.model.Component;
 import com.sayone.omidyar.model.CostElementYears;
 import com.sayone.omidyar.model.Frequency;
 import com.sayone.omidyar.model.LandKind;
+import com.sayone.omidyar.model.OutlayYears;
 import com.sayone.omidyar.model.Quantity;
 import com.sayone.omidyar.model.RevenueProduct;
 import com.sayone.omidyar.model.RevenueProductYears;
@@ -363,7 +364,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                     if(currentCostProductIndex > 0){
                         currentCostProductIndex--;
                         currentYearIndex = totalYearsCount - 1;
-                        // loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
+                        // loadRevenueProduct(costOutlays.get(currentCostProductIndex));
                     }else if(currentCostProductIndex == 0) {
                         if(productReveneIdCheck == 0 || productReveneIdCheck == productReveneIdCon){
                             finish();
@@ -404,7 +405,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
 
 //            case R.id.save_btn:
-//                // saveYearlyDatas(revenueProducts.get(currentCostProductIndexSave));
+//                // saveYearlyDatas(costOutlays.get(currentCostProductIndexSave));
 //
 //
 //                break;
@@ -863,9 +864,16 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 .equalTo("year",year)
                 .findFirst();
 
+        OutlayYears outlayYears = realm.where(OutlayYears.class)
+                .equalTo("surveyId",serveyId)
+                .equalTo("landKind",landKind)
+                .equalTo("year",year)
+                .findFirst();
+
 
         double revenueTotal = 0;
         double costTotal = 0;
+        double outlayTotal = 0;
         double disRate = disRatePersent/100;
 
         double disFactor = 0;
@@ -878,7 +886,10 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             costTotal = costElementYears.getSubtotal();
             disFactor = 1 / Math.pow(1+disRate,costElementYears.getProjectedIndex());
         }
-        double cashFlowVal = revenueTotal - costTotal;
+        if(outlayYears != null){
+            outlayTotal = outlayYears.getPrice();
+        }
+        double cashFlowVal = revenueTotal - costTotal - outlayTotal;
 
 
         double discountedCashFlow = cashFlowVal * disFactor;
