@@ -147,6 +147,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         timePeriodList = new ArrayList<>();
         unitList = new ArrayList<>();
 
+
         year_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, yearList);
         timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, timePeriodList);
         unit_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, unitList);

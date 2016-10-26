@@ -42,9 +42,11 @@ public class LoadingActivity extends BaseActivity {
     String spredTableLoadStatus;
     String frequencyLoadStatus;
     String quanityLoadStatus;
+    private String unitLoadStatus;
     int flagVlue = 0;
 
     public static final String TAG = LoadingActivity.class.getName();
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -181,6 +183,8 @@ public class LoadingActivity extends BaseActivity {
                 e.printStackTrace();
             }
         }
+
+
 
 
         RealmResults<SocialCapitalQuestions> results = realm.where(SocialCapitalQuestions.class).findAll();
