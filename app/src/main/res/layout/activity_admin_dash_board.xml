@@ -2,58 +2,76 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@android:color/white"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:orientation="vertical"
     tools:context=".view.AdminDashBoard">
 
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/colorPrimary"
+        android:elevation="3dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textview_admin_dashboard_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#29b7ab"
+            android:textAllCaps="true"
+            android:text="@string/heading_admin_dashboard"
+            android:textColor="#ffffff"
+            android:textSize="22dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/heading_size"
-        android:layout_gravity="center"
-        android:text="@string/heading_admin_dashboard"
-        android:id="@+id/textview_admin_dashboard_heading" />
-    <View
-        android:layout_width="230dp"
-        android:layout_height="2dp"
-        android:layout_gravity="center"
-        android:layout_margin="15dp"
-        android:background="#000000" />
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_marginTop="70dp"
+        android:layout_height="wrap_content">
 
     <TextView
+        android:id="@+id/textview_rates"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="@dimen/textfield_size"
+        android:layout_gravity="left"
         android:layout_marginTop="50dp"
         android:text="@string/text_rates"
-        android:id="@+id/textview_rates" />
+        android:textSize="@dimen/textfield_size" />
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textSize="@dimen/textfield_size"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_marginTop="20dp"-->
+    <!--android:text="@string/text_project_time_frame"-->
+    <!--android:id="@+id/textview_projection" />-->
 
     <TextView
+        android:id="@+id/textview_units"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/textfield_size"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="@string/text_project_time_frame"
-        android:id="@+id/textview_projection" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/textfield_size"
-        android:layout_gravity="center"
+        android:layout_gravity="left"
         android:layout_marginTop="20dp"
         android:text="@string/text_units"
-        android:id="@+id/textview_units" />
+        android:textSize="@dimen/textfield_size" />
 
     <TextView
+        android:id="@+id/textview_summary_surveys"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="@dimen/textfield_size"
-        android:text="@string/text_summary_surveys"
+        android:layout_gravity="left"
         android:layout_marginTop="20dp"
-        android:id="@+id/textview_summary_surveys"/>
+        android:text="@string/text_summary_surveys"
+        android:textSize="@dimen/textfield_size" />
+
+    </LinearLayout>
+
 </LinearLayout>

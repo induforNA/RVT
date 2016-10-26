@@ -26,6 +26,8 @@ public class SocialCapital extends RealmObject {
 
     double discountRate;
 
+    double discountRateOverride;
+
     public long getId() {
         return id;
     }
@@ -88,5 +90,13 @@ public class SocialCapital extends RealmObject {
 
     public void setDiscountRate(double discountRate) {
         this.discountRate = discountRate;
+    }
+
+    public double getDiscountRateOverride() {
+        return discountRateOverride;
+    }
+
+    public void setDiscountRateOverride(double discountRate) {
+        this.discountRateOverride = discountRate;
     }
 }

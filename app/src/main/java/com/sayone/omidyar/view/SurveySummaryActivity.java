@@ -75,11 +75,12 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
     RecyclerView recyclerView;
     RealmList<Survey> surveys;
     private SurveyAdapter surveyAdapter;
+    RealmResults<Survey> surveyList;
     int surveyCount;
 
     JSONObject jsonObject;
     private Context context;
-    private Button sendDataToServer;
+    private Button sendDataToServer,resetData;
     private SharedPreferences sharedPref;
     private Set<String> set = null;
 
@@ -95,12 +96,13 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         completedSurveys = (TextView) findViewById(R.id.completed_surveys);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_survey_list);
         sendDataToServer = (Button) findViewById(R.id.button_send_data_to_server);
+        resetData=(Button)findViewById(R.id.button_reset_data);
         sharedPref = context.getSharedPreferences(
                 "com.sayone.omidyar.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE);
 
 
         Realm realm = Realm.getDefaultInstance();
-        RealmResults<Survey> surveyList = realm.where(Survey.class).findAll();
+        surveyList = realm.where(Survey.class).findAll();
         surveyCount = surveyList.size();
 
         surveyAdapter = new SurveyAdapter(surveyList);
@@ -109,6 +111,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(surveyAdapter);
         sendDataToServer.setOnClickListener(this);
+        resetData.setOnClickListener(this);
 
 
         completedSurveys.setText("" + surveyCount);
@@ -1232,6 +1235,52 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 }
                 new LongOperation().execute("");
                 break;
+
+            case R.id.button_reset_data:
+                Realm realm = Realm.getDefaultInstance();
+                realm.beginTransaction();
+                RealmResults<CashFlow> cashFlow = realm.where(CashFlow.class).findAll();
+                cashFlow.deleteAllFromRealm();
+                RealmResults<Component>components  = realm.where(Component.class).findAll();
+                components.deleteAllFromRealm();
+                RealmResults<CostElement> costElements = realm.where(CostElement.class).findAll();
+                costElements.deleteAllFromRealm();
+                RealmResults<CostElementYears> costElementYearses = realm.where(CostElementYears.class).findAll();
+                costElementYearses.deleteAllFromRealm();
+                RealmResults<CropLand> cropLands = realm.where(CropLand.class).findAll();
+                cropLands.deleteAllFromRealm();
+                RealmResults<DiscountedCashFlow> discountedCashFlows = realm.where(DiscountedCashFlow.class).findAll();
+                discountedCashFlows.deleteAllFromRealm();
+                RealmResults<DiscountingFactor> discountingFactors = realm.where(DiscountingFactor.class).findAll();
+                discountingFactors.deleteAllFromRealm();
+                RealmResults<ForestLand> forestLands = realm.where(ForestLand.class).findAll();
+                forestLands.deleteAllFromRealm();
+                RealmResults<LandKind> landKinds = realm.where(LandKind.class).findAll();
+                landKinds.deleteAllFromRealm();
+                RealmResults<MiningLand> miningLands = realm.where(MiningLand.class).findAll();
+                miningLands.deleteAllFromRealm();
+                RealmResults<MultipleAnswer> multipleAnswers = realm.where(MultipleAnswer.class).findAll();
+                multipleAnswers.deleteAllFromRealm();
+                RealmResults<Outlay> outlays = realm.where(Outlay.class).findAll();
+                outlays.deleteAllFromRealm();
+                RealmResults<Participant> participants = realm.where(Participant.class).findAll();
+                participants.deleteAllFromRealm();
+                RealmResults<PastureLand> pastureLands = realm.where(PastureLand.class).findAll();
+                pastureLands.deleteAllFromRealm();
+                RealmResults<RevenueProduct> revenueProducts = realm.where(RevenueProduct.class).findAll();
+                revenueProducts.deleteAllFromRealm();
+                RealmResults<RevenueProductYears> revenueProductYearses = realm.where(RevenueProductYears.class).findAll();
+                revenueProductYearses.deleteAllFromRealm();
+                RealmResults<SocialCapital> socialCapitals = realm.where(SocialCapital.class).findAll();
+                socialCapitals.deleteAllFromRealm();
+                RealmResults<SocialCapitalAnswer> socialCapitalAnswers = realm.where(SocialCapitalAnswer.class).findAll();
+                socialCapitalAnswers.deleteAllFromRealm();
+                RealmResults<Survey> surveys = realm.where(Survey.class).findAll();
+                surveys.deleteAllFromRealm();
+                realm.commitTransaction();
+                surveyAdapter.notifyDataSetChanged();
+                break;
+
         }
     }
 }

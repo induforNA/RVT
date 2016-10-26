@@ -14,6 +14,7 @@ import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.Survey;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
@@ -47,6 +48,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         login.setOnClickListener(this);
         signUp.setOnClickListener(this);
         adminLogin.setOnClickListener(this);
+
 
 
     }
@@ -89,7 +91,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             }
                         }
 
-                        if (flag == false) {
+                        if (!flag) {
                             toastfunction(getApplicationContext(), getResources().getString(R.string.login_failed));
                         }
                     }

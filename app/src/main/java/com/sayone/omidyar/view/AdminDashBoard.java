@@ -17,12 +17,12 @@ public class AdminDashBoard extends BaseActivity implements View.OnClickListener
         setContentView(R.layout.activity_admin_dash_board);
 
         rates=(TextView)findViewById(R.id.textview_rates);
-        projectionTimeFrame=(TextView)findViewById(R.id.textview_projection);
+//        projectionTimeFrame=(TextView)findViewById(R.id.textview_projection);
         units=(TextView)findViewById(R.id.textview_units);
         summaryOfSurveys=(TextView)findViewById(R.id.textview_summary_surveys);
 
         rates.setOnClickListener(this);
-        projectionTimeFrame.setOnClickListener(this);
+ //       projectionTimeFrame.setOnClickListener(this);
         units.setOnClickListener(this);
         summaryOfSurveys.setOnClickListener(this);
 
@@ -36,11 +36,6 @@ public class AdminDashBoard extends BaseActivity implements View.OnClickListener
 
             case R.id.textview_rates:
                 intent=new Intent(getApplicationContext(),AdminRatesActivity.class);
-                startActivity(intent);
-                break;
-
-            case R.id.textview_projection:
-                intent=new Intent(getApplicationContext(),ProjectionTimeFrameActivity.class);
                 startActivity(intent);
                 break;
 
