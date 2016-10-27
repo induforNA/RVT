@@ -30,6 +30,7 @@ import java.util.Locale;
 
 import io.realm.Realm;
 import io.realm.RealmList;
+import io.realm.RealmResults;
 
 public class NaturalCapitalCostActivityA extends BaseActivity implements View.OnClickListener {
 
@@ -156,8 +157,17 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
         switch (view.getId()) {
 
             case R.id.button_next:
-                intent=new Intent(getApplicationContext(),NaturalCapitalCostActivityB.class);
-                startActivity(intent);
+                RealmResults<CostElement> costElements1 = realm.where(CostElement.class)
+                        .equalTo("surveyId", serveyId)
+                        .equalTo("landKind", currentSocialCapitalServey)
+                        .findAll();
+                if(costElements1.size() <= 0){
+                    intent=new Intent(getApplicationContext(),NaturalCapitalCostOutlay.class);
+                    startActivity(intent);
+                }else{
+                    intent=new Intent(getApplicationContext(),NaturalCapitalCostActivityB.class);
+                    startActivity(intent);
+                }
                 break;
 
             case R.id.button_back:

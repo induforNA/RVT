@@ -2,15 +2,15 @@
     <string name="app_name">Omidyar</string>
     <string name="checkbox_id">checkbox id</string>
     <string-array name="country_array">
-        <item>Select country</item>
+        <!--<item>Select country</item>-->
         <item>India</item>
-        <item>Australia</item>
-        <item>USA</item>
-        <item>China</item>
-        <item>Jamaica</item>
-        <item>Japan</item>
-        <item>Brasil</item>
-        <item>England</item>
+        <!--<item>Australia</item>-->
+        <!--<item>USA</item>-->
+        <!--<item>China</item>-->
+        <!--<item>Jamaica</item>-->
+        <!--<item>Japan</item>-->
+        <!--<item>Brasil</item>-->
+        <!--<item>England</item>-->
     </string-array>
     <string-array name="language_array">
         <!--<item>Select language</item>-->
@@ -160,7 +160,7 @@
     <string name="value">Value</string>
     <string name="social_capital_score">Social capital score</string>
     <string name="questions_completed">Questions completed</string>
-    <string name="total">Total :</string>
+    <string name="total">Total : </string>
     <string name="qn_completed">Questions completed -</string>
     <string name="type_species1">Type species 1</string>
     <string name="type_species2">Type species 2</string>

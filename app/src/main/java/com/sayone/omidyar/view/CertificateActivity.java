@@ -168,8 +168,19 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 //                }
                 Picasso.with(context).load(fforest).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageForest);
                 socialCapitalForest.setText(""+landKind.getSocialCapitals().getScore()+"/20");
-                forestValue.setText(roundTwo(surveyCheck.getComponents().getForestValue())+"");
-                totalVal = totalVal + surveyCheck.getComponents().getForestValue();
+                if(surveyCheck.getComponents() != null){
+                    if(surveyCheck.getComponents().getForestValue() != 0){
+                        forestValue.setText(roundTwo(surveyCheck.getComponents().getForestValue())+"");
+                        totalVal = totalVal + surveyCheck.getComponents().getForestValue();
+                    }else{
+                        forestValue.setText("0");
+                    }
+                }else{
+                    forestValue.setText("0");
+                }
+
+
+
             }
 
             if(landKind.getName().equals("Cropland")){
@@ -185,9 +196,20 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 //                }
                 Picasso.with(context).load(fcrop).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageCrop);
                 socialCapitalCrop.setText(""+landKind.getSocialCapitals().getScore()+"/20");
-                cropValue.setText(roundTwo(surveyCheck.getComponents().getCroplandValue())+"");
 
-                totalVal = totalVal + surveyCheck.getComponents().getCroplandValue();
+
+                if(surveyCheck.getComponents() != null){
+                    if(surveyCheck.getComponents().getCroplandValue() != 0){
+                        cropValue.setText(roundTwo(surveyCheck.getComponents().getCroplandValue())+"");
+                        totalVal = totalVal + surveyCheck.getComponents().getCroplandValue();
+                    }else{
+                        cropValue.setText("0");
+                    }
+                }else{
+                    cropValue.setText("0");
+                }
+
+
             }
 
             if(landKind.getName().equals("Pastureland")){
@@ -203,9 +225,20 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 //                }
                 Picasso.with(context).load(fpasture).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImagePasture);
                 socialCapitalPasture.setText(""+landKind.getSocialCapitals().getScore()+"/20");
-                pastureValue.setText(roundTwo(surveyCheck.getComponents().getPastureValue())+""+"");
 
-                totalVal = totalVal + surveyCheck.getComponents().getPastureValue();
+
+                if(surveyCheck.getComponents() != null){
+                    if(surveyCheck.getComponents().getPastureValue() != 0){
+                        pastureValue.setText(roundTwo(surveyCheck.getComponents().getPastureValue())+""+"");
+                        totalVal = totalVal + surveyCheck.getComponents().getPastureValue();
+                    }else{
+                        pastureValue.setText("0");
+                    }
+                }else{
+                    pastureValue.setText("0");
+                }
+
+
             }
 
             if(landKind.getName().equals("Mining Land")){
@@ -220,9 +253,20 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 //                }
                 Picasso.with(context).load(fmining).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageMining);
                 socialCapitalMining.setText(""+landKind.getSocialCapitals().getScore()+"/20");
-                miningValue.setText(roundTwo(surveyCheck.getComponents().getMiningLandValue())+"");
 
-                totalVal = totalVal + surveyCheck.getComponents().getMiningLandValue();
+
+                if(surveyCheck.getComponents() != null){
+                    if(surveyCheck.getComponents().getMiningLandValue() != 0){
+                        miningValue.setText(roundTwo(surveyCheck.getComponents().getMiningLandValue())+"");
+                        totalVal = totalVal + surveyCheck.getComponents().getMiningLandValue();
+                    }else{
+                        miningValue.setText("0");
+                    }
+                }else{
+                    miningValue.setText("0");
+                }
+
+
             }
         }
 

@@ -101,7 +101,7 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
                 //costElements = landKind.getForestLand().getRevenueProducts();
                 for(RevenueProduct revenueProduct:landKind.getPastureLand().getRevenueProducts()){
                     revenueProductsToSave.add(revenueProduct);
-                    if(revenueProduct.getType().equals("Timber")){
+                    if(revenueProduct.getType().equals("Livestock")){
                         revenueProducts.add(revenueProduct);
                     }
                 }
@@ -178,8 +178,23 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
                     intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivityB.class);
                     startActivity(intent);
                 }else{
-                    intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivityC.class);
-                    startActivity(intent);
+                    // Survey surveyRevenueProduct = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
+//                    RevenueProduct revenueProduct = realm.where(RevenueProduct.class)
+//                            .equalTo("surveyId", serveyId)
+//                            .equalTo("landKind", currentSocialCapitalServey)
+//                            .findFirst();
+
+                    RealmResults<RevenueProduct> revenueProducts = realm.where(RevenueProduct.class)
+                            .equalTo("surveyId", serveyId)
+                            .equalTo("landKind", currentSocialCapitalServey)
+                            .findAll();
+                    if(revenueProducts.size() <= 0){
+                        intent=new Intent(getApplicationContext(),NaturalCapitalCostActivityA.class);
+                        startActivity(intent);
+                    }else {
+                        intent = new Intent(getApplicationContext(), NaturalCapitalSurveyActivityC.class);
+                        startActivity(intent);
+                    }
                 }
                 break;
 
@@ -235,7 +250,11 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
                         RevenueProduct revenueProduct = realm.createObject(RevenueProduct.class);
                         revenueProduct.setId(getNextKeyRevenueProduct());
                         revenueProduct.setName(name);
-                        revenueProduct.setType("Timber");
+                        if(currentSocialCapitalServey.equals("Pastureland")){
+                            revenueProduct.setType("Livestock");
+                        }else{
+                            revenueProduct.setType("Timber");
+                        }
                         revenueProduct.setLandKind(landKindName);
                         revenueProduct.setSurveyId(serveyId);
                         realm.commitTransaction();

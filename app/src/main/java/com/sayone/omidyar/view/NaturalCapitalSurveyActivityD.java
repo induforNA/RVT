@@ -62,6 +62,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
     private TextView surveyIdDrawer;
     private TextView areaQuestion;
     private EditText areaEdit;
+    TextView timePerHead;
+    TextView numTimesHead;
 
     RealmList<RevenueProduct> revenueProducts;
     int totalCostProductCount = 0;
@@ -128,6 +130,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         areaQuestion = (TextView) findViewById(R.id.area_question);
         areaEdit = (EditText) findViewById(R.id.area_edit);
         landType=(TextView)findViewById(R.id.land_type);
+        timePerHead = (TextView) findViewById(R.id.time_per_head);
+        numTimesHead  = (TextView) findViewById(R.id.num_times_head);
 
         revenueProducts = new RealmList<>();
         totalCostProductCount = 0;
@@ -322,7 +326,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                                        View view, int pos, long id) {
                 timePeriod= parent.getItemAtPosition(pos).toString();
                 Log.e("Time period ",timePeriod);
-                if(timePeriod.equals("one-time")){
+                if(timePeriod.equals("one-time") && !currentSocialCapitalServey.equals("Pastureland")){
                     noOfTimesEdit.setText("1");
                     noOfTimesEdit.setEnabled(false);
                 }else{
@@ -422,11 +426,20 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             quantityQuestion.setText(getResources().getString(R.string.qn_natural_complex_2_1)+" "+revenueProductLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_2_2));
             productQuestion.setText(getResources().getString(R.string.qn_natural_complex_3_1)+" "+revenueProductLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_3_2));
             areaQuestion.setText(getResources().getString(R.string.percentage_area_harvested));
-        }else if(revenueProductLoad.getType().equals("Non Timber")){
-            loadQuestions.setText(getResources().getString(R.string.qn_natural_complex_1_1)+" "+revenueProductLoad.getName()+getResources().getString(R.string.qn_natural_complex_1_2)+"?");
-            quantityQuestion.setText(getResources().getString(R.string.qn_natural_complex_2_1)+" "+revenueProductLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_2_2));
-            productQuestion.setText(getResources().getString(R.string.qn_natural_complex_3_1)+" "+revenueProductLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_3_2));
+        }else if(revenueProductLoad.getType().equals("Non Timber")) {
+            loadQuestions.setText(getResources().getString(R.string.qn_natural_complex_1_1) + " " + revenueProductLoad.getName() + getResources().getString(R.string.qn_natural_complex_1_2) + "?");
+            quantityQuestion.setText(getResources().getString(R.string.qn_natural_complex_2_1) + " " + revenueProductLoad.getName() + " " + getResources().getString(R.string.qn_natural_complex_2_2));
+            productQuestion.setText(getResources().getString(R.string.qn_natural_complex_3_1) + " " + revenueProductLoad.getName() + " " + getResources().getString(R.string.qn_natural_complex_3_2));
             areaQuestion.setText(getResources().getString(R.string.percentage_area_harvested));
+        }else if(revenueProductLoad.getType().equals("Livestock")){
+            loadQuestions.setText("How many months of a year do you graze "+revenueProductLoad.getName()+" on this piece of land?");
+            quantityQuestion.setText("Total amount of fodder consumed per anmial per year");
+            productQuestion.setText("Market Price of fodder");
+            areaQuestion.setText("Number of livestock");
+            timePerHead.setVisibility(View.INVISIBLE);
+            spinnerTimePeriod.setVisibility(View.INVISIBLE);
+            numTimesHead.setVisibility(View.INVISIBLE);
+            noOfTimesEdit.setEnabled(true);
         }else {
             loadQuestions.setText(getResources().getString(R.string.qn_natural_complex_1_1)+" "+revenueProductLoad.getName()+getResources().getString(R.string.qn_natural_complex_1_2)+"?");
             quantityQuestion.setText(getResources().getString(R.string.qn_natural_complex_2_1)+" "+revenueProductLoad.getName()+" "+getResources().getString(R.string.qn_natural_complex_2_2));
@@ -481,6 +494,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         // Log.e("LOAD ","11111");
         if(revenueProductYearsLoad.getHarvestFrequencyValue() != 0){
             noOfTimesEdit.setText(revenueProductYearsLoad.getHarvestFrequencyValue()+"");
+        }else{
+            noOfTimesEdit.setText("1");
         }
         if(revenueProductYearsLoad.getQuantityValue() != 0){
             // Log.e("KKKKKKKKKKKKK ",revenueProductYearsLoad.getQuantityValue()+"");
@@ -575,12 +590,14 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                             }
                         });
 
+                        double total = 0;
 
 
-                        double total = frequency.getFrequencyValue()
-                                * Integer.parseInt(noOfTimesEdit.getText().toString())
-                                * Double.parseDouble(priceEdit.getText().toString())
-                                * Double.parseDouble(quanityEdit.getText().toString());
+
+//                        double total = frequency.getFrequencyValue()
+//                                * Integer.parseInt(noOfTimesEdit.getText().toString())
+//                                * Double.parseDouble(priceEdit.getText().toString())
+//                                * Double.parseDouble(quanityEdit.getText().toString());
 
                         String areaEditStr = areaEdit.getText().toString();
                         double harverArea = 0;
@@ -589,6 +606,29 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                         }else{
                             harverArea = Double.parseDouble(areaEditStr);
                         }
+
+                        Log.e("LAND ", currentSocialCapitalServey);
+
+                        if(currentSocialCapitalServey.equals("Pastureland")){
+                            Log.e("LAND ", "PAS");
+                            total = Integer.parseInt(noOfTimesEdit.getText().toString())
+                                    * Double.parseDouble(priceEdit.getText().toString())
+                                    * Double.parseDouble(quanityEdit.getText().toString())
+                                    * harverArea;
+                            Log.e("AA ",Integer.parseInt(noOfTimesEdit.getText().toString())
+                                    +" "+ Double.parseDouble(priceEdit.getText().toString())
+                                    +" "+ Double.parseDouble(quanityEdit.getText().toString())
+                                    +" "+ harverArea);
+                            total = total/12;
+
+                        }else {
+                            total = frequency.getFrequencyValue()
+                                    * Integer.parseInt(noOfTimesEdit.getText().toString())
+                                    * Double.parseDouble(priceEdit.getText().toString())
+                                    * Double.parseDouble(quanityEdit.getText().toString());
+                        }
+
+                        Log.e("TOTAL ",total+"");
 
 
 

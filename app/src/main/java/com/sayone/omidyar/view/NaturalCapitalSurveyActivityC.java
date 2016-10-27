@@ -248,11 +248,11 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
         switch (view.getId()){
 
             case R.id.button_next:
-
-                saveYears();
-
-
-
+                if(editTexts.size() > 0){
+                    saveYears();
+                }else{
+                    Toast.makeText(context,"Select at least one year",Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.button_back:

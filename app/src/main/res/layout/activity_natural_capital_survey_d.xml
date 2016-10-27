@@ -58,6 +58,7 @@
                 <!--android:id="@+id/checkBox" />-->
 
                 <TextView
+                    android:id="@+id/num_times_head"
                     android:layout_marginLeft="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -75,6 +76,7 @@
                     android:inputType="number" />
 
                 <TextView
+                    android:id="@+id/time_per_head"
                     android:layout_marginLeft="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

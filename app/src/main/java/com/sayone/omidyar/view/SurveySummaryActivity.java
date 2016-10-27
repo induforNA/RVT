@@ -1,9 +1,11 @@
 package com.sayone.omidyar.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -175,7 +177,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
 
     private class LongOperation extends AsyncTask<String, Void, String> {
-
+        private ProgressDialog progress;
         @Override
         protected String doInBackground(String... params) {
             RealmConfiguration config = new RealmConfiguration.Builder(getApplicationContext()).deleteRealmIfMigrationNeeded().build();
@@ -250,7 +252,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                                 jsonObject.put("components", "");
                             } else
                                 jsonObject.put("components", getComponent(survey.getComponents()));
-                            makeJsonObjectRequest();
+                            makeJsonObjectRequest(survey.getSurveyId());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -267,10 +269,23 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         @Override
         protected void onPostExecute(String result) {
          //   makeJsonObjectRequest();
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    progress.dismiss();
+                    Toast toast = Toast.makeText(context,"Completed", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }, 3000);
         }
 
         @Override
         protected void onPreExecute() {
+            progress = new ProgressDialog(context);
+            progress.setTitle("Sending Data");
+            progress.setMessage("Wait while sending...");
+            progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+            progress.show();
         }
 
         @Override
@@ -280,7 +295,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
     }
 
 
-    private void makeJsonObjectRequest() {
+    private void makeJsonObjectRequest(String surId) {
 
         Log.e("JSON ", jsonObject.toString());
 //        JSONObject jsonObject1 = null;
@@ -295,7 +310,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
         JSONObject object = new JSONObject();
         try {
-            object.put("survey_no", "0001");
+            object.put("survey_no", surId);
             object.put("content", jsonObject);
         } catch (JSONException e) {
             e.printStackTrace();

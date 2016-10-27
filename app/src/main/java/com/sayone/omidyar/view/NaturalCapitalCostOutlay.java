@@ -181,8 +181,26 @@ public class NaturalCapitalCostOutlay extends BaseActivity {
         switch (view.getId()) {
 
             case R.id.button_next:
-                intent=new Intent(getApplicationContext(),NaturalCapitalCostOutlayB.class);
-                startActivity(intent);
+//                Outlay outlayCheck = realm.where(Outlay.class)
+//                        .equalTo("surveyId",serveyId)
+//                        .equalTo("landKind",currentSocialCapitalServey)
+//                        .findFirst();
+
+                RealmResults<Outlay> outlays1 = realm.where(Outlay.class)
+                    .equalTo("surveyId",serveyId)
+                    .equalTo("landKind",currentSocialCapitalServey)
+                    .findAll();
+                if(outlays1.size() > 0){
+                    intent=new Intent(getApplicationContext(),NaturalCapitalCostOutlayB.class);
+                    startActivity(intent);
+                }else{
+                    nextLandKind();
+                }
+
+
+
+//                intent=new Intent(getApplicationContext(),NaturalCapitalCostOutlayB.class);
+//                startActivity(intent);
                 break;
             case R.id.button_back:
                 finish();

@@ -55,7 +55,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
     private TextView startSurvey;
     private TextView landType;
     private DrawerLayout menuDrawerLayout;
-    ArrayList<EditText> editTexts;
+    ArrayList<Spinner> editTexts;
     private TextView surveyIdDrawer;
     RealmList<CostElementYears> costElementYearsArrayList;
     TextView enterYearHeading;
@@ -173,15 +173,42 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
 
             Log.e("YEAR PEEEEEEEEE",costElementYears.getYear()+" "+currentYear);
             if(costElementYears.getYear() < currentYear && costElementYears.getYear() != 0){
-                EditText myEditText = new EditText(context);
-                myEditText.setLayoutParams(mRparams);
-                myEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-                myEditText.setId(i);
-                myEditText.setHint(getResources().getString(R.string.enter_year_hint)+" " + i);
-                myEditText.setText(costElementYears.getYear()+"");
-                allEditText.addView(myEditText);
-                editTexts.add(myEditText);
+                ArrayList yearArray = new ArrayList();
+                int year = currentYear - 1;
+                while(year >= 1990){
+                    yearArray.add(String.valueOf(year));
+                    year--;
+                }
+
+
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, yearArray);
+                //ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,yearArray);
+
+                Spinner spinner=new Spinner(this);
+                spinner.setAdapter(arrayAdapter);
+                spinner.setSelection(arrayAdapter.getPosition(costElementYears.getYear()+""));
+                spinner.setLayoutParams(mRparams);
+
+                spinner.setId(i);
+                allEditText.addView(spinner);
+                editTexts.add(spinner);
+
+                arrayAdapter.notifyDataSetChanged();
+                //setContentView();
+                //layout.addView(spinner);
                 i++;
+
+
+
+//                EditText myEditText = new EditText(context);
+//                myEditText.setLayoutParams(mRparams);
+//                myEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
+//                myEditText.setId(i);
+//                myEditText.setHint(getResources().getString(R.string.enter_year_hint)+" " + i);
+//                myEditText.setText(costElementYears.getYear()+"");
+//                allEditText.addView(myEditText);
+//                editTexts.add(myEditText);
+//                i++;
             }
         }
     }
@@ -189,14 +216,34 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
     public void generateYearFields(int j){
         LinearLayout.LayoutParams mRparams = new LinearLayout.LayoutParams(400, LinearLayout.LayoutParams.WRAP_CONTENT);
         int k;
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
         for(k=1; k<=j; k++){
-            EditText myEditText = new EditText(context);
-            myEditText.setLayoutParams(mRparams);
-            myEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-            myEditText.setId(k);
-            myEditText.setHint(getResources().getString(R.string.enter_year_hint)+" "+ k);
-            allEditText.addView(myEditText);
-            editTexts.add(myEditText);
+            ArrayList yearArray = new ArrayList();
+            int year = currentYear - 1;
+            while(year >= 1990){
+                yearArray.add(year--);
+            }
+
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, yearArray);
+
+            Spinner spinner=new Spinner(this);
+            spinner.setLayoutParams(mRparams);
+            spinner.setAdapter(arrayAdapter);
+            spinner.setId(k);
+            allEditText.addView(spinner);
+            editTexts.add(spinner);
+            //layout.addView(spinner);
+            i++;
+
+
+
+//            EditText myEditText = new EditText(context);
+//            myEditText.setLayoutParams(mRparams);
+//            myEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
+//            myEditText.setId(k);
+//            myEditText.setHint(getResources().getString(R.string.enter_year_hint)+" "+ k);
+//            allEditText.addView(myEditText);
+//            editTexts.add(myEditText);
         }
     }
 
@@ -206,11 +253,20 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
         switch (view.getId()){
 
             case R.id.button_next:
-                saveYears();
+                if(editTexts.size() > 0){
+                    saveYears();
+
+                    intent=new Intent(getApplicationContext(),NaturalCapitalCostActivityC.class);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(context,"Select at least one year",Toast.LENGTH_SHORT).show();
+                }
+//
+//
+//                saveYears();
 
 
-                intent=new Intent(getApplicationContext(),NaturalCapitalCostActivityC.class);
-                startActivity(intent);
+
                 break;
 
             case R.id.button_back:
@@ -263,10 +319,10 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
                     //Log.e("LAND AA ", revenueProduct1.getRevenueProductYearses().size()+"");
 
 
-                    for(EditText editText : editTexts){
+                    for(Spinner editText : editTexts){
                         //editText.setText("233");
                         //Log.e("SSS ",editText.getText().toString());
-                        costElementYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getText().toString()), costElements1.getId(), "Forestland"));
+                        costElementYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), costElements1.getId(), "Forestland"));
                     }
 
                     int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -289,10 +345,10 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
                     //Log.e("LAND AA ", revenueProduct1.getRevenueProductYearses().size()+"");
 
 
-                    for(EditText editText : editTexts){
+                    for(Spinner editText : editTexts){
                         //editText.setText("233");
                         //Log.e("SSS ",editText.getText().toString());
-                        costElementYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getText().toString()), costElements1.getId(), "Cropland"));
+                        costElementYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), costElements1.getId(), "Cropland"));
                     }
 
                     int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -314,10 +370,10 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
                     //Log.e("LAND AA ", revenueProduct1.getRevenueProductYearses().size()+"");
 
 
-                    for(EditText editText : editTexts){
+                    for(Spinner editText : editTexts){
                         //editText.setText("233");
                         //Log.e("SSS ",editText.getText().toString());
-                        costElementYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getText().toString()), costElements1.getId(), "Pastureland"));
+                        costElementYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), costElements1.getId(), "Pastureland"));
                     }
 
                     int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -339,10 +395,10 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
                     //Log.e("LAND AA ", revenueProduct1.getRevenueProductYearses().size()+"");
 
 
-                    for(EditText editText : editTexts){
+                    for(Spinner editText : editTexts){
                         //editText.setText("233");
                         //Log.e("SSS ",editText.getText().toString());
-                        costElementYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getText().toString()), costElements1.getId(), "Mining Land"));
+                        costElementYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), costElements1.getId(), "Mining Land"));
                     }
 
                     int year = Calendar.getInstance().get(Calendar.YEAR);

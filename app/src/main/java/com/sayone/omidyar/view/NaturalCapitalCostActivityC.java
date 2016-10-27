@@ -126,8 +126,8 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         logout = (TextView) findViewById(R.id.logout);
         startSurvey=(TextView)findViewById(R.id.text_start_survey);
         surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
-        areaQuestion = (TextView) findViewById(R.id.area_question);
-        areaEdit = (EditText) findViewById(R.id.area_edit);
+        //areaQuestion = (TextView) findViewById(R.id.area_question);
+        //areaEdit = (EditText) findViewById(R.id.area_edit);
         landType=(TextView)findViewById(R.id.land_type);
 
         revenueProducts = new RealmList<>();
@@ -566,9 +566,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                                 if(priceEdit.getText().toString().equals("")){
                                     priceEdit.setText("0");
                                 }
-                                if(areaEdit.getText().toString().equals("")){
-                                    areaEdit.setText("0");
-                                }
+//                                if(areaEdit.getText().toString().equals("")){
+//                                    areaEdit.setText("0");
+//                                }
                             }
                         });
 
@@ -579,13 +579,13 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                                 * Double.parseDouble(priceEdit.getText().toString())
                                 * Double.parseDouble(quanityEdit.getText().toString());
 
-                        String areaEditStr = areaEdit.getText().toString();
+                        //String areaEditStr = areaEdit.getText().toString();
                         double harverArea = 0;
-                        if(areaEditStr.equals("")){
-                            harverArea = 0;
-                        }else{
-                            harverArea = Double.parseDouble(areaEditStr);
-                        }
+//                        if(areaEditStr.equals("")){
+//                            harverArea = 0;
+//                        }else{
+//                            harverArea = Double.parseDouble(areaEditStr);
+//                        }
 
 
 

@@ -27,6 +27,7 @@ import com.sayone.omidyar.model.Survey;
 
 import io.realm.Realm;
 import io.realm.RealmList;
+import io.realm.RealmResults;
 
 public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.OnClickListener {
 
@@ -121,8 +122,20 @@ public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.
         switch (view.getId()) {
 
             case R.id.button_next:
-                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivityC.class);
-                startActivity(intent);
+                RealmResults<RevenueProduct> revenueProducts1 = realm.where(RevenueProduct.class)
+                        .equalTo("surveyId", serveyId)
+                        .equalTo("landKind", currentSocialCapitalServey)
+                        .findAll();
+                if(revenueProducts1.size() <= 0){
+                    intent=new Intent(getApplicationContext(),NaturalCapitalCostActivityA.class);
+                    startActivity(intent);
+                }else {
+                    intent = new Intent(getApplicationContext(), NaturalCapitalSurveyActivityC.class);
+                    startActivity(intent);
+                }
+
+//                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivityC.class);
+//                startActivity(intent);
                 break;
 
             case R.id.button_back:
