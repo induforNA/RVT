@@ -203,6 +203,7 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
                 Button popupCancel = (Button) dialog.findViewById(R.id.popup_cancel);
                 Button saveParticipant = (Button) dialog.findViewById(R.id.save_participant);
                 final EditText editTextWood = (EditText) dialog.findViewById(R.id.edit_text_wood);
+                editTextWood.setHint("Add cost element");
 
                 popupCancel.setOnClickListener(new View.OnClickListener() {
                     @Override

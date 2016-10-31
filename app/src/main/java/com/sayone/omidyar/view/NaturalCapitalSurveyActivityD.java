@@ -433,7 +433,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             areaQuestion.setText(getResources().getString(R.string.percentage_area_harvested));
         }else if(revenueProductLoad.getType().equals("Livestock")){
             loadQuestions.setText("How many months of a year do you graze "+revenueProductLoad.getName()+" on this piece of land?");
-            quantityQuestion.setText("Total amount of fodder consumed per anmial per year");
+            quantityQuestion.setText("Total amount of fodder consumed per animal per year");
             productQuestion.setText("Market Price of fodder");
             areaQuestion.setText("Number of livestock");
             timePerHead.setVisibility(View.INVISIBLE);
@@ -501,18 +501,18 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             // Log.e("KKKKKKKKKKKKK ",revenueProductYearsLoad.getQuantityValue()+"");
             quanityEdit.setText(revenueProductYearsLoad.getQuantityValue()+"");
         }else{
-            quanityEdit.setText("0");
+            quanityEdit.setText("");
         }
         if(revenueProductYearsLoad.getMarketPriceValue() != 0){
             priceEdit.setText(revenueProductYearsLoad.getMarketPriceValue()+"");
         }else{
-            priceEdit.setText("0");
+            priceEdit.setText("");
         }
 
         if(revenueProductYearsLoad.getHarvestArea() != 0){
             areaEdit.setText(revenueProductYearsLoad.getHarvestArea()+"");
         }else{
-            areaEdit.setText("0");
+            areaEdit.setText("");
         }
 
 
@@ -575,18 +575,18 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
                         runOnUiThread(new Runnable() {
                             public void run(){
-                                if(noOfTimesEdit.getText().toString().equals("")){
-                                    noOfTimesEdit.setText("0");
-                                }
-                                if(quanityEdit.getText().toString().equals("")){
-                                    quanityEdit.setText("0");
-                                }
-                                if(priceEdit.getText().toString().equals("")){
-                                    priceEdit.setText("0");
-                                }
-                                if(areaEdit.getText().toString().equals("")){
-                                    areaEdit.setText("0");
-                                }
+//                                if(noOfTimesEdit.getText().toString().equals("")){
+//                                    noOfTimesEdit.setText("0");
+//                                }
+//                                if(quanityEdit.getText().toString().equals("")){
+//                                    quanityEdit.setText("0");
+//                                }
+//                                if(priceEdit.getText().toString().equals("")){
+//                                    priceEdit.setText("0");
+//                                }
+//                                if(areaEdit.getText().toString().equals("")){
+//                                    areaEdit.setText("0");
+//                                }
                             }
                         });
 
@@ -607,25 +607,40 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                             harverArea = Double.parseDouble(areaEditStr);
                         }
 
+                        String noOfTimesEditStr = noOfTimesEdit.getText().toString();
+                        String priceEditStr = priceEdit.getText().toString();
+                        String quanityEditStr = quanityEdit.getText().toString();
+
+                        if(noOfTimesEditStr.equals("")){
+                            noOfTimesEditStr = "0";
+                        }
+                        if(priceEditStr.equals("")){
+                            priceEditStr = "0";
+                        }
+                        if(quanityEditStr.equals("")){
+                            quanityEditStr = "0";
+                        }
+
+
                         Log.e("LAND ", currentSocialCapitalServey);
 
                         if(currentSocialCapitalServey.equals("Pastureland")){
                             Log.e("LAND ", "PAS");
-                            total = Integer.parseInt(noOfTimesEdit.getText().toString())
-                                    * Double.parseDouble(priceEdit.getText().toString())
-                                    * Double.parseDouble(quanityEdit.getText().toString())
+                            total = Integer.parseInt(noOfTimesEditStr)
+                                    * Double.parseDouble(priceEditStr)
+                                    * Double.parseDouble(quanityEditStr)
                                     * harverArea;
-                            Log.e("AA ",Integer.parseInt(noOfTimesEdit.getText().toString())
-                                    +" "+ Double.parseDouble(priceEdit.getText().toString())
-                                    +" "+ Double.parseDouble(quanityEdit.getText().toString())
+                            Log.e("AA ",Integer.parseInt(noOfTimesEditStr)
+                                    +" "+ Double.parseDouble(priceEditStr)
+                                    +" "+ Double.parseDouble(quanityEditStr)
                                     +" "+ harverArea);
                             total = total/12;
 
                         }else {
                             total = frequency.getFrequencyValue()
-                                    * Integer.parseInt(noOfTimesEdit.getText().toString())
-                                    * Double.parseDouble(priceEdit.getText().toString())
-                                    * Double.parseDouble(quanityEdit.getText().toString());
+                                    * Integer.parseInt(noOfTimesEditStr)
+                                    * Double.parseDouble(priceEditStr)
+                                    * Double.parseDouble(quanityEditStr);
                         }
 
                         Log.e("TOTAL ",total+"");
@@ -633,11 +648,11 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
 
                         //realm.beginTransaction();
-                        revenueProductYears1.setHarvestFrequencyValue(Integer.parseInt(noOfTimesEdit.getText().toString()));
+                        revenueProductYears1.setHarvestFrequencyValue(Integer.parseInt(noOfTimesEditStr));
                         revenueProductYears1.setHarvestFrequencyUnit(frequency.getFrequencyValue());
-                        revenueProductYears1.setQuantityValue(Double.parseDouble(quanityEdit.getText().toString()));
+                        revenueProductYears1.setQuantityValue(Double.parseDouble(quanityEditStr));
                         revenueProductYears1.setQuantityUnit(spinnerUnit.getSelectedItem().toString());
-                        revenueProductYears1.setMarketPriceValue(Double.parseDouble(priceEdit.getText().toString()));
+                        revenueProductYears1.setMarketPriceValue(Double.parseDouble(priceEditStr));
                         revenueProductYears1.setMarketPriceCurrency(spinnerCurrency.getSelectedItem().toString());
                         revenueProductYears1.setProjectedIndex(yearIndex);
                         revenueProductYears1.setSubtotal(total);
@@ -671,7 +686,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             @Override
             public void onError(Throwable error) {
                 // transaction is automatically rolled-back, do any cleanup here
-                // Log.e("REALM", " ERROR ."+error.toString());
+                Log.e("REALM", " ERROR ."+error.toString());
             }
         });
 
