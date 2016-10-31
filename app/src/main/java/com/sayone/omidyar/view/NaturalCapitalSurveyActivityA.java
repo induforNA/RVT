@@ -232,6 +232,15 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
                 Button popupCancel = (Button) dialog.findViewById(R.id.popup_cancel);
                 Button saveParticipant = (Button) dialog.findViewById(R.id.save_participant);
                 final EditText editTextWood = (EditText) dialog.findViewById(R.id.edit_text_wood);
+                if(currentSocialCapitalServey.equals("Forestland")){
+                    editTextWood.setHint("Add Timber");
+                }else if(currentSocialCapitalServey.equals("Cropland")){
+                    editTextWood.setHint("Add Crop Type");
+                }else if(currentSocialCapitalServey.equals("Pastureland")){
+                    editTextWood.setHint("Add Livestock");
+                }else if(currentSocialCapitalServey.equals("Mining Land")){
+                    editTextWood.setHint("Add Mineral");
+                }
 
                 popupCancel.setOnClickListener(new View.OnClickListener() {
                     @Override

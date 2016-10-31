@@ -483,12 +483,12 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             // Log.e("KKKKKKKKKKKKK ",revenueProductYearsLoad.getQuantityValue()+"");
             quanityEdit.setText(costElementYearsLoad.getCostPerPeriodValue()+"");
         }else{
-            quanityEdit.setText("0");
+            quanityEdit.setText("");
         }
         if(costElementYearsLoad.getCostPerUnitValue() != 0){
             priceEdit.setText(costElementYearsLoad.getCostPerUnitValue()+"");
         }else{
-            priceEdit.setText("0");
+            priceEdit.setText("");
         }
 
 //        if(costElementYearsLoad.getHarvestArea() != 0){
@@ -557,27 +557,41 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
                         runOnUiThread(new Runnable() {
                             public void run(){
-                                if(noOfTimesEdit.getText().toString().equals("")){
-                                    noOfTimesEdit.setText("0");
-                                }
-                                if(quanityEdit.getText().toString().equals("")){
-                                    quanityEdit.setText("0");
-                                }
-                                if(priceEdit.getText().toString().equals("")){
-                                    priceEdit.setText("0");
-                                }
+//                                if(noOfTimesEdit.getText().toString().equals("")){
+//                                    noOfTimesEdit.setText("0");
+//                                }
+//                                if(quanityEdit.getText().toString().equals("")){
+//                                    quanityEdit.setText("0");
+//                                }
+//                                if(priceEdit.getText().toString().equals("")){
+//                                    priceEdit.setText("0");
+//                                }
 //                                if(areaEdit.getText().toString().equals("")){
 //                                    areaEdit.setText("0");
 //                                }
                             }
                         });
 
+                        String noOfTimesEditStr = noOfTimesEdit.getText().toString();
+                        String priceEditStr = priceEdit.getText().toString();
+                        String quanityEditStr = quanityEdit.getText().toString();
+
+                        if(noOfTimesEditStr.equals("")){
+                            noOfTimesEditStr = "0";
+                        }
+                        if(priceEditStr.equals("")){
+                            priceEditStr = "0";
+                        }
+                        if(quanityEditStr.equals("")){
+                            quanityEditStr = "0";
+                        }
+
 
 
                         double total = frequency.getFrequencyValue()
-                                * Integer.parseInt(noOfTimesEdit.getText().toString())
-                                * Double.parseDouble(priceEdit.getText().toString())
-                                * Double.parseDouble(quanityEdit.getText().toString());
+                                * Integer.parseInt(noOfTimesEditStr)
+                                * Double.parseDouble(priceEditStr)
+                                * Double.parseDouble(quanityEditStr);
 
                         //String areaEditStr = areaEdit.getText().toString();
                         double harverArea = 0;
@@ -590,11 +604,11 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
 
                         //realm.beginTransaction();
-                        costElementYears1.setCostFrequencyValue(Integer.parseInt(noOfTimesEdit.getText().toString()));
+                        costElementYears1.setCostFrequencyValue(Integer.parseInt(noOfTimesEditStr));
                         costElementYears1.setCostFrequencyUnit(frequency.getFrequencyValue());
-                        costElementYears1.setCostPerPeriodValue(Double.parseDouble(quanityEdit.getText().toString()));
+                        costElementYears1.setCostPerPeriodValue(Double.parseDouble(quanityEditStr));
                         costElementYears1.setCostPerPeriodUnit(spinnerUnit.getSelectedItem().toString());
-                        costElementYears1.setCostPerUnitValue(Double.parseDouble(priceEdit.getText().toString()));
+                        costElementYears1.setCostPerUnitValue(Double.parseDouble(priceEditStr));
                         costElementYears1.setCostPerUnitUnit(spinnerCurrency.getSelectedItem().toString());
                         costElementYears1.setProjectedIndex(yearIndex);
                         costElementYears1.setSubtotal(total);

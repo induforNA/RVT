@@ -9,12 +9,12 @@
         {
           "opt": "Right to access and use the parcel",
           "optHindi": "पार्सल को पाने और उपयोग करने का अधिकार",
-          "val": "0"
+          "val": "20"
         },
         {
           "opt": "Right to benefit from the parcel",
           "optHindi": "पार्सल से लाभ प्राप्त करने का अधिकार",
-          "val": "5"
+          "val": "15"
         },
         {
           "opt": "Right to control how the parcel will be used",
@@ -24,12 +24,12 @@
         {
           "opt": "Right to exclude others from unauthorized use of the parcel",
           "optHindi": "पार्सल के अनाधिकृत उपयोग से दूसरों को बाहर करने का अधिकार",
-          "val": "15"
+          "val": "5"
         },
         {
           "opt": "Right to pass rights to the parcel down to future generations or sell rights to others",
           "optHindi": "भविष्य की पीढ़ियों के लिए पार्सल देने के या दूसरों को अधिकार बेचने का अधिकार",
-          "val": "20"
+          "val": "0"
         }
       ]
     },
@@ -42,12 +42,12 @@
         {
           "opt": "Right to access and use the parcel",
           "optHindi": "पार्सल को पाने और उपयोग करने का अधिकार",
-          "val": "0"
+          "val": "20"
         },
         {
           "opt": "Right to benefit from the parcel",
           "optHindi": "पार्सल से लाभ प्राप्त करने का अधिकार",
-          "val": "5"
+          "val": "15"
         },
         {
           "opt": "Right to control how the parcel will be used",
@@ -57,12 +57,12 @@
         {
           "opt": "Right to exclude others from unauthorized use of the parcel",
           "optHindi": "पार्सल के अनाधिकृत उपयोग से दूसरों को बाहर करने का अधिकार",
-          "val": "15"
+          "val": "5"
         },
         {
           "opt": "Right to pass rights to the parcel down to future generations or sell rights to others",
           "optHindi": "भविष्य की पीढ़ियों के लिए पार्सल देने के या दूसरों को अधिकार बेचने का अधिकार",
-          "val": "20"
+          "val": "0"
         }
       ]
     },

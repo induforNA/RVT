@@ -236,6 +236,7 @@ public class NaturalCapitalCostOutlay extends BaseActivity {
                 Button popupCancel = (Button) dialog.findViewById(R.id.popup_cancel);
                 Button saveParticipant = (Button) dialog.findViewById(R.id.save_participant);
                 final EditText editTextWood = (EditText) dialog.findViewById(R.id.edit_text_wood);
+                editTextWood.setHint("Add cost outlay item");
 
                 popupCancel.setOnClickListener(new View.OnClickListener() {
                     @Override

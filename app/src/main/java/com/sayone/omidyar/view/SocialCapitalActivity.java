@@ -395,13 +395,14 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
             for(SocialCapitalAnswerOptions socialCapitalAnswerOptions:socialCapitalQuestionsCalculate.getSocialCapitalAnswerOptionses()){
                 if(multipleAnswer.getAnswer() == socialCapitalAnswerOptions.getId()){
                     socialCapitalAnswerOptions.getVal();
-//                    Log.e("Q wt ",socialCapitalAnswerOptions.getVal()+" "+questionWt);
-//                    Log.e("Q wt ",socialCapitalAnswerOptions.getVal()+" "+(double) questionWt/100);
-//                    Log.e("SCORE ", (socialCapitalAnswerOptions.getVal()*questionWt)/100 +"");
+                    Log.e("Q wt ",socialCapitalAnswerOptions.getVal()+" "+questionWt);
+                    Log.e("Q wt ",socialCapitalAnswerOptions.getVal()+" "+(double) questionWt/100);
+                    Log.e("SCORE ", (socialCapitalAnswerOptions.getVal()*questionWt)/100 +"");
                     factoreScore = factoreScore + (socialCapitalAnswerOptions.getVal()*(double)questionWt)/100;
                 }
             }
         }
+        Log.e("SCORE ", factoreScore +"");
 
         realm.beginTransaction();
         socialCapitalAnswer.setFactorScore(factoreScore);

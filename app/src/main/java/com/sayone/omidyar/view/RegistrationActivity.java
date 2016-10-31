@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.text.InputType;
 import android.view.View;
@@ -34,6 +35,8 @@ import java.util.Date;
 import io.realm.Realm;
 import io.realm.RealmList;
 
+import static java.security.AccessController.getContext;
+
 /**
  * Created by sayone on 16/9/16.
  */
@@ -55,6 +58,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     Context context;
+    private String androidId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,6 +69,9 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         realm = Realm.getDefaultInstance();
         preferences = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+
+        androidId = Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.ANDROID_ID);
 
 
         signUp = (Button) findViewById(R.id.button_sign_up);
@@ -226,7 +233,15 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
     public void insertData() {
         surveyId = getNextKeySurvey();
-        String formattediId = String.format("%04d", surveyId);
+
+        String enId = encode(2555L, androidId);
+
+        //String formattediId = String.format("%04d", surveyId);
+        String formattediId = String.valueOf(surveyId);
+
+        enId = enId.toUpperCase();
+
+        formattediId = enId+formattediId;
         RealmList<LandKind> landKinds = new RealmList<>();
 
         landKinds.add(insertAllLandKinds(formattediId,"Forestland"));
@@ -299,6 +314,16 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
 
         return landKind;
+    }
+
+    static String encode(long num, String symbols) {
+        final int B = symbols.length();
+        StringBuilder sb = new StringBuilder();
+        while (num != 0) {
+            sb.append(symbols.charAt((int) (num % B)));
+            num /= B;
+        }
+        return sb.reverse().toString();
     }
 
     public int getNextKeyLandKind() {
