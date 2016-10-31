@@ -59,6 +59,16 @@
       "quantityName":"Meter",
       "quantityType":"Distance",
       "quantityValue":1
+    },
+    {
+      "quantityName":"Days",
+      "quantityType":"Time",
+      "quantityValue":1
+    },
+    {
+      "quantityName":"Hours",
+      "quantityType":"Time",
+      "quantityValue":1
     }
   ]
 }

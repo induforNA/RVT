@@ -27,6 +27,7 @@ import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 
@@ -276,8 +277,9 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         parcelId.setText(surveyCheck.getSurveyId().toString());
         surveyorName.setText(surveyCheck.getSurveyor().toString());
         valuationDate.setText(s);
-
-        totalText.setText(roundTwo(totalVal)+"");
+        DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
+        String yourFormattedString = valueFormatter.format(roundTwo(totalVal));
+        totalText.setText(yourFormattedString);
 
 //        socialCapitalCrop.setText("0");
 //        socialCapitalPasture.setText("0");
@@ -291,6 +293,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         val = Math.round(val);
         val = val /100;
         return val;
+
     }
 
     @Override

@@ -1,6 +1,9 @@
 package com.sayone.omidyar.view;
 
 import android.app.ProgressDialog;
+
+
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -100,7 +103,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         sendDataToServer = (Button) findViewById(R.id.button_send_data_to_server);
         resetData=(Button)findViewById(R.id.button_reset_data);
         sharedPref = context.getSharedPreferences(
-                "com.sayone.omidyar.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE);
+                "com.sayone.omidyar.PREFERENCE_FILE_KEY_SET", Context.MODE_PRIVATE);
 
 
         Realm realm = Realm.getDefaultInstance();
@@ -177,7 +180,9 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
 
     private class LongOperation extends AsyncTask<String, Void, String> {
+
         private ProgressDialog progress;
+
         @Override
         protected String doInBackground(String... params) {
             RealmConfiguration config = new RealmConfiguration.Builder(getApplicationContext()).deleteRealmIfMigrationNeeded().build();
@@ -277,6 +282,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                     toast.show();
                 }
             }, 3000);
+
         }
 
         @Override
@@ -286,10 +292,12 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             progress.setMessage("Wait while sending...");
             progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
             progress.show();
+
         }
 
         @Override
         protected void onProgressUpdate(Void... values) {
+
 
         }
     }
@@ -1244,7 +1252,6 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         switch (view.getId()) {
             case R.id.button_send_data_to_server:
                 set = sharedPref.getStringSet("surveySet", null);
-
                 for (String temp : set) {
                     Log.e("Sirvey : ", temp);
                 }

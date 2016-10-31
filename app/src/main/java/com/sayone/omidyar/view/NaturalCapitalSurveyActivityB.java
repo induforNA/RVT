@@ -50,7 +50,7 @@ public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.
     private DrawerLayout menuDrawerLayout;
 
     RecyclerView timberList;
-    RevenueAdapter revenueAdapter;
+    RevenueAdapterB revenueAdapter;
 
     TextView landTypeName;
 
@@ -97,7 +97,7 @@ public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.
 
         timberList = (RecyclerView) findViewById(R.id.timber_list);
 
-        revenueAdapter = new RevenueAdapter(revenueProducts);
+        revenueAdapter = new RevenueAdapterB(revenueProducts,NaturalCapitalSurveyActivityB.this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         timberList.setLayoutManager(mLayoutManager);

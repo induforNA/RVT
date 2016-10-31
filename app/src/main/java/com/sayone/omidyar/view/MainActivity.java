@@ -94,7 +94,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
         serveyIdTextView.setText(serveyId);
 
-        participantsAdapter = new ParticipantsAdapter(participants);
+        participantsAdapter = new ParticipantsAdapter(participants,MainActivity.this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);

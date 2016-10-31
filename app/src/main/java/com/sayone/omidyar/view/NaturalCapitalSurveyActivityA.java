@@ -149,7 +149,7 @@ public class NaturalCapitalSurveyActivityA extends BaseActivity implements View.
 
         landType.setText(currentSocialCapitalServey);
 
-        revenueAdapter = new RevenueAdapter(revenueProducts);
+        revenueAdapter = new RevenueAdapter(revenueProducts,NaturalCapitalSurveyActivityA.this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         timberList.setLayoutManager(mLayoutManager);

@@ -131,7 +131,7 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
 
         timberList = (RecyclerView) findViewById(R.id.timber_list);
 
-        costAdapter = new CostAdapter(costElements);
+        costAdapter = new CostAdapter(costElements,NaturalCapitalCostActivityA.this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         timberList.setLayoutManager(mLayoutManager);
