@@ -165,7 +165,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
     public void loadYears(RealmList<CostElementYears> costElementYearsRealmList){
         i = 1;
         LinearLayout.LayoutParams mRparams = new LinearLayout.LayoutParams(400, LinearLayout.LayoutParams.WRAP_CONTENT);
-        for(CostElementYears costElementYears : costElementYearsRealmList){
+        for(final CostElementYears costElementYears : costElementYearsRealmList){
             int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 
             Log.e("YEAR PEEEEEEEEE",costElementYears.getYear()+" "+currentYear);
@@ -181,13 +181,45 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, yearArray);
                 //ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,yearArray);
 
-                Spinner spinner=new Spinner(this);
+                final Spinner spinner=new Spinner(this);
                 spinner.setAdapter(arrayAdapter);
                 spinner.setSelection(arrayAdapter.getPosition(costElementYears.getYear()+""));
                 spinner.setLayoutParams(mRparams);
 
                 spinner.setId(i);
-                allEditText.addView(spinner);
+                spinner.setTag(R.id.tagName,"loaded");
+
+                final LinearLayout parent = new LinearLayout(context);
+                parent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                parent.setOrientation(LinearLayout.HORIZONTAL);
+
+
+
+                ImageView iv = new ImageView(context);
+                iv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                iv.setImageResource(R.drawable.ic_delete_black_24dp);
+                iv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String spinnerYear = spinner.getSelectedItem().toString();
+
+                        CostElementYears costElementYearsDel = realm.where(CostElementYears.class)
+                                .equalTo("id",costElementYears.getId())
+                                .findFirst();
+
+                        realm.beginTransaction();
+                        costElementYearsDel.deleteFromRealm();
+                        realm.commitTransaction();
+
+                        allEditText.removeView(parent);
+                        editTexts.remove(spinner);
+                    }
+                });
+
+                parent.addView(spinner);
+                parent.addView(iv);
+
+                allEditText.addView(parent);
                 editTexts.add(spinner);
 
                 arrayAdapter.notifyDataSetChanged();
@@ -224,11 +256,35 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
 
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, yearArray);
 
-            Spinner spinner=new Spinner(this);
+            final Spinner spinner=new Spinner(this);
             spinner.setLayoutParams(mRparams);
             spinner.setAdapter(arrayAdapter);
             spinner.setId(k);
-            allEditText.addView(spinner);
+            spinner.setTag(R.id.tagName,"generated");
+
+
+            final LinearLayout parent = new LinearLayout(context);
+            parent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            parent.setOrientation(LinearLayout.HORIZONTAL);
+
+
+
+            ImageView iv = new ImageView(context);
+            iv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            iv.setImageResource(R.drawable.ic_delete_black_24dp);
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    allEditText.removeView(parent);
+                    editTexts.remove(spinner);
+                }
+            });
+
+            parent.addView(spinner);
+            parent.addView(iv);
+
+
+            allEditText.addView(parent);
             editTexts.add(spinner);
             //layout.addView(spinner);
             i++;
