@@ -68,4 +68,16 @@ public class CashFlow extends RealmObject {
     public void setDiscountedCashFlow(double discountedCashFlow) {
         this.discountedCashFlow = discountedCashFlow;
     }
+
+    @Override
+    public String toString() {
+        return "CashFlow{" +
+                "id=" + id +
+                ", surveyId='" + surveyId + '\'' +
+                ", year=" + year +
+                ", value=" + value +
+                ", discountingFactor=" + discountingFactor +
+                ", discountedCashFlow=" + discountedCashFlow +
+                '}';
+    }
 }

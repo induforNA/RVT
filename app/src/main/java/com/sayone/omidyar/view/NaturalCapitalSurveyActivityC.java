@@ -321,7 +321,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                             }
                             int year = Calendar.getInstance().get(Calendar.YEAR);
                             revenueProductYearsArrayList.add(saveTrend(revenueProduct1.getId(), "Forestland", realm));
-                            for(int k=1;k<=15;k++){
+                            for(int k=0;k<=15;k++){
                                 revenueProductYearsArrayList.add(saveProjectionYears(year, revenueProduct1.getId(), "Forestland", k, realm));
                                 year++;
                             }
@@ -347,7 +347,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
 
                             int year = Calendar.getInstance().get(Calendar.YEAR);
                             revenueProductYearsArrayList.add(saveTrend(revenueProduct1.getId(), "Cropland", realm));
-                            for(int k=1;k<=5;k++){
+                            for(int k=0;k<=5;k++){
                                 revenueProductYearsArrayList.add(saveProjectionYears(year, revenueProduct1.getId(), "Cropland", k, realm));
                                 year++;
                             }
@@ -372,7 +372,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
 
                             int year = Calendar.getInstance().get(Calendar.YEAR);
                             revenueProductYearsArrayList.add(saveTrend(revenueProduct1.getId(), "Pastureland", realm));
-                            for(int k=1;k<=8;k++){
+                            for(int k=0;k<=8;k++){
                                 revenueProductYearsArrayList.add(saveProjectionYears(year, revenueProduct1.getId(), "Pastureland", k, realm));
                                 year++;
                             }
@@ -397,7 +397,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
 
                             int year = Calendar.getInstance().get(Calendar.YEAR);
                             revenueProductYearsArrayList.add(saveTrend(revenueProduct1.getId(), "Mining Land", realm));
-                            for(int k=1;k<=5;k++){
+                            for(int k=0;k<=5;k++){
                                 revenueProductYearsArrayList.add(saveProjectionYears(year, revenueProduct1.getId(), "Mining Land", k, realm));
                                 year++;
                             }

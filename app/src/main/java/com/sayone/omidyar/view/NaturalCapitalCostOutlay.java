@@ -352,11 +352,11 @@ public class NaturalCapitalCostOutlay extends BaseActivity {
         if(currentSocialCapitalServey.equals("Forestland")){
             yearsCount = 15;
         }else if(currentSocialCapitalServey.equals("Cropland")){
-            yearsCount = 15;
+            yearsCount = 5;
         }else if(currentSocialCapitalServey.equals("Pastureland")){
-            yearsCount = 15;
+            yearsCount = 8;
         }else if(currentSocialCapitalServey.equals("Mining Land")){
-            yearsCount = 15;
+            yearsCount = 5;
         }
 
         for(int i=0;i<=yearsCount;i++){

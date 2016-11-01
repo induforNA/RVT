@@ -643,6 +643,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                                     * Double.parseDouble(quanityEditStr);
                         }
 
+                        //total = roundToTwoDecimal(total);
+
                         Log.e("TOTAL ",total+"");
 
 
@@ -767,15 +769,17 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                         revenueProductYears.setProjectedIndex(0);
                         revenueProductYears.setSubtotal(0);
                         //realm.commitTransaction();
+                        Log.e("REV ",revenueProductYears.toString());
                     }
                     if(revenueProductYears.getProjectedIndex() > 0){
                         double marketPriceVal = harvestPrice * Math.pow((1 + inflationRate), revenueProductYears.getProjectedIndex());
-
+                        //marketPriceVal = roundToTwoDecimal(marketPriceVal);
 
                         double totalVal = freqUnit
                                 * harvestFre
                                 * harvestTimes
                                 * marketPriceVal;
+                        //totalVal = roundToTwoDecimal(totalVal);
 
                         //realm.beginTransaction();
                         revenueProductYears.setHarvestFrequencyValue((int) harvestFre);
@@ -786,6 +790,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                         revenueProductYears.setMarketPriceCurrency(priceCurrency);
                         revenueProductYears.setSubtotal(totalVal);
                         //realm.commitTransaction();
+
+                        Log.e("REV ",revenueProductYears.toString());
                     }
                 }
 
@@ -926,6 +932,24 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 .equalTo("year",year)
                 .findFirst();
 
+        RealmResults<RevenueProductYears> revenueProductYearses = realm.where(RevenueProductYears.class)
+                .equalTo("surveyId",serveyId)
+                .equalTo("landKind",landKind)
+                .equalTo("year",year)
+                .findAll();
+
+        RealmResults<CostElementYears> costElementYearses = realm.where(CostElementYears.class)
+                .equalTo("surveyId",serveyId)
+                .equalTo("landKind",landKind)
+                .equalTo("year",year)
+                .findAll();
+
+        RealmResults<OutlayYears> outlayYearses = realm.where(OutlayYears.class)
+                .equalTo("surveyId",serveyId)
+                .equalTo("landKind",landKind)
+                .equalTo("year",year)
+                .findAll();
+
 
         double revenueTotal = 0;
         double costTotal = 0;
@@ -934,21 +958,38 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
         double disFactor = 0;
 
-        if(revenueProductYears != null){
-            revenueTotal = revenueProductYears.getSubtotal();
+        for(RevenueProductYears revenueProductYears1:revenueProductYearses){
+            revenueTotal = revenueTotal + revenueProductYears1.getSubtotal();
             disFactor = 1 / Math.pow(1+disRate,revenueProductYears.getProjectedIndex());
         }
-        if(costElementYears != null){
-            costTotal = costElementYears.getSubtotal();
+
+        for(CostElementYears costElementYears1:costElementYearses){
+            costTotal = costTotal + costElementYears1.getSubtotal();
             disFactor = 1 / Math.pow(1+disRate,costElementYears.getProjectedIndex());
         }
-        if(outlayYears != null){
-            outlayTotal = outlayYears.getPrice();
+
+        for(OutlayYears outlayYears1:outlayYearses){
+            outlayTotal = outlayTotal + outlayYears1.getPrice();
         }
+
+//        if(revenueProductYears != null){
+//            revenueTotal = revenueProductYears.getSubtotal();
+//            disFactor = 1 / Math.pow(1+disRate,revenueProductYears.getProjectedIndex());
+//        }
+//        if(costElementYears != null){
+//            costTotal = costElementYears.getSubtotal();
+//            disFactor = 1 / Math.pow(1+disRate,costElementYears.getProjectedIndex());
+//        }
+//        if(outlayYears != null){
+//            outlayTotal = outlayYears.getPrice();
+//        }
         double cashFlowVal = revenueTotal - costTotal - outlayTotal;
 
+        //cashFlowVal = roundToTwoDecimal(cashFlowVal);
+        Log.e("CASH FLOW CAL ", year+" "+cashFlowVal+" "+revenueTotal +" "+ costTotal +" "+ outlayTotal);
 
         double discountedCashFlow = cashFlowVal * disFactor;
+        ///discountedCashFlow = roundToTwoDecimal(discountedCashFlow);
 
         // Log.e("DIS FACT ",disFactor+"");
 
@@ -974,10 +1015,14 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
                 double npv = 0;
                 for(CashFlow cashFlow :landKind.getForestLand().getCashFlows()){
+                    Log.e("Cash flow ", cashFlow.toString());
                     if(cashFlow.getYear() >= year){
                         npv = npv + cashFlow.getDiscountedCashFlow();
                     }
                 }
+
+                //npv = roundToTwoDecimal(npv);
+
                 if(results.getComponents() == null){
                     realm.beginTransaction();
                     Component component = realm.createObject(Component.class);
@@ -1001,6 +1046,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                         npv = npv + cashFlow.getDiscountedCashFlow();
                     }
                 }
+
+                //npv = roundToTwoDecimal(npv);
+
                 if(results.getComponents() == null){
                     realm.beginTransaction();
                     Component component = realm.createObject(Component.class);
@@ -1025,6 +1073,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                         npv = npv + cashFlow.getDiscountedCashFlow();
                     }
                 }
+
+                //npv = roundToTwoDecimal(npv);
+
                 if(results.getComponents() == null){
                     realm.beginTransaction();
                     Component component = realm.createObject(Component.class);
@@ -1048,6 +1099,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                         npv = npv + cashFlow.getDiscountedCashFlow();
                     }
                 }
+
+                //npv = roundToTwoDecimal(npv);
+
                 if(results.getComponents() == null){
                     realm.beginTransaction();
                     Component component = realm.createObject(Component.class);
@@ -1082,5 +1136,12 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         }else{
             menuDrawerLayout.openDrawer(GravityCompat.START);
         }
+    }
+
+    public double roundToTwoDecimal(double val){
+        val = val*100;
+        val = Math.round(val);
+        val = val /100;
+        return val;
     }
 }

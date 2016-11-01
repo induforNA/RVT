@@ -44,6 +44,8 @@
         <item>Milligram</item>
         <item>Pound</item>
         <item>Ounce</item>
+        <item>Hours</item>
+        <item>Days</item>
     </string-array>
     <string-array name="time_period_array">
         <item>Select time period</item>

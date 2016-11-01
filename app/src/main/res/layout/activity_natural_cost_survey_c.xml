@@ -138,11 +138,11 @@
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/qn_natural_d_4"
-                        android:textSize="@dimen/heading_size" />
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="@string/qn_natural_d_4"-->
+                        <!--android:textSize="@dimen/heading_size" />-->
 
                     <Spinner
                         android:id="@+id/spinner_year"
@@ -187,7 +187,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
                         android:hint="@string/hint_number"
-                        android:inputType="number"
+                        android:inputType="numberDecimal"
                         android:textSize="@dimen/textfield_size" />
 
 
@@ -241,7 +241,7 @@
                         android:textSize="@dimen/textfield_size" />
 
                     <EditText
-                        android:inputType="number"
+                        android:inputType="numberDecimal"
                         android:id="@+id/price_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
