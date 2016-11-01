@@ -264,6 +264,12 @@
                                     android:text="@string/questions_completed"
                                     android:textSize="@dimen/textfield_size" />
 
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/discount_rate"
+                                    android:textSize="@dimen/textfield_size" />
+
                             </LinearLayout>
 
                             <LinearLayout
@@ -290,6 +296,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="0"
+                                    android:id="@+id/questions_completed"
+                                    android:textSize="@dimen/textfield_size" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:id="@+id/value_discount_rate_forest"
                                     android:textSize="@dimen/textfield_size" />
 
                             </LinearLayout>
@@ -365,6 +379,12 @@
                                 android:text="@string/questions_completed"
                                 android:textSize="@dimen/textfield_size" />
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/discount_rate"
+                                android:textSize="@dimen/textfield_size" />
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -391,6 +411,13 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"
+                                android:textSize="@dimen/textfield_size" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:id="@+id/value_discount_rate_crop"
                                 android:textSize="@dimen/textfield_size" />
 
                         </LinearLayout>
@@ -463,6 +490,12 @@
                                 android:text="@string/questions_completed"
                                 android:textSize="@dimen/textfield_size" />
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/discount_rate"
+                                android:textSize="@dimen/textfield_size" />
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -489,6 +522,13 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"
+                                android:textSize="@dimen/textfield_size" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:id="@+id/value_discount_rate_pasture"
                                 android:textSize="@dimen/textfield_size" />
 
                         </LinearLayout>
@@ -561,6 +601,12 @@
                                 android:text="@string/questions_completed"
                                 android:textSize="@dimen/textfield_size" />
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/discount_rate"
+                                android:textSize="@dimen/textfield_size" />
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -587,6 +633,13 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"
+                                android:textSize="@dimen/textfield_size" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:id="@+id/value_discount_rate_mining"
                                 android:textSize="@dimen/textfield_size" />
 
                         </LinearLayout>

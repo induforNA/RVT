@@ -28,6 +28,16 @@ public class SocialCapital extends RealmObject {
 
     double discountRateOverride;
 
+    private boolean discountFlag;
+
+    public boolean isDiscountFlag() {
+        return discountFlag;
+    }
+
+    public void setDiscountFlag(boolean discountFlag) {
+        this.discountFlag = discountFlag;
+    }
+
     public long getId() {
         return id;
     }
