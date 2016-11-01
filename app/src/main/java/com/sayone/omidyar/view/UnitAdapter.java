@@ -34,6 +34,7 @@ public class UnitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<String> unitList;
     private UnitsActivity mContext;
     private int poss=0;
+    Realm realm;
     public int flag;
 
     public UnitAdapter(List<String> unitList, UnitsActivity context) {
@@ -179,7 +180,17 @@ public class UnitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     saveParticipant.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            realm = Realm.getDefaultInstance();
+
+                            realm.beginTransaction();
+                            Quantity quantity = realm.where(Quantity.class)
+                                    .equalTo("quantityName",unitName.getText().toString())
+                                    .findFirst();
+                            quantity.setQuantityName(editTextSpecifyUnit.getText().toString());
+                            realm.commitTransaction();
                             dialog.cancel();
+                            mContext.dialogueCancel();
+                            mContext.editExistingUnit();
                         }
                     });
                     popupCancel.setOnClickListener(new View.OnClickListener() {
