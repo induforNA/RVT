@@ -1301,6 +1301,8 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 surveys.deleteAllFromRealm();
                 realm.commitTransaction();
                 surveyAdapter.notifyDataSetChanged();
+                surveyCount=0;
+                completedSurveys.setText("" + surveyCount);
                 break;
 
         }

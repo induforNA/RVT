@@ -125,6 +125,7 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
                         socialCapital != null) {
                     realm.beginTransaction();
                     socialCapital.setDiscountRateOverride(0.0);
+                    discountRate.setText(""+socialCapital.getDiscountRate());
                     realm.commitTransaction();
                     Toast.makeText(this,"Value Restored Successfully",Toast.LENGTH_SHORT).show();
                 } else
@@ -136,10 +137,13 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
                         socialCapital != null) {
                     realm.beginTransaction();
 
-                    if (!discountRateOverride.getText().toString().equals(""))
+                    if (!discountRateOverride.getText().toString().equals("")) {
                         socialCapital.setDiscountRateOverride(Double.parseDouble(discountRateOverride.getText().toString()));
+                        discountRate.setText(discountRateOverride.getText().toString());
+                    }
                     else
                         socialCapital.setDiscountRateOverride(0.0);
+
                     realm.commitTransaction();
                     Toast.makeText(this,"Value Saved Successfully",Toast.LENGTH_SHORT).show();
                 } else
