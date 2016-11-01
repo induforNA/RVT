@@ -156,7 +156,7 @@ public class NaturalCapitalCostOutlay extends BaseActivity {
 
         landType.setText(currentSocialCapitalServey);
 
-        costOutlayAdapter = new CostOutlayAdapter(costOutlays);
+        costOutlayAdapter = new CostOutlayAdapter(costOutlays,NaturalCapitalCostOutlay.this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         outlayItemList.setLayoutManager(mLayoutManager);

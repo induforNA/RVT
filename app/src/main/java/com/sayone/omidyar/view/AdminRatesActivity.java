@@ -119,11 +119,15 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_restore_original_discount_rate:
+                discountRateOverride.setText(String.valueOf(0.0));
 
-                if(surveyIdSpinner.getSelectedItemPosition() != 0 || landKindSpinner.getSelectedItemPosition() !=0) {
+                if((surveyIdSpinner.getSelectedItemPosition() != 0 || landKindSpinner.getSelectedItemPosition() !=0) &&
+                        socialCapital != null) {
                     realm.beginTransaction();
                     socialCapital.setDiscountRateOverride(0.0);
+                    discountRate.setText(""+socialCapital.getDiscountRate());
                     realm.commitTransaction();
+                    Toast.makeText(this,"Value Restored Successfully",Toast.LENGTH_SHORT).show();
                 } else
                     Toast.makeText(this,"Select Survey Id and Land Kind to Save",Toast.LENGTH_SHORT).show();
                 break;
@@ -133,11 +137,15 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
                         socialCapital != null) {
                     realm.beginTransaction();
 
-                    if (!discountRateOverride.getText().toString().equals(""))
+                    if (!discountRateOverride.getText().toString().equals("")) {
                         socialCapital.setDiscountRateOverride(Double.parseDouble(discountRateOverride.getText().toString()));
+                        discountRate.setText(discountRateOverride.getText().toString());
+                    }
                     else
                         socialCapital.setDiscountRateOverride(0.0);
+
                     realm.commitTransaction();
+                    Toast.makeText(this,"Value Saved Successfully",Toast.LENGTH_SHORT).show();
                 } else
                     Toast.makeText(this,"Select Survey Id and Land Kind to Save",Toast.LENGTH_SHORT).show();
                 break;

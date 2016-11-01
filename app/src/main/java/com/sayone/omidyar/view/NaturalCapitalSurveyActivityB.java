@@ -53,7 +53,7 @@ public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.
     private DrawerLayout menuDrawerLayout;
 
     RecyclerView timberList;
-    RevenueAdapter revenueAdapter;
+    RevenueAdapterB revenueAdapter;
     TextView landType;
     TextView questionRevenue;
 
@@ -133,6 +133,7 @@ public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.
 
         timberList = (RecyclerView) findViewById(R.id.timber_list);
 
+        revenueAdapter = new RevenueAdapterB(revenueProducts,NaturalCapitalSurveyActivityB.this);
         if(currentSocialCapitalServey.equals("Forestland")){
             questionRevenue.setText(getResources().getString(R.string.qn_natural_b));
 
@@ -149,7 +150,6 @@ public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.
 
         landType.setText(currentSocialCapitalServey);
 
-        revenueAdapter = new RevenueAdapter(revenueProducts);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         timberList.setLayoutManager(mLayoutManager);

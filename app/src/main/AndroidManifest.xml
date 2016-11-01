@@ -87,6 +87,7 @@
         <activity
             android:name=".view.NaturalCapitalSurveyActivityA"
             android:screenOrientation="landscape">
+
         </activity>
         <activity android:name=".view.NaturalCapitalSurveyActivityC"
             android:screenOrientation="landscape">
@@ -97,6 +98,7 @@
         </activity>
         <activity android:name=".view.NaturalCapitalSurveyStartActivity"
             android:screenOrientation="landscape">
+
         </activity>
         <activity
             android:name=".view.CroplandSurveyA"

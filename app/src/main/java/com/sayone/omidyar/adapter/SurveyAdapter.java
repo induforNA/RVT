@@ -66,7 +66,7 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = null;
         sharedPref = parent.getContext().getSharedPreferences(
-                "com.sayone.omidyar.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE);
+                "com.sayone.omidyar.PREFERENCE_FILE_KEY_SET", Context.MODE_PRIVATE);
         editor=sharedPref.edit();
         editor.clear();
         editor.putStringSet("surveySet",set);
