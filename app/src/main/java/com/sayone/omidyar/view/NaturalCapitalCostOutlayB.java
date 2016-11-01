@@ -323,7 +323,11 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                 for(RevenueProduct revenueProduct:landKind.getForestLand().getRevenueProducts()){
                     if(k <= 0) {
                         for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
-                            cashFlows.add(calculateCashFlow("Forestland",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
+                            if(!landKind.getSocialCapitals().isDiscountFlag()){
+                                cashFlows.add(calculateCashFlow("Forestland",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
+                            }else{
+                                cashFlows.add(calculateCashFlow("Forestland",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRateOverride()));
+                            }
                         }
                     }
                     k++;
@@ -338,7 +342,11 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                 for(RevenueProduct revenueProduct:landKind.getCropLand().getRevenueProducts()){
                     if(k <= 0) {
                         for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
-                            cashFlows.add(calculateCashFlow("Cropland",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
+                            if(!landKind.getSocialCapitals().isDiscountFlag()){
+                                cashFlows.add(calculateCashFlow("Cropland",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
+                            }else{
+                                cashFlows.add(calculateCashFlow("Cropland",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRateOverride()));
+                            }
                         }
                     }
                     k++;
@@ -351,7 +359,11 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                 for(RevenueProduct revenueProduct:landKind.getPastureLand().getRevenueProducts()){
                     if(k <= 0) {
                         for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
-                            cashFlows.add(calculateCashFlow("Pastureland",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
+                            if(!landKind.getSocialCapitals().isDiscountFlag()){
+                                cashFlows.add(calculateCashFlow("Pastureland",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
+                            }else{
+                                cashFlows.add(calculateCashFlow("Pastureland",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRateOverride()));
+                            }
                         }
                     }
                     k++;
@@ -364,7 +376,11 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                 for(RevenueProduct revenueProduct:landKind.getMiningLand().getRevenueProducts()){
                     if(k <= 0) {
                         for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
-                            cashFlows.add(calculateCashFlow("Mining Land",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
+                            if(!landKind.getSocialCapitals().isDiscountFlag()){
+                                cashFlows.add(calculateCashFlow("Mining Land",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
+                            }else{
+                                cashFlows.add(calculateCashFlow("Mining Land",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRateOverride()));
+                            }
                         }
                     }
                     k++;

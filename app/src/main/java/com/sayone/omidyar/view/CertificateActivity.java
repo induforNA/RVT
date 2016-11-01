@@ -59,10 +59,16 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
     private TextView surveyIdDrawer;
     private DrawerLayout menuDrawerLayout;
     private String serveyId;
+    private SocialCapital socialCapital;
+
 
     double totalVal = 0;
 
     TextView forestValue, cropValue, pastureValue, miningValue, totalText;
+    private TextView forestDiscountRateValue;
+    private TextView cropDiscountRateValue;
+    private TextView pastureDiscountRateValue;
+    private TextView miningDiscountRateValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +107,10 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         logout = (TextView) findViewById(R.id.logout);
         startSurvey=(TextView)findViewById(R.id.text_start_survey);
         surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
+        forestDiscountRateValue=(TextView)findViewById(R.id.value_discount_rate_forest);
+        cropDiscountRateValue=(TextView)findViewById(R.id.value_discount_rate_crop);
+        pastureDiscountRateValue=(TextView)findViewById(R.id.value_discount_rate_pasture);
+        miningDiscountRateValue=(TextView)findViewById(R.id.value_discount_rate_mining);
 
         forestValue = (TextView) findViewById(R.id.forest_value);
         cropValue = (TextView) findViewById(R.id.crop_value);
@@ -158,7 +168,13 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
             if(landKind.getName().equals("Forestland")){
                 forestlandLayout.setVisibility(View.VISIBLE);
                 headingForest.setVisibility(View.VISIBLE);
-
+                socialCapital = landKind.getSocialCapitals();
+                if(socialCapital.isDiscountFlag()) {
+                    forestDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRateOverride()));
+                }
+                else {
+                    forestDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRate()));
+                }
 
                 String pathForestMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Forestland"+surveyId+"screen.jpg/";
                 mapImageForest.setVisibility(View.VISIBLE);
@@ -187,6 +203,13 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
             if(landKind.getName().equals("Cropland")){
                 croplandLayout.setVisibility(View.VISIBLE);
                 headingCrop.setVisibility(View.VISIBLE);
+                socialCapital = landKind.getSocialCapitals();
+                if(socialCapital.isDiscountFlag()) {
+                    cropDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRateOverride()));
+                }
+                else {
+                    cropDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRate()));
+                }
 
                 String pathCropMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Cropland"+surveyId+"screen.jpg/";
                 mapImageCrop.setVisibility(View.VISIBLE);
@@ -216,7 +239,13 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
             if(landKind.getName().equals("Pastureland")){
                 pasturelandLayout.setVisibility(View.VISIBLE);
                 headingPasture.setVisibility(View.VISIBLE);
-
+                socialCapital = landKind.getSocialCapitals();
+                if(socialCapital.isDiscountFlag()) {
+                    pastureDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRateOverride()));
+                }
+                else {
+                    pastureDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRate()));
+                }
                 String pathPastureMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Pastureland"+surveyId+"screen.jpg/";
                 mapImagePasture.setVisibility(View.VISIBLE);
                 fpasture = new File(pathPastureMap);
@@ -245,6 +274,13 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
             if(landKind.getName().equals("Mining Land")){
                 mininglandLayout.setVisibility(View.VISIBLE);
                 headingMining.setVisibility(View.VISIBLE);
+                socialCapital = landKind.getSocialCapitals();
+                if(socialCapital.isDiscountFlag()) {
+                    miningDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRateOverride()));
+                }
+                else {
+                    miningDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRate()));
+                }
                 String pathminingMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Mining Land"+surveyId+"screen.jpg/";
                 mapImageMining.setVisibility(View.VISIBLE);
                 fmining = new File(pathminingMap);

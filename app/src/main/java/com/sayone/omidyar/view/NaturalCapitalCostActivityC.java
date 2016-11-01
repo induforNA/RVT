@@ -849,7 +849,13 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 for(CostElement costElement:landKind.getForestLand().getCostElements()){
                     if(k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
-                            cashFlows.add(calculateCashFlow("Forestland",costElementYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
+                            if (!landKind.getSocialCapitals().isDiscountFlag()) {
+                                Log.e("MMM ", landKind.getSocialCapitals().getDiscountRate()+"");
+                                cashFlows.add(calculateCashFlow("Forestland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
+                            } else {
+                                Log.e("NNN ", landKind.getSocialCapitals().getDiscountRateOverride()+"");
+                                cashFlows.add(calculateCashFlow("Forestland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
+                            }
                         }
                     }
                     k++;
@@ -862,7 +868,11 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 for(CostElement costElement:landKind.getCropLand().getCostElements()){
                     if(k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
-                            cashFlows.add(calculateCashFlow("Cropland",costElementYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
+                            if (!landKind.getSocialCapitals().isDiscountFlag()) {
+                                cashFlows.add(calculateCashFlow("Cropland",costElementYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
+                            }else{
+                                cashFlows.add(calculateCashFlow("Cropland",costElementYears.getYear(),landKind.getSocialCapitals().getDiscountRateOverride()));
+                            }
                         }
                     }
                     k++;
@@ -875,7 +885,11 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 for(CostElement costElement:landKind.getPastureLand().getCostElements()){
                     if(k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
-                            cashFlows.add(calculateCashFlow("Pastureland",costElementYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
+                            if (!landKind.getSocialCapitals().isDiscountFlag()) {
+                                cashFlows.add(calculateCashFlow("Pastureland",costElementYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
+                            }else{
+                                cashFlows.add(calculateCashFlow("Pastureland",costElementYears.getYear(),landKind.getSocialCapitals().getDiscountRateOverride()));
+                            }
                         }
                     }
                     k++;
@@ -888,7 +902,11 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 for(CostElement costElement:landKind.getMiningLand().getCostElements()){
                     if(k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
-                            cashFlows.add(calculateCashFlow("Mining Land",costElementYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
+                            if (!landKind.getSocialCapitals().isDiscountFlag()) {
+                                cashFlows.add(calculateCashFlow("Mining Land",costElementYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
+                            }else{
+                                cashFlows.add(calculateCashFlow("Mining Land",costElementYears.getYear(),landKind.getSocialCapitals().getDiscountRateOverride()));
+                            }
                         }
                     }
                     k++;
