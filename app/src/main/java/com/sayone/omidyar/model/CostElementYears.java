@@ -32,7 +32,7 @@ public class CostElementYears extends RealmObject {
 
     private int year;
 
-    private int projectedIndex;
+    private double projectedIndex;
 
     private double subtotal;
 
@@ -132,11 +132,11 @@ public class CostElementYears extends RealmObject {
         this.landKind = landKind;
     }
 
-    public int getProjectedIndex() {
+    public double getProjectedIndex() {
         return projectedIndex;
     }
 
-    public void setProjectedIndex(int projectedIndex) {
+    public void setProjectedIndex(double projectedIndex) {
         this.projectedIndex = projectedIndex;
     }
 }

@@ -187,7 +187,11 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 socialCapitalForest.setText(""+landKind.getSocialCapitals().getScore()+"/20");
                 if(surveyCheck.getComponents() != null){
                     if(surveyCheck.getComponents().getForestValue() != 0){
-                        forestValue.setText(roundTwo(surveyCheck.getComponents().getForestValue())+"");
+                        DecimalFormat valueFormatter = new DecimalFormat("#,###,###.##");
+                        String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getForestValue()));
+                        forestValue.setText(yourFormattedString);
+
+                        //forestValue.setText(roundTwo(surveyCheck.getComponents().getForestValue())+"");
                         totalVal = totalVal + surveyCheck.getComponents().getForestValue();
                     }else{
                         forestValue.setText("0");
@@ -224,7 +228,11 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 
                 if(surveyCheck.getComponents() != null){
                     if(surveyCheck.getComponents().getCroplandValue() != 0){
-                        cropValue.setText(roundTwo(surveyCheck.getComponents().getCroplandValue())+"");
+                        DecimalFormat valueFormatter = new DecimalFormat("#,###,###.##");
+                        String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getCroplandValue()));
+                        cropValue.setText(yourFormattedString);
+
+                        //cropValue.setText(roundTwo(surveyCheck.getComponents().getCroplandValue())+"");
                         totalVal = totalVal + surveyCheck.getComponents().getCroplandValue();
                     }else{
                         cropValue.setText("0");
@@ -259,7 +267,11 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 
                 if(surveyCheck.getComponents() != null){
                     if(surveyCheck.getComponents().getPastureValue() != 0){
-                        pastureValue.setText(roundTwo(surveyCheck.getComponents().getPastureValue())+""+"");
+                        DecimalFormat valueFormatter = new DecimalFormat("#,###,###.##");
+                        String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getPastureValue()));
+                        pastureValue.setText(yourFormattedString);
+
+                        //pastureValue.setText(roundTwo(surveyCheck.getComponents().getPastureValue())+""+"");
                         totalVal = totalVal + surveyCheck.getComponents().getPastureValue();
                     }else{
                         pastureValue.setText("0");
@@ -294,7 +306,11 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 
                 if(surveyCheck.getComponents() != null){
                     if(surveyCheck.getComponents().getMiningLandValue() != 0){
-                        miningValue.setText(roundTwo(surveyCheck.getComponents().getMiningLandValue())+"");
+                        DecimalFormat valueFormatter = new DecimalFormat("#,###,###.##");
+                        String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getMiningLandValue()));
+                        miningValue.setText(yourFormattedString);
+
+                        //miningValue.setText(roundTwo(surveyCheck.getComponents().getMiningLandValue())+"");
                         totalVal = totalVal + surveyCheck.getComponents().getMiningLandValue();
                     }else{
                         miningValue.setText("0");
@@ -313,7 +329,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         parcelId.setText(surveyCheck.getSurveyId().toString());
         surveyorName.setText(surveyCheck.getSurveyor().toString());
         valuationDate.setText(s);
-        DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
+        DecimalFormat valueFormatter = new DecimalFormat("#,###,###.##");
         String yourFormattedString = valueFormatter.format(roundTwo(totalVal));
         totalText.setText(yourFormattedString);
 
