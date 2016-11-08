@@ -445,7 +445,7 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
         landKindLoad.getSocialCapitals().setSovereign(7.16);
         landKindLoad.getSocialCapitals().setSpread(spredTable.getSpread());
         landKindLoad.getSocialCapitals().setRating(spredTable.getRating());
-        landKindLoad.getSocialCapitals().setDiscountRate(Math.round(spredTable.getSpread() + 7.16));
+        landKindLoad.getSocialCapitals().setDiscountRate(spredTable.getSpread() + 7.16);
         realm.commitTransaction();
         Log.e("SO ",landKindLoad.toString());
     }

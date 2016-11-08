@@ -71,7 +71,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         serveyId = sharedPref.getString("surveyId","");
         currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey","");
-        Log.e("SER ID ",serveyId);
+        //Log.e("SER ID ",serveyId);
 
         editTexts = new ArrayList<>();
         costElementYearsArrayList = new RealmList<>();
@@ -168,7 +168,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
         for(final CostElementYears costElementYears : costElementYearsRealmList){
             int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 
-            Log.e("YEAR PEEEEEEEEE",costElementYears.getYear()+" "+currentYear);
+            //Log.e("YEAR PEEEEEEEEE",costElementYears.getYear()+" "+currentYear);
             if(costElementYears.getYear() < currentYear && costElementYears.getYear() != 0){
                 ArrayList yearArray = new ArrayList();
                 int year = currentYear - 1;
@@ -482,14 +482,14 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
 
                 Intent intent=new Intent(getApplicationContext(),NaturalCapitalCostActivityC.class);
                 startActivity(intent);
-                Log.e("REALM", "All done updating.");
+                //Log.e("REALM", "All done updating.");
                 // Log.d("BG", t.getName());
             }
         }, new Realm.Transaction.OnError() {
             @Override
             public void onError(Throwable error) {
                 // transaction is automatically rolled-back, do any cleanup here
-                Log.e("REALM", "All done updating."+error.toString());
+                //Log.e("REALM", "All done updating."+error.toString());
             }
         });
 
@@ -522,7 +522,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
 
 
     public CostElementYears saveProductYears(int yearVal, long costElementId, String landKindName, Realm realm){
-        Log.e("CCC ",serveyId+" "+yearVal+" "+costElementId+" "+landKindName);
+        //Log.e("CCC ",serveyId+" "+yearVal+" "+costElementId+" "+landKindName);
         CostElementYears costElementYearsCheck = realm.where(CostElementYears.class)
                 .equalTo("surveyId",serveyId)
                 .equalTo("landKind",landKindName)
@@ -532,9 +532,9 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
         for(CostElementYears costElementYears1: realm.where(CostElementYears.class).findAll()){
             // Log.e("BBB ", costElementYears1.toString());
         }
-        Log.e("AA ", String.valueOf(costElementYearsCheck == null));
+        //Log.e("AA ", String.valueOf(costElementYearsCheck == null));
         if(costElementYearsCheck == null){
-            Log.e("AA ", "212121212121212");
+            //Log.e("AA ", "212121212121212");
             //realm.beginTransaction();
             CostElementYears costElementYears = realm.createObject(CostElementYears.class);
             costElementYears.setId(getNextKeyRevenueProductYears(realm));
@@ -550,7 +550,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
     }
 
     public CostElementYears saveTrend(long costElementId, String landKindName, Realm realm){
-        Log.e("CCC ",serveyId+" "+0+" "+costElementId+" "+landKindName);
+        //Log.e("CCC ",serveyId+" "+0+" "+costElementId+" "+landKindName);
         CostElementYears costElementYearsCheck = realm.where(CostElementYears.class)
                 .equalTo("surveyId",serveyId)
                 .equalTo("landKind",landKindName)
@@ -560,7 +560,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
         for(CostElementYears costElementYears1: realm.where(CostElementYears.class).findAll()){
             //Log.e("BBB ", costElementYears1.toString());
         }
-        Log.e("AA ", String.valueOf(costElementYearsCheck == null));
+        //Log.e("AA ", String.valueOf(costElementYearsCheck == null));
         if(costElementYearsCheck == null){
             //realm.beginTransaction();
             CostElementYears costElementYears = realm.createObject(CostElementYears.class);
@@ -577,7 +577,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
     }
 
     public CostElementYears saveProjectionYears(int yearVal, long costElementId, String landKindName, int projectionIndex, Realm realm){
-        Log.e("CCC ",serveyId+" "+yearVal+" "+costElementId+" "+landKindName);
+        //Log.e("CCC ",serveyId+" "+yearVal+" "+costElementId+" "+landKindName);
         CostElementYears costElementYearsCheck = realm.where(CostElementYears.class)
                 .equalTo("surveyId",serveyId)
                 .equalTo("landKind",landKindName)
@@ -587,7 +587,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
         for(CostElementYears costElementYears1: realm.where(CostElementYears.class).findAll()){
             //Log.e("BBB ", costElementYears1.toString());
         }
-        Log.e("AA ", String.valueOf(costElementYearsCheck == null));
+        //Log.e("AA ", String.valueOf(costElementYearsCheck == null));
         if(costElementYearsCheck == null){
             //realm.beginTransaction();
             CostElementYears costElementYears = realm.createObject(CostElementYears.class);
@@ -596,7 +596,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
             costElementYears.setCostElementId(costElementId);
             costElementYears.setLandKind(landKindName);
             costElementYears.setSurveyId(serveyId);
-            costElementYears.setProjectedIndex(projectionIndex);
+            costElementYears.setProjectedIndex(calculateProjectionIndex(projectionIndex));
             //realm.commitTransaction();
             return costElementYears;
         }else {
@@ -613,5 +613,25 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
         }else{
             menuDrawerLayout.openDrawer(GravityCompat.START);
         }
+    }
+
+    public double calculateProjectionIndex(double val){
+        double resVal = 0;
+
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        for(i=0;i<=val;i++){
+            if(i == 0) {
+                resVal = 0;
+            }else if( year % 4 == 0){
+                double aa = 366.0 / 365.0;
+                //Log.e("PRO IND BB ",resVal+"");
+                resVal = resVal + aa;
+            }else{
+                resVal = resVal + 1;
+            }
+            year++;
+        }
+        Log.e("PRO IND AA ",resVal+"");
+        return resVal;
     }
 }

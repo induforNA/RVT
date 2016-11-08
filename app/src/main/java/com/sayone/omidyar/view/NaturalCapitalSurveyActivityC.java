@@ -581,6 +581,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                 .equalTo("revenueProductId",revenueProductId)
                 .equalTo("year",yearVal)
                 .findFirst();
+        //calculateProjectionIndex(projectionIndex);
         for(RevenueProductYears revenueProductYears1: realm.where(RevenueProductYears.class).findAll()){
             //Log.e("BBB ", revenueProductYears1.toString());
         }
@@ -593,7 +594,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
             revenueProductYears.setRevenueProductId(revenueProductId);
             revenueProductYears.setLandKind(landKindName);
             revenueProductYears.setSurveyId(serveyId);
-            revenueProductYears.setProjectedIndex(projectionIndex);
+            revenueProductYears.setProjectedIndex(calculateProjectionIndex(projectionIndex));
             //realm.commitTransaction();
             return revenueProductYears;
         }else {
@@ -610,5 +611,25 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
         }else{
             menuDrawerLayout.openDrawer(GravityCompat.START);
         }
+    }
+
+    public double calculateProjectionIndex(double val){
+        double resVal = 0;
+
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        for(i=0;i<=val;i++){
+            if(i == 0) {
+                resVal = 0;
+            }else if( year % 4 == 0){
+                double aa = 366.0 / 365.0;
+                //Log.e("PRO IND BB ",resVal+"");
+                resVal = resVal + aa;
+            }else{
+                resVal = resVal + 1;
+            }
+            year++;
+        }
+        Log.e("PRO IND AA ",resVal+"");
+        return resVal;
     }
 }

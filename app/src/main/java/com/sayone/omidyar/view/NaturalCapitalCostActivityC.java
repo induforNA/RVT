@@ -321,7 +321,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             public void onItemSelected(AdapterView<?> parent,
                                        View view, int pos, long id) {
                 timePeriod= parent.getItemAtPosition(pos).toString();
-                Log.e("Time period ",timePeriod);
+                //Log.e("Time period ",timePeriod);
                 if(timePeriod.equals("one-time")){
                     noOfTimesEdit.setText("1");
                     noOfTimesEdit.setEnabled(false);
@@ -354,8 +354,8 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
             case R.id.button_back:
                 finish();
-                Log.e("YEAR ","PRE "+previousYearIndex+" Cur "+currentYearIndex);
-                Log.e("COST ","PRE "+previousCostProductIndex+" Cur "+currentCostProductIndex   );
+                //Log.e("YEAR ","PRE "+previousYearIndex+" Cur "+currentYearIndex);
+                //Log.e("COST ","PRE "+previousCostProductIndex+" Cur "+currentCostProductIndex   );
 
                 currentYearIndex = previousYearIndex;
                 currentCostProductIndex = previousCostProductIndex;
@@ -468,10 +468,10 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 currentYearIndex = 0;
             }
         }
-        Log.e("Current year ",currentYearIndex+"");
-        Log.e("Total year ",totalYearsCount+"");
-        Log.e("Current cost ",currentCostProductIndex+"");
-        Log.e("Total cost ",totalCostProductCount+"");
+//        Log.e("Current year ",currentYearIndex+"");
+//        Log.e("Total year ",totalYearsCount+"");
+//        Log.e("Current cost ",currentCostProductIndex+"");
+//        Log.e("Total cost ",totalCostProductCount+"");
     }
 
     public void loadRevenueYears(CostElementYears costElementYearsLoad, CostElement costElementLoad1){
@@ -600,7 +600,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 //                        }else{
 //                            harverArea = Double.parseDouble(areaEditStr);
 //                        }
-                        Log.e("TOTAL ",total+"");
+                        //Log.e("TOTAL ",total+"");
 
                         //total = roundToTwoDecimal(total);
 
@@ -815,7 +815,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         int j = 0;
         int i = 0;
         for (LandKind landKind : landKindRealmResults) {
-            Log.e("TAG ", landKind.toString());
+            //Log.e("TAG ", landKind.toString());
             //Log.e(TAG, String.valueOf(survey1.getParticipants().size()));
             if(landKind.getName().equals(currentSocialCapitalServey)){
                 j = i + 1;
@@ -850,10 +850,10 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                     if(k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
                             if (!landKind.getSocialCapitals().isDiscountFlag()) {
-                                Log.e("MMM ", landKind.getSocialCapitals().getDiscountRate()+"");
+                                //Log.e("MMM ", landKind.getSocialCapitals().getDiscountRate()+"");
                                 cashFlows.add(calculateCashFlow("Forestland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
                             } else {
-                                Log.e("NNN ", landKind.getSocialCapitals().getDiscountRateOverride()+"");
+                                //Log.e("NNN ", landKind.getSocialCapitals().getDiscountRateOverride()+"");
                                 cashFlows.add(calculateCashFlow("Forestland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
                             }
                         }
@@ -957,6 +957,14 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 .equalTo("year",year)
                 .findAll();
 
+        for(RevenueProductYears revenueProductYears1:revenueProductYearses){
+            Log.e("Revenue ",revenueProductYears1.toString());
+        }
+
+        for(CostElementYears costElementYears1:costElementYearses){
+            Log.e("Cost ",costElementYears1.toString());
+        }
+
 
         double revenueTotal = 0;
         double costTotal = 0;
@@ -993,7 +1001,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
         double cashFlowVal = revenueTotal - costTotal - outlayTotal;
         //cashFlowVal = roundToTwoDecimal(cashFlowVal);
-        Log.e("CASH FLOW CAL ", year+" "+cashFlowVal+" "+revenueTotal +" "+ costTotal +" "+ outlayTotal);
+        //Log.e("CASH FLOW CAL ", year+" "+cashFlowVal+" "+revenueTotal +" "+ costTotal +" "+ outlayTotal);
 
         double discountedCashFlow = cashFlowVal * disFactor;
         //discountedCashFlow = roundToTwoDecimal(discountedCashFlow);
@@ -1009,6 +1017,8 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         cashFlow.setDiscountingFactor(disFactor);
         cashFlow.setDiscountedCashFlow(discountedCashFlow);
         realm.commitTransaction();
+
+        Log.e("CASH ",cashFlow.toString()+"");
         return cashFlow;
     }
 

@@ -32,7 +32,7 @@ public class RevenueProductYears extends RealmObject {
 
     private int year;
 
-    private int projectedIndex;
+    private double projectedIndex;
 
     private double subtotal;
 
@@ -102,11 +102,11 @@ public class RevenueProductYears extends RealmObject {
         this.year = year;
     }
 
-    public int getProjectedIndex() {
+    public double getProjectedIndex() {
         return projectedIndex;
     }
 
-    public void setProjectedIndex(int projectedIndex) {
+    public void setProjectedIndex(double projectedIndex) {
         this.projectedIndex = projectedIndex;
     }
 

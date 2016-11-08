@@ -977,16 +977,19 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         for(RevenueProductYears revenueProductYears1:revenueProductYearses){
             revenueTotal = revenueTotal + revenueProductYears1.getSubtotal();
             disFactor = 1 / Math.pow(1+disRate,revenueProductYears.getProjectedIndex());
+            Log.e("PRO IN  ",disRate+" "+revenueProductYears.getProjectedIndex()+"");
         }
 
         for(CostElementYears costElementYears1:costElementYearses){
             costTotal = costTotal + costElementYears1.getSubtotal();
             disFactor = 1 / Math.pow(1+disRate,costElementYears.getProjectedIndex());
+            Log.e("PRO IN  ",disRate+" "+costElementYears.getProjectedIndex()+"");
         }
 
         for(OutlayYears outlayYears1:outlayYearses){
             outlayTotal = outlayTotal + outlayYears1.getPrice();
         }
+        Log.e("DIS FACT ",disFactor+"");
 
 //        if(revenueProductYears != null){
 //            revenueTotal = revenueProductYears.getSubtotal();
