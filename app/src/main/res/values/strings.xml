@@ -104,7 +104,7 @@
     <string name="community_hint">Community</string>
     <string name="district_hint">District</string>
     <string name="state_hint">State</string>
-    <string name="survey_hint">Survey</string>
+    <string name="survey_hint">Survey #</string>
     <string name="passcode_hint">Passcode</string>
     <string name="admin_login_button">Admin login</string>
     <string name="empty_surveyor_filed">Surveyor cannot be empty</string>
@@ -153,10 +153,10 @@
     <string name="text_survey2">Survey2</string>
     <string name="button_reset_data">Reset all data</string>
     <string name="button_send_to_server">Send data to server</string>
-    <string name="parcel_id">Parcel id</string>
-    <string name="site">Site</string>
-    <string name="surveyor_name">Surveyor Name</string>
-    <string name="date_to_valuation">Date to valuation</string>
+    <string name="parcel_id">Parcel ID</string>
+    <string name="site">Respondent group</string>
+    <string name="surveyor_name">Surveyor name</string>
+    <string name="date_to_valuation">Valuation date</string>
     <string name="inflation_rate">Inflation rate</string>
     <string name="title_cropland">Cropland</string>
     <string name="value">Value</string>
@@ -210,7 +210,7 @@
     <string name="string_option4">option 4</string>
     <string name="name_of_participant">Name of participant</string>
     <string name="button_cancel">Cancel</string>
-    <string name="string_survey_id">survey id</string>
+    <string name="string_survey_id">Survey ID</string>
     <string name="string_start_survey">Start Survey</string>
     <string name="string_logout">Logout</string>
     <string name="name_of_wood">Name of wood</string>
@@ -242,7 +242,7 @@
     <string name="qn_natural_A_2">What crops do you harvest, if any?</string>
     <string name="qn_natural_A_3">What livestock do you raise, if any?</string>
     <string name="qn_natural_A_4">What do you extract, if anything?</string>
-    <string name="string_add_revenue">Add a revenue product</string>
+    <string name="string_add_revenue">Add a product</string>
     <string name="image_saved">Image saved</string>
     <string name="save_failed">Save failed</string>
     <string name="qn_natural_complex_1_1">How often do you harvest </string>
@@ -251,11 +251,11 @@
     <string name="qn_natural_complex_2_2"> harvested each time?</string>
     <string name="qn_natural_complex_3_1">What was the price of the </string>
     <string name="qn_natural_complex_3_2"> per unit?</string>
-    <string name="costs_incur">What types of costs do you incur in the harvesting of products?</string>
+    <string name="costs_incur">What types of costs do you incur on this commons? (e.g. infrastructure, equipment, transportation, seeds/seedlings, fertilizer, water, labor)</string>
     <string name="data_on_harvest_activities">How many years of data do you have on harvest activities?</string>
     <string name="registration_successful">Registration successful</string>
     <string name="percentage_area_harvested">Area harvested (in %)</string>
-    <string name="qn_cost_1">How many years of data do you have on cost ?</string>
+    <string name="qn_cost_1">How many years of data do you have on costs?</string>
     <string name="qn_natural_cost_1_2"></string>
     <string name="qn_natural_cost_1_1">How often do you incur costs for</string>
     <string name="qn_natural_cost_2_1">What was the cost of</string>

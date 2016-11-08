@@ -12,6 +12,7 @@
         android:layout_marginRight="10dp"
         android:layout_gravity="center"
         android:layout_height="wrap_content"
+        android:singleLine="true"
         android:id="@+id/cropland_type" />
     <LinearLayout
         android:gravity="right"

@@ -9,6 +9,7 @@
         android:id="@+id/edit_text_wood"
         android:layout_gravity="center"
         android:hint="Name of NTFP"
+        android:singleLine="true"
         android:layout_width="300dp"
         android:layout_height="wrap_content" />
     <LinearLayout

@@ -65,12 +65,18 @@
 
             <EditText
                 android:id="@+id/edittext_discount_rate"
-                android:layout_width="100dp"
+                android:layout_width="80dp"
                 android:textSize="@dimen/textfield_size"
                 android:layout_marginLeft="20dp"
                 android:enabled="false"
                 android:text="0.0"
                 android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/textfield_size"
+                android:text="@string/percentage"/>
         </LinearLayout>
 
 
@@ -108,11 +114,12 @@
 
             <EditText
                 android:id="@+id/edittext_overridediscount"
-                android:layout_width="100dp"
+                android:layout_width="60dp"
                 android:textSize="@dimen/textfield_size"
                 android:layout_marginLeft="20dp"
                 android:inputType="numberDecimal"
                 android:text="0.0"
+                android:singleLine="true"
                 android:layout_height="wrap_content" />
 
             <TextView

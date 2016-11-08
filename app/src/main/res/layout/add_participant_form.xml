@@ -9,6 +9,7 @@
         android:id="@+id/edit_text_participant"
         android:layout_gravity="center"
         android:hint="@string/name_of_participant"
+        android:singleLine="true"
         android:layout_width="300dp"
         android:layout_height="wrap_content" />
     <EditText
@@ -16,11 +17,13 @@
         android:layout_gravity="center"
         android:hint="@string/string_occupation"
         android:layout_width="300dp"
+        android:singleLine="true"
         android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/edit_text_gender"
         android:layout_gravity="center"
         android:hint="@string/string_gender"
+        android:singleLine="true"
         android:layout_width="300dp"
         android:layout_height="wrap_content" />
     <EditText
@@ -28,6 +31,7 @@
         android:id="@+id/edit_text_age"
         android:layout_gravity="center"
         android:hint="@string/string_age"
+        android:singleLine="true"
         android:layout_width="300dp"
         android:layout_height="wrap_content" />
     <EditText
@@ -35,6 +39,7 @@
         android:id="@+id/edit_text_education"
         android:layout_gravity="center"
         android:hint="@string/string_years_of_education"
+        android:singleLine="true"
         android:layout_width="300dp"
         android:layout_height="wrap_content" />
     <LinearLayout

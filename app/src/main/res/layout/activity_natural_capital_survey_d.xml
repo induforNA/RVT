@@ -72,6 +72,7 @@
                     android:layout_marginLeft="20dp"
                     android:id="@+id/no_of_times_edit"
                     android:layout_width="match_parent"
+                    android:singleLine="true"
                     android:layout_height="wrap_content"
                     android:inputType="number" />
 
@@ -188,6 +189,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
+                        android:singleLine="true"
                         android:hint="@string/hint_number"
                         android:inputType="numberDecimal"
                         android:textSize="@dimen/textfield_size" />
@@ -248,6 +250,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
+                        android:singleLine="true"
                         android:hint="@string/price"
                         android:textSize="@dimen/textfield_size" />
 
@@ -294,6 +297,7 @@
                         android:id="@+id/area_edit"
                         android:layout_marginRight="150dp"
                         android:width="80dp"
+                        android:singleLine="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>

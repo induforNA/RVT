@@ -152,7 +152,7 @@
     <string name="button_reset_data">सभी डेटा रीसेट करे </string>
     <string name="button_send_to_server">सर्वर को डेटा भेजें</string>
     <string name="parcel_id">पार्सल आईडी</string>
-    <string name="site">साइट</string>
+    <string name="site">प्रतिवादी समूह</string>
     <string name="surveyor_name">सर्वेयर नाम</string>
     <string name="date_to_valuation">मूल्यांकन करने के लिए तिथि</string>
     <string name="inflation_rate">मँहगाई दर</string>
