@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,9 +20,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".view.AdminRatesActivity"
-            android:screenOrientation="landscape" >
-
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".view.ProjectionTimeFrameActivity"
             android:screenOrientation="landscape" />
@@ -36,9 +35,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.RegistrationActivity"
-            android:screenOrientation="landscape">
-
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".view.LoginActivity"
             android:screenOrientation="landscape" />
@@ -63,68 +60,51 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".view.SocialCapitalStartActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.LoadingActivity"
-            android:screenOrientation="landscape">
-
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".view.SocialCapitalActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.CertificateActivity"
-            android:screenOrientation="landscape">
-
-        </activity>
-        <activity android:name=".view.NaturalCapitalSurveyActivityD"
-            android:screenOrientation="landscape">
-
-        </activity>
+            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".view.NaturalCapitalSurveyActivityD"
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".view.NaturalCapitalSurveyActivityA"
-            android:screenOrientation="landscape">
-
-        </activity>
-        <activity android:name=".view.NaturalCapitalSurveyActivityC"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".view.NaturalCapitalSurveyActivityC"
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".view.NaturalCapitalSurveyActivity3"
-            android:screenOrientation="landscape">
-        </activity>
-        <activity android:name=".view.NaturalCapitalSurveyStartActivity"
-            android:screenOrientation="landscape">
-
-        </activity>
+            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".view.NaturalCapitalSurveyStartActivity"
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".view.CroplandSurveyA"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".view.NaturalCapitalSurveyActivityB"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
-            android:screenOrientation="landscape"
-            android:name=".view.NaturalCapitalCostActivityA">
-        </activity>
+            android:name=".view.NaturalCapitalCostActivityA"
+            android:screenOrientation="landscape"></activity>
         <activity
-            android:screenOrientation="landscape"
-            android:name=".view.NaturalCapitalCostActivityB">
-        </activity>
+            android:name=".view.NaturalCapitalCostActivityB"
+            android:screenOrientation="landscape"></activity>
         <activity
-            android:screenOrientation="landscape"
-            android:name=".view.NaturalCapitalCostActivityC">
-        </activity>
+            android:name=".view.NaturalCapitalCostActivityC"
+            android:screenOrientation="landscape"></activity>
         <activity
-            android:screenOrientation="landscape"
-            android:name=".view.StartLandTypeActivity">
-
-        </activity>
+            android:name=".view.StartLandTypeActivity"
+            android:screenOrientation="landscape"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -140,16 +120,15 @@
         <activity
             android:name=".view.OmidyarMap"
             android:label="@string/title_activity_omidyar_map"
-            android:screenOrientation="landscape">
-
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".view.NaturalCapitalCostOutlay"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
-            android:screenOrientation="landscape"
-            android:name=".view.NaturalCapitalCostOutlayB">
+            android:name=".view.NaturalCapitalCostOutlayB"
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".view.Main2Activity">
+
         </activity>
     </application>
 
