@@ -32,6 +32,8 @@ import com.sayone.omidyar.model.RevenueProduct;
 import com.sayone.omidyar.model.RevenueProductYears;
 import com.sayone.omidyar.model.Survey;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -586,12 +588,23 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                             quanityEditStr = "0";
                         }
 
+                        BigDecimal bigDecimalFrequency = new BigDecimal(frequency.getFrequencyValue());
+                        BigDecimal bigDecimalNoOfTimes = new BigDecimal(noOfTimesEditStr);
+                        BigDecimal bigDecimalPrice = new BigDecimal(priceEditStr);
+                        BigDecimal bigDecimalQuanityEditStr = new BigDecimal(quanityEditStr);
+
+                        BigDecimal bigDecimalTotal = bigDecimalFrequency.multiply(bigDecimalNoOfTimes, MathContext.DECIMAL64)
+                                .multiply(bigDecimalPrice, MathContext.DECIMAL64)
+                                .multiply(bigDecimalQuanityEditStr, MathContext.DECIMAL64);
+
+                        double total = bigDecimalTotal.doubleValue();
 
 
-                        double total = frequency.getFrequencyValue()
-                                * Integer.parseInt(noOfTimesEditStr)
-                                * Double.parseDouble(priceEditStr)
-                                * Double.parseDouble(quanityEditStr);
+
+//                        double total = frequency.getFrequencyValue()
+//                                * Integer.parseInt(noOfTimesEditStr)
+//                                * Double.parseDouble(priceEditStr)
+//                                * Double.parseDouble(quanityEditStr);
 
                         //String areaEditStr = areaEdit.getText().toString();
                         double harverArea = 0;
@@ -729,13 +742,27 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                         //realm.commitTransaction();
                     }
                     if(costElementYears.getProjectedIndex() > 0){
-                        double marketPriceVal = harvestPrice * Math.pow((1 + inflationRate), costElementYears.getProjectedIndex());
+                        BigDecimal bigDecimalPowerFactor = new BigDecimal(Math.pow((1 + inflationRate), costElementYears.getProjectedIndex()));
+                        BigDecimal bigDecimalHarvestPrice = new BigDecimal(harvestPrice);
+
+                        double marketPriceVal = bigDecimalHarvestPrice.multiply(bigDecimalPowerFactor, MathContext.DECIMAL64).doubleValue();
+
+                        // double marketPriceVal = harvestPrice * Math.pow((1 + inflationRate), costElementYears.getProjectedIndex());
                         //marketPriceVal = roundToTwoDecimal(marketPriceVal);
 
-                        double totalVal = freqUnit
-                                * harvestFre
-                                * harvestTimes
-                                * marketPriceVal;
+                        BigDecimal bigDecimalfreqUnit = new BigDecimal(freqUnit);
+                        BigDecimal bigDecimalharvestFre = new BigDecimal(harvestFre);
+                        BigDecimal bigDecimalharvestTimes = new BigDecimal(harvestTimes);
+                        BigDecimal bigDecimalmarketPriceVal = new BigDecimal(marketPriceVal);
+
+                        double totalVal = bigDecimalfreqUnit.multiply(bigDecimalharvestFre, MathContext.DECIMAL64)
+                                .multiply(bigDecimalharvestTimes, MathContext.DECIMAL64)
+                                .multiply(bigDecimalmarketPriceVal, MathContext.DECIMAL64).doubleValue();
+
+//                        double totalVal = freqUnit
+//                                * harvestFre
+//                                * harvestTimes
+//                                * marketPriceVal;
                         //totalVal = roundToTwoDecimal(totalVal);
 
                         //realm.beginTransaction();
@@ -973,14 +1000,30 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
         double disFactor = 0;
 
+        BigDecimal bigDecimalOne = new BigDecimal("1");
+
         for(RevenueProductYears revenueProductYears1:revenueProductYearses){
             revenueTotal = revenueTotal + revenueProductYears1.getSubtotal();
-            disFactor = 1 / Math.pow(1+disRate,revenueProductYears.getProjectedIndex());
+
+            double powerFactor = Math.pow(1+disRate,revenueProductYears.getProjectedIndex());
+            BigDecimal bigDecimalPowerFactor = new BigDecimal(powerFactor);
+            BigDecimal bigDecimalDisFactor = bigDecimalOne.divide(bigDecimalPowerFactor, MathContext.DECIMAL64);
+
+            disFactor = bigDecimalDisFactor.doubleValue();
+
+            // disFactor = 1 / Math.pow(1+disRate,revenueProductYears.getProjectedIndex());
         }
 
         for(CostElementYears costElementYears1:costElementYearses){
             costTotal = costTotal + costElementYears1.getSubtotal();
-            disFactor = 1 / Math.pow(1+disRate,costElementYears.getProjectedIndex());
+
+            double powerFactor = Math.pow(1+disRate,costElementYears.getProjectedIndex());
+            BigDecimal bigDecimalPowerFactor = new BigDecimal(powerFactor);
+            BigDecimal bigDecimalDisFactor = bigDecimalOne.divide(bigDecimalPowerFactor, MathContext.DECIMAL64);
+
+            disFactor = bigDecimalDisFactor.doubleValue();
+
+            // disFactor = 1 / Math.pow(1+disRate,costElementYears.getProjectedIndex());
         }
 
         for(OutlayYears outlayYears1:outlayYearses){

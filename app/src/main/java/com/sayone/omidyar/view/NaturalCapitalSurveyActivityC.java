@@ -25,6 +25,8 @@ import com.sayone.omidyar.model.RevenueProduct;
 import com.sayone.omidyar.model.RevenueProductYears;
 import com.sayone.omidyar.model.Survey;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -621,8 +623,14 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
             if(i == 0) {
                 resVal = 0;
             }else if( year % 4 == 0){
-                double aa = 366.0 / 365.0;
-                //Log.e("PRO IND BB ",resVal+"");
+                BigDecimal bigDecimal1 = new BigDecimal("366.0");
+                BigDecimal bigDecimal2 = new BigDecimal("365.0");
+
+                //double aa = 366.0 / 365.0;
+                BigDecimal bigDecimal3 = bigDecimal1.divide(bigDecimal2, MathContext.DECIMAL64);
+                double aa =  bigDecimal3.doubleValue();
+
+                Log.e("PRO IND BB ",aa+"");
                 resVal = resVal + aa;
             }else{
                 resVal = resVal + 1;
