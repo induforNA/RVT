@@ -356,6 +356,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 //                startActivity(intent);
 
                 saveYearlyDatas(revenueProducts.get(currentCostProductIndexSave));
+                Log.e("YEAR ","PRE "+previousYearIndex+" Cur "+currentYearIndex);
+                Log.e("COST ","PRE "+previousCostProductIndex+" Cur "+currentCostProductIndex   );
                 break;
 
             case R.id.button_back:

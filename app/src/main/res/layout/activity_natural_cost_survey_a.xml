@@ -15,7 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".view.NaturalCapitalSurveyActivityA">
+        tools:context=".view.NaturalCapitalSurveyActivityA"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,11 +103,85 @@
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/timber_list"
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <CheckBox
+                            android:id="@+id/option_a"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="slectedItems"
+                            android:text="Equipment cost"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <CheckBox
+                            android:id="@+id/option_b"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="slectedItems"
+                            android:text="Transportation cost"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <CheckBox
+                            android:id="@+id/option_c"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="slectedItems"
+                            android:text="Seed/seedling cost"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <CheckBox
+                            android:id="@+id/option_d"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="slectedItems"
+                            android:text="Fertilizer cost"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <CheckBox
+                            android:id="@+id/option_e"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="slectedItems"
+                            android:text="Water cost"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <CheckBox
+                            android:id="@+id/option_f"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="slectedItems"
+                            android:text="Labor cost"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <CheckBox
+                            android:id="@+id/option_g"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="slectedItems"
+                            android:text="Infrastructure cost"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <CheckBox
+                            android:id="@+id/option_h"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="slectedItems"
+                            android:text="Tax, fees, and other costs"
+                            android:textSize="@dimen/textfield_size" />
+                    </LinearLayout>
+                </ScrollView>
+
+
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                    <!--android:id="@+id/timber_list"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content" />-->
             </LinearLayout>
 
             <!--<EditText-->
@@ -148,17 +223,16 @@
                 android:layout_marginLeft="20dp"
                 android:gravity="bottom"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="120dp"
                 android:orientation="horizontal">
 
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/button_add_wood"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|end"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:src="@drawable/ic_add_white_36dp" />
+                <!--<android.support.design.widget.FloatingActionButton-->
+                    <!--android:id="@+id/button_add_wood"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="bottom|end"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:layout_marginBottom="20dp"-->
+                    <!--android:src="@drawable/ic_add_white_36dp" />-->
 
 
                 <View
