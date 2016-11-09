@@ -28,6 +28,7 @@
         android:textSize="@dimen/textfield_size"
         android:layout_marginTop="70dp"
         android:gravity="center"
+        android:singleLine="true"
         android:layout_height="wrap_content"
         android:id="@+id/edittext_surveyor"
         android:layout_gravity="center_horizontal" />
@@ -38,6 +39,7 @@
         android:gravity="center"
         android:layout_marginTop="10dp"
         android:textSize="@dimen/textfield_size"
+        android:singleLine="true"
         android:layout_height="wrap_content"
         android:id="@+id/edittext_community"
         android:layout_gravity="center_horizontal" />
@@ -47,6 +49,7 @@
         android:gravity="center"
         android:hint="@string/survey_hint"
         android:layout_marginTop="10dp"
+        android:singleLine="true"
         android:textSize="@dimen/textfield_size"
         android:layout_height="wrap_content"
         android:id="@+id/edittext_survey"

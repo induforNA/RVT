@@ -56,7 +56,13 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
     private TextView textViewAbout;
     private TextView logout;
     private TextView startSurvey;
+    private TextView respondentGroup;
     private TextView surveyIdDrawer;
+    private TextView forestValueSymbol;
+    private TextView cropValueSymbol;
+    private TextView pastureValueSymbol;
+    private TextView miningValueSymbol;
+    private TextView totalSymbol;
     private DrawerLayout menuDrawerLayout;
     private String serveyId;
     private SocialCapital socialCapital;
@@ -78,7 +84,6 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 
         parcelId=(TextView)findViewById(R.id.parcel_id);
         community=(TextView)findViewById(R.id.community_name);
-        site=(TextView)findViewById(R.id.site_name);
         surveyorName=(TextView)findViewById(R.id.surveyor_name);
         valuationDate=(TextView)findViewById(R.id.valuation_date);
         inflationRate=(TextView)findViewById(R.id.inflation_rate);
@@ -111,6 +116,13 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         cropDiscountRateValue=(TextView)findViewById(R.id.value_discount_rate_crop);
         pastureDiscountRateValue=(TextView)findViewById(R.id.value_discount_rate_pasture);
         miningDiscountRateValue=(TextView)findViewById(R.id.value_discount_rate_mining);
+        respondentGroup=(TextView)findViewById(R.id.respondent_name);
+        forestValueSymbol=(TextView)findViewById(R.id.forest_value_symbol);
+        cropValueSymbol=(TextView)findViewById(R.id.crop_value_symbol);
+        pastureValueSymbol=(TextView)findViewById(R.id.pasture_value_symbol);
+        miningValueSymbol=(TextView)findViewById(R.id.mining_value_symbol);
+        totalSymbol=(TextView)findViewById(R.id.total_symbol);
+
 
         forestValue = (TextView) findViewById(R.id.forest_value);
         cropValue = (TextView) findViewById(R.id.crop_value);
@@ -151,6 +163,15 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 .equalTo("surveyId", surveyId)
                 .equalTo("status", "active")
                 .findAll();
+        Log.e("Symbol:",surveyCheck.getCurrency());
+
+        if(surveyCheck.getCurrency().equals("INR")){
+            forestValueSymbol.setText("₹");
+            pastureValueSymbol.setText("₹");
+            cropValueSymbol.setText("₹");
+            miningValueSymbol.setText("₹");
+            totalSymbol.setText("₹");
+        }
 
         forestlandLayout.setVisibility(View.GONE);
         headingForest.setVisibility(View.GONE);
@@ -170,10 +191,10 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 headingForest.setVisibility(View.VISIBLE);
                 socialCapital = landKind.getSocialCapitals();
                 if(socialCapital.isDiscountFlag()) {
-                    forestDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRateOverride()));
+                    forestDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRateOverride())+"%");
                 }
                 else {
-                    forestDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRate()));
+                    forestDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRate())+"%");
                 }
 
                 String pathForestMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Forestland"+surveyId+"screen.jpg/";
@@ -187,8 +208,9 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 socialCapitalForest.setText(""+landKind.getSocialCapitals().getScore()+"/20");
                 if(surveyCheck.getComponents() != null){
                     if(surveyCheck.getComponents().getForestValue() != 0){
-                        DecimalFormat valueFormatter = new DecimalFormat("#,###,###.##");
+                        DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getForestValue()));
+
                         forestValue.setText(yourFormattedString);
 
                         //forestValue.setText(roundTwo(surveyCheck.getComponents().getForestValue())+"");
@@ -209,10 +231,10 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 headingCrop.setVisibility(View.VISIBLE);
                 socialCapital = landKind.getSocialCapitals();
                 if(socialCapital.isDiscountFlag()) {
-                    cropDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRateOverride()));
+                    cropDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRateOverride())+"%");
                 }
                 else {
-                    cropDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRate()));
+                    cropDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRate())+"%");
                 }
 
                 String pathCropMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Cropland"+surveyId+"screen.jpg/";
@@ -228,7 +250,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 
                 if(surveyCheck.getComponents() != null){
                     if(surveyCheck.getComponents().getCroplandValue() != 0){
-                        DecimalFormat valueFormatter = new DecimalFormat("#,###,###.##");
+                        DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getCroplandValue()));
                         cropValue.setText(yourFormattedString);
 
@@ -249,10 +271,10 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 headingPasture.setVisibility(View.VISIBLE);
                 socialCapital = landKind.getSocialCapitals();
                 if(socialCapital.isDiscountFlag()) {
-                    pastureDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRateOverride()));
+                    pastureDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRateOverride())+"%");
                 }
                 else {
-                    pastureDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRate()));
+                    pastureDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRate())+"%");
                 }
                 String pathPastureMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Pastureland"+surveyId+"screen.jpg/";
                 mapImagePasture.setVisibility(View.VISIBLE);
@@ -267,7 +289,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 
                 if(surveyCheck.getComponents() != null){
                     if(surveyCheck.getComponents().getPastureValue() != 0){
-                        DecimalFormat valueFormatter = new DecimalFormat("#,###,###.##");
+                        DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getPastureValue()));
                         pastureValue.setText(yourFormattedString);
 
@@ -288,10 +310,10 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 headingMining.setVisibility(View.VISIBLE);
                 socialCapital = landKind.getSocialCapitals();
                 if(socialCapital.isDiscountFlag()) {
-                    miningDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRateOverride()));
+                    miningDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRateOverride())+"%");
                 }
                 else {
-                    miningDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRate()));
+                    miningDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRate())+"%");
                 }
                 String pathminingMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Mining Land"+surveyId+"screen.jpg/";
                 mapImageMining.setVisibility(View.VISIBLE);
@@ -306,7 +328,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 
                 if(surveyCheck.getComponents() != null){
                     if(surveyCheck.getComponents().getMiningLandValue() != 0){
-                        DecimalFormat valueFormatter = new DecimalFormat("#,###,###.##");
+                        DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getMiningLandValue()));
                         miningValue.setText(yourFormattedString);
 
@@ -328,8 +350,9 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         community.setText(surveyCheck.getCommunity().toString());
         parcelId.setText(surveyCheck.getSurveyId().toString());
         surveyorName.setText(surveyCheck.getSurveyor().toString());
+        respondentGroup.setText(surveyCheck.getRespondentGroup().toString());
         valuationDate.setText(s);
-        DecimalFormat valueFormatter = new DecimalFormat("#,###,###.##");
+        DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
         String yourFormattedString = valueFormatter.format(roundTwo(totalVal));
         totalText.setText(yourFormattedString);
 

@@ -116,6 +116,7 @@
                 <EditText
                     android:inputType="number"
                     android:id="@+id/cost_value"
+                    android:singleLine="true"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content" />
                 <Spinner

@@ -50,6 +50,7 @@
                 android:id="@+id/edittext_respondent_group"
                 android:layout_width="match_parent"
                 android:textSize="@dimen/textfield_size"
+                android:singleLine="true"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:hint="@string/respondent_group_hint" />
@@ -59,6 +60,7 @@
                 android:layout_width="match_parent"
                 android:textSize="@dimen/textfield_size"
                 android:layout_height="60dp"
+                android:singleLine="true"
                 android:layout_gravity="center"
                 android:hint="@string/surveyor_hint" />
 
@@ -79,6 +81,7 @@
                 android:textSize="@dimen/textfield_size"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
+                android:singleLine="true"
                 android:hint="@string/community_hint" />
 
             <EditText
@@ -87,6 +90,7 @@
                 android:textSize="@dimen/textfield_size"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
+                android:singleLine="true"
                 android:hint="@string/district_hint" />
 
             <EditText
@@ -95,6 +99,7 @@
                 android:textSize="@dimen/textfield_size"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
+                android:singleLine="true"
                 android:hint="@string/state_hint" />
 
 

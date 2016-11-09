@@ -3,8 +3,8 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/menu_drawer_layout"
     android:layout_width="match_parent"
-    android:background="@android:color/white"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
     <!-- The main content view -->
     <FrameLayout
         android:id="@+id/content_frame"
@@ -58,133 +58,131 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 card_view:cardBackgroundColor="#fafafa"
-                card_view:contentPadding="16dp"
+                card_view:cardCornerRadius="5dp"
                 card_view:cardElevation="2dp"
-                card_view:cardCornerRadius="5dp">
+                card_view:contentPadding="16dp">
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:orientation="horizontal">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/parcel_id"
-                        android:textSize="@dimen/textfield_size" />
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                    <TextView
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/parcel_id"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/community_hint"
+                            android:textSize="@dimen/textfield_size" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/site"
+                            android:textSize="@dimen/textfield_size" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/community_hint"
-                        android:textSize="@dimen/textfield_size" />
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
+                        <TextView
+                            android:id="@+id/parcel_id"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="new text"
+                            android:textSize="@dimen/textfield_size" />
 
-                    <TextView
+                        <TextView
+                            android:id="@+id/community_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="xxxxxxx"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <TextView
+                            android:id="@+id/respondent_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="xxxxxxx"
+                            android:textSize="@dimen/textfield_size" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/site"
-                        android:textSize="@dimen/textfield_size" />
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/surveyor_name"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/date_to_valuation"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/inflation_rate"
+                            android:textSize="@dimen/textfield_size" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/surveyor_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="xxxxxxx"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <TextView
+                            android:id="@+id/valuation_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="xxxxxxx"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <TextView
+                            android:id="@+id/inflation_rate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="5%"
+                            android:textSize="@dimen/textfield_size" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/parcel_id"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="new text"
-                        android:textSize="@dimen/textfield_size" />
-
-                    <TextView
-                        android:id="@+id/community_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="xxxxxxx"
-                        android:textSize="@dimen/textfield_size" />
-
-                    <TextView
-                        android:id="@+id/site_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="xxxxxxx"
-                        android:textSize="@dimen/textfield_size" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/surveyor_name"
-                        android:textSize="@dimen/textfield_size" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/date_to_valuation"
-                        android:textSize="@dimen/textfield_size" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/inflation_rate"
-                        android:textSize="@dimen/textfield_size" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/surveyor_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="xxxxxxx"
-                        android:textSize="@dimen/textfield_size" />
-
-                    <TextView
-                        android:id="@+id/valuation_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="xxxxxxx"
-                        android:textSize="@dimen/textfield_size" />
-
-                    <TextView
-                        android:id="@+id/inflation_rate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="5%"
-                        android:textSize="@dimen/textfield_size" />
-
-                </LinearLayout>
-
-            </LinearLayout>
             </android.support.v7.widget.CardView>
-
-
 
 
             <ScrollView
@@ -210,13 +208,13 @@
                         android:textSize="@dimen/textfield_size" />
 
                     <android.support.v7.widget.CardView
-                        android:layout_width="fill_parent"
                         android:id="@+id/forestland_layout"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        card_view:contentPadding="16dp"
                         card_view:cardBackgroundColor="#fafafa"
+                        card_view:cardCornerRadius="5dp"
                         card_view:cardElevation="2dp"
-                        card_view:cardCornerRadius="5dp">
+                        card_view:contentPadding="16dp">
 
                         <LinearLayout
 
@@ -258,11 +256,11 @@
                                     android:text="@string/social_capital_score"
                                     android:textSize="@dimen/textfield_size" />
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/questions_completed"
-                                    android:textSize="@dimen/textfield_size" />
+                                <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:text="@string/questions_completed"-->
+                                <!--android:textSize="@dimen/textfield_size" />-->
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -278,12 +276,25 @@
                                 android:layout_weight="1"
                                 android:orientation="vertical">
 
-                                <TextView
-                                    android:id="@+id/forest_value"
+                                <LinearLayout
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="0"
-                                    android:textSize="@dimen/textfield_size" />
+                                    android:layout_height="wrap_content">
+
+                                    <TextView
+                                        android:id="@+id/forest_value_symbol"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="*"
+                                        android:textSize="@dimen/textfield_size" />
+
+                                    <TextView
+                                        android:id="@+id/forest_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="0"
+                                        android:textSize="@dimen/textfield_size" />
+
+                                </LinearLayout>
 
                                 <TextView
                                     android:id="@+id/forest_social_capital_score"
@@ -292,18 +303,18 @@
                                     android:text="0"
                                     android:textSize="@dimen/textfield_size" />
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="0"
-                                    android:id="@+id/questions_completed"
-                                    android:textSize="@dimen/textfield_size" />
+                                <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:text="0"-->
+                                <!--android:id="@+id/questions_completed"-->
+                                <!--android:textSize="@dimen/textfield_size" />-->
 
                                 <TextView
+                                    android:id="@+id/value_discount_rate_forest"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="0"
-                                    android:id="@+id/value_discount_rate_forest"
                                     android:textSize="@dimen/textfield_size" />
 
                             </LinearLayout>
@@ -311,8 +322,7 @@
 
                         </LinearLayout>
 
-                        </android.support.v7.widget.CardView>
-
+                    </android.support.v7.widget.CardView>
 
 
                     <TextView
@@ -324,105 +334,118 @@
                         android:textSize="@dimen/textfield_size" />
 
                     <android.support.v7.widget.CardView
+                        android:id="@+id/cropland_layout"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/cropland_layout"
-                        card_view:contentPadding="16dp"
-                        card_view:cardElevation="2dp"
                         card_view:cardBackgroundColor="#fafafa"
-                        card_view:cardCornerRadius="5dp">
+                        card_view:cardCornerRadius="5dp"
+                        card_view:cardElevation="2dp"
+                        card_view:contentPadding="16dp">
 
-
-                    <LinearLayout
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
 
                         <LinearLayout
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <ImageView
-                                android:id="@+id/map_image_crop"
-                                android:layout_width="200dp"
-                                android:layout_height="80dp"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/map" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/value"
-                                android:textSize="@dimen/textfield_size" />
+                                android:layout_weight="1">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/social_capital_score"
-                                android:textSize="@dimen/textfield_size" />
+                                <ImageView
+                                    android:id="@+id/map_image_crop"
+                                    android:layout_width="200dp"
+                                    android:layout_height="80dp"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/map" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/questions_completed"
-                                android:textSize="@dimen/textfield_size" />
+                            </LinearLayout>
 
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/discount_rate"
-                                android:textSize="@dimen/textfield_size" />
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/value"
+                                    android:textSize="@dimen/textfield_size" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/social_capital_score"
+                                    android:textSize="@dimen/textfield_size" />
+
+                                <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:text="@string/questions_completed"-->
+                                <!--android:textSize="@dimen/textfield_size" />-->
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/discount_rate"
+                                    android:textSize="@dimen/textfield_size" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+
+                                    <TextView
+                                        android:id="@+id/crop_value_symbol"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="*"
+                                        android:textSize="@dimen/textfield_size" />
+
+                                    <TextView
+                                        android:id="@+id/crop_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="0"
+                                        android:textSize="@dimen/textfield_size" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/crop_social_capital_score"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textSize="@dimen/textfield_size" />
+
+                                <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:text="0"-->
+                                <!--android:textSize="@dimen/textfield_size" />-->
+
+                                <TextView
+                                    android:id="@+id/value_discount_rate_crop"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textSize="@dimen/textfield_size" />
+
+                            </LinearLayout>
 
                         </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/crop_value"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                android:textSize="@dimen/textfield_size" />
-
-                            <TextView
-                                android:id="@+id/crop_social_capital_score"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                android:textSize="@dimen/textfield_size" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                android:textSize="@dimen/textfield_size" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                android:id="@+id/value_discount_rate_crop"
-                                android:textSize="@dimen/textfield_size" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
 
                     </android.support.v7.widget.CardView>
 
@@ -435,105 +458,119 @@
                         android:textSize="@dimen/textfield_size" />
 
                     <android.support.v7.widget.CardView
+                        android:id="@+id/pastureland_layout"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        card_view:contentPadding="16dp"
-                        android:id="@+id/pastureland_layout"
                         card_view:cardBackgroundColor="#fafafa"
+                        card_view:cardCornerRadius="5dp"
                         card_view:cardElevation="2dp"
-                        card_view:cardCornerRadius="5dp">
-
-                    <LinearLayout
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-
-                        android:orientation="horizontal">
+                        card_view:contentPadding="16dp">
 
                         <LinearLayout
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <ImageView
-                                android:id="@+id/map_image_pasture"
-                                android:layout_width="200dp"
-                                android:layout_height="80dp"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/map" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
                             android:layout_weight="1"
-                            android:orientation="vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/value"
-                                android:textSize="@dimen/textfield_size" />
+                            android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/social_capital_score"
-                                android:textSize="@dimen/textfield_size" />
+                                android:layout_weight="1">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/questions_completed"
-                                android:textSize="@dimen/textfield_size" />
+                                <ImageView
+                                    android:id="@+id/map_image_pasture"
+                                    android:layout_width="200dp"
+                                    android:layout_height="80dp"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/map" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/discount_rate"
-                                android:textSize="@dimen/textfield_size" />
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/value"
+                                    android:textSize="@dimen/textfield_size" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/social_capital_score"
+                                    android:textSize="@dimen/textfield_size" />
+
+                                <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:text="@string/questions_completed"-->
+                                <!--android:textSize="@dimen/textfield_size" />-->
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/discount_rate"
+                                    android:textSize="@dimen/textfield_size" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+
+                                    <TextView
+                                        android:id="@+id/pasture_value_symbol"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="*"
+                                        android:textSize="@dimen/textfield_size" />
+
+
+                                    <TextView
+                                        android:id="@+id/pasture_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="0"
+                                        android:textSize="@dimen/textfield_size" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/pasture_social_capital_score"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textSize="@dimen/textfield_size" />
+
+                                <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:text="0"-->
+                                <!--android:textSize="@dimen/textfield_size" />-->
+
+                                <TextView
+                                    android:id="@+id/value_discount_rate_pasture"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textSize="@dimen/textfield_size" />
+
+                            </LinearLayout>
 
                         </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/pasture_value"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                android:textSize="@dimen/textfield_size" />
-
-                            <TextView
-                                android:id="@+id/pasture_social_capital_score"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                android:textSize="@dimen/textfield_size" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                android:textSize="@dimen/textfield_size" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                android:id="@+id/value_discount_rate_pasture"
-                                android:textSize="@dimen/textfield_size" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
 
                     </android.support.v7.widget.CardView>
 
@@ -546,105 +583,119 @@
                         android:textSize="@dimen/textfield_size" />
 
                     <android.support.v7.widget.CardView
+                        android:id="@+id/miningland_layout"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/miningland_layout"
                         card_view:cardBackgroundColor="#fafafa"
-                        card_view:contentPadding="16dp"
+                        card_view:cardCornerRadius="5dp"
                         card_view:cardElevation="2dp"
-                        card_view:cardCornerRadius="5dp">
-
-                    <LinearLayout
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-
-                        android:orientation="horizontal">
+                        card_view:contentPadding="16dp">
 
                         <LinearLayout
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <ImageView
-                                android:id="@+id/map_image_mining"
-                                android:layout_width="200dp"
-                                android:layout_height="80dp"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/map" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
                             android:layout_weight="1"
-                            android:orientation="vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/value"
-                                android:textSize="@dimen/textfield_size" />
+                            android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/social_capital_score"
-                                android:textSize="@dimen/textfield_size" />
+                                android:layout_weight="1">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/questions_completed"
-                                android:textSize="@dimen/textfield_size" />
+                                <ImageView
+                                    android:id="@+id/map_image_mining"
+                                    android:layout_width="200dp"
+                                    android:layout_height="80dp"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/map" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/discount_rate"
-                                android:textSize="@dimen/textfield_size" />
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/value"
+                                    android:textSize="@dimen/textfield_size" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/social_capital_score"
+                                    android:textSize="@dimen/textfield_size" />
+
+                                <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:text="@string/questions_completed"-->
+                                <!--android:textSize="@dimen/textfield_size" />-->
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/discount_rate"
+                                    android:textSize="@dimen/textfield_size" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+
+                                    <TextView
+                                        android:id="@+id/mining_value_symbol"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="*"
+                                        android:textSize="@dimen/textfield_size" />
+
+
+                                    <TextView
+                                        android:id="@+id/mining_value"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="0"
+                                        android:textSize="@dimen/textfield_size" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/minimg_social_capital_score"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textSize="@dimen/textfield_size" />
+
+                                <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:text="0"-->
+                                <!--android:textSize="@dimen/textfield_size" />-->
+
+                                <TextView
+                                    android:id="@+id/value_discount_rate_mining"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textSize="@dimen/textfield_size" />
+
+                            </LinearLayout>
 
                         </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/mining_value"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                android:textSize="@dimen/textfield_size" />
-
-                            <TextView
-                                android:id="@+id/minimg_social_capital_score"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                android:textSize="@dimen/textfield_size" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                android:textSize="@dimen/textfield_size" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                android:id="@+id/value_discount_rate_mining"
-                                android:textSize="@dimen/textfield_size" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
 
                     </android.support.v7.widget.CardView>
 
@@ -666,6 +717,13 @@
                     android:textSize="35dp" />
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/total_symbol"
+                    android:textSize="35dp"
+                    android:text="*"/>
+
+                <TextView
                     android:id="@+id/total_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -674,26 +732,26 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:gravity="right">
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:gravity="right">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/qn_completed"
-                    android:textSize="@dimen/textfield_size" />
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/qn_completed"-->
+            <!--android:textSize="@dimen/textfield_size" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0%"
-                    android:textSize="@dimen/textfield_size" />
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="0%"-->
+            <!--android:textSize="@dimen/textfield_size" />-->
 
-            </LinearLayout>
+            <!--</LinearLayout>-->
 
         </LinearLayout>
 

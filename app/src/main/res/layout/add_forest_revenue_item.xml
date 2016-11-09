@@ -10,6 +10,7 @@
         android:layout_gravity="center"
         android:hint="Name of revenue item"
         android:layout_width="300dp"
+        android:singleLine="true"
         android:layout_height="wrap_content" />
     <LinearLayout
         android:gravity="right"
