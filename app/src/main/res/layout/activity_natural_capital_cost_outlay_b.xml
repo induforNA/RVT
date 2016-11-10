@@ -114,6 +114,7 @@
                     android:layout_width="300dp"
                     android:layout_height="wrap_content" />
                 <EditText
+                    android:paddingLeft="10dp"
                     android:inputType="number"
                     android:id="@+id/cost_value"
                     android:singleLine="true"

@@ -639,6 +639,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                 realm.commitTransaction();
             }
         }
+        Toast.makeText(context,"Data saved",Toast.LENGTH_SHORT).show();
     }
 
 

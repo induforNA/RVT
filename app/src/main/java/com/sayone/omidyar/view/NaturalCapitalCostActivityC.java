@@ -95,6 +95,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
     long productReveneIdCon;
     long productReveneIdCheck = 0;
 
+    String currentProductName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -350,36 +351,62 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 //
 //                intent=new Intent(getApplicationContext(),NaturalCapitalCostActivityA.class);
 //                startActivity(intent);
-
-                saveYearlyDatas(revenueProducts.get(currentCostProductIndexSave));
+                if(buttonNext.isClickable()) {
+                    buttonNext.setClickable(false);
+                    saveYearlyDatas(revenueProducts.get(currentCostProductIndexSave));
+                }
                 break;
 
             case R.id.button_back:
-                finish();
-                //Log.e("YEAR ","PRE "+previousYearIndex+" Cur "+currentYearIndex);
-                //Log.e("COST ","PRE "+previousCostProductIndex+" Cur "+currentCostProductIndex   );
-
-                currentYearIndex = previousYearIndex;
-                currentCostProductIndex = previousCostProductIndex;
-                if(currentYearIndex > 0){
-                    currentYearIndex--;
-                }else if(currentYearIndex == 0){
-                    if(currentCostProductIndex > 0){
-                        currentCostProductIndex--;
-                        currentYearIndex = totalYearsCount - 1;
-                        // loadRevenueProduct(costOutlays.get(currentCostProductIndex));
-                    }else if(currentCostProductIndex == 0) {
-                        if(productReveneIdCheck == 0 || productReveneIdCheck == productReveneIdCon){
+                int currentYearBackIndex = getIndexYears(spinnerYear.getSelectedItem().toString());
+                int currentPrductNameBackIndex = getIndexRevenueProducts(currentProductName);
+                if(currentYearBackIndex != -1 &&  currentPrductNameBackIndex != -1){
+                    if(currentPrductNameBackIndex == 0){
+                        if(currentYearBackIndex == 0){
                             finish();
-                        }else {
-                            currentYearIndex = totalYearsCount - 1;
+                        }else{
+                            currentYearIndex = currentYearBackIndex - 1;
+                            currentCostProductIndex = currentPrductNameBackIndex;
                         }
                     }else{
-                        finish();
+                        if(currentYearBackIndex == 0){
+                            currentCostProductIndex = currentPrductNameBackIndex - 1;
+                            currentYearIndex = yearList.size() - 1;
+                        }else{
+                            currentYearIndex = currentYearBackIndex - 1;
+                            currentCostProductIndex = currentPrductNameBackIndex;
+                        }
                     }
-                }else{
-                    finish();
                 }
+
+
+
+
+//                finish();
+//                //Log.e("YEAR ","PRE "+previousYearIndex+" Cur "+currentYearIndex);
+//                //Log.e("COST ","PRE "+previousCostProductIndex+" Cur "+currentCostProductIndex   );
+//
+//                currentYearIndex = previousYearIndex;
+//                currentCostProductIndex = previousCostProductIndex;
+//                if(currentYearIndex > 0){
+//                    currentYearIndex--;
+//                }else if(currentYearIndex == 0){
+//                    if(currentCostProductIndex > 0){
+//                        currentCostProductIndex--;
+//                        currentYearIndex = totalYearsCount - 1;
+//                        // loadRevenueProduct(costOutlays.get(currentCostProductIndex));
+//                    }else if(currentCostProductIndex == 0) {
+//                        if(productReveneIdCheck == 0 || productReveneIdCheck == productReveneIdCon){
+//                            finish();
+//                        }else {
+//                            currentYearIndex = totalYearsCount - 1;
+//                        }
+//                    }else{
+//                        finish();
+//                    }
+//                }else{
+//                    finish();
+//                }
 
                 loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
 
@@ -416,20 +443,42 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         }
     }
 
+    public int getIndexRevenueProducts(String itemName) {
+        for (int i = 0; i < revenueProducts.size(); i++){
+            CostElement costElementGet = revenueProducts.get(i);
+            if (itemName.equals(costElementGet.getName())){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public int getIndexYears(String itemName) {
+        for (int i = 0; i < yearList.size(); i++){
+            String yearGet = yearList.get(i);
+            if (itemName.equals(yearGet)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public void loadRevenueProduct(CostElement costElementLoad){
         // Log.e("LOAD ","REVENUE 11111");
 
+        currentProductName = costElementLoad.getName();
+
         if(costElementLoad.getType().equals("Timber")){
-            loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_1_2)+"?");
-            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_2_2));
+            loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1)+" "+costElementLoad.getName()+""+getResources().getString(R.string.qn_natural_cost_1_2)+"?");
+            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_2_2)+"?");
             productQuestion.setText(getResources().getString(R.string.qn_natural_cost_3_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_3_2));
         }else if(costElementLoad.getType().equals("Non Timber")){
-            loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_1_2)+"?");
-            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_2_2));
+            loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1)+" "+costElementLoad.getName()+""+getResources().getString(R.string.qn_natural_cost_1_2)+"?");
+            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_2_2)+"?");
             productQuestion.setText(getResources().getString(R.string.qn_natural_cost_3_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_3_2));
         }else {
-            loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_1_2)+"?");
-            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_2_2));
+            loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1)+" "+costElementLoad.getName()+""+getResources().getString(R.string.qn_natural_cost_1_2)+"?");
+            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_2_2)+"?");
             productQuestion.setText(getResources().getString(R.string.qn_natural_cost_3_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_3_2));
         }
         productReveneIdCheck = costElementLoad.getId();
@@ -788,6 +837,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 if(currentCostProductIndex < totalCostProductCount){
                     loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
                     //currentCostProductIndex++;
+                    buttonNext.setClickable(true);
                 }else{
                     Toast.makeText(context,"Completed ",Toast.LENGTH_SHORT).show();
                     allCashFlow();
@@ -832,6 +882,12 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 //        revenueProductYears1.setProjectedIndex(yearIndex);
 //        revenueProductYears1.setSubtotal(total);
 //        realm.commitTransaction();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        buttonNext.setClickable(true);
     }
 
     public void nextLandKind(){
