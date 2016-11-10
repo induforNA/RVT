@@ -88,7 +88,7 @@ public class UnitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     ImageView swapButton1 = (ImageView) dialog.findViewById(R.id.button_swap_1);
                     ImageView swapButton2 = (ImageView) dialog.findViewById(R.id.button_swap_2);
 
-                    final EditText editTextSpecifyUnit1 = (EditText) dialog.findViewById(R.id.edit_text_specify_unit_1_1);
+                    final TextView editTextSpecifyUnit1 = (TextView) dialog.findViewById(R.id.edit_text_specify_unit_1_1);
                     final EditText editTextSpecifyUnit2 = (EditText) dialog.findViewById(R.id.edit_text_specify_unit_1_2);
                     final EditText editTextSetUnit1 = (EditText) dialog.findViewById(R.id.edit_text_set_unit_1);
                     final EditText editTextSetUnit2 = (EditText) dialog.findViewById(R.id.edit_text_set_unit_2);
