@@ -8,156 +8,163 @@
     tools:context="com.sayone.omidyar.view.AdminRatesActivity">
 
     <LinearLayout
-        android:elevation="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
         android:background="@color/colorPrimary"
+        android:elevation="3dp"
         android:gravity="center"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="56dp">
-
-    <TextView
-        android:id="@+id/textview_adminrate_heading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:textAllCaps="true"
-        android:textStyle="bold"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/admin_rate_heading"
-        android:textSize="22dp" />
-
-        </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_marginLeft="150dp"
-        android:layout_marginRight="150dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="80dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_height="wrap_content">
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_marginRight="10dp"
-        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Spinner
-            android:id="@+id/spinner_survey_id"
-            style="@style/Widget.AppCompat.Spinner.Underlined"
-            android:layout_width="match_parent"
-            android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            android:layout_height="wrap_content"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/textfield_size"
-                android:text="@string/discount_rate" />
-
-            <EditText
-                android:id="@+id/edittext_discount_rate"
-                android:layout_width="80dp"
-                android:textSize="@dimen/textfield_size"
-                android:layout_marginLeft="20dp"
-                android:enabled="false"
-                android:text="0.0"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="@dimen/textfield_size"
-                android:text="@string/percentage"/>
-        </LinearLayout>
-
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_marginLeft="10dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <Spinner
-            android:id="@+id/spinner_land_kind"
-            style="@style/Widget.AppCompat.Spinner.Underlined"
-            android:layout_width="match_parent"
-            android:layout_marginLeft="20dp"
-            android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            android:layout_height="wrap_content" />
-
-
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/textview_adminrate_heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/textfield_size"
-                android:text="@string/override_discount" />
-
-            <EditText
-                android:id="@+id/edittext_overridediscount"
-                android:layout_width="60dp"
-                android:textSize="@dimen/textfield_size"
-                android:layout_marginLeft="20dp"
-                android:inputType="numberDecimal"
-                android:text="0.0"
-                android:singleLine="true"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:textSize="@dimen/textfield_size"
-                android:text="@string/percentage" />
-        </LinearLayout>
-    </LinearLayout>
+            android:layout_gravity="center_horizontal"
+            android:text="@string/admin_rate_heading"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="22dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:id="@+id/button_save"
-        android:padding="5dp"
         android:layout_gravity="center_horizontal"
-        android:text="@string/button_save"
-        android:textColor="@android:color/white" />
+        android:layout_marginLeft="150dp"
+        android:layout_marginRight="150dp"
+        android:layout_marginTop="80dp"
+        android:orientation="horizontal">
 
-    <!--<View-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/spinner_survey_id"
+                style="@style/Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/discount_rate"
+                    android:textSize="@dimen/textfield_size" />
+
+                <EditText
+                    android:id="@+id/edittext_discount_rate"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:enabled="false"
+                    android:text="0.0"
+                    android:textSize="@dimen/textfield_size" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/percentage"
+                    android:textSize="@dimen/textfield_size" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/spinner_land_kind"
+                style="@style/Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/override_discount"
+                    android:textSize="@dimen/textfield_size" />
+
+                <EditText
+                    android:id="@+id/edittext_overridediscount"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:inputType="numberDecimal"
+                    android:singleLine="true"
+                    android:text="0.0"
+                    android:textSize="@dimen/textfield_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/percentage"
+                    android:textSize="@dimen/textfield_size" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:padding="5dp"
+            android:text="@string/button_save"
+            android:textColor="@android:color/white" />
+
+        <!--<View-->
         <!--android:layout_width="100dp"-->
         <!--android:layout_marginTop="10dp"-->
         <!--android:background="@android:color/darker_gray"-->
         <!--android:layout_gravity="center_horizontal"-->
         <!--android:layout_height="2dp"/>-->
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="@android:color/white"
-        android:id="@+id/button_restore_original_discount_rate"
-        android:text="@string/restore_original_discount_rate"
-        android:layout_marginTop="10dp" />
+        <Button
+            android:id="@+id/button_restore_original_discount_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="@string/restore_original_discount_rate"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
 
 
 </LinearLayout>

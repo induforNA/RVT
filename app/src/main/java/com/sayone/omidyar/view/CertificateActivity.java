@@ -140,7 +140,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         textViewAbout.setOnClickListener(this);
         logout.setOnClickListener(this);
         startSurvey.setOnClickListener(this);
-        surveyIdDrawer.setText(serveyId);
+
 
         context=this;
 
@@ -184,6 +184,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 
         mininglandLayout.setVisibility(View.GONE);
         headingMining.setVisibility(View.GONE);
+
 
         for(LandKind landKind: landKinds){
             if(landKind.getName().equals("Forestland")){
@@ -352,6 +353,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         surveyorName.setText(surveyCheck.getSurveyor().toString());
         respondentGroup.setText(surveyCheck.getRespondentGroup().toString());
         valuationDate.setText(s);
+        surveyIdDrawer.setText(surveyId);
         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
         String yourFormattedString = valueFormatter.format(roundTwo(totalVal));
         totalText.setText(yourFormattedString);

@@ -147,7 +147,7 @@
     <string name="time_frame_qstn3">Number of years to project</string>
     <string name="summary_of_survey_heading">Summary of surveys</string>
     <string name="in_progress_text">In progress</string>
-    <string name="completed_text">Completed</string>
+    <string name="completed_text">Completed : </string>
     <string name="select_all">Select all</string>
     <string name="text_survey1">Survey1</string>
     <string name="text_survey2">Survey2</string>
