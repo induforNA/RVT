@@ -27,8 +27,12 @@ import com.sayone.omidyar.model.RevenueProduct;
 import com.sayone.omidyar.model.RevenueProductYears;
 import com.sayone.omidyar.model.Survey;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -171,8 +175,8 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
             //Log.e("YEAR PEEEEEEEEE",costElementYears.getYear()+" "+currentYear);
             if(costElementYears.getYear() < currentYear && costElementYears.getYear() != 0){
                 ArrayList yearArray = new ArrayList();
-                yearArray.add("select year");
                 int year = currentYear - 1;
+                yearArray.add("Select year");
                 while(year >= 1990){
                     yearArray.add(String.valueOf(year));
                     year--;
@@ -250,8 +254,8 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
         for(k=1; k<=j; k++){
             ArrayList yearArray = new ArrayList();
-            yearArray.add("select year");
             int year = currentYear - 1;
+            yearArray.add("Select year");
             while(year >= 1990){
                 yearArray.add(year--);
             }
@@ -309,7 +313,27 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
 
             case R.id.button_next:
                 if(editTexts.size() > 0){
-                    saveYears();
+                    boolean selectYearNotFoud = true;
+                    Set<String> set = new HashSet<String>();
+                    for(Spinner editText1 : editTexts) {
+                        //editText.setText("233");
+                        //Log.e("SSS ",editText.getText().toString());
+                        if (editText1.getSelectedItem().toString().length() > 5) {
+                            selectYearNotFoud = false;
+                        }else{
+                            set.add(editText1.getSelectedItem().toString());
+                        }
+                    }
+                    if(selectYearNotFoud){
+                        if(set.size() < editTexts.size()){
+                            Toast.makeText(context,"Select different years",Toast.LENGTH_SHORT).show();
+                        }else {
+                            saveYears();
+                        }
+                    }else{
+                        Toast.makeText(context,"Select all year",Toast.LENGTH_SHORT).show();
+                    }
+                    // saveYears();
                 }else{
                     Toast.makeText(context,"Select at least one year",Toast.LENGTH_SHORT).show();
                 }
@@ -374,12 +398,9 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
                             for(Spinner editText : editTexts) {
                                 //editText.setText("233");
                                 //Log.e("SSS ",editText.getText().toString());
-                                if (!editText.getSelectedItem().toString().equals("")&&!editText.getSelectedItem().toString().equals("select year")) {
+                                if (!editText.getSelectedItem().toString().equals("")) {
                                     costElementYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), costElement1.getId(), "Forestland", realm));
-                                }
-                                else{
-                                    progress.dismiss();
-                                    Toast.makeText(context, "Select year", Toast.LENGTH_SHORT).show();
+
                                 }
                             }
                             int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -402,14 +423,10 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
                             //Log.e("LAND AA ", revenueProduct1.getRevenueProductYearses().size()+"");
 
 
-                            for(Spinner editText : editTexts) {
-                                if (!editText.getSelectedItem().toString().equals("select year")) {
-                                    costElementYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), costElement1.getId(), "Cropland", realm));
-                                }
-                                else{
-                                    progress.dismiss();
-                                    Toast.makeText(context, "Select year", Toast.LENGTH_SHORT).show();
-                                }
+                            for(Spinner editText : editTexts){
+                                //editText.setText("233");
+                                //Log.e("SSS ",editText.getText().toString());
+                                costElementYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), costElement1.getId(), "Cropland", realm));
                             }
 
                             int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -431,14 +448,10 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
                             //Log.e("LAND AA ", revenueProduct1.getRevenueProductYearses().size()+"");
 
 
-                            for(Spinner editText : editTexts) {
-                                if (!editText.getSelectedItem().toString().equals("select year")) {
-                                    costElementYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), costElement1.getId(), "Pastureland", realm));
-                                }
-                                else{
-                                    progress.dismiss();
-                                    Toast.makeText(context, "Select year", Toast.LENGTH_SHORT).show();
-                                }
+                            for(Spinner editText : editTexts){
+                                //editText.setText("233");
+                                //Log.e("SSS ",editText.getText().toString());
+                                costElementYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), costElement1.getId(), "Pastureland",realm));
                             }
 
                             int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -460,14 +473,10 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
                             //Log.e("LAND AA ", revenueProduct1.getRevenueProductYearses().size()+"");
 
 
-                            for(Spinner editText : editTexts) {
-                                if (!editText.getSelectedItem().toString().equals("select year")) {
-                                    costElementYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), costElement1.getId(), "Mining Land", realm));
-                                }
-                                else{
-                                    progress.dismiss();
-                                    Toast.makeText(context, "Select year", Toast.LENGTH_SHORT).show();
-                                }
+                            for(Spinner editText : editTexts){
+                                //editText.setText("233");
+                                //Log.e("SSS ",editText.getText().toString());
+                                costElementYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), costElement1.getId(), "Mining Land",realm));
                             }
 
                             int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -507,7 +516,6 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
             public void onError(Throwable error) {
                 // transaction is automatically rolled-back, do any cleanup here
                 //Log.e("REALM", "All done updating."+error.toString());
-                Toast.makeText(context, "Select year", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -641,7 +649,15 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
             if(i == 0) {
                 resVal = 0;
             }else if( year % 4 == 0){
-                double aa = 366.0 / 365.0;
+                BigDecimal bigDecimal1 = new BigDecimal("366.0");
+                BigDecimal bigDecimal2 = new BigDecimal("365.0");
+
+                //double aa = 366.0 / 365.0;
+                BigDecimal bigDecimal3 = bigDecimal1.divide(bigDecimal2, MathContext.DECIMAL64);
+                double aa =  bigDecimal3.doubleValue();
+
+
+                // double aa = 366.0 / 365.0;
                 //Log.e("PRO IND BB ",resVal+"");
                 resVal = resVal + aa;
             }else{

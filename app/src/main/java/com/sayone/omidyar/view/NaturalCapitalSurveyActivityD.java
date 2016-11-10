@@ -31,6 +31,8 @@ import com.sayone.omidyar.model.RevenueProduct;
 import com.sayone.omidyar.model.RevenueProductYears;
 import com.sayone.omidyar.model.Survey;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -354,6 +356,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 //                startActivity(intent);
 
                 saveYearlyDatas(revenueProducts.get(currentCostProductIndexSave));
+                Log.e("YEAR ","PRE "+previousYearIndex+" Cur "+currentYearIndex);
+                Log.e("COST ","PRE "+previousCostProductIndex+" Cur "+currentCostProductIndex   );
                 break;
 
             case R.id.button_back:
@@ -621,26 +625,47 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                             quanityEditStr = "0";
                         }
 
+                        BigDecimal bigDecimalNoOfTimes = new BigDecimal(noOfTimesEditStr);
+                        BigDecimal bigDecimalPrice = new BigDecimal(priceEditStr);
+                        BigDecimal bigDecimalQuanityEditStr = new BigDecimal(quanityEditStr);
+                        BigDecimal bigDecimalHarverArea = new BigDecimal(harverArea);
+
 
                         Log.e("LAND ", currentSocialCapitalServey);
 
                         if(currentSocialCapitalServey.equals("Pastureland")){
                             Log.e("LAND ", "PAS");
-                            total = Integer.parseInt(noOfTimesEditStr)
-                                    * Double.parseDouble(priceEditStr)
-                                    * Double.parseDouble(quanityEditStr)
-                                    * harverArea;
+//                            total = Integer.parseInt(noOfTimesEditStr)
+//                                    * Double.parseDouble(priceEditStr)
+//                                    * Double.parseDouble(quanityEditStr)
+//                                    * harverArea;
+
+                            BigDecimal bigDecimalTotal = bigDecimalNoOfTimes.multiply(bigDecimalPrice, MathContext.DECIMAL64)
+                                    .multiply(bigDecimalQuanityEditStr, MathContext.DECIMAL64)
+                                    .multiply(bigDecimalHarverArea, MathContext.DECIMAL64);
+
                             Log.e("AA ",Integer.parseInt(noOfTimesEditStr)
                                     +" "+ Double.parseDouble(priceEditStr)
                                     +" "+ Double.parseDouble(quanityEditStr)
                                     +" "+ harverArea);
-                            total = total/12;
+
+                            total = bigDecimalTotal.divide(new BigDecimal("12"),MathContext.DECIMAL64).doubleValue();
+
+                            // total = total/12;
 
                         }else {
-                            total = frequency.getFrequencyValue()
-                                    * Integer.parseInt(noOfTimesEditStr)
-                                    * Double.parseDouble(priceEditStr)
-                                    * Double.parseDouble(quanityEditStr);
+                            BigDecimal bigDecimalFrequency = new BigDecimal(frequency.getFrequencyValue());
+
+                            BigDecimal bigDecimalTotal = bigDecimalFrequency.multiply(bigDecimalNoOfTimes, MathContext.DECIMAL64)
+                                    .multiply(bigDecimalPrice, MathContext.DECIMAL64)
+                                    .multiply(bigDecimalQuanityEditStr, MathContext.DECIMAL64);
+
+                            total = bigDecimalTotal.doubleValue();
+
+//                            total = frequency.getFrequencyValue()
+//                                    * Integer.parseInt(noOfTimesEditStr)
+//                                    * Double.parseDouble(priceEditStr)
+//                                    * Double.parseDouble(quanityEditStr);
                         }
 
                         //total = roundToTwoDecimal(total);
@@ -716,6 +741,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 double harvestFre = 0;
                 double harvestTimes = 0;
                 double harvestPrice = 0;
+                double harvestArea = 0;
 
                 double freqUnit = 0;
                 String quaUnit = "";
@@ -734,6 +760,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                                 freqUnit = revenueProductYears.getHarvestFrequencyUnit();
                                 quaUnit = revenueProductYears.getQuantityUnit();
                                 priceCurrency = revenueProductYears.getMarketPriceCurrency();
+                                harvestArea = harvestArea + revenueProductYears.getHarvestArea();
                             }
                         }
                     }else{
@@ -743,6 +770,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                                 harvestFre = revenueProductYears.getHarvestFrequencyValue();
                                 harvestTimes = harvestTimes + revenueProductYears.getQuantityValue();
                                 harvestPrice = harvestPrice + revenueProductYears.getMarketPriceValue();
+                                harvestArea = harvestArea + revenueProductYears.getHarvestArea();
 
                                 freqUnit = revenueProductYears.getHarvestFrequencyUnit();
                                 quaUnit = revenueProductYears.getQuantityUnit();
@@ -754,6 +782,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
                         harvestTimes = harvestTimes/eleCount;
                         harvestPrice = harvestPrice/eleCount;
+                        harvestArea = harvestArea/eleCount;
                     }
                 }
 
@@ -768,17 +797,44 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                         revenueProductYears.setMarketPriceCurrency(priceCurrency);
                         revenueProductYears.setProjectedIndex(0);
                         revenueProductYears.setSubtotal(0);
+                        if(currentSocialCapitalServey.equals("Pastureland")){
+                            revenueProductYears.setHarvestArea(harvestArea);
+                        }
                         //realm.commitTransaction();
                         Log.e("REV ",revenueProductYears.toString());
                     }
                     if(revenueProductYears.getProjectedIndex() > 0){
-                        double marketPriceVal = harvestPrice * Math.pow((1 + inflationRate), revenueProductYears.getProjectedIndex());
+                        BigDecimal bigDecimalPowerFactor = new BigDecimal(Math.pow((1 + inflationRate), revenueProductYears.getProjectedIndex()), MathContext.DECIMAL64);
+                        BigDecimal bigDecimalHarvestPrice = new BigDecimal(harvestPrice);
+
+                        double marketPriceVal = bigDecimalPowerFactor.multiply(bigDecimalHarvestPrice, MathContext.DECIMAL64).doubleValue();
+
+                        // double marketPriceVal = harvestPrice * Math.pow((1 + inflationRate), revenueProductYears.getProjectedIndex());
                         //marketPriceVal = roundToTwoDecimal(marketPriceVal);
 
-                        double totalVal = freqUnit
-                                * harvestFre
-                                * harvestTimes
-                                * marketPriceVal;
+                        BigDecimal bigDecimalfreqUnit = new BigDecimal(freqUnit);
+                        BigDecimal bigDecimalharvestFre = new BigDecimal(harvestFre);
+                        BigDecimal bigDecimalharvestTimes = new BigDecimal(harvestTimes);
+                        BigDecimal bigDecimalmarketPriceVal = new BigDecimal(marketPriceVal);
+                        BigDecimal bigDecimalHarvestArea = new BigDecimal(harvestArea);
+
+                        double totalVal = bigDecimalfreqUnit.multiply(bigDecimalharvestFre, MathContext.DECIMAL64)
+                                .multiply(bigDecimalharvestTimes, MathContext.DECIMAL64)
+                                .multiply(bigDecimalmarketPriceVal, MathContext.DECIMAL64).doubleValue();
+
+                        if(currentSocialCapitalServey.equals("Pastureland")){
+                            BigDecimal bigDecimal12 = new BigDecimal("12");
+                            BigDecimal bigDecimalNewHarvestArea = bigDecimalharvestFre.divide(bigDecimal12, MathContext.DECIMAL64);
+                            totalVal = bigDecimalNewHarvestArea.multiply(bigDecimalharvestTimes, MathContext.DECIMAL64)
+                                    .multiply(bigDecimalmarketPriceVal, MathContext.DECIMAL64)
+                                    .multiply(bigDecimalHarvestArea, MathContext.DECIMAL64)
+                                    .doubleValue();
+                        }
+
+//                        double totalVal = freqUnit
+//                                * harvestFre
+//                                * harvestTimes
+//                                * marketPriceVal;
                         //totalVal = roundToTwoDecimal(totalVal);
 
                         //realm.beginTransaction();
@@ -789,6 +845,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                         revenueProductYears.setMarketPriceValue(marketPriceVal);
                         revenueProductYears.setMarketPriceCurrency(priceCurrency);
                         revenueProductYears.setSubtotal(totalVal);
+                        if(currentSocialCapitalServey.equals("Pastureland")) {
+                            revenueProductYears.setHarvestArea(harvestArea);
+                        }
                         //realm.commitTransaction();
 
                         Log.e("REV ",revenueProductYears.toString());
@@ -974,15 +1033,30 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
         double disFactor = 0;
 
+        BigDecimal bigDecimalOne = new BigDecimal("1");
+
         for(RevenueProductYears revenueProductYears1:revenueProductYearses){
             revenueTotal = revenueTotal + revenueProductYears1.getSubtotal();
-            disFactor = 1 / Math.pow(1+disRate,revenueProductYears.getProjectedIndex());
+
+            double powerFactor = Math.pow(1+disRate,revenueProductYears.getProjectedIndex());
+            BigDecimal bigDecimalPowerFactor = new BigDecimal(powerFactor);
+            BigDecimal bigDecimalDisFactor = bigDecimalOne.divide(bigDecimalPowerFactor, MathContext.DECIMAL64);
+
+            disFactor = bigDecimalDisFactor.doubleValue();
+
+            // disFactor = 1 / Math.pow(1+disRate,revenueProductYears.getProjectedIndex());
             Log.e("PRO IN  ",disRate+" "+revenueProductYears.getProjectedIndex()+"");
         }
 
         for(CostElementYears costElementYears1:costElementYearses){
             costTotal = costTotal + costElementYears1.getSubtotal();
-            disFactor = 1 / Math.pow(1+disRate,costElementYears.getProjectedIndex());
+
+            double powerFactor = Math.pow(1+disRate,costElementYears.getProjectedIndex());
+            BigDecimal bigDecimalPowerFactor = new BigDecimal(powerFactor);
+            BigDecimal bigDecimalDisFactor = bigDecimalOne.divide(bigDecimalPowerFactor, MathContext.DECIMAL64);
+
+            disFactor = bigDecimalDisFactor.doubleValue();
+            // disFactor = 1 / Math.pow(1+disRate,costElementYears.getProjectedIndex());
             Log.e("PRO IN  ",disRate+" "+costElementYears.getProjectedIndex()+"");
         }
 

@@ -320,7 +320,7 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                 }
                 break;
             case R.id.next_button:
-                if(socialCapitalAnswerOptionsesList.size() > 0) {
+                //if(socialCapitalAnswerOptionsesList.size() > 0) {
                     if (currentQuestionId < 14) {
                         //Log.e("Current id ", socialCapitalAnswerOptionsesList.size() + "");
                         RealmList<MultipleAnswer> multipleAnswers;
@@ -358,9 +358,9 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
 //                    Intent intent = new Intent(SocialCapitalActivity.this, CertificateActivity.class);
 //                    startActivity(intent);
                     }
-                }else{
-                    Toast.makeText(context,"Select an option",Toast.LENGTH_SHORT).show();
-                }
+//                }else{
+//                    Toast.makeText(context,"Select an option",Toast.LENGTH_SHORT).show();
+//                }
                 break;
             case R.id.image_view_menu_icon:
                 toggleMenuDrawer();
