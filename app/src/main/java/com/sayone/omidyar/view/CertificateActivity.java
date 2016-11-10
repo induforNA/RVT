@@ -170,7 +170,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
             pastureValueSymbol.setText("₹");
             cropValueSymbol.setText("₹");
             miningValueSymbol.setText("₹");
-            totalSymbol.setText("₹");
+            totalSymbol.setText(" ₹");
         }
 
         forestlandLayout.setVisibility(View.GONE);
