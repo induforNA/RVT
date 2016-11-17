@@ -9,12 +9,12 @@
         {
           "opt": "Right to access and use the parcel",
           "optHindi": "पार्सल को पाने और उपयोग करने का अधिकार",
-          "val": "20"
+          "val": "0"
         },
         {
           "opt": "Right to benefit from the parcel",
           "optHindi": "पार्सल से लाभ प्राप्त करने का अधिकार",
-          "val": "15"
+          "val": "5"
         },
         {
           "opt": "Right to control how the parcel will be used",
@@ -24,12 +24,12 @@
         {
           "opt": "Right to exclude others from unauthorized use of the parcel",
           "optHindi": "पार्सल के अनाधिकृत उपयोग से दूसरों को बाहर करने का अधिकार",
-          "val": "5"
+          "val": "15"
         },
         {
           "opt": "Right to pass rights to the parcel down to future generations or sell rights to others",
           "optHindi": "भविष्य की पीढ़ियों के लिए पार्सल देने के या दूसरों को अधिकार बेचने का अधिकार",
-          "val": "0"
+          "val": "20"
         }
       ]
     },
@@ -42,12 +42,12 @@
         {
           "opt": "Right to access and use the parcel",
           "optHindi": "पार्सल को पाने और उपयोग करने का अधिकार",
-          "val": "20"
+          "val": "0"
         },
         {
           "opt": "Right to benefit from the parcel",
           "optHindi": "पार्सल से लाभ प्राप्त करने का अधिकार",
-          "val": "15"
+          "val": "5"
         },
         {
           "opt": "Right to control how the parcel will be used",
@@ -57,12 +57,12 @@
         {
           "opt": "Right to exclude others from unauthorized use of the parcel",
           "optHindi": "पार्सल के अनाधिकृत उपयोग से दूसरों को बाहर करने का अधिकार",
-          "val": "5"
+          "val": "15"
         },
         {
           "opt": "Right to pass rights to the parcel down to future generations or sell rights to others",
           "optHindi": "भविष्य की पीढ़ियों के लिए पार्सल देने के या दूसरों को अधिकार बेचने का अधिकार",
-          "val": "0"
+          "val": "20"
         }
       ]
     },
@@ -75,7 +75,7 @@
         {
           "opt": "Both",
           "optHindi": "दोनों",
-          "val": "0"
+          "val": "20"
         },
         {
           "opt": "Government or community only",
@@ -85,25 +85,25 @@
         {
           "opt": "None",
           "optHindi": "कोई नहीं",
-          "val": "20"
+          "val": "0"
         }
       ]
     },
     {
-      "question": "Does this group feel confident that they will be able to continue to use the parcel for this land use without constraints indefinitely into the future?",
-      "questionHindi": "क्या इस समूह को भरोसा है कि वे पार्सल भविष्य में अनिश्चित काल के लिए बाधाओं के बिना इस भूमि के उपयोग के लिए उपयोग करने के लिए जारी रखेगा?",
+      "question": "Does this group feel confident that they will be able to continue to use the parcel without constraints indefinitely into the future?",
+      "questionHindi": "?",
       "weight": "5",
       "optiontype": "single",
       "options": [
         {
           "opt": "Yes",
           "optHindi": "हाँ",
-          "val": "0"
+          "val": "20"
         },
         {
           "opt": "Mostly",
           "optHindi": "अधिकतर",
-          "val": "5"
+          "val": "15"
         },
         {
           "opt": "Somewhat",
@@ -113,12 +113,12 @@
         {
           "opt": "Maybe",
           "optHindi": "शायद",
-          "val": "15"
+          "val": "5"
         },
         {
           "opt": "No",
           "optHindi": "नहीं",
-          "val": "20"
+          "val": "0"
         }
       ]
     },
@@ -131,12 +131,12 @@
         {
           "opt": "No",
           "optHindi": "नहीं",
-          "val": "0"
+          "val": "20"
         },
         {
           "opt": "One low level",
           "optHindi": "एक कम स्तर",
-          "val": "5"
+          "val": "15"
         },
         {
           "opt": "Multiple low level",
@@ -146,20 +146,20 @@
         {
           "opt": "Open conflict",
           "optHindi": "खुला संघर्ष",
-          "val": "20"
+          "val": "0"
         }
       ]
     },
     {
-      "question": "If the resource rights are not legally recognized, do households in this community use the parcel and access the resource based upon locally recognized customary norms?",
-      "questionHindi": "अगर संसाधन अधिकार को कानूनी रूप से मान्यता प्राप्त नहीं कर रहे हैं तो क्या इस समुदाय में घरों पार्सल का उपयोग और स्थानीय स्तर पर मान्यता प्राप्त प्रथागत मानदंडों के आधार पर संसाधन का उपयोग करते हैं?",
+      "question": "Do households in this community use the parcel and access the resource based upon locally recognized customary norms?",
+      "questionHindi": "",
       "weight": "5",
       "optiontype": "single",
       "options": [
         {
           "opt": "Yes",
           "optHindi": "हाँ",
-          "val": "0"
+          "val": "20"
         },
         {
           "opt": "Somewhat",
@@ -169,7 +169,7 @@
         {
           "opt": "No",
           "optHindi": "नहीं",
-          "val": "20"
+          "val": "0"
         }
       ]
     },
@@ -182,12 +182,12 @@
         {
           "opt": "Yes",
           "optHindi": "हाँ",
-          "val": "0"
+          "val": "20"
         },
         {
           "opt": "No",
           "optHindi": "नहीं",
-          "val": "20"
+          "val": "0"
         }
       ]
     },
@@ -200,7 +200,7 @@
         {
           "opt": "Yes",
           "optHindi": "हाँ",
-          "val": "0"
+          "val": "20"
         },
         {
           "opt": "Some",
@@ -210,7 +210,7 @@
         {
           "opt": "No",
           "optHindi": "नहीं",
-          "val": "20"
+          "val": "0"
         }
       ]
     },
@@ -223,7 +223,7 @@
         {
           "opt": "Yes",
           "optHindi": "हाँ",
-          "val": "0"
+          "val": "20"
         },
         {
           "opt": "Somewhat",
@@ -233,7 +233,7 @@
         {
           "opt": "No",
           "optHindi": "नहीं",
-          "val": "20"
+          "val": "0"
         }
       ]
     },
@@ -246,7 +246,7 @@
         {
           "opt": "Yes",
           "optHindi": "हाँ",
-          "val": "0"
+          "val": "20"
         },
         {
           "opt": "Half",
@@ -256,7 +256,7 @@
         {
           "opt": "None",
           "optHindi": "कोई नहीं",
-          "val": "20"
+          "val": "0"
         }
       ]
     },
@@ -269,7 +269,7 @@
         {
           "opt": "Yes",
           "optHindi": "हाँ",
-          "val": "0"
+          "val": "20"
         },
         {
           "opt": "By many",
@@ -277,9 +277,14 @@
           "val": "10"
         },
         {
+          "opt": "By some",
+          "optHindi": "",
+          "val": "5"
+        },
+        {
           "opt": "No",
           "optHindi": "नहीं",
-          "val": "20"
+          "val": "0"
         }
       ]
     },
@@ -290,29 +295,29 @@
       "optiontype": "single",
       "options": [
         {
-          "opt": "20+",
-          "optHindi": "20+",
-          "val": "0"
+          "opt": "15+",
+          "optHindi": "15+",
+          "val": "20"
         },
         {
-          "opt": "15 to 20",
-          "optHindi": "15 to 20",
-          "val": "5"
-        },
-        {
-          "opt": "10 to 15",
-          "optHindi": "10 to 15",
-          "val": "10"
-        },
-        {
-          "opt": "5 to 10",
-          "optHindi": "5 to 10",
+          "opt": "11 to 15",
+          "optHindi": "11 to 15",
           "val": "15"
         },
         {
-          "opt": "0 to 5",
-          "optHindi": "0 to 5",
-          "val": "20"
+          "opt": "6 to 10",
+          "optHindi": "6 to 10",
+          "val": "10"
+        },
+        {
+          "opt": "1 to 5",
+          "optHindi": "1 to 5",
+          "val": "5"
+        },
+        {
+          "opt": "0",
+          "optHindi": "0",
+          "val": "0"
         }
       ]
     },
@@ -325,7 +330,7 @@
         {
           "opt": "Never",
           "optHindi": "कभी नहीँ",
-          "val": "0"
+          "val": "20"
         },
         {
           "opt": "Sometimes",
@@ -334,31 +339,36 @@
         },
         {
           "opt": "Always",
-          "optHindi": "हमेशा",
-          "val": "20"
+          "optHindi": "",
+          "val": "5"
+        },
+        {
+          "opt": "N/A",
+          "optHindi": "",
+          "val": "0"
         }
       ]
     },
     {
-      "question": "How much of your community's livelihoods is generated by this parcel?",
+      "question": "How much of your community's use of this resource/product comes from this parcel?",
       "questionHindi": "अपने समुदाय की आजीविका का कितना इस पार्सल द्वारा उत्पन्न होता है?",
       "weight": "5",
       "optiontype": "single",
       "options": [
         {
-          "opt": "100%",
-          "optHindi": "100%",
-          "val": "0"
+          "opt": "75% + ",
+          "optHindi": "75% + ",
+          "val": "20"
         },
         {
-          "opt": "50%",
-          "optHindi": "50%",
+          "opt": "25 to 75%",
+          "optHindi": "25 to 75%",
           "val": "10"
         },
         {
-          "opt": "Less than 10%",
-          "optHindi": "10 से कम%",
-          "val": "20"
+          "opt": "0 to 25%",
+          "optHindi": "0 to 25%",
+          "val": "0"
         }
       ]
     }

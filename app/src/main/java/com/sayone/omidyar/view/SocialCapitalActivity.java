@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -301,23 +302,57 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
         }
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (Integer.parseInt(android.os.Build.VERSION.SDK) > 5
+                && keyCode == KeyEvent.KEYCODE_BACK
+                && event.getRepeatCount() == 0) {
+            Log.e("CDA", "onKeyDown Called");
+            onBackPressed();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        Log.e("CDA", "onBackPressed Called");
+        backButtonAction();
+    }
+
+    public void backButtonAction(){
+        if (currentQuestionId > 0) {
+            int nextQuestionId = currentQuestionId - 1;
+            //Log.e("Current id ", nextQuestionId + "");
+
+            socialCapitalAnswerOptionsesList.clear();
+            clearOptions();
+
+            loadQuestion(nextQuestionId);
+            currentQuestionId = nextQuestionId;
+        } else {
+            finish();
+        }
+    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.back_button:
-                if (currentQuestionId > 0) {
-                    int nextQuestionId = currentQuestionId - 1;
-                    //Log.e("Current id ", nextQuestionId + "");
-
-                    socialCapitalAnswerOptionsesList.clear();
-                    clearOptions();
-
-                    loadQuestion(nextQuestionId);
-                    currentQuestionId = nextQuestionId;
-                } else {
-                    finish();
-                }
+                backButtonAction();
+//                if (currentQuestionId > 0) {
+//                    int nextQuestionId = currentQuestionId - 1;
+//                    //Log.e("Current id ", nextQuestionId + "");
+//
+//                    socialCapitalAnswerOptionsesList.clear();
+//                    clearOptions();
+//
+//                    loadQuestion(nextQuestionId);
+//                    currentQuestionId = nextQuestionId;
+//                } else {
+//                    finish();
+//                }
                 break;
             case R.id.next_button:
                 if(socialCapitalAnswerOptionsesList.size() > 0) {
@@ -431,8 +466,8 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                     .findFirst();
         }else {
             spredTable = realm.where(SpredTable.class)
-                    .lessThan("moreThan", totalFactorScore)
-                    .greaterThanOrEqualTo("lessThan", totalFactorScore)
+                    .lessThanOrEqualTo("moreThan", totalFactorScore)
+                    .greaterThan("lessThan", totalFactorScore)
                     .findFirst();
         }
         Log.e("Rating ", spredTable.getRating());

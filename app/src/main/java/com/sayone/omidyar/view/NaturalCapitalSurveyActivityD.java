@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -346,6 +347,56 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
     }
 
+//    @Override
+//    public void onBackPressed() {
+//        // super.onBackPressed();
+//        backButtonAction();
+//    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (Integer.parseInt(android.os.Build.VERSION.SDK) > 5
+                && keyCode == KeyEvent.KEYCODE_BACK
+                && event.getRepeatCount() == 0) {
+            Log.e("CDA", "onKeyDown Called");
+            onBackPressed();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        Log.e("CDA", "onBackPressed Called");
+        backButtonAction();
+    }
+
+    public void backButtonAction(){
+        int currentYearBackIndex = getIndexYears(spinnerYear.getSelectedItem().toString());
+        int currentPrductNameBackIndex = getIndexRevenueProducts(currentProductName);
+        if(currentYearBackIndex != -1 &&  currentPrductNameBackIndex != -1){
+            if(currentPrductNameBackIndex == 0){
+                if(currentYearBackIndex == 0){
+                    finish();
+                }else{
+                    currentYearIndex = currentYearBackIndex - 1;
+                    currentCostProductIndex = currentPrductNameBackIndex;
+                }
+            }else{
+                if(currentYearBackIndex == 0){
+                    currentCostProductIndex = currentPrductNameBackIndex - 1;
+                    currentYearIndex = yearList.size() - 1;
+                }else{
+                    currentYearIndex = currentYearBackIndex - 1;
+                    currentCostProductIndex = currentPrductNameBackIndex;
+                }
+            }
+        }
+
+        loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
+    }
+
     @Override
     public void onClick(View view) {
         Intent intent;
@@ -366,27 +417,27 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 break;
 
             case R.id.button_back:
-
-                int currentYearBackIndex = getIndexYears(spinnerYear.getSelectedItem().toString());
-                int currentPrductNameBackIndex = getIndexRevenueProducts(currentProductName);
-                if(currentYearBackIndex != -1 &&  currentPrductNameBackIndex != -1){
-                    if(currentPrductNameBackIndex == 0){
-                        if(currentYearBackIndex == 0){
-                            finish();
-                        }else{
-                            currentYearIndex = currentYearBackIndex - 1;
-                            currentCostProductIndex = currentPrductNameBackIndex;
-                        }
-                    }else{
-                        if(currentYearBackIndex == 0){
-                            currentCostProductIndex = currentPrductNameBackIndex - 1;
-                            currentYearIndex = yearList.size() - 1;
-                        }else{
-                            currentYearIndex = currentYearBackIndex - 1;
-                            currentCostProductIndex = currentPrductNameBackIndex;
-                        }
-                    }
-                }
+                backButtonAction();
+//                int currentYearBackIndex = getIndexYears(spinnerYear.getSelectedItem().toString());
+//                int currentPrductNameBackIndex = getIndexRevenueProducts(currentProductName);
+//                if(currentYearBackIndex != -1 &&  currentPrductNameBackIndex != -1){
+//                    if(currentPrductNameBackIndex == 0){
+//                        if(currentYearBackIndex == 0){
+//                            finish();
+//                        }else{
+//                            currentYearIndex = currentYearBackIndex - 1;
+//                            currentCostProductIndex = currentPrductNameBackIndex;
+//                        }
+//                    }else{
+//                        if(currentYearBackIndex == 0){
+//                            currentCostProductIndex = currentPrductNameBackIndex - 1;
+//                            currentYearIndex = yearList.size() - 1;
+//                        }else{
+//                            currentYearIndex = currentYearBackIndex - 1;
+//                            currentCostProductIndex = currentPrductNameBackIndex;
+//                        }
+//                    }
+//                }
 
 
 //                Log.e("YEAR ","PRE "+previousYearIndex+" Cur "+currentYearIndex);
@@ -414,7 +465,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 //                    finish();
 //                }
 
-                loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
+
 
                 break;
 

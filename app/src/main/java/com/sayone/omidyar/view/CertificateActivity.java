@@ -36,15 +36,15 @@ import io.realm.RealmResults;
 
 public class CertificateActivity extends BaseActivity implements View.OnClickListener {
 
-    TextView parcelId,community,site,surveyorName,valuationDate,inflationRate,socialCapitalForest,socialCapitalCrop,socialCapitalPasture,socialCapitalMining;
+    TextView parcelId, community, site, surveyorName, valuationDate, inflationRate, socialCapitalForest, socialCapitalCrop, socialCapitalPasture, socialCapitalMining;
     SharedPreferences sharedPref;
     private Realm realm;
-    TextView headingForest,headingCrop,headingPasture,headingMining;
+    TextView headingForest, headingCrop, headingPasture, headingMining;
     private String surveyId;
     LinearLayout fullscreen;
-    CardView forestlandLayout,croplandLayout,pasturelandLayout,mininglandLayout;
+    CardView forestlandLayout, croplandLayout, pasturelandLayout, mininglandLayout;
     Context context;
-    ImageView mapImageForest,mapImageCrop,mapImagePasture,mapImageMining,mapFullScreen;
+    ImageView mapImageForest, mapImageCrop, mapImagePasture, mapImageMining, mapFullScreen;
     private String currentSocialCapitalServey;
     private File fforest;
     private File fcrop;
@@ -82,46 +82,46 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         setContentView(R.layout.activity_certificate);
 
 
-        parcelId=(TextView)findViewById(R.id.parcel_id);
-        community=(TextView)findViewById(R.id.community_name);
-        surveyorName=(TextView)findViewById(R.id.surveyor_name);
-        valuationDate=(TextView)findViewById(R.id.valuation_date);
-        inflationRate=(TextView)findViewById(R.id.inflation_rate);
-        socialCapitalForest=(TextView)findViewById(R.id.forest_social_capital_score);
-        socialCapitalCrop=(TextView)findViewById(R.id.crop_social_capital_score);
-        socialCapitalPasture=(TextView)findViewById(R.id.pasture_social_capital_score);
-        socialCapitalMining=(TextView)findViewById(R.id.minimg_social_capital_score);
-        mapImageForest=(ImageView)findViewById(R.id.map_image_forest);
-        mapImageCrop=(ImageView)findViewById(R.id.map_image_crop);
-        mapImagePasture=(ImageView)findViewById(R.id.map_image_pasture);
-        mapImageMining=(ImageView)findViewById(R.id.map_image_mining);
-        forestlandLayout=(CardView) findViewById(R.id.forestland_layout);
-        croplandLayout=(CardView) findViewById(R.id.cropland_layout);
-        pasturelandLayout=(CardView) findViewById(R.id.pastureland_layout);
-        mininglandLayout=(CardView) findViewById(R.id.miningland_layout);
-        headingCrop=(TextView)findViewById(R.id.heading_cropland);
-        headingForest=(TextView)findViewById(R.id.heading_forest);
-        headingPasture=(TextView)findViewById(R.id.heading_pastureland);
-        headingMining=(TextView)findViewById(R.id.heading_miningland);
-        mapFullScreen=(ImageView)findViewById(R.id.map_fullscreen);
-        fullscreen=(LinearLayout)findViewById(R.id.fullscreen);
+        parcelId = (TextView) findViewById(R.id.parcel_id);
+        community = (TextView) findViewById(R.id.community_name);
+        surveyorName = (TextView) findViewById(R.id.surveyor_name);
+        valuationDate = (TextView) findViewById(R.id.valuation_date);
+        inflationRate = (TextView) findViewById(R.id.inflation_rate);
+        socialCapitalForest = (TextView) findViewById(R.id.forest_social_capital_score);
+        socialCapitalCrop = (TextView) findViewById(R.id.crop_social_capital_score);
+        socialCapitalPasture = (TextView) findViewById(R.id.pasture_social_capital_score);
+        socialCapitalMining = (TextView) findViewById(R.id.minimg_social_capital_score);
+        mapImageForest = (ImageView) findViewById(R.id.map_image_forest);
+        mapImageCrop = (ImageView) findViewById(R.id.map_image_crop);
+        mapImagePasture = (ImageView) findViewById(R.id.map_image_pasture);
+        mapImageMining = (ImageView) findViewById(R.id.map_image_mining);
+        forestlandLayout = (CardView) findViewById(R.id.forestland_layout);
+        croplandLayout = (CardView) findViewById(R.id.cropland_layout);
+        pasturelandLayout = (CardView) findViewById(R.id.pastureland_layout);
+        mininglandLayout = (CardView) findViewById(R.id.miningland_layout);
+        headingCrop = (TextView) findViewById(R.id.heading_cropland);
+        headingForest = (TextView) findViewById(R.id.heading_forest);
+        headingPasture = (TextView) findViewById(R.id.heading_pastureland);
+        headingMining = (TextView) findViewById(R.id.heading_miningland);
+        mapFullScreen = (ImageView) findViewById(R.id.map_fullscreen);
+        fullscreen = (LinearLayout) findViewById(R.id.fullscreen);
         menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);
         imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
         drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
         textViewAbout = (TextView) findViewById(R.id.text_view_about);
         logout = (TextView) findViewById(R.id.logout);
-        startSurvey=(TextView)findViewById(R.id.text_start_survey);
-        surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
-        forestDiscountRateValue=(TextView)findViewById(R.id.value_discount_rate_forest);
-        cropDiscountRateValue=(TextView)findViewById(R.id.value_discount_rate_crop);
-        pastureDiscountRateValue=(TextView)findViewById(R.id.value_discount_rate_pasture);
-        miningDiscountRateValue=(TextView)findViewById(R.id.value_discount_rate_mining);
-        respondentGroup=(TextView)findViewById(R.id.respondent_name);
-        forestValueSymbol=(TextView)findViewById(R.id.forest_value_symbol);
-        cropValueSymbol=(TextView)findViewById(R.id.crop_value_symbol);
-        pastureValueSymbol=(TextView)findViewById(R.id.pasture_value_symbol);
-        miningValueSymbol=(TextView)findViewById(R.id.mining_value_symbol);
-        totalSymbol=(TextView)findViewById(R.id.total_symbol);
+        startSurvey = (TextView) findViewById(R.id.text_start_survey);
+        surveyIdDrawer = (TextView) findViewById(R.id.text_view_id);
+        forestDiscountRateValue = (TextView) findViewById(R.id.value_discount_rate_forest);
+        cropDiscountRateValue = (TextView) findViewById(R.id.value_discount_rate_crop);
+        pastureDiscountRateValue = (TextView) findViewById(R.id.value_discount_rate_pasture);
+        miningDiscountRateValue = (TextView) findViewById(R.id.value_discount_rate_mining);
+        respondentGroup = (TextView) findViewById(R.id.respondent_name);
+        forestValueSymbol = (TextView) findViewById(R.id.forest_value_symbol);
+        cropValueSymbol = (TextView) findViewById(R.id.crop_value_symbol);
+        pastureValueSymbol = (TextView) findViewById(R.id.pasture_value_symbol);
+        miningValueSymbol = (TextView) findViewById(R.id.mining_value_symbol);
+        totalSymbol = (TextView) findViewById(R.id.total_symbol);
 
 
         forestValue = (TextView) findViewById(R.id.forest_value);
@@ -142,17 +142,17 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         startSurvey.setOnClickListener(this);
 
 
-        context=this;
+        context = this;
 
         totalVal = 0;
 
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        surveyId = sharedPref.getString("surveyId","");
-        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey","");
+        surveyId = sharedPref.getString("surveyId", "");
+        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey", "");
         Realm realm = Realm.getDefaultInstance();
         Survey surveyCheck = realm.where(Survey.class)
-                .equalTo("surveyId",surveyId)
+                .equalTo("surveyId", surveyId)
                 .findFirst();
 
         Format formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -163,9 +163,9 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 .equalTo("surveyId", surveyId)
                 .equalTo("status", "active")
                 .findAll();
-        Log.e("Symbol:",surveyCheck.getCurrency());
+        Log.e("Symbol:", surveyCheck.getCurrency());
 
-        if(surveyCheck.getCurrency().equals("INR")){
+        if (surveyCheck.getCurrency().equals("INR")) {
             forestValueSymbol.setText("₹");
             pastureValueSymbol.setText("₹");
             cropValueSymbol.setText("₹");
@@ -186,19 +186,18 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         headingMining.setVisibility(View.GONE);
 
 
-        for(LandKind landKind: landKinds){
-            if(landKind.getName().equals("Forestland")){
+        for (LandKind landKind : landKinds) {
+            if (landKind.getName().equals("Forestland")) {
                 forestlandLayout.setVisibility(View.VISIBLE);
                 headingForest.setVisibility(View.VISIBLE);
                 socialCapital = landKind.getSocialCapitals();
-                if(socialCapital.isDiscountFlag()) {
-                    forestDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRateOverride())+"%");
-                }
-                else {
-                    forestDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRate())+"%");
+                if (socialCapital.isDiscountFlag()) {
+                    forestDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRateOverride()) + "%");
+                } else {
+                    forestDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRate()) + "%");
                 }
 
-                String pathForestMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Forestland"+surveyId+"screen.jpg/";
+                String pathForestMap = Environment.getExternalStorageDirectory().toString() + "/MapImagesNew/" + "Forestland" + surveyId + "screen.jpg/";
                 mapImageForest.setVisibility(View.VISIBLE);
                 fforest = new File(pathForestMap);
 //                if(!fforest.exists()) {
@@ -206,9 +205,9 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 //                    headingForest.setVisibility(View.GONE);
 //                }
                 Picasso.with(context).load(fforest).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageForest);
-                socialCapitalForest.setText(""+landKind.getSocialCapitals().getScore()+"/20");
-                if(surveyCheck.getComponents() != null){
-                    if(surveyCheck.getComponents().getForestValue() != 0){
+                socialCapitalForest.setText("" + landKind.getSocialCapitals().getScore() + "/20");
+                if (surveyCheck.getComponents() != null) {
+                    if (surveyCheck.getComponents().getForestValue() != 0) {
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getForestValue()));
 
@@ -216,29 +215,27 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 
                         //forestValue.setText(roundTwo(surveyCheck.getComponents().getForestValue())+"");
                         totalVal = totalVal + surveyCheck.getComponents().getForestValue();
-                    }else{
+                    } else {
                         forestValue.setText("0");
                     }
-                }else{
+                } else {
                     forestValue.setText("0");
                 }
 
 
-
             }
 
-            if(landKind.getName().equals("Cropland")){
+            if (landKind.getName().equals("Cropland")) {
                 croplandLayout.setVisibility(View.VISIBLE);
                 headingCrop.setVisibility(View.VISIBLE);
                 socialCapital = landKind.getSocialCapitals();
-                if(socialCapital.isDiscountFlag()) {
-                    cropDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRateOverride())+"%");
-                }
-                else {
-                    cropDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRate())+"%");
+                if (socialCapital.isDiscountFlag()) {
+                    cropDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRateOverride()) + "%");
+                } else {
+                    cropDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRate()) + "%");
                 }
 
-                String pathCropMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Cropland"+surveyId+"screen.jpg/";
+                String pathCropMap = Environment.getExternalStorageDirectory().toString() + "/MapImagesNew/" + "Cropland" + surveyId + "screen.jpg/";
                 mapImageCrop.setVisibility(View.VISIBLE);
                 fcrop = new File(pathCropMap);
 //                if(!fcrop.exists()){
@@ -246,38 +243,37 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 //                    headingCrop.setVisibility(View.GONE);
 //                }
                 Picasso.with(context).load(fcrop).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageCrop);
-                socialCapitalCrop.setText(""+landKind.getSocialCapitals().getScore()+"/20");
+                socialCapitalCrop.setText("" + landKind.getSocialCapitals().getScore() + "/20");
 
 
-                if(surveyCheck.getComponents() != null){
-                    if(surveyCheck.getComponents().getCroplandValue() != 0){
+                if (surveyCheck.getComponents() != null) {
+                    if (surveyCheck.getComponents().getCroplandValue() != 0) {
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getCroplandValue()));
                         cropValue.setText(yourFormattedString);
 
                         //cropValue.setText(roundTwo(surveyCheck.getComponents().getCroplandValue())+"");
                         totalVal = totalVal + surveyCheck.getComponents().getCroplandValue();
-                    }else{
+                    } else {
                         cropValue.setText("0");
                     }
-                }else{
+                } else {
                     cropValue.setText("0");
                 }
 
 
             }
 
-            if(landKind.getName().equals("Pastureland")){
+            if (landKind.getName().equals("Pastureland")) {
                 pasturelandLayout.setVisibility(View.VISIBLE);
                 headingPasture.setVisibility(View.VISIBLE);
                 socialCapital = landKind.getSocialCapitals();
-                if(socialCapital.isDiscountFlag()) {
-                    pastureDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRateOverride())+"%");
+                if (socialCapital.isDiscountFlag()) {
+                    pastureDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRateOverride()) + "%");
+                } else {
+                    pastureDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRate()) + "%");
                 }
-                else {
-                    pastureDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRate())+"%");
-                }
-                String pathPastureMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Pastureland"+surveyId+"screen.jpg/";
+                String pathPastureMap = Environment.getExternalStorageDirectory().toString() + "/MapImagesNew/" + "Pastureland" + surveyId + "screen.jpg/";
                 mapImagePasture.setVisibility(View.VISIBLE);
                 fpasture = new File(pathPastureMap);
 //                if(!fpasture.exists()){
@@ -285,38 +281,37 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 //                    headingPasture.setVisibility(View.GONE);
 //                }
                 Picasso.with(context).load(fpasture).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImagePasture);
-                socialCapitalPasture.setText(""+landKind.getSocialCapitals().getScore()+"/20");
+                socialCapitalPasture.setText("" + landKind.getSocialCapitals().getScore() + "/20");
 
 
-                if(surveyCheck.getComponents() != null){
-                    if(surveyCheck.getComponents().getPastureValue() != 0){
+                if (surveyCheck.getComponents() != null) {
+                    if (surveyCheck.getComponents().getPastureValue() != 0) {
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getPastureValue()));
                         pastureValue.setText(yourFormattedString);
 
                         //pastureValue.setText(roundTwo(surveyCheck.getComponents().getPastureValue())+""+"");
                         totalVal = totalVal + surveyCheck.getComponents().getPastureValue();
-                    }else{
+                    } else {
                         pastureValue.setText("0");
                     }
-                }else{
+                } else {
                     pastureValue.setText("0");
                 }
 
 
             }
 
-            if(landKind.getName().equals("Mining Land")){
+            if (landKind.getName().equals("Mining Land")) {
                 mininglandLayout.setVisibility(View.VISIBLE);
                 headingMining.setVisibility(View.VISIBLE);
                 socialCapital = landKind.getSocialCapitals();
-                if(socialCapital.isDiscountFlag()) {
-                    miningDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRateOverride())+"%");
+                if (socialCapital.isDiscountFlag()) {
+                    miningDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRateOverride()) + "%");
+                } else {
+                    miningDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRate()) + "%");
                 }
-                else {
-                    miningDiscountRateValue.setText(String.valueOf(socialCapital.getDiscountRate())+"%");
-                }
-                String pathminingMap = Environment.getExternalStorageDirectory().toString() +"/MapImagesNew/"+"Mining Land"+surveyId+"screen.jpg/";
+                String pathminingMap = Environment.getExternalStorageDirectory().toString() + "/MapImagesNew/" + "Mining Land" + surveyId + "screen.jpg/";
                 mapImageMining.setVisibility(View.VISIBLE);
                 fmining = new File(pathminingMap);
 //                if(!fmining.exists()){
@@ -324,28 +319,27 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 //                    headingMining.setVisibility(View.GONE);
 //                }
                 Picasso.with(context).load(fmining).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageMining);
-                socialCapitalMining.setText(""+landKind.getSocialCapitals().getScore()+"/20");
+                socialCapitalMining.setText("" + landKind.getSocialCapitals().getScore() + "/20");
 
 
-                if(surveyCheck.getComponents() != null){
-                    if(surveyCheck.getComponents().getMiningLandValue() != 0){
+                if (surveyCheck.getComponents() != null) {
+                    if (surveyCheck.getComponents().getMiningLandValue() != 0) {
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getMiningLandValue()));
                         miningValue.setText(yourFormattedString);
 
                         //miningValue.setText(roundTwo(surveyCheck.getComponents().getMiningLandValue())+"");
                         totalVal = totalVal + surveyCheck.getComponents().getMiningLandValue();
-                    }else{
+                    } else {
                         miningValue.setText("0");
                     }
-                }else{
+                } else {
                     miningValue.setText("0");
                 }
 
 
             }
         }
-
 
 
         community.setText(surveyCheck.getCommunity().toString());
@@ -361,14 +355,14 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 //        socialCapitalCrop.setText("0");
 //        socialCapitalPasture.setText("0");
 //        socialCapitalMining.setText("0");
-      //  inflationRate.setText(surveyCheck.getInflationRate().toString());
+        //  inflationRate.setText(surveyCheck.getInflationRate().toString());
 
     }
 
-    public double roundTwo(double val){
-        val = val*100;
+    public double roundTwo(double val) {
+        val = val * 100;
         val = Math.round(val);
-        val = val /100;
+        val = val / 100;
         return val;
 
     }
@@ -378,7 +372,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         if (mapFullScreen.getVisibility() == View.VISIBLE) {
             mapFullScreen.setVisibility(View.GONE);
             fullscreen.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             super.onBackPressed();
         }
     }
@@ -391,7 +385,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 Picasso.with(context).load(fforest).into(mapFullScreen);
                 mapFullScreen.setVisibility(View.VISIBLE);
                 scaleAnim = AnimationUtils.loadAnimation(this, R.anim.fadein);
-                mapFullScreen.startAnimation( scaleAnim );
+                mapFullScreen.startAnimation(scaleAnim);
                 break;
 
             case R.id.map_image_crop:
@@ -399,7 +393,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 Picasso.with(context).load(fcrop).into(mapFullScreen);
                 mapFullScreen.setVisibility(View.VISIBLE);
                 scaleAnim = AnimationUtils.loadAnimation(this, R.anim.fadein);
-                mapFullScreen.startAnimation( scaleAnim );
+                mapFullScreen.startAnimation(scaleAnim);
                 break;
 
             case R.id.map_image_pasture:
@@ -407,7 +401,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 Picasso.with(context).load(fpasture).into(mapFullScreen);
                 mapFullScreen.setVisibility(View.VISIBLE);
                 scaleAnim = AnimationUtils.loadAnimation(this, R.anim.fadein);
-                mapFullScreen.startAnimation( scaleAnim );
+                mapFullScreen.startAnimation(scaleAnim);
                 break;
 
             case R.id.map_image_mining:
@@ -415,30 +409,30 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 Picasso.with(context).load(fmining).into(mapFullScreen);
                 mapFullScreen.setVisibility(View.VISIBLE);
                 scaleAnim = AnimationUtils.loadAnimation(this, R.anim.fadein);
-                mapFullScreen.startAnimation( scaleAnim );
+                mapFullScreen.startAnimation(scaleAnim);
                 break;
 
             case R.id.image_view_menu_icon:
                 toggleMenuDrawer();
                 break;
 
-            case  R.id.drawer_close_btn:
+            case R.id.drawer_close_btn:
                 toggleMenuDrawer();
                 break;
 
-            case  R.id.text_view_about:
-                Intent i = new Intent(getApplicationContext(),AboutActivity.class);
+            case R.id.text_view_about:
+                Intent i = new Intent(getApplicationContext(), AboutActivity.class);
                 startActivity(i);
                 break;
 
             case R.id.text_start_survey:
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 break;
 
             case R.id.logout:
-                Intent intents = new Intent(getApplicationContext(),RegistrationActivity.class);
+                Intent intents = new Intent(getApplicationContext(), RegistrationActivity.class);
                 intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intents);
                 break;
@@ -447,10 +441,10 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
     }
 
 
-    public void toggleMenuDrawer(){
-        if(menuDrawerLayout.isDrawerOpen(GravityCompat.START)){
+    public void toggleMenuDrawer() {
+        if (menuDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             menuDrawerLayout.closeDrawer(GravityCompat.START);
-        }else{
+        } else {
             menuDrawerLayout.openDrawer(GravityCompat.START);
         }
     }
