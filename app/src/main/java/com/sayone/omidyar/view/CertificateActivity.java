@@ -403,11 +403,11 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 totalSymbol.setText(" ₹");
             }
             else{
-                forestValueSymbol.setText("-₹");
-                pastureValueSymbol.setText("-₹");
-                cropValueSymbol.setText("-₹");
-                miningValueSymbol.setText("-₹");
-                totalSymbol.setText(" -₹");
+                forestValueSymbol.setText("- ₹");
+                pastureValueSymbol.setText("- ₹");
+                cropValueSymbol.setText("- ₹");
+                miningValueSymbol.setText("- ₹");
+                totalSymbol.setText(" - ₹");
             }
         }
 

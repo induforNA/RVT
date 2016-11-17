@@ -72,6 +72,15 @@
         android:text="@string/text_summary_surveys"
         android:textSize="@dimen/textfield_size" />
 
+        <TextView
+            android:id="@+id/textview_inflation_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp"
+            android:text="Inflation rate"
+            android:textSize="@dimen/textfield_size" />
+
     </LinearLayout>
 
 </LinearLayout>
