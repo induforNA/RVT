@@ -1,15 +1,11 @@
 package com.sayone.omidyar.view;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,7 +19,6 @@ import android.widget.Toast;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
-import com.sayone.omidyar.adapter.CostOutlayAdapter;
 import com.sayone.omidyar.model.CashFlow;
 import com.sayone.omidyar.model.Component;
 import com.sayone.omidyar.model.CostElementYears;
@@ -42,6 +37,8 @@ import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
 
+import static android.R.layout.simple_spinner_item;
+
 /**
  * Created by sayone on 18/10/16.
  */
@@ -55,6 +52,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
     String serveyId;
     Button buttonBack,buttonNext;
     ImageView buttonAddWood;
+    Spinner spinnerOccurance;
     RealmList<Outlay> costOutlays;
     RealmList<Outlay> costOutlaysToSave;
     private ImageView imageViewMenuIcon;
@@ -84,7 +82,9 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
     ArrayAdapter<String> item_adapter;
     ArrayList<String> itemList;
 
+
     EditText costValue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,19 +106,25 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         spinnerYear = (Spinner) findViewById(R.id.spinner_year);
         spinnerCurrency = (Spinner) findViewById(R.id.spinner_currency);
         spinnerItem = (Spinner) findViewById(R.id.spinner_item);
+        spinnerOccurance=(Spinner)findViewById(R.id.spinner_occurance);
 
         yearList = new ArrayList<>();
         currenyList = new ArrayList<>();
         itemList = new ArrayList<>();
 
-        year_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, yearList);
+        year_adapter = new ArrayAdapter<>(this, simple_spinner_item, yearList);
         spinnerYear.setAdapter(year_adapter);
 
-        curreny_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, currenyList);
+        curreny_adapter = new ArrayAdapter<>(this, simple_spinner_item, currenyList);
         spinnerCurrency.setAdapter(curreny_adapter);
 
-        item_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, itemList);
+        item_adapter = new ArrayAdapter<>(this, simple_spinner_item, itemList);
         spinnerItem.setAdapter(item_adapter);
+
+        ArrayAdapter<CharSequence> occurance_adapter = ArrayAdapter.createFromResource(this,
+                R.array.time_period_array, android.R.layout.simple_spinner_item);
+     //  occurance_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerOccurance.setAdapter(occurance_adapter);
 
         int year = Calendar.getInstance().get(Calendar.YEAR);
 
@@ -613,8 +619,11 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         for(OutlayYears outlayYears:outlayResult.getOutlayYearses()){
             Log.e("CHECK ", outlayYears.getYear()+" "+spinnerYear.getSelectedItem().toString());
             if(outlayYears.getYear() == Integer.parseInt(spinnerYear.getSelectedItem().toString())){
-
-                costValue.setText(outlayYears.getPrice()+"");
+                if(outlayYears.getPrice()!=0) {
+                    costValue.setText(outlayYears.getPrice() + "");
+                }else{
+                    costValue.setText("");
+                }
                 spinnerYear.setSelection(year_adapter.getPosition(String.valueOf(yearVal)));
 //                realm.beginTransaction();
 //                outlayYears.setPrice(Double.parseDouble(costValue.getText().toString()));

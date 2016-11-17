@@ -13,7 +13,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -60,9 +59,6 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
     private String language;
     private TextView surveyIdDrawer;
 
-    CheckBox optionA, optionB, optionC, optionD, optionE, optionF, optionG, optionH;
-    String costNameA, costNameB, costNameC, costNameD, costNameE, costNameF, costNameG, costNameH;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,33 +72,6 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
         serveyId = sharedPref.getString("surveyId","");
         currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey","");
 
-        costNameA = "Equipment cost";
-        costNameB = "Transportation cost";
-        costNameC = "Seed/seedling cost";
-        costNameD = "Fertilizer cost";
-        costNameE = "Water cost";
-        costNameF = "Labor cost";
-        costNameG = "Infrastructure cost";
-        costNameH = "Tax, fees, and other costs";
-
-        optionA = (CheckBox) findViewById(R.id.option_a);
-        optionB = (CheckBox) findViewById(R.id.option_b);
-        optionC = (CheckBox) findViewById(R.id.option_c);
-        optionD = (CheckBox) findViewById(R.id.option_d);
-        optionE = (CheckBox) findViewById(R.id.option_e);
-        optionF = (CheckBox) findViewById(R.id.option_f);
-        optionG = (CheckBox) findViewById(R.id.option_g);
-        optionH = (CheckBox) findViewById(R.id.option_h);
-
-        optionA.setText(costNameA);
-        optionB.setText(costNameB);
-        optionC.setText(costNameC);
-        optionD.setText(costNameD);
-        optionE.setText(costNameE);
-        optionF.setText(costNameF);
-        optionG.setText(costNameG);
-        optionH.setText(costNameH);
-
         costElements = new RealmList<>();
         costProductsToSave = new RealmList<>();
         Survey survey = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
@@ -114,7 +83,6 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
                     costProductsToSave.add(costElement);
                     if(costElement.getType().equals("Timber")){
                         costElements.add(costElement);
-                        loadCostCheckBox(costElement.getName());
                     }
                 }
             }else if(landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")){
@@ -124,7 +92,6 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
                     costProductsToSave.add(costElement);
                     if(costElement.getType().equals("Timber")){
                         costElements.add(costElement);
-                        loadCostCheckBox(costElement.getName());
                     }
                 }
             }else if(landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")){
@@ -134,7 +101,6 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
                     costProductsToSave.add(costElement);
                     if(costElement.getType().equals("Timber")){
                         costElements.add(costElement);
-                        loadCostCheckBox(costElement.getName());
                     }
                 }
             }else if(landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")){
@@ -144,7 +110,6 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
                     costProductsToSave.add(costElement);
                     if(costElement.getType().equals("Timber")){
                         costElements.add(costElement);
-                        loadCostCheckBox(costElement.getName());
                     }
                 }
             }
@@ -153,7 +118,7 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
 
         buttonBack=(Button)findViewById(R.id.button_back);
         buttonNext=(Button)findViewById(R.id.button_next);
-        // buttonAddWood = (ImageView) findViewById(R.id.button_add_wood);
+        buttonAddWood = (ImageView) findViewById(R.id.button_add_wood);
         menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);
         imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
         drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
@@ -164,53 +129,26 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
         landType=(TextView)findViewById(R.id.land_type);
         landType.setText(currentSocialCapitalServey);
 
-        // timberList = (RecyclerView) findViewById(R.id.timber_list);
+        timberList = (RecyclerView) findViewById(R.id.timber_list);
 
         costAdapter = new CostAdapter(costElements,NaturalCapitalCostActivityA.this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-//        timberList.setLayoutManager(mLayoutManager);
-//        timberList.setItemAnimator(new DefaultItemAnimator());
-//        timberList.setAdapter(costAdapter);
+        timberList.setLayoutManager(mLayoutManager);
+        timberList.setItemAnimator(new DefaultItemAnimator());
+        timberList.setAdapter(costAdapter);
         surveyIdDrawer.setText(serveyId);
 
 
         buttonNext.setOnClickListener(this);
         buttonBack.setOnClickListener(this);
-        // buttonAddWood.setOnClickListener(this);
+        buttonAddWood.setOnClickListener(this);
         imageViewMenuIcon.setOnClickListener(this);
         drawerCloseBtn.setOnClickListener(this);
         textViewAbout.setOnClickListener(this);
         logout.setOnClickListener(this);
         startSurvey.setOnClickListener(this);
 
-    }
-
-    public void loadCostCheckBox(String name){
-        if(name.equals(costNameA)){
-            optionA.setChecked(true);
-        }
-        if(name.equals(costNameB)){
-            optionB.setChecked(true);
-        }
-        if(name.equals(costNameC)){
-            optionC.setChecked(true);
-        }
-        if(name.equals(costNameD)){
-            optionD.setChecked(true);
-        }
-        if(name.equals(costNameE)){
-            optionE.setChecked(true);
-        }
-        if(name.equals(costNameF)){
-            optionF.setChecked(true);
-        }
-        if(name.equals(costNameG)){
-            optionG.setChecked(true);
-        }
-        if(name.equals(costNameH)){
-            optionH.setChecked(true);
-        }
     }
 
     @Override
@@ -277,51 +215,51 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
                 saveParticipant.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                    String name = editTextWood.getText().toString();
+                        String name = editTextWood.getText().toString();
 
-                    if(!name.equals("")) {
-                        realm.beginTransaction();
-                        CostElement costElement = realm.createObject(CostElement.class);
-                        costElement.setId(getNextKeyCostElement());
-                        costElement.setName(name);
-                        costElement.setType("Timber");
-                        costElement.setLandKind(landKindName);
-                        costElement.setSurveyId(serveyId);
-                        realm.commitTransaction();
+                        if(!name.equals("")) {
+                            realm.beginTransaction();
+                            CostElement costElement = realm.createObject(CostElement.class);
+                            costElement.setId(getNextKeyCostElement());
+                            costElement.setName(name);
+                            costElement.setType("Timber");
+                            costElement.setLandKind(landKindName);
+                            costElement.setSurveyId(serveyId);
+                            realm.commitTransaction();
 
-                        costElements.add(costElement);
-                        costProductsToSave.add(costElement);
-                        Survey surveyRevenueProduct = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
+                            costElements.add(costElement);
+                            costProductsToSave.add(costElement);
+                            Survey surveyRevenueProduct = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
 
 
-                        for(LandKind landKind:surveyRevenueProduct.getLandKinds()){
-                            Log.e("BBB ",landKind.getName()+" "+landKind.getForestLand());
-                            if(landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")){
-                                Log.e("BBB ", costElements.size()+"");
-                                Log.e("AAA ",landKind.getForestLand().getCostElements().toString());
-                                realm.beginTransaction();
-                                landKind.getForestLand().setCostElements(costProductsToSave);
-                                realm.commitTransaction();
-                            }else if(landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")){
-                                Log.e("BBB ", costElements.size()+"");
-                                Log.e("AAA ",landKind.getCropLand().getCostElements().toString());
-                                realm.beginTransaction();
-                                landKind.getCropLand().setCostElements(costProductsToSave);
-                                realm.commitTransaction();
-                            }else if(landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")){
-                                Log.e("BBB ", costElements.size()+"");
-                                Log.e("AAA ",landKind.getPastureLand().getCostElements().toString());
-                                realm.beginTransaction();
-                                landKind.getPastureLand().setCostElements(costProductsToSave);
-                                realm.commitTransaction();
-                            }else if(landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")){
-                                Log.e("BBB ", costElements.size()+"");
-                                Log.e("AAA ",landKind.getMiningLand().getCostElements().toString());
-                                realm.beginTransaction();
-                                landKind.getMiningLand().setCostElements(costProductsToSave);
-                                realm.commitTransaction();
+                            for(LandKind landKind:surveyRevenueProduct.getLandKinds()){
+                                Log.e("BBB ",landKind.getName()+" "+landKind.getForestLand());
+                                if(landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")){
+                                    Log.e("BBB ", costElements.size()+"");
+                                    Log.e("AAA ",landKind.getForestLand().getCostElements().toString());
+                                    realm.beginTransaction();
+                                    landKind.getForestLand().setCostElements(costProductsToSave);
+                                    realm.commitTransaction();
+                                }else if(landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")){
+                                    Log.e("BBB ", costElements.size()+"");
+                                    Log.e("AAA ",landKind.getCropLand().getCostElements().toString());
+                                    realm.beginTransaction();
+                                    landKind.getCropLand().setCostElements(costProductsToSave);
+                                    realm.commitTransaction();
+                                }else if(landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")){
+                                    Log.e("BBB ", costElements.size()+"");
+                                    Log.e("AAA ",landKind.getPastureLand().getCostElements().toString());
+                                    realm.beginTransaction();
+                                    landKind.getPastureLand().setCostElements(costProductsToSave);
+                                    realm.commitTransaction();
+                                }else if(landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")){
+                                    Log.e("BBB ", costElements.size()+"");
+                                    Log.e("AAA ",landKind.getMiningLand().getCostElements().toString());
+                                    realm.beginTransaction();
+                                    landKind.getMiningLand().setCostElements(costProductsToSave);
+                                    realm.commitTransaction();
+                                }
                             }
-                        }
 
 //                        Survey results = realm.where(Survey.class).findFirst();
 //                        for(LandKind landKind:results.getLandKinds()){
@@ -332,16 +270,16 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
 //                            }
 //                        }
 
-                        costAdapter.notifyDataSetChanged();
+                            costAdapter.notifyDataSetChanged();
 
 //                        noParticipantLayout.setVisibility(View.GONE);
 //                        participantLayout.setVisibility(View.VISIBLE);
 //                        participantsAdapter.notifyDataSetChanged();
-                        dialog.cancel();
-                    }else {
+                            dialog.cancel();
+                        }else {
                             Toast.makeText(context,getResources().getString(R.string.string_fill_name), Toast.LENGTH_SHORT).show();
 
-                    }
+                        }
                     }
                 });
                 dialog.show();
@@ -349,155 +287,6 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
 //                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivityD.class);
 //                startActivity(intent);
                 break;
-
-        }
-    }
-
-    public void slectedItems(View view) {
-        boolean checked = ((CheckBox) view).isChecked();
-
-        String costName = "";
-
-        switch (view.getId()) {
-            case R.id.option_a:
-                costName = costNameA;
-                if(checked){
-                    saveDataCheckBox(costName);
-                }else {
-                    deleteDataCheckBox(costName);
-                }
-                break;
-            case R.id.option_b:
-                costName = costNameB;
-                if(checked){
-                    saveDataCheckBox(costName);
-                }else {
-                    deleteDataCheckBox(costName);
-                }
-                break;
-            case R.id.option_c:
-                costName = costNameC;
-                if(checked){
-                    saveDataCheckBox(costName);
-                }else {
-                    deleteDataCheckBox(costName);
-                }
-                break;
-            case R.id.option_d:
-                costName = costNameD;
-                if(checked){
-                    saveDataCheckBox(costName);
-                }else {
-                    deleteDataCheckBox(costName);
-                }
-                break;
-            case R.id.option_e:
-                costName = costNameE;
-                if(checked){
-                    saveDataCheckBox(costName);
-                }else {
-                    deleteDataCheckBox(costName);
-                }
-                break;
-            case R.id.option_f:
-                costName = costNameF;
-                if(checked){
-                    saveDataCheckBox(costName);
-                }else {
-                    deleteDataCheckBox(costName);
-                }
-                break;
-            case R.id.option_g:
-                costName = costNameG;
-                if(checked){
-                    saveDataCheckBox(costName);
-                }else {
-                    deleteDataCheckBox(costName);
-                }
-                break;
-            case R.id.option_h:
-                costName = costNameH;
-                if(checked){
-                    saveDataCheckBox(costName);
-                }else {
-                    deleteDataCheckBox(costName);
-                }
-                break;
-        }
-    }
-
-    public void deleteDataCheckBox(String name){
-        CostElement costElement = realm.where(CostElement.class)
-                .equalTo("landKind", currentSocialCapitalServey)
-                .equalTo("surveyId", serveyId)
-                .equalTo("name",name)
-                .findFirst();
-        if(costElement != null){
-            realm.beginTransaction();
-            costElement.deleteFromRealm();
-            realm.commitTransaction();
-//            costElements.remove(costElement);
-//            costProductsToSave.remove(costElement);
-        }
-    }
-
-    public void saveDataCheckBox(String name){
-        if(!name.equals("")) {
-            realm.beginTransaction();
-            CostElement costElement = realm.createObject(CostElement.class);
-            costElement.setId(getNextKeyCostElement());
-            costElement.setName(name);
-            costElement.setType("Timber");
-            costElement.setLandKind(landKindName);
-            costElement.setSurveyId(serveyId);
-            realm.commitTransaction();
-
-            costElements.add(costElement);
-            costProductsToSave.add(costElement);
-            Survey surveyRevenueProduct = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
-
-
-            for(LandKind landKind:surveyRevenueProduct.getLandKinds()){
-                Log.e("BBB ",landKind.getName()+" "+landKind.getForestLand());
-                if(landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")){
-                    Log.e("BBB ", costElements.size()+"");
-                    Log.e("AAA ",landKind.getForestLand().getCostElements().toString());
-                    realm.beginTransaction();
-                    landKind.getForestLand().setCostElements(costProductsToSave);
-                    realm.commitTransaction();
-                }else if(landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")){
-                    Log.e("BBB ", costElements.size()+"");
-                    Log.e("AAA ",landKind.getCropLand().getCostElements().toString());
-                    realm.beginTransaction();
-                    landKind.getCropLand().setCostElements(costProductsToSave);
-                    realm.commitTransaction();
-                }else if(landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")){
-                    Log.e("BBB ", costElements.size()+"");
-                    Log.e("AAA ",landKind.getPastureLand().getCostElements().toString());
-                    realm.beginTransaction();
-                    landKind.getPastureLand().setCostElements(costProductsToSave);
-                    realm.commitTransaction();
-                }else if(landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")){
-                    Log.e("BBB ", costElements.size()+"");
-                    Log.e("AAA ",landKind.getMiningLand().getCostElements().toString());
-                    realm.beginTransaction();
-                    landKind.getMiningLand().setCostElements(costProductsToSave);
-                    realm.commitTransaction();
-                }
-            }
-
-//                        Survey results = realm.where(Survey.class).findFirst();
-//                        for(LandKind landKind:results.getLandKinds()){
-//                            if(landKind.getName().equals("Forestland")){
-//                                for (CostElement costElement1: landKind.getForestLand().getCostElements()){
-//                                    Log.e("LAND ", costElement1.getName());
-//                                }
-//                            }
-//                        }
-
-            // costAdapter.notifyDataSetChanged();
-        }else {
-            Toast.makeText(context,getResources().getString(R.string.string_fill_name), Toast.LENGTH_SHORT).show();
 
         }
     }

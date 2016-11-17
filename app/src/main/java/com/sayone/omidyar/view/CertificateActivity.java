@@ -41,6 +41,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
     private Realm realm;
     TextView headingForest, headingCrop, headingPasture, headingMining;
     private String surveyId;
+    private Boolean flag=true;
     LinearLayout fullscreen;
     CardView forestlandLayout, croplandLayout, pasturelandLayout, mininglandLayout;
     Context context;
@@ -209,9 +210,16 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 if (surveyCheck.getComponents() != null) {
                     if (surveyCheck.getComponents().getForestValue() != 0) {
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
-                        String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getForestValue()));
+                        if(!(surveyCheck.getComponents().getForestValue() <0)){
+                            String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getForestValue()));
+                            forestValue.setText(yourFormattedString);
+                        }
+                        else{
+                            double value = (surveyCheck.getComponents().getForestValue())*-1;
+                            String yourFormattedString = valueFormatter.format(roundTwo(value));
+                            forestValue.setText(yourFormattedString);
+                        }
 
-                        forestValue.setText(yourFormattedString);
 
                         //forestValue.setText(roundTwo(surveyCheck.getComponents().getForestValue())+"");
                         totalVal = totalVal + surveyCheck.getComponents().getForestValue();
@@ -249,8 +257,16 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 if (surveyCheck.getComponents() != null) {
                     if (surveyCheck.getComponents().getCroplandValue() != 0) {
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
-                        String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getCroplandValue()));
-                        cropValue.setText(yourFormattedString);
+                        if(!(surveyCheck.getComponents().getCroplandValue() <0)){
+                            String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getCroplandValue()));
+                            cropValue.setText(yourFormattedString);
+                        }
+                        else{
+                            double value = surveyCheck.getComponents().getCroplandValue();
+                            String yourFormattedString = valueFormatter.format(roundTwo(value));
+                            cropValue.setText(yourFormattedString);
+                        }
+
 
                         //cropValue.setText(roundTwo(surveyCheck.getComponents().getCroplandValue())+"");
                         totalVal = totalVal + surveyCheck.getComponents().getCroplandValue();
@@ -287,8 +303,16 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 if (surveyCheck.getComponents() != null) {
                     if (surveyCheck.getComponents().getPastureValue() != 0) {
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
-                        String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getPastureValue()));
-                        pastureValue.setText(yourFormattedString);
+                        if(!(surveyCheck.getComponents().getPastureValue() <0)){
+                            String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getPastureValue()));
+                            pastureValue.setText(yourFormattedString);
+                        }
+                        else{
+                            double value = surveyCheck.getComponents().getPastureValue();
+                            String yourFormattedString = valueFormatter.format(roundTwo(value));
+                            pastureValue.setText(yourFormattedString);
+                        }
+
 
                         //pastureValue.setText(roundTwo(surveyCheck.getComponents().getPastureValue())+""+"");
                         totalVal = totalVal + surveyCheck.getComponents().getPastureValue();
@@ -325,8 +349,16 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 if (surveyCheck.getComponents() != null) {
                     if (surveyCheck.getComponents().getMiningLandValue() != 0) {
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
-                        String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getMiningLandValue()));
-                        miningValue.setText(yourFormattedString);
+                        if(!(surveyCheck.getComponents().getMiningLandValue() <0)){
+                            String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getMiningLandValue()));
+                            miningValue.setText(yourFormattedString);
+                        }
+                        else{
+                            double value = surveyCheck.getComponents().getMiningLandValue();
+                            String yourFormattedString = valueFormatter.format(roundTwo(value));
+                            miningValue.setText(yourFormattedString);
+                        }
+
 
                         //miningValue.setText(roundTwo(surveyCheck.getComponents().getMiningLandValue())+"");
                         totalVal = totalVal + surveyCheck.getComponents().getMiningLandValue();
@@ -349,8 +381,36 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         valuationDate.setText(s);
         surveyIdDrawer.setText(surveyId);
         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
-        String yourFormattedString = valueFormatter.format(roundTwo(totalVal));
-        totalText.setText(yourFormattedString);
+        if(!(totalVal <0)){
+
+            String yourFormattedString = valueFormatter.format(roundTwo(totalVal));
+            totalText.setText(yourFormattedString);
+            flag=true;
+        }
+        else{
+            totalVal=totalVal*-1;
+            String yourFormattedString = valueFormatter.format(roundTwo(totalVal));
+            totalText.setText(yourFormattedString);
+            flag=false;
+        }
+
+        if(surveyCheck.getCurrency().equals("INR")){
+            if(flag==true) {
+                forestValueSymbol.setText("₹");
+                pastureValueSymbol.setText("₹");
+                cropValueSymbol.setText("₹");
+                miningValueSymbol.setText("₹");
+                totalSymbol.setText(" ₹");
+            }
+            else{
+                forestValueSymbol.setText("- ₹");
+                pastureValueSymbol.setText("- ₹");
+                cropValueSymbol.setText("- ₹");
+                miningValueSymbol.setText("- ₹");
+                totalSymbol.setText(" - ₹");
+            }
+        }
+
 
 //        socialCapitalCrop.setText("0");
 //        socialCapitalPasture.setText("0");
