@@ -382,9 +382,6 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         surveyIdDrawer.setText(surveyId);
         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
 
-
-
-
         double lowerLimit;
         double upperLimit;
         if(totalVal > 0 ){
