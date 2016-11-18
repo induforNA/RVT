@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginTop="20dp"
-            android:text="Inflation rate"
+            android:text="@string/inflation_rate"
             android:textSize="@dimen/textfield_size" />
 
     </LinearLayout>

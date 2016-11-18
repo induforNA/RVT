@@ -29,6 +29,7 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private final int viewTypeHeader=0,viewTypeList=1;
     private Boolean flag,flag1=true;
     private SharedPreferences sharedPref;
+    private Context context;
     private String surveyId;
     Set<String> set;
     private SharedPreferences.Editor editor;
@@ -67,6 +68,7 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         View itemView = null;
         sharedPref = parent.getContext().getSharedPreferences(
                 "com.sayone.omidyar.PREFERENCE_FILE_KEY_SET", Context.MODE_PRIVATE);
+        context=parent.getContext();
         editor=sharedPref.edit();
         editor.clear();
         editor.putStringSet("surveySet",set);
@@ -95,9 +97,9 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         if (holder instanceof HeaderViewHolder){
             if(flag){
-                ((HeaderViewHolder)holder).header.setText("Unselect all");
+                ((HeaderViewHolder)holder).header.setText(context.getResources().getText(R.string.unselect_all));
             } else {
-                ((HeaderViewHolder)holder).header.setText("Select all");
+                ((HeaderViewHolder)holder).header.setText(context.getResources().getText(R.string.select_all));
             }
             ((HeaderViewHolder)holder).header.setOnClickListener(new View.OnClickListener() {
                 @Override

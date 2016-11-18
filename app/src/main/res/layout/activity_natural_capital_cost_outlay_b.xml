@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:gravity="left"
-                android:text="Add investment/cost outlay items"
+                android:text="@string/natural_outlay_qn1"
                 android:textSize="@dimen/heading_size"
                 android:textStyle="bold" />
 
@@ -112,7 +112,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Choose outlay item"
+                        android:text="@string/natural_outlay_qn2"
                         android:textSize="@dimen/textfield_size" />
 
                     <Spinner
@@ -133,7 +133,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="In which year do you expect to first incur the cost?"
+                        android:text="@string/natural_outlay_qn3"
                         android:textSize="@dimen/textfield_size" />
 
                     <Spinner
@@ -153,7 +153,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Amount"
+                        android:text="@string/natural_outlay_qn4"
                         android:textSize="@dimen/textfield_size" />
 
                     <EditText
@@ -175,7 +175,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Choose currency"
+                        android:text="@string/natural_outlay_qn5"
                         android:textSize="@dimen/textfield_size" />
 
                     <Spinner
@@ -195,7 +195,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="How often does this expense occur?"
+                        android:text="@string/natural_outlay_qn6"
                         android:textSize="@dimen/textfield_size" />
 
                     <Spinner
@@ -212,7 +212,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Save"
+                    android:text="@string/button_save"
                     android:textAllCaps="false"
                     android:textColor="#ffffff" />
 

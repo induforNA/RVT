@@ -278,7 +278,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             handler.postDelayed(new Runnable() {
                 public void run() {
                     progress.dismiss();
-                    Toast toast = Toast.makeText(context,"Completed", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(context,getResources().getText(R.string.completed_text), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }, 3000);
@@ -288,8 +288,8 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         @Override
         protected void onPreExecute() {
             progress = new ProgressDialog(context);
-            progress.setTitle("Sending Data");
-            progress.setMessage("Wait while sending...");
+            progress.setTitle(getResources().getString(R.string.sending_data));
+            progress.setMessage(getResources().getString(R.string.wait_while_sending));
             progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
             progress.show();
 

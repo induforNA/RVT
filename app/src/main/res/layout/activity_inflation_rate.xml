@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="INFLATION RATE"
+            android:text="@string/inflation_rate_heading"
             android:textAllCaps="true"
             android:textColor="@android:color/white"
             android:textSize="22dp"
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/textfield_size"
-        android:text="Inflation rate"/>
+        android:text="@string/inflation_rate"/>
 
     <EditText
         android:layout_width="100dp"

@@ -140,19 +140,19 @@ public class NaturalCapitalCostOutlay extends BaseActivity {
 
         outlayItemList = (RecyclerView) findViewById(R.id.timber_list);
 
-        if(currentSocialCapitalServey.equals("Forestland")){
-            questionRevenue.setText("Add investment/cost outlay items");
-
-        }else if(currentSocialCapitalServey.equals("Cropland")){
-            questionRevenue.setText("Add investment/cost outlay items");
-
-        }else if(currentSocialCapitalServey.equals("Pastureland")){
-            questionRevenue.setText("Add investment/cost outlay items");
-
-        }else if(currentSocialCapitalServey.equals("Mining Land")){
-            questionRevenue.setText("Add investment/cost outlay items");
-
-        }
+//        if(currentSocialCapitalServey.equals("Forestland")){
+//            questionRevenue.setText("Add investment/cost outlay items");
+//
+//        }else if(currentSocialCapitalServey.equals("Cropland")){
+//            questionRevenue.setText("Add investment/cost outlay items");
+//
+//        }else if(currentSocialCapitalServey.equals("Pastureland")){
+//            questionRevenue.setText("Add investment/cost outlay items");
+//
+//        }else if(currentSocialCapitalServey.equals("Mining Land")){
+//            questionRevenue.setText("Add investment/cost outlay items");
+//
+//        }
 
         landType.setText(currentSocialCapitalServey);
 
@@ -230,13 +230,13 @@ public class NaturalCapitalCostOutlay extends BaseActivity {
             case R.id.button_add_wood:
                 final Dialog dialog = new Dialog(context);
                 dialog.setContentView(R.layout.add_forest_revenue_item);
-                dialog.setTitle("Add cost outlay item");
+                dialog.setTitle(getResources().getString(R.string.natural_outlay_a_qn2));
                 dialog.setCancelable(false);
 
                 Button popupCancel = (Button) dialog.findViewById(R.id.popup_cancel);
                 Button saveParticipant = (Button) dialog.findViewById(R.id.save_participant);
                 final EditText editTextWood = (EditText) dialog.findViewById(R.id.edit_text_wood);
-                editTextWood.setHint("Add cost outlay item");
+                editTextWood.setHint(getResources().getString(R.string.natural_outlay_a_qn2));
 
                 popupCancel.setOnClickListener(new View.OnClickListener() {
                     @Override

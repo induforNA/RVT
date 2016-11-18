@@ -50,8 +50,8 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
         realm = Realm.getDefaultInstance();
         RealmResults<Survey> surveyList = realm.where(Survey.class).findAll();
 
-        surveyIds.add(0, "--Select Survey Id--");
-        surveyLandKinds.add(0, "--Select Land Kind--");
+        surveyIds.add(0,getResources().getString(R.string.select_suvey_id));
+        surveyLandKinds.add(0,getResources().getString(R.string.select_landkind));
 
         for (Survey survey : surveyList) {
             surveyIds.add(survey.getSurveyId());
@@ -70,7 +70,7 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 surveyLandKinds.clear();
                 if(position != 0){
-                    surveyLandKinds.add(0, "--Select Land Kind--");
+                    surveyLandKinds.add(0,getResources().getString(R.string.select_landkind));
                 }
                 if (position != 0) {
                     Survey survey = realm.where(Survey.class).equalTo("surveyId", surveyIds.get(position))
@@ -85,7 +85,7 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
                     landKindSpinner.setAdapter(landKindAdapter);
                 } else {
                     surveyLandKinds.clear();
-                    surveyLandKinds.add(0, "--Select Land Kind--");
+                    surveyLandKinds.add(0,getResources().getString(R.string.select_landkind));
                     landKindSpinner.setAdapter(landKindAdapter);
                 }
             }

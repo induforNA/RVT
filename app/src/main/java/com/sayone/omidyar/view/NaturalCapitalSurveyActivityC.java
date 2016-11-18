@@ -114,22 +114,22 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                 .findFirst();
         for(LandKind landKind:results.getLandKinds()){
             if(landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")){
-                question.setText("How many years of data do you have on harvest activities?");
+                question.setText(getResources().getText(R.string.qn_natural_c));
                 if(landKind.getForestLand().getRevenueProducts().size() > 0){
                     loadYears(landKind.getForestLand().getRevenueProducts().get(0).getRevenueProductYearses());
                 }
             }else if(landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")){
-                question.setText("How many years of data do you have on harvesting activities?");
+                question.setText(getResources().getText(R.string.qn_natural_c));
                 if(landKind.getCropLand().getRevenueProducts().size() > 0){
                     loadYears(landKind.getCropLand().getRevenueProducts().get(0).getRevenueProductYearses());
                 }
             }else if(landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")){
-                question.setText("How many years of data do you have on livestock activity?");
+                question.setText(getResources().getText(R.string.year_data_livestock));
                 if(landKind.getPastureLand().getRevenueProducts().size() > 0){
                     loadYears(landKind.getPastureLand().getRevenueProducts().get(0).getRevenueProductYearses());
                 }
             }else if(landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")){
-                question.setText("How many years of data do you have on extraction activities?");
+                question.setText(getResources().getText(R.string.year_data_extraction));
                 if(landKind.getMiningLand().getRevenueProducts().size() > 0){
                     loadYears(landKind.getMiningLand().getRevenueProducts().get(0).getRevenueProductYearses());
                 }

@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:gravity="left"
-                android:text="Add investment/cost outlay items"
+                android:text="@string/natural_outlay_a_qn1"
                 android:textSize="@dimen/heading_size" />
 
             <LinearLayout
