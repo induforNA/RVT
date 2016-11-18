@@ -159,6 +159,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         Survey results = realm.where(Survey.class)
                 .equalTo("surveyId",serveyId)
                 .findFirst();
+        if(!results.getInflationRate().equals("")){
+            inflationRate = Double.parseDouble(results.getInflationRate());
+        }
 
         RealmResults<Frequency> frequencyResult = realm.where(Frequency.class).findAll();
         for(Frequency frequency:frequencyResult){
@@ -382,8 +385,11 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 }
             }
         }
-
-        loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
+        if(revenueProducts.size() == 1){
+            finish();
+        }else {
+            loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
+        }
     }
 
     @Override

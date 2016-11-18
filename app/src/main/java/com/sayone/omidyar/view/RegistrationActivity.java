@@ -60,6 +60,9 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
     Context context;
     private String androidId;
 
+    String inflationRateStr;
+    double inflationRate = 0.05;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +75,8 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
         androidId = Settings.Secure.getString(getContentResolver(),
                 Settings.Secure.ANDROID_ID);
+        inflationRateStr = preferences.getString("inflationRate","5");
+        inflationRate = Double.parseDouble(inflationRateStr)/100;
 
 
         signUp = (Button) findViewById(R.id.button_sign_up);
@@ -266,6 +271,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         survey.setLanguage(language);
         survey.setCurrency(currency);
         survey.setDate(date);
+        survey.setInflationRate(String.valueOf(inflationRate));
         realm.commitTransaction();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);

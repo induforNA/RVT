@@ -171,7 +171,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
             pastureValueSymbol.setText("₹");
             cropValueSymbol.setText("₹");
             miningValueSymbol.setText("₹");
-            totalSymbol.setText(" ₹");
+            // totalSymbol.setText(" ₹");
         }
 
         forestlandLayout.setVisibility(View.GONE);
@@ -381,35 +381,77 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         valuationDate.setText(s);
         surveyIdDrawer.setText(surveyId);
         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
-        if(!(totalVal <0)){
 
-            String yourFormattedString = valueFormatter.format(roundTwo(totalVal));
-            totalText.setText(yourFormattedString);
-            flag=true;
-        }
-        else{
-            totalVal=totalVal*-1;
-            String yourFormattedString = valueFormatter.format(roundTwo(totalVal));
-            totalText.setText(yourFormattedString);
-            flag=false;
+
+        totalVal = 26163789;
+
+        double lowerLimit;
+        double upperLimit;
+        if(totalVal > 0 ){
+            lowerLimit = totalVal * 0.9999;
+            lowerLimit = Math.round(lowerLimit);
+            upperLimit = totalVal * 1.0001;
+            upperLimit = Math.round(upperLimit);
+        }else if(totalVal < 0 ){
+            lowerLimit = totalVal * 1.0001;
+            lowerLimit = Math.round(lowerLimit);
+            upperLimit = totalVal * 0.9999;
+            upperLimit = Math.round(upperLimit);
+        }else{
+            lowerLimit = 0;
+            upperLimit = 0;
         }
 
-        if(surveyCheck.getCurrency().equals("INR")){
-            if(flag==true) {
-                forestValueSymbol.setText("₹");
-                pastureValueSymbol.setText("₹");
-                cropValueSymbol.setText("₹");
-                miningValueSymbol.setText("₹");
-                totalSymbol.setText(" ₹");
-            }
-            else{
-                forestValueSymbol.setText("- ₹");
-                pastureValueSymbol.setText("- ₹");
-                cropValueSymbol.setText("- ₹");
-                miningValueSymbol.setText("- ₹");
-                totalSymbol.setText(" - ₹");
-            }
-        }
+        String lowerLimitStr = String.valueOf((long) lowerLimit);
+        String upperLimitStr = String.valueOf((long) upperLimit);
+
+        numberProcess(lowerLimitStr);
+        Log.e("LOWER LIMIT Test ",numberProcess(lowerLimitStr));
+
+
+        Log.e("LOWER LIMIT ",String.valueOf(lowerLimit));
+        Log.e("LOWER LIMIT ",String.valueOf(Math.round(lowerLimit/10000)*10000));
+        Log.e("UPPER LIMIT ",String.valueOf((long) upperLimit));
+
+//        String totalValStr = String.valueOf(Math.round(lowerLimit/10000)*10000)+" to "+String.valueOf(Math.round(upperLimit/10000)*10000);
+
+
+        // formattedString(Math.round(lowerLimit/10000)*10000);
+
+        String totalValStr  = formattedString(Long.valueOf(numberProcess(lowerLimitStr)))+" ~ "+formattedString(Long.valueOf(numberProcess(upperLimitStr)));
+        Log.e("Final Value Range ",totalValStr);
+
+        totalText.setText(totalValStr);
+
+//        if(!(totalVal <0)){
+//
+//            String yourFormattedString = valueFormatter.format(roundTwo(totalVal));
+//            totalText.setText(yourFormattedString);
+//            flag=true;
+//        }
+//        else{
+//            totalVal=totalVal*-1;
+//            String yourFormattedString = valueFormatter.format(roundTwo(totalVal));
+//            totalText.setText(yourFormattedString);
+//            flag=false;
+//        }
+//
+//        if(surveyCheck.getCurrency().equals("INR")){
+//            if(flag==true) {
+//                forestValueSymbol.setText("₹");
+//                pastureValueSymbol.setText("₹");
+//                cropValueSymbol.setText("₹");
+//                miningValueSymbol.setText("₹");
+//                totalSymbol.setText(" ₹");
+//            }
+//            else{
+//                forestValueSymbol.setText("- ₹");
+//                pastureValueSymbol.setText("- ₹");
+//                cropValueSymbol.setText("- ₹");
+//                miningValueSymbol.setText("- ₹");
+//                totalSymbol.setText(" - ₹");
+//            }
+//        }
 
 
 //        socialCapitalCrop.setText("0");
@@ -417,6 +459,30 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 //        socialCapitalMining.setText("0");
         //  inflationRate.setText(surveyCheck.getInflationRate().toString());
 
+    }
+
+    public String numberProcess(String numberStr){
+        String zerosStr = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+        int zerosCount = 0;
+        long q = Long.valueOf(numberStr);
+        if(numberStr.length() >= 4){
+            zerosCount = numberStr.substring(4).length();
+            double afterDec = Double.valueOf("0."+numberStr.substring(4));
+            q = Long.valueOf(numberStr.substring(0,4)) + Math.round(afterDec);
+        }
+        return String.valueOf(q)+zerosStr.substring(0,zerosCount);
+    }
+
+    public String formattedString(long l){
+        DecimalFormat valueFormatter1 = new DecimalFormat("#,###,###");
+
+        String fString = "0";
+        if(l < 0){
+            fString = "- ₹"+valueFormatter1.format(l*-1);
+        }else{
+            fString = "₹"+valueFormatter1.format(l);
+        }
+        return fString;
     }
 
     public double roundTwo(double val) {

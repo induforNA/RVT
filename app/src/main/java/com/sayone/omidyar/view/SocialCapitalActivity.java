@@ -550,7 +550,7 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                 break;
             case R.id.option_c:
                 checkC();
-                checkBoxChecked(checked, optionB);
+                checkBoxChecked(checked, optionC);
 //                Log.e("PP ", optionC.getTag(R.string.checkbox_id).toString());
 //                if (checked) {
 //                    socialCapitalAnswerOptionsesList.add(socialCapitalQuestionsSelectedItem.getSocialCapitalAnswerOptionses().get(Integer.parseInt(optionC.getTag(R.string.checkbox_id).toString())));
