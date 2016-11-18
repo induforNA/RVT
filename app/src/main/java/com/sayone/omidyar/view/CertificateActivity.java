@@ -383,7 +383,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
 
 
-        totalVal = 26163789;
+//        totalVal = 26163789;
 
         double lowerLimit;
         double upperLimit;
