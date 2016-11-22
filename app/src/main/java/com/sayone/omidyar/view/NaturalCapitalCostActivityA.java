@@ -127,7 +127,18 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
         startSurvey=(TextView)findViewById(R.id.text_start_survey);
         surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
         landType=(TextView)findViewById(R.id.land_type);
-        landType.setText(currentSocialCapitalServey);
+
+
+
+        if(currentSocialCapitalServey.equals("Forestland"))
+            landType.setText(getResources().getText(R.string.string_forestland));
+        if(currentSocialCapitalServey.equals("Pastureland"))
+            landType.setText(getResources().getText(R.string.string_pastureland));
+        if(currentSocialCapitalServey.equals("Mining Land"))
+            landType.setText(getResources().getText(R.string.string_miningland));
+        if(currentSocialCapitalServey.equals("Cropland"))
+            landType.setText(getResources().getText(R.string.title_cropland));
+      //  landType.setText(currentSocialCapitalServey);
 
         timberList = (RecyclerView) findViewById(R.id.timber_list);
 
@@ -203,7 +214,7 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
                 Button popupCancel = (Button) dialog.findViewById(R.id.popup_cancel);
                 Button saveParticipant = (Button) dialog.findViewById(R.id.save_participant);
                 final EditText editTextWood = (EditText) dialog.findViewById(R.id.edit_text_wood);
-                editTextWood.setHint("Add cost element");
+                editTextWood.setHint(getResources().getString(R.string.string_add_cost_element));
 
                 popupCancel.setOnClickListener(new View.OnClickListener() {
                     @Override

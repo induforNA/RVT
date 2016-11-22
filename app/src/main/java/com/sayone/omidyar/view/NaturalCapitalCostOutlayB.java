@@ -216,21 +216,29 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         buttonSave = (Button) findViewById(R.id.button_save);
         costValue = (EditText) findViewById(R.id.cost_value);
 
-        if(currentSocialCapitalServey.equals("Forestland")){
-            questionRevenue.setText("Add investment/cost outlay items");
+//        if(currentSocialCapitalServey.equals("Forestland")){
+//            questionRevenue.setText("Add investment/cost outlay items");
+//
+//        }else if(currentSocialCapitalServey.equals("Cropland")){
+//            questionRevenue.setText("Add investment/cost outlay items");
+//
+//        }else if(currentSocialCapitalServey.equals("Pastureland")){
+//            questionRevenue.setText("Add investment/cost outlay items");
+//
+//        }else if(currentSocialCapitalServey.equals("Mining Land")){
+//            questionRevenue.setText("Add investment/cost outlay items");
+//
+//        }
 
-        }else if(currentSocialCapitalServey.equals("Cropland")){
-            questionRevenue.setText("Add investment/cost outlay items");
-
-        }else if(currentSocialCapitalServey.equals("Pastureland")){
-            questionRevenue.setText("Add investment/cost outlay items");
-
-        }else if(currentSocialCapitalServey.equals("Mining Land")){
-            questionRevenue.setText("Add investment/cost outlay items");
-
-        }
-
-        landType.setText(currentSocialCapitalServey);
+//        landType.setText(currentSocialCapitalServey);
+        if(currentSocialCapitalServey.equals("Forestland"))
+            landType.setText(getResources().getText(R.string.string_forestland));
+        if(currentSocialCapitalServey.equals("Pastureland"))
+            landType.setText(getResources().getText(R.string.string_pastureland));
+        if(currentSocialCapitalServey.equals("Mining Land"))
+            landType.setText(getResources().getText(R.string.string_miningland));
+        if(currentSocialCapitalServey.equals("Cropland"))
+            landType.setText(getResources().getText(R.string.title_cropland));
 
 //        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
 //        outlayItemList.setLayoutManager(mLayoutManager);

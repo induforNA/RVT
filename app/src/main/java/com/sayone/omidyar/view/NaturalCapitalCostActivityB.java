@@ -176,7 +176,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
             if(costElementYears.getYear() < currentYear && costElementYears.getYear() != 0){
                 ArrayList yearArray = new ArrayList();
                 int year = currentYear - 1;
-                yearArray.add("Select year");
+                yearArray.add(getResources().getString(R.string.qn_natural_d_4));
                 while(year >= 1990){
                     yearArray.add(String.valueOf(year));
                     year--;
@@ -255,7 +255,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
         for(k=1; k<=j; k++){
             ArrayList yearArray = new ArrayList();
             int year = currentYear - 1;
-            yearArray.add("Select year");
+            yearArray.add(getResources().getString(R.string.qn_natural_d_4));
             while(year >= 1990){
                 yearArray.add(year--);
             }
@@ -326,16 +326,16 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
                     }
                     if(selectYearNotFoud){
                         if(set.size() < editTexts.size()){
-                            Toast.makeText(context,"Select different years",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context,getResources().getText(R.string.select_different_year),Toast.LENGTH_SHORT).show();
                         }else {
                             saveYears();
                         }
                     }else{
-                        Toast.makeText(context,"Select all year",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,getResources().getText(R.string.select_all_year),Toast.LENGTH_SHORT).show();
                     }
                     // saveYears();
                 }else{
-                    Toast.makeText(context,"Select at least one year",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,getResources().getText(R.string.select_atleast_oneyear),Toast.LENGTH_SHORT).show();
                 }
                 break;
 
@@ -378,8 +378,8 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
 
     public void saveYears(){
         final ProgressDialog progress = new ProgressDialog(this);
-        progress.setTitle("Loading");
-        progress.setMessage("Wait while loading...");
+        progress.setTitle(getResources().getText(R.string.loading));
+        progress.setMessage(getResources().getText(R.string.wait_while_loading));
         progress.show();
 
         realm.executeTransactionAsync(new Realm.Transaction() {

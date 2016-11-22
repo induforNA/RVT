@@ -262,17 +262,39 @@
     <string name="qn_natural_cost_3_1" >प्रति यूनिट</string>
     <string name="qn_natural_cost_3_2">  की कीमत क्या थी?</string>
     <string name="inflation_rate_heading">मँहगाई दर</string>
+    <string name="natural_outlay_qn3">किस साल में आप पहली बार लागत उठाना उम्मीद करते हैं?</string>
+    <string name="natural_outlay_qn4">रकम</string>
+    <string name="year_data_livestock">पशुधन गतिविधि पर कितने साल के डेटा है?</string>
 
-    <string name="natural_outlay_qn1">Give details of investment/cost outlay items added</string>
-    <string name="natural_outlay_qn2">Choose outlay item</string>
-    <string name="natural_outlay_qn3">In which year do you expect to first incur the cost?</string>
-    <string name="natural_outlay_qn4">Amount</string>
-    <string name="natural_outlay_qn5">Choose currency</string>
-    <string name="natural_outlay_qn6">How often does this expense occur?</string>
-    <string name="natural_outlay_a_qn1">Add investment/cost outlay items</string>
-    <string name="natural_outlay_a_qn2">Add cost outlay item</string>
-    <string name="year_data_livestock">How many years of data do you have on livestock activity?</string>
-    <string name="year_data_extraction">How many years of data do you have on extraction activities?</string>
-
+    <string name="natural_outlay_qn1">जोड़ा हुवा निवेश/ लागत परिव्यय आइटम की जानकारी दो</string>
+    <string name="natural_outlay_qn2">परिव्यय आइटम चुनें</string>
+    <string name="natural_outlay_qn5">मुद्रा चुनें</string>
+    <string name="natural_outlay_qn6">कितनी बार इस खर्च होती है?</string>
+    <string name="natural_outlay_a_qn1">निवेश/ लागत परिव्यय आइटम जोड़ें</string>
+    <string name="natural_outlay_a_qn2">लागत परिव्यय आइटम जोड़ें</string>
+    <string name="year_data_extraction">निकासी की गतिविधियों पर कितने साल के डेटा है?</string>
+    <string name="sending_data">डेटा भेज रहे हैं</string>
+    <string name="wait_while_sending">भेज रहे हैं, जबकि प्रतीक्षा करें...</string>
+    <string name="unselect_all">सभी का चयन रद्द</string>
+    <string name="units_option_1">नयी इकाइयाँ एंटर करें</string>
+    <string name="units_option_2">मौजूदा इकाइयों को जोड़ें</string>
+    <string name="specify_unit">यूनिट निर्दिष्ट करें</string>
+    <string name="convert_unit_international">यूनिट को अंतरराष्ट्रीय यूनिट में परिवर्तित करो</string>
+    <string name="specified_unit">निर्दिष्ट यूनिट</string>
+    <string name="select_suvey_id">--सर्वेक्षण आयडी चुनें--</string>
+    <string name="select_landkind">--भूमि प्रकार चुनें--</string>
+    <string name="hint_add_timber">इमारती लकड़ी जोड़े</string>
+    <string name="hint_add_croptype">फसल प्रकार जोड़ें</string>
+    <string name="hint_add_livestock">पशुधन जोड़े</string>
+    <string name="hint_add_mineral">खनिज जोड़े</string>
+    <string name="hint_add_nftp">NTFP जोड़े</string>
+    <string name="select_different_year">अलग अलग साल चुनें</string>
+    <string name="select_all_year">कम से कम एक साल </string>
+    <string name="select_atleast_oneyear">कम से कम एक साल चुनेंें</string>
+    <string name="loading">लोड हो रहा है</string>
+    <string name="wait_while_loading">होने तक इंतजार करे...</string>
+    <string name="value_restored">मूल्य सफलतापूर्वक बहाल</string>
+    <string name="select_surveyid_landkind">सवे करने केलिए सर्वेक्षण आईडी और भूमि तरह चुनें</string>
+    <string name="value_saved_success">मूल्य सफलतापूर्वक सवे हुआ</string>
 
 </resources>

@@ -148,7 +148,15 @@ public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.
 
         }
 
-        landType.setText(currentSocialCapitalServey);
+       // landType.setText(currentSocialCapitalServey);
+        if(currentSocialCapitalServey.equals("Forestland"))
+            landType.setText(getResources().getText(R.string.string_forestland));
+        if(currentSocialCapitalServey.equals("Pastureland"))
+            landType.setText(getResources().getText(R.string.string_pastureland));
+        if(currentSocialCapitalServey.equals("Mining Land"))
+            landType.setText(getResources().getText(R.string.string_miningland));
+        if(currentSocialCapitalServey.equals("Cropland"))
+            landType.setText(getResources().getText(R.string.title_cropland));
 
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -233,13 +241,13 @@ public class NaturalCapitalSurveyActivityB extends BaseActivity implements View.
                 Button saveParticipant = (Button) dialog.findViewById(R.id.save_participant);
                 final EditText editTextWood = (EditText) dialog.findViewById(R.id.edit_text_wood);
                 if(currentSocialCapitalServey.equals("Forestland")){
-                    editTextWood.setHint("Add NTFP");
+                    editTextWood.setHint(getResources().getString(R.string.hint_add_nftp));
                 }else if(currentSocialCapitalServey.equals("Cropland")){
-                    editTextWood.setHint("Add Crop Type");
+                    editTextWood.setHint(getResources().getString(R.string.hint_add_croptype));
                 }else if(currentSocialCapitalServey.equals("Pastureland")){
-                    editTextWood.setHint("Add Livestock");
+                    editTextWood.setHint(getResources().getString(R.string.hint_add_livestock));
                 }else if(currentSocialCapitalServey.equals("Mining Land")){
-                    editTextWood.setHint("Add Mineral");
+                    editTextWood.setHint(getResources().getString(R.string.hint_add_mineral));
                 }
 
                 popupCancel.setOnClickListener(new View.OnClickListener() {

@@ -102,7 +102,15 @@ public class NaturalCapitalCostActivityB_copy extends BaseActivity implements Vi
         logout.setOnClickListener(this);
         startSurvey.setOnClickListener(this);
         surveyIdDrawer.setText(serveyId);
-        landType.setText(currentSocialCapitalServey);
+        if(currentSocialCapitalServey.equals("Forestland"))
+            landType.setText(getResources().getText(R.string.string_forestland));
+        if(currentSocialCapitalServey.equals("Pastureland"))
+            landType.setText(getResources().getText(R.string.string_pastureland));
+        if(currentSocialCapitalServey.equals("Mining Land"))
+            landType.setText(getResources().getText(R.string.string_miningland));
+        if(currentSocialCapitalServey.equals("Cropland"))
+            landType.setText(getResources().getText(R.string.title_cropland));
+    //    landType.setText(currentSocialCapitalServey);
 
         Survey results = realm.where(Survey.class)
                 .equalTo("surveyId",serveyId)
@@ -255,7 +263,7 @@ public class NaturalCapitalCostActivityB_copy extends BaseActivity implements Vi
                     intent=new Intent(getApplicationContext(),NaturalCapitalCostActivityC.class);
                     startActivity(intent);
                 }else{
-                    Toast.makeText(context,"Select at least one year",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,getResources().getText(R.string.select_atleast_oneyear),Toast.LENGTH_SHORT).show();
                 }
 //
 //

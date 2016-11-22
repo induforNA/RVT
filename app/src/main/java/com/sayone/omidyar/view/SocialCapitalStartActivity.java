@@ -143,11 +143,19 @@ public class SocialCapitalStartActivity extends BaseActivity implements View.OnC
                 .findFirst();
 
         Log.e("LLL ", landKind1.getSocialCapitals().getSocialCapitalAnswers().toString());
+        Log.e("blaa : ",currentSocialCapitalServey);
 
 
-
-
-        landType.setText(currentSocialCapitalServey);
+        if(currentSocialCapitalServey.equals("Forestland"))
+            landType.setText(getResources().getText(R.string.string_forestland));
+        if(currentSocialCapitalServey.equals("Pastureland"))
+            landType.setText(getResources().getText(R.string.string_pastureland));
+        if(currentSocialCapitalServey.equals("Mining Land"))
+            landType.setText(getResources().getText(R.string.string_miningland));
+        if(currentSocialCapitalServey.equals("Cropland"))
+            landType.setText(getResources().getText(R.string.title_cropland));
+        //  landType.setText(currentSocialCapitalServey);
+       // landType.setText(currentSocialCapitalServey);
     }
 
     @Override

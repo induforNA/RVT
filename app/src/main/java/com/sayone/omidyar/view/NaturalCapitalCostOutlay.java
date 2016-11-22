@@ -154,7 +154,15 @@ public class NaturalCapitalCostOutlay extends BaseActivity {
 //
 //        }
 
-        landType.setText(currentSocialCapitalServey);
+ //       landType.setText(currentSocialCapitalServey);
+        if(currentSocialCapitalServey.equals("Forestland"))
+            landType.setText(getResources().getText(R.string.string_forestland));
+        if(currentSocialCapitalServey.equals("Pastureland"))
+            landType.setText(getResources().getText(R.string.string_pastureland));
+        if(currentSocialCapitalServey.equals("Mining land"))
+            landType.setText(getResources().getText(R.string.string_miningland));
+        if(currentSocialCapitalServey.equals("Cropland"))
+            landType.setText(getResources().getText(R.string.title_cropland));
 
         costOutlayAdapter = new CostOutlayAdapter(costOutlays,NaturalCapitalCostOutlay.this);
 

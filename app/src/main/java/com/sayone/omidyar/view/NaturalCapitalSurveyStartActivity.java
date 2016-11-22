@@ -16,6 +16,8 @@ import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.LandKind;
 
+import java.util.Locale;
+
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -36,6 +38,7 @@ public class NaturalCapitalSurveyStartActivity extends BaseActivity implements V
     private TextView startSurvey;
     private TextView surveyIdDrawer;
     private DrawerLayout menuDrawerLayout;
+    private String language;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class NaturalCapitalSurveyStartActivity extends BaseActivity implements V
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         serveyId = preferences.getString("surveyId","");
         currentSocialCapitalServey = preferences.getString("currentSocialCapitalServey","");
+        language=Locale.getDefault().getDisplayLanguage();
 
         landType = (TextView)findViewById(R.id.land_type);
         buttonBack=(Button)findViewById(R.id.button_back);
@@ -80,7 +84,16 @@ public class NaturalCapitalSurveyStartActivity extends BaseActivity implements V
             editor.putString("currentSocialCapitalServey",currentSocialCapitalServey);
             editor.apply();
         }
-        landType.setText(currentSocialCapitalServey);
+
+        if(currentSocialCapitalServey.equals("Forestland"))
+            landType.setText(getResources().getText(R.string.string_forestland));
+        if(currentSocialCapitalServey.equals("Pastureland"))
+            landType.setText(getResources().getText(R.string.string_pastureland));
+        if(currentSocialCapitalServey.equals("Mining Land"))
+            landType.setText(getResources().getText(R.string.string_miningland));
+        if(currentSocialCapitalServey.equals("Cropland"))
+            landType.setText(getResources().getText(R.string.title_cropland));
+
 
     }
 

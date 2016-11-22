@@ -91,7 +91,7 @@
     },
     {
       "question": "Does this group feel confident that they will be able to continue to use the parcel without constraints indefinitely into the future?",
-      "questionHindi": "?",
+      "questionHindi": "क्या इस समूह को भरोसा है कि वे भविष्य में अनिश्चित काल के लिए बाधाओं के बिना पार्सल का उपयोग करने के लिए जारी रखने  को सक्षम हो जाएगा लगता है?",
       "weight": "5",
       "optiontype": "single",
       "options": [
@@ -152,7 +152,7 @@
     },
     {
       "question": "Do households in this community use the parcel and access the resource based upon locally recognized customary norms?",
-      "questionHindi": "",
+      "questionHindi": "क्या इस समुदाय में घरों पार्सल का उपयोग और स्थानीय स्तर पर मान्यता प्राप्त प्रथागत मानदंडों पर आधारित संसाधन उपयोग करते हैं?",
       "weight": "5",
       "optiontype": "single",
       "options": [
@@ -278,7 +278,7 @@
         },
         {
           "opt": "By some",
-          "optHindi": "",
+          "optHindi": "कुछ के द्वारा",
           "val": "5"
         },
         {
@@ -339,12 +339,12 @@
         },
         {
           "opt": "Always",
-          "optHindi": "",
+          "optHindi": "हमेशा",
           "val": "5"
         },
         {
           "opt": "N/A",
-          "optHindi": "",
+          "optHindi": "N/A",
           "val": "0"
         }
       ]

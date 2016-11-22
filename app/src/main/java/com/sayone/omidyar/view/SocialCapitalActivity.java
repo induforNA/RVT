@@ -181,7 +181,17 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                     landKindLoad.getSocialCapitals().getSocialCapitalAnswers().get(currentQId).getMultipleAnswers());
         }
         pageNumber.setText(currentQId+1+"/14");
-        landType.setText(currentSocialCapitalServey);
+
+        if(currentSocialCapitalServey.equals("Forestland"))
+            landType.setText(getResources().getText(R.string.string_forestland));
+        if(currentSocialCapitalServey.equals("Pastureland"))
+            landType.setText(getResources().getText(R.string.string_pastureland));
+        if(currentSocialCapitalServey.equals("Mining Land"))
+            landType.setText(getResources().getText(R.string.string_miningland));
+        if(currentSocialCapitalServey.equals("Cropland"))
+            landType.setText(getResources().getText(R.string.title_cropland));
+        //  landType.setText(currentSocialCapitalServey);
+       // landType.setText(currentSocialCapitalServey);
     }
 
     public void setQuestionView(String type,

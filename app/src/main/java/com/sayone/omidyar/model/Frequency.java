@@ -14,7 +14,17 @@ public class Frequency extends RealmObject {
 
     private String harvestFrequency;
 
+    private String harvestFrequencyHindi;
+
     private int frequencyValue;
+
+    public String getHarvestFrequencyHindi() {
+        return harvestFrequencyHindi;
+    }
+
+    public void setHarvestFrequencyHindi(String harvestFrequencyHindi) {
+        this.harvestFrequencyHindi = harvestFrequencyHindi;
+    }
 
     public long getId() {
         return id;

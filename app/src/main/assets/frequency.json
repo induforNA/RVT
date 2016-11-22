@@ -2,22 +2,27 @@
   "frequency": [
     {
       "harvestFrequency": "one-time",
+      "harvestFrequencyHindi": "एक बार",
       "value": 1
     },
     {
       "harvestFrequency": "per day",
+      "harvestFrequencyHindi": "हर दिन",
       "value": 365
     },
     {
       "harvestFrequency": "per week",
+      "harvestFrequencyHindi": "प्रति सप्ताह",
       "value": 52
     },
     {
       "harvestFrequency": "per month",
+      "harvestFrequencyHindi": "प्रति माह",
       "value": 12
     },
     {
       "harvestFrequency": "per year",
+      "harvestFrequencyHindi": "प्रति वर्ष",
       "value": 1
     }
   ]

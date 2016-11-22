@@ -2,66 +2,79 @@
   "cost":[
     {
       "quantityName":"Hour",
+      "quantityNameHindi":"घंटे",
       "quantityType":"Time",
       "quantityValue":3600
     },
     {
       "quantityName":"Cubic Meter",
+      "quantityNameHindi":"क्यूबिक मीटर ",
       "quantityType":"Volume",
       "quantityValue":1000
     },
     {
       "quantityName":"Cubic Kilometer",
+      "quantityNameHindi":"क्यूबिक किलोमीटर ",
       "quantityType":"Volume",
       "quantityValue":1000000000000
     },
     {
       "quantityName":"Cubic Centimeter",
+      "quantityNameHindi":"क्यूबिक सेनटीमीटर",
       "quantityType":"Volume",
       "quantityValue":0.001
     },
     {
       "quantityName":"Cubic Millimeter",
+      "quantityNameHindi":"क्यूबिक मिल्लीमीटर",
       "quantityType":"Volume",
       "quantityValue":0.000001
     },
     {
       "quantityName":"Liter",
+      "quantityNameHindi":"लिटेर",
       "quantityType":"Volume",
       "quantityValue":1
     },
     {
       "quantityName":"Milliliter",
+      "quantityNameHindi":"मिल्लीलीटेर",
       "quantityType":"Volume",
       "quantityValue":0.001
     },
     {
       "quantityName":"Kilogram",
+      "quantityNameHindi":"किलोग्राम",
       "quantityType":"Weight",
       "quantityValue":1
     },
     {
       "quantityName":"Gram",
+      "quantityNameHindi":"ग्राम",
       "quantityType":"Weight",
       "quantityValue":0.001
     },
     {
       "quantityName":"Milligram",
+      "quantityNameHindi":"मिलिग्रॅम",
       "quantityType":"Weight",
       "quantityValue":0.000001
     },
     {
       "quantityName":"Pound",
+      "quantityNameHindi":"पौंड",
       "quantityType":"Weight",
       "quantityValue":0.453592
     },
     {
       "quantityName":"Ounce",
+      "quantityNameHindi":"आउन्स",
       "quantityType":"Weight",
       "quantityValue":0.02834950000001049
     },
     {
       "quantityName":"Meter",
+      "quantityNameHindi":"मीटर",
       "quantityType":"Distance",
       "quantityValue":1
     }

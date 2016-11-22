@@ -44,6 +44,7 @@ public class UnitsActivity extends BaseActivity implements View.OnClickListener 
     Realm realm;
     int idUnit;
     private Dialog dialog1;
+    private String language;
 
 
     @Override
@@ -98,7 +99,12 @@ public class UnitsActivity extends BaseActivity implements View.OnClickListener 
 
         RealmResults<Quantity> quantityResult = realm.where(Quantity.class).findAll();
         for(Quantity quantity:quantityResult){
-            unitList.add(quantity.getQuantityName());
+//            if(language.equals("हिन्दी")) {
+//                unitList.add(quantity.getQuantityNameHindi());
+//            }
+//            else{
+                unitList.add(quantity.getQuantityName());
+//            }
         }
 
 

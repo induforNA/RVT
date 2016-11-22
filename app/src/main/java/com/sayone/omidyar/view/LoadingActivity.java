@@ -136,13 +136,14 @@ public class LoadingActivity extends BaseActivity {
                 JSONArray jsonArray = reader.getJSONArray("frequency");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = new JSONObject(jsonArray.get(i).toString());
-                    Log.e("AA ", jsonObject.getString("harvestFrequency"));
+                    Log.e("HINDI AA ", jsonObject.getString("harvestFrequencyHindi"));
                     Log.e("BB ", jsonObject.getInt("value")+"");
 
                     realm.beginTransaction();
                     Frequency frequency = realm.createObject(Frequency.class);
                     frequency.setId(getNextKeyFrequency());
                     frequency.setHarvestFrequency(jsonObject.getString("harvestFrequency"));
+                    frequency.setHarvestFrequencyHindi(jsonObject.getString("harvestFrequencyHindi"));
                     frequency.setFrequencyValue(jsonObject.getInt("value"));
                     realm.commitTransaction();
                 }
@@ -170,6 +171,7 @@ public class LoadingActivity extends BaseActivity {
                     Quantity quantity = realm.createObject(Quantity.class);
                     quantity.setId(getNextKeyQuantity());
                     quantity.setQuantityName(jsonObject.getString("quantityName"));
+                    quantity.setQuantityNameHindi(jsonObject.getString("quantityNameHindi"));
                     quantity.setQuantityType(jsonObject.getString("quantityType"));
                     quantity.setQuantityValue(Double.parseDouble(jsonObject.getString("quantityValue")));
                     realm.commitTransaction();

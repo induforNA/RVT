@@ -36,6 +36,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -98,6 +99,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
     long productReveneIdCheck = 0;
 
     String currentProductName;
+    private String language;
 
 
     @Override
@@ -148,9 +150,19 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         previousYearIndex = 0;
         previousCostProductIndex = 0;
         productReveneIdCheck = 0;
-        landType.setText(currentSocialCapitalServey);
+        if(currentSocialCapitalServey.equals("Forestland"))
+            landType.setText(getResources().getText(R.string.string_forestland));
+        if(currentSocialCapitalServey.equals("Pastureland"))
+            landType.setText(getResources().getText(R.string.string_pastureland));
+        if(currentSocialCapitalServey.equals("Mining Land"))
+            landType.setText(getResources().getText(R.string.string_miningland));
+        if(currentSocialCapitalServey.equals("Cropland"))
+            landType.setText(getResources().getText(R.string.title_cropland));
+     //   landType.setText(currentSocialCapitalServey);
 
         inflationRate = 0.05;
+
+        language = Locale.getDefault().getDisplayLanguage();
 
         yearList = new ArrayList<>();
         timePeriodList = new ArrayList<>();
@@ -171,12 +183,22 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
         RealmResults<Frequency> frequencyResult = realm.where(Frequency.class).findAll();
         for(Frequency frequency:frequencyResult){
-            timePeriodList.add(frequency.getHarvestFrequency());
+            if(language.equals("हिन्दी")) {
+                timePeriodList.add(frequency.getHarvestFrequencyHindi());
+            }
+            else{
+                timePeriodList.add(frequency.getHarvestFrequency());
+            }
         }
 
         RealmResults<Quantity> quantityResult = realm.where(Quantity.class).findAll();
         for(Quantity quantity:quantityResult){
-            unitList.add(quantity.getQuantityName());
+            if(language.equals("हिन्दी")) {
+                unitList.add(quantity.getQuantityNameHindi());
+            }
+            else{
+                unitList.add(quantity.getQuantityName());
+            }
         }
 
 
@@ -633,8 +655,16 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
         if(timePeriodList.size() != 0 && frequency != null){
             // Log.e("TEST FRE ", timePeriod_adapter.getPosition(frequency.getHarvestFrequency())+"");
+            if(language.equals("हिन्दी")) {
+                spinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(frequency.getHarvestFrequencyHindi()));
+            }
+            else{
+                spinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(frequency.getHarvestFrequency()));
+            }
 
-            spinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(frequency.getHarvestFrequency()));
+
+
+
             //spinnerTimePeriod.setSelection(timePeriodList.indexOf(frequency.getHarvestFrequency()));
         }
 
@@ -672,10 +702,17 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                     if(String.valueOf(revenueProductYears1.getYear()).equals(spinnerYear.getSelectedItem()) ){
                         // Log.e("REVE YEAR ",revenueProductYears1.toString());
                         String spinnerTimePeriodStr = spinnerTimePeriod.getSelectedItem().toString();
-                        Frequency frequency = realm.where(Frequency.class)
-                                .equalTo("harvestFrequency",spinnerTimePeriodStr)
-                                .findFirst();
-
+                        Frequency frequency;
+                        if(language.equals("हिन्दी")) {
+                            frequency = realm.where(Frequency.class)
+                                    .equalTo("harvestFrequencyHindi",spinnerTimePeriodStr)
+                                    .findFirst();
+                        }
+                        else{
+                            frequency = realm.where(Frequency.class)
+                                    .equalTo("harvestFrequency",spinnerTimePeriodStr)
+                                    .findFirst();
+                        }
 
 
                         int yearCurent = Calendar.getInstance().get(Calendar.YEAR);

@@ -107,7 +107,15 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
         logout.setOnClickListener(this);
         startSurvey.setOnClickListener(this);
         surveyIdDrawer.setText(serveyId);
-        landType.setText(currentSocialCapitalServey);
+        if(currentSocialCapitalServey.equals("Forestland"))
+            landType.setText(getResources().getText(R.string.string_forestland));
+        if(currentSocialCapitalServey.equals("Pastureland"))
+            landType.setText(getResources().getText(R.string.string_pastureland));
+        if(currentSocialCapitalServey.equals("Mining Land"))
+            landType.setText(getResources().getText(R.string.string_miningland));
+        if(currentSocialCapitalServey.equals("Cropland"))
+            landType.setText(getResources().getText(R.string.title_cropland));
+       // landType.setText(currentSocialCapitalServey);
 
         Survey results = realm.where(Survey.class)
                 .equalTo("surveyId",serveyId)
@@ -179,7 +187,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
             Log.e("YEAR PEEEEEEEEE",revenueProductYears.getYear()+" "+currentYear);
             if(revenueProductYears.getYear() < currentYear && revenueProductYears.getYear() != 0){
                 ArrayList yearArray = new ArrayList();
-                yearArray.add("Select year");
+                yearArray.add(getResources().getString(R.string.qn_natural_d_4));
                 int year = currentYear - 1;
                 while(year >= 1990){
                     yearArray.add(String.valueOf(year));
@@ -261,7 +269,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
         for(k=1; k<=j; k++){
             ArrayList yearArray = new ArrayList();
             int year = currentYear - 1;
-            yearArray.add("Select year");
+            yearArray.add(getResources().getString(R.string.qn_natural_d_4));
             while(year >= 1990){
                 yearArray.add(year--);
             }
@@ -332,16 +340,16 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                     }
                     if(selectYearNotFoud){
                         if(set.size() < editTexts.size()){
-                            Toast.makeText(context,"Select different years",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context,getResources().getText(R.string.select_different_year),Toast.LENGTH_SHORT).show();
                         }else {
                             saveYears();
                         }
                     }else{
-                        Toast.makeText(context,"Select all year",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,getResources().getText(R.string.select_all_year),Toast.LENGTH_SHORT).show();
                     }
                     // saveYears();
                 }else{
-                    Toast.makeText(context,"Select at least one year",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,getResources().getText(R.string.select_atleast_oneyear),Toast.LENGTH_SHORT).show();
                 }
                 break;
 
@@ -384,8 +392,8 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
 
     public void saveYears(){
         final ProgressDialog progress = new ProgressDialog(this);
-        progress.setTitle("Loading");
-        progress.setMessage("Wait while loading...");
+        progress.setTitle(getResources().getString(R.string.loading));
+        progress.setMessage(getResources().getString(R.string.wait_while_loading));
         progress.show();
 
         realm.executeTransactionAsync(new Realm.Transaction() {

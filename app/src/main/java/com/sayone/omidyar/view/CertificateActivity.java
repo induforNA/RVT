@@ -30,6 +30,7 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -173,6 +174,8 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
             miningValueSymbol.setText("₹");
             // totalSymbol.setText(" ₹");
         }
+
+        Log.e("Language : ",Locale.getDefault().getDisplayLanguage());
 
         forestlandLayout.setVisibility(View.GONE);
         headingForest.setVisibility(View.GONE);

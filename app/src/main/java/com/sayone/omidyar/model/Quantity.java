@@ -14,6 +14,8 @@ public class Quantity extends RealmObject {
 
     private String quantityName;
 
+    private String quantityNameHindi;
+
     private String quantityType;
 
     private double quantityValue;
@@ -24,6 +26,14 @@ public class Quantity extends RealmObject {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getQuantityNameHindi() {
+        return quantityNameHindi;
+    }
+
+    public void setQuantityNameHindi(String quantityNameHindi) {
+        this.quantityNameHindi = quantityNameHindi;
     }
 
     public String getQuantityName() {

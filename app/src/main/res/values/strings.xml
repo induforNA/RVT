@@ -286,6 +286,21 @@
     <string name="select_suvey_id">--Select Survey Id--</string>
     <string name="select_landkind">--Select Land Kind--</string>
 
+    <string name="hint_add_timber">Add Timber</string>
+    <string name="hint_add_croptype">Add Crop Type</string>
+    <string name="hint_add_livestock">Add Livestock</string>
+    <string name="hint_add_mineral">Add Mineral</string>
+    <string name="hint_add_nftp">Add NTFP</string>
+
+    <string name="select_different_year">Select different years</string>
+    <string name="select_all_year">Select all year</string>
+    <string name="select_atleast_oneyear">Select at least one year</string>
+    <string name="loading">Loading</string>
+    <string name="wait_while_loading">Wait while loading...</string>
+    <string name="value_restored">Value Restored Successfully</string>
+    <string name="select_surveyid_landkind">Select Survey Id and Land Kind to Save</string>
+    <string name="value_saved_success">Value Saved Successfully</string>
+
 
 
 </resources>

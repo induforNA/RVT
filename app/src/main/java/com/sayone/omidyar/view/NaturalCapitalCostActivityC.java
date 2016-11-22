@@ -37,6 +37,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -97,6 +98,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
     long productReveneIdCheck = 0;
 
     String currentProductName;
+    private String language;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,7 +157,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, timePeriodList);
         unit_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, unitList);
 
-
+        language = Locale.getDefault().getDisplayLanguage();
         Survey results = realm.where(Survey.class)
                 .equalTo("surveyId",serveyId)
                 .findFirst();
@@ -165,12 +167,21 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
         RealmResults<Frequency> frequencyResult = realm.where(Frequency.class).findAll();
         for(Frequency frequency:frequencyResult){
-            timePeriodList.add(frequency.getHarvestFrequency());
+            if(language.equals("हिन्दी")) {
+                timePeriodList.add(frequency.getHarvestFrequencyHindi());
+            }
+            else{
+                timePeriodList.add(frequency.getHarvestFrequency());
+            }
         }
 
         RealmResults<Quantity> quantityResult = realm.where(Quantity.class).findAll();
         for(Quantity quantity:quantityResult){
-            unitList.add(quantity.getQuantityName());
+            if(language.equals("हिन्दी")) {
+                unitList.add(quantity.getQuantityNameHindi());
+            }else{
+                unitList.add(quantity.getQuantityName());
+            }
         }
 
 
@@ -200,7 +211,16 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         spinnerUnit.setAdapter(unit_adapter);
         spinnerCurrency.setAdapter(currency_adapter);
         spinnerTimePeriod.setAdapter(timePeriod_adapter);
-        landType.setText(currentSocialCapitalServey);
+
+        if(currentSocialCapitalServey.equals("Forestland"))
+            landType.setText(getResources().getText(R.string.string_forestland));
+        if(currentSocialCapitalServey.equals("Pastureland"))
+            landType.setText(getResources().getText(R.string.string_pastureland));
+        if(currentSocialCapitalServey.equals("Mining Land"))
+            landType.setText(getResources().getText(R.string.string_miningland));
+        if(currentSocialCapitalServey.equals("Cropland"))
+            landType.setText(getResources().getText(R.string.title_cropland));
+      //  landType.setText(currentSocialCapitalServey);
 
 
         for(LandKind landKind:results.getLandKinds()){
@@ -649,9 +669,17 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                     if(String.valueOf(costElementYears1.getYear()).equals(spinnerYear.getSelectedItem()) ){
                         // Log.e("REVE YEAR ",revenueProductYears1.toString());
                         String spinnerTimePeriodStr = spinnerTimePeriod.getSelectedItem().toString();
-                        Frequency frequency = realm.where(Frequency.class)
-                                .equalTo("harvestFrequency",spinnerTimePeriodStr)
-                                .findFirst();
+                        Frequency frequency;
+
+                        if(language.equals("हिन्दी")) {
+                            frequency = realm.where(Frequency.class)
+                                    .equalTo("harvestFrequencyHindi",spinnerTimePeriodStr)
+                                    .findFirst();
+                        }else{
+                            frequency = realm.where(Frequency.class)
+                                    .equalTo("harvestFrequency",spinnerTimePeriodStr)
+                                    .findFirst();
+                        }
 
 
 
