@@ -243,11 +243,11 @@
     <string name="image_saved">चित्र सवे हुवा </string>
     <string name="save_failed">सेव फेल हुआ</string>
     <string name="qn_natural_complex_1_1">आप कितनी बार </string>
-    <string name="qn_natural_complex_1_2"> कटता है</string>
+    <string name="qn_natural_complex_1_2">  कटता है</string>
     <string name="qn_natural_complex_2_1">हर बार काटा </string>
-    <string name="qn_natural_complex_2_2"> की मात्रा क्या था?</string>
+    <string name="qn_natural_complex_2_2">  की मात्रा क्या था?</string>
     <string name="qn_natural_complex_3_1">प्रति यूनिट</string>
-    <string name="qn_natural_complex_3_2">की कीमत क्या थी?</string>
+    <string name="qn_natural_complex_3_2">  की कीमत क्या थी?</string>
     <string name="costs_incur">इस उत्पाद की कटाई में किस प्रकार की लागत अपने ऊपर लेना है?</string>
     <string name="data_on_harvest_activities">आप के पास फसल की गतिविधियों पर कितने साल के डेटा है ?</string>
     <string name="registration_successful">पंजीकरण सफल</string>
@@ -258,7 +258,7 @@
     <string name="qn_natural_cost_1_2" >केलिए आप कितनी बार अपने ऊपर लागत लेते है?</string>
     <string name="qn_natural_cost_1_1" ></string>
     <string name="qn_natural_cost_2_1" >समय अवधि के प्रति </string>
-    <string name="qn_natural_cost_2_2" >की लागत क्या था?</string>
+    <string name="qn_natural_cost_2_2" >  की लागत क्या था?</string>
     <string name="qn_natural_cost_3_1" >प्रति यूनिट</string>
     <string name="qn_natural_cost_3_2">  की कीमत क्या थी?</string>
     <string name="inflation_rate_heading">मँहगाई दर</string>
