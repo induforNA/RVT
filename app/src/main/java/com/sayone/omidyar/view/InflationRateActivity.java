@@ -38,7 +38,7 @@ public class InflationRateActivity extends AppCompatActivity {
                 inflationrateString = inflationRate.getText().toString();
                 editor.putString("inflationRate", inflationrateString);
                 editor.apply();
-                Toast toast = Toast.makeText(context, "Saved", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(context,getResources().getText(R.string.text_data_saved), Toast.LENGTH_SHORT);
                 toast.show();
                 String rate = preferences.getString("inflationRate", "");
                 Log.e("Rate :", rate);
