@@ -66,7 +66,7 @@ public class CostOutlayAdapter extends RecyclerView.Adapter<CostOutlayAdapter.Co
                         .findFirst();
                 outlay.deleteFromRealm();
                 realm.commitTransaction();
-                Toast toast = Toast.makeText(mContext,"Deleted", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(mContext,mContext.getResources().getText(R.string.text_deleted), Toast.LENGTH_SHORT);
                 toast.show();
                 Intent intent=new Intent(mContext,NaturalCapitalCostOutlay.class);
                 mContext.startActivity(intent);

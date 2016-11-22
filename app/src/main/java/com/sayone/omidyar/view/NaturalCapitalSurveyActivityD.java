@@ -685,8 +685,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
     public void saveYearlyDatas(final RevenueProduct revenueProduct2){
         final long revenueProductId = revenueProduct2.getId();
         final ProgressDialog progress = new ProgressDialog(this);
-        progress.setTitle("Loading");
-        progress.setMessage("Wait while loading...");
+        progress.setTitle(getResources().getString(R.string.loading));
+        progress.setMessage(getResources().getString(R.string.wait_while_loading));
         progress.show();
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
@@ -1008,7 +1008,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                     //currentCostProductIndex++;
                     buttonNext.setClickable(true);
                 }else{
-                    Toast.makeText(context,"Completed ",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,getResources().getText(R.string.completed_text),Toast.LENGTH_SHORT).show();
                     allCashFlow();
                     calculateNPV();
 

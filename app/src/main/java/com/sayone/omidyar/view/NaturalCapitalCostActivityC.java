@@ -35,6 +35,7 @@ import com.sayone.omidyar.model.Survey;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.security.interfaces.RSAKey;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
@@ -652,8 +653,8 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
     public void saveYearlyDatas(final CostElement costElement2){
         final long costElementId = costElement2.getId();
         final ProgressDialog progress = new ProgressDialog(this);
-        progress.setTitle("Loading");
-        progress.setMessage("Wait while loading...");
+        progress.setTitle(getResources().getString(R.string.loading));
+        progress.setMessage(getResources().getString(R.string.wait_while_loading));
         progress.show();
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
@@ -919,7 +920,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                     //currentCostProductIndex++;
                     buttonNext.setClickable(true);
                 }else{
-                    Toast.makeText(context,"Completed ",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,getResources().getText(R.string.completed_text),Toast.LENGTH_SHORT).show();
                     allCashFlow();
                     calculateNPV();
 

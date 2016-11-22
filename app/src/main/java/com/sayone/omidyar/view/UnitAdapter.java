@@ -63,7 +63,7 @@ public class UnitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             .findFirst();
                     quantity.deleteFromRealm();
                     realm.commitTransaction();
-                    Toast toast = Toast.makeText(mContext,"Deleted", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(mContext,mContext.getResources().getText(R.string.text_deleted), Toast.LENGTH_SHORT);
                     toast.show();
                     mContext.dialogueCancel();
                     mContext.editExistingUnit();
@@ -78,7 +78,7 @@ public class UnitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     Spinner unitSpinner1, unitSpinner2;
                     final Dialog dialog = new Dialog(mContext);
                     dialog.setContentView(R.layout.add_units);
-                    dialog.setTitle("Enter new units");
+                    dialog.setTitle(mContext.getResources().getString(R.string.units_option_1));
                     dialog.setCancelable(false);
 
                     LinearLayout layout1 = null, layout2 = null;

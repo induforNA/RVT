@@ -296,5 +296,8 @@
     <string name="value_restored">मूल्य सफलतापूर्वक बहाल</string>
     <string name="select_surveyid_landkind">सवे करने केलिए सर्वेक्षण आईडी और भूमि तरह चुनें</string>
     <string name="value_saved_success">मूल्य सफलतापूर्वक सवे हुआ</string>
+    <string name="text_data_saved">सेव्ड किया गया डेटा</string>
+    <string name="text_deleted">डिलीट कर दिया</string>
+    <string name="select_option">एक विकल्प चुनें</string>
 
 </resources>

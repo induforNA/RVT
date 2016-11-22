@@ -81,7 +81,7 @@ public class ParticipantsAdapter extends RecyclerView.Adapter<ParticipantsAdapte
                         .findFirst();
                 participant.deleteFromRealm();
                 realm.commitTransaction();
-                Toast toast = Toast.makeText(mContext,"Deleted", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(mContext,mContext.getResources().getText(R.string.text_deleted), Toast.LENGTH_SHORT);
                 toast.show();
                 Intent intent=new Intent(mContext,MainActivity.class);
                 mContext.startActivity(intent);

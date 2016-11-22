@@ -132,7 +132,7 @@ public class UnitsActivity extends BaseActivity implements View.OnClickListener 
 
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.add_units);
-        dialog.setTitle("Enter new units");
+        dialog.setTitle(getResources().getString(R.string.units_option_1));
         dialog.setCancelable(false);
 
         LinearLayout layout1 = null, layout2 = null;

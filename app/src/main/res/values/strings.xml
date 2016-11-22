@@ -300,6 +300,9 @@
     <string name="value_restored">Value Restored Successfully</string>
     <string name="select_surveyid_landkind">Select Survey Id and Land Kind to Save</string>
     <string name="value_saved_success">Value Saved Successfully</string>
+    <string name="text_data_saved">Data saved</string>
+    <string name="text_deleted">Deleted</string>
+    <string name="select_option">Select an option</string>
 
 
 

@@ -404,7 +404,8 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
 //                    startActivity(intent);
                     }
                 }else{
-                    Toast.makeText(context,"Select an option",Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(context,getResources().getText(R.string.select_option),Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.image_view_menu_icon:
