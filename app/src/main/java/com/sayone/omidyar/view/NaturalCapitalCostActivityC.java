@@ -406,7 +406,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 }
             }
         }
-        if(revenueProducts.size() == 1){
+        if(revenueProducts.size() == 1 && revenueProducts.get(currentCostProductIndex).getCostElementYearses().size() == 1){
             finish();
         }else {
             loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
