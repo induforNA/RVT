@@ -248,7 +248,7 @@
     <string name="qn_natural_complex_2_2">  की मात्रा क्या था?</string>
     <string name="qn_natural_complex_3_1">प्रति यूनिट</string>
     <string name="qn_natural_complex_3_2">  की कीमत क्या थी?</string>
-    <string name="costs_incur">इस उत्पाद की कटाई में किस प्रकार की लागत अपने ऊपर लेना है?</string>
+    <string name="costs_incur">इस उत्पाद की कटाई में किस प्रकार की लागत अपने ऊपर लेना है?(e.g. आधारिक संरचना, उपकरण, परिवहन, बीज/पौध, उर्वरक, पानी, श्रम)</string>
     <string name="data_on_harvest_activities">आप के पास फसल की गतिविधियों पर कितने साल के डेटा है ?</string>
     <string name="registration_successful">पंजीकरण सफल</string>
     <string name="title_start_survey">सर्वेक्षण शुरू करें</string>

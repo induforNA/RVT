@@ -147,7 +147,7 @@
     <string name="time_frame_qstn3">Number of years to project</string>
     <string name="summary_of_survey_heading">Summary of surveys</string>
     <string name="in_progress_text">In progress</string>
-    <string name="completed_text">Completed : </string>
+    <string name="completed_text">Completed  </string>
     <string name="select_all">Select all</string>
     <string name="text_survey1">Survey1</string>
     <string name="text_survey2">Survey2</string>
@@ -257,10 +257,10 @@
     <string name="percentage_area_harvested">Area harvested (in %)</string>
     <string name="qn_cost_1">How many years of data do you have on costs?</string>
     <string name="qn_natural_cost_1_2"></string>
-    <string name="qn_natural_cost_1_1">How often do you incur </string>
-    <string name="qn_natural_cost_2_1">What was the </string>
+    <string name="qn_natural_cost_1_1">How often do you incur cost of </string>
+    <string name="qn_natural_cost_2_1">What was the cost of </string>
     <string name="qn_natural_cost_2_2">per time period</string>
-    <string name="qn_natural_cost_3_1">What was the </string>
+    <string name="qn_natural_cost_3_1">What was the cost of</string>
     <string name="qn_natural_cost_3_2">per unit?</string>
     <string name="title_start_survey">Start Survey</string>
     <string name="inflation_rate_heading">INFLATION RATE</string>
