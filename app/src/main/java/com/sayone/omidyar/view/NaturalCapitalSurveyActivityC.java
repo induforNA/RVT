@@ -626,6 +626,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
             //Log.e("BBB ", revenueProductYears1.toString());
         }
         Log.e("AA ", String.valueOf(revenueProductYearsCheck == null));
+        Log.e("INDEX ZERO ",calculateProjectionIndex(projectionIndex)+"");
         if(revenueProductYearsCheck == null){
             //realm.beginTransaction();
             RevenueProductYears revenueProductYears = realm.createObject(RevenueProductYears.class);

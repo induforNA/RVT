@@ -85,6 +85,7 @@ public class LoadingActivity extends BaseActivity {
                     realm.beginTransaction();
                     SocialCapitalQuestions socialCapitalQuestions = realm.createObject(SocialCapitalQuestions.class);
                     socialCapitalQuestions.setId(getNextKeySocialCapitalQuestions());
+                    socialCapitalQuestions.setQuestionno(Integer.parseInt(jsonObject.getString("questionno")));
                     socialCapitalQuestions.setQuestion(jsonObject.getString("question"));
                     socialCapitalQuestions.setQuestionHindi(jsonObject.getString("questionHindi"));
                     socialCapitalQuestions.setOptionType(jsonObject.getString("optiontype"));

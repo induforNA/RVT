@@ -370,8 +370,9 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                         //Log.e("Current id ", socialCapitalAnswerOptionsesList.size() + "");
                         RealmList<MultipleAnswer> multipleAnswers;
                         multipleAnswers = new RealmList<>();
+                        int qNo = landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getSocialCapitalQuestion().getQuestionno();
                         for (SocialCapitalAnswerOptions socialCapitalAnswerOptions : socialCapitalAnswerOptionsesList) {
-                            multipleAnswers.add(addAnswer(socialCapitalAnswerOptions.getId()));
+                            multipleAnswers.add(addAnswer(socialCapitalAnswerOptions.getId(), qNo));
                         }
                         realm.beginTransaction();
                         landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).setMultipleAnswers(multipleAnswers);
@@ -512,11 +513,18 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
 //        optionERadio.setChecked(false);
     }
 
-    public MultipleAnswer addAnswer(long answerId) {
+    public MultipleAnswer addAnswer(long answerId, int qNo) {
+        SocialCapitalAnswerOptions socialCapitalAnswerOptions = realm.where(SocialCapitalAnswerOptions.class)
+                .equalTo("id",answerId)
+                .findFirst();
+
+
         realm.beginTransaction();
         MultipleAnswer multipleAnswer = realm.createObject(MultipleAnswer.class);
         multipleAnswer.setId(getNextKeyMultipleAnswer());
+        multipleAnswer.setAnswerValue(socialCapitalAnswerOptions.getVal());
         multipleAnswer.setAnswer((int) answerId);
+        multipleAnswer.setQuestionNo(qNo);
         realm.commitTransaction();
         return multipleAnswer;
     }

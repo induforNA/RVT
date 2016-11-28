@@ -15,10 +15,12 @@ import android.widget.TextView;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
+import com.sayone.omidyar.model.LandKind;
 
 import java.util.Locale;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * Created by sayone on 14/10/16.
@@ -99,6 +101,7 @@ public class StartLandTypeActivity extends BaseActivity implements View.OnClickL
                 startActivity(intent);
                 break;
             case R.id.back_button:
+                previousLandKind();
                 finish();
                 break;
             case  R.id.drawer_close_btn:
@@ -121,6 +124,35 @@ public class StartLandTypeActivity extends BaseActivity implements View.OnClickL
             case R.id.image_view_menu_icon:
                 toggleMenuDrawer();
                 break;
+        }
+    }
+
+    public void previousLandKind(){
+        RealmResults<LandKind> landKindRealmResults = realm.where(LandKind.class)
+                .equalTo("surveyId",serveyId)
+                .equalTo("status","active")
+                .findAll();
+        int j = 0;
+        int i = 0;
+        for (LandKind landKind : landKindRealmResults) {
+            Log.e("TAG ", landKind.toString());
+            //Log.e(TAG, String.valueOf(survey1.getParticipants().size()));
+            if(landKind.getName().equals(currentSocialCapitalServey)){
+                j = i - 1;
+            }
+            i++;
+        }
+
+        if(j >= 0){
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("currentSocialCapitalServey", landKindRealmResults.get(j).getName());
+            editor.apply();
+
+            Intent intent = new Intent(getApplicationContext(),StartLandTypeActivity.class);
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(getApplicationContext(),CertificateActivity.class);
+            startActivity(intent);
         }
     }
 
