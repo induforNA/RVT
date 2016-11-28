@@ -350,7 +350,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                 landKind.getForestLand().setCashFlows(cashFlows);
                 realm.commitTransaction();
 
-                Log.e("MM ",landKind.getForestLand().getCashFlows().get(0).toString());
+                // Log.e("MM ",landKind.getForestLand().getCashFlows().get(0).toString());
             }else if(landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")){
                 int k = 0;
                 for(RevenueProduct revenueProduct:landKind.getCropLand().getRevenueProducts()){
