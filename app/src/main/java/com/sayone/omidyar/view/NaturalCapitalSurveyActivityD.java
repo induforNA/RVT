@@ -418,11 +418,14 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 }
             }
         }
-        if(revenueProducts.size() == 1 && revenueProducts.get(currentCostProductIndex).getRevenueProductYearses().size() == 1){
-            finish();
-        }else {
+//        if(revenueProducts.size() == 1 && revenueProducts.get(0).getRevenueProductYearses().size() == 1){
+//            finish();
+//        }else {
+            if(revenueProducts.size() == 1){
+                currentCostProductIndex = 0;
+            }
             loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
-        }
+//        }
     }
 
     @Override

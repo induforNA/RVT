@@ -85,7 +85,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
     JSONObject jsonObject;
     private Context context;
-    private Button sendDataToServer,resetData;
+    private Button sendDataToServer,resetData,exportData;
     private SharedPreferences sharedPref;
     private Set<String> set = null;
 
@@ -101,6 +101,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         completedSurveys = (TextView) findViewById(R.id.completed_surveys);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_survey_list);
         sendDataToServer = (Button) findViewById(R.id.button_send_data_to_server);
+        exportData=(Button)findViewById(R.id.button_export);
         resetData=(Button)findViewById(R.id.button_reset_data);
         sharedPref = context.getSharedPreferences(
                 "com.sayone.omidyar.PREFERENCE_FILE_KEY_SET", Context.MODE_PRIVATE);
@@ -117,6 +118,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         recyclerView.setAdapter(surveyAdapter);
         sendDataToServer.setOnClickListener(this);
         resetData.setOnClickListener(this);
+        exportData.setOnClickListener(this);
 
 
         completedSurveys.setText("" + surveyCount);
@@ -1251,6 +1253,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
         switch (view.getId()) {
             case R.id.button_send_data_to_server:
+                exportData.setVisibility(View.VISIBLE);
                 set = sharedPref.getStringSet("surveySet", null);
                 for (String temp : set) {
                     Log.e("Sirvey : ", temp);
@@ -1303,6 +1306,10 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 surveyAdapter.notifyDataSetChanged();
                 surveyCount=0;
                 completedSurveys.setText("" + surveyCount);
+                break;
+
+            case R.id.button_export:
+                Toast.makeText(getApplicationContext(),"expoted",Toast.LENGTH_SHORT).show();
                 break;
 
         }

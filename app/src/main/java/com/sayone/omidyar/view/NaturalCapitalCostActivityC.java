@@ -406,11 +406,15 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 }
             }
         }
-        if(revenueProducts.size() == 1 && revenueProducts.get(currentCostProductIndex).getCostElementYearses().size() == 1){
-            finish();
-        }else {
+        Log.e("INDEX ", revenueProducts.size()+" "+currentCostProductIndex+" "+revenueProducts.get(0).getCostElementYearses().size());
+//        if(revenueProducts.size() == 1 && revenueProducts.get(0) == null){
+//            finish();
+//        }else {
+            if(revenueProducts.size() == 1){
+                currentCostProductIndex = 0;
+            }
             loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
-        }
+//        }
     }
 
     @Override
@@ -570,7 +574,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 yearList.add(costElementYears.getYear()+"");
                 year_adapter.notifyDataSetChanged();
 
-                // Log.e("REV PROD ID ",revenueProductYears.getRevenueProductId()+"");
+                Log.e("REV PROD ID zzzzz",costElementYears.getYear()+"");
                 totalYearsCount++;
             }
         }

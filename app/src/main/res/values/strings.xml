@@ -304,6 +304,8 @@
     <string name="text_deleted">Deleted</string>
     <string name="select_option">Select an option</string>
 
+    <string name="button_export">Export Data</string>
+
 
 
 </resources>

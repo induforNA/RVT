@@ -26,7 +26,9 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.SurveySummaryActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape" >
+
+        </activity>
         <activity
             android:name=".view.UnitsActivity"
             android:screenOrientation="landscape" />
