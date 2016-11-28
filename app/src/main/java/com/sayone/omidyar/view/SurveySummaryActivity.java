@@ -496,9 +496,9 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             } else
                 jsonObjectMiningLand.put("costElements", getCostElement(miningLand.getCostElements()));
             if (miningLand.getRevenueProducts() == null) {
-                jsonObjectMiningLand.put("costOutlays", "");
+                jsonObjectMiningLand.put("revenueProducts", "");
             } else
-                jsonObjectMiningLand.put("costOutlays", getRevenueProducts(miningLand.getRevenueProducts()));
+                jsonObjectMiningLand.put("revenueProducts", getRevenueProducts(miningLand.getRevenueProducts()));
             if (miningLand.getDiscountedCashFlows() == null) {
                 jsonObjectMiningLand.put("discountedCashFlows", "");
             } else
@@ -547,9 +547,9 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             } else
                 jsonObjectPastureLand.put("costElements", getCostElement(pastureLand.getCostElements()));
             if (pastureLand.getRevenueProducts() == null) {
-                jsonObjectPastureLand.put("costOutlays", "");
+                jsonObjectPastureLand.put("revenueProducts", "");
             } else
-                jsonObjectPastureLand.put("costOutlays", getRevenueProducts(pastureLand.getRevenueProducts()));
+                jsonObjectPastureLand.put("revenueProducts", getRevenueProducts(pastureLand.getRevenueProducts()));
             if (pastureLand.getDiscountedCashFlows() == null) {
                 jsonObjectPastureLand.put("discountedCashFlows", "");
             } else
@@ -597,9 +597,9 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             } else
                 jsonObjectCropLand.put("outlays", getOutLays(cropLand.getOutlays()));
             if (cropLand.getRevenueProducts() == null) {
-                jsonObjectCropLand.put("costOutlays", "");
+                jsonObjectCropLand.put("revenueProducts", "");
             } else
-                jsonObjectCropLand.put("costOutlays", getRevenueProducts(cropLand.getRevenueProducts()));
+                jsonObjectCropLand.put("revenueProducts", getRevenueProducts(cropLand.getRevenueProducts()));
             if (cropLand.getDiscountingFactors() == null) {
                 jsonObjectCropLand.put("discountingFactors", "");
             } else
@@ -647,9 +647,9 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             } else
                 jsonObjectForestLand.put("Outlays", getOutLays(forestLand.getOutlays()));
             if (forestLand.getRevenueProducts() == null) {
-                jsonObjectForestLand.put("costOutlays", "");
+                jsonObjectForestLand.put("revenueProducts", "");
             } else
-                jsonObjectForestLand.put("costOutlays", getRevenueProducts(forestLand.getRevenueProducts()));
+                jsonObjectForestLand.put("revenueProducts", getRevenueProducts(forestLand.getRevenueProducts()));
             if (forestLand.getSurveyId() == null) {
                 jsonObjectForestLand.put("surveyId", "");
             } else
@@ -736,10 +736,17 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                     jsonObjectRevenueProductYear.put("marketPriceCurrency", "");
                 } else
                     jsonObjectRevenueProductYear.put("marketPriceCurrency", revenueProductYear.getMarketPriceCurrency());
+
                 if (revenueProductYear.getProjectedIndex() == 0) {
-                    jsonObjectRevenueProductYear.put("projectedIndex", "");
-                } else
+                    if(revenueProductYear.getYear() == 0){
+                        jsonObjectRevenueProductYear.put("projectedIndex", "");
+                    }else {
+                        jsonObjectRevenueProductYear.put("projectedIndex", 0);
+                    }
+                } else {
                     jsonObjectRevenueProductYear.put("projectedIndex", revenueProductYear.getProjectedIndex());
+                }
+
                 if (revenueProductYear.getQuantityUnit() == null) {
                     jsonObjectRevenueProductYear.put("quantityUnit", "");
                 } else
@@ -947,10 +954,21 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                     jsonObjectCostElementYears.put("costPerPeriodUni", "");
                 } else
                     jsonObjectCostElementYears.put("costPerPeriodUni", costElementYears.getCostPerPeriodUnit());
+
+
+
+
                 if (costElementYears.getProjectedIndex() == 0) {
-                    jsonObjectCostElementYears.put("projectedIndex", "");
-                } else
+                    if(costElementYears.getYear() == 0){
+                        jsonObjectCostElementYears.put("projectedIndex", "");
+                    }else{
+                        jsonObjectCostElementYears.put("projectedIndex", 0);
+                    }
+                } else {
                     jsonObjectCostElementYears.put("projectedIndex", costElementYears.getProjectedIndex());
+                }
+
+
                 if (costElementYears.getSubtotal() == 0) {
                     jsonObjectCostElementYears.put("subtotal", "");
                 } else
@@ -1076,10 +1094,15 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                     jsonObjectSocialCapitalAnswer.put("factorScore", "");
                 } else
                     jsonObjectSocialCapitalAnswer.put("factorScore", socialCapitalAnswer.getFactorScore());
-//                if(socialCapitalAnswer.getSocialCapitalQuestion()==null){
-//                    jsonObjectSocialCapitalAnswer.put("socialCapitalQuestion","");
-//                }else
-//                jsonObjectSocialCapitalAnswer.put("socialCapitalQuestion",getSocialCapitalQuestions(socialCapitalAnswer.getSocialCapitalQuestion()));
+
+
+                if(socialCapitalAnswer.getSocialCapitalQuestion()==null){
+                    jsonObjectSocialCapitalAnswer.put("socialCapitalQuestion","");
+                }else {
+                    jsonObjectSocialCapitalAnswer.put("socialCapitalQuestion", getSocialCapitalQuestions(socialCapitalAnswer.getSocialCapitalQuestion()));
+                }
+
+
                 if (socialCapitalAnswer.getMultipleAnswers() == null) {
                     jsonObjectSocialCapitalAnswer.put("multipleAnswers", "");
                 } else
@@ -1101,12 +1124,24 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             try {
                 if (multipleAnswer.getId() == 0) {
                     jsonObjectMultipleAnwser.put("id", "");
-                } else
+                } else {
                     jsonObjectMultipleAnwser.put("id", multipleAnswer.getId());
+                }
                 if (multipleAnswer.getAnswer() == 0) {
                     jsonObjectMultipleAnwser.put("answer", "");
-                } else
+                } else {
                     jsonObjectMultipleAnwser.put("answer", multipleAnswer.getAnswer());
+                }
+                if (multipleAnswer.getAnswerValue() == 0) {
+                    jsonObjectMultipleAnwser.put("answerValue", "");
+                } else {
+                    jsonObjectMultipleAnwser.put("answerValue", multipleAnswer.getAnswerValue());
+                }
+                if (multipleAnswer.getQuestionNo() == 0) {
+                    jsonObjectMultipleAnwser.put("questionNo", "");
+                } else {
+                    jsonObjectMultipleAnwser.put("questionNo", multipleAnswer.getQuestionNo());
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }

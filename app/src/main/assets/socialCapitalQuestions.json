@@ -1,6 +1,7 @@
 {
   "socialCapitalQuestions": [
     {
+      "questionno": 1,
       "question": "What rights do households in this community have over this parcel?",
       "questionHindi": "इस पार्सल पर इस समुदाय के परिवारों का अधिकार क्या है?",
       "weight": "20",
@@ -34,6 +35,7 @@
       ]
     },
     {
+      "questionno": 2,
       "question": "What rights to this parcel are provided through a state-backed and legally recognized record (i.e. title, lease, etc.)?",
       "questionHindi": "राज्य का समर्थन किया और कानूनी रूप से मान्यता प्राप्त रिकॉर्ड के माध्यम (अर्थात शीर्षक, पट्टे आदि) से इस पार्सल को क्या अधिकार  प्रदान की जाती हैं?",
       "weight": "20",
@@ -67,6 +69,7 @@
       ]
     },
     {
+      "questionno": 3,
       "question": "Are the boundaries for this parcel well known and understood by government authorities and/or community members?",
       "questionHindi": "इस पार्सल के लिए सीमाओं को अच्छी तरह से जाना जाता है और सरकार के अधिकारियों और / या समुदाय के सदस्यों द्वारा समझ रहे हैं?",
       "weight": "5",
@@ -90,6 +93,7 @@
       ]
     },
     {
+      "questionno": 4,
       "question": "Does this group feel confident that they will be able to continue to use the parcel without constraints indefinitely into the future?",
       "questionHindi": "क्या इस समूह को भरोसा है कि वे भविष्य में अनिश्चित काल के लिए बाधाओं के बिना पार्सल का उपयोग करने के लिए जारी रखने  को सक्षम हो जाएगा लगता है?",
       "weight": "5",
@@ -123,6 +127,7 @@
       ]
     },
     {
+      "questionno": 5,
       "question": "Are there any current disputes related to the boundaries or rights associated with this parcel?",
       "questionHindi": "वहाँ किसी भी वर्तमान सीमाओं या इस पार्सल के साथ जुड़े अधिकारों से संबंधित विवादों हैं?",
       "weight": "5",
@@ -151,6 +156,7 @@
       ]
     },
     {
+      "questionno": 6,
       "question": "Do households in this community use the parcel and access the resource based upon locally recognized customary norms?",
       "questionHindi": "क्या इस समुदाय में घरों पार्सल का उपयोग और स्थानीय स्तर पर मान्यता प्राप्त प्रथागत मानदंडों पर आधारित संसाधन उपयोग करते हैं?",
       "weight": "5",
@@ -174,6 +180,7 @@
       ]
     },
     {
+      "questionno": 7,
       "question": "Is there a group or committee in this community with specific responsibility to manage or oversee matters related to use of this parcel?",
       "questionHindi": "इस समुदाय में इस पार्सल के उपयोग से संबंधित मामलों की देखरेख करने का विशेष जिम्मेदारी के साथ एक प्रबंधन या समिति है?",
       "weight": "5",
@@ -192,6 +199,7 @@
       ]
     },
     {
+      "questionno": 8,
       "question": "Are there rules and regulations associated with this parcel that were created by the community itself?",
       "questionHindi": "क्या इस पार्सल के साथ जुड़े समुदाय स्वयं के द्वारा बनाया गया नियमों हैं?",
       "weight": "5",
@@ -215,6 +223,7 @@
       ]
     },
     {
+      "questionno": 9,
       "question": "Do all stakeholders within the community generally have equal access to the parcel?",
       "questionHindi": "प्रबंधन समूह समुदाय के सभी वर्गों के प्रतिनिधि शामिल करता है?",
       "weight": "5",
@@ -238,6 +247,7 @@
       ]
     },
     {
+      "questionno": 10,
       "question": "Does the management group include representatives from all segments of the community?",
       "questionHindi": "प्रबंधन समूह समुदाय के सभी वर्गों के प्रतिनिधि शामिल करता है?",
       "weight": "5",
@@ -261,6 +271,7 @@
       ]
     },
     {
+      "questionno": 11,
       "question": "Are the rules and regulations associated with this parcel generally viewed as fair and legitimate?",
       "questionHindi": "क्या इस पार्सल के साथ जुड़े नियमों आम तौर पर उचित और वैध के रूप में देखा जाता हैं?",
       "weight": "5",
@@ -289,6 +300,7 @@
       ]
     },
     {
+      "questionno": 12,
       "question": "How long have the institutions for this parcel been operating?",
       "questionHindi": "इस पार्सल के लिए संस्थानों कब से काम कर रहा है?",
       "weight": "5",
@@ -322,6 +334,7 @@
       ]
     },
     {
+      "questionno": 13,
       "question": "How often are decisions made by the committee ignored or not implemented?",
       "questionHindi": "कितनी बार समिति द्वारा किए गए फैसले को नजरअंदाज कर दिया है या नहीं लागू कर रहे हैं?",
       "weight": "5",
@@ -350,6 +363,7 @@
       ]
     },
     {
+      "questionno": 14,
       "question": "How much of your community's use of this resource/product comes from this parcel?",
       "questionHindi": "अपने समुदाय की आजीविका का कितना इस पार्सल द्वारा उत्पन्न होता है?",
       "weight": "5",

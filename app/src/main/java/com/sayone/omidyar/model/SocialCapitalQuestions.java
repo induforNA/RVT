@@ -14,6 +14,8 @@ public class SocialCapitalQuestions extends RealmObject {
 
     private String question;
 
+    private int questionno;
+
     private String questionHindi;
 
     private String optionType;
@@ -69,5 +71,13 @@ public class SocialCapitalQuestions extends RealmObject {
 
     public void setSocialCapitalAnswerOptionses(RealmList<SocialCapitalAnswerOptions> socialCapitalAnswerOptionses) {
         this.socialCapitalAnswerOptionses = socialCapitalAnswerOptionses;
+    }
+
+    public int getQuestionno() {
+        return questionno;
+    }
+
+    public void setQuestionno(int questionno) {
+        this.questionno = questionno;
     }
 }

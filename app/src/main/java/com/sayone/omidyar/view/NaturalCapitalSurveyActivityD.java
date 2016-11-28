@@ -1068,6 +1068,10 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 // Log.e("DIS RATE ", landKind.getSocialCapitals().getDiscountRate()+"");
                 int k = 0;
                 for(RevenueProduct revenueProduct:landKind.getForestLand().getRevenueProducts()){
+
+                    for (RevenueProductYears revenueProductYears00 : revenueProduct.getRevenueProductYearses()) {
+                        Log.e("RPPPPPPP ", revenueProductYears00+"");
+                    }
                     if(k <= 0) {
                         for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
                             if(!landKind.getSocialCapitals().isDiscountFlag()){

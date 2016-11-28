@@ -14,6 +14,10 @@ public class MultipleAnswer extends RealmObject {
 
     private int answer;
 
+    private long answerValue;
+
+    private int questionNo;
+
     public long getId() {
         return id;
     }
@@ -28,5 +32,21 @@ public class MultipleAnswer extends RealmObject {
 
     public void setAnswer(int answer) {
         this.answer = answer;
+    }
+
+    public long getAnswerValue() {
+        return answerValue;
+    }
+
+    public void setAnswerValue(long answerValue) {
+        this.answerValue = answerValue;
+    }
+
+    public int getQuestionNo() {
+        return questionNo;
+    }
+
+    public void setQuestionNo(int questionNo) {
+        this.questionNo = questionNo;
     }
 }
