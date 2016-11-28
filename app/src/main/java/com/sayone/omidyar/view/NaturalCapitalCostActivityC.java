@@ -226,7 +226,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
         for(LandKind landKind:results.getLandKinds()){
             if(landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")){
-                if(landKind.getForestLand().getRevenueProducts().size() > 0){
+                if(landKind.getForestLand().getCostElements().size() > 0){
                     //loadYears(landKind.getForestLand().getRevenueProducts().get(0).getRevenueProductYearses());
                     revenueProducts = landKind.getForestLand().getCostElements();
                     totalCostProductCount = revenueProducts.size();
@@ -238,38 +238,38 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                     }
                 }
             }else if(landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")){
-                if(landKind.getCropLand().getRevenueProducts().size() > 0){
+                if(landKind.getCropLand().getCostElements().size() > 0){
                     //loadYears(landKind.getForestLand().getRevenueProducts().get(0).getRevenueProductYearses());
                     revenueProducts = landKind.getCropLand().getCostElements();
                     totalCostProductCount = revenueProducts.size();
                     currentCostProductIndex = 0;
                     currentYearIndex = 0;
                     if(currentCostProductIndex < totalCostProductCount){
-                        productReveneIdCon = landKind.getCropLand().getRevenueProducts().get(currentCostProductIndex).getId();
+                        productReveneIdCon = landKind.getCropLand().getCostElements().get(currentCostProductIndex).getId();
                         loadRevenueProduct(landKind.getCropLand().getCostElements().get(currentCostProductIndex));
                     }
                 }
             }else if(landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")){
-                if(landKind.getPastureLand().getRevenueProducts().size() > 0){
+                if(landKind.getPastureLand().getCostElements().size() > 0){
                     //loadYears(landKind.getForestLand().getRevenueProducts().get(0).getRevenueProductYearses());
                     revenueProducts = landKind.getPastureLand().getCostElements();
                     totalCostProductCount = revenueProducts.size();
                     currentCostProductIndex = 0;
                     currentYearIndex = 0;
                     if(currentCostProductIndex < totalCostProductCount){
-                        productReveneIdCon = landKind.getPastureLand().getRevenueProducts().get(currentCostProductIndex).getId();
+                        productReveneIdCon = landKind.getPastureLand().getCostElements().get(currentCostProductIndex).getId();
                         loadRevenueProduct(landKind.getPastureLand().getCostElements().get(currentCostProductIndex));
                     }
                 }
             }else if(landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")){
-                if(landKind.getMiningLand().getRevenueProducts().size() > 0){
+                if(landKind.getMiningLand().getCostElements().size() > 0){
                     //loadYears(landKind.getForestLand().getRevenueProducts().get(0).getRevenueProductYearses());
                     revenueProducts = landKind.getMiningLand().getCostElements();
                     totalCostProductCount = revenueProducts.size();
                     currentCostProductIndex = 0;
                     currentYearIndex = 0;
                     if(currentCostProductIndex < totalCostProductCount){
-                        productReveneIdCon = landKind.getMiningLand().getRevenueProducts().get(currentCostProductIndex).getId();
+                        productReveneIdCon = landKind.getMiningLand().getCostElements().get(currentCostProductIndex).getId();
                         loadRevenueProduct(landKind.getMiningLand().getCostElements().get(currentCostProductIndex));
                     }
                 }
