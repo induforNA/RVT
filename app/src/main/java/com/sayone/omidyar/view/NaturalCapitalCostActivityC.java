@@ -406,11 +406,31 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 }
             }
         }
-        if(revenueProducts.size() == 1 && revenueProducts.get(currentCostProductIndex).getCostElementYearses().size() == 1){
-            finish();
+
+        if(revenueProducts.size() == 1){
+            int yearCounting = 0;
+            for(CostElementYears costElementYearsA: revenueProducts.get(0).getCostElementYearses()){
+                Log.e("YEAR ", costElementYearsA.getYear()+"");
+                if(costElementYearsA.getYear() != 0 && costElementYearsA.getYear() < Calendar.getInstance().get(Calendar.YEAR)){
+                    yearCounting++;
+                }
+            }
+            if(yearCounting == 1){
+                finish();
+            }else {
+                loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
+            }
         }else {
             loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
         }
+
+
+
+//        if(revenueProducts.size() == 1 && revenueProducts.get(currentCostProductIndex).getCostElementYearses().size() == 1){
+//            finish();
+//        }else {
+//            loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
+//        }
     }
 
     @Override

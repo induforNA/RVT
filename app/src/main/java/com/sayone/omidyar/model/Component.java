@@ -39,6 +39,8 @@ public class Component extends RealmObject {
 
     private double totalValue;
 
+    private String totalValueStr;
+
     private double totalSocialCapitalScore;
 
     public long getId() {
@@ -167,5 +169,13 @@ public class Component extends RealmObject {
 
     public void setSurveyId(String surveyId) {
         this.surveyId = surveyId;
+    }
+
+    public String getTotalValueStr() {
+        return totalValueStr;
+    }
+
+    public void setTotalValueStr(String totalValueStr) {
+        this.totalValueStr = totalValueStr;
     }
 }

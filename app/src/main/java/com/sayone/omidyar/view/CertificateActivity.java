@@ -16,6 +16,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
@@ -160,7 +161,6 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         Format formatter = new SimpleDateFormat("dd/MM/yyyy");
         String s = formatter.format(surveyCheck.getDate());
 
-
         RealmResults<LandKind> landKinds = realm.where(LandKind.class)
                 .equalTo("surveyId", surveyId)
                 .equalTo("status", "active")
@@ -210,6 +210,11 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 //                }
                 Picasso.with(context).load(fforest).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageForest);
                 socialCapitalForest.setText("" + landKind.getSocialCapitals().getScore() + "/20");
+
+                realm.beginTransaction();
+                surveyCheck.getComponents().setForestSocialCapitalScore(landKind.getSocialCapitals().getScore());
+                realm.commitTransaction();
+
                 if (surveyCheck.getComponents() != null) {
                     if (surveyCheck.getComponents().getForestValue() != 0) {
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
@@ -256,6 +261,9 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 Picasso.with(context).load(fcrop).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageCrop);
                 socialCapitalCrop.setText("" + landKind.getSocialCapitals().getScore() + "/20");
 
+                realm.beginTransaction();
+                surveyCheck.getComponents().setCroplandSocialCapitalScore(landKind.getSocialCapitals().getScore());
+                realm.commitTransaction();
 
                 if (surveyCheck.getComponents() != null) {
                     if (surveyCheck.getComponents().getCroplandValue() != 0) {
@@ -302,6 +310,9 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 Picasso.with(context).load(fpasture).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImagePasture);
                 socialCapitalPasture.setText("" + landKind.getSocialCapitals().getScore() + "/20");
 
+                realm.beginTransaction();
+                surveyCheck.getComponents().setPastureSocialCapitalScore(landKind.getSocialCapitals().getScore());
+                realm.commitTransaction();
 
                 if (surveyCheck.getComponents() != null) {
                     if (surveyCheck.getComponents().getPastureValue() != 0) {
@@ -348,6 +359,9 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 Picasso.with(context).load(fmining).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageMining);
                 socialCapitalMining.setText("" + landKind.getSocialCapitals().getScore() + "/20");
 
+                realm.beginTransaction();
+                surveyCheck.getComponents().setMiningSocialCapitalScore(landKind.getSocialCapitals().getScore());
+                realm.commitTransaction();
 
                 if (surveyCheck.getComponents() != null) {
                     if (surveyCheck.getComponents().getMiningLandValue() != 0) {
@@ -420,6 +434,10 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 
         String totalValStr  = formattedString(Long.valueOf(numberProcess(lowerLimitStr)))+" ~ "+formattedString(Long.valueOf(numberProcess(upperLimitStr)));
         Log.e("Final Value Range ",totalValStr);
+
+        realm.beginTransaction();
+        surveyCheck.getComponents().setTotalValueStr(totalValStr);
+        realm.commitTransaction();
 
         totalText.setText(totalValStr);
 

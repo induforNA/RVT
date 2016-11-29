@@ -418,8 +418,21 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 }
             }
         }
-        if(revenueProducts.size() == 1 && revenueProducts.get(currentCostProductIndex).getRevenueProductYearses().size() == 1){
-            finish();
+//        Log.e("AA BB ", revenueProducts.get(0).getRevenueProductYearses().size()+"");
+
+        if(revenueProducts.size() == 1){
+            int yearCounting = 0;
+            for(RevenueProductYears revenueProductYearsA: revenueProducts.get(0).getRevenueProductYearses()){
+                Log.e("YEAR ", revenueProductYearsA.getYear()+"");
+                if(revenueProductYearsA.getYear() != 0 && revenueProductYearsA.getYear() < Calendar.getInstance().get(Calendar.YEAR)){
+                    yearCounting++;
+                }
+            }
+            if(yearCounting == 1){
+                finish();
+            }else {
+                loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
+            }
         }else {
             loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
         }

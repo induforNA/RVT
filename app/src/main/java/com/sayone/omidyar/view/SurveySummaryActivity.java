@@ -47,6 +47,7 @@ import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.MiningLand;
 import com.sayone.omidyar.model.MultipleAnswer;
 import com.sayone.omidyar.model.Outlay;
+import com.sayone.omidyar.model.OutlayYears;
 import com.sayone.omidyar.model.Participant;
 import com.sayone.omidyar.model.PastureLand;
 import com.sayone.omidyar.model.RevenueProduct;
@@ -726,10 +727,13 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                     jsonObjectRevenueProductYear.put("marketPriceValue", "");
                 } else
                     jsonObjectRevenueProductYear.put("marketPriceValue", revenueProductYear.getMarketPriceValue());
+
                 if (revenueProductYear.getHarvestFrequencyUnit() == 0) {
-                    jsonObjectRevenueProductYear.put("harvestFrequencyUnit", "");
-                } else
+                    jsonObjectRevenueProductYear.put("harvestFrequencyUnit", 0);
+                } else {
                     jsonObjectRevenueProductYear.put("harvestFrequencyUnit", revenueProductYear.getHarvestFrequencyUnit());
+                }
+
                 if (revenueProductYear.getMarketPriceCurrency() == null) {
                     jsonObjectRevenueProductYear.put("marketPriceCurrency", "");
                 } else
@@ -759,8 +763,14 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                     jsonObjectRevenueProductYear.put("subtotal", revenueProductYear.getSubtotal());
                 if (revenueProductYear.getYear() == 0) {
                     jsonObjectRevenueProductYear.put("year", "");
-                } else
+                } else {
                     jsonObjectRevenueProductYear.put("year", revenueProductYear.getYear());
+                }
+                if (revenueProductYear.getHarvestArea() == 0) {
+                    jsonObjectRevenueProductYear.put("harvestArea", "");
+                } else {
+                    jsonObjectRevenueProductYear.put("harvestArea", revenueProductYear.getHarvestArea());
+                }
 
 
             } catch (JSONException e) {
@@ -779,38 +789,67 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             try {
                 if (outlay.getId() == 0) {
                     jsonObjectOutLays.put("id", "");
-                } else
+                } else {
                     jsonObjectOutLays.put("id", outlay.getId());
+                }
                 if (outlay.getSurveyId() == null) {
                     jsonObjectOutLays.put("surveyId", "");
-                } else
+                } else {
                     jsonObjectOutLays.put("surveyId", outlay.getSurveyId());
-//                if (outlay.getYear() == 0) {
-//                    jsonObjectOutLays.put("year", "");
-//                } else
-//                    jsonObjectOutLays.put("year", outlay.getYear());
-//                if (outlay.getItemName() == null) {
-//                    jsonObjectOutLays.put("itemName", "");
-//                } else
-//                    jsonObjectOutLays.put("itemName", outlay.getItemName());
-//                if (outlay.getPrice() == 0) {
-//                    jsonObjectOutLays.put("price", "");
-//                } else
-//                    jsonObjectOutLays.put("price", outlay.getPrice());
-//                if (outlay.getType() == null) {
-//                    jsonObjectOutLays.put("type", "");
-//                } else
-//                    jsonObjectOutLays.put("type", outlay.getType());
-//                if (outlay.getUnit() == null) {
-//                    jsonObjectOutLays.put("unit", "");
-//                } else
-//                    jsonObjectOutLays.put("unit", outlay.getUnit());
+                }
+                if (outlay.getSurveyId() == null) {
+                    jsonObjectOutLays.put("itemName", "");
+                } else {
+                    jsonObjectOutLays.put("itemName", outlay.getItemName());
+                }
+                if (outlay.getOutlayYearses() == null) {
+                    jsonObjectOutLays.put("outlayYears", "");
+                } else {
+                    jsonObjectOutLays.put("outlayYears", getOutlayYears(outlay.getOutlayYearses()));
+                }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             jsonOutLaysArray.put(jsonObjectOutLays);
         }
         return jsonOutLaysArray;
+    }
+
+    private JSONArray getOutlayYears(RealmList<OutlayYears> outlayYearses) {
+
+        JSONArray jsonOutlayYearsArray = new JSONArray();
+        for (OutlayYears outlayYears : outlayYearses) {
+            JSONObject jsonObjectOutlayYears = new JSONObject();
+            try {
+                if (outlayYears.getId() == 0) {
+                    jsonObjectOutlayYears.put("id", "");
+                } else {
+                    jsonObjectOutlayYears.put("id", outlayYears.getId());
+                }
+                if (outlayYears.getYear() == 0) {
+                    jsonObjectOutlayYears.put("year", "");
+                } else {
+                    jsonObjectOutlayYears.put("year", outlayYears.getYear());
+                }
+                if (outlayYears.getPrice() == 0) {
+                    jsonObjectOutlayYears.put("price", 0);
+                } else {
+                    jsonObjectOutlayYears.put("price", outlayYears.getPrice());
+                }
+                Log.e("GGG ",outlayYears.toString());
+                if (outlayYears.getUnit() == null) {
+                    jsonObjectOutlayYears.put("unit", "");
+                } else {
+                    jsonObjectOutlayYears.put("unit", outlayYears.getUnit());
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            jsonOutlayYearsArray.put(jsonObjectOutlayYears);
+        }
+        return jsonOutlayYearsArray;
     }
 
     private JSONArray getDiscountingFactors(RealmList<DiscountingFactor> discountingFactors) {
@@ -1273,8 +1312,14 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 jsonObjectComponent.put("totalValue", component.getTotalValue());
             if (component.getTotalSocialCapitalScore() == 0) {
                 jsonObjectComponent.put("totalSocialCapitalScore", "");
-            } else
+            } else {
                 jsonObjectComponent.put("totalSocialCapitalScore", component.getTotalSocialCapitalScore());
+            }
+            if (component.getTotalValueStr().equals("")) {
+                jsonObjectComponent.put("totalValueStr", "");
+            } else {
+                jsonObjectComponent.put("totalValueStr", component.getTotalValueStr());
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

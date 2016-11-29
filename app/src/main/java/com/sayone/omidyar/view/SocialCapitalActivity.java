@@ -168,6 +168,12 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                 .equalTo("status", "active")
                 .equalTo("name", currentSocialCapitalServey)
                 .findFirst();
+        Log.e("MM ", serveyId+" "+currentSocialCapitalServey);
+
+        for(SocialCapitalAnswer socialCapitalAnswer: landKindLoad.getSocialCapitals().getSocialCapitalAnswers()){
+            Log.e("NN ",socialCapitalAnswer.toString());
+        }
+
         SocialCapitalQuestions socialCapitalQuestionsLandKindLoad = landKindLoad.getSocialCapitals().getSocialCapitalAnswers().get(currentQId).getSocialCapitalQuestion();
         if(language.equals("हिन्दी")){
             setQuestionView(socialCapitalQuestionsLandKindLoad.getOptionType(),
