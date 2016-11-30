@@ -1259,6 +1259,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         cashFlow.setValue(cashFlowVal);
         cashFlow.setDiscountingFactor(disFactor);
         cashFlow.setDiscountedCashFlow(discountedCashFlow);
+        cashFlow.setTotalRevenue(revenueTotal);
+        cashFlow.setTotalCost(costTotal);
+        cashFlow.setTotalOutlay(outlayTotal);
         realm.commitTransaction();
         return cashFlow;
     }

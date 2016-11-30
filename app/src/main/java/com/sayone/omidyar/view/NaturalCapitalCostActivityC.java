@@ -1216,6 +1216,10 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         cashFlow.setValue(cashFlowVal);
         cashFlow.setDiscountingFactor(disFactor);
         cashFlow.setDiscountedCashFlow(discountedCashFlow);
+
+        cashFlow.setTotalRevenue(revenueTotal);
+        cashFlow.setTotalCost(costTotal);
+        cashFlow.setTotalOutlay(outlayTotal);
         realm.commitTransaction();
 
         Log.e("CASH ",cashFlow.toString()+"");

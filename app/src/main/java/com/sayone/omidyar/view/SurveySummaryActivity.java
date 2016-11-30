@@ -1055,8 +1055,25 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                     jsonObjectCashFlow.put("year", cashFlow.getYear());
                 if (cashFlow.getId() == 0) {
                     jsonObjectCashFlow.put("id", "");
-                } else
+                } else {
                     jsonObjectCashFlow.put("id", cashFlow.getId());
+                }
+
+                if (cashFlow.getTotalRevenue() == 0) {
+                    jsonObjectCashFlow.put("totalRevenue", 0);
+                } else {
+                    jsonObjectCashFlow.put("totalRevenue", cashFlow.getTotalRevenue());
+                }
+                if (cashFlow.getTotalCost() == 0) {
+                    jsonObjectCashFlow.put("totalCost", 0);
+                } else {
+                    jsonObjectCashFlow.put("totalCost", cashFlow.getTotalCost());
+                }
+                if (cashFlow.getTotalOutlay() == 0) {
+                    jsonObjectCashFlow.put("totalOutlay", 0);
+                } else {
+                    jsonObjectCashFlow.put("totalOutlay", cashFlow.getTotalOutlay());
+                }
 
 
             } catch (JSONException e) {
