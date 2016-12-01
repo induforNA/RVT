@@ -21,6 +21,12 @@ public class CashFlow extends RealmObject {
 
     private double discountedCashFlow;
 
+    private double totalRevenue;
+
+    private double totalCost;
+
+    private double totalOutlay;
+
     public long getId() {
         return id;
     }
@@ -67,6 +73,30 @@ public class CashFlow extends RealmObject {
 
     public void setDiscountedCashFlow(double discountedCashFlow) {
         this.discountedCashFlow = discountedCashFlow;
+    }
+
+    public double getTotalRevenue() {
+        return totalRevenue;
+    }
+
+    public void setTotalRevenue(double totalRevenue) {
+        this.totalRevenue = totalRevenue;
+    }
+
+    public double getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(double totalCost) {
+        this.totalCost = totalCost;
+    }
+
+    public double getTotalOutlay() {
+        return totalOutlay;
+    }
+
+    public void setTotalOutlay(double totalOutlay) {
+        this.totalOutlay = totalOutlay;
     }
 
     @Override

@@ -158,7 +158,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             landType.setText(getResources().getText(R.string.string_miningland));
         if(currentSocialCapitalServey.equals("Cropland"))
             landType.setText(getResources().getText(R.string.title_cropland));
-     //   landType.setText(currentSocialCapitalServey);
+        //   landType.setText(currentSocialCapitalServey);
 
         inflationRate = 0.05;
 
@@ -418,14 +418,24 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 }
             }
         }
-//        if(revenueProducts.size() == 1 && revenueProducts.get(0).getRevenueProductYearses().size() == 1){
-//            finish();
-//        }else {
-            if(revenueProducts.size() == 1){
-                currentCostProductIndex = 0;
+//        Log.e("AA BB ", revenueProducts.get(0).getRevenueProductYearses().size()+"");
+
+        if(revenueProducts.size() == 1){
+            int yearCounting = 0;
+            for(RevenueProductYears revenueProductYearsA: revenueProducts.get(0).getRevenueProductYearses()){
+                Log.e("YEAR ", revenueProductYearsA.getYear()+"");
+                if(revenueProductYearsA.getYear() != 0 && revenueProductYearsA.getYear() < Calendar.getInstance().get(Calendar.YEAR)){
+                    yearCounting++;
+                }
             }
+            if(yearCounting == 1){
+                finish();
+            }else {
+                loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
+            }
+        }else {
             loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
-//        }
+        }
     }
 
     @Override
@@ -1249,6 +1259,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         cashFlow.setValue(cashFlowVal);
         cashFlow.setDiscountingFactor(disFactor);
         cashFlow.setDiscountedCashFlow(discountedCashFlow);
+        cashFlow.setTotalRevenue(revenueTotal);
+        cashFlow.setTotalCost(costTotal);
+        cashFlow.setTotalOutlay(outlayTotal);
         realm.commitTransaction();
         return cashFlow;
     }

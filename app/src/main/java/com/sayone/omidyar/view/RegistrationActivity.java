@@ -271,6 +271,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         survey.setLanguage(language);
         survey.setCurrency(currency);
         survey.setDate(date);
+        survey.setSendStatus(false);
         survey.setInflationRate(String.valueOf(inflationRate));
         realm.commitTransaction();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);

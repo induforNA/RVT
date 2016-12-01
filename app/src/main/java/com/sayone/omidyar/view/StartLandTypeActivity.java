@@ -50,6 +50,7 @@ public class StartLandTypeActivity extends BaseActivity implements View.OnClickL
         setContentView(R.layout.activity_start_land_type);
 
         context = this;
+        realm = Realm.getDefaultInstance();
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         serveyId = sharedPref.getString("surveyId","");
@@ -132,27 +133,32 @@ public class StartLandTypeActivity extends BaseActivity implements View.OnClickL
                 .equalTo("surveyId",serveyId)
                 .equalTo("status","active")
                 .findAll();
-        int j = 0;
-        int i = 0;
-        for (LandKind landKind : landKindRealmResults) {
-            Log.e("TAG ", landKind.toString());
-            //Log.e(TAG, String.valueOf(survey1.getParticipants().size()));
-            if(landKind.getName().equals(currentSocialCapitalServey)){
-                j = i - 1;
+        if(landKindRealmResults != null) {
+            int j = 0;
+            int i = 0;
+            for (LandKind landKind : landKindRealmResults) {
+                Log.e("TAG ", landKind.toString());
+                //Log.e(TAG, String.valueOf(survey1.getParticipants().size()));
+                if (landKind.getName().equals(currentSocialCapitalServey)) {
+                    j = i - 1;
+                }
+                i++;
             }
-            i++;
-        }
 
-        if(j >= 0){
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString("currentSocialCapitalServey", landKindRealmResults.get(j).getName());
-            editor.apply();
-
-            Intent intent = new Intent(getApplicationContext(),StartLandTypeActivity.class);
-            startActivity(intent);
+            if (j >= 0) {
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("currentSocialCapitalServey", landKindRealmResults.get(j).getName());
+                editor.apply();
+                finish();
+//                Intent intent = new Intent(getApplicationContext(), StartLandTypeActivity.class);
+//                startActivity(intent);
+            } else {
+                finish();
+//                Intent intent = new Intent(getApplicationContext(), CertificateActivity.class);
+//                startActivity(intent);
+            }
         }else{
-            Intent intent = new Intent(getApplicationContext(),CertificateActivity.class);
-            startActivity(intent);
+            finish();
         }
     }
 

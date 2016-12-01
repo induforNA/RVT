@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -19,6 +20,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import io.realm.Realm;
+
 /**
  * Created by sayone on 3/10/16.
  */
@@ -28,7 +31,9 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private List<Survey>surveyList;
     private final int viewTypeHeader=0,viewTypeList=1;
     private Boolean flag,flag1=true;
+    private Realm realm;
     private SharedPreferences sharedPref;
+
     private Context context;
     private String surveyId;
     Set<String> set;
@@ -38,12 +43,15 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public class SurveyViewHolder extends RecyclerView.ViewHolder {
         private TextView surveyName;
         private CheckBox checkBoxSurvey;
+        private Button exportButton;
 
         public SurveyViewHolder(View itemView) {
             super(itemView);
             set = new HashSet<String>();
+            realm = Realm.getDefaultInstance();
             surveyName = (TextView) itemView.findViewById(R.id.survey_name);
             checkBoxSurvey=(CheckBox)itemView.findViewById(R.id.checkbox_survey);
+            exportButton=(Button)itemView.findViewById(R.id.button_export);
 
         }
     }
@@ -113,6 +121,12 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (holder instanceof SurveyViewHolder){
             int pos=position-1;
             final Survey survey = surveyList.get(pos);
+            if(survey.isSendStatus()) {
+                ((SurveyViewHolder) holder).exportButton.setVisibility(View.VISIBLE);
+            }
+            else{
+                ((SurveyViewHolder) holder).exportButton.setVisibility(View.INVISIBLE);
+            }
 
             ((SurveyViewHolder)holder).checkBoxSurvey.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -120,6 +134,9 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
                     if(flag1) {
                         ((SurveyViewHolder) holder).checkBoxSurvey.setChecked(true);
+                        realm.beginTransaction();
+                        survey.setSendStatus(true);
+                        realm.commitTransaction();
                         set.add(survey.getSurveyId());
                         editor = sharedPref.edit();
                         editor.clear();
@@ -128,6 +145,9 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     }
                     else{
                        ((SurveyViewHolder) holder).checkBoxSurvey.setChecked(false);
+//                        realm.beginTransaction();
+//                        survey.setSendStatus(false);
+//                        realm.commitTransaction();
                         set.remove(survey.getSurveyId());
                         editor = sharedPref.edit();
                         editor.clear();
@@ -147,6 +167,9 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
               set.clear();
           }
             if(((SurveyViewHolder)holder).checkBoxSurvey.isChecked()){
+                realm.beginTransaction();
+                survey.setSendStatus(true);
+                realm.commitTransaction();
                 set.add(survey.getSurveyId());
             }
 

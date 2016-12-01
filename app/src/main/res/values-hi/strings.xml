@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ओमिडयर</string>
+    <string name="app_name">ओमिडयर </string>
     <string-array name="country_array">
         <!--<item>देश चुनिए</item>-->
         <item>इंडिया</item>

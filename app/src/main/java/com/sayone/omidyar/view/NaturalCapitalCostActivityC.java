@@ -221,7 +221,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             landType.setText(getResources().getText(R.string.string_miningland));
         if(currentSocialCapitalServey.equals("Cropland"))
             landType.setText(getResources().getText(R.string.title_cropland));
-      //  landType.setText(currentSocialCapitalServey);
+        //  landType.setText(currentSocialCapitalServey);
 
 
         for(LandKind landKind:results.getLandKinds()){
@@ -406,14 +406,30 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 }
             }
         }
-        Log.e("INDEX ", revenueProducts.size()+" "+currentCostProductIndex+" "+revenueProducts.get(0).getCostElementYearses().size());
-//        if(revenueProducts.size() == 1 && revenueProducts.get(0) == null){
+
+        if(revenueProducts.size() == 1){
+            int yearCounting = 0;
+            for(CostElementYears costElementYearsA: revenueProducts.get(0).getCostElementYearses()){
+                Log.e("YEAR ", costElementYearsA.getYear()+"");
+                if(costElementYearsA.getYear() != 0 && costElementYearsA.getYear() < Calendar.getInstance().get(Calendar.YEAR)){
+                    yearCounting++;
+                }
+            }
+            if(yearCounting == 1){
+                finish();
+            }else {
+                loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
+            }
+        }else {
+            loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
+        }
+
+
+
+//        if(revenueProducts.size() == 1 && revenueProducts.get(currentCostProductIndex).getCostElementYearses().size() == 1){
 //            finish();
 //        }else {
-            if(revenueProducts.size() == 1){
-                currentCostProductIndex = 0;
-            }
-            loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
+//            loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
 //        }
     }
 
@@ -574,7 +590,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 yearList.add(costElementYears.getYear()+"");
                 year_adapter.notifyDataSetChanged();
 
-                Log.e("REV PROD ID zzzzz",costElementYears.getYear()+"");
+                // Log.e("REV PROD ID ",revenueProductYears.getRevenueProductId()+"");
                 totalYearsCount++;
             }
         }
@@ -1200,6 +1216,10 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         cashFlow.setValue(cashFlowVal);
         cashFlow.setDiscountingFactor(disFactor);
         cashFlow.setDiscountedCashFlow(discountedCashFlow);
+
+        cashFlow.setTotalRevenue(revenueTotal);
+        cashFlow.setTotalCost(costTotal);
+        cashFlow.setTotalOutlay(outlayTotal);
         realm.commitTransaction();
 
         Log.e("CASH ",cashFlow.toString()+"");

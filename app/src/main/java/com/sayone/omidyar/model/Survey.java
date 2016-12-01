@@ -32,6 +32,8 @@ public class Survey extends RealmObject {
 
     private String respondentGroup;
 
+    private Boolean sendStatus;
+
     private Date date;
 
     private RealmList<Participant> participants;
@@ -64,6 +66,14 @@ public class Survey extends RealmObject {
 
     public void setCommunity(String community) {
         this.community = community;
+    }
+
+    public boolean isSendStatus() {
+        return sendStatus;
+    }
+
+    public void setSendStatus(boolean sendStatus) {
+        this.sendStatus = sendStatus;
     }
 
     public String getDistrict() {
