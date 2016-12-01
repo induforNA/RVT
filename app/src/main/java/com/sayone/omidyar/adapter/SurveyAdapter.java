@@ -11,13 +11,27 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.Participant;
 import com.sayone.omidyar.model.Survey;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import io.realm.Realm;
@@ -32,6 +46,7 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private final int viewTypeHeader=0,viewTypeList=1;
     private Boolean flag,flag1=true;
     private Realm realm;
+    private Survey surveyRequest;
     private SharedPreferences sharedPref;
 
     private Context context;
@@ -120,7 +135,17 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
         if (holder instanceof SurveyViewHolder){
             int pos=position-1;
+            ((SurveyViewHolder) holder).exportButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    sendRequest();
+                }
+
+
+            });
+
             final Survey survey = surveyList.get(pos);
+            surveyRequest=survey;
             if(survey.isSendStatus()) {
                 ((SurveyViewHolder) holder).exportButton.setVisibility(View.VISIBLE);
             }
@@ -181,6 +206,57 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         editor.apply();
 
 
+    }
+
+    private void sendRequest() {
+
+        JSONObject object = new JSONObject();
+        try {
+            // object.put("id","BF01");
+            object.put("id",surveyRequest.getSurveyId());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                "http://52.66.160.79/api/v1/generate-survey-excel/", object, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.e("RES ", response.toString());
+//                if(response.has("failed")) {
+//                  Toast.makeText(context,"Failed", Toast.LENGTH_SHORT).show();
+//                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("TAG ", "Error: " + error.getMessage());
+//                // hide the progress dialog
+//                hidepDialog();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Token 2fb88b01c22ac470cbb969f604e9b3c87d6c8c7d");
+                params.put("Content-Type", "application/json");
+
+                return params;
+            }
+        };
+
+        try {
+            Log.e("Re ", jsonObjReq.getBody() + " " + jsonObjReq.getHeaders().get("Authorization").toString());
+        } catch (AuthFailureError authFailureError) {
+            authFailureError.printStackTrace();
+        }
+
+        queue.add(jsonObjReq);
     }
 
     private boolean toggle() {

@@ -1410,9 +1410,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 completedSurveys.setText("" + surveyCount);
                 break;
 
-            case R.id.button_export:
-                Toast.makeText(getApplicationContext(),"expoted",Toast.LENGTH_SHORT).show();
-                break;
+
 
         }
     }
