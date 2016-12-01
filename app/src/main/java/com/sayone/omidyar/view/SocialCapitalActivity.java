@@ -220,38 +220,78 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
 
         int i = 0;
         for (SocialCapitalAnswerOptions socialCapitalAnswerOptions : options) {
-            if (i == 0) {
-                if (type.equals("multiple")) {
-                    changeDisplay(type, options, i, optionA, null, multipleAnswers,"optionA");
-                } else {
-                    changeDisplay(type, options, i, null, optionARadio, multipleAnswers,"");
-                }
-            } else if (i == 1) {
-                if (type.equals("multiple")) {
-                    changeDisplay(type, options, i, optionB, null, multipleAnswers,"optionB");
-                } else {
-                    changeDisplay(type, options, i, null, optionBRadio, multipleAnswers,"");
-                }
-            } else if (i == 2) {
-                if (type.equals("multiple")) {
-                    changeDisplay(type, options, i, optionC, null, multipleAnswers,"optionC");
-                } else {
-                    changeDisplay(type, options, i, null, optionCRadio, multipleAnswers,"");
-                }
-            } else if (i == 3) {
-                if (type.equals("multiple")) {
-                    changeDisplay(type, options, i, optionD, null, multipleAnswers,"optionD");
-                } else {
-                    changeDisplay(type, options, i, null, optionDRadio, multipleAnswers,"");
-                }
-            } else if (i == 4) {
-                if (type.equals("multiple")) {
-                    changeDisplay(type, options, i, optionE, null, multipleAnswers,"optionE");
-                } else {
-                    changeDisplay(type, options, i, null, optionERadio, multipleAnswers,"");
-                }
+            switch (i){
+                case 0:
+                    if (type.equals("multiple")) {
+                        changeDisplay(type, options, i, optionA, null, multipleAnswers,"optionA");
+                    } else {
+                        changeDisplay(type, options, i, null, optionARadio, multipleAnswers,"");
+                    }
+                    break;
+                case 1:
+                    if (type.equals("multiple")) {
+                        changeDisplay(type, options, i, optionB, null, multipleAnswers,"optionB");
+                    } else {
+                        changeDisplay(type, options, i, null, optionBRadio, multipleAnswers,"");
+                    }
+                    break;
+                case 2:
+                    if (type.equals("multiple")) {
+                        changeDisplay(type, options, i, optionC, null, multipleAnswers,"optionC");
+                    } else {
+                        changeDisplay(type, options, i, null, optionCRadio, multipleAnswers,"");
+                    }
+                    break;
+                case 3:
+                    if (type.equals("multiple")) {
+                        changeDisplay(type, options, i, optionD, null, multipleAnswers,"optionD");
+                    } else {
+                        changeDisplay(type, options, i, null, optionDRadio, multipleAnswers,"");
+                    }
+                    break;
+                case 4:
+                    if (type.equals("multiple")) {
+                        changeDisplay(type, options, i, optionE, null, multipleAnswers,"optionE");
+                    } else {
+                        changeDisplay(type, options, i, null, optionERadio, multipleAnswers,"");
+                    }
+                    break;
             }
             i++;
+
+
+//            if (i == 0) {
+//                if (type.equals("multiple")) {
+//                    changeDisplay(type, options, i, optionA, null, multipleAnswers,"optionA");
+//                } else {
+//                    changeDisplay(type, options, i, null, optionARadio, multipleAnswers,"");
+//                }
+//            } else if (i == 1) {
+//                if (type.equals("multiple")) {
+//                    changeDisplay(type, options, i, optionB, null, multipleAnswers,"optionB");
+//                } else {
+//                    changeDisplay(type, options, i, null, optionBRadio, multipleAnswers,"");
+//                }
+//            } else if (i == 2) {
+//                if (type.equals("multiple")) {
+//                    changeDisplay(type, options, i, optionC, null, multipleAnswers,"optionC");
+//                } else {
+//                    changeDisplay(type, options, i, null, optionCRadio, multipleAnswers,"");
+//                }
+//            } else if (i == 3) {
+//                if (type.equals("multiple")) {
+//                    changeDisplay(type, options, i, optionD, null, multipleAnswers,"optionD");
+//                } else {
+//                    changeDisplay(type, options, i, null, optionDRadio, multipleAnswers,"");
+//                }
+//            } else if (i == 4) {
+//                if (type.equals("multiple")) {
+//                    changeDisplay(type, options, i, optionE, null, multipleAnswers,"optionE");
+//                } else {
+//                    changeDisplay(type, options, i, null, optionERadio, multipleAnswers,"");
+//                }
+//            }
+//            i++;
         }
     }
 
@@ -478,7 +518,11 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
 
         Log.e("Factores Score",totalFactorScore+"");
         SpredTable spredTable;
-        if(totalFactorScore == 0.0){
+        if(totalFactorScore == 20.0) {
+            spredTable = realm.where(SpredTable.class)
+                    .equalTo("lessThan",totalFactorScore)
+                    .findFirst();
+        }else if(totalFactorScore == 0.0){
             spredTable = realm.where(SpredTable.class)
                     .equalTo("moreThan",totalFactorScore)
                     .findFirst();

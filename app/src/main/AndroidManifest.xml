@@ -18,6 +18,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="589d3c8f8b997c0c35337806ec6f75402fca3f66"
+            />
+
         <activity
             android:name=".view.AdminRatesActivity"
             android:screenOrientation="landscape"></activity>

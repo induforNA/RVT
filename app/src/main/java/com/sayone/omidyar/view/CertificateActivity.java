@@ -165,6 +165,9 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 .equalTo("surveyId", surveyId)
                 .equalTo("status", "active")
                 .findAll();
+
+        Log.e("CHECK ", surveyCheck.toString());
+
         Log.e("Symbol:", surveyCheck.getCurrency());
 
         if (surveyCheck.getCurrency().equals("INR")) {
@@ -211,9 +214,11 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 Picasso.with(context).load(fforest).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageForest);
                 socialCapitalForest.setText("" + landKind.getSocialCapitals().getScore() + "/20");
 
-                realm.beginTransaction();
-                surveyCheck.getComponents().setForestSocialCapitalScore(landKind.getSocialCapitals().getScore());
-                realm.commitTransaction();
+                if(surveyCheck.getComponents() != null){
+                    realm.beginTransaction();
+                    surveyCheck.getComponents().setForestSocialCapitalScore(landKind.getSocialCapitals().getScore());
+                    realm.commitTransaction();
+                }
 
                 if (surveyCheck.getComponents() != null) {
                     if (surveyCheck.getComponents().getForestValue() != 0) {
@@ -261,9 +266,11 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 Picasso.with(context).load(fcrop).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageCrop);
                 socialCapitalCrop.setText("" + landKind.getSocialCapitals().getScore() + "/20");
 
-                realm.beginTransaction();
-                surveyCheck.getComponents().setCroplandSocialCapitalScore(landKind.getSocialCapitals().getScore());
-                realm.commitTransaction();
+                if(surveyCheck.getComponents() != null) {
+                    realm.beginTransaction();
+                    surveyCheck.getComponents().setCroplandSocialCapitalScore(landKind.getSocialCapitals().getScore());
+                    realm.commitTransaction();
+                }
 
                 if (surveyCheck.getComponents() != null) {
                     if (surveyCheck.getComponents().getCroplandValue() != 0) {
@@ -310,9 +317,11 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 Picasso.with(context).load(fpasture).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImagePasture);
                 socialCapitalPasture.setText("" + landKind.getSocialCapitals().getScore() + "/20");
 
-                realm.beginTransaction();
-                surveyCheck.getComponents().setPastureSocialCapitalScore(landKind.getSocialCapitals().getScore());
-                realm.commitTransaction();
+                if(surveyCheck.getComponents() != null) {
+                    realm.beginTransaction();
+                    surveyCheck.getComponents().setPastureSocialCapitalScore(landKind.getSocialCapitals().getScore());
+                    realm.commitTransaction();
+                }
 
                 if (surveyCheck.getComponents() != null) {
                     if (surveyCheck.getComponents().getPastureValue() != 0) {
@@ -359,9 +368,11 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 Picasso.with(context).load(fmining).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageMining);
                 socialCapitalMining.setText("" + landKind.getSocialCapitals().getScore() + "/20");
 
-                realm.beginTransaction();
-                surveyCheck.getComponents().setMiningSocialCapitalScore(landKind.getSocialCapitals().getScore());
-                realm.commitTransaction();
+                if(surveyCheck.getComponents() != null) {
+                    realm.beginTransaction();
+                    surveyCheck.getComponents().setMiningSocialCapitalScore(landKind.getSocialCapitals().getScore());
+                    realm.commitTransaction();
+                }
 
                 if (surveyCheck.getComponents() != null) {
                     if (surveyCheck.getComponents().getMiningLandValue() != 0) {
@@ -435,9 +446,11 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         String totalValStr  = formattedString(Long.valueOf(numberProcess(lowerLimitStr)))+" ~ "+formattedString(Long.valueOf(numberProcess(upperLimitStr)));
         Log.e("Final Value Range ",totalValStr);
 
-        realm.beginTransaction();
-        surveyCheck.getComponents().setTotalValueStr(totalValStr);
-        realm.commitTransaction();
+        if(surveyCheck.getComponents() != null) {
+            realm.beginTransaction();
+            surveyCheck.getComponents().setTotalValueStr(totalValStr);
+            realm.commitTransaction();
+        }
 
         totalText.setText(totalValStr);
 
@@ -475,7 +488,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 //        socialCapitalCrop.setText("0");
 //        socialCapitalPasture.setText("0");
 //        socialCapitalMining.setText("0");
-        //  inflationRate.setText(surveyCheck.getInflationRate().toString());
+          inflationRate.setText(String.valueOf(Double.parseDouble(surveyCheck.getInflationRate())*100.00));
 
     }
 

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -76,6 +77,9 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         androidId = Settings.Secure.getString(getContentResolver(),
                 Settings.Secure.ANDROID_ID);
         inflationRateStr = preferences.getString("inflationRate","5");
+
+        Log.e("IRATE ",inflationRateStr);
+
         inflationRate = Double.parseDouble(inflationRateStr)/100;
 
 
@@ -273,6 +277,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         survey.setDate(date);
         survey.setInflationRate(String.valueOf(inflationRate));
         realm.commitTransaction();
+
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         finish();
