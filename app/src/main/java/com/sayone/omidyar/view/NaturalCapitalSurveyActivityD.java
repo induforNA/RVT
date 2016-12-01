@@ -158,7 +158,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             landType.setText(getResources().getText(R.string.string_miningland));
         if(currentSocialCapitalServey.equals("Cropland"))
             landType.setText(getResources().getText(R.string.title_cropland));
-     //   landType.setText(currentSocialCapitalServey);
+        //   landType.setText(currentSocialCapitalServey);
 
         inflationRate = 0.05;
 

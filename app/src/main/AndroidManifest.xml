@@ -26,19 +26,21 @@
 
         <activity
             android:name=".view.AdminRatesActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".view.ProjectionTimeFrameActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.SurveySummaryActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape">
+
+        </activity>
         <activity
             android:name=".view.UnitsActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.MainActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".view.RegistrationActivity"
             android:screenOrientation="landscape" />
@@ -53,7 +55,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.AdminLoginActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".view.AdminDashBoard"
             android:screenOrientation="landscape" />
@@ -77,8 +79,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.CertificateActivity"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".view.NaturalCapitalSurveyActivityD"
             android:screenOrientation="landscape" />
@@ -87,7 +88,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.NaturalCapitalSurveyActivityC"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".view.NaturalCapitalSurveyActivity3"
             android:screenOrientation="landscape" />
@@ -102,7 +103,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.NaturalCapitalCostActivityA"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".view.NaturalCapitalCostActivityB"
             android:screenOrientation="landscape" />
@@ -130,17 +131,17 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.NaturalCapitalCostOutlay"
-            android:screenOrientation="landscape" >
-
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".view.NaturalCapitalCostOutlayB"
-            android:screenOrientation="landscape" >
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".view.Main2Activity" />
+        <activity
+            android:name=".view.InflationRateActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".view.JsonParserActivity">
 
         </activity>
-        <activity android:name=".view.Main2Activity"></activity>
-        <activity android:name=".view.InflationRateActivity"
-            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>

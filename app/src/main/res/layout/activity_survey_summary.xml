@@ -145,6 +145,8 @@
             android:textColor="@android:color/white"
             android:text="@string/button_send_to_server" />
 
+
+
     </LinearLayout>
 
 </LinearLayout>

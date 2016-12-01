@@ -89,6 +89,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
     private Button sendDataToServer,resetData;
     private SharedPreferences sharedPref;
     private Set<String> set = null;
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +108,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 "com.sayone.omidyar.PREFERENCE_FILE_KEY_SET", Context.MODE_PRIVATE);
 
 
-        Realm realm = Realm.getDefaultInstance();
+        realm = Realm.getDefaultInstance();
         surveyList = realm.where(Survey.class).findAll();
         surveyCount = surveyList.size();
 
@@ -283,6 +284,9 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                     toast.show();
                 }
             }, 3000);
+
+            surveyList = realm.where(Survey.class).findAll();
+            surveyAdapter.notifyDataSetChanged();
 
         }
 
@@ -1351,6 +1355,10 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 set = sharedPref.getStringSet("surveySet", null);
                 for (String temp : set) {
                     Log.e("Sirvey : ", temp);
+                    realm.beginTransaction();
+                    Survey survey = realm.where(Survey.class).equalTo("surveyId",temp).findFirst();
+                    survey.setSendStatus(true);
+                    realm.commitTransaction();
                 }
                 new LongOperation().execute("");
                 break;
@@ -1400,6 +1408,10 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 surveyAdapter.notifyDataSetChanged();
                 surveyCount=0;
                 completedSurveys.setText("" + surveyCount);
+                break;
+
+            case R.id.button_export:
+                Toast.makeText(getApplicationContext(),"expoted",Toast.LENGTH_SHORT).show();
                 break;
 
         }

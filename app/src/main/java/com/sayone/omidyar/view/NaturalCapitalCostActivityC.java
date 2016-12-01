@@ -221,7 +221,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             landType.setText(getResources().getText(R.string.string_miningland));
         if(currentSocialCapitalServey.equals("Cropland"))
             landType.setText(getResources().getText(R.string.title_cropland));
-      //  landType.setText(currentSocialCapitalServey);
+        //  landType.setText(currentSocialCapitalServey);
 
 
         for(LandKind landKind:results.getLandKinds()){
