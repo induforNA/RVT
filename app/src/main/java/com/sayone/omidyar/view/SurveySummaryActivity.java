@@ -988,7 +988,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 } else
                     jsonObjectCostElementYears.put("costElementId", costElementYears.getCostElementId());
                 if (costElementYears.getCostFrequencyUnit() == 0) {
-                    jsonObjectCostElementYears.put("costFrequencyUnit", "");
+                    jsonObjectCostElementYears.put("costFrequencyUnit", 0);
                 } else
                     jsonObjectCostElementYears.put("costFrequencyUnit", costElementYears.getCostFrequencyUnit());
                 if (costElementYears.getCostPerPeriodUnit() == null) {

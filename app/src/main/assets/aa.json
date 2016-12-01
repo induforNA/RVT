@@ -1,0 +1,1154 @@
+{
+  "district": "ekm",
+  "language": "English",
+  "community": "com",
+  "date": "Thu Dec 01 00:00:00 GMT+05:30 2016",
+  "respondentGroup": "res",
+  "state": "ker",
+  "participants": [],
+  "landKinds": [
+    {
+      "name": "Forestland",
+      "miningLand": "",
+      "status": "deleted",
+      "cropLand": "",
+      "surveyId": "99A1",
+      "socialCapitals": "",
+      "id": 1,
+      "pastureLand": "",
+      "forestLand": {
+        "revenueProducts": [],
+        "discountingFactors": [],
+        "discountedCashFlows": [],
+        "costElements": [],
+        "Outlays": [],
+        "cashFlows": [],
+        "id": 1,
+        "surveyId": "",
+        "discountPercentage": "",
+        "netPresentValue": ""
+      }
+    },
+    {
+      "name": "Cropland",
+      "miningLand": "",
+      "status": "active",
+      "cropLand": {
+        "revenueProducts": [
+          {
+            "name": "aaa",
+            "landKind": "Cropland",
+            "surveyId": "99A1",
+            "revenueProductYearses": [
+              {
+                "landKind": "Cropland",
+                "marketPriceValue": 50000,
+                "year": 2014,
+                "subtotal": 50000000000000,
+                "harvestArea": 10,
+                "marketPriceCurrency": "INR",
+                "harvestFrequencyUnit": 1,
+                "harvestFrequencyValue": 1,
+                "quantityUnit": "Cubic Meter",
+                "surveyId": "99A1",
+                "quantityValue": 1000000000,
+                "projectedIndex": -2,
+                "id": 1,
+                "revenueProductId": 1
+              },
+              {
+                "landKind": "Cropland",
+                "marketPriceValue": 50000,
+                "year": "",
+                "subtotal": "",
+                "harvestArea": "",
+                "marketPriceCurrency": "INR",
+                "harvestFrequencyUnit": 1,
+                "harvestFrequencyValue": 1,
+                "quantityUnit": "Cubic Meter",
+                "surveyId": "99A1",
+                "quantityValue": 1000000000,
+                "projectedIndex": "",
+                "id": 2,
+                "revenueProductId": 1
+              },
+              {
+                "landKind": "Cropland",
+                "marketPriceValue": "",
+                "year": 2016,
+                "subtotal": "",
+                "harvestArea": "",
+                "marketPriceCurrency": "",
+                "harvestFrequencyUnit": 0,
+                "harvestFrequencyValue": "",
+                "quantityUnit": "",
+                "surveyId": "99A1",
+                "quantityValue": "",
+                "projectedIndex": 0,
+                "id": 3,
+                "revenueProductId": 1
+              },
+              {
+                "landKind": "Cropland",
+                "marketPriceValue": 52500,
+                "year": 2017,
+                "subtotal": 52500000000000,
+                "harvestArea": "",
+                "marketPriceCurrency": "INR",
+                "harvestFrequencyUnit": 1,
+                "harvestFrequencyValue": 1,
+                "quantityUnit": "Cubic Meter",
+                "surveyId": "99A1",
+                "quantityValue": 1000000000,
+                "projectedIndex": 1,
+                "id": 4,
+                "revenueProductId": 1
+              },
+              {
+                "landKind": "Cropland",
+                "marketPriceValue": 55125,
+                "year": 2018,
+                "subtotal": 55125000000000,
+                "harvestArea": "",
+                "marketPriceCurrency": "INR",
+                "harvestFrequencyUnit": 1,
+                "harvestFrequencyValue": 1,
+                "quantityUnit": "Cubic Meter",
+                "surveyId": "99A1",
+                "quantityValue": 1000000000,
+                "projectedIndex": 2,
+                "id": 5,
+                "revenueProductId": 1
+              },
+              {
+                "landKind": "Cropland",
+                "marketPriceValue": 57881.25,
+                "year": 2019,
+                "subtotal": 57881250000000,
+                "harvestArea": "",
+                "marketPriceCurrency": "INR",
+                "harvestFrequencyUnit": 1,
+                "harvestFrequencyValue": 1,
+                "quantityUnit": "Cubic Meter",
+                "surveyId": "99A1",
+                "quantityValue": 1000000000,
+                "projectedIndex": 3,
+                "id": 6,
+                "revenueProductId": 1
+              },
+              {
+                "landKind": "Cropland",
+                "marketPriceValue": 60783.43698128025,
+                "year": 2020,
+                "subtotal": 60783436981280.25,
+                "harvestArea": "",
+                "marketPriceCurrency": "INR",
+                "harvestFrequencyUnit": 1,
+                "harvestFrequencyValue": 1,
+                "quantityUnit": "Cubic Meter",
+                "surveyId": "99A1",
+                "quantityValue": 1000000000,
+                "projectedIndex": 4.0027397260273965,
+                "id": 7,
+                "revenueProductId": 1
+              },
+              {
+                "landKind": "Cropland",
+                "marketPriceValue": 63822.6088303443,
+                "year": 2021,
+                "subtotal": 63822608830344.3,
+                "harvestArea": "",
+                "marketPriceCurrency": "INR",
+                "harvestFrequencyUnit": 1,
+                "harvestFrequencyValue": 1,
+                "quantityUnit": "Cubic Meter",
+                "surveyId": "99A1",
+                "quantityValue": 1000000000,
+                "projectedIndex": 5.0027397260273965,
+                "id": 8,
+                "revenueProductId": 1
+              }
+            ],
+            "id": 1,
+            "type": "Timber"
+          }
+        ],
+        "outlays": [
+          {
+            "itemName": "outlay",
+            "id": 1,
+            "surveyId": "99A1",
+            "outlayYears": [
+              {
+                "year": 2016,
+                "price": 50000,
+                "id": 1,
+                "unit": ""
+              },
+              {
+                "year": 2017,
+                "price": 0,
+                "id": 2,
+                "unit": ""
+              },
+              {
+                "year": 2018,
+                "price": 0,
+                "id": 3,
+                "unit": ""
+              },
+              {
+                "year": 2019,
+                "price": 0,
+                "id": 4,
+                "unit": ""
+              },
+              {
+                "year": 2020,
+                "price": 0,
+                "id": 5,
+                "unit": ""
+              },
+              {
+                "year": 2021,
+                "price": 0,
+                "id": 6,
+                "unit": ""
+              }
+            ]
+          }
+        ],
+        "discountedCashFlows": [],
+        "costElements": [
+          {
+            "name": "cost",
+            "costElementYearses": [
+              {
+                "surveyI1d": "99A1",
+                "landKind": "Cropland",
+                "year": 2015,
+                "costPerPeriodValue": "",
+                "subtotal": "",
+                "costPerUnitUnit": "INR",
+                "costFrequencyUnit": 1,
+                "costPerPeriodUni": "Cubic Meter",
+                "costPerUnitValue": "",
+                "projectedIndex": -1,
+                "id": 1,
+                "costFrequencyValue": 1,
+                "costElementId": 1
+              },
+              {
+                "surveyI1d": "99A1",
+                "landKind": "Cropland",
+                "year": "",
+                "costPerPeriodValue": "",
+                "subtotal": "",
+                "costPerUnitUnit": "INR",
+                "costFrequencyUnit": 1,
+                "costPerPeriodUni": "Cubic Meter",
+                "costPerUnitValue": "",
+                "projectedIndex": "",
+                "id": 2,
+                "costFrequencyValue": 1,
+                "costElementId": 1
+              },
+              {
+                "surveyI1d": "99A1",
+                "landKind": "Cropland",
+                "year": 2016,
+                "costPerPeriodValue": "",
+                "subtotal": "",
+                "costPerUnitUnit": "",
+                "costFrequencyUnit": "",
+                "costPerPeriodUni": "",
+                "costPerUnitValue": "",
+                "projectedIndex": 0,
+                "id": 3,
+                "costFrequencyValue": "",
+                "costElementId": 1
+              },
+              {
+                "surveyI1d": "99A1",
+                "landKind": "Cropland",
+                "year": 2017,
+                "costPerPeriodValue": "",
+                "subtotal": "",
+                "costPerUnitUnit": "INR",
+                "costFrequencyUnit": 1,
+                "costPerPeriodUni": "Cubic Meter",
+                "costPerUnitValue": "",
+                "projectedIndex": 1,
+                "id": 4,
+                "costFrequencyValue": 1,
+                "costElementId": 1
+              },
+              {
+                "surveyI1d": "99A1",
+                "landKind": "Cropland",
+                "year": 2018,
+                "costPerPeriodValue": "",
+                "subtotal": "",
+                "costPerUnitUnit": "INR",
+                "costFrequencyUnit": 1,
+                "costPerPeriodUni": "Cubic Meter",
+                "costPerUnitValue": "",
+                "projectedIndex": 2,
+                "id": 5,
+                "costFrequencyValue": 1,
+                "costElementId": 1
+              },
+              {
+                "surveyI1d": "99A1",
+                "landKind": "Cropland",
+                "year": 2019,
+                "costPerPeriodValue": "",
+                "subtotal": "",
+                "costPerUnitUnit": "INR",
+                "costFrequencyUnit": 1,
+                "costPerPeriodUni": "Cubic Meter",
+                "costPerUnitValue": "",
+                "projectedIndex": 3,
+                "id": 6,
+                "costFrequencyValue": 1,
+                "costElementId": 1
+              },
+              {
+                "surveyI1d": "99A1",
+                "landKind": "Cropland",
+                "year": 2020,
+                "costPerPeriodValue": "",
+                "subtotal": "",
+                "costPerUnitUnit": "INR",
+                "costFrequencyUnit": 1,
+                "costPerPeriodUni": "Cubic Meter",
+                "costPerUnitValue": "",
+                "projectedIndex": 4.0027397260273965,
+                "id": 7,
+                "costFrequencyValue": 1,
+                "costElementId": 1
+              },
+              {
+                "surveyI1d": "99A1",
+                "landKind": "Cropland",
+                "year": 2021,
+                "costPerPeriodValue": "",
+                "subtotal": "",
+                "costPerUnitUnit": "INR",
+                "costFrequencyUnit": 1,
+                "costPerPeriodUni": "Cubic Meter",
+                "costPerUnitValue": "",
+                "projectedIndex": 5.0027397260273965,
+                "id": 8,
+                "costFrequencyValue": 1,
+                "costElementId": 1
+              }
+            ],
+            "surveyId": "99A1",
+            "landKind": "Cropland",
+            "id": 1,
+            "type": "Timber"
+          }
+        ],
+        "surveyId": "",
+        "cashFlows": [
+          {
+            "year": 2014,
+            "surveyId": "99A1",
+            "value": 50000000000000,
+            "discountingFactor": 1.41991056,
+            "discountedCashFlow": 70995528000000,
+            "id": 231,
+            "totalCost": 0,
+            "totalOutlay": 0,
+            "totalRevenue": 50000000000000
+          },
+          {
+            "year": "",
+            "surveyId": "99A1",
+            "value": "",
+            "discountingFactor": 1,
+            "discountedCashFlow": "",
+            "id": 232,
+            "totalCost": 0,
+            "totalOutlay": 0,
+            "totalRevenue": 0
+          },
+          {
+            "year": 2016,
+            "surveyId": "99A1",
+            "value": -50000,
+            "discountingFactor": 1,
+            "discountedCashFlow": -50000,
+            "id": 233,
+            "totalCost": 0,
+            "totalOutlay": 50000,
+            "totalRevenue": 0
+          },
+          {
+            "year": 2017,
+            "surveyId": "99A1",
+            "value": 52500000000000,
+            "discountingFactor": 0.8392077878482712,
+            "discountedCashFlow": 44058408862034.24,
+            "id": 234,
+            "totalCost": 0,
+            "totalOutlay": 0,
+            "totalRevenue": 52500000000000
+          },
+          {
+            "year": 2018,
+            "surveyId": "99A1",
+            "value": 55125000000000,
+            "discountingFactor": 0.704269711185189,
+            "discountedCashFlow": 38822867829083.55,
+            "id": 235,
+            "totalCost": 0,
+            "totalOutlay": 0,
+            "totalRevenue": 55125000000000
+          },
+          {
+            "year": 2019,
+            "surveyId": "99A1",
+            "value": 57881250000000,
+            "discountingFactor": 0.5910286263722634,
+            "discountedCashFlow": 34209475680209.57,
+            "id": 236,
+            "totalCost": 0,
+            "totalOutlay": 0,
+            "totalRevenue": 57881250000000
+          },
+          {
+            "year": 2020,
+            "surveyId": "99A1",
+            "value": 60783436981280.25,
+            "discountingFactor": 0.4957576735555783,
+            "discountedCashFlow": 30133855308551.6,
+            "id": 237,
+            "totalCost": 0,
+            "totalOutlay": 0,
+            "totalRevenue": 60783436981280.25
+          },
+          {
+            "year": 2021,
+            "surveyId": "99A1",
+            "value": 63822608830344.3,
+            "discountingFactor": 0.41604370053338224,
+            "discountedCashFlow": 26552994355470.96,
+            "id": 238,
+            "totalCost": 0,
+            "totalOutlay": 0,
+            "totalRevenue": 63822608830344.3
+          }
+        ],
+        "id": 1,
+        "discountingFactors": [],
+        "discountPercentage": "",
+        "netPresentValue": ""
+      },
+      "surveyId": "99A1",
+      "socialCapitals": {
+        "sovereign": 7.16,
+        "surveyId": "99A1",
+        "socialCapitalAnswers": [
+          {
+            "factorScore": "",
+            "id": 1,
+            "socialCapitalQuestion": {
+              "optionType": "multiple",
+              "question": "What rights do households in this community have over this parcel?",
+              "questionHindi": "इस पार्सल पर इस समुदाय के परिवारों का अधिकार क्या है?",
+              "id": 1,
+              "weight": 20,
+              "socialCapitalAnswerOptionses": [
+                {
+                  "val": "",
+                  "id": 1,
+                  "options": "Right to access and use the parcel",
+                  "optionsHindi": "पार्सल को पाने और उपयोग करने का अधिकार"
+                },
+                {
+                  "val": 5,
+                  "id": 2,
+                  "options": "Right to benefit from the parcel",
+                  "optionsHindi": "पार्सल से लाभ प्राप्त करने का अधिकार"
+                },
+                {
+                  "val": 10,
+                  "id": 3,
+                  "options": "Right to control how the parcel will be used",
+                  "optionsHindi": "कैसे पार्सल इस्तेमाल किया जाएगा नियंत्रित करने का अधिकार"
+                },
+                {
+                  "val": 15,
+                  "id": 4,
+                  "options": "Right to exclude others from unauthorized use of the parcel",
+                  "optionsHindi": "पार्सल के अनाधिकृत उपयोग से दूसरों को बाहर करने का अधिकार"
+                },
+                {
+                  "val": 20,
+                  "id": 5,
+                  "options": "Right to pass rights to the parcel down to future generations or sell rights to others",
+                  "optionsHindi": "भविष्य की पीढ़ियों के लिए पार्सल देने के या दूसरों को अधिकार बेचने का अधिकार"
+                }
+              ]
+            },
+            "surveyId": "99A1",
+            "multipleAnswers": [
+              {
+                "answerValue": "",
+                "answer": 1,
+                "id": 127,
+                "questionNo": 1
+              }
+            ]
+          },
+          {
+            "factorScore": "",
+            "id": 2,
+            "socialCapitalQuestion": {
+              "optionType": "multiple",
+              "question": "What rights to this parcel are provided through a state-backed and legally recognized record (i.e. title, lease, etc.)?",
+              "questionHindi": "राज्य का समर्थन किया और कानूनी रूप से मान्यता प्राप्त रिकॉर्ड के माध्यम (अर्थात शीर्षक, पट्टे आदि) से इस पार्सल को क्या अधिकार  प्रदान की जाती हैं?",
+              "id": 2,
+              "weight": 20,
+              "socialCapitalAnswerOptionses": [
+                {
+                  "val": "",
+                  "id": 6,
+                  "options": "Right to access and use the parcel",
+                  "optionsHindi": "पार्सल को पाने और उपयोग करने का अधिकार"
+                },
+                {
+                  "val": 5,
+                  "id": 7,
+                  "options": "Right to benefit from the parcel",
+                  "optionsHindi": "पार्सल से लाभ प्राप्त करने का अधिकार"
+                },
+                {
+                  "val": 10,
+                  "id": 8,
+                  "options": "Right to control how the parcel will be used",
+                  "optionsHindi": "कैसे पार्सल इस्तेमाल किया जाएगा नियंत्रित करने का अधिकार"
+                },
+                {
+                  "val": 15,
+                  "id": 9,
+                  "options": "Right to exclude others from unauthorized use of the parcel",
+                  "optionsHindi": "पार्सल के अनाधिकृत उपयोग से दूसरों को बाहर करने का अधिकार"
+                },
+                {
+                  "val": 20,
+                  "id": 10,
+                  "options": "Right to pass rights to the parcel down to future generations or sell rights to others",
+                  "optionsHindi": "भविष्य की पीढ़ियों के लिए पार्सल देने के या दूसरों को अधिकार बेचने का अधिकार"
+                }
+              ]
+            },
+            "surveyId": "99A1",
+            "multipleAnswers": [
+              {
+                "answerValue": "",
+                "answer": 6,
+                "id": 128,
+                "questionNo": 2
+              }
+            ]
+          },
+          {
+            "factorScore": "",
+            "id": 3,
+            "socialCapitalQuestion": {
+              "optionType": "single",
+              "question": "Are the boundaries for this parcel well known and understood by government authorities and/or community members?",
+              "questionHindi": "इस पार्सल के लिए सीमाओं को अच्छी तरह से जाना जाता है और सरकार के अधिकारियों और / या समुदाय के सदस्यों द्वारा समझ रहे हैं?",
+              "id": 3,
+              "weight": 5,
+              "socialCapitalAnswerOptionses": [
+                {
+                  "val": 20,
+                  "id": 11,
+                  "options": "Both",
+                  "optionsHindi": "दोनों"
+                },
+                {
+                  "val": 10,
+                  "id": 12,
+                  "options": "Government or community only",
+                  "optionsHindi": "केवल सरकार या समुदाय"
+                },
+                {
+                  "val": "",
+                  "id": 13,
+                  "options": "None",
+                  "optionsHindi": "कोई नहीं"
+                }
+              ]
+            },
+            "surveyId": "99A1",
+            "multipleAnswers": [
+              {
+                "answerValue": "",
+                "answer": 13,
+                "id": 129,
+                "questionNo": 3
+              }
+            ]
+          },
+          {
+            "factorScore": "",
+            "id": 4,
+            "socialCapitalQuestion": {
+              "optionType": "single",
+              "question": "Does this group feel confident that they will be able to continue to use the parcel without constraints indefinitely into the future?",
+              "questionHindi": "क्या इस समूह को भरोसा है कि वे भविष्य में अनिश्चित काल के लिए बाधाओं के बिना पार्सल का उपयोग करने के लिए जारी रखने  को सक्षम हो जाएगा लगता है?",
+              "id": 4,
+              "weight": 5,
+              "socialCapitalAnswerOptionses": [
+                {
+                  "val": 20,
+                  "id": 14,
+                  "options": "Yes",
+                  "optionsHindi": "हाँ"
+                },
+                {
+                  "val": 15,
+                  "id": 15,
+                  "options": "Mostly",
+                  "optionsHindi": "अधिकतर"
+                },
+                {
+                  "val": 10,
+                  "id": 16,
+                  "options": "Somewhat",
+                  "optionsHindi": "कुछ हद तक"
+                },
+                {
+                  "val": 5,
+                  "id": 17,
+                  "options": "Maybe",
+                  "optionsHindi": "शायद"
+                },
+                {
+                  "val": "",
+                  "id": 18,
+                  "options": "No",
+                  "optionsHindi": "नहीं"
+                }
+              ]
+            },
+            "surveyId": "99A1",
+            "multipleAnswers": [
+              {
+                "answerValue": "",
+                "answer": 18,
+                "id": 130,
+                "questionNo": 4
+              }
+            ]
+          },
+          {
+            "factorScore": "",
+            "id": 5,
+            "socialCapitalQuestion": {
+              "optionType": "single",
+              "question": "Are there any current disputes related to the boundaries or rights associated with this parcel?",
+              "questionHindi": "वहाँ किसी भी वर्तमान सीमाओं या इस पार्सल के साथ जुड़े अधिकारों से संबंधित विवादों हैं?",
+              "id": 5,
+              "weight": 5,
+              "socialCapitalAnswerOptionses": [
+                {
+                  "val": 20,
+                  "id": 19,
+                  "options": "No",
+                  "optionsHindi": "नहीं"
+                },
+                {
+                  "val": 15,
+                  "id": 20,
+                  "options": "One low level",
+                  "optionsHindi": "एक कम स्तर"
+                },
+                {
+                  "val": 10,
+                  "id": 21,
+                  "options": "Multiple low level",
+                  "optionsHindi": "कई कम स्तर"
+                },
+                {
+                  "val": "",
+                  "id": 22,
+                  "options": "Open conflict",
+                  "optionsHindi": "खुला संघर्ष"
+                }
+              ]
+            },
+            "surveyId": "99A1",
+            "multipleAnswers": [
+              {
+                "answerValue": "",
+                "answer": 22,
+                "id": 131,
+                "questionNo": 5
+              }
+            ]
+          },
+          {
+            "factorScore": "",
+            "id": 6,
+            "socialCapitalQuestion": {
+              "optionType": "single",
+              "question": "Do households in this community use the parcel and access the resource based upon locally recognized customary norms?",
+              "questionHindi": "क्या इस समुदाय में घरों पार्सल का उपयोग और स्थानीय स्तर पर मान्यता प्राप्त प्रथागत मानदंडों पर आधारित संसाधन उपयोग करते हैं?",
+              "id": 6,
+              "weight": 5,
+              "socialCapitalAnswerOptionses": [
+                {
+                  "val": 20,
+                  "id": 23,
+                  "options": "Yes",
+                  "optionsHindi": "हाँ"
+                },
+                {
+                  "val": 10,
+                  "id": 24,
+                  "options": "Somewhat",
+                  "optionsHindi": "कुछ हद तक"
+                },
+                {
+                  "val": "",
+                  "id": 25,
+                  "options": "No",
+                  "optionsHindi": "नहीं"
+                }
+              ]
+            },
+            "surveyId": "99A1",
+            "multipleAnswers": [
+              {
+                "answerValue": "",
+                "answer": 25,
+                "id": 132,
+                "questionNo": 6
+              }
+            ]
+          },
+          {
+            "factorScore": "",
+            "id": 7,
+            "socialCapitalQuestion": {
+              "optionType": "single",
+              "question": "Is there a group or committee in this community with specific responsibility to manage or oversee matters related to use of this parcel?",
+              "questionHindi": "इस समुदाय में इस पार्सल के उपयोग से संबंधित मामलों की देखरेख करने का विशेष जिम्मेदारी के साथ एक प्रबंधन या समिति है?",
+              "id": 7,
+              "weight": 5,
+              "socialCapitalAnswerOptionses": [
+                {
+                  "val": 20,
+                  "id": 26,
+                  "options": "Yes",
+                  "optionsHindi": "हाँ"
+                },
+                {
+                  "val": "",
+                  "id": 27,
+                  "options": "No",
+                  "optionsHindi": "नहीं"
+                }
+              ]
+            },
+            "surveyId": "99A1",
+            "multipleAnswers": [
+              {
+                "answerValue": "",
+                "answer": 27,
+                "id": 133,
+                "questionNo": 7
+              }
+            ]
+          },
+          {
+            "factorScore": "",
+            "id": 8,
+            "socialCapitalQuestion": {
+              "optionType": "single",
+              "question": "Are there rules and regulations associated with this parcel that were created by the community itself?",
+              "questionHindi": "क्या इस पार्सल के साथ जुड़े समुदाय स्वयं के द्वारा बनाया गया नियमों हैं?",
+              "id": 8,
+              "weight": 5,
+              "socialCapitalAnswerOptionses": [
+                {
+                  "val": 20,
+                  "id": 28,
+                  "options": "Yes",
+                  "optionsHindi": "हाँ"
+                },
+                {
+                  "val": 10,
+                  "id": 29,
+                  "options": "Some",
+                  "optionsHindi": "कुछ"
+                },
+                {
+                  "val": "",
+                  "id": 30,
+                  "options": "No",
+                  "optionsHindi": "नहीं"
+                }
+              ]
+            },
+            "surveyId": "99A1",
+            "multipleAnswers": [
+              {
+                "answerValue": "",
+                "answer": 30,
+                "id": 134,
+                "questionNo": 8
+              }
+            ]
+          },
+          {
+            "factorScore": "",
+            "id": 9,
+            "socialCapitalQuestion": {
+              "optionType": "single",
+              "question": "Do all stakeholders within the community generally have equal access to the parcel?",
+              "questionHindi": "प्रबंधन समूह समुदाय के सभी वर्गों के प्रतिनिधि शामिल करता है?",
+              "id": 9,
+              "weight": 5,
+              "socialCapitalAnswerOptionses": [
+                {
+                  "val": 20,
+                  "id": 31,
+                  "options": "Yes",
+                  "optionsHindi": "हाँ"
+                },
+                {
+                  "val": 10,
+                  "id": 32,
+                  "options": "Somewhat",
+                  "optionsHindi": "कुछ हद तक"
+                },
+                {
+                  "val": "",
+                  "id": 33,
+                  "options": "No",
+                  "optionsHindi": "नहीं"
+                }
+              ]
+            },
+            "surveyId": "99A1",
+            "multipleAnswers": [
+              {
+                "answerValue": "",
+                "answer": 33,
+                "id": 135,
+                "questionNo": 9
+              }
+            ]
+          },
+          {
+            "factorScore": "",
+            "id": 10,
+            "socialCapitalQuestion": {
+              "optionType": "single",
+              "question": "Does the management group include representatives from all segments of the community?",
+              "questionHindi": "प्रबंधन समूह समुदाय के सभी वर्गों के प्रतिनिधि शामिल करता है?",
+              "id": 10,
+              "weight": 5,
+              "socialCapitalAnswerOptionses": [
+                {
+                  "val": 20,
+                  "id": 34,
+                  "options": "Yes",
+                  "optionsHindi": "हाँ"
+                },
+                {
+                  "val": 10,
+                  "id": 35,
+                  "options": "Half",
+                  "optionsHindi": "आधा"
+                },
+                {
+                  "val": "",
+                  "id": 36,
+                  "options": "None",
+                  "optionsHindi": "कोई नहीं"
+                }
+              ]
+            },
+            "surveyId": "99A1",
+            "multipleAnswers": [
+              {
+                "answerValue": "",
+                "answer": 36,
+                "id": 136,
+                "questionNo": 10
+              }
+            ]
+          },
+          {
+            "factorScore": "",
+            "id": 11,
+            "socialCapitalQuestion": {
+              "optionType": "single",
+              "question": "Are the rules and regulations associated with this parcel generally viewed as fair and legitimate?",
+              "questionHindi": "क्या इस पार्सल के साथ जुड़े नियमों आम तौर पर उचित और वैध के रूप में देखा जाता हैं?",
+              "id": 11,
+              "weight": 5,
+              "socialCapitalAnswerOptionses": [
+                {
+                  "val": 20,
+                  "id": 37,
+                  "options": "Yes",
+                  "optionsHindi": "हाँ"
+                },
+                {
+                  "val": 10,
+                  "id": 38,
+                  "options": "By many",
+                  "optionsHindi": "कई द्वारा"
+                },
+                {
+                  "val": 5,
+                  "id": 39,
+                  "options": "By some",
+                  "optionsHindi": "कुछ के द्वारा"
+                },
+                {
+                  "val": "",
+                  "id": 40,
+                  "options": "No",
+                  "optionsHindi": "नहीं"
+                }
+              ]
+            },
+            "surveyId": "99A1",
+            "multipleAnswers": [
+              {
+                "answerValue": "",
+                "answer": 40,
+                "id": 137,
+                "questionNo": 11
+              }
+            ]
+          },
+          {
+            "factorScore": "",
+            "id": 12,
+            "socialCapitalQuestion": {
+              "optionType": "single",
+              "question": "How long have the institutions for this parcel been operating?",
+              "questionHindi": "इस पार्सल के लिए संस्थानों कब से काम कर रहा है?",
+              "id": 12,
+              "weight": 5,
+              "socialCapitalAnswerOptionses": [
+                {
+                  "val": 20,
+                  "id": 41,
+                  "options": "15+",
+                  "optionsHindi": "15+"
+                },
+                {
+                  "val": 15,
+                  "id": 42,
+                  "options": "11 to 15",
+                  "optionsHindi": "11 to 15"
+                },
+                {
+                  "val": 10,
+                  "id": 43,
+                  "options": "6 to 10",
+                  "optionsHindi": "6 to 10"
+                },
+                {
+                  "val": 5,
+                  "id": 44,
+                  "options": "1 to 5",
+                  "optionsHindi": "1 to 5"
+                },
+                {
+                  "val": "",
+                  "id": 45,
+                  "options": "0",
+                  "optionsHindi": "0"
+                }
+              ]
+            },
+            "surveyId": "99A1",
+            "multipleAnswers": [
+              {
+                "answerValue": "",
+                "answer": 45,
+                "id": 138,
+                "questionNo": 12
+              }
+            ]
+          },
+          {
+            "factorScore": "",
+            "id": 13,
+            "socialCapitalQuestion": {
+              "optionType": "single",
+              "question": "How often are decisions made by the committee ignored or not implemented?",
+              "questionHindi": "कितनी बार समिति द्वारा किए गए फैसले को नजरअंदाज कर दिया है या नहीं लागू कर रहे हैं?",
+              "id": 13,
+              "weight": 5,
+              "socialCapitalAnswerOptionses": [
+                {
+                  "val": 20,
+                  "id": 46,
+                  "options": "Never",
+                  "optionsHindi": "कभी नहीँ"
+                },
+                {
+                  "val": 10,
+                  "id": 47,
+                  "options": "Sometimes",
+                  "optionsHindi": "कभी कभी"
+                },
+                {
+                  "val": 5,
+                  "id": 48,
+                  "options": "Always",
+                  "optionsHindi": "हमेशा"
+                },
+                {
+                  "val": "",
+                  "id": 49,
+                  "options": "N/A",
+                  "optionsHindi": "N/A"
+                }
+              ]
+            },
+            "surveyId": "99A1",
+            "multipleAnswers": [
+              {
+                "answerValue": "",
+                "answer": 49,
+                "id": 139,
+                "questionNo": 13
+              }
+            ]
+          },
+          {
+            "factorScore": "",
+            "id": 14,
+            "socialCapitalQuestion": {
+              "optionType": "single",
+              "question": "How much of your community's use of this resource/product comes from this parcel?",
+              "questionHindi": "अपने समुदाय की आजीविका का कितना इस पार्सल द्वारा उत्पन्न होता है?",
+              "id": 14,
+              "weight": 5,
+              "socialCapitalAnswerOptionses": [
+                {
+                  "val": 20,
+                  "id": 50,
+                  "options": "75% + ",
+                  "optionsHindi": "75% + "
+                },
+                {
+                  "val": 10,
+                  "id": 51,
+                  "options": "25 to 75%",
+                  "optionsHindi": "25 to 75%"
+                },
+                {
+                  "val": "",
+                  "id": 52,
+                  "options": "0 to 25%",
+                  "optionsHindi": "0 to 25%"
+                }
+              ]
+            },
+            "surveyId": "99A1",
+            "multipleAnswers": [
+              {
+                "answerValue": "",
+                "answer": 52,
+                "id": 141,
+                "questionNo": 14
+              }
+            ]
+          }
+        ],
+        "score": "",
+        "id": 1,
+        "spread": 12,
+        "discountRate": 19.16,
+        "rating": "Ca"
+      },
+      "id": 2,
+      "pastureLand": "",
+      "forestLand": ""
+    },
+    {
+      "name": "Pastureland",
+      "miningLand": "",
+      "status": "deleted",
+      "cropLand": "",
+      "surveyId": "99A1",
+      "socialCapitals": "",
+      "id": 3,
+      "pastureLand": {
+        "revenueProducts": [],
+        "discountingFactors": [],
+        "discountedCashFlows": [],
+        "cashFlows": [],
+        "surveyId": "",
+        "costElements": [],
+        "id": 1,
+        "outlays": [],
+        "discountPercentage": "",
+        "netPresentValue": ""
+      },
+      "forestLand": ""
+    },
+    {
+      "name": "Mining Land",
+      "miningLand": {
+        "revenueProducts": [],
+        "discountingFactors": [],
+        "discountedCashFlows": [],
+        "cashFlows": [],
+        "surveyId": "",
+        "costElements": [],
+        "id": 1,
+        "outlays": [],
+        "discountPercentage": "",
+        "netPresentValue": ""
+      },
+      "status": "deleted",
+      "cropLand": "",
+      "surveyId": "99A1",
+      "socialCapitals": "",
+      "id": 4,
+      "pastureLand": "",
+      "forestLand": ""
+    }
+  ],
+  "currency": "INR",
+  "inflationRate": "0.05",
+  "components": {
+    "totalSocialCapitalScore": "",
+    "totalValue": "",
+    "pastureValue": "",
+    "miningLandValue": "",
+    "forestSocialCapitalScore": "",
+    "pastureSocialCapitalScore": "",
+    "forestCompleteness": "",
+    "miningSocialCapitalScore": "",
+    "miningLandCompleteness": "",
+    "croplandCompleteness": "",
+    "forestValue": "",
+    "totalValueStr": "₹173,800,000,000,000 ~ ₹173,800,000,000,000",
+    "pastureCompleteness": "",
+    "id": 1,
+    "croplandValue": 173777601985349.9,
+    "croplandSocialCapitalScore": ""
+  },
+  "surveyId": "99A1",
+  "country": "India",
+  "id": 1,
+  "surveyor": "eby"
+}
