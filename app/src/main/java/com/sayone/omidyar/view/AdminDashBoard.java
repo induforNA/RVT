@@ -10,7 +10,7 @@ import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 
 public class AdminDashBoard extends BaseActivity implements View.OnClickListener  {
-    TextView rates,projectionTimeFrame,units,summaryOfSurveys,inflationRate;
+    TextView rates,projectionTimeFrame,units,summaryOfSurveys;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,13 +20,11 @@ public class AdminDashBoard extends BaseActivity implements View.OnClickListener
 //        projectionTimeFrame=(TextView)findViewById(R.id.textview_projection);
         units=(TextView)findViewById(R.id.textview_units);
         summaryOfSurveys=(TextView)findViewById(R.id.textview_summary_surveys);
-        inflationRate=(TextView)findViewById(R.id.textview_inflation_rate);
 
         rates.setOnClickListener(this);
  //       projectionTimeFrame.setOnClickListener(this);
         units.setOnClickListener(this);
         summaryOfSurveys.setOnClickListener(this);
-        inflationRate.setOnClickListener(this);
 
     }
 
@@ -48,10 +46,6 @@ public class AdminDashBoard extends BaseActivity implements View.OnClickListener
 
             case R.id.textview_summary_surveys:
                 intent=new Intent(getApplicationContext(),SurveySummaryActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.textview_inflation_rate:
-                intent=new Intent(getApplicationContext(),InflationRateActivity.class);
                 startActivity(intent);
                 break;
         }

@@ -769,7 +769,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
 
                         //realm.beginTransaction();
-                        costElementYears1.setCostFrequencyValue(Integer.parseInt(noOfTimesEditStr));
+                        costElementYears1.setCostFrequencyValue(Double.parseDouble(noOfTimesEditStr));
                         costElementYears1.setCostFrequencyUnit(frequency.getFrequencyValue());
                         costElementYears1.setCostPerPeriodValue(Double.parseDouble(quanityEditStr));
                         costElementYears1.setCostPerPeriodUnit(spinnerUnit.getSelectedItem().toString());

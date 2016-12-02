@@ -73,7 +73,7 @@
                     android:id="@+id/no_of_times_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
 
                 <TextView
                     android:layout_marginLeft="20dp"

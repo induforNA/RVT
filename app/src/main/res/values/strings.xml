@@ -305,6 +305,7 @@
     <string name="select_option">Select an option</string>
 
     <string name="button_export">Export Data</string>
+    <string name="text_times">times</string>
 
 
 </resources>

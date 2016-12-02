@@ -120,10 +120,10 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         pastureDiscountRateValue = (TextView) findViewById(R.id.value_discount_rate_pasture);
         miningDiscountRateValue = (TextView) findViewById(R.id.value_discount_rate_mining);
         respondentGroup = (TextView) findViewById(R.id.respondent_name);
-        forestValueSymbol = (TextView) findViewById(R.id.forest_value_symbol);
-        cropValueSymbol = (TextView) findViewById(R.id.crop_value_symbol);
-        pastureValueSymbol = (TextView) findViewById(R.id.pasture_value_symbol);
-        miningValueSymbol = (TextView) findViewById(R.id.mining_value_symbol);
+//        forestValueSymbol = (TextView) findViewById(R.id.forest_value_symbol);
+//        cropValueSymbol = (TextView) findViewById(R.id.crop_value_symbol);
+//        pastureValueSymbol = (TextView) findViewById(R.id.pasture_value_symbol);
+//        miningValueSymbol = (TextView) findViewById(R.id.mining_value_symbol);
         totalSymbol = (TextView) findViewById(R.id.total_symbol);
 
 
@@ -170,13 +170,13 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 
         Log.e("Symbol:", surveyCheck.getCurrency());
 
-        if (surveyCheck.getCurrency().equals("INR")) {
-            forestValueSymbol.setText("₹");
-            pastureValueSymbol.setText("₹");
-            cropValueSymbol.setText("₹");
-            miningValueSymbol.setText("₹");
-            // totalSymbol.setText(" ₹");
-        }
+//        if (surveyCheck.getCurrency().equals("INR")) {
+//            forestValueSymbol.setText("₹");
+//            pastureValueSymbol.setText("₹");
+//            cropValueSymbol.setText("₹");
+//            miningValueSymbol.setText("₹");
+//            // totalSymbol.setText(" ₹");
+//        }
 
         Log.e("Language : ",Locale.getDefault().getDisplayLanguage());
 
@@ -225,12 +225,12 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         if(!(surveyCheck.getComponents().getForestValue() <0)){
                             String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getForestValue()));
-                            forestValue.setText(yourFormattedString);
+                            forestValue.setText(" ₹"+yourFormattedString);
                         }
                         else{
-                            double value = (surveyCheck.getComponents().getForestValue())*-1;
-                            String yourFormattedString = valueFormatter.format(roundTwo(value));
-                            forestValue.setText(yourFormattedString);
+                            double value = (surveyCheck.getComponents().getForestValue());
+                            String yourFormattedString = valueFormatter.format(roundTwo(value)*-1);
+                            forestValue.setText("- ₹"+yourFormattedString);
                         }
 
 
@@ -277,12 +277,12 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         if(!(surveyCheck.getComponents().getCroplandValue() <0)){
                             String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getCroplandValue()));
-                            cropValue.setText(yourFormattedString);
+                            cropValue.setText(" ₹"+yourFormattedString);
                         }
                         else{
                             double value = surveyCheck.getComponents().getCroplandValue();
-                            String yourFormattedString = valueFormatter.format(roundTwo(value));
-                            cropValue.setText(yourFormattedString);
+                            String yourFormattedString = valueFormatter.format(roundTwo(value)*-1);
+                            cropValue.setText("- ₹"+yourFormattedString);
                         }
 
 
@@ -328,12 +328,12 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         if(!(surveyCheck.getComponents().getPastureValue() <0)){
                             String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getPastureValue()));
-                            pastureValue.setText(yourFormattedString);
+                            pastureValue.setText(" ₹"+yourFormattedString);
                         }
                         else{
                             double value = surveyCheck.getComponents().getPastureValue();
-                            String yourFormattedString = valueFormatter.format(roundTwo(value));
-                            pastureValue.setText(yourFormattedString);
+                            String yourFormattedString = valueFormatter.format(roundTwo(value)*-1);
+                            pastureValue.setText("- ₹"+yourFormattedString);
                         }
 
 
@@ -379,12 +379,12 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         if(!(surveyCheck.getComponents().getMiningLandValue() <0)){
                             String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getMiningLandValue()));
-                            miningValue.setText(yourFormattedString);
+                            miningValue.setText(" ₹"+yourFormattedString);
                         }
                         else{
                             double value = surveyCheck.getComponents().getMiningLandValue();
-                            String yourFormattedString = valueFormatter.format(roundTwo(value));
-                            miningValue.setText(yourFormattedString);
+                            String yourFormattedString = valueFormatter.format(roundTwo(value)*-1);
+                            miningValue.setText("- ₹"+yourFormattedString);
                         }
 
 

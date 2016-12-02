@@ -1,6 +1,9 @@
 package com.sayone.omidyar.view;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -25,21 +28,27 @@ import io.realm.RealmResults;
 public class AdminRatesActivity extends BaseActivity implements View.OnClickListener {
 
     public Spinner surveyIdSpinner, landKindSpinner;
-    private EditText discountRate, discountRateOverride;
+    private EditText discountRate, discountRateOverride,inflationRate;;
     private ArrayList<String> surveyIds = new ArrayList<>();
     private ArrayList<String> surveyLandKinds = new ArrayList<>();
     private ArrayList<String> surveyLandKindsHindi = new ArrayList<>();
-    private Button buttonSave, buttonREstore;
+    private Button buttonSave, buttonREstore,saveButtonInflation;
     private Realm realm;
     private SocialCapital socialCapital;
     private ArrayAdapter landKindAdapter;
     private ArrayAdapter surveyIdAdapter;
     private String language;
+    private String inflationrateString;
+    private Context context;
+    private SharedPreferences preferences;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = this;
+        preferences = context.getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         setContentView(R.layout.activity_admin_rates);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
@@ -49,6 +58,10 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
         buttonSave = (Button) findViewById(R.id.button_save);
         surveyIdSpinner = (Spinner) findViewById(R.id.spinner_survey_id);
         landKindSpinner = (Spinner) findViewById(R.id.spinner_land_kind);
+        inflationRate = (EditText) findViewById(R.id.inflation_rate);
+        saveButtonInflation = (Button) findViewById(R.id.button_save_inlation);
+
+        inflationRate.setText(preferences.getString("inflationRate", ""));
 
         realm = Realm.getDefaultInstance();
         language = Locale.getDefault().getDisplayLanguage();
@@ -68,6 +81,19 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
 
         surveyIdSpinner.setAdapter(surveyIdAdapter);
         landKindSpinner.setAdapter(landKindAdapter);
+        saveButtonInflation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = preferences.edit();
+                inflationrateString = inflationRate.getText().toString();
+                editor.putString("inflationRate", inflationrateString);
+                editor.apply();
+                Toast toast = Toast.makeText(context,getResources().getText(R.string.text_data_saved), Toast.LENGTH_SHORT);
+                toast.show();
+                String rate = preferences.getString("inflationRate", "");
+                Log.e("Rate :", rate);
+            }
+        });
 
         surveyIdSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
