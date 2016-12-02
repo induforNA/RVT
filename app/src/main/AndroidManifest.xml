@@ -26,7 +26,9 @@
 
         <activity
             android:name=".view.AdminRatesActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape" >
+
+        </activity>
         <activity
             android:name=".view.ProjectionTimeFrameActivity"
             android:screenOrientation="landscape" />
@@ -106,7 +108,9 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.NaturalCapitalCostActivityB"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape" >
+
+        </activity>
         <activity
             android:name=".view.NaturalCapitalCostActivityC"
             android:screenOrientation="landscape" />
@@ -134,7 +138,9 @@
             android:screenOrientation="landscape"></activity>
         <activity
             android:name=".view.NaturalCapitalCostOutlayB"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape">
+
+        </activity>
         <activity android:name=".view.Main2Activity" />
         <activity
             android:name=".view.InflationRateActivity"

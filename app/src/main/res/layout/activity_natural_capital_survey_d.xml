@@ -74,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:singleLine="true"
                     android:layout_height="wrap_content"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
 
                 <TextView
                     android:id="@+id/time_per_head"

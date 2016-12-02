@@ -18,7 +18,7 @@ public class RevenueProductYears extends RealmObject {
 
     private long revenueProductId;
 
-    private int harvestFrequencyValue;
+    private double harvestFrequencyValue;
 
     private double harvestFrequencyUnit;
 
@@ -46,11 +46,11 @@ public class RevenueProductYears extends RealmObject {
         this.id = id;
     }
 
-    public int getHarvestFrequencyValue() {
+    public double getHarvestFrequencyValue() {
         return harvestFrequencyValue;
     }
 
-    public void setHarvestFrequencyValue(int harvestFrequencyValue) {
+    public void setHarvestFrequencyValue(double harvestFrequencyValue) {
         this.harvestFrequencyValue = harvestFrequencyValue;
     }
 

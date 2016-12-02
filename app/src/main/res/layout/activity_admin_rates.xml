@@ -29,13 +29,12 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="150dp"
         android:layout_marginRight="150dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -135,6 +134,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
@@ -143,7 +143,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
             android:padding="5dp"
             android:text="@string/button_save"
             android:textColor="@android:color/white" />
@@ -165,6 +164,52 @@
             android:textColor="@android:color/white" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textfield_size"
+            android:text="@string/inflation_rate"/>
+
+        <EditText
+            android:layout_width="100dp"
+            android:id="@+id/inflation_rate"
+            android:singleLine="true"
+            android:inputType="numberDecimal"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+
+            android:textSize="@dimen/textfield_size"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textfield_size"
+            android:text="%"/>
+
+        <Button
+            android:id="@+id/button_save_inlation"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="5dp"
+            android:text="@string/button_save"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+
+
+
 
 
 </LinearLayout>

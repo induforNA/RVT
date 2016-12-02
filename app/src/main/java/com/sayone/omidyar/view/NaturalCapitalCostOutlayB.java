@@ -61,6 +61,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
     private TextView logout;
     private TextView startSurvey;
     private TextView surveyIdDrawer;
+    private EditText frequencyNumber;
     private DrawerLayout menuDrawerLayout;
     Button buttonSave;
 
@@ -225,6 +226,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
         // buttonSave = (Button) findViewById(R.id.button_save);
         costValue = (EditText) findViewById(R.id.cost_value);
+        frequencyNumber = (EditText)findViewById(R.id.frequency_number);
 
 //        if(currentSocialCapitalServey.equals("Forestland")){
 //            questionRevenue.setText("Add investment/cost outlay items");

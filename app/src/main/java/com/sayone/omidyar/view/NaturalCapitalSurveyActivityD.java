@@ -829,7 +829,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
 
                         //realm.beginTransaction();
-                        revenueProductYears1.setHarvestFrequencyValue(Integer.parseInt(noOfTimesEditStr));
+                        revenueProductYears1.setHarvestFrequencyValue(Double.parseDouble(noOfTimesEditStr));
                         revenueProductYears1.setHarvestFrequencyUnit(frequency.getFrequencyValue());
                         revenueProductYears1.setQuantityValue(Double.parseDouble(quanityEditStr));
                         revenueProductYears1.setQuantityUnit(spinnerUnit.getSelectedItem().toString());

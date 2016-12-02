@@ -18,7 +18,7 @@ public class CostElementYears extends RealmObject {
 
     private long costElementId;
 
-    private int costFrequencyValue;
+    private double costFrequencyValue;
 
     private double costFrequencyUnit;
 
@@ -52,11 +52,11 @@ public class CostElementYears extends RealmObject {
         this.surveyId = surveyId;
     }
 
-    public int getCostFrequencyValue() {
+    public double getCostFrequencyValue() {
         return costFrequencyValue;
     }
 
-    public void setCostFrequencyValue(int costFrequencyValue) {
+    public void setCostFrequencyValue(double costFrequencyValue) {
         this.costFrequencyValue = costFrequencyValue;
     }
 
