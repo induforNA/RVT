@@ -1292,6 +1292,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                     component.setForestValue(npv);
                     realm.commitTransaction();
 
+                    Log.e("COM ", component.toString());
+
                     realm.beginTransaction();
                     results.setComponents(component);
                     realm.commitTransaction();
@@ -1299,6 +1301,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                     realm.beginTransaction();
                     results.getComponents().setForestValue(npv);
                     realm.commitTransaction();
+
+                    Log.e("COM ", results.getComponents().toString());
                 }
             }else if(landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")){
                 double npv = 0;

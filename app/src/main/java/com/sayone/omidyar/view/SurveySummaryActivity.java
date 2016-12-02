@@ -197,6 +197,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                     Log.e("setsend:",setsend);
                     Log.e("surveyId:",survey.getSurveyId());
                     if (survey.getSurveyId().equals(setsend)) {
+                        Log.e("AA ","ok");
                         jsonObject = new JSONObject();
                         try {
                             if (survey.getId() == 0) {
@@ -328,6 +329,8 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        Log.e("JSON ", object.toString());
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -1102,7 +1105,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             } else
                 jsonObjectSocialCapital.put("surveyId", socialCapitals.getSurveyId());
             if (socialCapitals.getScore() == 0) {
-                jsonObjectSocialCapital.put("score", "");
+                jsonObjectSocialCapital.put("score", 0);
             } else
                 jsonObjectSocialCapital.put("score", socialCapitals.getScore());
             if (socialCapitals.getRating() == null) {
@@ -1114,11 +1117,11 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             } else
                 jsonObjectSocialCapital.put("sovereign", socialCapitals.getSovereign());
             if (socialCapitals.getDiscountRate() == 0) {
-                jsonObjectSocialCapital.put("discountRate", "");
+                jsonObjectSocialCapital.put("discountRate", 0);
             } else
                 jsonObjectSocialCapital.put("discountRate", socialCapitals.getDiscountRate());
             if (socialCapitals.getSpread() == 0) {
-                jsonObjectSocialCapital.put("spread", "");
+                jsonObjectSocialCapital.put("spread", 0);
             } else
                 jsonObjectSocialCapital.put("spread", socialCapitals.getSpread());
             if (socialCapitals.getSocialCapitalAnswers() == null) {
@@ -1149,7 +1152,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 } else
                     jsonObjectSocialCapitalAnswer.put("surveyId", socialCapitalAnswer.getSurveyId());
                 if (socialCapitalAnswer.getFactorScore() == 0) {
-                    jsonObjectSocialCapitalAnswer.put("factorScore", "");
+                    jsonObjectSocialCapitalAnswer.put("factorScore", 0);
                 } else
                     jsonObjectSocialCapitalAnswer.put("factorScore", socialCapitalAnswer.getFactorScore());
 
@@ -1191,7 +1194,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                     jsonObjectMultipleAnwser.put("answer", multipleAnswer.getAnswer());
                 }
                 if (multipleAnswer.getAnswerValue() == 0) {
-                    jsonObjectMultipleAnwser.put("answerValue", "");
+                    jsonObjectMultipleAnwser.put("answerValue", 0);
                 } else {
                     jsonObjectMultipleAnwser.put("answerValue", multipleAnswer.getAnswerValue());
                 }
