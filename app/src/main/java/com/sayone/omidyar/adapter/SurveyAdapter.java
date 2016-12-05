@@ -39,12 +39,12 @@ import io.realm.Realm;
 /**
  * Created by sayone on 3/10/16.
  */
-public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
-    private List<Survey>surveyList;
-    private final int viewTypeHeader=0,viewTypeList=1;
-    private Boolean flag,flag1=true;
+    private List<Survey> surveyList;
+    private final int viewTypeHeader = 0, viewTypeList = 1;
+    private Boolean flag, flag1 = true;
     private Realm realm;
     private Survey surveyRequest;
     private SharedPreferences sharedPref;
@@ -65,11 +65,12 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             set = new HashSet<String>();
             realm = Realm.getDefaultInstance();
             surveyName = (TextView) itemView.findViewById(R.id.survey_name);
-            checkBoxSurvey=(CheckBox)itemView.findViewById(R.id.checkbox_survey);
-            exportButton=(Button)itemView.findViewById(R.id.button_export);
+            checkBoxSurvey = (CheckBox) itemView.findViewById(R.id.checkbox_survey);
+            exportButton = (Button) itemView.findViewById(R.id.button_export);
 
         }
     }
+
     public class HeaderViewHolder extends RecyclerView.ViewHolder {
 
         private TextView header;
@@ -82,7 +83,7 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     public SurveyAdapter(List<Survey> surveyList) {
-        this.flag=false;
+        this.flag = false;
         this.surveyList = surveyList;
     }
 
@@ -91,15 +92,14 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         View itemView = null;
         sharedPref = parent.getContext().getSharedPreferences(
                 "com.sayone.omidyar.PREFERENCE_FILE_KEY_SET", Context.MODE_PRIVATE);
-        context=parent.getContext();
-        editor=sharedPref.edit();
+        context = parent.getContext();
+        editor = sharedPref.edit();
         editor.clear();
-        editor.putStringSet("surveySet",set);
-        switch(viewType)
-        {
+        editor.putStringSet("surveySet", set);
+        switch (viewType) {
 
             case viewTypeHeader:
-                itemView= LayoutInflater.from(parent.getContext())
+                itemView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.recycler_header, parent, false);
                 return new HeaderViewHolder(itemView);
 
@@ -118,23 +118,23 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
 
-        if (holder instanceof HeaderViewHolder){
-            if(flag){
-                ((HeaderViewHolder)holder).header.setText(context.getResources().getText(R.string.unselect_all));
+        if (holder instanceof HeaderViewHolder) {
+            if (flag) {
+                ((HeaderViewHolder) holder).header.setText(context.getResources().getText(R.string.unselect_all));
             } else {
-                ((HeaderViewHolder)holder).header.setText(context.getResources().getText(R.string.select_all));
+                ((HeaderViewHolder) holder).header.setText(context.getResources().getText(R.string.select_all));
             }
-            ((HeaderViewHolder)holder).header.setOnClickListener(new View.OnClickListener() {
+            ((HeaderViewHolder) holder).header.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                  flag=toggle();
+                    flag = toggle();
                     notifyDataSetChanged();
                 }
             });
 
         }
-        if (holder instanceof SurveyViewHolder){
-            int pos=position-1;
+        if (holder instanceof SurveyViewHolder) {
+            int pos = position - 1;
             ((SurveyViewHolder) holder).exportButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -145,19 +145,18 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             });
 
             final Survey survey = surveyList.get(pos);
-            surveyRequest=survey;
-            if(survey.isSendStatus()) {
+            surveyRequest = survey;
+            if (survey.isSendStatus()) {
                 ((SurveyViewHolder) holder).exportButton.setVisibility(View.VISIBLE);
-            }
-            else{
+            } else {
                 ((SurveyViewHolder) holder).exportButton.setVisibility(View.INVISIBLE);
             }
 
-            ((SurveyViewHolder)holder).checkBoxSurvey.setOnClickListener(new View.OnClickListener() {
+            ((SurveyViewHolder) holder).checkBoxSurvey.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    if(flag1) {
+                    if (flag1) {
                         ((SurveyViewHolder) holder).checkBoxSurvey.setChecked(true);
                         realm.beginTransaction();
                         survey.setSendStatus(true);
@@ -167,9 +166,8 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         editor.clear();
                         editor.putStringSet("surveySet", set);
                         editor.apply();
-                    }
-                    else{
-                       ((SurveyViewHolder) holder).checkBoxSurvey.setChecked(false);
+                    } else {
+                        ((SurveyViewHolder) holder).checkBoxSurvey.setChecked(false);
 //                        realm.beginTransaction();
 //                        survey.setSendStatus(false);
 //                        realm.commitTransaction();
@@ -180,18 +178,18 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         editor.apply();
                     }
 // notifyDataSetChanged();
-                    flag1=toggle1();
+                    flag1 = toggle1();
                 }
             });
-            ((SurveyViewHolder)holder).surveyName.setText(survey.getSurveyId());
-          if(flag){
-              ((SurveyViewHolder)holder).checkBoxSurvey.setChecked(true);
+            ((SurveyViewHolder) holder).surveyName.setText(survey.getSurveyId());
+            if (flag) {
+                ((SurveyViewHolder) holder).checkBoxSurvey.setChecked(true);
 
-           } else {
-              ((SurveyViewHolder)holder).checkBoxSurvey.setChecked(false);
-              set.clear();
-          }
-            if(((SurveyViewHolder)holder).checkBoxSurvey.isChecked()){
+            } else {
+                ((SurveyViewHolder) holder).checkBoxSurvey.setChecked(false);
+                set.clear();
+            }
+            if (((SurveyViewHolder) holder).checkBoxSurvey.isChecked()) {
                 realm.beginTransaction();
                 survey.setSendStatus(true);
                 realm.commitTransaction();
@@ -200,9 +198,9 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 
         }
-        editor=sharedPref.edit();
+        editor = sharedPref.edit();
         editor.clear();
-        editor.putStringSet("surveySet",set);
+        editor.putStringSet("surveySet", set);
         editor.apply();
 
 
@@ -213,7 +211,7 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         JSONObject object = new JSONObject();
         try {
             // object.put("id","BF01");
-            object.put("id",surveyRequest.getSurveyId());
+            object.put("id", surveyRequest.getSurveyId());
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -282,9 +280,8 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return surveyList.size()+1;
+        return surveyList.size() + 1;
     }
-
 
 
 }

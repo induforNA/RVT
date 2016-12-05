@@ -86,7 +86,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
     JSONObject jsonObject;
     private Context context;
-    private Button sendDataToServer,resetData;
+    private Button sendDataToServer,resetData, exportDataEmail;
     private SharedPreferences sharedPref;
     private Set<String> set = null;
     private Realm realm;
@@ -104,6 +104,8 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         recyclerView = (RecyclerView) findViewById(R.id.recycler_survey_list);
         sendDataToServer = (Button) findViewById(R.id.button_send_data_to_server);
         resetData=(Button)findViewById(R.id.button_reset_data);
+        exportDataEmail = (Button) findViewById(R.id.button_export_data_email);
+
         sharedPref = context.getSharedPreferences(
                 "com.sayone.omidyar.PREFERENCE_FILE_KEY_SET", Context.MODE_PRIVATE);
 
@@ -119,6 +121,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         recyclerView.setAdapter(surveyAdapter);
         sendDataToServer.setOnClickListener(this);
         resetData.setOnClickListener(this);
+        exportDataEmail.setOnClickListener(this);
 
 
         completedSurveys.setText("" + surveyCount);
@@ -287,7 +290,12 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             }, 3000);
 
             surveyList = realm.where(Survey.class).findAll();
-            surveyAdapter.notifyDataSetChanged();
+            surveyAdapter = new SurveyAdapter(surveyList);
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+            recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter(surveyAdapter);
+            // surveyAdapter.notifyDataSetChanged();
 
         }
 
@@ -1366,6 +1374,59 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 new LongOperation().execute("");
                 break;
 
+            case R.id.button_export_data_email:
+                RealmResults<Survey> surveyExports = realm.where(Survey.class).equalTo("sendStatus", true).findAll();
+                JSONArray jsonArray = new JSONArray();
+                for(Survey surveyExport : surveyExports){
+                    jsonArray.put(surveyExport.getSurveyId());
+                }
+
+                JSONObject object = new JSONObject();
+                try {
+                    object.put("id", jsonArray);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Log.e("JSON ", object.toString());
+
+                RequestQueue queue = Volley.newRequestQueue(this);
+
+
+                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                        "http://52.66.160.79/api/v1/generate-mini-excel/", object, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("RES ", response.toString());
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.e("TAG ", "Error: " + error.getMessage());
+                    }
+                }) {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("Authorization", "Token 2fb88b01c22ac470cbb969f604e9b3c87d6c8c7d");
+                        params.put("Content-Type", "application/json");
+
+                        return params;
+                    }
+                };
+
+//                try {
+//                    Log.e("Re ", jsonObjReq.getBody() + " " + jsonObjReq.getHeaders().get("Authorization").toString());
+//                } catch (AuthFailureError authFailureError) {
+//                    authFailureError.printStackTrace();
+//                }
+
+                queue.add(jsonObjReq);
+
+
+                break;
             case R.id.button_reset_data:
                 Realm realm = Realm.getDefaultInstance();
                 realm.beginTransaction();
