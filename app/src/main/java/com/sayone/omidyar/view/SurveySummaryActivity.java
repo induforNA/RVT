@@ -1364,12 +1364,14 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         switch (view.getId()) {
             case R.id.button_send_data_to_server:
                 set = sharedPref.getStringSet("surveySet", null);
-                for (String temp : set) {
-                    Log.e("Sirvey : ", temp);
-                    realm.beginTransaction();
-                    Survey survey = realm.where(Survey.class).equalTo("surveyId",temp).findFirst();
-                    survey.setSendStatus(true);
-                    realm.commitTransaction();
+                if(set != null) {
+                    for (String temp : set) {
+                        Log.e("Sirvey : ", temp);
+                        realm.beginTransaction();
+                        Survey survey = realm.where(Survey.class).equalTo("surveyId", temp).findFirst();
+                        survey.setSendStatus(true);
+                        realm.commitTransaction();
+                    }
                 }
                 new LongOperation().execute("");
                 break;
