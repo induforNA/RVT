@@ -1421,6 +1421,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 break;
 
             case R.id.button_export_data_email:
+                exportDataEmail.setEnabled(false);
                 RealmResults<Survey> surveyExports = realm.where(Survey.class).equalTo("sendStatus", true).findAll();
                 JSONArray jsonArray = new JSONArray();
                 for(Survey surveyExport : surveyExports){
@@ -1445,6 +1446,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.e("RES ", response.toString());
+                        exportDataEmail.setEnabled(true);
                     }
                 }, new Response.ErrorListener() {
 
@@ -1453,6 +1455,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                         VolleyLog.e("TAG ", "Error: " + error.getMessage());
                         Toast toast = Toast.makeText(context,getResources().getString(R.string.save_failed), Toast.LENGTH_SHORT);
                         toast.show();
+                        exportDataEmail.setEnabled(true);
                     }
                 }) {
                     @Override

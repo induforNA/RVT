@@ -168,9 +168,23 @@
     </LinearLayout>
 
     <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Spinner
+            android:id="@+id/spinner_survey_id_inflatrion"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
@@ -187,6 +201,7 @@
             android:inputType="numberDecimal"
             android:layout_marginLeft="10dp"
             android:gravity="center"
+            android:text="5"
             android:selectAllOnFocus="true"
             android:textSize="@dimen/textfield_size"
             android:layout_height="wrap_content" />
@@ -197,6 +212,17 @@
             android:textSize="@dimen/textfield_size"
             android:text="%"/>
 
+
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content">
+
         <Button
             android:id="@+id/button_save_inlation"
             android:layout_marginLeft="10dp"
@@ -205,6 +231,14 @@
             android:layout_gravity="center_horizontal"
             android:padding="5dp"
             android:text="@string/button_save"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/button_restore_original_inflation_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/restore_original_inflation_rate"
             android:textColor="@android:color/white" />
 
     </LinearLayout>

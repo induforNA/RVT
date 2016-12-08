@@ -306,6 +306,7 @@
 
     <string name="button_export">Export Data</string>
     <string name="text_times">times</string>
+    <string name="restore_original_inflation_rate">Restore original Inflation rate</string>
 
 
 </resources>
