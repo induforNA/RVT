@@ -71,6 +71,7 @@
                     android:editable="true"
                     android:layout_marginLeft="20dp"
                     android:id="@+id/no_of_times_edit"
+                    android:selectAllOnFocus="true"
                     android:layout_width="match_parent"
                     android:singleLine="true"
                     android:layout_height="wrap_content"
@@ -189,6 +190,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
+                        android:selectAllOnFocus="true"
                         android:singleLine="true"
                         android:hint="@string/hint_number"
                         android:inputType="numberDecimal"
@@ -250,6 +252,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
+                        android:selectAllOnFocus="true"
                         android:singleLine="true"
                         android:hint="@string/price"
                         android:textSize="@dimen/textfield_size" />
@@ -298,6 +301,7 @@
                         android:layout_marginRight="150dp"
                         android:width="80dp"
                         android:singleLine="true"
+                        android:selectAllOnFocus="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>

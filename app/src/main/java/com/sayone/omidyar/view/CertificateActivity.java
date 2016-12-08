@@ -207,10 +207,9 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 String pathForestMap = Environment.getExternalStorageDirectory().toString() + "/MapImagesNew/" + "Forestland" + surveyId + "screen.jpg/";
                 mapImageForest.setVisibility(View.VISIBLE);
                 fforest = new File(pathForestMap);
-//                if(!fforest.exists()) {
-//                    forestlandLayout.setVisibility(View.GONE);
-//                    headingForest.setVisibility(View.GONE);
-//                }
+                if(!fforest.exists()) {
+                    mapImageForest.setEnabled(false);
+                }
                 Picasso.with(context).load(fforest).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageForest);
                 socialCapitalForest.setText("" + landKind.getSocialCapitals().getScore() + "/20");
 
@@ -259,10 +258,9 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 String pathCropMap = Environment.getExternalStorageDirectory().toString() + "/MapImagesNew/" + "Cropland" + surveyId + "screen.jpg/";
                 mapImageCrop.setVisibility(View.VISIBLE);
                 fcrop = new File(pathCropMap);
-//                if(!fcrop.exists()){
-//                    croplandLayout.setVisibility(View.GONE);
-//                    headingCrop.setVisibility(View.GONE);
-//                }
+                if(!fcrop.exists()){
+                   mapImageCrop.setEnabled(false);
+                }
                 Picasso.with(context).load(fcrop).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageCrop);
                 socialCapitalCrop.setText("" + landKind.getSocialCapitals().getScore() + "/20");
 
@@ -271,6 +269,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                     surveyCheck.getComponents().setCroplandSocialCapitalScore(landKind.getSocialCapitals().getScore());
                     realm.commitTransaction();
                 }
+
 
                 if (surveyCheck.getComponents() != null) {
                     if (surveyCheck.getComponents().getCroplandValue() != 0) {
@@ -310,10 +309,9 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 String pathPastureMap = Environment.getExternalStorageDirectory().toString() + "/MapImagesNew/" + "Pastureland" + surveyId + "screen.jpg/";
                 mapImagePasture.setVisibility(View.VISIBLE);
                 fpasture = new File(pathPastureMap);
-//                if(!fpasture.exists()){
-//                    pasturelandLayout.setVisibility(View.GONE);
-//                    headingPasture.setVisibility(View.GONE);
-//                }
+                if(!fpasture.exists()){
+                   mapImagePasture.setEnabled(false);
+                }
                 Picasso.with(context).load(fpasture).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImagePasture);
                 socialCapitalPasture.setText("" + landKind.getSocialCapitals().getScore() + "/20");
 
@@ -361,10 +359,9 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 String pathminingMap = Environment.getExternalStorageDirectory().toString() + "/MapImagesNew/" + "Mining Land" + surveyId + "screen.jpg/";
                 mapImageMining.setVisibility(View.VISIBLE);
                 fmining = new File(pathminingMap);
-//                if(!fmining.exists()){
-//                    mininglandLayout.setVisibility(View.GONE);
-//                    headingMining.setVisibility(View.GONE);
-//                }
+                if(!fmining.exists()){
+                  mapImageMining.setEnabled(false);
+                }
                 Picasso.with(context).load(fmining).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageMining);
                 socialCapitalMining.setText("" + landKind.getSocialCapitals().getScore() + "/20");
 
@@ -443,7 +440,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 
         // formattedString(Math.round(lowerLimit/10000)*10000);
 
-        String totalValStr  = formattedString(Long.valueOf(numberProcess(lowerLimitStr)))+" ~ "+formattedString(Long.valueOf(numberProcess(upperLimitStr)));
+        String totalValStr  = " ~ "+formattedString(Long.valueOf(numberProcess(lowerLimitStr)))+" — "+formattedString(Long.valueOf(numberProcess(upperLimitStr)));
         Log.e("Final Value Range ",totalValStr);
 
         if(surveyCheck.getComponents() != null) {
@@ -488,7 +485,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 //        socialCapitalCrop.setText("0");
 //        socialCapitalPasture.setText("0");
 //        socialCapitalMining.setText("0");
-          inflationRate.setText(String.valueOf(Double.parseDouble(surveyCheck.getInflationRate())*100.00));
+          inflationRate.setText(String.valueOf(Double.parseDouble(surveyCheck.getInflationRate())*100.00)+"%");
 
     }
 

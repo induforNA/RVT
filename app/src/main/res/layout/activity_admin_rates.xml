@@ -68,6 +68,7 @@
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:selectAllOnFocus="true"
                     android:enabled="false"
                     android:text="0.0"
                     android:textSize="@dimen/textfield_size" />
@@ -116,6 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:inputType="numberDecimal"
+                    android:selectAllOnFocus="true"
                     android:singleLine="true"
                     android:text="0.0"
                     android:textSize="@dimen/textfield_size" />
@@ -185,7 +187,7 @@
             android:inputType="numberDecimal"
             android:layout_marginLeft="10dp"
             android:gravity="center"
-
+            android:selectAllOnFocus="true"
             android:textSize="@dimen/textfield_size"
             android:layout_height="wrap_content" />
 

@@ -7,8 +7,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -105,6 +107,9 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         sendDataToServer = (Button) findViewById(R.id.button_send_data_to_server);
         resetData=(Button)findViewById(R.id.button_reset_data);
         exportDataEmail = (Button) findViewById(R.id.button_export_data_email);
+        exportDataEmail.setEnabled(false);
+        exportDataEmail.setBackgroundResource(android.R.drawable.btn_default);
+        exportDataEmail.getBackground().setColorFilter(ContextCompat.getColor(this,R.color.colorDisable), PorterDuff.Mode.MULTIPLY);
 
         sharedPref = context.getSharedPreferences(
                 "com.sayone.omidyar.PREFERENCE_FILE_KEY_SET", Context.MODE_PRIVATE);
@@ -114,7 +119,9 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         surveyList = realm.where(Survey.class).findAll();
         surveyCount = surveyList.size();
 
-        surveyAdapter = new SurveyAdapter(surveyList);
+
+
+        surveyAdapter = new SurveyAdapter(surveyList,SurveySummaryActivity.this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -125,6 +132,14 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
 
         completedSurveys.setText("" + surveyCount);
+
+
+        resetData.setBackgroundResource(android.R.drawable.btn_default);
+        resetData.getBackground().setColorFilter(ContextCompat.getColor(this,R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+
+
+        sendDataToServer.setBackgroundResource(android.R.drawable.btn_default);
+        sendDataToServer.getBackground().setColorFilter(ContextCompat.getColor(this,R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
 
 
 //        Gson gson = new GsonBuilder()
@@ -182,6 +197,21 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
 
     }
+
+    public void setButtonEnabled(){
+        exportDataEmail.setEnabled(true);
+        exportDataEmail.setBackgroundResource(android.R.drawable.btn_default);
+       exportDataEmail.getBackground().setColorFilter(ContextCompat.getColor(this,R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+      //  exportDataEmail.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimary));
+    }
+
+    public void setButtonDisabled(){
+       exportDataEmail.setEnabled(false);
+      //  exportDataEmail.getBackground().setColorFilter(ContextCompat.getColor(this,R.color.colorDisable), PorterDuff.Mode.MULTIPLY);
+        //exportDataEmail.setBackgroundColor(ContextCompat.getColor(this,R.color.colorDisable));
+    }
+
+
 
 
     private class LongOperation extends AsyncTask<String, Void, String> {
@@ -290,7 +320,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             }, 3000);
 
             surveyList = realm.where(Survey.class).findAll();
-            surveyAdapter = new SurveyAdapter(surveyList);
+            surveyAdapter = new SurveyAdapter(surveyList,SurveySummaryActivity.this);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -1364,14 +1394,23 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         switch (view.getId()) {
             case R.id.button_send_data_to_server:
                 set = sharedPref.getStringSet("surveySet", null);
-                for (String temp : set) {
-                    Log.e("Sirvey : ", temp);
-                    realm.beginTransaction();
-                    Survey survey = realm.where(Survey.class).equalTo("surveyId",temp).findFirst();
-                    survey.setSendStatus(true);
-                    realm.commitTransaction();
+                if(set != null) {
+                    if (!set.isEmpty()) {
+                        for (String temp : set) {
+                            Log.e("Sirvey : ", temp);
+                            realm.beginTransaction();
+                            Survey survey = realm.where(Survey.class).equalTo("surveyId", temp).findFirst();
+                            survey.setSendStatus(true);
+                            exportDataEmail.setVisibility(View.VISIBLE);
+                            realm.commitTransaction();
+                            new LongOperation().execute("");
+                        }
+                    }
                 }
-                new LongOperation().execute("");
+                else {
+                    Toast.makeText(this, "Empty", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
 
             case R.id.button_export_data_email:
@@ -1405,6 +1444,8 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         VolleyLog.e("TAG ", "Error: " + error.getMessage());
+                        Toast toast = Toast.makeText(context,getResources().getString(R.string.save_failed), Toast.LENGTH_SHORT);
+                        toast.show();
                     }
                 }) {
                     @Override
@@ -1424,6 +1465,9 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 //                }
 
                 queue.add(jsonObjReq);
+                Toast toast = Toast.makeText(context,getResources().getString(R.string.completed_text), Toast.LENGTH_SHORT);
+                toast.show();
+
 
 
                 break;
@@ -1472,6 +1516,9 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 surveyAdapter.notifyDataSetChanged();
                 surveyCount=0;
                 completedSurveys.setText("" + surveyCount);
+                exportDataEmail.setEnabled(false);
+                exportDataEmail.setBackgroundResource(android.R.drawable.btn_default);
+                exportDataEmail.getBackground().setColorFilter(ContextCompat.getColor(this,R.color.colorDisable), PorterDuff.Mode.MULTIPLY);
                 break;
 
 

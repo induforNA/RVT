@@ -224,7 +224,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         logout = (TextView) findViewById(R.id.logout);
         startSurvey=(TextView)findViewById(R.id.text_start_survey);
         surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
-        // buttonSave = (Button) findViewById(R.id.button_save);
+         buttonSave = (Button) findViewById(R.id.button_save);
         costValue = (EditText) findViewById(R.id.cost_value);
         frequencyNumber = (EditText)findViewById(R.id.frequency_number);
 
@@ -267,7 +267,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         logout.setOnClickListener(this);
         startSurvey.setOnClickListener(this);
         surveyIdDrawer.setText(serveyId);
-        // buttonSave.setOnClickListener(this);
+         buttonSave.setOnClickListener(this);
         // buttonSaveNext.setOnClickListener(this);
 
 
@@ -298,20 +298,20 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
     public void findNextData(){
         saveDatas();
 
-        currentYearIndex++;
-        if(currentYearIndex >= totalYears){
-            currentYearIndex = 0;
+//        currentYearIndex++;
+//        if(currentYearIndex >= totalYears){
+            //currentYearIndex = 0;
             currentItemIndex++;
             if(currentItemIndex >= totalIems){
                 currentItemIndex = 0;
                 allCashFlow();
                 // Toast.makeText(context,"Completed",Toast.LENGTH_SHORT).show();
             }
-        }
+//        }
         Log.e("INDEX ", currentYearIndex+" "+currentItemIndex+" "+year_adapter.getCount()+" "+item_adapter.getCount());
 //        yearList.size();
 //        totalIems = itemList.size();
-        spinnerYear.setSelection(year_adapter.getPosition(yearList.get(currentYearIndex)));
+        //spinnerYear.setSelection(year_adapter.getPosition(yearList.get(currentYearIndex)));
         spinnerItem.setSelection(item_adapter.getPosition(itemList.get(currentItemIndex)));
 
 
@@ -320,9 +320,9 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
     }
 
     public void findBackData(){
-        currentYearIndex--;
-        if(currentYearIndex < 0){
-            currentYearIndex = totalYears - 1;
+//        currentYearIndex--;
+//        if(currentYearIndex < 0){
+//            currentYearIndex = totalYears - 1;
             currentItemIndex--;
             if(currentItemIndex < 0){
                 currentItemIndex = totalIems - 1;
@@ -330,11 +330,11 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                 // allCashFlow();
                 // Toast.makeText(context,"Completed",Toast.LENGTH_SHORT).show();
             }
-        }
+//        }
         Log.e("INDEX ", currentYearIndex+" "+currentItemIndex+" "+year_adapter.getCount()+" "+item_adapter.getCount());
 //        yearList.size();
 //        totalIems = itemList.size();
-        spinnerYear.setSelection(year_adapter.getPosition(yearList.get(currentYearIndex)));
+//         setSelection(year_adapter.getPosition(yearList.get(currentYearIndex)));
         spinnerItem.setSelection(item_adapter.getPosition(itemList.get(currentItemIndex)));
     }
 
@@ -356,9 +356,10 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                 // finish();
                 break;
             
-//            case R.id.button_save:
-//                saveDatas();
-//                break;
+            case R.id.button_save:
+                saveDatas();
+                Toast.makeText(this,getResources().getString(R.string.text_data_saved),Toast.LENGTH_SHORT).show();
+                break;
 
             case R.id.image_view_menu_icon:
                 toggleMenuDrawer();
@@ -693,8 +694,12 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
             if(outlayYears.getYear() == Integer.parseInt(spinnerYear.getSelectedItem().toString())){
                 if(outlayYears.getPrice()!=0) {
                     costValue.setText(outlayYears.getPrice() + "");
+                    if(outlayYears.getFrequency()!=0) {
+                        frequencyNumber.setText(outlayYears.getFrequency() + "");
+                    }
                 }else{
                     costValue.setText("");
+                    frequencyNumber.setText("");
                 }
                 spinnerYear.setSelection(year_adapter.getPosition(String.valueOf(yearVal)));
 //                realm.beginTransaction();
@@ -719,11 +724,18 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
             Log.e("CHECK ", outlayYears.getYear()+" "+spinnerYear.getSelectedItem().toString());
             if(outlayYears.getYear() == Integer.parseInt(spinnerYear.getSelectedItem().toString())){
                 String val = costValue.getText().toString();
+                String freq= frequencyNumber.getText().toString();
+                String timePeriod=spinnerOccurance.getSelectedItem().toString();
                 if(val.equals("")) {
                     val = "0";
                 }
+                if(freq.equals("")){
+                    freq = "0";
+                }
                 realm.beginTransaction();
                 outlayYears.setPrice(Double.parseDouble(val));
+                outlayYears.setFrequency(Double.parseDouble(freq));
+                outlayYears.setTimePeriod(timePeriod);
                 realm.commitTransaction();
 
             }

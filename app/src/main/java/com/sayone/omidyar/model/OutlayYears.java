@@ -20,9 +20,13 @@ public class OutlayYears extends RealmObject {
 
     private String unit;
 
+    private String timePeriod;
+
     private double price;
 
     private int year;
+
+    private double frequency;
 
     public long getId() {
         return id;
@@ -60,8 +64,24 @@ public class OutlayYears extends RealmObject {
         return unit;
     }
 
+    public String getTimePeriod() {
+        return timePeriod;
+    }
+
+    public void setTimePeriod(String timePeriod) {
+        this.timePeriod = timePeriod;
+    }
+
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public double getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(double frequency) {
+        this.frequency = frequency;
     }
 
     public double getPrice() {
