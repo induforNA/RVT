@@ -1,5 +1,6 @@
 package com.sayone.omidyar.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ import com.android.volley.toolbox.Volley;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.Participant;
 import com.sayone.omidyar.model.Survey;
+import com.sayone.omidyar.view.SurveySummaryActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,6 +50,7 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private Boolean flag, flag1 = true;
     private Realm realm;
     private Survey surveyRequest;
+    private SurveySummaryActivity mContext;
     private SharedPreferences sharedPref;
 
     private Context context;
@@ -58,7 +62,7 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public class SurveyViewHolder extends RecyclerView.ViewHolder {
         private TextView surveyName;
         private CheckBox checkBoxSurvey;
-        private Button exportButton;
+        private ImageView exportButton;
 
         public SurveyViewHolder(View itemView) {
             super(itemView);
@@ -66,7 +70,7 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             realm = Realm.getDefaultInstance();
             surveyName = (TextView) itemView.findViewById(R.id.survey_name);
             checkBoxSurvey = (CheckBox) itemView.findViewById(R.id.checkbox_survey);
-            exportButton = (Button) itemView.findViewById(R.id.button_export);
+            exportButton = (ImageView) itemView.findViewById(R.id.button_export);
 
         }
     }
@@ -82,8 +86,9 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    public SurveyAdapter(List<Survey> surveyList) {
+    public SurveyAdapter(List<Survey> surveyList, SurveySummaryActivity context) {
         this.flag = false;
+        mContext=context;
         this.surveyList = surveyList;
     }
 
@@ -135,19 +140,21 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
         if (holder instanceof SurveyViewHolder) {
             int pos = position - 1;
-            ((SurveyViewHolder) holder).exportButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    sendRequest();
-                }
-
-
-            });
+//            ((SurveyViewHolder) holder).exportButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    sendRequest();
+//                }
+//
+//
+//            });
 
             final Survey survey = surveyList.get(pos);
             surveyRequest = survey;
             if (survey.isSendStatus()) {
                 ((SurveyViewHolder) holder).exportButton.setVisibility(View.VISIBLE);
+                mContext.setButtonEnabled();
+
             } else {
                 ((SurveyViewHolder) holder).exportButton.setVisibility(View.INVISIBLE);
             }

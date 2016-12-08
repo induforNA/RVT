@@ -145,7 +145,7 @@
             android:textColor="@android:color/white"
             android:text="@string/button_send_to_server" />
 
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/button_export_data_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

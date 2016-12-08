@@ -42,6 +42,8 @@ public class Survey extends RealmObject {
 
     private String inflationRate;
 
+    private String overRideInflationRate;
+
     private Component components;
 
     public long getId() {
@@ -74,6 +76,14 @@ public class Survey extends RealmObject {
 
     public void setSendStatus(boolean sendStatus) {
         this.sendStatus = sendStatus;
+    }
+
+    public String getOverRideInflationRate() {
+        return overRideInflationRate;
+    }
+
+    public void setOverRideInflationRate(String overRideInflationRate) {
+        this.overRideInflationRate = overRideInflationRate;
     }
 
     public String getDistrict() {

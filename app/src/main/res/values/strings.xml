@@ -293,7 +293,7 @@
     <string name="hint_add_nftp">Add NTFP</string>
 
     <string name="select_different_year">Select different years</string>
-    <string name="select_all_year">Select all year</string>
+    <string name="select_all_year">Select all years</string>
     <string name="select_atleast_oneyear">Select at least one year</string>
     <string name="loading">Loading</string>
     <string name="wait_while_loading">Wait while loading...</string>
@@ -306,6 +306,7 @@
 
     <string name="button_export">Export Data</string>
     <string name="text_times">times</string>
+    <string name="restore_original_inflation_rate">Restore original Inflation rate</string>
 
 
 </resources>

@@ -81,10 +81,14 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.CertificateActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape">
+
+        </activity>
         <activity
             android:name=".view.NaturalCapitalSurveyActivityD"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape" >
+
+        </activity>
         <activity
             android:name=".view.NaturalCapitalSurveyActivityA"
             android:screenOrientation="landscape" />
