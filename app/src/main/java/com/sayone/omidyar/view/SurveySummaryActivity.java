@@ -1409,6 +1409,13 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 }
                 else {
                     Toast.makeText(this, "Empty", Toast.LENGTH_SHORT).show();
+                    for (String temp : set) {
+                        Log.e("Sirvey : ", temp);
+                        realm.beginTransaction();
+                        Survey survey = realm.where(Survey.class).equalTo("surveyId", temp).findFirst();
+                        survey.setSendStatus(true);
+                        realm.commitTransaction();
+                    }
                 }
 
                 break;
