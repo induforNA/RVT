@@ -385,7 +385,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.e("TAG ", "Error: " + error.getMessage());
-                error.
+                
 //                Toast.makeText(getApplicati   onContext(),
 //                        error.getMessage(), Toast.LENGTH_SHORT).show();
 //                // hide the progress dialog
