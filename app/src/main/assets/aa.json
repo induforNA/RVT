@@ -1,110 +1,622 @@
 {
-  "district": "ekm",
-  "country": "India",
-  "surveyId": "99A1",
-  "state": "ker",
-  "surveyor": "eby",
   "landKinds": [{
-    "status": "active",
-    "forestLand": {
-      "discountingFactors": [],
-      "cashFlows": [],
-      "costElements": [],
-      "discountPercentage": "",
-      "revenueProducts": [],
-      "Outlays": [],
-      "netPresentValue": "",
-      "id": 1,
-      "surveyId": "",
-      "discountedCashFlows": []
-    },
+    "surveyId": "9CD2",
     "socialCapitals": {
-      "score": 0,
-      "spread": 0,
-      "surveyId": "99A1",
-      "discountRate": 0,
-      "rating": "",
-      "sovereign": "",
-      "socialCapitalAnswers": [],
-      "id": 1
+      "discountRate": 9.66,
+      "sovereign": 7.16,
+      "id": 2,
+      "score": 9,
+      "rating": "Ba1",
+      "socialCapitalAnswers": [{
+        "factorScore": 1,
+        "socialCapitalQuestion": {
+          "id": 1,
+          "optionType": "multiple",
+          "weight": 20,
+          "question": "What rights do households in this community have over this parcel?",
+          "questionHindi": "\u0907\u0938 \u092a\u093e\u0930\u094d\u0938\u0932 \u092a\u0930 \u0907\u0938 \u0938\u092e\u0941\u0926\u093e\u092f \u0915\u0947 \u092a\u0930\u093f\u0935\u093e\u0930\u094b\u0902 \u0915\u093e \u0905\u0927\u093f\u0915\u093e\u0930 \u0915\u094d\u092f\u093e \u0939\u0948?",
+          "socialCapitalAnswerOptionses": [{
+            "optionsHindi": "\u092a\u093e\u0930\u094d\u0938\u0932 \u0915\u094b \u092a\u093e\u0928\u0947 \u0914\u0930 \u0909\u092a\u092f\u094b\u0917 \u0915\u0930\u0928\u0947 \u0915\u093e \u0905\u0927\u093f\u0915\u093e\u0930",
+            "id": 1,
+            "val": "",
+            "options": "Right to access and use the parcel"
+          }, {
+            "optionsHindi": "\u092a\u093e\u0930\u094d\u0938\u0932 \u0938\u0947 \u0932\u093e\u092d \u092a\u094d\u0930\u093e\u092a\u094d\u0924 \u0915\u0930\u0928\u0947 \u0915\u093e \u0905\u0927\u093f\u0915\u093e\u0930",
+            "id": 2,
+            "val": 5,
+            "options": "Right to benefit from the parcel"
+          }, {
+            "optionsHindi": "\u0915\u0948\u0938\u0947 \u092a\u093e\u0930\u094d\u0938\u0932 \u0907\u0938\u094d\u0924\u0947\u092e\u093e\u0932 \u0915\u093f\u092f\u093e \u091c\u093e\u090f\u0917\u093e \u0928\u093f\u092f\u0902\u0924\u094d\u0930\u093f\u0924 \u0915\u0930\u0928\u0947 \u0915\u093e \u0905\u0927\u093f\u0915\u093e\u0930",
+            "id": 3,
+            "val": 10,
+            "options": "Right to control how the parcel will be used"
+          }, {
+            "optionsHindi": "\u092a\u093e\u0930\u094d\u0938\u0932 \u0915\u0947 \u0905\u0928\u093e\u0927\u093f\u0915\u0943\u0924 \u0909\u092a\u092f\u094b\u0917 \u0938\u0947 \u0926\u0942\u0938\u0930\u094b\u0902 \u0915\u094b \u092c\u093e\u0939\u0930 \u0915\u0930\u0928\u0947 \u0915\u093e \u0905\u0927\u093f\u0915\u093e\u0930",
+            "id": 4,
+            "val": 15,
+            "options": "Right to exclude others from unauthorized use of the parcel"
+          }, {
+            "optionsHindi": "\u092d\u0935\u093f\u0937\u094d\u092f \u0915\u0940 \u092a\u0940\u0922\u093c\u093f\u092f\u094b\u0902 \u0915\u0947 \u0932\u093f\u090f \u092a\u093e\u0930\u094d\u0938\u0932 \u0926\u0947\u0928\u0947 \u0915\u0947 \u092f\u093e \u0926\u0942\u0938\u0930\u094b\u0902 \u0915\u094b \u0905\u0927\u093f\u0915\u093e\u0930 \u092c\u0947\u091a\u0928\u0947 \u0915\u093e \u0905\u0927\u093f\u0915\u093e\u0930",
+            "id": 5,
+            "val": 20,
+            "options": "Right to pass rights to the parcel down to future generations or sell rights to others"
+          }]
+        },
+        "id": 15,
+        "surveyId": "9CD2",
+        "multipleAnswers": [{
+          "answer": 2,
+          "id": 31,
+          "questionNo": 1,
+          "answerValue": 5
+        }]
+      }, {
+        "factorScore": 2,
+        "socialCapitalQuestion": {
+          "id": 2,
+          "optionType": "multiple",
+          "weight": 20,
+          "question": "What rights to this parcel are provided through a state-backed and legally recognized record (i.e. title, lease, etc.)?",
+          "questionHindi": "\u0930\u093e\u091c\u094d\u092f \u0915\u093e \u0938\u092e\u0930\u094d\u0925\u0928 \u0915\u093f\u092f\u093e \u0914\u0930 \u0915\u093e\u0928\u0942\u0928\u0940 \u0930\u0942\u092a \u0938\u0947 \u092e\u093e\u0928\u094d\u092f\u0924\u093e \u092a\u094d\u0930\u093e\u092a\u094d\u0924 \u0930\u093f\u0915\u0949\u0930\u094d\u0921 \u0915\u0947 \u092e\u093e\u0927\u094d\u092f\u092e (\u0905\u0930\u094d\u0925\u093e\u0924 \u0936\u0940\u0930\u094d\u0937\u0915, \u092a\u091f\u094d\u091f\u0947 \u0906\u0926\u093f) \u0938\u0947 \u0907\u0938 \u092a\u093e\u0930\u094d\u0938\u0932 \u0915\u094b \u0915\u094d\u092f\u093e \u0905\u0927\u093f\u0915\u093e\u0930  \u092a\u094d\u0930\u0926\u093e\u0928 \u0915\u0940 \u091c\u093e\u0924\u0940 \u0939\u0948\u0902?",
+          "socialCapitalAnswerOptionses": [{
+            "optionsHindi": "\u092a\u093e\u0930\u094d\u0938\u0932 \u0915\u094b \u092a\u093e\u0928\u0947 \u0914\u0930 \u0909\u092a\u092f\u094b\u0917 \u0915\u0930\u0928\u0947 \u0915\u093e \u0905\u0927\u093f\u0915\u093e\u0930",
+            "id": 6,
+            "val": "",
+            "options": "Right to access and use the parcel"
+          }, {
+            "optionsHindi": "\u092a\u093e\u0930\u094d\u0938\u0932 \u0938\u0947 \u0932\u093e\u092d \u092a\u094d\u0930\u093e\u092a\u094d\u0924 \u0915\u0930\u0928\u0947 \u0915\u093e \u0905\u0927\u093f\u0915\u093e\u0930",
+            "id": 7,
+            "val": 5,
+            "options": "Right to benefit from the parcel"
+          }, {
+            "optionsHindi": "\u0915\u0948\u0938\u0947 \u092a\u093e\u0930\u094d\u0938\u0932 \u0907\u0938\u094d\u0924\u0947\u092e\u093e\u0932 \u0915\u093f\u092f\u093e \u091c\u093e\u090f\u0917\u093e \u0928\u093f\u092f\u0902\u0924\u094d\u0930\u093f\u0924 \u0915\u0930\u0928\u0947 \u0915\u093e \u0905\u0927\u093f\u0915\u093e\u0930",
+            "id": 8,
+            "val": 10,
+            "options": "Right to control how the parcel will be used"
+          }, {
+            "optionsHindi": "\u092a\u093e\u0930\u094d\u0938\u0932 \u0915\u0947 \u0905\u0928\u093e\u0927\u093f\u0915\u0943\u0924 \u0909\u092a\u092f\u094b\u0917 \u0938\u0947 \u0926\u0942\u0938\u0930\u094b\u0902 \u0915\u094b \u092c\u093e\u0939\u0930 \u0915\u0930\u0928\u0947 \u0915\u093e \u0905\u0927\u093f\u0915\u093e\u0930",
+            "id": 9,
+            "val": 15,
+            "options": "Right to exclude others from unauthorized use of the parcel"
+          }, {
+            "optionsHindi": "\u092d\u0935\u093f\u0937\u094d\u092f \u0915\u0940 \u092a\u0940\u0922\u093c\u093f\u092f\u094b\u0902 \u0915\u0947 \u0932\u093f\u090f \u092a\u093e\u0930\u094d\u0938\u0932 \u0926\u0947\u0928\u0947 \u0915\u0947 \u092f\u093e \u0926\u0942\u0938\u0930\u094b\u0902 \u0915\u094b \u0905\u0927\u093f\u0915\u093e\u0930 \u092c\u0947\u091a\u0928\u0947 \u0915\u093e \u0905\u0927\u093f\u0915\u093e\u0930",
+            "id": 10,
+            "val": 20,
+            "options": "Right to pass rights to the parcel down to future generations or sell rights to others"
+          }]
+        },
+        "id": 16,
+        "surveyId": "9CD2",
+        "multipleAnswers": [{
+          "answer": 8,
+          "id": 32,
+          "questionNo": 2,
+          "answerValue": 10
+        }]
+      }, {
+        "factorScore": 0,
+        "socialCapitalQuestion": {
+          "id": 3,
+          "optionType": "single",
+          "weight": 5,
+          "question": "Are the boundaries for this parcel well known and understood by government authorities and/or community members?",
+          "questionHindi": "\u0907\u0938 \u092a\u093e\u0930\u094d\u0938\u0932 \u0915\u0947 \u0932\u093f\u090f \u0938\u0940\u092e\u093e\u0913\u0902 \u0915\u094b \u0905\u091a\u094d\u091b\u0940 \u0924\u0930\u0939 \u0938\u0947 \u091c\u093e\u0928\u093e \u091c\u093e\u0924\u093e \u0939\u0948 \u0914\u0930 \u0938\u0930\u0915\u093e\u0930 \u0915\u0947 \u0905\u0927\u093f\u0915\u093e\u0930\u093f\u092f\u094b\u0902 \u0914\u0930 / \u092f\u093e \u0938\u092e\u0941\u0926\u093e\u092f \u0915\u0947 \u0938\u0926\u0938\u094d\u092f\u094b\u0902 \u0926\u094d\u0935\u093e\u0930\u093e \u0938\u092e\u091d \u0930\u0939\u0947 \u0939\u0948\u0902?",
+          "socialCapitalAnswerOptionses": [{
+            "optionsHindi": "\u0926\u094b\u0928\u094b\u0902",
+            "id": 11,
+            "val": 20,
+            "options": "Both"
+          }, {
+            "optionsHindi": "\u0915\u0947\u0935\u0932 \u0938\u0930\u0915\u093e\u0930 \u092f\u093e \u0938\u092e\u0941\u0926\u093e\u092f",
+            "id": 12,
+            "val": 10,
+            "options": "Government or community only"
+          }, {
+            "optionsHindi": "\u0915\u094b\u0908 \u0928\u0939\u0940\u0902",
+            "id": 13,
+            "val": "",
+            "options": "None"
+          }]
+        },
+        "id": 17,
+        "surveyId": "9CD2",
+        "multipleAnswers": [{
+          "answer": 13,
+          "id": 33,
+          "questionNo": 3,
+          "answerValue": 0
+        }]
+      }, {
+        "factorScore": 0.5,
+        "socialCapitalQuestion": {
+          "id": 4,
+          "optionType": "single",
+          "weight": 5,
+          "question": "Does this group feel confident that they will be able to continue to use the parcel without constraints indefinitely into the future?",
+          "questionHindi": "\u0915\u094d\u092f\u093e \u0907\u0938 \u0938\u092e\u0942\u0939 \u0915\u094b \u092d\u0930\u094b\u0938\u093e \u0939\u0948 \u0915\u093f \u0935\u0947 \u092d\u0935\u093f\u0937\u094d\u092f \u092e\u0947\u0902 \u0905\u0928\u093f\u0936\u094d\u091a\u093f\u0924 \u0915\u093e\u0932 \u0915\u0947 \u0932\u093f\u090f \u092c\u093e\u0927\u093e\u0913\u0902 \u0915\u0947 \u092c\u093f\u0928\u093e \u092a\u093e\u0930\u094d\u0938\u0932 \u0915\u093e \u0909\u092a\u092f\u094b\u0917 \u0915\u0930\u0928\u0947 \u0915\u0947 \u0932\u093f\u090f \u091c\u093e\u0930\u0940 \u0930\u0916\u0928\u0947  \u0915\u094b \u0938\u0915\u094d\u0937\u092e \u0939\u094b \u091c\u093e\u090f\u0917\u093e \u0932\u0917\u0924\u093e \u0939\u0948?",
+          "socialCapitalAnswerOptionses": [{
+            "optionsHindi": "\u0939\u093e\u0901",
+            "id": 14,
+            "val": 20,
+            "options": "Yes"
+          }, {
+            "optionsHindi": "\u0905\u0927\u093f\u0915\u0924\u0930",
+            "id": 15,
+            "val": 15,
+            "options": "Mostly"
+          }, {
+            "optionsHindi": "\u0915\u0941\u091b \u0939\u0926 \u0924\u0915",
+            "id": 16,
+            "val": 10,
+            "options": "Somewhat"
+          }, {
+            "optionsHindi": "\u0936\u093e\u092f\u0926",
+            "id": 17,
+            "val": 5,
+            "options": "Maybe"
+          }, {
+            "optionsHindi": "\u0928\u0939\u0940\u0902",
+            "id": 18,
+            "val": "",
+            "options": "No"
+          }]
+        },
+        "id": 18,
+        "surveyId": "9CD2",
+        "multipleAnswers": [{
+          "answer": 16,
+          "id": 34,
+          "questionNo": 4,
+          "answerValue": 10
+        }]
+      }, {
+        "factorScore": 0.75,
+        "socialCapitalQuestion": {
+          "id": 5,
+          "optionType": "single",
+          "weight": 5,
+          "question": "Are there any current disputes related to the boundaries or rights associated with this parcel?",
+          "questionHindi": "\u0935\u0939\u093e\u0901 \u0915\u093f\u0938\u0940 \u092d\u0940 \u0935\u0930\u094d\u0924\u092e\u093e\u0928 \u0938\u0940\u092e\u093e\u0913\u0902 \u092f\u093e \u0907\u0938 \u092a\u093e\u0930\u094d\u0938\u0932 \u0915\u0947 \u0938\u093e\u0925 \u091c\u0941\u0921\u093c\u0947 \u0905\u0927\u093f\u0915\u093e\u0930\u094b\u0902 \u0938\u0947 \u0938\u0902\u092c\u0902\u0927\u093f\u0924 \u0935\u093f\u0935\u093e\u0926\u094b\u0902 \u0939\u0948\u0902?",
+          "socialCapitalAnswerOptionses": [{
+            "optionsHindi": "\u0928\u0939\u0940\u0902",
+            "id": 19,
+            "val": 20,
+            "options": "No"
+          }, {
+            "optionsHindi": "\u090f\u0915 \u0915\u092e \u0938\u094d\u0924\u0930",
+            "id": 20,
+            "val": 15,
+            "options": "One low level"
+          }, {
+            "optionsHindi": "\u0915\u0908 \u0915\u092e \u0938\u094d\u0924\u0930",
+            "id": 21,
+            "val": 10,
+            "options": "Multiple low level"
+          }, {
+            "optionsHindi": "\u0916\u0941\u0932\u093e \u0938\u0902\u0918\u0930\u094d\u0937",
+            "id": 22,
+            "val": "",
+            "options": "Open conflict"
+          }]
+        },
+        "id": 19,
+        "surveyId": "9CD2",
+        "multipleAnswers": [{
+          "answer": 20,
+          "id": 35,
+          "questionNo": 5,
+          "answerValue": 15
+        }]
+      }, {
+        "factorScore": 0.5,
+        "socialCapitalQuestion": {
+          "id": 6,
+          "optionType": "single",
+          "weight": 5,
+          "question": "Do households in this community use the parcel and access the resource based upon locally recognized customary norms?",
+          "questionHindi": "\u0915\u094d\u092f\u093e \u0907\u0938 \u0938\u092e\u0941\u0926\u093e\u092f \u092e\u0947\u0902 \u0918\u0930\u094b\u0902 \u092a\u093e\u0930\u094d\u0938\u0932 \u0915\u093e \u0909\u092a\u092f\u094b\u0917 \u0914\u0930 \u0938\u094d\u0925\u093e\u0928\u0940\u092f \u0938\u094d\u0924\u0930 \u092a\u0930 \u092e\u093e\u0928\u094d\u092f\u0924\u093e \u092a\u094d\u0930\u093e\u092a\u094d\u0924 \u092a\u094d\u0930\u0925\u093e\u0917\u0924 \u092e\u093e\u0928\u0926\u0902\u0921\u094b\u0902 \u092a\u0930 \u0906\u0927\u093e\u0930\u093f\u0924 \u0938\u0902\u0938\u093e\u0927\u0928 \u0909\u092a\u092f\u094b\u0917 \u0915\u0930\u0924\u0947 \u0939\u0948\u0902?",
+          "socialCapitalAnswerOptionses": [{
+            "optionsHindi": "\u0939\u093e\u0901",
+            "id": 23,
+            "val": 20,
+            "options": "Yes"
+          }, {
+            "optionsHindi": "\u0915\u0941\u091b \u0939\u0926 \u0924\u0915",
+            "id": 24,
+            "val": 10,
+            "options": "Somewhat"
+          }, {
+            "optionsHindi": "\u0928\u0939\u0940\u0902",
+            "id": 25,
+            "val": "",
+            "options": "No"
+          }]
+        },
+        "id": 20,
+        "surveyId": "9CD2",
+        "multipleAnswers": [{
+          "answer": 24,
+          "id": 36,
+          "questionNo": 6,
+          "answerValue": 10
+        }]
+      }, {
+        "factorScore": 1,
+        "socialCapitalQuestion": {
+          "id": 7,
+          "optionType": "single",
+          "weight": 5,
+          "question": "Is there a group or committee in this community with specific responsibility to manage or oversee matters related to use of this parcel?",
+          "questionHindi": "\u0907\u0938 \u0938\u092e\u0941\u0926\u093e\u092f \u092e\u0947\u0902 \u0907\u0938 \u092a\u093e\u0930\u094d\u0938\u0932 \u0915\u0947 \u0909\u092a\u092f\u094b\u0917 \u0938\u0947 \u0938\u0902\u092c\u0902\u0927\u093f\u0924 \u092e\u093e\u092e\u0932\u094b\u0902 \u0915\u0940 \u0926\u0947\u0916\u0930\u0947\u0916 \u0915\u0930\u0928\u0947 \u0915\u093e \u0935\u093f\u0936\u0947\u0937 \u091c\u093f\u092e\u094d\u092e\u0947\u0926\u093e\u0930\u0940 \u0915\u0947 \u0938\u093e\u0925 \u090f\u0915 \u092a\u094d\u0930\u092c\u0902\u0927\u0928 \u092f\u093e \u0938\u092e\u093f\u0924\u093f \u0939\u0948?",
+          "socialCapitalAnswerOptionses": [{
+            "optionsHindi": "\u0939\u093e\u0901",
+            "id": 26,
+            "val": 20,
+            "options": "Yes"
+          }, {
+            "optionsHindi": "\u0928\u0939\u0940\u0902",
+            "id": 27,
+            "val": "",
+            "options": "No"
+          }]
+        },
+        "id": 21,
+        "surveyId": "9CD2",
+        "multipleAnswers": [{
+          "answer": 26,
+          "id": 37,
+          "questionNo": 7,
+          "answerValue": 20
+        }]
+      }, {
+        "factorScore": 0,
+        "socialCapitalQuestion": {
+          "id": 8,
+          "optionType": "single",
+          "weight": 5,
+          "question": "Are there rules and regulations associated with this parcel that were created by the community itself?",
+          "questionHindi": "\u0915\u094d\u092f\u093e \u0907\u0938 \u092a\u093e\u0930\u094d\u0938\u0932 \u0915\u0947 \u0938\u093e\u0925 \u091c\u0941\u0921\u093c\u0947 \u0938\u092e\u0941\u0926\u093e\u092f \u0938\u094d\u0935\u092f\u0902 \u0915\u0947 \u0926\u094d\u0935\u093e\u0930\u093e \u092c\u0928\u093e\u092f\u093e \u0917\u092f\u093e \u0928\u093f\u092f\u092e\u094b\u0902 \u0939\u0948\u0902?",
+          "socialCapitalAnswerOptionses": [{
+            "optionsHindi": "\u0939\u093e\u0901",
+            "id": 28,
+            "val": 20,
+            "options": "Yes"
+          }, {
+            "optionsHindi": "\u0915\u0941\u091b",
+            "id": 29,
+            "val": 10,
+            "options": "Some"
+          }, {
+            "optionsHindi": "\u0928\u0939\u0940\u0902",
+            "id": 30,
+            "val": "",
+            "options": "No"
+          }]
+        },
+        "id": 22,
+        "surveyId": "9CD2",
+        "multipleAnswers": [{
+          "answer": 30,
+          "id": 38,
+          "questionNo": 8,
+          "answerValue": 0
+        }]
+      }, {
+        "factorScore": 0.5,
+        "socialCapitalQuestion": {
+          "id": 9,
+          "optionType": "single",
+          "weight": 5,
+          "question": "Do all stakeholders within the community generally have equal access to the parcel?",
+          "questionHindi": "\u092a\u094d\u0930\u092c\u0902\u0927\u0928 \u0938\u092e\u0942\u0939 \u0938\u092e\u0941\u0926\u093e\u092f \u0915\u0947 \u0938\u092d\u0940 \u0935\u0930\u094d\u0917\u094b\u0902 \u0915\u0947 \u092a\u094d\u0930\u0924\u093f\u0928\u093f\u0927\u093f \u0936\u093e\u092e\u093f\u0932 \u0915\u0930\u0924\u093e \u0939\u0948?",
+          "socialCapitalAnswerOptionses": [{
+            "optionsHindi": "\u0939\u093e\u0901",
+            "id": 31,
+            "val": 20,
+            "options": "Yes"
+          }, {
+            "optionsHindi": "\u0915\u0941\u091b \u0939\u0926 \u0924\u0915",
+            "id": 32,
+            "val": 10,
+            "options": "Somewhat"
+          }, {
+            "optionsHindi": "\u0928\u0939\u0940\u0902",
+            "id": 33,
+            "val": "",
+            "options": "No"
+          }]
+        },
+        "id": 23,
+        "surveyId": "9CD2",
+        "multipleAnswers": [{
+          "answer": 32,
+          "id": 39,
+          "questionNo": 9,
+          "answerValue": 10
+        }]
+      }, {
+        "factorScore": 1,
+        "socialCapitalQuestion": {
+          "id": 10,
+          "optionType": "single",
+          "weight": 5,
+          "question": "Does the management group include representatives from all segments of the community?",
+          "questionHindi": "\u092a\u094d\u0930\u092c\u0902\u0927\u0928 \u0938\u092e\u0942\u0939 \u0938\u092e\u0941\u0926\u093e\u092f \u0915\u0947 \u0938\u092d\u0940 \u0935\u0930\u094d\u0917\u094b\u0902 \u0915\u0947 \u092a\u094d\u0930\u0924\u093f\u0928\u093f\u0927\u093f \u0936\u093e\u092e\u093f\u0932 \u0915\u0930\u0924\u093e \u0939\u0948?",
+          "socialCapitalAnswerOptionses": [{
+            "optionsHindi": "\u0939\u093e\u0901",
+            "id": 34,
+            "val": 20,
+            "options": "Yes"
+          }, {
+            "optionsHindi": "\u0906\u0927\u093e",
+            "id": 35,
+            "val": 10,
+            "options": "Half"
+          }, {
+            "optionsHindi": "\u0915\u094b\u0908 \u0928\u0939\u0940\u0902",
+            "id": 36,
+            "val": "",
+            "options": "None"
+          }]
+        },
+        "id": 24,
+        "surveyId": "9CD2",
+        "multipleAnswers": [{
+          "answer": 34,
+          "id": 40,
+          "questionNo": 10,
+          "answerValue": 20
+        }]
+      }, {
+        "factorScore": 0.25,
+        "socialCapitalQuestion": {
+          "id": 11,
+          "optionType": "single",
+          "weight": 5,
+          "question": "Are the rules and regulations associated with this parcel generally viewed as fair and legitimate?",
+          "questionHindi": "\u0915\u094d\u092f\u093e \u0907\u0938 \u092a\u093e\u0930\u094d\u0938\u0932 \u0915\u0947 \u0938\u093e\u0925 \u091c\u0941\u0921\u093c\u0947 \u0928\u093f\u092f\u092e\u094b\u0902 \u0906\u092e \u0924\u094c\u0930 \u092a\u0930 \u0909\u091a\u093f\u0924 \u0914\u0930 \u0935\u0948\u0927 \u0915\u0947 \u0930\u0942\u092a \u092e\u0947\u0902 \u0926\u0947\u0916\u093e \u091c\u093e\u0924\u093e \u0939\u0948\u0902?",
+          "socialCapitalAnswerOptionses": [{
+            "optionsHindi": "\u0939\u093e\u0901",
+            "id": 37,
+            "val": 20,
+            "options": "Yes"
+          }, {
+            "optionsHindi": "\u0915\u0908 \u0926\u094d\u0935\u093e\u0930\u093e",
+            "id": 38,
+            "val": 10,
+            "options": "By many"
+          }, {
+            "optionsHindi": "\u0915\u0941\u091b \u0915\u0947 \u0926\u094d\u0935\u093e\u0930\u093e",
+            "id": 39,
+            "val": 5,
+            "options": "By some"
+          }, {
+            "optionsHindi": "\u0928\u0939\u0940\u0902",
+            "id": 40,
+            "val": "",
+            "options": "No"
+          }]
+        },
+        "id": 25,
+        "surveyId": "9CD2",
+        "multipleAnswers": [{
+          "answer": 39,
+          "id": 41,
+          "questionNo": 11,
+          "answerValue": 5
+        }]
+      }, {
+        "factorScore": 0.5,
+        "socialCapitalQuestion": {
+          "id": 12,
+          "optionType": "single",
+          "weight": 5,
+          "question": "How long have the institutions for this parcel been operating?",
+          "questionHindi": "\u0907\u0938 \u092a\u093e\u0930\u094d\u0938\u0932 \u0915\u0947 \u0932\u093f\u090f \u0938\u0902\u0938\u094d\u0925\u093e\u0928\u094b\u0902 \u0915\u092c \u0938\u0947 \u0915\u093e\u092e \u0915\u0930 \u0930\u0939\u093e \u0939\u0948?",
+          "socialCapitalAnswerOptionses": [{
+            "optionsHindi": "15+",
+            "id": 41,
+            "val": 20,
+            "options": "15+"
+          }, {
+            "optionsHindi": "11 to 15",
+            "id": 42,
+            "val": 15,
+            "options": "11 to 15"
+          }, {
+            "optionsHindi": "6 to 10",
+            "id": 43,
+            "val": 10,
+            "options": "6 to 10"
+          }, {
+            "optionsHindi": "1 to 5",
+            "id": 44,
+            "val": 5,
+            "options": "1 to 5"
+          }, {
+            "optionsHindi": "0",
+            "id": 45,
+            "val": "",
+            "options": "0"
+          }]
+        },
+        "id": 26,
+        "surveyId": "9CD2",
+        "multipleAnswers": [{
+          "answer": 43,
+          "id": 42,
+          "questionNo": 12,
+          "answerValue": 10
+        }]
+      }, {
+        "factorScore": 0.5,
+        "socialCapitalQuestion": {
+          "id": 13,
+          "optionType": "single",
+          "weight": 5,
+          "question": "How often are decisions made by the committee ignored or not implemented?",
+          "questionHindi": "\u0915\u093f\u0924\u0928\u0940 \u092c\u093e\u0930 \u0938\u092e\u093f\u0924\u093f \u0926\u094d\u0935\u093e\u0930\u093e \u0915\u093f\u090f \u0917\u090f \u092b\u0948\u0938\u0932\u0947 \u0915\u094b \u0928\u091c\u0930\u0905\u0902\u0926\u093e\u091c \u0915\u0930 \u0926\u093f\u092f\u093e \u0939\u0948 \u092f\u093e \u0928\u0939\u0940\u0902 \u0932\u093e\u0917\u0942 \u0915\u0930 \u0930\u0939\u0947 \u0939\u0948\u0902?",
+          "socialCapitalAnswerOptionses": [{
+            "optionsHindi": "\u0915\u092d\u0940 \u0928\u0939\u0940\u0901",
+            "id": 46,
+            "val": 20,
+            "options": "Never"
+          }, {
+            "optionsHindi": "\u0915\u092d\u0940 \u0915\u092d\u0940",
+            "id": 47,
+            "val": 10,
+            "options": "Sometimes"
+          }, {
+            "optionsHindi": "\u0939\u092e\u0947\u0936\u093e",
+            "id": 48,
+            "val": 5,
+            "options": "Always"
+          }, {
+            "optionsHindi": "N/A",
+            "id": 49,
+            "val": "",
+            "options": "N/A"
+          }]
+        },
+        "id": 27,
+        "surveyId": "9CD2",
+        "multipleAnswers": [{
+          "answer": 47,
+          "id": 43,
+          "questionNo": 13,
+          "answerValue": 10
+        }]
+      }, {
+        "factorScore": 0.5,
+        "socialCapitalQuestion": {
+          "id": 14,
+          "optionType": "single",
+          "weight": 5,
+          "question": "How much of your community's use of this resource/product comes from this parcel?",
+          "questionHindi": "\u0905\u092a\u0928\u0947 \u0938\u092e\u0941\u0926\u093e\u092f \u0915\u0940 \u0906\u091c\u0940\u0935\u093f\u0915\u093e \u0915\u093e \u0915\u093f\u0924\u0928\u093e \u0907\u0938 \u092a\u093e\u0930\u094d\u0938\u0932 \u0926\u094d\u0935\u093e\u0930\u093e \u0909\u0924\u094d\u092a\u0928\u094d\u0928 \u0939\u094b\u0924\u093e \u0939\u0948?",
+          "socialCapitalAnswerOptionses": [{
+            "optionsHindi": "75% + ",
+            "id": 50,
+            "val": 20,
+            "options": "75% + "
+          }, {
+            "optionsHindi": "25 to 75%",
+            "id": 51,
+            "val": 10,
+            "options": "25 to 75%"
+          }, {
+            "optionsHindi": "0 to 25%",
+            "id": 52,
+            "val": "",
+            "options": "0 to 25%"
+          }]
+        },
+        "id": 28,
+        "surveyId": "9CD2",
+        "multipleAnswers": [{
+          "answer": 51,
+          "id": 44,
+          "questionNo": 14,
+          "answerValue": 10
+        }]
+      }],
+      "surveyId": "9CD2",
+      "spread": 2.5
     },
-    "surveyId": "99A1",
+    "status": "active",
+    "cropLand": "",
     "pastureLand": "",
     "name": "Forestland",
+    "id": 5,
     "miningLand": "",
-    "cropLand": "",
-    "id": 1
+    "forestLand": {
+      "revenueProducts": [],
+      "costElements": [],
+      "discountedCashFlows": [],
+      "netPresentValue": "",
+      "discountingFactors": [],
+      "Outlays": [],
+      "discountPercentage": "",
+      "cashFlows": [],
+      "id": 2,
+      "surveyId": ""
+    }
   }, {
-    "status": "deleted",
-    "forestLand": "",
+    "surveyId": "9CD2",
     "socialCapitals": "",
-    "surveyId": "99A1",
-    "pastureLand": "",
-    "name": "Cropland",
-    "miningLand": "",
+    "status": "deleted",
     "cropLand": {
       "outlays": [],
-      "discountingFactors": [],
-      "cashFlows": [],
       "costElements": [],
-      "surveyId": "",
+      "id": 2,
+      "netPresentValue": "",
+      "discountingFactors": [],
+      "discountedCashFlows": [],
+      "cashFlows": [],
       "discountPercentage": "",
-      "revenueProducts": [],
-      "netPresentValue": "",
-      "discountedCashFlows": [],
-      "id": 1
-    },
-    "id": 2
-  }, {
-    "status": "deleted",
-    "forestLand": "",
-    "socialCapitals": "",
-    "surveyId": "99A1",
-    "pastureLand": {
-      "discountingFactors": [],
-      "outlays": [],
-      "cashFlows": [],
-      "netPresentValue": "",
       "surveyId": "",
-      "revenueProducts": [],
+      "revenueProducts": []
+    },
+    "pastureLand": "",
+    "name": "Cropland",
+    "id": 6,
+    "miningLand": "",
+    "forestLand": ""
+  }, {
+    "surveyId": "9CD2",
+    "socialCapitals": "",
+    "status": "deleted",
+    "cropLand": "",
+    "pastureLand": {
+      "outlays": [],
       "costElements": [],
+      "id": 2,
+      "netPresentValue": "",
       "discountedCashFlows": [],
-      "id": 1,
-      "discountPercentage": ""
+      "discountingFactors": [],
+      "discountPercentage": "",
+      "cashFlows": [],
+      "surveyId": "",
+      "revenueProducts": []
     },
     "name": "Pastureland",
+    "id": 7,
     "miningLand": "",
-    "cropLand": "",
-    "id": 3
+    "forestLand": ""
   }, {
-    "status": "deleted",
-    "forestLand": "",
+    "surveyId": "9CD2",
     "socialCapitals": "",
-    "surveyId": "99A1",
+    "status": "deleted",
+    "cropLand": "",
     "pastureLand": "",
     "name": "Mining Land",
+    "id": 8,
     "miningLand": {
-      "discountingFactors": [],
       "outlays": [],
-      "cashFlows": [],
-      "netPresentValue": "",
-      "surveyId": "",
-      "revenueProducts": [],
       "costElements": [],
+      "id": 2,
+      "netPresentValue": "",
       "discountedCashFlows": [],
-      "id": 1,
-      "discountPercentage": ""
+      "discountingFactors": [],
+      "discountPercentage": "",
+      "cashFlows": [],
+      "surveyId": "",
+      "revenueProducts": []
     },
-    "cropLand": "",
-    "id": 4
+    "forestLand": ""
   }],
-  "date": "Thu Dec 08 00:00:00 GMT+05:30 2016",
-  "respondentGroup": "res",
-  "language": "English",
-  "community": "com",
-  "participants": [],
+  "id": 2,
+  "community": "rgfbg",
+  "respondentGroup": "hfhc",
+  "currency": "INR",
   "components": "",
-  "id": 1,
+  "language": "English",
+  "participants": [],
+  "surveyId": "9CD2",
+  "date": "Thu Dec 08 00:00:00 IST 2016",
+  "surveyor": "hchc",
+  "country": "India",
+  "district": "hfhf",
   "inflationRate": "0.05",
-  "currency": "INR"
+  "state": "nvhvh"
 }
