@@ -114,7 +114,7 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
                     }
                 }
                 else{
-                    Toast.makeText(context,"Select id",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"Select Id",Toast.LENGTH_SHORT).show();
                 }
 
 //                String rate = preferences.getString("inflationRate", "");

@@ -283,8 +283,8 @@
     <string name="specify_unit">Specify unit</string>
     <string name="convert_unit_international">Convert unit to international unit</string>
     <string name="specified_unit">specified unit</string>
-    <string name="select_suvey_id">--Select Survey Id--</string>
-    <string name="select_landkind">--Select Land Kind--</string>
+    <string name="select_suvey_id">Select Survey Id</string>
+    <string name="select_landkind">Select Land Kind</string>
 
     <string name="hint_add_timber">Add Timber</string>
     <string name="hint_add_croptype">Add Crop Type</string>
