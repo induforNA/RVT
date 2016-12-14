@@ -24,9 +24,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -37,13 +39,17 @@ import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.adapter.ParticipantsAdapter;
 import com.sayone.omidyar.adapter.SurveyAdapter;
+import com.sayone.omidyar.model.ApiClient;
+import com.sayone.omidyar.model.ApiInterface;
 import com.sayone.omidyar.model.CashFlow;
 import com.sayone.omidyar.model.Component;
 import com.sayone.omidyar.model.CostElement;
 import com.sayone.omidyar.model.CostElementYears;
 import com.sayone.omidyar.model.CropLand;
+import com.sayone.omidyar.model.DataWithId;
 import com.sayone.omidyar.model.DiscountedCashFlow;
 import com.sayone.omidyar.model.DiscountingFactor;
+import com.sayone.omidyar.model.ExportData;
 import com.sayone.omidyar.model.ForestLand;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.MiningLand;
@@ -64,6 +70,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -75,6 +82,8 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
 import io.realm.annotations.Required;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class SurveySummaryActivity extends BaseActivity implements View.OnClickListener {
 
@@ -360,6 +369,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 //        }
 //        jsonArray.put(jsonObject1);
 
+
         JSONObject object = new JSONObject();
         try {
             object.put("survey_no", surId);
@@ -385,6 +395,9 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.e("TAG ", "Error: " + error.getMessage());
+
+                Log.e("TAG ", error.networkResponse+"");
+
 //                Toast.makeText(getApplicati   onContext(),
 //                        error.getMessage(), Toast.LENGTH_SHORT).show();
 //                // hide the progress dialog
@@ -406,6 +419,15 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         } catch (AuthFailureError authFailureError) {
             authFailureError.printStackTrace();
         }
+
+
+        int socketTimeout = 0;//30 seconds - change to what you want
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        jsonObjReq.setRetryPolicy(policy);
+
+//        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(0,
+//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         queue.add(jsonObjReq);
 
@@ -1423,9 +1445,11 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             case R.id.button_export_data_email:
                 exportDataEmail.setEnabled(false);
                 RealmResults<Survey> surveyExports = realm.where(Survey.class).equalTo("sendStatus", true).findAll();
+                ArrayList<String> strings = new ArrayList<>();
                 JSONArray jsonArray = new JSONArray();
                 for(Survey surveyExport : surveyExports){
                     jsonArray.put(surveyExport.getSurveyId());
+                    strings.add(surveyExport.getSurveyId());
                 }
 
                 JSONObject object = new JSONObject();
@@ -1435,48 +1459,89 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                     e.printStackTrace();
                 }
 
-                Log.e("JSON ", object.toString());
 
-                RequestQueue queue = Volley.newRequestQueue(this);
+                ApiInterface apiService =
+                        ApiClient.getClient().create(ApiInterface.class);
 
+                DataWithId dataWithId = new DataWithId(strings);
 
-                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                        "http://52.66.160.79/api/v1/generate-mini-excel/", object, new Response.Listener<JSONObject>() {
+                Log.e("Res ",dataWithId.toString());
+
+                Call<ExportData> call = apiService.getExported(dataWithId);
+                Log.e("URL ", call.request().url()+"");
+                Log.e("URL ", call.request().body()+"");
+                call.enqueue(new Callback<ExportData>() {
 
                     @Override
-                    public void onResponse(JSONObject response) {
-                        Log.e("RES ", response.toString());
+                    public void onResponse(Call<ExportData> call, retrofit2.Response<ExportData> response) {
+                        Log.e("Response ",""+response.toString());
                         exportDataEmail.setEnabled(true);
+                        Toast toast = Toast.makeText(context,"Data exported", Toast.LENGTH_SHORT);
+                        toast.show();
                     }
-                }, new Response.ErrorListener() {
 
                     @Override
-                    public void onErrorResponse(VolleyError error) {
-                        VolleyLog.e("TAG ", "Error: " + error.getMessage());
+                    public void onFailure(Call<ExportData> call, Throwable t) {
+                        Log.e("Response ",""+t.toString());
                         Toast toast = Toast.makeText(context,getResources().getString(R.string.save_failed), Toast.LENGTH_SHORT);
                         toast.show();
                         exportDataEmail.setEnabled(true);
                     }
-                }) {
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("Authorization", "Token 2fb88b01c22ac470cbb969f604e9b3c87d6c8c7d");
-                        params.put("Content-Type", "application/json");
+                });
 
-                        return params;
-                    }
-                };
 
-//                try {
-//                    Log.e("Re ", jsonObjReq.getBody() + " " + jsonObjReq.getHeaders().get("Authorization").toString());
-//                } catch (AuthFailureError authFailureError) {
-//                    authFailureError.printStackTrace();
-//                }
 
-                queue.add(jsonObjReq);
-                Toast toast = Toast.makeText(context,getResources().getString(R.string.completed_text), Toast.LENGTH_SHORT);
-                toast.show();
+
+
+
+
+
+
+
+
+
+//                Log.e("JSON ", object.toString());
+//
+//                RequestQueue queue = Volley.newRequestQueue(this);
+//
+//
+//                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+//                        "http://52.66.160.79/api/v1/generate-mini-excel/", object, new Response.Listener<JSONObject>() {
+//
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//                        Log.e("RES ", response.toString());
+//                        exportDataEmail.setEnabled(true);
+//                    }
+//                }, new Response.ErrorListener() {
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        VolleyLog.e("TAG ", "Error: " + error.getMessage());
+//                        Toast toast = Toast.makeText(context,getResources().getString(R.string.save_failed), Toast.LENGTH_SHORT);
+//                        toast.show();
+//                        exportDataEmail.setEnabled(true);
+//                    }
+//                }) {
+//                    @Override
+//                    public Map<String, String> getHeaders() throws AuthFailureError {
+//                        Map<String, String> params = new HashMap<String, String>();
+//                        params.put("Authorization", "Token 2fb88b01c22ac470cbb969f604e9b3c87d6c8c7d");
+//                        params.put("Content-Type", "application/json");
+//
+//                        return params;
+//                    }
+//                };
+//
+////                try {
+////                    Log.e("Re ", jsonObjReq.getBody() + " " + jsonObjReq.getHeaders().get("Authorization").toString());
+////                } catch (AuthFailureError authFailureError) {
+////                    authFailureError.printStackTrace();
+////                }
+//
+//                queue.add(jsonObjReq);
+//                Toast toast = Toast.makeText(context,getResources().getString(R.string.completed_text), Toast.LENGTH_SHORT);
+//                toast.show();
 
 
 
