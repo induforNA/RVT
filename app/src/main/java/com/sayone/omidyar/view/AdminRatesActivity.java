@@ -46,6 +46,7 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
     private SharedPreferences preferences;
     private Survey survey;
     private Survey survey1;
+    private boolean flag=false;
 
 
     @Override
@@ -100,16 +101,20 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
         saveButtonInflation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!inflationRate.getText().toString().equals("")){
-                    realm.beginTransaction();
-                   // inflationRate.setText(String.valueOf(Double.parseDouble(inflationRate.getText().toString())*100));
-                    survey1.setInflationRate(String.valueOf(Double.parseDouble(inflationRate.getText().toString())/100));
-                    realm.commitTransaction();
-                    Toast toast = Toast.makeText(context,getResources().getText(R.string.text_data_saved), Toast.LENGTH_SHORT);
-                    toast.show();
+                if(flag) {
+                    if (!inflationRate.getText().toString().equals("")) {
+                        realm.beginTransaction();
+                        // inflationRate.setText(String.valueOf(Double.parseDouble(inflationRate.getText().toString())*100));
+                        survey1.setInflationRate(String.valueOf(Double.parseDouble(inflationRate.getText().toString()) / 100));
+                        realm.commitTransaction();
+                        Toast toast = Toast.makeText(context, getResources().getText(R.string.text_data_saved), Toast.LENGTH_SHORT);
+                        toast.show();
+                    } else {
+                        survey1.setInflationRate("" + 0.0);
+                    }
                 }
                 else{
-                    survey1.setInflationRate(""+0.0);
+                    Toast.makeText(context,"Select id",Toast.LENGTH_SHORT).show();
                 }
 
 //                String rate = preferences.getString("inflationRate", "");
@@ -120,8 +125,10 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
         surveyIdSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
 
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                 surveyLandKinds.clear();
                 if(position != 0){
                     surveyLandKinds.add(0,getResources().getString(R.string.select_landkind));
@@ -172,6 +179,7 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
                 if (position != 0) {
+                    flag=true;
                     survey1 = realm.where(Survey.class).equalTo("surveyId", surveyIdsListInflation.get(position))
                             .findFirst();
                     inflationRate.setText(String.valueOf(Double.parseDouble(survey1.getInflationRate())*100));
