@@ -738,7 +738,13 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                             quanityEditStr = "0";
                         }
 
-                        BigDecimal bigDecimalFrequency = new BigDecimal(frequency.getFrequencyValue());
+                        BigDecimal bigDecimalFrequency;
+                        if(frequency.getFrequencyValue() == 2) {
+                            bigDecimalFrequency = new BigDecimal(1);
+                        }else{
+                            bigDecimalFrequency = new BigDecimal(frequency.getFrequencyValue());
+                        }
+
                         BigDecimal bigDecimalNoOfTimes = new BigDecimal(noOfTimesEditStr);
                         BigDecimal bigDecimalPrice = new BigDecimal(priceEditStr);
                         BigDecimal bigDecimalQuanityEditStr = new BigDecimal(quanityEditStr);
@@ -770,7 +776,11 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
                         //realm.beginTransaction();
                         costElementYears1.setCostFrequencyValue(Double.parseDouble(noOfTimesEditStr));
-                        costElementYears1.setCostFrequencyUnit(frequency.getFrequencyValue());
+                        //if(frequency.getFrequencyValue() == 2) {
+                            //costElementYears1.setCostFrequencyUnit(1);
+                        //}else{
+                            costElementYears1.setCostFrequencyUnit(frequency.getFrequencyValue());
+                       // }
                         costElementYears1.setCostPerPeriodValue(Double.parseDouble(quanityEditStr));
                         costElementYears1.setCostPerPeriodUnit(spinnerUnit.getSelectedItem().toString());
                         costElementYears1.setCostPerUnitValue(Double.parseDouble(priceEditStr));

@@ -43,7 +43,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
     private Realm realm;
     TextView headingForest, headingCrop, headingPasture, headingMining;
     private String surveyId;
-    private Boolean flag=true;
+    private Boolean flag = true;
     LinearLayout fullscreen;
     CardView forestlandLayout, croplandLayout, pasturelandLayout, mininglandLayout;
     Context context;
@@ -178,7 +178,7 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 //            // totalSymbol.setText(" ₹");
 //        }
 
-        Log.e("Language : ",Locale.getDefault().getDisplayLanguage());
+        Log.e("Language : ", Locale.getDefault().getDisplayLanguage());
 
         forestlandLayout.setVisibility(View.GONE);
         headingForest.setVisibility(View.GONE);
@@ -207,13 +207,13 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 String pathForestMap = Environment.getExternalStorageDirectory().toString() + "/MapImagesNew/" + "Forestland" + surveyId + "screen.jpg/";
                 mapImageForest.setVisibility(View.VISIBLE);
                 fforest = new File(pathForestMap);
-                if(!fforest.exists()) {
+                if (!fforest.exists()) {
                     mapImageForest.setEnabled(false);
                 }
                 Picasso.with(context).load(fforest).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageForest);
                 socialCapitalForest.setText("" + landKind.getSocialCapitals().getScore() + "/20");
 
-                if(surveyCheck.getComponents() != null){
+                if (surveyCheck.getComponents() != null) {
                     realm.beginTransaction();
                     surveyCheck.getComponents().setForestSocialCapitalScore(landKind.getSocialCapitals().getScore());
                     realm.commitTransaction();
@@ -222,14 +222,13 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 if (surveyCheck.getComponents() != null) {
                     if (surveyCheck.getComponents().getForestValue() != 0) {
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
-                        if(!(surveyCheck.getComponents().getForestValue() <0)){
+                        if (!(surveyCheck.getComponents().getForestValue() < 0)) {
                             String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getForestValue()));
-                            forestValue.setText(" ₹"+yourFormattedString);
-                        }
-                        else{
+                            forestValue.setText(" ₹" + yourFormattedString);
+                        } else {
                             double value = (surveyCheck.getComponents().getForestValue());
-                            String yourFormattedString = valueFormatter.format(roundTwo(value)*-1);
-                            forestValue.setText("- ₹"+yourFormattedString);
+                            String yourFormattedString = valueFormatter.format(roundTwo(value) * -1);
+                            forestValue.setText("- ₹" + yourFormattedString);
                         }
 
 
@@ -258,13 +257,13 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 String pathCropMap = Environment.getExternalStorageDirectory().toString() + "/MapImagesNew/" + "Cropland" + surveyId + "screen.jpg/";
                 mapImageCrop.setVisibility(View.VISIBLE);
                 fcrop = new File(pathCropMap);
-                if(!fcrop.exists()){
-                   mapImageCrop.setEnabled(false);
+                if (!fcrop.exists()) {
+                    mapImageCrop.setEnabled(false);
                 }
                 Picasso.with(context).load(fcrop).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageCrop);
                 socialCapitalCrop.setText("" + landKind.getSocialCapitals().getScore() + "/20");
 
-                if(surveyCheck.getComponents() != null) {
+                if (surveyCheck.getComponents() != null) {
                     realm.beginTransaction();
                     surveyCheck.getComponents().setCroplandSocialCapitalScore(landKind.getSocialCapitals().getScore());
                     realm.commitTransaction();
@@ -274,14 +273,13 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 if (surveyCheck.getComponents() != null) {
                     if (surveyCheck.getComponents().getCroplandValue() != 0) {
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
-                        if(!(surveyCheck.getComponents().getCroplandValue() <0)){
+                        if (!(surveyCheck.getComponents().getCroplandValue() < 0)) {
                             String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getCroplandValue()));
-                            cropValue.setText(" ₹"+yourFormattedString);
-                        }
-                        else{
+                            cropValue.setText(" ₹" + yourFormattedString);
+                        } else {
                             double value = surveyCheck.getComponents().getCroplandValue();
-                            String yourFormattedString = valueFormatter.format(roundTwo(value)*-1);
-                            cropValue.setText("- ₹"+yourFormattedString);
+                            String yourFormattedString = valueFormatter.format(roundTwo(value) * -1);
+                            cropValue.setText("- ₹" + yourFormattedString);
                         }
 
 
@@ -309,13 +307,13 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 String pathPastureMap = Environment.getExternalStorageDirectory().toString() + "/MapImagesNew/" + "Pastureland" + surveyId + "screen.jpg/";
                 mapImagePasture.setVisibility(View.VISIBLE);
                 fpasture = new File(pathPastureMap);
-                if(!fpasture.exists()){
-                   mapImagePasture.setEnabled(false);
+                if (!fpasture.exists()) {
+                    mapImagePasture.setEnabled(false);
                 }
                 Picasso.with(context).load(fpasture).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImagePasture);
                 socialCapitalPasture.setText("" + landKind.getSocialCapitals().getScore() + "/20");
 
-                if(surveyCheck.getComponents() != null) {
+                if (surveyCheck.getComponents() != null) {
                     realm.beginTransaction();
                     surveyCheck.getComponents().setPastureSocialCapitalScore(landKind.getSocialCapitals().getScore());
                     realm.commitTransaction();
@@ -324,14 +322,13 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 if (surveyCheck.getComponents() != null) {
                     if (surveyCheck.getComponents().getPastureValue() != 0) {
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
-                        if(!(surveyCheck.getComponents().getPastureValue() <0)){
+                        if (!(surveyCheck.getComponents().getPastureValue() < 0)) {
                             String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getPastureValue()));
-                            pastureValue.setText(" ₹"+yourFormattedString);
-                        }
-                        else{
+                            pastureValue.setText(" ₹" + yourFormattedString);
+                        } else {
                             double value = surveyCheck.getComponents().getPastureValue();
-                            String yourFormattedString = valueFormatter.format(roundTwo(value)*-1);
-                            pastureValue.setText("- ₹"+yourFormattedString);
+                            String yourFormattedString = valueFormatter.format(roundTwo(value) * -1);
+                            pastureValue.setText("- ₹" + yourFormattedString);
                         }
 
 
@@ -359,13 +356,13 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 String pathminingMap = Environment.getExternalStorageDirectory().toString() + "/MapImagesNew/" + "Mining Land" + surveyId + "screen.jpg/";
                 mapImageMining.setVisibility(View.VISIBLE);
                 fmining = new File(pathminingMap);
-                if(!fmining.exists()){
-                  mapImageMining.setEnabled(false);
+                if (!fmining.exists()) {
+                    mapImageMining.setEnabled(false);
                 }
                 Picasso.with(context).load(fmining).memoryPolicy(MemoryPolicy.NO_CACHE).into(mapImageMining);
                 socialCapitalMining.setText("" + landKind.getSocialCapitals().getScore() + "/20");
 
-                if(surveyCheck.getComponents() != null) {
+                if (surveyCheck.getComponents() != null) {
                     realm.beginTransaction();
                     surveyCheck.getComponents().setMiningSocialCapitalScore(landKind.getSocialCapitals().getScore());
                     realm.commitTransaction();
@@ -374,14 +371,13 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 if (surveyCheck.getComponents() != null) {
                     if (surveyCheck.getComponents().getMiningLandValue() != 0) {
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
-                        if(!(surveyCheck.getComponents().getMiningLandValue() <0)){
+                        if (!(surveyCheck.getComponents().getMiningLandValue() < 0)) {
                             String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getMiningLandValue()));
-                            miningValue.setText(" ₹"+yourFormattedString);
-                        }
-                        else{
+                            miningValue.setText(" ₹" + yourFormattedString);
+                        } else {
                             double value = surveyCheck.getComponents().getMiningLandValue();
-                            String yourFormattedString = valueFormatter.format(roundTwo(value)*-1);
-                            miningValue.setText("- ₹"+yourFormattedString);
+                            String yourFormattedString = valueFormatter.format(roundTwo(value) * -1);
+                            miningValue.setText("- ₹" + yourFormattedString);
                         }
 
 
@@ -409,17 +405,17 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 
         double lowerLimit;
         double upperLimit;
-        if(totalVal > 0 ){
+        if (totalVal > 0) {
             lowerLimit = totalVal * 0.9999;
             lowerLimit = Math.round(lowerLimit);
             upperLimit = totalVal * 1.0001;
             upperLimit = Math.round(upperLimit);
-        }else if(totalVal < 0 ){
+        } else if (totalVal < 0) {
             lowerLimit = totalVal * 1.0001;
             lowerLimit = Math.round(lowerLimit);
             upperLimit = totalVal * 0.9999;
             upperLimit = Math.round(upperLimit);
-        }else{
+        } else {
             lowerLimit = 0;
             upperLimit = 0;
         }
@@ -428,22 +424,22 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         String upperLimitStr = String.valueOf((long) upperLimit);
 
         numberProcess(lowerLimitStr);
-        Log.e("LOWER LIMIT Test ",numberProcess(lowerLimitStr));
+        Log.e("LOWER LIMIT Test ", numberProcess(lowerLimitStr));
 
 
-        Log.e("LOWER LIMIT ",String.valueOf(lowerLimit));
-        Log.e("LOWER LIMIT ",String.valueOf(Math.round(lowerLimit/10000)*10000));
-        Log.e("UPPER LIMIT ",String.valueOf((long) upperLimit));
+        Log.e("LOWER LIMIT ", String.valueOf(lowerLimit));
+        Log.e("LOWER LIMIT ", String.valueOf(Math.round(lowerLimit / 10000) * 10000));
+        Log.e("UPPER LIMIT ", String.valueOf((long) upperLimit));
 
 //        String totalValStr = String.valueOf(Math.round(lowerLimit/10000)*10000)+" to "+String.valueOf(Math.round(upperLimit/10000)*10000);
 
 
         // formattedString(Math.round(lowerLimit/10000)*10000);
 
-        String totalValStr  = " ~ "+formattedString(Long.valueOf(numberProcess(lowerLimitStr)))+" — "+formattedString(Long.valueOf(numberProcess(upperLimitStr)));
-        Log.e("Final Value Range ",totalValStr);
+        String totalValStr = " ~ " + formattedString(Long.valueOf(numberProcess(lowerLimitStr))) + " — " + formattedString(Long.valueOf(numberProcess(upperLimitStr)));
+        Log.e("Final Value Range ", totalValStr);
 
-        if(surveyCheck.getComponents() != null) {
+        if (surveyCheck.getComponents() != null) {
             realm.beginTransaction();
             surveyCheck.getComponents().setTotalValueStr(totalValStr);
             realm.commitTransaction();
@@ -485,30 +481,32 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
 //        socialCapitalCrop.setText("0");
 //        socialCapitalPasture.setText("0");
 //        socialCapitalMining.setText("0");
-          inflationRate.setText(String.valueOf(Double.parseDouble(surveyCheck.getInflationRate())*100.00)+"%");
+        double infl = Double.parseDouble(surveyCheck.getInflationRate()) * 100.00;
+        double roundOff = Math.round(infl * 100.0) / 100.0;
+        inflationRate.setText(String.valueOf(roundOff) + "%");
 
     }
 
-    public String numberProcess(String numberStr){
+    public String numberProcess(String numberStr) {
         String zerosStr = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
         int zerosCount = 0;
         long q = Long.valueOf(numberStr);
-        if(numberStr.length() >= 4){
+        if (numberStr.length() >= 4) {
             zerosCount = numberStr.substring(4).length();
-            double afterDec = Double.valueOf("0."+numberStr.substring(4));
-            q = Long.valueOf(numberStr.substring(0,4)) + Math.round(afterDec);
+            double afterDec = Double.valueOf("0." + numberStr.substring(4));
+            q = Long.valueOf(numberStr.substring(0, 4)) + Math.round(afterDec);
         }
-        return String.valueOf(q)+zerosStr.substring(0,zerosCount);
+        return String.valueOf(q) + zerosStr.substring(0, zerosCount);
     }
 
-    public String formattedString(long l){
+    public String formattedString(long l) {
         DecimalFormat valueFormatter1 = new DecimalFormat("#,###,###");
 
         String fString = "0";
-        if(l < 0){
-            fString = "- ₹"+valueFormatter1.format(l*-1);
-        }else{
-            fString = "₹"+valueFormatter1.format(l);
+        if (l < 0) {
+            fString = "- ₹" + valueFormatter1.format(l * -1);
+        } else {
+            fString = "₹" + valueFormatter1.format(l);
         }
         return fString;
     }

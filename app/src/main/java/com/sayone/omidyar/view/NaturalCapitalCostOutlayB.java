@@ -22,6 +22,7 @@ import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.CashFlow;
 import com.sayone.omidyar.model.Component;
 import com.sayone.omidyar.model.CostElementYears;
+import com.sayone.omidyar.model.Frequency;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.Outlay;
 import com.sayone.omidyar.model.OutlayYears;
@@ -80,8 +81,11 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
     ArrayAdapter<String> curreny_adapter;
     ArrayList<String> currenyList;
 
+    ArrayAdapter<String> occuranceAdapter;
+
     ArrayAdapter<String> item_adapter;
     ArrayList<String> itemList;
+    ArrayList<String> timePeriodList;
 
 
     EditText costValue;
@@ -114,6 +118,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         yearList = new ArrayList<>();
         currenyList = new ArrayList<>();
         itemList = new ArrayList<>();
+        timePeriodList = new ArrayList<>();
 
         year_adapter = new ArrayAdapter<>(this, simple_spinner_item, yearList);
         spinnerYear.setAdapter(year_adapter);
@@ -124,10 +129,12 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         item_adapter = new ArrayAdapter<>(this, simple_spinner_item, itemList);
         spinnerItem.setAdapter(item_adapter);
 
-        ArrayAdapter<CharSequence> occurance_adapter = ArrayAdapter.createFromResource(this,
-                R.array.time_period_array, android.R.layout.simple_spinner_item);
+        occuranceAdapter = new ArrayAdapter<>(this, simple_spinner_item, timePeriodList);
+
+//        ArrayAdapter<CharSequence> occurance_adapter = ArrayAdapter.createFromResource(this,
+//                R.array.time_period_array, android.R.layout.simple_spinner_item);
      //  occurance_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerOccurance.setAdapter(occurance_adapter);
+        spinnerOccurance.setAdapter(occuranceAdapter);
 
         int year = Calendar.getInstance().get(Calendar.YEAR);
         currentYearIndex = 0;
@@ -201,6 +208,18 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                 }
             }
         }
+
+        RealmResults<Frequency> frequencyResult = realm.where(Frequency.class).findAll();
+        for(Frequency frequency:frequencyResult){
+            Log.e("HARVEST ", frequency.getHarvestFrequency()+" "+frequency.getFrequencyValue());
+            if(language.equals("हिन्दी")) {
+                timePeriodList.add(frequency.getHarvestFrequencyHindi());
+            }
+            else{
+                timePeriodList.add(frequency.getHarvestFrequency());
+            }
+        }
+        occuranceAdapter.notifyDataSetChanged();
 
         for(Outlay outlay:costOutlays){
             itemList.add(outlay.getItemName());
@@ -696,6 +715,15 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                     costValue.setText(outlayYears.getPrice() + "");
                     if(outlayYears.getFrequency()!=0) {
                         frequencyNumber.setText(outlayYears.getFrequency() + "");
+                        if(timePeriodList.size() != 0){
+                            // Log.e("TEST FRE ", timePeriod_adapter.getPosition(frequency.getHarvestFrequency())+"");
+//                            if(language.equals("हिन्दी")) {
+                            spinnerOccurance.setSelection(occuranceAdapter.getPosition(outlayYears.getTimePeriod()));
+//                            }
+//                            else{
+//                                spinnerTimePeriod.setSelection(occuranceAdapter.getPosition(outlayYears.getHarvestFrequency()));
+//                            }
+                        }
                     }
                 }else{
                     costValue.setText("");

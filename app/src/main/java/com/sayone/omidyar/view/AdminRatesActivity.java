@@ -105,7 +105,12 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
                     if (!inflationRate.getText().toString().equals("")) {
                         realm.beginTransaction();
                         // inflationRate.setText(String.valueOf(Double.parseDouble(inflationRate.getText().toString())*100));
-                        survey1.setInflationRate(String.valueOf(Double.parseDouble(inflationRate.getText().toString()) / 100));
+
+                        double numToRound = Double.parseDouble(inflationRate.getText().toString()) / 100;
+
+                        double roundOff = Math.round(numToRound * 100.0) / 100.0;
+
+                        survey1.setInflationRate(String.valueOf(roundOff));
                         realm.commitTransaction();
                         Toast toast = Toast.makeText(context, getResources().getText(R.string.text_data_saved), Toast.LENGTH_SHORT);
                         toast.show();

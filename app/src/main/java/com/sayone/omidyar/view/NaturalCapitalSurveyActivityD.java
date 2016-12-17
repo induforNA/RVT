@@ -183,6 +183,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
         RealmResults<Frequency> frequencyResult = realm.where(Frequency.class).findAll();
         for(Frequency frequency:frequencyResult){
+            Log.e("HARVEST ", frequency.getHarvestFrequency()+" "+frequency.getFrequencyValue());
             if(language.equals("हिन्दी")) {
                 timePeriodList.add(frequency.getHarvestFrequencyHindi());
             }
@@ -666,6 +667,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 .equalTo("frequencyValue",(int) revenueProductYearsLoad.getHarvestFrequencyUnit())
                 .findFirst();
 
+
+
         if(timePeriodList.size() != 0 && frequency != null){
             // Log.e("TEST FRE ", timePeriod_adapter.getPosition(frequency.getHarvestFrequency())+"");
             if(language.equals("हिन्दी")) {
@@ -715,6 +718,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                     if(String.valueOf(revenueProductYears1.getYear()).equals(spinnerYear.getSelectedItem()) ){
                         // Log.e("REVE YEAR ",revenueProductYears1.toString());
                         String spinnerTimePeriodStr = spinnerTimePeriod.getSelectedItem().toString();
+                        Log.e("SPINNER STR ",spinnerTimePeriodStr);
                         Frequency frequency;
                         if(language.equals("हिन्दी")) {
                             frequency = realm.where(Frequency.class)
@@ -726,6 +730,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                                     .equalTo("harvestFrequency",spinnerTimePeriodStr)
                                     .findFirst();
                         }
+
+                        Log.e("SPINNER STR ",frequency.getHarvestFrequency()+" "+frequency.getFrequencyValue());
 
 
                         int yearCurent = Calendar.getInstance().get(Calendar.YEAR);
@@ -808,7 +814,12 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                             // total = total/12;
 
                         }else {
-                            BigDecimal bigDecimalFrequency = new BigDecimal(frequency.getFrequencyValue());
+                            BigDecimal bigDecimalFrequency;
+                            if(frequency.getFrequencyValue() == 2){
+                                bigDecimalFrequency = new BigDecimal(1);
+                            }else {
+                                bigDecimalFrequency = new BigDecimal(frequency.getFrequencyValue());
+                            }
 
                             BigDecimal bigDecimalTotal = bigDecimalFrequency.multiply(bigDecimalNoOfTimes, MathContext.DECIMAL64)
                                     .multiply(bigDecimalPrice, MathContext.DECIMAL64)
@@ -830,7 +841,11 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
                         //realm.beginTransaction();
                         revenueProductYears1.setHarvestFrequencyValue(Double.parseDouble(noOfTimesEditStr));
-                        revenueProductYears1.setHarvestFrequencyUnit(frequency.getFrequencyValue());
+                        //if(frequency.getFrequencyValue() == 2) {
+                            //revenueProductYears1.setHarvestFrequencyUnit(1);
+                        //}else{
+                            revenueProductYears1.setHarvestFrequencyUnit(frequency.getFrequencyValue());
+                        //}
                         revenueProductYears1.setQuantityValue(Double.parseDouble(quanityEditStr));
                         revenueProductYears1.setQuantityUnit(spinnerUnit.getSelectedItem().toString());
                         revenueProductYears1.setMarketPriceValue(Double.parseDouble(priceEditStr));
