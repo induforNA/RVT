@@ -355,7 +355,8 @@ public class NaturalCapitalCostOutlay extends BaseActivity {
     public RealmList<OutlayYears> addOutlayYears(String name, long outlayYearsId){
         RealmList<OutlayYears> outlayYearses = new RealmList<>();
         int yearsCount = 0;
-        int year = Calendar.getInstance().get(Calendar.YEAR);
+        // int year = Calendar.getInstance().get(Calendar.YEAR);
+        int year = sharedPref.getInt("surveyyear",2016);
 
         if(currentSocialCapitalServey.equals("Forestland")){
             yearsCount = 15;

@@ -437,11 +437,14 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         // formattedString(Math.round(lowerLimit/10000)*10000);
 
         String totalValStr = " ~ " + formattedString(Long.valueOf(numberProcess(lowerLimitStr))) + " — " + formattedString(Long.valueOf(numberProcess(upperLimitStr)));
+        String totalValStrToSend = formattedStringNoSymbol(Long.valueOf(numberProcess(lowerLimitStr))) + " : " + formattedStringNoSymbol(Long.valueOf(numberProcess(upperLimitStr)));
+
+
         Log.e("Final Value Range ", totalValStr);
 
         if (surveyCheck.getComponents() != null) {
             realm.beginTransaction();
-            surveyCheck.getComponents().setTotalValueStr(totalValStr);
+            surveyCheck.getComponents().setTotalValueStr(totalValStrToSend);
             realm.commitTransaction();
         }
 
@@ -507,6 +510,18 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
             fString = "- ₹" + valueFormatter1.format(l * -1);
         } else {
             fString = "₹" + valueFormatter1.format(l);
+        }
+        return fString;
+    }
+
+    public String formattedStringNoSymbol(long l) {
+        DecimalFormat valueFormatter1 = new DecimalFormat("#,###,###");
+
+        String fString = "0";
+        if (l < 0) {
+            fString = "- " + valueFormatter1.format(l * -1);
+        } else {
+            fString = "" + valueFormatter1.format(l);
         }
         return fString;
     }

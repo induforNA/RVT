@@ -27,6 +27,7 @@ import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.Participant;
 import com.sayone.omidyar.model.Survey;
 
+import java.util.Calendar;
 import java.util.Locale;
 
 import io.realm.Realm;
@@ -115,6 +116,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
         //realm.beginTransaction();
         survey = realm.where(Survey.class).equalTo("surveyId",serveyId).findFirst();
+
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(survey.getDate());
+        int surveyyear = cal.get(Calendar.YEAR);
+        Log.e("SURVEY DATE ", surveyyear+"");
+
+        SharedPreferences.Editor editor= sharedPref.edit();
+        editor.putInt("surveyyear",surveyyear);
+        editor.apply();
+
+//        sharedPref.
+//        inflationRateStr = preferences.getString("inflationRate","5");
+
+
 //        Survey survey = realm.createObject(Survey.class);
 //        survey.setId(getNextKeySurvey());
 //        survey.setSurveyId(serveyId);

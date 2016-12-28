@@ -425,7 +425,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             int yearCounting = 0;
             for(RevenueProductYears revenueProductYearsA: revenueProducts.get(0).getRevenueProductYearses()){
                 Log.e("YEAR ", revenueProductYearsA.getYear()+"");
-                if(revenueProductYearsA.getYear() != 0 && revenueProductYearsA.getYear() < Calendar.getInstance().get(Calendar.YEAR)){
+                if(revenueProductYearsA.getYear() != 0 && revenueProductYearsA.getYear() < sharedPref.getInt("surveyyear",2016)){
                     yearCounting++;
                 }
             }
@@ -598,7 +598,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
 
         //yearList = revenueProductLoad.getRevenueProductYearses();
-        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        // int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        int currentYear = sharedPref.getInt("surveyyear",2016);
         yearList.clear();
         totalYearsCount = 0;
         for(RevenueProductYears revenueProductYears:revenueProductLoad.getRevenueProductYearses()){
@@ -734,7 +735,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                         Log.e("SPINNER STR ",frequency.getHarvestFrequency()+" "+frequency.getFrequencyValue());
 
 
-                        int yearCurent = Calendar.getInstance().get(Calendar.YEAR);
+                        // int yearCurent = Calendar.getInstance().get(Calendar.YEAR);
+                        int yearCurent = sharedPref.getInt("surveyyear",2016);
                         int yearIndex = revenueProductYears1.getYear() - yearCurent;
 
                         runOnUiThread(new Runnable() {
@@ -1285,7 +1287,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         Survey results = realm.where(Survey.class)
                 .equalTo("surveyId",serveyId)
                 .findFirst();
-        int year = Calendar.getInstance().get(Calendar.YEAR);
+        // int year = Calendar.getInstance().get(Calendar.YEAR);
+        int year = sharedPref.getInt("surveyyear",2016);
         for(LandKind landKind:results.getLandKinds()){
             if(landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")){
 

@@ -411,7 +411,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             int yearCounting = 0;
             for(CostElementYears costElementYearsA: revenueProducts.get(0).getCostElementYearses()){
                 Log.e("YEAR ", costElementYearsA.getYear()+"");
-                if(costElementYearsA.getYear() != 0 && costElementYearsA.getYear() < Calendar.getInstance().get(Calendar.YEAR)){
+                if(costElementYearsA.getYear() != 0 && costElementYearsA.getYear() < sharedPref.getInt("surveyyear",2016)){
                     yearCounting++;
                 }
             }
@@ -582,7 +582,8 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
 
         //yearList = revenueProductLoad.getRevenueProductYearses();
-        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        // int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        int currentYear = sharedPref.getInt("surveyyear",2016);
         yearList.clear();
         totalYearsCount = 0;
         for(CostElementYears costElementYears:costElementLoad.getCostElementYearses()){
@@ -704,7 +705,8 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
 
 
-                        int yearCurent = Calendar.getInstance().get(Calendar.YEAR);
+                        // int yearCurent = Calendar.getInstance().get(Calendar.YEAR);
+                        int yearCurent = sharedPref.getInt("surveyyear",2016);
                         int yearIndex = costElementYears1.getYear() - yearCurent;
 
                         runOnUiThread(new Runnable() {
@@ -1240,7 +1242,8 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         Survey results = realm.where(Survey.class)
                 .equalTo("surveyId",serveyId)
                 .findFirst();
-        int year = Calendar.getInstance().get(Calendar.YEAR);
+        // int year = Calendar.getInstance().get(Calendar.YEAR);
+        int year = sharedPref.getInt("surveyyear",2016);
         for(LandKind landKind:results.getLandKinds()){
             if(landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")){
 

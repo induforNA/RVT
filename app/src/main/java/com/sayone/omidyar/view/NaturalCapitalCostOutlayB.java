@@ -136,7 +136,8 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
      //  occurance_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerOccurance.setAdapter(occuranceAdapter);
 
-        int year = Calendar.getInstance().get(Calendar.YEAR);
+        // int year = Calendar.getInstance().get(Calendar.YEAR);
+        int year = sharedPref.getInt("surveyyear",2016);
         currentYearIndex = 0;
         totalYears = 0;
         currentItemIndex = 0;
@@ -590,7 +591,8 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         Survey results = realm.where(Survey.class)
                 .equalTo("surveyId",serveyId)
                 .findFirst();
-        int year = Calendar.getInstance().get(Calendar.YEAR);
+        // int year = Calendar.getInstance().get(Calendar.YEAR);
+        int year = sharedPref.getInt("surveyyear",2016);
         for(LandKind landKind:results.getLandKinds()){
             if(landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")){
 

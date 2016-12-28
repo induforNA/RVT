@@ -182,7 +182,8 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
         i = 1;
         LinearLayout.LayoutParams mRparams = new LinearLayout.LayoutParams(400, LinearLayout.LayoutParams.WRAP_CONTENT);
         for(final RevenueProductYears revenueProductYears : revenueProductYearsRealmList){
-            int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+            //int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+            int currentYear = sharedPref.getInt("surveyyear",2016);
 
             Log.e("YEAR PEEEEEEEEE",revenueProductYears.getYear()+" "+currentYear);
             if(revenueProductYears.getYear() < currentYear && revenueProductYears.getYear() != 0){
@@ -265,7 +266,8 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
     public void generateYearFields(int j){
         LinearLayout.LayoutParams mRparams = new LinearLayout.LayoutParams(400, LinearLayout.LayoutParams.WRAP_CONTENT);
         int k;
-        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        // int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        int currentYear = sharedPref.getInt("surveyyear",2016);
         for(k=1; k<=j; k++){
             ArrayList yearArray = new ArrayList();
             int year = currentYear - 1;
@@ -417,7 +419,8 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
 
                                 }
                             }
-                            int year = Calendar.getInstance().get(Calendar.YEAR);
+                            // int year = Calendar.getInstance().get(Calendar.YEAR);
+                            int year = sharedPref.getInt("surveyyear",2016);
                             revenueProductYearsArrayList.add(saveTrend(revenueProduct1.getId(), "Forestland", realm));
                             for(int k=0;k<=15;k++){
                                 revenueProductYearsArrayList.add(saveProjectionYears(year, revenueProduct1.getId(), "Forestland", k, realm));
@@ -443,7 +446,8 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                                 revenueProductYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), revenueProduct1.getId(), "Cropland", realm));
                             }
 
-                            int year = Calendar.getInstance().get(Calendar.YEAR);
+                            // int year = Calendar.getInstance().get(Calendar.YEAR);
+                            int year = sharedPref.getInt("surveyyear",2016);
                             revenueProductYearsArrayList.add(saveTrend(revenueProduct1.getId(), "Cropland", realm));
                             for(int k=0;k<=5;k++){
                                 revenueProductYearsArrayList.add(saveProjectionYears(year, revenueProduct1.getId(), "Cropland", k, realm));
@@ -468,7 +472,8 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                                 revenueProductYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), revenueProduct1.getId(), "Pastureland",realm));
                             }
 
-                            int year = Calendar.getInstance().get(Calendar.YEAR);
+                            // int year = Calendar.getInstance().get(Calendar.YEAR);
+                            int year = sharedPref.getInt("surveyyear",2016);
                             revenueProductYearsArrayList.add(saveTrend(revenueProduct1.getId(), "Pastureland", realm));
                             for(int k=0;k<=8;k++){
                                 revenueProductYearsArrayList.add(saveProjectionYears(year, revenueProduct1.getId(), "Pastureland", k, realm));
@@ -493,7 +498,8 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                                 revenueProductYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), revenueProduct1.getId(), "Mining Land",realm));
                             }
 
-                            int year = Calendar.getInstance().get(Calendar.YEAR);
+                            // int year = Calendar.getInstance().get(Calendar.YEAR);
+                            int year = sharedPref.getInt("surveyyear",2016);
                             revenueProductYearsArrayList.add(saveTrend(revenueProduct1.getId(), "Mining Land", realm));
                             for(int k=0;k<=5;k++){
                                 revenueProductYearsArrayList.add(saveProjectionYears(year, revenueProduct1.getId(), "Mining Land", k, realm));
@@ -657,7 +663,8 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
     public double calculateProjectionIndex(double val){
         double resVal = 0;
 
-        int year = Calendar.getInstance().get(Calendar.YEAR);
+        // int year = Calendar.getInstance().get(Calendar.YEAR);
+        int year = sharedPref.getInt("surveyyear",2016);
         for(i=0;i<=val;i++){
             if(i == 0) {
                 resVal = 0;
