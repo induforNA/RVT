@@ -371,7 +371,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         if (Integer.parseInt(android.os.Build.VERSION.SDK) > 5
                 && keyCode == KeyEvent.KEYCODE_BACK
                 && event.getRepeatCount() == 0) {
-            Log.e("CDA", "onKeyDown Called");
+            // Log.e("CDA", "onKeyDown Called");
             onBackPressed();
             return true;
         }
@@ -381,7 +381,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
     @Override
     public void onBackPressed() {
-        Log.e("CDA", "onBackPressed Called");
+        // Log.e("CDA", "onBackPressed Called");
         backButtonAction();
     }
 
@@ -410,7 +410,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         if(revenueProducts.size() == 1){
             int yearCounting = 0;
             for(CostElementYears costElementYearsA: revenueProducts.get(0).getCostElementYearses()){
-                Log.e("YEAR ", costElementYearsA.getYear()+"");
+                // Log.e("YEAR ", costElementYearsA.getYear()+"");
                 if(costElementYearsA.getYear() != 0 && costElementYearsA.getYear() < sharedPref.getInt("surveyyear",2016)){
                     yearCounting++;
                 }
@@ -913,7 +913,15 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                         //marketPriceVal = roundToTwoDecimal(marketPriceVal);
 
                         BigDecimal bigDecimalfreqUnit = new BigDecimal(freqUnit);
+                        // if(!currentSocialCapitalServey.equals("Pastureland")){
+                            if(freqUnit == 2){
+                                bigDecimalfreqUnit = new BigDecimal(1);
+                            }
+                        // }
+
+
                         BigDecimal bigDecimalharvestFre = new BigDecimal(harvestFre);
+
                         BigDecimal bigDecimalharvestTimes = new BigDecimal(harvestTimes);
                         BigDecimal bigDecimalmarketPriceVal = new BigDecimal(marketPriceVal);
 
@@ -1043,6 +1051,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 // Log.e("DIS RATE ", landKind.getSocialCapitals().getDiscountRate()+"");
                 int k = 0;
                 for(CostElement costElement:landKind.getForestLand().getCostElements()){
+                    for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
+                        Log.e("RPPPPPPP ", costElementYears00+"");
+                    }
                     if(k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
                             if (!landKind.getSocialCapitals().isDiscountFlag()) {
@@ -1062,6 +1073,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             }else if(landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")){
                 int k = 0;
                 for(CostElement costElement:landKind.getCropLand().getCostElements()){
+                    for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
+                        Log.e("RPPPPPPP ", costElementYears00+"");
+                    }
                     if(k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
                             if (!landKind.getSocialCapitals().isDiscountFlag()) {
@@ -1079,6 +1093,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             }else if(landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")){
                 int k = 0;
                 for(CostElement costElement:landKind.getPastureLand().getCostElements()){
+                    for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
+                        Log.e("RPPPPPPP ", costElementYears00+"");
+                    }
                     if(k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
                             if (!landKind.getSocialCapitals().isDiscountFlag()) {
@@ -1096,6 +1113,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             }else if(landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")){
                 int k = 0;
                 for(CostElement costElement:landKind.getMiningLand().getCostElements()){
+                    for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
+                        Log.e("RPPPPPPP ", costElementYears00+"");
+                    }
                     if(k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
                             if (!landKind.getSocialCapitals().isDiscountFlag()) {
@@ -1154,11 +1174,11 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 .findAll();
 
         for(RevenueProductYears revenueProductYears1:revenueProductYearses){
-            Log.e("Revenue ",revenueProductYears1.toString());
+            //Log.e("Revenue ",revenueProductYears1.toString());
         }
 
         for(CostElementYears costElementYears1:costElementYearses){
-            Log.e("Cost ",costElementYears1.toString());
+            //Log.e("Cost ",costElementYears1.toString());
         }
 
 
@@ -1234,7 +1254,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         cashFlow.setTotalOutlay(outlayTotal);
         realm.commitTransaction();
 
-        Log.e("CASH ",cashFlow.toString()+"");
+        // Log.e("CASH ",cashFlow.toString()+"");
         return cashFlow;
     }
 
@@ -1249,7 +1269,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
                 double npv = 0;
                 for(CashFlow cashFlow :landKind.getForestLand().getCashFlows()){
-                    Log.e("Cash flow ", cashFlow.toString());
+                    // Log.e("Cash flow ", cashFlow.toString());
                     if(cashFlow.getYear() >= year){
                         npv = npv + cashFlow.getDiscountedCashFlow();
                     }

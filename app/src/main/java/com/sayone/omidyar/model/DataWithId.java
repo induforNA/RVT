@@ -12,6 +12,21 @@ public class DataWithId {
 
     ArrayList<String> id;
 
+    ArrayList<String> email;
+
+    public DataWithId(ArrayList<String> id, ArrayList<String> email) {
+        this.id = id;
+        this.email = email;
+    }
+
+    public ArrayList<String> getEmail() {
+        return email;
+    }
+
+    public void setEmail(ArrayList<String> email) {
+        this.email = email;
+    }
+
     public ArrayList<String> getId() {
         return id;
     }
@@ -20,14 +35,11 @@ public class DataWithId {
         this.id = id;
     }
 
-    public DataWithId(ArrayList<String> id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
         return "DataWithId{" +
                 "id=" + id +
+                ", email=" + email +
                 '}';
     }
 }

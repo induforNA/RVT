@@ -95,63 +95,47 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social_capital);
 
-        // Log.e("Current Activity ", "4454");
-
         context = this;
         realm = Realm.getDefaultInstance();
         preferences = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         serveyId = preferences.getString("surveyId", "");
         currentSocialCapitalServey = preferences.getString("currentSocialCapitalServey", "");
-        // Log.e("Languade :",Locale.getDefault().getDisplayLanguage());
-
         language = Locale.getDefault().getDisplayLanguage();
-
         socialCapitalAnswerOptionsesList = new RealmList<>();
-
         checkboxgroup = (LinearLayout) findViewById(R.id.checkboxgroup);
         radiobuttongroup = (RadioGroup) findViewById(R.id.radiobuttongroup);
         radiobuttongroup.setOnCheckedChangeListener(this);
-
         question = (TextView) findViewById(R.id.question);
-
         optionA = (CheckBox) findViewById(R.id.option_a);
         optionB = (CheckBox) findViewById(R.id.option_b);
         optionC = (CheckBox) findViewById(R.id.option_c);
         optionD = (CheckBox) findViewById(R.id.option_d);
         optionE = (CheckBox) findViewById(R.id.option_e);
-
         optionARadio = (RadioButton) findViewById(R.id.option_a_radio);
         optionBRadio = (RadioButton) findViewById(R.id.option_b_radio);
         optionCRadio = (RadioButton) findViewById(R.id.option_c_radio);
         optionDRadio = (RadioButton) findViewById(R.id.option_d_radio);
         optionERadio = (RadioButton) findViewById(R.id.option_e_radio);
-
         menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);
         imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
         drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
         textViewAbout = (TextView) findViewById(R.id.text_view_about);
-        surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
+        surveyIdDrawer=(TextView) findViewById(R.id.text_view_id);
         logout = (TextView) findViewById(R.id.logout);
-        startSurvey=(TextView)findViewById(R.id.text_start_survey);
-        pageNumber=(TextView)findViewById(R.id.page_number);
-        landType=(TextView)findViewById(R.id.land_type);
-
+        startSurvey = (TextView) findViewById(R.id.text_start_survey);
+        pageNumber = (TextView) findViewById(R.id.page_number);
+        landType = (TextView) findViewById(R.id.land_type);
         landKind = realm.where(LandKind.class)
                 .equalTo("surveyId", serveyId)
                 .equalTo("status", "active")
                 .equalTo("name", currentSocialCapitalServey)
                 .findFirst();
-
         currentQuestionId = 0;
         loadQuestion(currentQuestionId);
-
-
         backButton = (Button) findViewById(R.id.back_button);
         nextButton = (Button) findViewById(R.id.next_button);
-
         surveyIdDrawer.setText(serveyId);
-
         imageViewMenuIcon.setOnClickListener(this);
         surveyIdDrawer.setText(serveyId);
         drawerCloseBtn.setOnClickListener(this);
@@ -168,12 +152,9 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                 .equalTo("status", "active")
                 .equalTo("name", currentSocialCapitalServey)
                 .findFirst();
-        Log.e("MM ", serveyId+" "+currentSocialCapitalServey);
-
         for(SocialCapitalAnswer socialCapitalAnswer: landKindLoad.getSocialCapitals().getSocialCapitalAnswers()){
             Log.e("NN ",socialCapitalAnswer.toString());
         }
-
         SocialCapitalQuestions socialCapitalQuestionsLandKindLoad = landKindLoad.getSocialCapitals().getSocialCapitalAnswers().get(currentQId).getSocialCapitalQuestion();
         if(language.equals("हिन्दी")){
             setQuestionView(socialCapitalQuestionsLandKindLoad.getOptionType(),
@@ -196,8 +177,6 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
             landType.setText(getResources().getText(R.string.string_miningland));
         if(currentSocialCapitalServey.equals("Cropland"))
             landType.setText(getResources().getText(R.string.title_cropland));
-        //  landType.setText(currentSocialCapitalServey);
-       // landType.setText(currentSocialCapitalServey);
     }
 
     public void setQuestionView(String type,
@@ -205,19 +184,16 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                                 RealmList<SocialCapitalAnswerOptions> options,
                                 RealmList<MultipleAnswer> multipleAnswers) {
         question.setText(questionval);
-
         optionA.setVisibility(View.GONE);
         optionB.setVisibility(View.GONE);
         optionC.setVisibility(View.GONE);
         optionD.setVisibility(View.GONE);
         optionE.setVisibility(View.GONE);
-
         optionARadio.setVisibility(View.GONE);
         optionBRadio.setVisibility(View.GONE);
         optionCRadio.setVisibility(View.GONE);
         optionDRadio.setVisibility(View.GONE);
         optionERadio.setVisibility(View.GONE);
-
         int i = 0;
         for (SocialCapitalAnswerOptions socialCapitalAnswerOptions : options) {
             switch (i){

@@ -5,21 +5,26 @@ import android.app.ProgressDialog;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,6 +76,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -84,6 +90,8 @@ import io.realm.RealmResults;
 import io.realm.annotations.Required;
 import retrofit2.Call;
 import retrofit2.Callback;
+
+import static com.sayone.omidyar.R.id.button;
 
 public class SurveySummaryActivity extends BaseActivity implements View.OnClickListener {
 
@@ -101,6 +109,8 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
     private SharedPreferences sharedPref;
     private Set<String> set = null;
     private Realm realm;
+
+    String emailIdsStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +132,8 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
         sharedPref = context.getSharedPreferences(
                 "com.sayone.omidyar.PREFERENCE_FILE_KEY_SET", Context.MODE_PRIVATE);
+
+        emailIdsStr = sharedPref.getString("emailIdsStr", "");
 
 
         realm = Realm.getDefaultInstance();
@@ -203,8 +215,59 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 //        });
 
        // new LongOperation().execute("");
+        // open();
+
+    }
+
+    public void open(){
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+        final EditText inputA = new EditText(SurveySummaryActivity.this);
+        if(emailIdsStr.equals("")) {
+            emailIdsStr = sharedPref.getString("emailIdsStr", "");
+        }
+        if(emailIdsStr.equals("")) {
+            emailIdsStr = "yijia.chen@indufor-na.com, daphne.yin@indufor-na.com";
+            // emailIdsStr = "riyas.sayone@gmail.com,issac.sayone@gmail.com";
+        }
+        inputA.setText(emailIdsStr);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        inputA.setLayoutParams(lp);
+
+        // Get the layout inflater
+        LayoutInflater inflater = getLayoutInflater();
+        // alertDialogBuilder.setView(inflater.inflate(R.layout.send_emails,null));
+        alertDialogBuilder.setView(inputA);
 
 
+        alertDialogBuilder.setMessage("Enter email ids separated by commas");
+                alertDialogBuilder.setPositiveButton("Send Data",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                String value = inputA.getText().toString();
+
+                                SharedPreferences.Editor editor = sharedPref.edit();
+                                editor.putString("emailIdsStr",value);
+                                editor.commit();
+
+                                // alertDialogBuilder.setView(null);
+                                exportDatas(value);
+                                // Toast.makeText(SurveySummaryActivity.this,"You clicked yes  button",Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+                alertDialogBuilder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Toast.makeText(SurveySummaryActivity.this,"You clicked yes  button",Toast.LENGTH_LONG).show();
+                    }
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     public void setButtonEnabled(){
@@ -709,9 +772,9 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             } else
                 jsonObjectForestLand.put("discountPercentage", forestLand.getDiscountPercentage());
             if (forestLand.getOutlays() == null) {
-                jsonObjectForestLand.put("Outlays", "");
+                jsonObjectForestLand.put("outlays", "");
             } else
-                jsonObjectForestLand.put("Outlays", getOutLays(forestLand.getOutlays()));
+                jsonObjectForestLand.put("outlays", getOutLays(forestLand.getOutlays()));
             if (forestLand.getRevenueProducts() == null) {
                 jsonObjectForestLand.put("revenueProducts", "");
             } else
@@ -1180,6 +1243,10 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 jsonObjectSocialCapital.put("discountRate", 0);
             } else
                 jsonObjectSocialCapital.put("discountRate", socialCapitals.getDiscountRate());
+//            if (socialCapitals.getDiscountRateOverride() == 0) {
+//                jsonObjectSocialCapital.put("discountRateOverride", 0);
+//            } else
+                jsonObjectSocialCapital.put("discountRateOverride", socialCapitals.getDiscountRateOverride());
             if (socialCapitals.getSpread() == 0) {
                 jsonObjectSocialCapital.put("spread", 0);
             } else
@@ -1443,51 +1510,57 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 break;
 
             case R.id.button_export_data_email:
-                exportDataEmail.setEnabled(false);
-                RealmResults<Survey> surveyExports = realm.where(Survey.class).equalTo("sendStatus", true).findAll();
-                ArrayList<String> strings = new ArrayList<>();
-                JSONArray jsonArray = new JSONArray();
-                for(Survey surveyExport : surveyExports){
-                    jsonArray.put(surveyExport.getSurveyId());
-                    strings.add(surveyExport.getSurveyId());
-                }
+                open();
 
-                JSONObject object = new JSONObject();
-                try {
-                    object.put("id", jsonArray);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-                ApiInterface apiService =
-                        ApiClient.getClient().create(ApiInterface.class);
-
-                DataWithId dataWithId = new DataWithId(strings);
-
-                Log.e("Res ",dataWithId.toString());
-
-                Call<ExportData> call = apiService.getExported(dataWithId);
-                Log.e("URL ", call.request().url()+"");
-                Log.e("URL ", call.request().body()+"");
-                call.enqueue(new Callback<ExportData>() {
-
-                    @Override
-                    public void onResponse(Call<ExportData> call, retrofit2.Response<ExportData> response) {
-                        Log.e("Response ",""+response.toString());
-                        exportDataEmail.setEnabled(true);
-                        Toast toast = Toast.makeText(context,"Data exported", Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
-
-                    @Override
-                    public void onFailure(Call<ExportData> call, Throwable t) {
-                        Log.e("Response ",""+t.toString());
-                        Toast toast = Toast.makeText(context,getResources().getString(R.string.save_failed), Toast.LENGTH_SHORT);
-                        toast.show();
-                        exportDataEmail.setEnabled(true);
-                    }
-                });
+//                exportDataEmail.setEnabled(false);
+//                RealmResults<Survey> surveyExports = realm.where(Survey.class).equalTo("sendStatus", true).findAll();
+//                ArrayList<String> strings = new ArrayList<>();
+//                JSONArray jsonArray = new JSONArray();
+//                JSONArray jsonArrayEmails = new JSONArray();
+//                jsonArrayEmails.put("riyas.sayone@gmail.com");
+//                jsonArrayEmails.put("issac.sayone@gmail.com");
+//                for(Survey surveyExport : surveyExports){
+//                    jsonArray.put(surveyExport.getSurveyId());
+//                    strings.add(surveyExport.getSurveyId());
+//                }
+//
+//                JSONObject object = new JSONObject();
+//                try {
+//                    object.put("id", jsonArray);
+//                    object.put("email",jsonArrayEmails);
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//
+//                ApiInterface apiService =
+//                        ApiClient.getClient().create(ApiInterface.class);
+//
+//                DataWithId dataWithId = new DataWithId(strings);
+//
+//                Log.e("Res ",dataWithId.toString());
+//
+//                Call<ExportData> call = apiService.getExported(dataWithId);
+//                Log.e("URL ", call.request().url()+"");
+//                Log.e("URL ", call.request().body()+"");
+//                call.enqueue(new Callback<ExportData>() {
+//
+//                    @Override
+//                    public void onResponse(Call<ExportData> call, retrofit2.Response<ExportData> response) {
+//                        Log.e("Response ",""+response.toString());
+//                        exportDataEmail.setEnabled(true);
+//                        Toast toast = Toast.makeText(context,"Data exported", Toast.LENGTH_SHORT);
+//                        toast.show();
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<ExportData> call, Throwable t) {
+//                        Log.e("Response ",""+t.toString());
+//                        Toast toast = Toast.makeText(context,getResources().getString(R.string.save_failed), Toast.LENGTH_SHORT);
+//                        toast.show();
+//                        exportDataEmail.setEnabled(true);
+//                    }
+//                });
 
 
 
@@ -1599,5 +1672,65 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
 
         }
+    }
+
+    public void exportDatas(String aa){
+        // ArrayList<String> elephantList = (ArrayList<String>) Arrays.asList(aa.split(","));
+        ArrayList<String> elephantList = new ArrayList<String>(Arrays.asList(aa.split(",")));
+
+        exportDataEmail.setEnabled(false);
+        RealmResults<Survey> surveyExports = realm.where(Survey.class).equalTo("sendStatus", true).findAll();
+        ArrayList<String> strings = new ArrayList<>();
+        JSONArray jsonArray = new JSONArray();
+        JSONArray jsonArrayEmails = new JSONArray();
+        for(String a : elephantList){
+            jsonArrayEmails.put(a);
+        }
+
+        Log.e("EMl ", jsonArrayEmails.toString());
+
+        // jsonArrayEmails.put("issac.sayone@gmail.com");
+        for(Survey surveyExport : surveyExports){
+            jsonArray.put(surveyExport.getSurveyId());
+            strings.add(surveyExport.getSurveyId());
+        }
+
+        JSONObject object = new JSONObject();
+        try {
+            object.put("id", jsonArray);
+            object.put("email",jsonArrayEmails);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        ApiInterface apiService =
+                ApiClient.getClient().create(ApiInterface.class);
+
+        DataWithId dataWithId = new DataWithId(strings, elephantList);
+
+        Log.e("Res ",dataWithId.toString());
+
+        Call<ExportData> call = apiService.getExported(dataWithId);
+        Log.e("URL ", call.request().url()+"");
+        Log.e("URL ", call.request().body()+"");
+        call.enqueue(new Callback<ExportData>() {
+
+            @Override
+            public void onResponse(Call<ExportData> call, retrofit2.Response<ExportData> response) {
+                Log.e("Response ",""+response.toString());
+                exportDataEmail.setEnabled(true);
+                Toast toast = Toast.makeText(context,"Data exported", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+
+            @Override
+            public void onFailure(Call<ExportData> call, Throwable t) {
+                Log.e("Response ",""+t.toString());
+                Toast toast = Toast.makeText(context,getResources().getString(R.string.save_failed), Toast.LENGTH_SHORT);
+                toast.show();
+                exportDataEmail.setEnabled(true);
+            }
+        });
     }
 }

@@ -823,11 +823,14 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                                 bigDecimalFrequency = new BigDecimal(frequency.getFrequencyValue());
                             }
 
+                            Log.e("FREQUENCY ", bigDecimalFrequency.doubleValue()+"");
+
                             BigDecimal bigDecimalTotal = bigDecimalFrequency.multiply(bigDecimalNoOfTimes, MathContext.DECIMAL64)
                                     .multiply(bigDecimalPrice, MathContext.DECIMAL64)
                                     .multiply(bigDecimalQuanityEditStr, MathContext.DECIMAL64);
 
                             total = bigDecimalTotal.doubleValue();
+                            Log.e("TOTAL  ", bigDecimalTotal.doubleValue()+"");
 
 //                            total = frequency.getFrequencyValue()
 //                                    * Integer.parseInt(noOfTimesEditStr)
@@ -938,6 +941,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                         int eleCount = 0;
                         for(RevenueProductYears revenueProductYears:revenueProduct4.getRevenueProductYearses()){
                             if(revenueProductYears.getProjectedIndex() < 0){
+
                                 harvestFre = revenueProductYears.getHarvestFrequencyValue();
                                 harvestTimes = harvestTimes + revenueProductYears.getQuantityValue();
                                 harvestPrice = harvestPrice + revenueProductYears.getMarketPriceValue();
@@ -960,7 +964,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 for(RevenueProductYears revenueProductYears:revenueProduct4.getRevenueProductYearses()){
                     if(revenueProductYears.getYear() == 0){
                         //realm.beginTransaction();
-                        revenueProductYears.setHarvestFrequencyValue((int) harvestFre);
+                        revenueProductYears.setHarvestFrequencyValue(harvestFre);
                         revenueProductYears.setHarvestFrequencyUnit(freqUnit);
                         revenueProductYears.setQuantityValue(harvestTimes);
                         revenueProductYears.setQuantityUnit(quaUnit);
@@ -983,11 +987,18 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                         // double marketPriceVal = harvestPrice * Math.pow((1 + inflationRate), revenueProductYears.getProjectedIndex());
                         //marketPriceVal = roundToTwoDecimal(marketPriceVal);
 
+
                         BigDecimal bigDecimalfreqUnit = new BigDecimal(freqUnit);
+                        if(!currentSocialCapitalServey.equals("Pastureland")){
+                            if(freqUnit == 2){
+                                bigDecimalfreqUnit = new BigDecimal(1);
+                            }
+                        }
                         BigDecimal bigDecimalharvestFre = new BigDecimal(harvestFre);
                         BigDecimal bigDecimalharvestTimes = new BigDecimal(harvestTimes);
                         BigDecimal bigDecimalmarketPriceVal = new BigDecimal(marketPriceVal);
                         BigDecimal bigDecimalHarvestArea = new BigDecimal(harvestArea);
+
 
                         double totalVal = bigDecimalfreqUnit.multiply(bigDecimalharvestFre, MathContext.DECIMAL64)
                                 .multiply(bigDecimalharvestTimes, MathContext.DECIMAL64)
@@ -1009,7 +1020,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                         //totalVal = roundToTwoDecimal(totalVal);
 
                         //realm.beginTransaction();
-                        revenueProductYears.setHarvestFrequencyValue((int) harvestFre);
+                        revenueProductYears.setHarvestFrequencyValue(harvestFre);
                         revenueProductYears.setHarvestFrequencyUnit(freqUnit);
                         revenueProductYears.setQuantityValue(harvestTimes);
                         revenueProductYears.setQuantityUnit(quaUnit);
@@ -1116,6 +1127,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             }else if(landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")){
                 int k = 0;
                 for(RevenueProduct revenueProduct:landKind.getCropLand().getRevenueProducts()){
+                    for (RevenueProductYears revenueProductYears00 : revenueProduct.getRevenueProductYearses()) {
+                        Log.e("RPPPPPPP ", revenueProductYears00+"");
+                    }
                     if(k <= 0) {
                         for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
                             if(!landKind.getSocialCapitals().isDiscountFlag()){
@@ -1133,6 +1147,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             }else if(landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")){
                 int k = 0;
                 for(RevenueProduct revenueProduct:landKind.getPastureLand().getRevenueProducts()){
+                    for (RevenueProductYears revenueProductYears00 : revenueProduct.getRevenueProductYearses()) {
+                        Log.e("RPPPPPPP ", revenueProductYears00+"");
+                    }
                     if(k <= 0) {
                         for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
                             if(!landKind.getSocialCapitals().isDiscountFlag()){
@@ -1150,6 +1167,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             }else if(landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")){
                 int k = 0;
                 for(RevenueProduct revenueProduct:landKind.getMiningLand().getRevenueProducts()){
+                    for (RevenueProductYears revenueProductYears00 : revenueProduct.getRevenueProductYearses()) {
+                        Log.e("RPPPPPPP ", revenueProductYears00+"");
+                    }
                     if(k <= 0) {
                         for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
                             if(!landKind.getSocialCapitals().isDiscountFlag()){

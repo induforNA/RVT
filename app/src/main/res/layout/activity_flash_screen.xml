@@ -8,23 +8,35 @@
     android:gravity="center"
     tools:context=".view.SplashScreenActivity">
 
-    <ImageView
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
-        android:id="@+id/icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_logo" />
 
     <TextView
+        android:gravity="center"
+        android:layout_weight="1"
+        android:textSize="65dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/string_powered_by"/>
+        android:text="Community Land Valuation Tool"/>
+
+    <!--<ImageView-->
+        <!--android:layout_marginLeft="100dp"-->
+        <!--android:layout_marginRight="100dp"-->
+        <!--android:id="@+id/icon"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/ic_logo" />-->
 
     <TextView
-        android:textSize="24dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="22dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sponsor_name"/>
+        android:text="Supported by Omidyar Network"/>
+
+    <TextView
+        android:layout_marginBottom="20dp"
+        android:textSize="26dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Implemented by Indufor North America and Foundation for Ecological Security"/>
 
 </LinearLayout>
