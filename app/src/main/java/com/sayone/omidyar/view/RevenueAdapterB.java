@@ -28,17 +28,18 @@ public class RevenueAdapterB extends RecyclerView.Adapter<RevenueAdapterB.Revenu
     public class RevenueProductViewHolder extends RecyclerView.ViewHolder {
         private final ImageView deleteButton;
         public TextView revenueProductName;
+
         public RevenueProductViewHolder(View itemView) {
             super(itemView);
             revenueProductName = (TextView) itemView.findViewById(R.id.revenue_product_name);
-            deleteButton=(ImageView)itemView.findViewById(R.id.button_delete);
+            deleteButton = (ImageView) itemView.findViewById(R.id.button_delete);
         }
     }
 
     public RevenueAdapterB(List<RevenueProduct> revenueProducts, NaturalCapitalSurveyActivityB context) {
 
         this.revenueProducts = revenueProducts;
-        mContext=context;
+        mContext = context;
     }
 
     @Override
@@ -59,14 +60,14 @@ public class RevenueAdapterB extends RecyclerView.Adapter<RevenueAdapterB.Revenu
                 Realm realm = Realm.getDefaultInstance();
                 realm.beginTransaction();
                 RevenueProduct revenueProduct = realm.where(RevenueProduct.class)
-                        .equalTo("name",holder.revenueProductName.getText().toString())
+                        .equalTo("name", holder.revenueProductName.getText().toString())
                         .findFirst();
                 revenueProduct.deleteFromRealm();
                 realm.commitTransaction();
-                Toast toast = Toast.makeText(mContext,mContext.getResources().getText(R.string.text_deleted), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(mContext, mContext.getResources().getText(R.string.text_deleted), Toast.LENGTH_SHORT);
                 toast.show();
 
-                Intent intent=new Intent(mContext,NaturalCapitalSurveyActivityB.class);
+                Intent intent = new Intent(mContext, NaturalCapitalSurveyActivityB.class);
                 mContext.startActivity(intent);
                 mContext.finish();
             }

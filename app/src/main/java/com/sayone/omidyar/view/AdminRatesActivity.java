@@ -3,7 +3,6 @@ package com.sayone.omidyar.view;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -29,12 +28,13 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
 
     public Spinner surveyIdSpinner, landKindSpinner;
     public Spinner spinnerSurveyIdInflatrion;
-    private EditText discountRate, discountRateOverride,inflationRate;;
+    private EditText discountRate, discountRateOverride, inflationRate;
+    ;
     private ArrayList<String> surveyIds = new ArrayList<>();
     private ArrayList<String> surveyIdsListInflation = new ArrayList<>();
     private ArrayList<String> surveyLandKinds = new ArrayList<>();
     private ArrayList<String> surveyLandKindsHindi = new ArrayList<>();
-    private Button buttonSave, buttonREstore,saveButtonInflation,buttonRestoreInflation;
+    private Button buttonSave, buttonREstore, saveButtonInflation, buttonRestoreInflation;
     private Realm realm;
     private SocialCapital socialCapital;
     private ArrayAdapter landKindAdapter;
@@ -46,7 +46,7 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
     private SharedPreferences preferences;
     private Survey survey;
     private Survey survey1;
-    private boolean flag=false;
+    private boolean flag = false;
 
 
     @Override
@@ -69,17 +69,17 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
         landKindSpinner = (Spinner) findViewById(R.id.spinner_land_kind);
         inflationRate = (EditText) findViewById(R.id.inflation_rate);
         saveButtonInflation = (Button) findViewById(R.id.button_save_inlation);
-        buttonRestoreInflation=(Button)findViewById(R.id.button_restore_original_inflation_rate);
+        buttonRestoreInflation = (Button) findViewById(R.id.button_restore_original_inflation_rate);
 
-      //  inflationRate.setText(preferences.getString("inflationRate", ""));
+        //  inflationRate.setText(preferences.getString("inflationRate", ""));
 
         realm = Realm.getDefaultInstance();
         language = Locale.getDefault().getDisplayLanguage();
         RealmResults<Survey> surveyList = realm.where(Survey.class).findAll();
 
-        surveyIds.add(0,getResources().getString(R.string.select_suvey_id));
-        surveyIdsListInflation.add(0,getResources().getString(R.string.select_suvey_id));
-        surveyLandKinds.add(0,getResources().getString(R.string.select_landkind));
+        surveyIds.add(0, getResources().getString(R.string.select_suvey_id));
+        surveyIdsListInflation.add(0, getResources().getString(R.string.select_suvey_id));
+        surveyLandKinds.add(0, getResources().getString(R.string.select_landkind));
 
         for (Survey survey : surveyList) {
             String surveyIdLoop = survey.getSurveyId();
@@ -101,7 +101,7 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
         saveButtonInflation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(flag) {
+                if (flag) {
                     if (!inflationRate.getText().toString().equals("")) {
                         realm.beginTransaction();
                         // inflationRate.setText(String.valueOf(Double.parseDouble(inflationRate.getText().toString())*100));
@@ -117,29 +117,27 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
                     } else {
                         survey1.setInflationRate("" + 0.0);
                     }
-                }
-                else{
-                    Toast.makeText(context,"Select Id",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "Select Id", Toast.LENGTH_SHORT).show();
                 }
 
 //                String rate = preferences.getString("inflationRate", "");
-             //   Log.e("Rate :", rate);
+                //   Log.e("Rate :", rate);
             }
         });
 
         surveyIdSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
 
-
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 surveyLandKinds.clear();
-                if(position != 0){
-                    surveyLandKinds.add(0,getResources().getString(R.string.select_landkind));
+                if (position != 0) {
+                    surveyLandKinds.add(0, getResources().getString(R.string.select_landkind));
                 }
                 if (position != 0) {
-                     survey = realm.where(Survey.class).equalTo("surveyId", surveyIds.get(position))
+                    survey = realm.where(Survey.class).equalTo("surveyId", surveyIds.get(position))
                             .findFirst();
                     for (LandKind landKind : survey.getLandKinds()) {
                         if (landKind.getStatus().equals("active")) {
@@ -158,17 +156,17 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
 //                                }
 //                            }
 //                            else{
-                                surveyLandKinds.add(landKind.getName());
+                            surveyLandKinds.add(landKind.getName());
 //                            }
 
-                        }else {
+                        } else {
                             surveyLandKinds.remove(landKind.getName());
                         }
                     }
                     landKindSpinner.setAdapter(landKindAdapter);
                 } else {
                     surveyLandKinds.clear();
-                    surveyLandKinds.add(0,getResources().getString(R.string.select_landkind));
+                    surveyLandKinds.add(0, getResources().getString(R.string.select_landkind));
                     landKindSpinner.setAdapter(landKindAdapter);
                 }
             }
@@ -184,10 +182,10 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
                 if (position != 0) {
-                    flag=true;
+                    flag = true;
                     survey1 = realm.where(Survey.class).equalTo("surveyId", surveyIdsListInflation.get(position))
                             .findFirst();
-                    inflationRate.setText(String.valueOf(Double.parseDouble(survey1.getInflationRate())*100));
+                    inflationRate.setText(String.valueOf(Double.parseDouble(survey1.getInflationRate()) * 100));
 
                 }
             }
@@ -206,18 +204,18 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
 
                 if (position != 0) {
                     LandKind landKind = realm.where(LandKind.class)
-                            .equalTo("surveyId",surveyIdSpinner.getSelectedItem().toString())
-                            .equalTo("status","active")
+                            .equalTo("surveyId", surveyIdSpinner.getSelectedItem().toString())
+                            .equalTo("status", "active")
                             .equalTo("name", surveyLandKinds.get(position))
                             .findFirst();
-                    survey1=realm.where(Survey.class)
-                            .equalTo("surveyId",surveyIdSpinner.getSelectedItem().toString()).findFirst();
+                    survey1 = realm.where(Survey.class)
+                            .equalTo("surveyId", surveyIdSpinner.getSelectedItem().toString()).findFirst();
                     socialCapital = landKind.getSocialCapitals();
-                    if(socialCapital.isDiscountFlag()) {
+                    if (socialCapital.isDiscountFlag()) {
                         discountRate.setText(String.valueOf(socialCapital.getDiscountRateOverride()));
                         discountRateOverride.setText(String.valueOf(socialCapital.getDiscountRateOverride()));
                         discountRate.setEnabled(false);
-                    }else {
+                    } else {
                         discountRate.setText(String.valueOf(socialCapital.getDiscountRate()));
                         discountRate.setEnabled(false);
 
@@ -242,21 +240,21 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
             case R.id.button_restore_original_discount_rate:
                 discountRateOverride.setText(String.valueOf(0.0));
 
-                if((surveyIdSpinner.getSelectedItemPosition() != 0 || landKindSpinner.getSelectedItemPosition() !=0) &&
+                if ((surveyIdSpinner.getSelectedItemPosition() != 0 || landKindSpinner.getSelectedItemPosition() != 0) &&
                         socialCapital != null) {
                     realm.beginTransaction();
                     socialCapital.setDiscountRateOverride(0.0);
-                    discountRate.setText(""+socialCapital.getDiscountRate());
-                    Toast.makeText(this,getResources().getText(R.string.value_restored),Toast.LENGTH_SHORT).show();
+                    discountRate.setText("" + socialCapital.getDiscountRate());
+                    Toast.makeText(this, getResources().getText(R.string.value_restored), Toast.LENGTH_SHORT).show();
                     socialCapital.setDiscountFlag(false);
                     realm.commitTransaction();
 
                 } else
-                    Toast.makeText(this,getResources().getText(R.string.select_surveyid_landkind),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getResources().getText(R.string.select_surveyid_landkind), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_save:
 
-                if((surveyIdSpinner.getSelectedItemPosition() != 0 || landKindSpinner.getSelectedItemPosition() !=0) &&
+                if ((surveyIdSpinner.getSelectedItemPosition() != 0 || landKindSpinner.getSelectedItemPosition() != 0) &&
                         socialCapital != null) {
                     realm.beginTransaction();
 
@@ -265,31 +263,31 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
                         discountRate.setText(discountRateOverride.getText().toString());
 
                         socialCapital.setDiscountFlag(true);
-                    }else {
+                    } else {
                         socialCapital.setDiscountRateOverride(0.0);
 
                     }
 
                     realm.commitTransaction();
-                    Toast.makeText(this,getResources().getText(R.string.value_saved_success),Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(this,getResources().getText(R.string.select_surveyid_landkind), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getResources().getText(R.string.value_saved_success), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, getResources().getText(R.string.select_surveyid_landkind), Toast.LENGTH_SHORT).show();
                 }
                 break;
 
             case R.id.button_restore_original_inflation_rate:
 
-                inflationRate.setText(""+5);
+                inflationRate.setText("" + 5);
 
-                if((surveyIdSpinner.getSelectedItemPosition() != 0 || landKindSpinner.getSelectedItemPosition() !=0) &&
+                if ((surveyIdSpinner.getSelectedItemPosition() != 0 || landKindSpinner.getSelectedItemPosition() != 0) &&
                         survey1 != null) {
                     realm.beginTransaction();
-                    survey1.setInflationRate(""+0.5);
-                    Toast.makeText(this,getResources().getText(R.string.value_restored),Toast.LENGTH_SHORT).show();
+                    survey1.setInflationRate("" + 0.5);
+                    Toast.makeText(this, getResources().getText(R.string.value_restored), Toast.LENGTH_SHORT).show();
                     realm.commitTransaction();
 
                 } else
-                    Toast.makeText(this,getResources().getText(R.string.select_surveyid_landkind),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getResources().getText(R.string.select_surveyid_landkind), Toast.LENGTH_SHORT).show();
 
                 break;
         }

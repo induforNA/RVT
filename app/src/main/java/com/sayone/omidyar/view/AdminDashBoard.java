@@ -1,7 +1,6 @@
 package com.sayone.omidyar.view;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -9,23 +8,23 @@ import android.widget.TextView;
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 
-public class AdminDashBoard extends BaseActivity implements View.OnClickListener  {
-    TextView rates,projectionTimeFrame,units,summaryOfSurveys;
+public class AdminDashBoard extends BaseActivity implements View.OnClickListener {
+    TextView rates, projectionTimeFrame, units, summaryOfSurveys;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dash_board);
 
-        rates=(TextView)findViewById(R.id.textview_rates);
+        rates = (TextView) findViewById(R.id.textview_rates);
 //        projectionTimeFrame=(TextView)findViewById(R.id.textview_projection);
-        units=(TextView)findViewById(R.id.textview_units);
-        summaryOfSurveys=(TextView)findViewById(R.id.textview_summary_surveys);
+        units = (TextView) findViewById(R.id.textview_units);
+        summaryOfSurveys = (TextView) findViewById(R.id.textview_summary_surveys);
 
         rates.setOnClickListener(this);
- //       projectionTimeFrame.setOnClickListener(this);
+        //       projectionTimeFrame.setOnClickListener(this);
         units.setOnClickListener(this);
         summaryOfSurveys.setOnClickListener(this);
-
     }
 
     @Override
@@ -35,20 +34,19 @@ public class AdminDashBoard extends BaseActivity implements View.OnClickListener
         switch (view.getId()) {
 
             case R.id.textview_rates:
-                intent=new Intent(getApplicationContext(),AdminRatesActivity.class);
+                intent = new Intent(getApplicationContext(), AdminRatesActivity.class);
                 startActivity(intent);
                 break;
 
             case R.id.textview_units:
-                intent=new Intent(getApplicationContext(),UnitsActivity.class);
+                intent = new Intent(getApplicationContext(), UnitsActivity.class);
                 startActivity(intent);
                 break;
 
             case R.id.textview_summary_surveys:
-                intent=new Intent(getApplicationContext(),SurveySummaryActivity.class);
+                intent = new Intent(getApplicationContext(), SurveySummaryActivity.class);
                 startActivity(intent);
                 break;
         }
     }
-
 }

@@ -29,13 +29,11 @@ import com.sayone.omidyar.model.Frequency;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.OutlayYears;
 import com.sayone.omidyar.model.Quantity;
-import com.sayone.omidyar.model.RevenueProduct;
 import com.sayone.omidyar.model.RevenueProductYears;
 import com.sayone.omidyar.model.Survey;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.security.interfaces.RSAKey;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
@@ -52,9 +50,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
     Context context;
     String currentSocialCapitalServey;
 
-    Spinner spinnerYear,spinnerUnit,spinnerCurrency,spinnerTimePeriod;
-    String year,unit,currency,numberTimes,timePeriod;
-    Button buttonBack,buttonNext;
+    Spinner spinnerYear, spinnerUnit, spinnerCurrency, spinnerTimePeriod;
+    String year, unit, currency, numberTimes, timePeriod;
+    Button buttonBack, buttonNext;
     TextView loadQuestions;
     Button saveBtn;
 
@@ -110,15 +108,15 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         realm = Realm.getDefaultInstance();
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        serveyId = sharedPref.getString("surveyId","");
-        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey","");
+        serveyId = sharedPref.getString("surveyId", "");
+        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey", "");
 
-        spinnerYear = (Spinner)findViewById(R.id.spinner_year);
-        spinnerUnit = (Spinner)findViewById(R.id.spinner_unit);
-        spinnerCurrency = (Spinner)findViewById(R.id.spinner_currency);
-        spinnerTimePeriod = (Spinner)findViewById(R.id.spinner_time_period);
-        buttonBack = (Button)findViewById(R.id.button_back);
-        buttonNext = (Button)findViewById(R.id.button_next);
+        spinnerYear = (Spinner) findViewById(R.id.spinner_year);
+        spinnerUnit = (Spinner) findViewById(R.id.spinner_unit);
+        spinnerCurrency = (Spinner) findViewById(R.id.spinner_currency);
+        spinnerTimePeriod = (Spinner) findViewById(R.id.spinner_time_period);
+        buttonBack = (Button) findViewById(R.id.button_back);
+        buttonNext = (Button) findViewById(R.id.button_next);
         loadQuestions = (TextView) findViewById(R.id.load_questions);
         //saveBtn = (Button) findViewById(R.id.save_btn);
         quantityQuestion = (TextView) findViewById(R.id.quantity_question);
@@ -131,11 +129,11 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
         textViewAbout = (TextView) findViewById(R.id.text_view_about);
         logout = (TextView) findViewById(R.id.logout);
-        startSurvey=(TextView)findViewById(R.id.text_start_survey);
-        surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
+        startSurvey = (TextView) findViewById(R.id.text_start_survey);
+        surveyIdDrawer = (TextView) findViewById(R.id.text_view_id);
         //areaQuestion = (TextView) findViewById(R.id.area_question);
         //areaEdit = (EditText) findViewById(R.id.area_edit);
-        landType=(TextView)findViewById(R.id.land_type);
+        landType = (TextView) findViewById(R.id.land_type);
 
         revenueProducts = new RealmList<>();
         totalCostProductCount = 0;
@@ -160,36 +158,29 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
         language = Locale.getDefault().getDisplayLanguage();
         Survey results = realm.where(Survey.class)
-                .equalTo("surveyId",serveyId)
+                .equalTo("surveyId", serveyId)
                 .findFirst();
-        if(!results.getInflationRate().equals("")){
+        if (!results.getInflationRate().equals("")) {
             inflationRate = Double.parseDouble(results.getInflationRate());
         }
 
         RealmResults<Frequency> frequencyResult = realm.where(Frequency.class).findAll();
-        for(Frequency frequency:frequencyResult){
-            if(language.equals("हिन्दी")) {
+        for (Frequency frequency : frequencyResult) {
+            if (language.equals("हिन्दी")) {
                 timePeriodList.add(frequency.getHarvestFrequencyHindi());
-            }
-            else{
+            } else {
                 timePeriodList.add(frequency.getHarvestFrequency());
             }
         }
 
         RealmResults<Quantity> quantityResult = realm.where(Quantity.class).findAll();
-        for(Quantity quantity:quantityResult){
-            if(language.equals("हिन्दी")) {
+        for (Quantity quantity : quantityResult) {
+            if (language.equals("हिन्दी")) {
                 unitList.add(quantity.getQuantityNameHindi());
-            }else{
+            } else {
                 unitList.add(quantity.getQuantityName());
             }
         }
-
-
-
-
-
-
 
 
 //        year_adapter = ArrayAdapter.createFromResource(this,
@@ -213,62 +204,62 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         spinnerCurrency.setAdapter(currency_adapter);
         spinnerTimePeriod.setAdapter(timePeriod_adapter);
 
-        if(currentSocialCapitalServey.equals("Forestland"))
+        if (currentSocialCapitalServey.equals("Forestland"))
             landType.setText(getResources().getText(R.string.string_forestland));
-        if(currentSocialCapitalServey.equals("Pastureland"))
+        if (currentSocialCapitalServey.equals("Pastureland"))
             landType.setText(getResources().getText(R.string.string_pastureland));
-        if(currentSocialCapitalServey.equals("Mining Land"))
+        if (currentSocialCapitalServey.equals("Mining Land"))
             landType.setText(getResources().getText(R.string.string_miningland));
-        if(currentSocialCapitalServey.equals("Cropland"))
+        if (currentSocialCapitalServey.equals("Cropland"))
             landType.setText(getResources().getText(R.string.title_cropland));
         //  landType.setText(currentSocialCapitalServey);
 
 
-        for(LandKind landKind:results.getLandKinds()){
-            if(landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")){
-                if(landKind.getForestLand().getCostElements().size() > 0){
+        for (LandKind landKind : results.getLandKinds()) {
+            if (landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")) {
+                if (landKind.getForestLand().getCostElements().size() > 0) {
                     //loadYears(landKind.getForestLand().getRevenueProducts().get(0).getRevenueProductYearses());
                     revenueProducts = landKind.getForestLand().getCostElements();
                     totalCostProductCount = revenueProducts.size();
                     currentCostProductIndex = 0;
                     currentYearIndex = 0;
-                    if(currentCostProductIndex < totalCostProductCount){
+                    if (currentCostProductIndex < totalCostProductCount) {
                         productReveneIdCon = landKind.getForestLand().getCostElements().get(currentCostProductIndex).getId();
                         loadRevenueProduct(landKind.getForestLand().getCostElements().get(currentCostProductIndex));
                     }
                 }
-            }else if(landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")){
-                if(landKind.getCropLand().getCostElements().size() > 0){
+            } else if (landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")) {
+                if (landKind.getCropLand().getCostElements().size() > 0) {
                     //loadYears(landKind.getForestLand().getRevenueProducts().get(0).getRevenueProductYearses());
                     revenueProducts = landKind.getCropLand().getCostElements();
                     totalCostProductCount = revenueProducts.size();
                     currentCostProductIndex = 0;
                     currentYearIndex = 0;
-                    if(currentCostProductIndex < totalCostProductCount){
+                    if (currentCostProductIndex < totalCostProductCount) {
                         productReveneIdCon = landKind.getCropLand().getCostElements().get(currentCostProductIndex).getId();
                         loadRevenueProduct(landKind.getCropLand().getCostElements().get(currentCostProductIndex));
                     }
                 }
-            }else if(landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")){
-                if(landKind.getPastureLand().getCostElements().size() > 0){
+            } else if (landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")) {
+                if (landKind.getPastureLand().getCostElements().size() > 0) {
                     //loadYears(landKind.getForestLand().getRevenueProducts().get(0).getRevenueProductYearses());
                     revenueProducts = landKind.getPastureLand().getCostElements();
                     totalCostProductCount = revenueProducts.size();
                     currentCostProductIndex = 0;
                     currentYearIndex = 0;
-                    if(currentCostProductIndex < totalCostProductCount){
+                    if (currentCostProductIndex < totalCostProductCount) {
                         productReveneIdCon = landKind.getPastureLand().getCostElements().get(currentCostProductIndex).getId();
                         loadRevenueProduct(landKind.getPastureLand().getCostElements().get(currentCostProductIndex));
                     }
                 }
-            }else if(landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")){
-                if(landKind.getMiningLand().getCostElements().size() > 0){
+            } else if (landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")) {
+                if (landKind.getMiningLand().getCostElements().size() > 0) {
                     //loadYears(landKind.getForestLand().getRevenueProducts().get(0).getRevenueProductYearses());
                     revenueProducts = landKind.getMiningLand().getCostElements();
                     totalCostProductCount = revenueProducts.size();
                     currentCostProductIndex = 0;
                     currentYearIndex = 0;
-                    if(currentCostProductIndex < totalCostProductCount){
+                    if (currentCostProductIndex < totalCostProductCount) {
                         productReveneIdCon = landKind.getMiningLand().getCostElements().get(currentCostProductIndex).getId();
                         loadRevenueProduct(landKind.getMiningLand().getCostElements().get(currentCostProductIndex));
                     }
@@ -277,12 +268,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         }
 
 
-
-
-
         ///year= spinnerYear.getSelectedItem().toString();
-        unit= spinnerUnit.getSelectedItem().toString();
-        currency= spinnerCurrency.getSelectedItem().toString();
+        unit = spinnerUnit.getSelectedItem().toString();
+        currency = spinnerCurrency.getSelectedItem().toString();
 //        timePeriod= spinnerTimePeriod.getSelectedItem().toString();
 
         buttonNext.setOnClickListener(this);
@@ -296,13 +284,12 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         surveyIdDrawer.setText(serveyId);
 
 
-
         spinnerYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> parent,
                                        View view, int pos, long id) {
-                year= parent.getItemAtPosition(pos).toString();
+                year = parent.getItemAtPosition(pos).toString();
 //                RevenueProductYears revenueProductYearsLoad = realm.where(RevenueProductYears.class)
 //                        .equalTo("surveyId",serveyId)
 //                        .equalTo("year",year)
@@ -322,7 +309,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             @Override
             public void onItemSelected(AdapterView<?> parent,
                                        View view, int pos, long id) {
-                unit= parent.getItemAtPosition(pos).toString();
+                unit = parent.getItemAtPosition(pos).toString();
             }
 
             @Override
@@ -335,7 +322,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             @Override
             public void onItemSelected(AdapterView<?> parent,
                                        View view, int pos, long id) {
-                currency= parent.getItemAtPosition(pos).toString();
+                currency = parent.getItemAtPosition(pos).toString();
             }
 
             @Override
@@ -348,12 +335,12 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             @Override
             public void onItemSelected(AdapterView<?> parent,
                                        View view, int pos, long id) {
-                timePeriod= parent.getItemAtPosition(pos).toString();
+                timePeriod = parent.getItemAtPosition(pos).toString();
                 //Log.e("Time period ",timePeriod);
-                if(timePeriod.equals("one-time")){
+                if (timePeriod.equals("one-time")) {
                     noOfTimesEdit.setText("1");
                     noOfTimesEdit.setEnabled(false);
-                }else{
+                } else {
                     noOfTimesEdit.setEnabled(true);
                 }
             }
@@ -367,7 +354,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (Integer.parseInt(android.os.Build.VERSION.SDK) > 5
                 && keyCode == KeyEvent.KEYCODE_BACK
                 && event.getRepeatCount() == 0) {
@@ -385,45 +372,44 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         backButtonAction();
     }
 
-    public void backButtonAction(){
+    public void backButtonAction() {
         int currentYearBackIndex = getIndexYears(spinnerYear.getSelectedItem().toString());
         int currentPrductNameBackIndex = getIndexRevenueProducts(currentProductName);
-        if(currentYearBackIndex != -1 &&  currentPrductNameBackIndex != -1){
-            if(currentPrductNameBackIndex == 0){
-                if(currentYearBackIndex == 0){
+        if (currentYearBackIndex != -1 && currentPrductNameBackIndex != -1) {
+            if (currentPrductNameBackIndex == 0) {
+                if (currentYearBackIndex == 0) {
                     finish();
-                }else{
+                } else {
                     currentYearIndex = currentYearBackIndex - 1;
                     currentCostProductIndex = currentPrductNameBackIndex;
                 }
-            }else{
-                if(currentYearBackIndex == 0){
+            } else {
+                if (currentYearBackIndex == 0) {
                     currentCostProductIndex = currentPrductNameBackIndex - 1;
                     currentYearIndex = yearList.size() - 1;
-                }else{
+                } else {
                     currentYearIndex = currentYearBackIndex - 1;
                     currentCostProductIndex = currentPrductNameBackIndex;
                 }
             }
         }
 
-        if(revenueProducts.size() == 1){
+        if (revenueProducts.size() == 1) {
             int yearCounting = 0;
-            for(CostElementYears costElementYearsA: revenueProducts.get(0).getCostElementYearses()){
+            for (CostElementYears costElementYearsA : revenueProducts.get(0).getCostElementYearses()) {
                 // Log.e("YEAR ", costElementYearsA.getYear()+"");
-                if(costElementYearsA.getYear() != 0 && costElementYearsA.getYear() < sharedPref.getInt("surveyyear",2016)){
+                if (costElementYearsA.getYear() != 0 && costElementYearsA.getYear() < sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR))) {
                     yearCounting++;
                 }
             }
-            if(yearCounting == 1){
+            if (yearCounting == 1) {
                 finish();
-            }else {
+            } else {
                 loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
             }
-        }else {
+        } else {
             loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
         }
-
 
 
 //        if(revenueProducts.size() == 1 && revenueProducts.get(currentCostProductIndex).getCostElementYearses().size() == 1){
@@ -436,14 +422,14 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
     @Override
     public void onClick(View view) {
         Intent intent;
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.button_next:
 //                allCashFlow();
 //                calculateNPV();
 //
 //                intent=new Intent(getApplicationContext(),NaturalCapitalCostActivityA.class);
 //                startActivity(intent);
-                if(buttonNext.isClickable()) {
+                if (buttonNext.isClickable()) {
                     buttonNext.setClickable(false);
                     saveYearlyDatas(revenueProducts.get(currentCostProductIndexSave));
                 }
@@ -471,8 +457,6 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 //                        }
 //                    }
 //                }
-
-
 
 
 //                finish();
@@ -508,20 +492,20 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             case R.id.image_view_menu_icon:
                 toggleMenuDrawer();
                 break;
-            case  R.id.drawer_close_btn:
+            case R.id.drawer_close_btn:
                 toggleMenuDrawer();
                 break;
-            case  R.id.text_view_about:
-                Intent i = new Intent(getApplicationContext(),AboutActivity.class);
+            case R.id.text_view_about:
+                Intent i = new Intent(getApplicationContext(), AboutActivity.class);
                 startActivity(i);
                 break;
             case R.id.text_start_survey:
-                Intent intentt = new Intent(getApplicationContext(),MainActivity.class);
+                Intent intentt = new Intent(getApplicationContext(), MainActivity.class);
                 intentt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intentt);
                 break;
             case R.id.logout:
-                Intent intents = new Intent(getApplicationContext(),RegistrationActivity.class);
+                Intent intents = new Intent(getApplicationContext(), RegistrationActivity.class);
                 intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intents);
                 break;
@@ -537,9 +521,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
     }
 
     public int getIndexRevenueProducts(String itemName) {
-        for (int i = 0; i < revenueProducts.size(); i++){
+        for (int i = 0; i < revenueProducts.size(); i++) {
             CostElement costElementGet = revenueProducts.get(i);
-            if (itemName.equals(costElementGet.getName())){
+            if (itemName.equals(costElementGet.getName())) {
                 return i;
             }
         }
@@ -547,48 +531,44 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
     }
 
     public int getIndexYears(String itemName) {
-        for (int i = 0; i < yearList.size(); i++){
+        for (int i = 0; i < yearList.size(); i++) {
             String yearGet = yearList.get(i);
-            if (itemName.equals(yearGet)){
+            if (itemName.equals(yearGet)) {
                 return i;
             }
         }
         return -1;
     }
 
-    public void loadRevenueProduct(CostElement costElementLoad){
+    public void loadRevenueProduct(CostElement costElementLoad) {
         // Log.e("LOAD ","REVENUE 11111");
 
         currentProductName = costElementLoad.getName();
 
-        if(costElementLoad.getType().equals("Timber")){
-            loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1)+" "+costElementLoad.getName()+""+getResources().getString(R.string.qn_natural_cost_1_2)+"?");
-            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_2_2)+"?");
-            productQuestion.setText(getResources().getString(R.string.qn_natural_cost_3_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_3_2));
-        }else if(costElementLoad.getType().equals("Non Timber")){
-            loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1)+" "+costElementLoad.getName()+""+getResources().getString(R.string.qn_natural_cost_1_2)+"?");
-            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_2_2)+"?");
-            productQuestion.setText(getResources().getString(R.string.qn_natural_cost_3_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_3_2));
-        }else {
-            loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1)+" "+costElementLoad.getName()+""+getResources().getString(R.string.qn_natural_cost_1_2)+"?");
-            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_2_2)+"?");
-            productQuestion.setText(getResources().getString(R.string.qn_natural_cost_3_1)+" "+costElementLoad.getName()+" "+getResources().getString(R.string.qn_natural_cost_3_2));
+        if (costElementLoad.getType().equals("Timber")) {
+            loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1) + " " + costElementLoad.getName() + "" + getResources().getString(R.string.qn_natural_cost_1_2) + "?");
+            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1) + " " + costElementLoad.getName() + " " + getResources().getString(R.string.qn_natural_cost_2_2) + "?");
+            productQuestion.setText(getResources().getString(R.string.qn_natural_cost_3_1) + " " + costElementLoad.getName() + " " + getResources().getString(R.string.qn_natural_cost_3_2));
+        } else if (costElementLoad.getType().equals("Non Timber")) {
+            loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1) + " " + costElementLoad.getName() + "" + getResources().getString(R.string.qn_natural_cost_1_2) + "?");
+            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1) + " " + costElementLoad.getName() + " " + getResources().getString(R.string.qn_natural_cost_2_2) + "?");
+            productQuestion.setText(getResources().getString(R.string.qn_natural_cost_3_1) + " " + costElementLoad.getName() + " " + getResources().getString(R.string.qn_natural_cost_3_2));
+        } else {
+            loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1) + " " + costElementLoad.getName() + "" + getResources().getString(R.string.qn_natural_cost_1_2) + "?");
+            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1) + " " + costElementLoad.getName() + " " + getResources().getString(R.string.qn_natural_cost_2_2) + "?");
+            productQuestion.setText(getResources().getString(R.string.qn_natural_cost_3_1) + " " + costElementLoad.getName() + " " + getResources().getString(R.string.qn_natural_cost_3_2));
         }
         productReveneIdCheck = costElementLoad.getId();
 
 
-
-
-
-
         //yearList = revenueProductLoad.getRevenueProductYearses();
         // int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        int currentYear = sharedPref.getInt("surveyyear",2016);
+        int currentYear = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
         yearList.clear();
         totalYearsCount = 0;
-        for(CostElementYears costElementYears:costElementLoad.getCostElementYearses()){
-            if(costElementYears.getYear() < currentYear && costElementYears.getYear() != 0){
-                yearList.add(costElementYears.getYear()+"");
+        for (CostElementYears costElementYears : costElementLoad.getCostElementYearses()) {
+            if (costElementYears.getYear() < currentYear && costElementYears.getYear() != 0) {
+                yearList.add(costElementYears.getYear() + "");
                 year_adapter.notifyDataSetChanged();
 
                 // Log.e("REV PROD ID ",revenueProductYears.getRevenueProductId()+"");
@@ -605,7 +585,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         currentCostProductIndexSave = currentCostProductIndex;
         currentYearIndexSave = currentYearIndex;
 
-        if(currentYearIndex < totalYearsCount) {
+        if (currentYearIndex < totalYearsCount) {
             loadRevenueYears(costElementLoad.getCostElementYearses().get(currentYearIndex), costElementLoad);
             if (currentYearIndex == totalYearsCount) {
                 previousCostProductIndex = currentCostProductIndex;
@@ -619,20 +599,20 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 //        Log.e("Total cost ",totalCostProductCount+"");
     }
 
-    public void loadRevenueYears(CostElementYears costElementYearsLoad, CostElement costElementLoad1){
+    public void loadRevenueYears(CostElementYears costElementYearsLoad, CostElement costElementLoad1) {
         // Log.e("LOAD ","11111");
-        if(costElementYearsLoad.getCostFrequencyValue() != 0){
-            noOfTimesEdit.setText(costElementYearsLoad.getCostFrequencyValue()+"");
+        if (costElementYearsLoad.getCostFrequencyValue() != 0) {
+            noOfTimesEdit.setText(costElementYearsLoad.getCostFrequencyValue() + "");
         }
-        if(costElementYearsLoad.getCostPerPeriodValue() != 0){
+        if (costElementYearsLoad.getCostPerPeriodValue() != 0) {
             // Log.e("KKKKKKKKKKKKK ",revenueProductYearsLoad.getQuantityValue()+"");
-            quanityEdit.setText(costElementYearsLoad.getCostPerPeriodValue()+"");
-        }else{
+            quanityEdit.setText(costElementYearsLoad.getCostPerPeriodValue() + "");
+        } else {
             quanityEdit.setText("");
         }
-        if(costElementYearsLoad.getCostPerUnitValue() != 0){
-            priceEdit.setText(costElementYearsLoad.getCostPerUnitValue()+"");
-        }else{
+        if (costElementYearsLoad.getCostPerUnitValue() != 0) {
+            priceEdit.setText(costElementYearsLoad.getCostPerUnitValue() + "");
+        } else {
             priceEdit.setText("");
         }
 
@@ -643,14 +623,13 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 //        }
 
 
-
         spinnerYear.setSelection(currentYearIndex);
 
         Frequency frequency = realm.where(Frequency.class)
-                .equalTo("frequencyValue",(int) costElementYearsLoad.getCostFrequencyUnit())
+                .equalTo("frequencyValue", (int) costElementYearsLoad.getCostFrequencyUnit())
                 .findFirst();
 
-        if(timePeriodList.size() != 0 && frequency != null){
+        if (timePeriodList.size() != 0 && frequency != null) {
             // Log.e("TEST FRE ", timePeriod_adapter.getPosition(frequency.getHarvestFrequency())+"");
 
             spinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(frequency.getHarvestFrequency()));
@@ -659,10 +638,10 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
 
         Quantity quantity = realm.where(Quantity.class)
-                .equalTo("quantityName",costElementYearsLoad.getCostPerPeriodUnit())
+                .equalTo("quantityName", costElementYearsLoad.getCostPerPeriodUnit())
                 .findFirst();
 
-        if(unitList.size() != 0 && quantity != null){
+        if (unitList.size() != 0 && quantity != null) {
             // Log.e("QUANTITY ", unit_adapter.getPosition(quantity.getQuantityName())+"");
             spinnerUnit.setSelection(unit_adapter.getPosition(quantity.getQuantityName()));
         }
@@ -671,7 +650,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         currentYearIndex++;
     }
 
-    public void saveYearlyDatas(final CostElement costElement2){
+    public void saveYearlyDatas(final CostElement costElement2) {
         final long costElementId = costElement2.getId();
         final ProgressDialog progress = new ProgressDialog(this);
         progress.setTitle(getResources().getString(R.string.loading));
@@ -681,36 +660,34 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             @Override
             public void execute(Realm realm) {
                 CostElement revenueProduct2 = realm.where(CostElement.class)
-                        .equalTo("id",costElementId)
+                        .equalTo("id", costElementId)
                         .findFirst();
 
 
-
                 // Log.e("REVE PRO ",revenueProduct2.toString()+" YEAR "+spinnerYear.getSelectedItem());
-                for(CostElementYears costElementYears1:revenueProduct2.getCostElementYearses()){
-                    if(String.valueOf(costElementYears1.getYear()).equals(spinnerYear.getSelectedItem()) ){
+                for (CostElementYears costElementYears1 : revenueProduct2.getCostElementYearses()) {
+                    if (String.valueOf(costElementYears1.getYear()).equals(spinnerYear.getSelectedItem())) {
                         // Log.e("REVE YEAR ",revenueProductYears1.toString());
                         String spinnerTimePeriodStr = spinnerTimePeriod.getSelectedItem().toString();
                         Frequency frequency;
 
-                        if(language.equals("हिन्दी")) {
+                        if (language.equals("हिन्दी")) {
                             frequency = realm.where(Frequency.class)
-                                    .equalTo("harvestFrequencyHindi",spinnerTimePeriodStr)
+                                    .equalTo("harvestFrequencyHindi", spinnerTimePeriodStr)
                                     .findFirst();
-                        }else{
+                        } else {
                             frequency = realm.where(Frequency.class)
-                                    .equalTo("harvestFrequency",spinnerTimePeriodStr)
+                                    .equalTo("harvestFrequency", spinnerTimePeriodStr)
                                     .findFirst();
                         }
 
 
-
                         // int yearCurent = Calendar.getInstance().get(Calendar.YEAR);
-                        int yearCurent = sharedPref.getInt("surveyyear",2016);
+                        int yearCurent = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
                         int yearIndex = costElementYears1.getYear() - yearCurent;
 
                         runOnUiThread(new Runnable() {
-                            public void run(){
+                            public void run() {
 //                                if(noOfTimesEdit.getText().toString().equals("")){
 //                                    noOfTimesEdit.setText("0");
 //                                }
@@ -730,20 +707,20 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                         String priceEditStr = priceEdit.getText().toString();
                         String quanityEditStr = quanityEdit.getText().toString();
 
-                        if(noOfTimesEditStr.equals("")){
+                        if (noOfTimesEditStr.equals("")) {
                             noOfTimesEditStr = "0";
                         }
-                        if(priceEditStr.equals("")){
+                        if (priceEditStr.equals("")) {
                             priceEditStr = "0";
                         }
-                        if(quanityEditStr.equals("")){
+                        if (quanityEditStr.equals("")) {
                             quanityEditStr = "0";
                         }
 
                         BigDecimal bigDecimalFrequency;
-                        if(frequency.getFrequencyValue() == 2) {
+                        if (frequency.getFrequencyValue() == 2) {
                             bigDecimalFrequency = new BigDecimal(1);
-                        }else{
+                        } else {
                             bigDecimalFrequency = new BigDecimal(frequency.getFrequencyValue());
                         }
 
@@ -756,7 +733,6 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                                 .multiply(bigDecimalQuanityEditStr, MathContext.DECIMAL64);
 
                         double total = bigDecimalTotal.doubleValue();
-
 
 
 //                        double total = frequency.getFrequencyValue()
@@ -779,10 +755,10 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                         //realm.beginTransaction();
                         costElementYears1.setCostFrequencyValue(Double.parseDouble(noOfTimesEditStr));
                         //if(frequency.getFrequencyValue() == 2) {
-                            //costElementYears1.setCostFrequencyUnit(1);
+                        //costElementYears1.setCostFrequencyUnit(1);
                         //}else{
-                            costElementYears1.setCostFrequencyUnit(frequency.getFrequencyValue());
-                       // }
+                        costElementYears1.setCostFrequencyUnit(frequency.getFrequencyValue());
+                        // }
                         costElementYears1.setCostPerPeriodValue(Double.parseDouble(quanityEditStr));
                         costElementYears1.setCostPerPeriodUnit(spinnerUnit.getSelectedItem().toString());
                         costElementYears1.setCostPerUnitValue(Double.parseDouble(priceEditStr));
@@ -790,7 +766,6 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                         costElementYears1.setProjectedIndex(yearIndex);
                         costElementYears1.setSubtotal(total);
                         //costElementYears1.setHarvestArea(harverArea);
-
 
 
 //                        costElementYears1.setCostFrequencyValue(Integer.parseInt(noOfTimesEdit.getText().toString()));
@@ -811,10 +786,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 }
 
 
-                for(CostElementYears costElementYears11:revenueProduct2.getCostElementYearses()){
+                for (CostElementYears costElementYears11 : revenueProduct2.getCostElementYearses()) {
                     // Log.e("ALL YEARS DATA",costElementYears11.toString());
                 }
-
 
 
             }
@@ -838,12 +812,12 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
     }
 
-    public void calculateTrend(final long revenueProductIdLong){
+    public void calculateTrend(final long revenueProductIdLong) {
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
                 CostElement costElement4 = realm.where(CostElement.class)
-                        .equalTo("id",revenueProductIdLong)
+                        .equalTo("id", revenueProductIdLong)
                         .findFirst();
                 double harvestFre = 0;
                 double harvestTimes = 0;
@@ -852,15 +826,15 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 double freqUnit = 0;
                 String quaUnit = "";
                 String priceCurrency = "";
-                if(costElement4.getCostElementYearses().size() > 0){
-                    if(costElement4.getCostElementYearses().get(0).getCostFrequencyUnit() == 0){
-                        for(CostElementYears costElementYears:costElement4.getCostElementYearses()){
-                            if(costElementYears.getProjectedIndex() < 0){
+                if (costElement4.getCostElementYearses().size() > 0) {
+                    if (costElement4.getCostElementYearses().get(0).getCostFrequencyUnit() == 0) {
+                        for (CostElementYears costElementYears : costElement4.getCostElementYearses()) {
+                            if (costElementYears.getProjectedIndex() < 0) {
                                 harvestFre = 0;
-                                if(harvestTimes < costElementYears.getCostPerPeriodValue()){
+                                if (harvestTimes < costElementYears.getCostPerPeriodValue()) {
                                     harvestTimes = costElementYears.getCostPerPeriodValue();
                                 }
-                                if(harvestPrice < costElementYears.getCostPerUnitValue()){
+                                if (harvestPrice < costElementYears.getCostPerUnitValue()) {
                                     harvestPrice = costElementYears.getCostPerUnitValue();
                                 }
                                 freqUnit = costElementYears.getCostFrequencyUnit();
@@ -868,10 +842,10 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                                 priceCurrency = costElementYears.getCostPerUnitUnit();
                             }
                         }
-                    }else{
+                    } else {
                         int eleCount = 0;
-                        for(CostElementYears costElementYears:costElement4.getCostElementYearses()){
-                            if(costElementYears.getProjectedIndex() < 0){
+                        for (CostElementYears costElementYears : costElement4.getCostElementYearses()) {
+                            if (costElementYears.getProjectedIndex() < 0) {
                                 harvestFre = costElementYears.getCostFrequencyValue();
                                 harvestTimes = harvestTimes + costElementYears.getCostPerPeriodValue();
                                 harvestPrice = harvestPrice + costElementYears.getCostPerUnitValue();
@@ -884,17 +858,17 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                             }
                         }
 
-                        harvestTimes = harvestTimes/eleCount;
-                        harvestPrice = harvestPrice/eleCount;
+                        harvestTimes = harvestTimes / eleCount;
+                        harvestPrice = harvestPrice / eleCount;
                     }
                 }
 
-                if(freqUnit == 1){
+                if (freqUnit == 1) {
                     harvestFre = 0;
                 }
 
-                for(CostElementYears costElementYears:costElement4.getCostElementYearses()){
-                    if(costElementYears.getYear() == 0){
+                for (CostElementYears costElementYears : costElement4.getCostElementYearses()) {
+                    if (costElementYears.getYear() == 0) {
 
                         //realm.beginTransaction();
                         costElementYears.setCostFrequencyValue((int) harvestFre);
@@ -907,7 +881,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                         costElementYears.setSubtotal(0);
                         //realm.commitTransaction();
                     }
-                    if(costElementYears.getProjectedIndex() > 0){
+                    if (costElementYears.getProjectedIndex() > 0) {
                         BigDecimal bigDecimalPowerFactor = new BigDecimal(Math.pow((1 + inflationRate), costElementYears.getProjectedIndex()));
                         BigDecimal bigDecimalHarvestPrice = new BigDecimal(harvestPrice);
 
@@ -918,9 +892,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
                         BigDecimal bigDecimalfreqUnit = new BigDecimal(freqUnit);
                         // if(!currentSocialCapitalServey.equals("Pastureland")){
-                            if(freqUnit == 2){
-                                bigDecimalfreqUnit = new BigDecimal(1);
-                            }
+                        if (freqUnit == 2) {
+                            bigDecimalfreqUnit = new BigDecimal(1);
+                        }
                         // }
 
 
@@ -952,19 +926,16 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 }
 
 
-
-
-
             }
         }, new Realm.Transaction.OnSuccess() {
             @Override
             public void onSuccess() {
-                if(currentCostProductIndex < totalCostProductCount){
+                if (currentCostProductIndex < totalCostProductCount) {
                     loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
                     //currentCostProductIndex++;
                     buttonNext.setClickable(true);
-                }else{
-                    Toast.makeText(context,getResources().getText(R.string.completed_text),Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, getResources().getText(R.string.completed_text), Toast.LENGTH_SHORT).show();
                     allCashFlow();
                     calculateNPV();
 
@@ -989,14 +960,6 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         });
 
 
-
-
-
-
-
-
-
-
 //        realm.beginTransaction();
 //        revenueProductYears1.setHarvestFrequencyValue(Integer.parseInt(noOfTimesEdit.getText().toString()));
 //        revenueProductYears1.setHarvestFrequencyUnit(frequency.getFrequencyValue());
@@ -1015,50 +978,50 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         buttonNext.setClickable(true);
     }
 
-    public void nextLandKind(){
+    public void nextLandKind() {
         RealmResults<LandKind> landKindRealmResults = realm.where(LandKind.class)
-                .equalTo("surveyId",serveyId)
-                .equalTo("status","active")
+                .equalTo("surveyId", serveyId)
+                .equalTo("status", "active")
                 .findAll();
         int j = 0;
         int i = 0;
         for (LandKind landKind : landKindRealmResults) {
             //Log.e("TAG ", landKind.toString());
             //Log.e(TAG, String.valueOf(survey1.getParticipants().size()));
-            if(landKind.getName().equals(currentSocialCapitalServey)){
+            if (landKind.getName().equals(currentSocialCapitalServey)) {
                 j = i + 1;
             }
             i++;
         }
 
-        if(j < i){
+        if (j < i) {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("currentSocialCapitalServey", landKindRealmResults.get(j).getName());
             editor.apply();
 
-            Intent intent = new Intent(getApplicationContext(),StartLandTypeActivity.class);
+            Intent intent = new Intent(getApplicationContext(), StartLandTypeActivity.class);
             startActivity(intent);
-        }else{
-            Intent intent = new Intent(getApplicationContext(),CertificateActivity.class);
+        } else {
+            Intent intent = new Intent(getApplicationContext(), CertificateActivity.class);
             startActivity(intent);
         }
     }
 
-    public void allCashFlow(){
+    public void allCashFlow() {
         Survey results = realm.where(Survey.class)
-                .equalTo("surveyId",serveyId)
+                .equalTo("surveyId", serveyId)
                 .findFirst();
         RealmList<CashFlow> cashFlows = new RealmList<>();
-        for(LandKind landKind:results.getLandKinds()){
+        for (LandKind landKind : results.getLandKinds()) {
 
-            if(landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")){
+            if (landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")) {
                 // Log.e("DIS RATE ", landKind.getSocialCapitals().getDiscountRate()+"");
                 int k = 0;
-                for(CostElement costElement:landKind.getForestLand().getCostElements()){
+                for (CostElement costElement : landKind.getForestLand().getCostElements()) {
                     for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
-                        Log.e("RPPPPPPP ", costElementYears00+"");
+                        Log.e("RPPPPPPP ", costElementYears00 + "");
                     }
-                    if(k <= 0) {
+                    if (k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
                             if (!landKind.getSocialCapitals().isDiscountFlag()) {
                                 //Log.e("MMM ", landKind.getSocialCapitals().getDiscountRate()+"");
@@ -1074,18 +1037,18 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 realm.beginTransaction();
                 landKind.getForestLand().setCashFlows(cashFlows);
                 realm.commitTransaction();
-            }else if(landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")){
+            } else if (landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")) {
                 int k = 0;
-                for(CostElement costElement:landKind.getCropLand().getCostElements()){
+                for (CostElement costElement : landKind.getCropLand().getCostElements()) {
                     for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
-                        Log.e("RPPPPPPP ", costElementYears00+"");
+                        Log.e("RPPPPPPP ", costElementYears00 + "");
                     }
-                    if(k <= 0) {
+                    if (k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
                             if (!landKind.getSocialCapitals().isDiscountFlag()) {
-                                cashFlows.add(calculateCashFlow("Cropland",costElementYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
-                            }else{
-                                cashFlows.add(calculateCashFlow("Cropland",costElementYears.getYear(),landKind.getSocialCapitals().getDiscountRateOverride()));
+                                cashFlows.add(calculateCashFlow("Cropland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
+                            } else {
+                                cashFlows.add(calculateCashFlow("Cropland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
                             }
                         }
                     }
@@ -1094,18 +1057,18 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 realm.beginTransaction();
                 landKind.getCropLand().setCashFlows(cashFlows);
                 realm.commitTransaction();
-            }else if(landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")){
+            } else if (landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")) {
                 int k = 0;
-                for(CostElement costElement:landKind.getPastureLand().getCostElements()){
+                for (CostElement costElement : landKind.getPastureLand().getCostElements()) {
                     for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
-                        Log.e("RPPPPPPP ", costElementYears00+"");
+                        Log.e("RPPPPPPP ", costElementYears00 + "");
                     }
-                    if(k <= 0) {
+                    if (k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
                             if (!landKind.getSocialCapitals().isDiscountFlag()) {
-                                cashFlows.add(calculateCashFlow("Pastureland",costElementYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
-                            }else{
-                                cashFlows.add(calculateCashFlow("Pastureland",costElementYears.getYear(),landKind.getSocialCapitals().getDiscountRateOverride()));
+                                cashFlows.add(calculateCashFlow("Pastureland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
+                            } else {
+                                cashFlows.add(calculateCashFlow("Pastureland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
                             }
                         }
                     }
@@ -1114,18 +1077,18 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 realm.beginTransaction();
                 landKind.getPastureLand().setCashFlows(cashFlows);
                 realm.commitTransaction();
-            }else if(landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")){
+            } else if (landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")) {
                 int k = 0;
-                for(CostElement costElement:landKind.getMiningLand().getCostElements()){
+                for (CostElement costElement : landKind.getMiningLand().getCostElements()) {
                     for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
-                        Log.e("RPPPPPPP ", costElementYears00+"");
+                        Log.e("RPPPPPPP ", costElementYears00 + "");
                     }
-                    if(k <= 0) {
+                    if (k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
                             if (!landKind.getSocialCapitals().isDiscountFlag()) {
-                                cashFlows.add(calculateCashFlow("Mining Land",costElementYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
-                            }else{
-                                cashFlows.add(calculateCashFlow("Mining Land",costElementYears.getYear(),landKind.getSocialCapitals().getDiscountRateOverride()));
+                                cashFlows.add(calculateCashFlow("Mining Land", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
+                            } else {
+                                cashFlows.add(calculateCashFlow("Mining Land", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
                             }
                         }
                     }
@@ -1140,48 +1103,48 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
     }
 
-    public CashFlow calculateCashFlow(String landKind, int year, double disRatePersent){
+    public CashFlow calculateCashFlow(String landKind, int year, double disRatePersent) {
         RevenueProductYears revenueProductYears = realm.where(RevenueProductYears.class)
-                .equalTo("surveyId",serveyId)
-                .equalTo("landKind",landKind)
-                .equalTo("year",year)
+                .equalTo("surveyId", serveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
                 .findFirst();
 
         CostElementYears costElementYears = realm.where(CostElementYears.class)
-                .equalTo("surveyId",serveyId)
-                .equalTo("landKind",landKind)
-                .equalTo("year",year)
+                .equalTo("surveyId", serveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
                 .findFirst();
 
         OutlayYears outlayYears = realm.where(OutlayYears.class)
-                .equalTo("surveyId",serveyId)
-                .equalTo("landKind",landKind)
-                .equalTo("year",year)
+                .equalTo("surveyId", serveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
                 .findFirst();
 
         RealmResults<RevenueProductYears> revenueProductYearses = realm.where(RevenueProductYears.class)
-                .equalTo("surveyId",serveyId)
-                .equalTo("landKind",landKind)
-                .equalTo("year",year)
+                .equalTo("surveyId", serveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
                 .findAll();
 
         RealmResults<CostElementYears> costElementYearses = realm.where(CostElementYears.class)
-                .equalTo("surveyId",serveyId)
-                .equalTo("landKind",landKind)
-                .equalTo("year",year)
+                .equalTo("surveyId", serveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
                 .findAll();
 
         RealmResults<OutlayYears> outlayYearses = realm.where(OutlayYears.class)
-                .equalTo("surveyId",serveyId)
-                .equalTo("landKind",landKind)
-                .equalTo("year",year)
+                .equalTo("surveyId", serveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
                 .findAll();
 
-        for(RevenueProductYears revenueProductYears1:revenueProductYearses){
+        for (RevenueProductYears revenueProductYears1 : revenueProductYearses) {
             //Log.e("Revenue ",revenueProductYears1.toString());
         }
 
-        for(CostElementYears costElementYears1:costElementYearses){
+        for (CostElementYears costElementYears1 : costElementYearses) {
             //Log.e("Cost ",costElementYears1.toString());
         }
 
@@ -1189,16 +1152,16 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         double revenueTotal = 0;
         double costTotal = 0;
         double outlayTotal = 0;
-        double disRate = disRatePersent/100;
+        double disRate = disRatePersent / 100;
 
         double disFactor = 0;
 
         BigDecimal bigDecimalOne = new BigDecimal("1");
 
-        for(RevenueProductYears revenueProductYears1:revenueProductYearses){
+        for (RevenueProductYears revenueProductYears1 : revenueProductYearses) {
             revenueTotal = revenueTotal + revenueProductYears1.getSubtotal();
 
-            double powerFactor = Math.pow(1+disRate,revenueProductYears.getProjectedIndex());
+            double powerFactor = Math.pow(1 + disRate, revenueProductYears.getProjectedIndex());
             BigDecimal bigDecimalPowerFactor = new BigDecimal(powerFactor);
             BigDecimal bigDecimalDisFactor = bigDecimalOne.divide(bigDecimalPowerFactor, MathContext.DECIMAL64);
 
@@ -1207,10 +1170,10 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             // disFactor = 1 / Math.pow(1+disRate,revenueProductYears.getProjectedIndex());
         }
 
-        for(CostElementYears costElementYears1:costElementYearses){
+        for (CostElementYears costElementYears1 : costElementYearses) {
             costTotal = costTotal + costElementYears1.getSubtotal();
 
-            double powerFactor = Math.pow(1+disRate,costElementYears.getProjectedIndex());
+            double powerFactor = Math.pow(1 + disRate, costElementYears.getProjectedIndex());
             BigDecimal bigDecimalPowerFactor = new BigDecimal(powerFactor);
             BigDecimal bigDecimalDisFactor = bigDecimalOne.divide(bigDecimalPowerFactor, MathContext.DECIMAL64);
 
@@ -1219,7 +1182,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             // disFactor = 1 / Math.pow(1+disRate,costElementYears.getProjectedIndex());
         }
 
-        for(OutlayYears outlayYears1:outlayYearses){
+        for (OutlayYears outlayYears1 : outlayYearses) {
             outlayTotal = outlayTotal + outlayYears1.getPrice();
         }
 
@@ -1262,19 +1225,19 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         return cashFlow;
     }
 
-    public void calculateNPV(){
+    public void calculateNPV() {
         Survey results = realm.where(Survey.class)
-                .equalTo("surveyId",serveyId)
+                .equalTo("surveyId", serveyId)
                 .findFirst();
         // int year = Calendar.getInstance().get(Calendar.YEAR);
-        int year = sharedPref.getInt("surveyyear",2016);
-        for(LandKind landKind:results.getLandKinds()){
-            if(landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")){
+        int year = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
+        for (LandKind landKind : results.getLandKinds()) {
+            if (landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")) {
 
                 double npv = 0;
-                for(CashFlow cashFlow :landKind.getForestLand().getCashFlows()){
+                for (CashFlow cashFlow : landKind.getForestLand().getCashFlows()) {
                     // Log.e("Cash flow ", cashFlow.toString());
-                    if(cashFlow.getYear() >= year){
+                    if (cashFlow.getYear() >= year) {
                         npv = npv + cashFlow.getDiscountedCashFlow();
                     }
                 }
@@ -1282,7 +1245,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 //npv = roundToTwoDecimal(npv);
 
 
-                if(results.getComponents() == null){
+                if (results.getComponents() == null) {
                     realm.beginTransaction();
                     Component component = realm.createObject(Component.class);
                     component.setId(getNextKeyComponent());
@@ -1293,22 +1256,22 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                     realm.beginTransaction();
                     results.setComponents(component);
                     realm.commitTransaction();
-                }else{
+                } else {
                     realm.beginTransaction();
                     results.getComponents().setForestValue(npv);
                     realm.commitTransaction();
                 }
-            }else if(landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")){
+            } else if (landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")) {
                 double npv = 0;
-                for(CashFlow cashFlow :landKind.getCropLand().getCashFlows()){
-                    if(cashFlow.getYear() >= year){
+                for (CashFlow cashFlow : landKind.getCropLand().getCashFlows()) {
+                    if (cashFlow.getYear() >= year) {
                         npv = npv + cashFlow.getDiscountedCashFlow();
                     }
                 }
 
                 //npv = roundToTwoDecimal(npv);
 
-                if(results.getComponents() == null){
+                if (results.getComponents() == null) {
                     realm.beginTransaction();
                     Component component = realm.createObject(Component.class);
                     component.setId(getNextKeyComponent());
@@ -1319,23 +1282,23 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                     realm.beginTransaction();
                     results.setComponents(component);
                     realm.commitTransaction();
-                }else{
+                } else {
                     realm.beginTransaction();
                     results.getComponents().setCroplandValue(npv);
                     realm.commitTransaction();
                 }
 
-            }else if(landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")){
+            } else if (landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")) {
                 double npv = 0;
-                for(CashFlow cashFlow :landKind.getPastureLand().getCashFlows()){
-                    if(cashFlow.getYear() >= year){
+                for (CashFlow cashFlow : landKind.getPastureLand().getCashFlows()) {
+                    if (cashFlow.getYear() >= year) {
                         npv = npv + cashFlow.getDiscountedCashFlow();
                     }
                 }
 
                 //npv = roundToTwoDecimal(npv);
 
-                if(results.getComponents() == null){
+                if (results.getComponents() == null) {
                     realm.beginTransaction();
                     Component component = realm.createObject(Component.class);
                     component.setId(getNextKeyComponent());
@@ -1346,22 +1309,22 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                     realm.beginTransaction();
                     results.setComponents(component);
                     realm.commitTransaction();
-                }else{
+                } else {
                     realm.beginTransaction();
                     results.getComponents().setPastureValue(npv);
                     realm.commitTransaction();
                 }
-            }else if(landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")){
+            } else if (landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")) {
                 double npv = 0;
-                for(CashFlow cashFlow :landKind.getMiningLand().getCashFlows()){
-                    if(cashFlow.getYear() >= year){
+                for (CashFlow cashFlow : landKind.getMiningLand().getCashFlows()) {
+                    if (cashFlow.getYear() >= year) {
                         npv = npv + cashFlow.getDiscountedCashFlow();
                     }
                 }
 
                 //npv = roundToTwoDecimal(npv);
 
-                if(results.getComponents() == null){
+                if (results.getComponents() == null) {
                     realm.beginTransaction();
                     Component component = realm.createObject(Component.class);
                     component.setId(getNextKeyComponent());
@@ -1372,7 +1335,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                     realm.beginTransaction();
                     results.setComponents(component);
                     realm.commitTransaction();
-                }else{
+                } else {
                     realm.beginTransaction();
                     results.getComponents().setMiningLandValue(npv);
                     realm.commitTransaction();
@@ -1389,18 +1352,18 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         return realm.where(Component.class).max("id").intValue() + 1;
     }
 
-    public void toggleMenuDrawer(){
-        if(menuDrawerLayout.isDrawerOpen(GravityCompat.START)){
+    public void toggleMenuDrawer() {
+        if (menuDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             menuDrawerLayout.closeDrawer(GravityCompat.START);
-        }else{
+        } else {
             menuDrawerLayout.openDrawer(GravityCompat.START);
         }
     }
 
-    public double roundToTwoDecimal(double val){
-        val = val*100;
+    public double roundToTwoDecimal(double val) {
+        val = val * 100;
         val = Math.round(val);
-        val = val /100;
+        val = val / 100;
         return val;
     }
 }

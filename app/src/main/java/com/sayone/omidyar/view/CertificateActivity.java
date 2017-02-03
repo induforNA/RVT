@@ -3,11 +3,10 @@ package com.sayone.omidyar.view;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
@@ -16,13 +15,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.SocialCapital;
-import com.sayone.omidyar.model.SocialCapitalQuestions;
 import com.sayone.omidyar.model.Survey;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
@@ -83,7 +80,6 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_certificate);
-
 
         parcelId = (TextView) findViewById(R.id.parcel_id);
         community = (TextView) findViewById(R.id.community_name);
@@ -231,7 +227,6 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                             forestValue.setText("- ₹" + yourFormattedString);
                         }
 
-
                         //forestValue.setText(roundTwo(surveyCheck.getComponents().getForestValue())+"");
                         totalVal = totalVal + surveyCheck.getComponents().getForestValue();
                     } else {
@@ -240,8 +235,6 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 } else {
                     forestValue.setText("0");
                 }
-
-
             }
 
             if (landKind.getName().equals("Cropland")) {
@@ -291,8 +284,6 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 } else {
                     cropValue.setText("0");
                 }
-
-
             }
 
             if (landKind.getName().equals("Pastureland")) {
@@ -331,7 +322,6 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                             pastureValue.setText("- ₹" + yourFormattedString);
                         }
 
-
                         //pastureValue.setText(roundTwo(surveyCheck.getComponents().getPastureValue())+""+"");
                         totalVal = totalVal + surveyCheck.getComponents().getPastureValue();
                     } else {
@@ -340,8 +330,6 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 } else {
                     pastureValue.setText("0");
                 }
-
-
             }
 
             if (landKind.getName().equals("Mining Land")) {
@@ -389,8 +377,6 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 } else {
                     miningValue.setText("0");
                 }
-
-
             }
         }
 
@@ -432,7 +418,6 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         Log.e("UPPER LIMIT ", String.valueOf((long) upperLimit));
 
 //        String totalValStr = String.valueOf(Math.round(lowerLimit/10000)*10000)+" to "+String.valueOf(Math.round(upperLimit/10000)*10000);
-
 
         // formattedString(Math.round(lowerLimit/10000)*10000);
 
@@ -487,7 +472,6 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         double infl = Double.parseDouble(surveyCheck.getInflationRate()) * 100.00;
         double roundOff = Math.round(infl * 100.0) / 100.0;
         inflationRate.setText(String.valueOf(roundOff) + "%");
-
     }
 
     public String numberProcess(String numberStr) {
@@ -531,7 +515,6 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
         val = Math.round(val);
         val = val / 100;
         return val;
-
     }
 
     @Override
@@ -603,10 +586,8 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
                 intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intents);
                 break;
-
         }
     }
-
 
     public void toggleMenuDrawer() {
         if (menuDrawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -615,5 +596,4 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
             menuDrawerLayout.openDrawer(GravityCompat.START);
         }
     }
-
 }

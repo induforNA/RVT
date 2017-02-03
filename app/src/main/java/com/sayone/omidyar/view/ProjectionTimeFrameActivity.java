@@ -1,6 +1,5 @@
 package com.sayone.omidyar.view;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,8 +11,8 @@ import com.sayone.omidyar.R;
 
 public class ProjectionTimeFrameActivity extends BaseActivity {
 
-    public Spinner yearSpinner1,yearSpinner2,yearSpinner3;
-    String year1,year2,year3;
+    public Spinner yearSpinner1, yearSpinner2, yearSpinner3;
+    String year1, year2, year3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

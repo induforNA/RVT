@@ -1,16 +1,13 @@
 package com.sayone.omidyar.view;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,9 +17,7 @@ import android.widget.Toast;
 
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.Quantity;
-import com.sayone.omidyar.model.Survey;
 
-import java.util.HashSet;
 import java.util.List;
 
 import io.realm.Realm;
@@ -33,7 +28,7 @@ import io.realm.Realm;
 public class UnitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<String> unitList;
     private UnitsActivity mContext;
-    private int poss=0;
+    private int poss = 0;
     Realm realm;
     public int flag;
 
@@ -44,13 +39,13 @@ public class UnitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public class UnitViewHolder extends RecyclerView.ViewHolder {
         private TextView unitName;
-        private ImageView imageEditButton,deleteButton;
+        private ImageView imageEditButton, deleteButton;
 
         public UnitViewHolder(View itemView) {
             super(itemView);
             unitName = (TextView) itemView.findViewById(R.id.unit_name);
-            imageEditButton=(ImageView) itemView.findViewById(R.id.image_edit_unit);
-            deleteButton=(ImageView)itemView.findViewById(R.id.button_delete);
+            imageEditButton = (ImageView) itemView.findViewById(R.id.image_edit_unit);
+            deleteButton = (ImageView) itemView.findViewById(R.id.button_delete);
 
             deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -59,11 +54,11 @@ public class UnitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     Realm realm = Realm.getDefaultInstance();
                     realm.beginTransaction();
                     Quantity quantity = realm.where(Quantity.class)
-                            .equalTo("quantityName",unitName.getText().toString())
+                            .equalTo("quantityName", unitName.getText().toString())
                             .findFirst();
                     quantity.deleteFromRealm();
                     realm.commitTransaction();
-                    Toast toast = Toast.makeText(mContext,mContext.getResources().getText(R.string.text_deleted), Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(mContext, mContext.getResources().getText(R.string.text_deleted), Toast.LENGTH_SHORT);
                     toast.show();
                     mContext.dialogueCancel();
                     mContext.editExistingUnit();
@@ -97,7 +92,6 @@ public class UnitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     editTextSpecifyUnit.setText(unitName.getText());
                     editTextSpecifyUnit1.setText(unitName.getText());
                     editTextSpecifyUnit2.setText(unitName.getText());
-
 
 
                     layout1 = (LinearLayout) dialog.findViewById(R.id.layout_1);
@@ -184,7 +178,7 @@ public class UnitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                             realm.beginTransaction();
                             Quantity quantity = realm.where(Quantity.class)
-                                    .equalTo("quantityName",unitName.getText().toString())
+                                    .equalTo("quantityName", unitName.getText().toString())
                                     .findFirst();
                             quantity.setQuantityName(editTextSpecifyUnit.getText().toString());
                             realm.commitTransaction();
@@ -219,13 +213,13 @@ public class UnitAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((UnitViewHolder)holder).unitName.setText(unitList.get(position+1));
-        poss=position;
+        ((UnitViewHolder) holder).unitName.setText(unitList.get(position + 1));
+        poss = position;
     }
 
     @Override
     public int getItemCount() {
-        return unitList.size()-1;
+        return unitList.size() - 1;
     }
 
 }

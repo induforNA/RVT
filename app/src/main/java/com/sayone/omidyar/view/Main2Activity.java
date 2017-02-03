@@ -1,16 +1,10 @@
 package com.sayone.omidyar.view;
 
 import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.sayone.omidyar.R;
@@ -23,7 +17,7 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        button=(ImageView) findViewById(R.id.button_add_participant);
+        button = (ImageView) findViewById(R.id.button_add_participant);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,7 +42,5 @@ public class Main2Activity extends AppCompatActivity {
                 anim.start();
             }
         });
-
-
     }
 }

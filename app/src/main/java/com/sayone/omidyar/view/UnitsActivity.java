@@ -2,13 +2,10 @@ package com.sayone.omidyar.view;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,18 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
-import com.sayone.omidyar.adapter.SurveyAdapter;
 import com.sayone.omidyar.model.Quantity;
-import com.sayone.omidyar.model.Survey;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import io.realm.Realm;
@@ -59,10 +52,6 @@ public class UnitsActivity extends BaseActivity implements View.OnClickListener 
 
         enterNewUnits.setOnClickListener(this);
         editExistingUnits.setOnClickListener(this);
-
-
-
-
     }
 
     @Override
@@ -82,7 +71,7 @@ public class UnitsActivity extends BaseActivity implements View.OnClickListener 
         }
     }
 
-    public void editExistingUnit(){
+    public void editExistingUnit() {
 
         dialog1 = new Dialog(context);
         dialog1.setContentView(R.layout.edit_unit);
@@ -94,21 +83,21 @@ public class UnitsActivity extends BaseActivity implements View.OnClickListener 
         recyclerView = (RecyclerView) dialog1.findViewById(R.id.recycler_unit_list);
 
 
-        List<String> unitList =  new ArrayList<>();
+        List<String> unitList = new ArrayList<>();
         realm = Realm.getDefaultInstance();
 
         RealmResults<Quantity> quantityResult = realm.where(Quantity.class).findAll();
-        for(Quantity quantity:quantityResult){
+        for (Quantity quantity : quantityResult) {
 //            if(language.equals("हिन्दी")) {
 //                unitList.add(quantity.getQuantityNameHindi());
 //            }
 //            else{
-                unitList.add(quantity.getQuantityName());
+            unitList.add(quantity.getQuantityName());
 //            }
         }
 
 
-        unitAdapter = new UnitAdapter(unitList,UnitsActivity.this);
+        unitAdapter = new UnitAdapter(unitList, UnitsActivity.this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -125,9 +114,8 @@ public class UnitsActivity extends BaseActivity implements View.OnClickListener 
     }
 
 
-    public void enterNewUnit(){
+    public void enterNewUnit() {
         Spinner unitSpinner1, unitSpinner2;
-
 
 
         final Dialog dialog = new Dialog(context);
@@ -253,14 +241,13 @@ public class UnitsActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private int getNextKeySurvey() {
-        if(realm.where(Quantity.class).max("id") == null){
+        if (realm.where(Quantity.class).max("id") == null) {
             return 1;
         }
         return realm.where(Quantity.class).max("id").intValue() + 1;
     }
-    public  void dialogueCancel(){
+
+    public void dialogueCancel() {
         dialog1.cancel();
     }
-
-
 }

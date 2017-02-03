@@ -36,8 +36,6 @@ import java.util.Date;
 import io.realm.Realm;
 import io.realm.RealmList;
 
-import static java.security.AccessController.getContext;
-
 /**
  * Created by sayone on 16/9/16.
  */

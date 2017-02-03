@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.LandKind;
-import com.sayone.omidyar.model.Participant;
 import com.sayone.omidyar.model.SocialCapital;
 import com.sayone.omidyar.model.Survey;
 
@@ -33,7 +32,7 @@ import io.realm.RealmResults;
 /**
  * Created by sayone on 19/9/16.
  */
-public class LandTypeSelectionActivity extends BaseActivity implements View.OnClickListener{
+public class LandTypeSelectionActivity extends BaseActivity implements View.OnClickListener {
 
     public static final String TAG = LandTypeSelectionActivity.class.getName();
     Context context;
@@ -43,7 +42,6 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
     Survey survey;
     RealmList<LandKind> landKinds;
     String currentSocialCapitalServey;
-
 
     private Button nextButton;
     private Button backButton;
@@ -73,9 +71,8 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
         realm = Realm.getDefaultInstance();
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        serveyId = sharedPref.getString("surveyId","");
+        serveyId = sharedPref.getString("surveyId", "");
         currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey", "");
-
 
         landKinds = new RealmList<>();
         landTypeNames = new HashSet<String>();
@@ -95,26 +92,26 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
         imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
         drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
         textViewAbout = (TextView) findViewById(R.id.text_view_about);
-        surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
+        surveyIdDrawer = (TextView) findViewById(R.id.text_view_id);
         logout = (TextView) findViewById(R.id.logout);
-        startSurvey=(TextView)findViewById(R.id.text_start_survey);
+        startSurvey = (TextView) findViewById(R.id.text_start_survey);
 
 
         survey = realm.where(Survey.class)
-                .equalTo("surveyId",serveyId)
+                .equalTo("surveyId", serveyId)
                 .findFirst();
-        for(LandKind landKindItrate :survey.getLandKinds()) {
-            Log.e(TAG+" 11",landKindItrate.toString());
-            if(landKindItrate.getName().equals("Forestland") && landKindItrate.getStatus().equals("active")){
+        for (LandKind landKindItrate : survey.getLandKinds()) {
+            Log.e(TAG + " 11", landKindItrate.toString());
+            if (landKindItrate.getName().equals("Forestland") && landKindItrate.getStatus().equals("active")) {
                 forestland.setChecked(true);
                 landTypeNames.add("Forestland");
-            }else if(landKindItrate.getName().equals("Cropland") && landKindItrate.getStatus().equals("active")){
+            } else if (landKindItrate.getName().equals("Cropland") && landKindItrate.getStatus().equals("active")) {
                 cropland.setChecked(true);
                 landTypeNames.add("Cropland");
-            }else if(landKindItrate.getName().equals("Pastureland") && landKindItrate.getStatus().equals("active")){
+            } else if (landKindItrate.getName().equals("Pastureland") && landKindItrate.getStatus().equals("active")) {
                 pastureland.setChecked(true);
                 landTypeNames.add("Pastureland");
-            }else if(landKindItrate.getName().equals("Mining Land") && landKindItrate.getStatus().equals("active")){
+            } else if (landKindItrate.getName().equals("Mining Land") && landKindItrate.getStatus().equals("active")) {
                 miningland.setChecked(true);
                 landTypeNames.add("Mining Land");
             }
@@ -136,9 +133,9 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
 
     public void slectedLandKind(View view) {
         boolean checked = ((CheckBox) view).isChecked();
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.forestland:
-                addLandTyeInSet(checked,"Forestland");
+                addLandTyeInSet(checked, "Forestland");
 //                if (checked) {
 //                    landTypeNames.add("Forestland");
 //                }else{
@@ -146,7 +143,7 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
 //                }
                 break;
             case R.id.cropland:
-                addLandTyeInSet(checked,"Cropland");
+                addLandTyeInSet(checked, "Cropland");
 //                if (checked) {
 //                    landTypeNames.add("Cropland");
 //                }else{
@@ -154,7 +151,7 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
 //                }
                 break;
             case R.id.pastureland:
-                addLandTyeInSet(checked,"Pastureland");
+                addLandTyeInSet(checked, "Pastureland");
 //                if (checked) {
 //                    landTypeNames.add("Pastureland");
 //                }else{
@@ -162,7 +159,7 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
 //                }
                 break;
             case R.id.miningland:
-                addLandTyeInSet(checked,"Mining Land");
+                addLandTyeInSet(checked, "Mining Land");
 //                if (checked) {
 //                    landTypeNames.add("Mining Land");
 //                }else{
@@ -172,15 +169,15 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
         }
     }
 
-    public void addLandTyeInSet(boolean checked, String name){
-        Log.e("CHECKED STATUS ", checked+" "+name);
+    public void addLandTyeInSet(boolean checked, String name) {
+        Log.e("CHECKED STATUS ", checked + " " + name);
         if (checked) {
             LandKind landKind = realm.where(LandKind.class)
-                    .equalTo("name",name)
-                    .equalTo("surveyId",serveyId)
+                    .equalTo("name", name)
+                    .equalTo("surveyId", serveyId)
                     .findFirst();
             SocialCapital socialCapital = null;
-            if(landKind.getSocialCapitals() == null){
+            if (landKind.getSocialCapitals() == null) {
                 realm.beginTransaction();
                 socialCapital = realm.createObject(SocialCapital.class);
                 socialCapital.setId(getNextKeySocialCapital());
@@ -190,18 +187,18 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
 
             realm.beginTransaction();
             landKind.setStatus("active");
-            if(landKind.getSocialCapitals() == null) {
+            if (landKind.getSocialCapitals() == null) {
                 landKind.setSocialCapitals(socialCapital);
             }
             realm.commitTransaction();
             landTypeNames.add(name);
-        }else{
+        } else {
             LandKind landKind = realm.where(LandKind.class)
-                    .equalTo("surveyId",serveyId)
-                    .equalTo("name",name)
+                    .equalTo("surveyId", serveyId)
+                    .equalTo("name", name)
                     .findFirst();
             SocialCapital socialCapital = null;
-            if(landKind.getSocialCapitals() == null){
+            if (landKind.getSocialCapitals() == null) {
                 realm.beginTransaction();
                 socialCapital = realm.createObject(SocialCapital.class);
                 socialCapital.setId(getNextKeySocialCapital());
@@ -228,43 +225,43 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
                 toggleMenuDrawer();
                 break;
             case R.id.next_button:
-                Log.e("CLICK ","CHECK");
+                Log.e("CLICK ", "CHECK");
                 saveLandKind();
                 break;
             case R.id.back_button:
                 finish();
                 break;
-            case  R.id.text_view_about:
-                Intent i = new Intent(LandTypeSelectionActivity.this,AboutActivity.class);
+            case R.id.text_view_about:
+                Intent i = new Intent(LandTypeSelectionActivity.this, AboutActivity.class);
                 startActivity(i);
                 break;
             case R.id.logout:
-                Intent intent = new Intent(LandTypeSelectionActivity.this,RegistrationActivity.class);
+                Intent intent = new Intent(LandTypeSelectionActivity.this, RegistrationActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 break;
             case R.id.text_start_survey:
-                Intent intents = new Intent(getApplicationContext(),MainActivity.class);
+                Intent intents = new Intent(getApplicationContext(), MainActivity.class);
                 intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intents);
                 break;
         }
     }
 
-    public void toggleMenuDrawer(){
-        if(menuDrawerLayout.isDrawerOpen(GravityCompat.START)){
+    public void toggleMenuDrawer() {
+        if (menuDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             menuDrawerLayout.closeDrawer(GravityCompat.START);
-        }else{
+        } else {
             menuDrawerLayout.openDrawer(GravityCompat.START);
         }
     }
 
-    public void saveLandKind(){
+    public void saveLandKind() {
         RealmResults<LandKind> landKindRealmResults = realm.where(LandKind.class)
-                .equalTo("surveyId",serveyId)
-                .equalTo("status","active")
+                .equalTo("surveyId", serveyId)
+                .equalTo("status", "active")
                 .findAll();
-        if(landKindRealmResults.size() != 0) {
+        if (landKindRealmResults.size() != 0) {
 
             RealmResults<LandKind> results = realm.where(LandKind.class)
                     .equalTo("surveyId", serveyId)
@@ -281,8 +278,8 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
 
             Intent intent = new Intent(LandTypeSelectionActivity.this, StartLandTypeActivity.class);
             startActivity(intent);
-        }else{
-                Toast.makeText(context,getResources().getString(R.string.string_atleast_one), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, getResources().getString(R.string.string_atleast_one), Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -290,6 +287,7 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
     public int getNextKeyLandKind() {
         return realm.where(LandKind.class).max("id").intValue() + 1;
     }
+
     public int getNextKeySocialCapital() {
         return realm.where(SocialCapital.class).max("id").intValue() + 1;
     }

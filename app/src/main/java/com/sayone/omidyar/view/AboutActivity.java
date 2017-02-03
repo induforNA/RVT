@@ -2,7 +2,6 @@ package com.sayone.omidyar.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;

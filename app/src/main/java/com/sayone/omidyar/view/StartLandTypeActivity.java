@@ -17,8 +17,6 @@ import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.LandKind;
 
-import java.util.Locale;
-
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -26,7 +24,7 @@ import io.realm.RealmResults;
  * Created by sayone on 14/10/16.
  */
 
-public class StartLandTypeActivity extends BaseActivity implements View.OnClickListener{
+public class StartLandTypeActivity extends BaseActivity implements View.OnClickListener {
 
     Context context;
     Realm realm;
@@ -43,7 +41,6 @@ public class StartLandTypeActivity extends BaseActivity implements View.OnClickL
     private TextView startSurvey;
     private DrawerLayout menuDrawerLayout;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +50,8 @@ public class StartLandTypeActivity extends BaseActivity implements View.OnClickL
         realm = Realm.getDefaultInstance();
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        serveyId = sharedPref.getString("surveyId","");
-        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey","");
+        serveyId = sharedPref.getString("surveyId", "");
+        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey", "");
 
         backButton = (Button) findViewById(R.id.back_button);
         nextButton = (Button) findViewById(R.id.next_button);
@@ -63,21 +60,21 @@ public class StartLandTypeActivity extends BaseActivity implements View.OnClickL
         imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
         drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
         textViewAbout = (TextView) findViewById(R.id.text_view_about);
-        surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
+        surveyIdDrawer = (TextView) findViewById(R.id.text_view_id);
         logout = (TextView) findViewById(R.id.logout);
-        startSurvey=(TextView)findViewById(R.id.text_start_survey);
+        startSurvey = (TextView) findViewById(R.id.text_start_survey);
 
         surveyIdDrawer.setText(serveyId);
 
-      //  landType.setText(currentSocialCapitalServey);
+        //  landType.setText(currentSocialCapitalServey);
 
-        if(currentSocialCapitalServey.equals("Forestland"))
+        if (currentSocialCapitalServey.equals("Forestland"))
             landType.setText(getResources().getText(R.string.string_forestland));
-        if(currentSocialCapitalServey.equals("Pastureland"))
+        if (currentSocialCapitalServey.equals("Pastureland"))
             landType.setText(getResources().getText(R.string.string_pastureland));
-        if(currentSocialCapitalServey.equals("Mining Land"))
+        if (currentSocialCapitalServey.equals("Mining Land"))
             landType.setText(getResources().getText(R.string.string_miningland));
-        if(currentSocialCapitalServey.equals("Cropland"))
+        if (currentSocialCapitalServey.equals("Cropland"))
             landType.setText(getResources().getText(R.string.title_cropland));
         //  landType.setText(currentSocialCapitalServey);
 
@@ -105,20 +102,20 @@ public class StartLandTypeActivity extends BaseActivity implements View.OnClickL
                 previousLandKind();
                 finish();
                 break;
-            case  R.id.drawer_close_btn:
+            case R.id.drawer_close_btn:
                 toggleMenuDrawer();
                 break;
-            case  R.id.text_view_about:
-                i = new Intent(getApplicationContext(),AboutActivity.class);
+            case R.id.text_view_about:
+                i = new Intent(getApplicationContext(), AboutActivity.class);
                 startActivity(i);
                 break;
             case R.id.logout:
-                i = new Intent(getApplicationContext(),RegistrationActivity.class);
+                i = new Intent(getApplicationContext(), RegistrationActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
                 break;
             case R.id.text_start_survey:
-                i = new Intent(getApplicationContext(),MainActivity.class);
+                i = new Intent(getApplicationContext(), MainActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
                 break;
@@ -128,12 +125,12 @@ public class StartLandTypeActivity extends BaseActivity implements View.OnClickL
         }
     }
 
-    public void previousLandKind(){
+    public void previousLandKind() {
         RealmResults<LandKind> landKindRealmResults = realm.where(LandKind.class)
-                .equalTo("surveyId",serveyId)
-                .equalTo("status","active")
+                .equalTo("surveyId", serveyId)
+                .equalTo("status", "active")
                 .findAll();
-        if(landKindRealmResults != null) {
+        if (landKindRealmResults != null) {
             int j = 0;
             int i = 0;
             for (LandKind landKind : landKindRealmResults) {
@@ -157,15 +154,15 @@ public class StartLandTypeActivity extends BaseActivity implements View.OnClickL
 //                Intent intent = new Intent(getApplicationContext(), CertificateActivity.class);
 //                startActivity(intent);
             }
-        }else{
+        } else {
             finish();
         }
     }
 
-    public void toggleMenuDrawer(){
-        if(menuDrawerLayout.isDrawerOpen(GravityCompat.START)){
+    public void toggleMenuDrawer() {
+        if (menuDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             menuDrawerLayout.closeDrawer(GravityCompat.START);
-        }else{
+        } else {
             menuDrawerLayout.openDrawer(GravityCompat.START);
         }
     }

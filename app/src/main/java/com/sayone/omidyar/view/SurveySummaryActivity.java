@@ -1,20 +1,15 @@
 package com.sayone.omidyar.view;
 
 import android.app.ProgressDialog;
-
-
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -38,11 +33,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
-import com.sayone.omidyar.adapter.ParticipantsAdapter;
 import com.sayone.omidyar.adapter.SurveyAdapter;
 import com.sayone.omidyar.model.ApiClient;
 import com.sayone.omidyar.model.ApiInterface;
@@ -77,7 +69,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -85,13 +76,9 @@ import java.util.Set;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmList;
-import io.realm.RealmObject;
 import io.realm.RealmResults;
-import io.realm.annotations.Required;
 import retrofit2.Call;
 import retrofit2.Callback;
-
-import static com.sayone.omidyar.R.id.button;
 
 public class SurveySummaryActivity extends BaseActivity implements View.OnClickListener {
 
@@ -105,7 +92,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
     JSONObject jsonObject;
     private Context context;
-    private Button sendDataToServer,resetData, exportDataEmail;
+    private Button sendDataToServer, resetData, exportDataEmail;
     private SharedPreferences sharedPref;
     private Set<String> set = null;
     private Realm realm;
@@ -124,11 +111,11 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         completedSurveys = (TextView) findViewById(R.id.completed_surveys);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_survey_list);
         sendDataToServer = (Button) findViewById(R.id.button_send_data_to_server);
-        resetData=(Button)findViewById(R.id.button_reset_data);
+        resetData = (Button) findViewById(R.id.button_reset_data);
         exportDataEmail = (Button) findViewById(R.id.button_export_data_email);
         exportDataEmail.setEnabled(false);
         exportDataEmail.setBackgroundResource(android.R.drawable.btn_default);
-        exportDataEmail.getBackground().setColorFilter(ContextCompat.getColor(this,R.color.colorDisable), PorterDuff.Mode.MULTIPLY);
+        exportDataEmail.getBackground().setColorFilter(ContextCompat.getColor(this, R.color.colorDisable), PorterDuff.Mode.MULTIPLY);
 
         sharedPref = context.getSharedPreferences(
                 "com.sayone.omidyar.PREFERENCE_FILE_KEY_SET", Context.MODE_PRIVATE);
@@ -141,8 +128,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         surveyCount = surveyList.size();
 
 
-
-        surveyAdapter = new SurveyAdapter(surveyList,SurveySummaryActivity.this);
+        surveyAdapter = new SurveyAdapter(surveyList, SurveySummaryActivity.this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -156,11 +142,11 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
 
         resetData.setBackgroundResource(android.R.drawable.btn_default);
-        resetData.getBackground().setColorFilter(ContextCompat.getColor(this,R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+        resetData.getBackground().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
 
 
         sendDataToServer.setBackgroundResource(android.R.drawable.btn_default);
-        sendDataToServer.getBackground().setColorFilter(ContextCompat.getColor(this,R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+        sendDataToServer.getBackground().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
 
 
 //        Gson gson = new GsonBuilder()
@@ -214,19 +200,19 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 //            }
 //        });
 
-       // new LongOperation().execute("");
+        // new LongOperation().execute("");
         // open();
 
     }
 
-    public void open(){
+    public void open() {
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
         final EditText inputA = new EditText(SurveySummaryActivity.this);
-        if(emailIdsStr.equals("")) {
+        if (emailIdsStr.equals("")) {
             emailIdsStr = sharedPref.getString("emailIdsStr", "");
         }
-        if(emailIdsStr.equals("")) {
+        if (emailIdsStr.equals("")) {
             emailIdsStr = "yijia.chen@indufor-na.com, daphne.yin@indufor-na.com";
             // emailIdsStr = "riyas.sayone@gmail.com,issac.sayone@gmail.com";
         }
@@ -243,47 +229,45 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
 
         alertDialogBuilder.setMessage("Enter email ids separated by commas");
-                alertDialogBuilder.setPositiveButton("Send Data",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface arg0, int arg1) {
-                                String value = inputA.getText().toString();
-
-                                SharedPreferences.Editor editor = sharedPref.edit();
-                                editor.putString("emailIdsStr",value);
-                                editor.commit();
-
-                                // alertDialogBuilder.setView(null);
-                                exportDatas(value);
-                                // Toast.makeText(SurveySummaryActivity.this,"You clicked yes  button",Toast.LENGTH_LONG).show();
-                            }
-                        });
-
-                alertDialogBuilder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setPositiveButton("Send Data",
+                new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        String value = inputA.getText().toString();
+
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString("emailIdsStr", value);
+                        editor.commit();
+
+                        // alertDialogBuilder.setView(null);
+                        exportDatas(value);
                         // Toast.makeText(SurveySummaryActivity.this,"You clicked yes  button",Toast.LENGTH_LONG).show();
                     }
                 });
+
+        alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Toast.makeText(SurveySummaryActivity.this,"You clicked yes  button",Toast.LENGTH_LONG).show();
+            }
+        });
 
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
 
-    public void setButtonEnabled(){
+    public void setButtonEnabled() {
         exportDataEmail.setEnabled(true);
         exportDataEmail.setBackgroundResource(android.R.drawable.btn_default);
-       exportDataEmail.getBackground().setColorFilter(ContextCompat.getColor(this,R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
-      //  exportDataEmail.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimary));
+        exportDataEmail.getBackground().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+        //  exportDataEmail.setBackgroundColor(ContextCompat.getColor(this,R.color.colorPrimary));
     }
 
-    public void setButtonDisabled(){
-       exportDataEmail.setEnabled(false);
-      //  exportDataEmail.getBackground().setColorFilter(ContextCompat.getColor(this,R.color.colorDisable), PorterDuff.Mode.MULTIPLY);
+    public void setButtonDisabled() {
+        exportDataEmail.setEnabled(false);
+        //  exportDataEmail.getBackground().setColorFilter(ContextCompat.getColor(this,R.color.colorDisable), PorterDuff.Mode.MULTIPLY);
         //exportDataEmail.setBackgroundColor(ContextCompat.getColor(this,R.color.colorDisable));
     }
-
-
 
 
     private class LongOperation extends AsyncTask<String, Void, String> {
@@ -299,10 +283,10 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             RealmResults<Survey> surveys = realm.where(Survey.class).findAll();
             for (String setsend : set) {
                 for (Survey survey : surveys) {
-                    Log.e("setsend:",setsend);
-                    Log.e("surveyId:",survey.getSurveyId());
+                    Log.e("setsend:", setsend);
+                    Log.e("surveyId:", survey.getSurveyId());
                     if (survey.getSurveyId().equals(setsend)) {
-                        Log.e("AA ","ok");
+                        Log.e("AA ", "ok");
                         jsonObject = new JSONObject();
                         try {
                             if (survey.getId() == 0) {
@@ -381,18 +365,18 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
         @Override
         protected void onPostExecute(String result) {
-         //   makeJsonObjectRequest();
+            //   makeJsonObjectRequest();
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 public void run() {
                     progress.dismiss();
-                    Toast toast = Toast.makeText(context,getResources().getText(R.string.completed_text), Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(context, getResources().getText(R.string.completed_text), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }, 3000);
 
             surveyList = realm.where(Survey.class).findAll();
-            surveyAdapter = new SurveyAdapter(surveyList,SurveySummaryActivity.this);
+            surveyAdapter = new SurveyAdapter(surveyList, SurveySummaryActivity.this);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -459,7 +443,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.e("TAG ", "Error: " + error.getMessage());
 
-                Log.e("TAG ", error.networkResponse+"");
+                Log.e("TAG ", error.networkResponse + "");
 
 //                Toast.makeText(getApplicati   onContext(),
 //                        error.getMessage(), Toast.LENGTH_SHORT).show();
@@ -870,9 +854,9 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                     jsonObjectRevenueProductYear.put("marketPriceCurrency", revenueProductYear.getMarketPriceCurrency());
 
                 if (revenueProductYear.getProjectedIndex() == 0) {
-                    if(revenueProductYear.getYear() == 0){
+                    if (revenueProductYear.getYear() == 0) {
                         jsonObjectRevenueProductYear.put("projectedIndex", "");
-                    }else {
+                    } else {
                         jsonObjectRevenueProductYear.put("projectedIndex", 0);
                     }
                 } else {
@@ -967,7 +951,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 } else {
                     jsonObjectOutlayYears.put("price", outlayYears.getPrice());
                 }
-                Log.e("GGG ",outlayYears.toString());
+                Log.e("GGG ", outlayYears.toString());
                 if (outlayYears.getUnit() == null) {
                     jsonObjectOutlayYears.put("unit", "");
                 } else {
@@ -1123,12 +1107,10 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                     jsonObjectCostElementYears.put("costPerPeriodUni", costElementYears.getCostPerPeriodUnit());
 
 
-
-
                 if (costElementYears.getProjectedIndex() == 0) {
-                    if(costElementYears.getYear() == 0){
+                    if (costElementYears.getYear() == 0) {
                         jsonObjectCostElementYears.put("projectedIndex", "");
-                    }else{
+                    } else {
                         jsonObjectCostElementYears.put("projectedIndex", 0);
                     }
                 } else {
@@ -1246,7 +1228,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 //            if (socialCapitals.getDiscountRateOverride() == 0) {
 //                jsonObjectSocialCapital.put("discountRateOverride", 0);
 //            } else
-                jsonObjectSocialCapital.put("discountRateOverride", socialCapitals.getDiscountRateOverride());
+            jsonObjectSocialCapital.put("discountRateOverride", socialCapitals.getDiscountRateOverride());
             if (socialCapitals.getSpread() == 0) {
                 jsonObjectSocialCapital.put("spread", 0);
             } else
@@ -1284,9 +1266,9 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                     jsonObjectSocialCapitalAnswer.put("factorScore", socialCapitalAnswer.getFactorScore());
 
 
-                if(socialCapitalAnswer.getSocialCapitalQuestion()==null){
-                    jsonObjectSocialCapitalAnswer.put("socialCapitalQuestion","");
-                }else {
+                if (socialCapitalAnswer.getSocialCapitalQuestion() == null) {
+                    jsonObjectSocialCapitalAnswer.put("socialCapitalQuestion", "");
+                } else {
                     jsonObjectSocialCapitalAnswer.put("socialCapitalQuestion", getSocialCapitalQuestions(socialCapitalAnswer.getSocialCapitalQuestion()));
                 }
 
@@ -1483,7 +1465,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         switch (view.getId()) {
             case R.id.button_send_data_to_server:
                 set = sharedPref.getStringSet("surveySet", null);
-                if(set != null) {
+                if (set != null) {
                     if (!set.isEmpty()) {
                         for (String temp : set) {
                             Log.e("Sirvey : ", temp);
@@ -1495,8 +1477,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                             new LongOperation().execute("");
                         }
                     }
-                }
-                else {
+                } else {
                     Toast.makeText(this, "Empty", Toast.LENGTH_SHORT).show();
                     for (String temp : set) {
                         Log.e("Sirvey : ", temp);
@@ -1563,16 +1544,6 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 //                });
 
 
-
-
-
-
-
-
-
-
-
-
 //                Log.e("JSON ", object.toString());
 //
 //                RequestQueue queue = Volley.newRequestQueue(this);
@@ -1617,14 +1588,13 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 //                toast.show();
 
 
-
                 break;
             case R.id.button_reset_data:
                 Realm realm = Realm.getDefaultInstance();
                 realm.beginTransaction();
                 RealmResults<CashFlow> cashFlow = realm.where(CashFlow.class).findAll();
                 cashFlow.deleteAllFromRealm();
-                RealmResults<Component>components  = realm.where(Component.class).findAll();
+                RealmResults<Component> components = realm.where(Component.class).findAll();
                 components.deleteAllFromRealm();
                 RealmResults<CostElement> costElements = realm.where(CostElement.class).findAll();
                 costElements.deleteAllFromRealm();
@@ -1662,19 +1632,18 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 surveys.deleteAllFromRealm();
                 realm.commitTransaction();
                 surveyAdapter.notifyDataSetChanged();
-                surveyCount=0;
+                surveyCount = 0;
                 completedSurveys.setText("" + surveyCount);
                 exportDataEmail.setEnabled(false);
                 exportDataEmail.setBackgroundResource(android.R.drawable.btn_default);
-                exportDataEmail.getBackground().setColorFilter(ContextCompat.getColor(this,R.color.colorDisable), PorterDuff.Mode.MULTIPLY);
+                exportDataEmail.getBackground().setColorFilter(ContextCompat.getColor(this, R.color.colorDisable), PorterDuff.Mode.MULTIPLY);
                 break;
-
 
 
         }
     }
 
-    public void exportDatas(String aa){
+    public void exportDatas(String aa) {
         // ArrayList<String> elephantList = (ArrayList<String>) Arrays.asList(aa.split(","));
         ArrayList<String> elephantList = new ArrayList<String>(Arrays.asList(aa.split(",")));
 
@@ -1683,14 +1652,14 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         ArrayList<String> strings = new ArrayList<>();
         JSONArray jsonArray = new JSONArray();
         JSONArray jsonArrayEmails = new JSONArray();
-        for(String a : elephantList){
+        for (String a : elephantList) {
             jsonArrayEmails.put(a);
         }
 
         Log.e("EMl ", jsonArrayEmails.toString());
 
         // jsonArrayEmails.put("issac.sayone@gmail.com");
-        for(Survey surveyExport : surveyExports){
+        for (Survey surveyExport : surveyExports) {
             jsonArray.put(surveyExport.getSurveyId());
             strings.add(surveyExport.getSurveyId());
         }
@@ -1698,7 +1667,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         JSONObject object = new JSONObject();
         try {
             object.put("id", jsonArray);
-            object.put("email",jsonArrayEmails);
+            object.put("email", jsonArrayEmails);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1709,25 +1678,25 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
         DataWithId dataWithId = new DataWithId(strings, elephantList);
 
-        Log.e("Res ",dataWithId.toString());
+        Log.e("Res ", dataWithId.toString());
 
         Call<ExportData> call = apiService.getExported(dataWithId);
-        Log.e("URL ", call.request().url()+"");
-        Log.e("URL ", call.request().body()+"");
+        Log.e("URL ", call.request().url() + "");
+        Log.e("URL ", call.request().body() + "");
         call.enqueue(new Callback<ExportData>() {
 
             @Override
             public void onResponse(Call<ExportData> call, retrofit2.Response<ExportData> response) {
-                Log.e("Response ",""+response.toString());
+                Log.e("Response ", "" + response.toString());
                 exportDataEmail.setEnabled(true);
-                Toast toast = Toast.makeText(context,"Data exported", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(context, "Data exported", Toast.LENGTH_SHORT);
                 toast.show();
             }
 
             @Override
             public void onFailure(Call<ExportData> call, Throwable t) {
-                Log.e("Response ",""+t.toString());
-                Toast toast = Toast.makeText(context,getResources().getString(R.string.save_failed), Toast.LENGTH_SHORT);
+                Log.e("Response ", "" + t.toString());
+                Toast toast = Toast.makeText(context, getResources().getString(R.string.save_failed), Toast.LENGTH_SHORT);
                 toast.show();
                 exportDataEmail.setEnabled(true);
             }

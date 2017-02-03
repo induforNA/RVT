@@ -11,13 +11,10 @@ import android.util.Log;
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.Frequency;
-import com.sayone.omidyar.model.LandKind;
-import com.sayone.omidyar.model.Participant;
 import com.sayone.omidyar.model.Quantity;
 import com.sayone.omidyar.model.SocialCapitalAnswerOptions;
 import com.sayone.omidyar.model.SocialCapitalQuestions;
 import com.sayone.omidyar.model.SpredTable;
-import com.sayone.omidyar.model.Survey;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,7 +45,6 @@ public class LoadingActivity extends BaseActivity {
     int flagVlue = 0;
 
     public static final String TAG = LoadingActivity.class.getName();
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -218,9 +214,6 @@ public class LoadingActivity extends BaseActivity {
 //        for (Quantity quantity : results3) {
 //            Log.e(TAG + "Quantity ", quantity.getQuantityName());
 //        }
-
-
-
     }
 
     private class LongOperationLoad extends AsyncTask<String, Void, String> {
@@ -303,7 +296,7 @@ public class LoadingActivity extends BaseActivity {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = new JSONObject(jsonArray.get(i).toString());
                         Log.e("HINDI AA ", jsonObject.getString("harvestFrequencyHindi"));
-                        Log.e("BB ", jsonObject.getInt("value")+"");
+                        Log.e("BB ", jsonObject.getInt("value") + "");
 
                         realm.beginTransaction();
                         Frequency frequency = realm.createObject(Frequency.class);
@@ -353,8 +346,6 @@ public class LoadingActivity extends BaseActivity {
             }
 
 
-
-
             RealmResults<SocialCapitalQuestions> results = realm.where(SocialCapitalQuestions.class).findAll();
             for (SocialCapitalQuestions socialCapitalQuestions1 : results) {
                 Log.e(TAG + "abcd", socialCapitalQuestions1.toString());
@@ -380,7 +371,6 @@ public class LoadingActivity extends BaseActivity {
                 Log.e(TAG + "Quantity ", quantity.getQuantityName());
             }
 
-
             return null;
         }
 
@@ -391,9 +381,9 @@ public class LoadingActivity extends BaseActivity {
         }
     }
 
-    public void goToNext(){
-        if((flagVlue >= 4) || (quetionsLoadStatus.equals("true") && spredTableLoadStatus.equals("true") && frequencyLoadStatus.equals("true") && quanityLoadStatus.equals("true"))){
-            Intent intent = new Intent(LoadingActivity.this,RegistrationActivity.class);
+    public void goToNext() {
+        if ((flagVlue >= 4) || (quetionsLoadStatus.equals("true") && spredTableLoadStatus.equals("true") && frequencyLoadStatus.equals("true") && quanityLoadStatus.equals("true"))) {
+            Intent intent = new Intent(LoadingActivity.this, RegistrationActivity.class);
             startActivity(intent);
             finish();
         }
@@ -542,6 +532,5 @@ public class LoadingActivity extends BaseActivity {
             return null;
         }
         return json;
-
     }
 }

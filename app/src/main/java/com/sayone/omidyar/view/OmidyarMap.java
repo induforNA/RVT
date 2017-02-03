@@ -1,22 +1,18 @@
 package com.sayone.omidyar.view;
 
 import android.Manifest;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
-import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
@@ -36,7 +32,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.sayone.omidyar.BaseActivity;
-import com.sayone.omidyar.Omidyar;
 import com.sayone.omidyar.R;
 
 import java.io.File;
@@ -45,8 +40,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
-
-import io.realm.Realm;
 
 public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -111,15 +104,15 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
         landName = (TextView) findViewById(R.id.land_name);
         map = (View) findViewById(R.id.map);
 
-        if(currentSocialCapitalServey.equals("Forestland"))
+        if (currentSocialCapitalServey.equals("Forestland"))
             landName.setText(getResources().getText(R.string.string_forestland));
-        if(currentSocialCapitalServey.equals("Pastureland"))
+        if (currentSocialCapitalServey.equals("Pastureland"))
             landName.setText(getResources().getText(R.string.string_pastureland));
-        if(currentSocialCapitalServey.equals("Mining Land"))
+        if (currentSocialCapitalServey.equals("Mining Land"))
             landName.setText(getResources().getText(R.string.string_miningland));
-        if(currentSocialCapitalServey.equals("Cropland"))
+        if (currentSocialCapitalServey.equals("Cropland"))
             landName.setText(getResources().getText(R.string.title_cropland));
-      //  landName.setText(currentSocialCapitalServey);
+        //  landName.setText(currentSocialCapitalServey);
         nextButton.setOnClickListener(this);
         backButton.setOnClickListener(this);
         drawPolygon.setOnClickListener(this);
@@ -147,35 +140,35 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
         googleMap.setOnMapLongClickListener(this);
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
-                @Override
-                public void onMapClick(LatLng latLng) {
-                    if(flag){
-                        googleMap.clear();
-                        flag=false;
-                    }
-                    latLng1=latLng;
-                    MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(latLng);
-                    if(initFlag){
-                        initLat=latLng.latitude;
-                        initLon=latLng.longitude;
-                        initFlag=false;
-                    }
-                    x.add(latLng.latitude);
-                    y.add(latLng.longitude);
-                    markerOptions.title(latLng.latitude + " : " + latLng.longitude);
-                    googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-                    googleMap.addMarker(markerOptions);
+            @Override
+            public void onMapClick(LatLng latLng) {
+                if (flag) {
+                    googleMap.clear();
+                    flag = false;
                 }
-            });
+                latLng1 = latLng;
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(latLng);
+                if (initFlag) {
+                    initLat = latLng.latitude;
+                    initLon = latLng.longitude;
+                    initFlag = false;
+                }
+                x.add(latLng.latitude);
+                y.add(latLng.longitude);
+                markerOptions.title(latLng.latitude + " : " + latLng.longitude);
+                googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                googleMap.addMarker(markerOptions);
+            }
+        });
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
 
             case R.id.next_button:
-                Intent intent=new Intent(getApplicationContext(),SocialCapitalStartActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SocialCapitalStartActivity.class);
                 startActivity(intent);
                 break;
 
@@ -188,16 +181,16 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
                 v.setDrawingCacheEnabled(true);
                 mMap.snapshot(this);
                 mapImage.setImageBitmap(bitmap);
-                Toast toast = Toast.makeText(context,getResources().getString(R.string.image_saved), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(context, getResources().getString(R.string.image_saved), Toast.LENGTH_SHORT);
                 toast.show();
                 break;
 
             case R.id.clear_button:
                 x.clear();
                 y.clear();
-                initLon=0;
-                initFlag=true;
-                initLat=0;
+                initLon = 0;
+                initFlag = true;
+                initLat = 0;
                 mMap.clear();
                 polylineOptions = new PolylineOptions();
                 break;
@@ -205,15 +198,15 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
             case R.id.draw_map_button:
                 mMap.clear();
                 int i = 0;
-                for(Double cordinate:x){
-                    Log.e("LAT LONG ", cordinate+" "+y.get(i));
+                for (Double cordinate : x) {
+                    Log.e("LAT LONG ", cordinate + " " + y.get(i));
 
-                    polylineOptions.add(new LatLng(cordinate,y.get(i)));
+                    polylineOptions.add(new LatLng(cordinate, y.get(i)));
                     i++;
-                    temp=i;
+                    temp = i;
                     mMap.addPolyline(polylineOptions).setWidth(3);
                 }
-                polylineOptions.add(new LatLng(initLat,initLon));
+                polylineOptions.add(new LatLng(initLat, initLon));
                 mMap.addPolyline(polylineOptions).setWidth(3);
                 break;
         }
@@ -221,7 +214,7 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                     mGoogleApiClient);
             if (mLastLocation != null) {
@@ -229,15 +222,14 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
                 lat = mLastLocation.getLatitude();
                 lon = mLastLocation.getLongitude();
 
-                Log.e("LAT ",lat+"");
-                Log.e("LON ",lon+"");
+                Log.e("LAT ", lat + "");
+                Log.e("LON ", lon + "");
                 LatLng sydney = new LatLng(lat, lon);
                 mMap.addMarker(new MarkerOptions().position(sydney).title("your location"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
                 return;
             }
-        }
-        else{
+        } else {
 
             if (ContextCompat.checkSelfPermission(OmidyarMap.this,
                     Manifest.permission.ACCESS_FINE_LOCATION)
@@ -253,7 +245,6 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
                 }
             }
         }
-
     }
 
     @Override
@@ -280,10 +271,9 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     return;
-                }
-                else{
+                } else {
                     if (ContextCompat.checkSelfPermission(OmidyarMap.this,
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             != PackageManager.PERMISSION_GRANTED) {
@@ -299,8 +289,6 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
                     }
                 }
         }
-
-
     }
 
     @Override
@@ -313,15 +301,13 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
         mapImage.setImageBitmap(bitmap);
 
 
-
-
         String path = Environment.getExternalStorageDirectory().toString();
         OutputStream fOutputStream = null;
         File dir = new File(path + "/MapImagesNew/");
-        if(!dir.exists()) {
+        if (!dir.exists()) {
             dir.mkdirs();
         }
-        File file = new File(path + "/MapImagesNew/",currentSocialCapitalServey+serveyId+"screen.jpg");
+        File file = new File(path + "/MapImagesNew/", currentSocialCapitalServey + serveyId + "screen.jpg");
         try {
             fOutputStream = new FileOutputStream(file);
 
@@ -334,16 +320,12 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
             MediaStore.Images.Media.insertImage(getContentResolver(), file.getAbsolutePath(), file.getName(), file.getName());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            Toast.makeText(this,getResources().getString(R.string.save_failed), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.save_failed), Toast.LENGTH_SHORT).show();
             return;
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(this,getResources().getString(R.string.save_failed), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.save_failed), Toast.LENGTH_SHORT).show();
             return;
         }
-
-
     }
-
-
 }

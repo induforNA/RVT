@@ -3,10 +3,9 @@ package com.sayone.omidyar.view;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,7 +27,7 @@ public class NaturalCapitalSurveyStartActivity extends BaseActivity implements V
 
     private SharedPreferences preferences;
     Context context;
-    Button buttonNext,buttonBack;
+    Button buttonNext, buttonBack;
     String currentSocialCapitalServey;
     String serveyId;
     private ImageView imageViewMenuIcon;
@@ -49,21 +48,21 @@ public class NaturalCapitalSurveyStartActivity extends BaseActivity implements V
         realm = Realm.getDefaultInstance();
         preferences = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        serveyId = preferences.getString("surveyId","");
-        currentSocialCapitalServey = preferences.getString("currentSocialCapitalServey","");
-        language=Locale.getDefault().getDisplayLanguage();
+        serveyId = preferences.getString("surveyId", "");
+        currentSocialCapitalServey = preferences.getString("currentSocialCapitalServey", "");
+        language = Locale.getDefault().getDisplayLanguage();
 
-        landType = (TextView)findViewById(R.id.land_type);
-        buttonBack=(Button)findViewById(R.id.button_back);
-        buttonNext=(Button)findViewById(R.id.button_next);
+        landType = (TextView) findViewById(R.id.land_type);
+        buttonBack = (Button) findViewById(R.id.button_back);
+        buttonNext = (Button) findViewById(R.id.button_next);
 
         menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);
         imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
         drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
         textViewAbout = (TextView) findViewById(R.id.text_view_about);
         logout = (TextView) findViewById(R.id.logout);
-        startSurvey=(TextView)findViewById(R.id.text_start_survey);
-        surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
+        startSurvey = (TextView) findViewById(R.id.text_start_survey);
+        surveyIdDrawer = (TextView) findViewById(R.id.text_view_id);
 
         buttonBack.setOnClickListener(this);
         buttonNext.setOnClickListener(this);
@@ -74,36 +73,34 @@ public class NaturalCapitalSurveyStartActivity extends BaseActivity implements V
         startSurvey.setOnClickListener(this);
         surveyIdDrawer.setText(serveyId);
 
-        if(currentSocialCapitalServey.equals("")){
+        if (currentSocialCapitalServey.equals("")) {
             RealmResults<LandKind> landKindRealmResults = realm.where(LandKind.class)
-                    .equalTo("surveyId",serveyId)
-                    .equalTo("status","active")
+                    .equalTo("surveyId", serveyId)
+                    .equalTo("status", "active")
                     .findAll();
             SharedPreferences.Editor editor = preferences.edit();
             currentSocialCapitalServey = landKindRealmResults.get(0).getName();
-            editor.putString("currentSocialCapitalServey",currentSocialCapitalServey);
+            editor.putString("currentSocialCapitalServey", currentSocialCapitalServey);
             editor.apply();
         }
 
-        if(currentSocialCapitalServey.equals("Forestland"))
+        if (currentSocialCapitalServey.equals("Forestland"))
             landType.setText(getResources().getText(R.string.string_forestland));
-        if(currentSocialCapitalServey.equals("Pastureland"))
+        if (currentSocialCapitalServey.equals("Pastureland"))
             landType.setText(getResources().getText(R.string.string_pastureland));
-        if(currentSocialCapitalServey.equals("Mining Land"))
+        if (currentSocialCapitalServey.equals("Mining Land"))
             landType.setText(getResources().getText(R.string.string_miningland));
-        if(currentSocialCapitalServey.equals("Cropland"))
+        if (currentSocialCapitalServey.equals("Cropland"))
             landType.setText(getResources().getText(R.string.title_cropland));
-
-
     }
 
     @Override
     public void onClick(View view) {
         Intent intent;
-        switch (view.getId()){
+        switch (view.getId()) {
 
             case R.id.button_next:
-                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivityA.class);
+                intent = new Intent(getApplicationContext(), NaturalCapitalSurveyActivityA.class);
                 startActivity(intent);
                 break;
             case R.id.button_back:
@@ -112,30 +109,30 @@ public class NaturalCapitalSurveyStartActivity extends BaseActivity implements V
             case R.id.image_view_menu_icon:
                 toggleMenuDrawer();
                 break;
-            case  R.id.drawer_close_btn:
+            case R.id.drawer_close_btn:
                 toggleMenuDrawer();
                 break;
-            case  R.id.text_view_about:
-                Intent i = new Intent(getApplicationContext(),AboutActivity.class);
+            case R.id.text_view_about:
+                Intent i = new Intent(getApplicationContext(), AboutActivity.class);
                 startActivity(i);
                 break;
             case R.id.text_start_survey:
-                Intent intentt = new Intent(getApplicationContext(),MainActivity.class);
+                Intent intentt = new Intent(getApplicationContext(), MainActivity.class);
                 intentt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intentt);
                 break;
             case R.id.logout:
-                Intent intents = new Intent(getApplicationContext(),RegistrationActivity.class);
+                Intent intents = new Intent(getApplicationContext(), RegistrationActivity.class);
                 intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intents);
                 break;
-
         }
     }
-    public void toggleMenuDrawer(){
-        if(menuDrawerLayout.isDrawerOpen(GravityCompat.START)){
+
+    public void toggleMenuDrawer() {
+        if (menuDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             menuDrawerLayout.closeDrawer(GravityCompat.START);
-        }else{
+        } else {
             menuDrawerLayout.openDrawer(GravityCompat.START);
         }
     }

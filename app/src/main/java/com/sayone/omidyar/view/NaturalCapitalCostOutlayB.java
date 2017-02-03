@@ -51,7 +51,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
     SharedPreferences sharedPref;
 
     String serveyId;
-    Button buttonBack,buttonNext, buttonSaveNext;
+    Button buttonBack, buttonNext, buttonSaveNext;
     ImageView buttonAddWood;
     Spinner spinnerOccurance;
     RealmList<Outlay> costOutlays;
@@ -103,8 +103,8 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         realm = Realm.getDefaultInstance();
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        serveyId = sharedPref.getString("surveyId","");
-        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey","");
+        serveyId = sharedPref.getString("surveyId", "");
+        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey", "");
 
         costOutlays = new RealmList<>();
         costOutlaysToSave = new RealmList<>();
@@ -113,7 +113,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         spinnerYear = (Spinner) findViewById(R.id.spinner_year);
         spinnerCurrency = (Spinner) findViewById(R.id.spinner_currency);
         spinnerItem = (Spinner) findViewById(R.id.spinner_item);
-        spinnerOccurance=(Spinner)findViewById(R.id.spinner_occurance);
+        spinnerOccurance = (Spinner) findViewById(R.id.spinner_occurance);
 
         yearList = new ArrayList<>();
         currenyList = new ArrayList<>();
@@ -133,11 +133,10 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
 
 //        ArrayAdapter<CharSequence> occurance_adapter = ArrayAdapter.createFromResource(this,
 //                R.array.time_period_array, android.R.layout.simple_spinner_item);
-     //  occurance_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //  occurance_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerOccurance.setAdapter(occuranceAdapter);
 
-        // int year = Calendar.getInstance().get(Calendar.YEAR);
-        int year = sharedPref.getInt("surveyyear",2016);
+        int year = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
         currentYearIndex = 0;
         totalYears = 0;
         currentItemIndex = 0;
@@ -148,62 +147,61 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         curreny_adapter.notifyDataSetChanged();
 
 
-
         Survey survey = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
-        for(LandKind landKind:survey.getLandKinds()){
-            if(landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")){
-                for(int i=0;i<=15;i++){
+        for (LandKind landKind : survey.getLandKinds()) {
+            if (landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")) {
+                for (int i = 0; i <= 15; i++) {
                     yearList.add(String.valueOf(year));
                     year++;
                 }
                 year_adapter.notifyDataSetChanged();
                 landKindName = landKind.getName();
                 //costElements = landKind.getForestLand().getRevenueProducts();
-                for(Outlay outlay:landKind.getForestLand().getOutlays()){
+                for (Outlay outlay : landKind.getForestLand().getOutlays()) {
                     costOutlaysToSave.add(outlay);
-                    if(outlay.getType().equals("Timber")){
+                    if (outlay.getType().equals("Timber")) {
                         costOutlays.add(outlay);
                     }
                 }
-            }else if(landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")){
-                for(int i=0;i<=5;i++){
+            } else if (landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")) {
+                for (int i = 0; i <= 5; i++) {
                     yearList.add(String.valueOf(year));
                     year++;
                 }
                 year_adapter.notifyDataSetChanged();
                 landKindName = landKind.getName();
                 //costElements = landKind.getForestLand().getRevenueProducts();
-                for(Outlay outlay:landKind.getCropLand().getOutlays()){
+                for (Outlay outlay : landKind.getCropLand().getOutlays()) {
                     costOutlaysToSave.add(outlay);
-                    if(outlay.getType().equals("Timber")){
+                    if (outlay.getType().equals("Timber")) {
                         costOutlays.add(outlay);
                     }
                 }
-            }else if(landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")){
-                for(int i=0;i<=8;i++){
+            } else if (landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")) {
+                for (int i = 0; i <= 8; i++) {
                     yearList.add(String.valueOf(year));
                     year++;
                 }
                 year_adapter.notifyDataSetChanged();
                 landKindName = landKind.getName();
                 //costElements = landKind.getForestLand().getRevenueProducts();
-                for(Outlay outlay:landKind.getPastureLand().getOutlays()){
+                for (Outlay outlay : landKind.getPastureLand().getOutlays()) {
                     costOutlaysToSave.add(outlay);
-                    if(outlay.getType().equals("Timber")){
+                    if (outlay.getType().equals("Timber")) {
                         costOutlays.add(outlay);
                     }
                 }
-            }else if(landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")){
-                for(int i=0;i<=5;i++){
+            } else if (landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")) {
+                for (int i = 0; i <= 5; i++) {
                     yearList.add(String.valueOf(year));
                     year++;
                 }
                 year_adapter.notifyDataSetChanged();
                 landKindName = landKind.getName();
                 //costElements = landKind.getForestLand().getRevenueProducts();
-                for(Outlay outlay:landKind.getMiningLand().getOutlays()){
+                for (Outlay outlay : landKind.getMiningLand().getOutlays()) {
                     costOutlaysToSave.add(outlay);
-                    if(outlay.getType().equals("Timber")){
+                    if (outlay.getType().equals("Timber")) {
                         costOutlays.add(outlay);
                     }
                 }
@@ -211,18 +209,17 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         }
 
         RealmResults<Frequency> frequencyResult = realm.where(Frequency.class).findAll();
-        for(Frequency frequency:frequencyResult){
-            Log.e("HARVEST ", frequency.getHarvestFrequency()+" "+frequency.getFrequencyValue());
-            if(language.equals("हिन्दी")) {
+        for (Frequency frequency : frequencyResult) {
+            Log.e("HARVEST ", frequency.getHarvestFrequency() + " " + frequency.getFrequencyValue());
+            if (language.equals("हिन्दी")) {
                 timePeriodList.add(frequency.getHarvestFrequencyHindi());
-            }
-            else{
+            } else {
                 timePeriodList.add(frequency.getHarvestFrequency());
             }
         }
         occuranceAdapter.notifyDataSetChanged();
 
-        for(Outlay outlay:costOutlays){
+        for (Outlay outlay : costOutlays) {
             itemList.add(outlay.getItemName());
         }
         item_adapter.notifyDataSetChanged();
@@ -231,8 +228,8 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         totalIems = itemList.size();
 
 
-        buttonBack=(Button)findViewById(R.id.button_back);
-        buttonNext=(Button)findViewById(R.id.button_next);
+        buttonBack = (Button) findViewById(R.id.button_back);
+        buttonNext = (Button) findViewById(R.id.button_next);
         // buttonSaveNext = (Button) findViewById(R.id.button_save_next);
 //        buttonAddWood = (ImageView) findViewById(R.id.button_add_wood);
         landType = (TextView) findViewById(R.id.land_type);
@@ -242,11 +239,11 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
         textViewAbout = (TextView) findViewById(R.id.text_view_about);
         logout = (TextView) findViewById(R.id.logout);
-        startSurvey=(TextView)findViewById(R.id.text_start_survey);
-        surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
-         buttonSave = (Button) findViewById(R.id.button_save);
+        startSurvey = (TextView) findViewById(R.id.text_start_survey);
+        surveyIdDrawer = (TextView) findViewById(R.id.text_view_id);
+        buttonSave = (Button) findViewById(R.id.button_save);
         costValue = (EditText) findViewById(R.id.cost_value);
-        frequencyNumber = (EditText)findViewById(R.id.frequency_number);
+        frequencyNumber = (EditText) findViewById(R.id.frequency_number);
 
 //        if(currentSocialCapitalServey.equals("Forestland")){
 //            questionRevenue.setText("Add investment/cost outlay items");
@@ -263,13 +260,13 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
 //        }
 
 //        landType.setText(currentSocialCapitalServey);
-        if(currentSocialCapitalServey.equals("Forestland"))
+        if (currentSocialCapitalServey.equals("Forestland"))
             landType.setText(getResources().getText(R.string.string_forestland));
-        if(currentSocialCapitalServey.equals("Pastureland"))
+        if (currentSocialCapitalServey.equals("Pastureland"))
             landType.setText(getResources().getText(R.string.string_pastureland));
-        if(currentSocialCapitalServey.equals("Mining Land"))
+        if (currentSocialCapitalServey.equals("Mining Land"))
             landType.setText(getResources().getText(R.string.string_miningland));
-        if(currentSocialCapitalServey.equals("Cropland"))
+        if (currentSocialCapitalServey.equals("Cropland"))
             landType.setText(getResources().getText(R.string.title_cropland));
 
 //        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -287,7 +284,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         logout.setOnClickListener(this);
         startSurvey.setOnClickListener(this);
         surveyIdDrawer.setText(serveyId);
-         buttonSave.setOnClickListener(this);
+        buttonSave.setOnClickListener(this);
         // buttonSaveNext.setOnClickListener(this);
 
 
@@ -315,20 +312,20 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         });
     }
 
-    public void findNextData(){
+    public void findNextData() {
         saveDatas();
 
 //        currentYearIndex++;
 //        if(currentYearIndex >= totalYears){
-            //currentYearIndex = 0;
-            currentItemIndex++;
-            if(currentItemIndex >= totalIems){
-                currentItemIndex = 0;
-                allCashFlow();
-                // Toast.makeText(context,"Completed",Toast.LENGTH_SHORT).show();
-            }
+        //currentYearIndex = 0;
+        currentItemIndex++;
+        if (currentItemIndex >= totalIems) {
+            currentItemIndex = 0;
+            allCashFlow();
+            // Toast.makeText(context,"Completed",Toast.LENGTH_SHORT).show();
+        }
 //        }
-        Log.e("INDEX ", currentYearIndex+" "+currentItemIndex+" "+year_adapter.getCount()+" "+item_adapter.getCount());
+        Log.e("INDEX ", currentYearIndex + " " + currentItemIndex + " " + year_adapter.getCount() + " " + item_adapter.getCount());
 //        yearList.size();
 //        totalIems = itemList.size();
         //spinnerYear.setSelection(year_adapter.getPosition(yearList.get(currentYearIndex)));
@@ -339,19 +336,19 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
 //        spinnerCurrency.setSelection(yearList.indexOf(yearList.get(currentYearIndex))            currentItemIndex);
     }
 
-    public void findBackData(){
+    public void findBackData() {
 //        currentYearIndex--;
 //        if(currentYearIndex < 0){
 //            currentYearIndex = totalYears - 1;
-            currentItemIndex--;
-            if(currentItemIndex < 0){
-                currentItemIndex = totalIems - 1;
-                finish();
-                // allCashFlow();
-                // Toast.makeText(context,"Completed",Toast.LENGTH_SHORT).show();
-            }
+        currentItemIndex--;
+        if (currentItemIndex < 0) {
+            currentItemIndex = totalIems - 1;
+            finish();
+            // allCashFlow();
+            // Toast.makeText(context,"Completed",Toast.LENGTH_SHORT).show();
+        }
 //        }
-        Log.e("INDEX ", currentYearIndex+" "+currentItemIndex+" "+year_adapter.getCount()+" "+item_adapter.getCount());
+        Log.e("INDEX ", currentYearIndex + " " + currentItemIndex + " " + year_adapter.getCount() + " " + item_adapter.getCount());
 //        yearList.size();
 //        totalIems = itemList.size();
 //         setSelection(year_adapter.getPosition(yearList.get(currentYearIndex)));
@@ -375,29 +372,29 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                 findBackData();
                 // finish();
                 break;
-            
+
             case R.id.button_save:
                 saveDatas();
-                Toast.makeText(this,getResources().getString(R.string.text_data_saved),Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.text_data_saved), Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.image_view_menu_icon:
                 toggleMenuDrawer();
                 break;
-            case  R.id.drawer_close_btn:
+            case R.id.drawer_close_btn:
                 toggleMenuDrawer();
                 break;
-            case  R.id.text_view_about:
-                Intent i = new Intent(getApplicationContext(),AboutActivity.class);
+            case R.id.text_view_about:
+                Intent i = new Intent(getApplicationContext(), AboutActivity.class);
                 startActivity(i);
                 break;
             case R.id.text_start_survey:
-                Intent intentt = new Intent(getApplicationContext(),MainActivity.class);
+                Intent intentt = new Intent(getApplicationContext(), MainActivity.class);
                 intentt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intentt);
                 break;
             case R.id.logout:
-                Intent intents = new Intent(getApplicationContext(),RegistrationActivity.class);
+                Intent intents = new Intent(getApplicationContext(), RegistrationActivity.class);
                 intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intents);
                 break;
@@ -405,23 +402,23 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         }
     }
 
-    public void allCashFlow(){
+    public void allCashFlow() {
         Survey results = realm.where(Survey.class)
-                .equalTo("surveyId",serveyId)
+                .equalTo("surveyId", serveyId)
                 .findFirst();
         RealmList<CashFlow> cashFlows = new RealmList<>();
-        for(LandKind landKind:results.getLandKinds()){
+        for (LandKind landKind : results.getLandKinds()) {
 
-            if(landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")){
+            if (landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")) {
                 // Log.e("DIS RATE ", landKind.getSocialCapitals().getDiscountRate()+"");
                 int k = 0;
-                for(RevenueProduct revenueProduct:landKind.getForestLand().getRevenueProducts()){
-                    if(k <= 0) {
+                for (RevenueProduct revenueProduct : landKind.getForestLand().getRevenueProducts()) {
+                    if (k <= 0) {
                         for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
-                            if(!landKind.getSocialCapitals().isDiscountFlag()){
-                                cashFlows.add(calculateCashFlow("Forestland",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
-                            }else{
-                                cashFlows.add(calculateCashFlow("Forestland",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRateOverride()));
+                            if (!landKind.getSocialCapitals().isDiscountFlag()) {
+                                cashFlows.add(calculateCashFlow("Forestland", revenueProductYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
+                            } else {
+                                cashFlows.add(calculateCashFlow("Forestland", revenueProductYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
                             }
                         }
                     }
@@ -432,15 +429,15 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                 realm.commitTransaction();
 
                 // Log.e("MM ",landKind.getForestLand().getCashFlows().get(0).toString());
-            }else if(landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")){
+            } else if (landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")) {
                 int k = 0;
-                for(RevenueProduct revenueProduct:landKind.getCropLand().getRevenueProducts()){
-                    if(k <= 0) {
+                for (RevenueProduct revenueProduct : landKind.getCropLand().getRevenueProducts()) {
+                    if (k <= 0) {
                         for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
-                            if(!landKind.getSocialCapitals().isDiscountFlag()){
-                                cashFlows.add(calculateCashFlow("Cropland",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
-                            }else{
-                                cashFlows.add(calculateCashFlow("Cropland",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRateOverride()));
+                            if (!landKind.getSocialCapitals().isDiscountFlag()) {
+                                cashFlows.add(calculateCashFlow("Cropland", revenueProductYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
+                            } else {
+                                cashFlows.add(calculateCashFlow("Cropland", revenueProductYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
                             }
                         }
                     }
@@ -449,15 +446,15 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                 realm.beginTransaction();
                 landKind.getCropLand().setCashFlows(cashFlows);
                 realm.commitTransaction();
-            }else if(landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")){
+            } else if (landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")) {
                 int k = 0;
-                for(RevenueProduct revenueProduct:landKind.getPastureLand().getRevenueProducts()){
-                    if(k <= 0) {
+                for (RevenueProduct revenueProduct : landKind.getPastureLand().getRevenueProducts()) {
+                    if (k <= 0) {
                         for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
-                            if(!landKind.getSocialCapitals().isDiscountFlag()){
-                                cashFlows.add(calculateCashFlow("Pastureland",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
-                            }else{
-                                cashFlows.add(calculateCashFlow("Pastureland",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRateOverride()));
+                            if (!landKind.getSocialCapitals().isDiscountFlag()) {
+                                cashFlows.add(calculateCashFlow("Pastureland", revenueProductYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
+                            } else {
+                                cashFlows.add(calculateCashFlow("Pastureland", revenueProductYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
                             }
                         }
                     }
@@ -466,15 +463,15 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                 realm.beginTransaction();
                 landKind.getPastureLand().setCashFlows(cashFlows);
                 realm.commitTransaction();
-            }else if(landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")){
+            } else if (landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")) {
                 int k = 0;
-                for(RevenueProduct revenueProduct:landKind.getMiningLand().getRevenueProducts()){
-                    if(k <= 0) {
+                for (RevenueProduct revenueProduct : landKind.getMiningLand().getRevenueProducts()) {
+                    if (k <= 0) {
                         for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
-                            if(!landKind.getSocialCapitals().isDiscountFlag()){
-                                cashFlows.add(calculateCashFlow("Mining Land",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRate()));
-                            }else{
-                                cashFlows.add(calculateCashFlow("Mining Land",revenueProductYears.getYear(),landKind.getSocialCapitals().getDiscountRateOverride()));
+                            if (!landKind.getSocialCapitals().isDiscountFlag()) {
+                                cashFlows.add(calculateCashFlow("Mining Land", revenueProductYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
+                            } else {
+                                cashFlows.add(calculateCashFlow("Mining Land", revenueProductYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
                             }
                         }
                     }
@@ -489,62 +486,62 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         nextLandKind();
     }
 
-    public CashFlow calculateCashFlow(String landKind, int year, double disRatePersent){
+    public CashFlow calculateCashFlow(String landKind, int year, double disRatePersent) {
         RevenueProductYears revenueProductYears = realm.where(RevenueProductYears.class)
-                .equalTo("surveyId",serveyId)
-                .equalTo("landKind",landKind)
-                .equalTo("year",year)
+                .equalTo("surveyId", serveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
                 .findFirst();
 
         CostElementYears costElementYears = realm.where(CostElementYears.class)
-                .equalTo("surveyId",serveyId)
-                .equalTo("landKind",landKind)
-                .equalTo("year",year)
+                .equalTo("surveyId", serveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
                 .findFirst();
 
         OutlayYears outlayYears = realm.where(OutlayYears.class)
-                .equalTo("surveyId",serveyId)
-                .equalTo("landKind",landKind)
-                .equalTo("year",year)
+                .equalTo("surveyId", serveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
                 .findFirst();
 
         RealmResults<RevenueProductYears> revenueProductYearses = realm.where(RevenueProductYears.class)
-                .equalTo("surveyId",serveyId)
-                .equalTo("landKind",landKind)
-                .equalTo("year",year)
+                .equalTo("surveyId", serveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
                 .findAll();
 
         RealmResults<CostElementYears> costElementYearses = realm.where(CostElementYears.class)
-                .equalTo("surveyId",serveyId)
-                .equalTo("landKind",landKind)
-                .equalTo("year",year)
+                .equalTo("surveyId", serveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
                 .findAll();
 
         RealmResults<OutlayYears> outlayYearses = realm.where(OutlayYears.class)
-                .equalTo("surveyId",serveyId)
-                .equalTo("landKind",landKind)
-                .equalTo("year",year)
+                .equalTo("surveyId", serveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
                 .findAll();
 
 
         double revenueTotal = 0;
         double costTotal = 0;
         double outlayTotal = 0;
-        double disRate = disRatePersent/100;
+        double disRate = disRatePersent / 100;
 
         double disFactor = 0;
 
-        for(RevenueProductYears revenueProductYears1:revenueProductYearses){
+        for (RevenueProductYears revenueProductYears1 : revenueProductYearses) {
             revenueTotal = revenueTotal + revenueProductYears1.getSubtotal();
-            disFactor = 1 / Math.pow(1+disRate,revenueProductYears.getProjectedIndex());
+            disFactor = 1 / Math.pow(1 + disRate, revenueProductYears.getProjectedIndex());
         }
 
-        for(CostElementYears costElementYears1:costElementYearses){
+        for (CostElementYears costElementYears1 : costElementYearses) {
             costTotal = costTotal + costElementYears1.getSubtotal();
-            disFactor = 1 / Math.pow(1+disRate,costElementYears.getProjectedIndex());
+            disFactor = 1 / Math.pow(1 + disRate, costElementYears.getProjectedIndex());
         }
 
-        for(OutlayYears outlayYears1:outlayYearses){
+        for (OutlayYears outlayYears1 : outlayYearses) {
             outlayTotal = outlayTotal + outlayYears1.getPrice();
         }
 
@@ -570,7 +567,6 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         double discountedCashFlow = cashFlowVal * disFactor;
 
 
-
         realm.beginTransaction();
         CashFlow cashFlow = realm.createObject(CashFlow.class);
         cashFlow.setId(getNextKeyCashFlow());
@@ -587,22 +583,21 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         return cashFlow;
     }
 
-    public void calculateNPV(){
+    public void calculateNPV() {
         Survey results = realm.where(Survey.class)
-                .equalTo("surveyId",serveyId)
+                .equalTo("surveyId", serveyId)
                 .findFirst();
-        // int year = Calendar.getInstance().get(Calendar.YEAR);
-        int year = sharedPref.getInt("surveyyear",2016);
-        for(LandKind landKind:results.getLandKinds()){
-            if(landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")){
+        int year = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
+        for (LandKind landKind : results.getLandKinds()) {
+            if (landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")) {
 
                 double npv = 0;
-                for(CashFlow cashFlow :landKind.getForestLand().getCashFlows()){
-                    if(cashFlow.getYear() >= year){
+                for (CashFlow cashFlow : landKind.getForestLand().getCashFlows()) {
+                    if (cashFlow.getYear() >= year) {
                         npv = npv + cashFlow.getDiscountedCashFlow();
                     }
                 }
-                if(results.getComponents() == null){
+                if (results.getComponents() == null) {
                     realm.beginTransaction();
                     Component component = realm.createObject(Component.class);
                     component.setId(getNextKeyComponent());
@@ -613,19 +608,19 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                     realm.beginTransaction();
                     results.setComponents(component);
                     realm.commitTransaction();
-                }else{
+                } else {
                     realm.beginTransaction();
                     results.getComponents().setForestValue(npv);
                     realm.commitTransaction();
                 }
-            }else if(landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")){
+            } else if (landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")) {
                 double npv = 0;
-                for(CashFlow cashFlow :landKind.getCropLand().getCashFlows()){
-                    if(cashFlow.getYear() >= year){
+                for (CashFlow cashFlow : landKind.getCropLand().getCashFlows()) {
+                    if (cashFlow.getYear() >= year) {
                         npv = npv + cashFlow.getDiscountedCashFlow();
                     }
                 }
-                if(results.getComponents() == null){
+                if (results.getComponents() == null) {
                     realm.beginTransaction();
                     Component component = realm.createObject(Component.class);
                     component.setId(getNextKeyComponent());
@@ -636,20 +631,20 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                     realm.beginTransaction();
                     results.setComponents(component);
                     realm.commitTransaction();
-                }else{
+                } else {
                     realm.beginTransaction();
                     results.getComponents().setCroplandValue(npv);
                     realm.commitTransaction();
                 }
 
-            }else if(landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")){
+            } else if (landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")) {
                 double npv = 0;
-                for(CashFlow cashFlow :landKind.getPastureLand().getCashFlows()){
-                    if(cashFlow.getYear() >= year){
+                for (CashFlow cashFlow : landKind.getPastureLand().getCashFlows()) {
+                    if (cashFlow.getYear() >= year) {
                         npv = npv + cashFlow.getDiscountedCashFlow();
                     }
                 }
-                if(results.getComponents() == null){
+                if (results.getComponents() == null) {
                     realm.beginTransaction();
                     Component component = realm.createObject(Component.class);
                     component.setId(getNextKeyComponent());
@@ -660,19 +655,19 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                     realm.beginTransaction();
                     results.setComponents(component);
                     realm.commitTransaction();
-                }else{
+                } else {
                     realm.beginTransaction();
                     results.getComponents().setPastureValue(npv);
                     realm.commitTransaction();
                 }
-            }else if(landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")){
+            } else if (landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")) {
                 double npv = 0;
-                for(CashFlow cashFlow :landKind.getMiningLand().getCashFlows()){
-                    if(cashFlow.getYear() >= year){
+                for (CashFlow cashFlow : landKind.getMiningLand().getCashFlows()) {
+                    if (cashFlow.getYear() >= year) {
                         npv = npv + cashFlow.getDiscountedCashFlow();
                     }
                 }
-                if(results.getComponents() == null){
+                if (results.getComponents() == null) {
                     realm.beginTransaction();
                     Component component = realm.createObject(Component.class);
                     component.setId(getNextKeyComponent());
@@ -683,7 +678,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                     realm.beginTransaction();
                     results.setComponents(component);
                     realm.commitTransaction();
-                }else{
+                } else {
                     realm.beginTransaction();
                     results.getComponents().setMiningLandValue(npv);
                     realm.commitTransaction();
@@ -700,24 +695,24 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         return realm.where(CashFlow.class).max("id").intValue() + 1;
     }
 
-    private void loadDatas(){
+    private void loadDatas() {
         String itemName = spinnerItem.getSelectedItem().toString();
         int yearVal = Integer.parseInt(spinnerYear.getSelectedItem().toString());
 
         Outlay outlayResult = realm.where(Outlay.class)
-                .equalTo("surveyId",serveyId)
-                .equalTo("landKind",currentSocialCapitalServey)
-                .equalTo("itemName",itemName)
+                .equalTo("surveyId", serveyId)
+                .equalTo("landKind", currentSocialCapitalServey)
+                .equalTo("itemName", itemName)
                 .findFirst();
         //Log.e("Save ", outlayResult.toString());
-        for(OutlayYears outlayYears:outlayResult.getOutlayYearses()){
+        for (OutlayYears outlayYears : outlayResult.getOutlayYearses()) {
             //Log.e("CHECK ", outlayYears.getYear()+" "+spinnerYear.getSelectedItem().toString());
-            if(outlayYears.getYear() == Integer.parseInt(spinnerYear.getSelectedItem().toString())){
-                if(outlayYears.getPrice()!=0) {
+            if (outlayYears.getYear() == Integer.parseInt(spinnerYear.getSelectedItem().toString())) {
+                if (outlayYears.getPrice() != 0) {
                     costValue.setText(outlayYears.getPrice() + "");
-                    if(outlayYears.getFrequency()!=0) {
+                    if (outlayYears.getFrequency() != 0) {
                         frequencyNumber.setText(outlayYears.getFrequency() + "");
-                        if(timePeriodList.size() != 0){
+                        if (timePeriodList.size() != 0) {
                             // Log.e("TEST FRE ", timePeriod_adapter.getPosition(frequency.getHarvestFrequency())+"");
 //                            if(language.equals("हिन्दी")) {
                             spinnerOccurance.setSelection(occuranceAdapter.getPosition(outlayYears.getTimePeriod()));
@@ -727,7 +722,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
 //                            }
                         }
                     }
-                }else{
+                } else {
                     costValue.setText("");
                     frequencyNumber.setText("");
                 }
@@ -745,21 +740,21 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
     private void saveDatas() {
         //Log.e("Save","DATA");
         Outlay outlayResult = realm.where(Outlay.class)
-                .equalTo("surveyId",serveyId)
-                .equalTo("landKind",currentSocialCapitalServey)
-                .equalTo("itemName",spinnerItem.getSelectedItem().toString())
+                .equalTo("surveyId", serveyId)
+                .equalTo("landKind", currentSocialCapitalServey)
+                .equalTo("itemName", spinnerItem.getSelectedItem().toString())
                 .findFirst();
         //Log.e("Save ", outlayResult.toString());
-        for(OutlayYears outlayYears:outlayResult.getOutlayYearses()){
-            Log.e("CHECK ", outlayYears.getYear()+" "+spinnerYear.getSelectedItem().toString());
-            if(outlayYears.getYear() == Integer.parseInt(spinnerYear.getSelectedItem().toString())){
+        for (OutlayYears outlayYears : outlayResult.getOutlayYearses()) {
+            Log.e("CHECK ", outlayYears.getYear() + " " + spinnerYear.getSelectedItem().toString());
+            if (outlayYears.getYear() == Integer.parseInt(spinnerYear.getSelectedItem().toString())) {
                 String val = costValue.getText().toString();
-                String freq= frequencyNumber.getText().toString();
-                String timePeriod=spinnerOccurance.getSelectedItem().toString();
-                if(val.equals("")) {
+                String freq = frequencyNumber.getText().toString();
+                String timePeriod = spinnerOccurance.getSelectedItem().toString();
+                if (val.equals("")) {
                     val = "0";
                 }
-                if(freq.equals("")){
+                if (freq.equals("")) {
                     freq = "0";
                 }
                 realm.beginTransaction();
@@ -775,17 +770,17 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
     }
 
 
-    public void nextLandKind(){
+    public void nextLandKind() {
         RealmResults<LandKind> landKindRealmResults = realm.where(LandKind.class)
-                .equalTo("surveyId",serveyId)
-                .equalTo("status","active")
+                .equalTo("surveyId", serveyId)
+                .equalTo("status", "active")
                 .findAll();
         int j = 0;
         int i = 0;
         for (LandKind landKind : landKindRealmResults) {
             //Log.e("TAG ", landKind.toString());
             //Log.e(TAG, String.valueOf(survey1.getParticipants().size()));
-            if(landKind.getName().equals(currentSocialCapitalServey)){
+            if (landKind.getName().equals(currentSocialCapitalServey)) {
                 j = i + 1;
             }
             i++;
@@ -794,15 +789,15 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         currentYearIndex = totalYears - 1;
         currentItemIndex = totalIems - 1;
 
-        if(j < i){
+        if (j < i) {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("currentSocialCapitalServey", landKindRealmResults.get(j).getName());
             editor.apply();
 
-            Intent intent = new Intent(getApplicationContext(),StartLandTypeActivity.class);
+            Intent intent = new Intent(getApplicationContext(), StartLandTypeActivity.class);
             startActivity(intent);
-        }else{
-            Intent intent = new Intent(getApplicationContext(),CertificateActivity.class);
+        } else {
+            Intent intent = new Intent(getApplicationContext(), CertificateActivity.class);
             startActivity(intent);
         }
     }
@@ -815,10 +810,10 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         return realm.where(Outlay.class).max("id").intValue() + 1;
     }
 
-    public void toggleMenuDrawer(){
-        if(menuDrawerLayout.isDrawerOpen(GravityCompat.START)){
+    public void toggleMenuDrawer() {
+        if (menuDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             menuDrawerLayout.closeDrawer(GravityCompat.START);
-        }else{
+        } else {
             menuDrawerLayout.openDrawer(GravityCompat.START);
         }
     }

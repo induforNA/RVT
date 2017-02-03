@@ -29,8 +29,6 @@ public class AdminLoginActivity extends BaseActivity implements View.OnClickList
         login.setOnClickListener(this);
         surveyorLogin.setOnClickListener(this);
         signUp.setOnClickListener(this);
-
-
     }
 
     @Override

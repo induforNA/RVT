@@ -14,19 +14,17 @@ import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.Survey;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     Button signUp, adminLogin, login;
-    EditText surveyorName, communityName,surveyName;
-    String surveyor, community,survey;
+    EditText surveyorName, communityName, surveyName;
+    String surveyor, community, survey;
     boolean flag = false;
     SharedPreferences.Editor editor;
 
     private SharedPreferences preferences;
     Context context;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +41,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         adminLogin = (Button) findViewById(R.id.button_admin_login);
         communityName = (EditText) findViewById(R.id.edittext_community);
         surveyorName = (EditText) findViewById(R.id.edittext_surveyor);
-        surveyName=(EditText)findViewById(R.id.edittext_survey);
+        surveyName = (EditText) findViewById(R.id.edittext_survey);
 
         login.setOnClickListener(this);
         signUp.setOnClickListener(this);
         adminLogin.setOnClickListener(this);
-
-
-
     }
 
     @Override
@@ -62,25 +57,25 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.button_login:
                 surveyor = surveyorName.getText().toString();
                 community = communityName.getText().toString();
-                survey=surveyName.getText().toString();
+                survey = surveyName.getText().toString();
                 if (surveyor.equals("")) {
                     toastfunction(getApplicationContext(), getResources().getString(R.string.empty_surveyor_filed));
                 } else if (community.equals("")) {
                     toastfunction(getApplicationContext(), getResources().getString(R.string.empty_community_field));
                 } else if (survey.equals("")) {
                     toastfunction(getApplicationContext(), getResources().getString(R.string.empty_survey_field));
-                }else {
+                } else {
                     Realm realm = Realm.getDefaultInstance();
                     Survey surveyCheck = realm.where(Survey.class)
-                                                        .equalTo("surveyId",survey)
-                                                        .findFirst();
-                    if(surveyCheck!=null) {
+                            .equalTo("surveyId", survey)
+                            .findFirst();
+                    if (surveyCheck != null) {
                         if (surveyor.equals(surveyCheck.getSurveyor())) {
                             if (community.equals(surveyCheck.getCommunity())) {
                                 toastfunction(getApplicationContext(), getResources().getString(R.string.login_successful));
                                 flag = true;
-                                editor= preferences.edit();
-                                editor.putString("surveyId",survey);
+                                editor = preferences.edit();
+                                editor.putString("surveyId", survey);
                                 editor.apply();
                                 intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
@@ -94,8 +89,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         if (!flag) {
                             toastfunction(getApplicationContext(), getResources().getString(R.string.login_failed));
                         }
-                    }
-                    else {
+                    } else {
                         toastfunction(getApplicationContext(), getResources().getString(R.string.survey_absent));
                     }
                 }
@@ -110,9 +104,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 intent = new Intent(getApplicationContext(), AdminLoginActivity.class);
                 startActivity(intent);
                 break;
-
         }
     }
+
     public void toastfunction(Context context, String message) {
         Toast toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
         toast.show();

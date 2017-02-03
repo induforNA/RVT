@@ -117,9 +117,9 @@ public class SocialCapitalActivity1 extends BaseActivity {
         imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
         drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
         textViewAbout = (TextView) findViewById(R.id.text_view_about);
-        surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
+        surveyIdDrawer = (TextView) findViewById(R.id.text_view_id);
         logout = (TextView) findViewById(R.id.logout);
-        startSurvey=(TextView)findViewById(R.id.text_start_survey);
+        startSurvey = (TextView) findViewById(R.id.text_start_survey);
 
 //        socialCapitalQuestionses = realm.where(SocialCapitalQuestions.class).findAll();
 //        for (SocialCapitalQuestions socialCapitalQuestions : socialCapitalQuestionses) {
@@ -152,8 +152,7 @@ public class SocialCapitalActivity1 extends BaseActivity {
                 landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers());
 
 
-        Log.e("MULTIPLE ",landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers().toString());
-
+        Log.e("MULTIPLE ", landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers().toString());
 
 
 //        if (landKind.getSocialCapitals().getSocialCapitalAnswers().size() == 0) {
@@ -229,7 +228,7 @@ public class SocialCapitalActivity1 extends BaseActivity {
                     clearOptions();
 
 
-                    Log.e("MULTIPLE ",landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers().toString());
+                    Log.e("MULTIPLE ", landKind.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers().toString());
 
 
                     int preQuestionId = currentQuestionId + 1;
@@ -248,27 +247,27 @@ public class SocialCapitalActivity1 extends BaseActivity {
             case R.id.image_view_menu_icon:
                 toggleMenuDrawer();
                 break;
-            case  R.id.drawer_close_btn:
+            case R.id.drawer_close_btn:
                 toggleMenuDrawer();
                 break;
-            case  R.id.text_view_about:
-                Intent i = new Intent(getApplicationContext(),AboutActivity.class);
+            case R.id.text_view_about:
+                Intent i = new Intent(getApplicationContext(), AboutActivity.class);
                 startActivity(i);
                 break;
             case R.id.logout:
-                Intent intent = new Intent(getApplicationContext(),RegistrationActivity.class);
+                Intent intent = new Intent(getApplicationContext(), RegistrationActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 break;
             case R.id.text_start_survey:
-                Intent intents = new Intent(getApplicationContext(),MainActivity.class);
+                Intent intents = new Intent(getApplicationContext(), MainActivity.class);
                 intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intents);
                 break;
         }
     }
 
-    public void clearOptions(){
+    public void clearOptions() {
         optionA.setChecked(false);
         optionB.setChecked(false);
         optionC.setChecked(false);
@@ -371,10 +370,10 @@ public class SocialCapitalActivity1 extends BaseActivity {
             if (options.get(index) == null) {
                 checkBox.setVisibility(View.GONE);
             } else {
-                for(MultipleAnswer multipleAnswerItr : landKind1.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers()){
-                    Log.e("AFTER ",options.get(index).getId()+" "+multipleAnswerItr.getAnswer());
-                    if(options.get(index).getId() == multipleAnswerItr.getAnswer()){
-                        Log.e("AFTER ","CLEAR CHANGE DISPLAY TEST");
+                for (MultipleAnswer multipleAnswerItr : landKind1.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers()) {
+                    Log.e("AFTER ", options.get(index).getId() + " " + multipleAnswerItr.getAnswer());
+                    if (options.get(index).getId() == multipleAnswerItr.getAnswer()) {
+                        Log.e("AFTER ", "CLEAR CHANGE DISPLAY TEST");
                         checkBox.setChecked(true);
                         socialCapitalAnswerOptionsesList.add(options.get(index));
                     }
@@ -389,8 +388,8 @@ public class SocialCapitalActivity1 extends BaseActivity {
             if (options.get(index) == null) {
                 radioButton.setVisibility(View.GONE);
             } else {
-                for(MultipleAnswer multipleAnswerItr : landKind1.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers()){
-                    if(options.get(index).getId() == multipleAnswerItr.getAnswer()){
+                for (MultipleAnswer multipleAnswerItr : landKind1.getSocialCapitals().getSocialCapitalAnswers().get(currentQuestionId).getMultipleAnswers()) {
+                    if (options.get(index).getId() == multipleAnswerItr.getAnswer()) {
                         radioButton.setChecked(true);
                         socialCapitalAnswerOptionsesList.add(options.get(index));
                     }
@@ -471,10 +470,11 @@ public class SocialCapitalActivity1 extends BaseActivity {
                 .findFirst();
 
     }
-    public void toggleMenuDrawer(){
-        if(menuDrawerLayout.isDrawerOpen(GravityCompat.START)){
+
+    public void toggleMenuDrawer() {
+        if (menuDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             menuDrawerLayout.closeDrawer(GravityCompat.START);
-        }else{
+        } else {
             menuDrawerLayout.openDrawer(GravityCompat.START);
         }
     }

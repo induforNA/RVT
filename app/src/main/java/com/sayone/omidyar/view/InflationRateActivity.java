@@ -2,8 +2,8 @@ package com.sayone.omidyar.view;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -38,13 +38,11 @@ public class InflationRateActivity extends AppCompatActivity {
                 inflationrateString = inflationRate.getText().toString();
                 editor.putString("inflationRate", inflationrateString);
                 editor.apply();
-                Toast toast = Toast.makeText(context,getResources().getText(R.string.text_data_saved), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(context, getResources().getText(R.string.text_data_saved), Toast.LENGTH_SHORT);
                 toast.show();
                 String rate = preferences.getString("inflationRate", "");
                 Log.e("Rate :", rate);
             }
         });
-
-
     }
 }

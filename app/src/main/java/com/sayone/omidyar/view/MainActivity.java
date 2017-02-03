@@ -4,10 +4,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,7 +23,6 @@ import android.widget.Toast;
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.adapter.ParticipantsAdapter;
-import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.Participant;
 import com.sayone.omidyar.model.Survey;
 
@@ -34,7 +33,7 @@ import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener{
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     public static final String TAG = MainActivity.class.getName();
     Context context;
@@ -76,14 +75,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
-        serveyId = sharedPref.getString("surveyId","");
+        serveyId = sharedPref.getString("surveyId", "");
 
 
         menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);
         imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
         drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
         textViewAbout = (TextView) findViewById(R.id.text_view_about);
-        surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
+        surveyIdDrawer = (TextView) findViewById(R.id.text_view_id);
         buttonAddParticipant = (ImageView) findViewById(R.id.button_add_participant);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         serveyIdTextView = (TextView) findViewById(R.id.servey_id);
@@ -91,11 +90,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         noParticipantLayout = (LinearLayout) findViewById(R.id.no_participant_layout);
         participantLayout = (LinearLayout) findViewById(R.id.participant_layout);
         logout = (TextView) findViewById(R.id.logout);
-        startSurvey=(TextView)findViewById(R.id.text_start_survey);
+        startSurvey = (TextView) findViewById(R.id.text_start_survey);
 
         serveyIdTextView.setText(serveyId);
 
-        participantsAdapter = new ParticipantsAdapter(participants,MainActivity.this);
+        participantsAdapter = new ParticipantsAdapter(participants, MainActivity.this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -115,16 +114,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
 
         //realm.beginTransaction();
-        survey = realm.where(Survey.class).equalTo("surveyId",serveyId).findFirst();
+        survey = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
 
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(survey.getDate());
         int surveyyear = cal.get(Calendar.YEAR);
-        Log.e("SURVEY DATE ", surveyyear+"");
+        Log.e("SURVEY DATE ", surveyyear + "");
 
-        SharedPreferences.Editor editor= sharedPref.edit();
-        editor.putInt("surveyyear",surveyyear);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("surveyyear", surveyyear);
         editor.apply();
 
 //        sharedPref.
@@ -146,15 +145,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
         //Log.e(TAG ,encodeDeviceId(androidId)+" "+androidId);
 
-        if(survey.getParticipants().size() == 0){
+        if (survey.getParticipants().size() == 0) {
             participantLayout.setVisibility(View.GONE);
             noParticipantLayout.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             //participants = survey.getParticipants();
-            for(Participant participantIter:survey.getParticipants()){
+            for (Participant participantIter : survey.getParticipants()) {
                 participants.add(participantIter);
             }
-            Log.e("TEST ",participants.toString());
+            Log.e("TEST ", participants.toString());
             participantsAdapter.notifyDataSetChanged();
             noParticipantLayout.setVisibility(View.GONE);
             participantLayout.setVisibility(View.VISIBLE);
@@ -162,12 +161,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
         RealmResults<Survey> results = realm.where(Survey.class).findAll();
         for (Survey survey1 : results) {
-            Log.e(TAG,survey1.toString());
+            Log.e(TAG, survey1.toString());
             Log.e(TAG, String.valueOf(survey1.getParticipants().size()));
         }
-
-
-
     }
 
     @Override
@@ -179,27 +175,27 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     public int getNextKeySurvey() {
         return realm.where(Survey.class).max("id").intValue() + 1;
     }
+
     public int getNextKeyParticipant() {
         return realm.where(Participant.class).max("id").intValue() + 1;
     }
 
 
-
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.image_view_menu_icon:
                 toggleMenuDrawer();
                 break;
-            case  R.id.drawer_close_btn:
+            case R.id.drawer_close_btn:
                 toggleMenuDrawer();
                 break;
-            case  R.id.text_view_about:
-                Intent i = new Intent(MainActivity.this,AboutActivity.class);
+            case R.id.text_view_about:
+                Intent i = new Intent(MainActivity.this, AboutActivity.class);
                 startActivity(i);
                 break;
             case R.id.text_start_survey:
-                Intent intent = new Intent(MainActivity.this,MainActivity.class);
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 break;
@@ -232,7 +228,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                         String gender = editTextGender.getText().toString();
                         String age = editTextAge.getText().toString();
                         String education = editTextEducation.getText().toString();
-                        if(!name.equals("")) {
+                        if (!name.equals("")) {
                             realm.beginTransaction();
                             Participant participant = realm.createObject(Participant.class);
                             participant.setId(getNextKeyParticipant());
@@ -240,10 +236,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                             participant.setName(name);
                             participant.setOccupation(occupation);
                             participant.setGender(gender);
-                            if(!age.equals("")){
+                            if (!age.equals("")) {
                                 participant.setAge(Integer.parseInt(age));
                             }
-                            if(!education.equals("")){
+                            if (!education.equals("")) {
                                 participant.setYearsOfEdu(Integer.parseInt(education));
                             }
                             realm.commitTransaction();
@@ -269,19 +265,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                             participantLayout.setVisibility(View.VISIBLE);
                             participantsAdapter.notifyDataSetChanged();
                             dialog.cancel();
-                        }else {
-                                Toast.makeText(context, getResources().getString(R.string.string_fill_name), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(context, getResources().getString(R.string.string_fill_name), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
                 dialog.show();
                 break;
             case R.id.next_button:
-                Intent intentToLandTypeSelectionActivity = new Intent(MainActivity.this,LandTypeSelectionActivity.class);
+                Intent intentToLandTypeSelectionActivity = new Intent(MainActivity.this, LandTypeSelectionActivity.class);
                 startActivity(intentToLandTypeSelectionActivity);
                 break;
             case R.id.logout:
-                Intent intents = new Intent(MainActivity.this,RegistrationActivity.class);
+                Intent intents = new Intent(MainActivity.this, RegistrationActivity.class);
                 intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intents);
                 break;
@@ -289,10 +285,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     }
 
 
-    public void toggleMenuDrawer(){
-        if(menuDrawerLayout.isDrawerOpen(GravityCompat.START)){
+    public void toggleMenuDrawer() {
+        if (menuDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             menuDrawerLayout.closeDrawer(GravityCompat.START);
-        }else{
+        } else {
             menuDrawerLayout.openDrawer(GravityCompat.START);
         }
     }

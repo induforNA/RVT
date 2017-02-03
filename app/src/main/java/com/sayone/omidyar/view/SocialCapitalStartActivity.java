@@ -16,11 +16,8 @@ import android.widget.TextView;
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.LandKind;
-import com.sayone.omidyar.model.Participant;
-import com.sayone.omidyar.model.SocialCapital;
 import com.sayone.omidyar.model.SocialCapitalAnswer;
 import com.sayone.omidyar.model.SocialCapitalQuestions;
-import com.sayone.omidyar.model.Survey;
 
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -29,7 +26,7 @@ import io.realm.RealmResults;
 /**
  * Created by sayone on 20/9/16.
  */
-public class SocialCapitalStartActivity extends BaseActivity implements View.OnClickListener{
+public class SocialCapitalStartActivity extends BaseActivity implements View.OnClickListener {
 
     public static final String TAG = SocialCapitalStartActivity.class.getName();
     private Realm realm;
@@ -59,8 +56,8 @@ public class SocialCapitalStartActivity extends BaseActivity implements View.OnC
         realm = Realm.getDefaultInstance();
         preferences = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        serveyId = preferences.getString("surveyId","");
-        currentSocialCapitalServey = preferences.getString("currentSocialCapitalServey","");
+        serveyId = preferences.getString("surveyId", "");
+        currentSocialCapitalServey = preferences.getString("currentSocialCapitalServey", "");
 
         landType = (TextView) findViewById(R.id.land_type);
         backButton = (Button) findViewById(R.id.back_button);
@@ -69,9 +66,9 @@ public class SocialCapitalStartActivity extends BaseActivity implements View.OnC
         imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
         drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
         textViewAbout = (TextView) findViewById(R.id.text_view_about);
-        surveyIdDrawer=(TextView)findViewById(R.id.text_view_id);
+        surveyIdDrawer = (TextView) findViewById(R.id.text_view_id);
         logout = (TextView) findViewById(R.id.logout);
-        startSurvey=(TextView)findViewById(R.id.text_start_survey);
+        startSurvey = (TextView) findViewById(R.id.text_start_survey);
 
         surveyIdDrawer.setText(serveyId);
 
@@ -84,14 +81,14 @@ public class SocialCapitalStartActivity extends BaseActivity implements View.OnC
         nextButton.setOnClickListener(this);
         startSurvey.setOnClickListener(this);
 
-        if(currentSocialCapitalServey.equals("")){
+        if (currentSocialCapitalServey.equals("")) {
             RealmResults<LandKind> landKindRealmResults = realm.where(LandKind.class)
-                    .equalTo("surveyId",serveyId)
-                    .equalTo("status","active")
+                    .equalTo("surveyId", serveyId)
+                    .equalTo("status", "active")
                     .findAll();
             SharedPreferences.Editor editor = preferences.edit();
             currentSocialCapitalServey = landKindRealmResults.get(0).getName();
-            editor.putString("currentSocialCapitalServey",currentSocialCapitalServey);
+            editor.putString("currentSocialCapitalServey", currentSocialCapitalServey);
             editor.apply();
 //            for (LandKind landKind : landKindRealmResults) {
 //                Log.e("NAME ",landKind.getName());
@@ -108,11 +105,11 @@ public class SocialCapitalStartActivity extends BaseActivity implements View.OnC
 //        }
 
         LandKind landKind = realm.where(LandKind.class)
-                .equalTo("surveyId",serveyId)
-                .equalTo("name",currentSocialCapitalServey)
-                .equalTo("status","active")
+                .equalTo("surveyId", serveyId)
+                .equalTo("name", currentSocialCapitalServey)
+                .equalTo("status", "active")
                 .findFirst();
-        if(landKind.getSocialCapitals().getSocialCapitalAnswers().size() == 0) {
+        if (landKind.getSocialCapitals().getSocialCapitalAnswers().size() == 0) {
             Log.e("Here ", "NULL");
 
 
@@ -134,28 +131,26 @@ public class SocialCapitalStartActivity extends BaseActivity implements View.OnC
         }
 
 
-
-
         LandKind landKind1 = realm.where(LandKind.class)
-                .equalTo("surveyId",serveyId)
-                .equalTo("name",currentSocialCapitalServey)
-                .equalTo("status","active")
+                .equalTo("surveyId", serveyId)
+                .equalTo("name", currentSocialCapitalServey)
+                .equalTo("status", "active")
                 .findFirst();
 
         Log.e("LLL ", landKind1.getSocialCapitals().getSocialCapitalAnswers().toString());
-        Log.e("blaa : ",currentSocialCapitalServey);
+        Log.e("blaa : ", currentSocialCapitalServey);
 
 
-        if(currentSocialCapitalServey.equals("Forestland"))
+        if (currentSocialCapitalServey.equals("Forestland"))
             landType.setText(getResources().getText(R.string.string_forestland));
-        if(currentSocialCapitalServey.equals("Pastureland"))
+        if (currentSocialCapitalServey.equals("Pastureland"))
             landType.setText(getResources().getText(R.string.string_pastureland));
-        if(currentSocialCapitalServey.equals("Mining Land"))
+        if (currentSocialCapitalServey.equals("Mining Land"))
             landType.setText(getResources().getText(R.string.string_miningland));
-        if(currentSocialCapitalServey.equals("Cropland"))
+        if (currentSocialCapitalServey.equals("Cropland"))
             landType.setText(getResources().getText(R.string.title_cropland));
         //  landType.setText(currentSocialCapitalServey);
-       // landType.setText(currentSocialCapitalServey);
+        // landType.setText(currentSocialCapitalServey);
     }
 
     @Override
@@ -172,20 +167,20 @@ public class SocialCapitalStartActivity extends BaseActivity implements View.OnC
             case R.id.image_view_menu_icon:
                 toggleMenuDrawer();
                 break;
-            case  R.id.drawer_close_btn:
+            case R.id.drawer_close_btn:
                 toggleMenuDrawer();
                 break;
-            case  R.id.text_view_about:
-                i = new Intent(SocialCapitalStartActivity.this,AboutActivity.class);
+            case R.id.text_view_about:
+                i = new Intent(SocialCapitalStartActivity.this, AboutActivity.class);
                 startActivity(i);
                 break;
             case R.id.logout:
-                i = new Intent(SocialCapitalStartActivity.this,RegistrationActivity.class);
+                i = new Intent(SocialCapitalStartActivity.this, RegistrationActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
                 break;
             case R.id.text_start_survey:
-                i = new Intent(getApplicationContext(),MainActivity.class);
+                i = new Intent(getApplicationContext(), MainActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
                 break;
@@ -195,10 +190,11 @@ public class SocialCapitalStartActivity extends BaseActivity implements View.OnC
     public int getNextKeySocialCapitalAnswer() {
         return realm.where(SocialCapitalAnswer.class).max("id").intValue() + 1;
     }
-    public void toggleMenuDrawer(){
-        if(menuDrawerLayout.isDrawerOpen(GravityCompat.START)){
+
+    public void toggleMenuDrawer() {
+        if (menuDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             menuDrawerLayout.closeDrawer(GravityCompat.START);
-        }else{
+        } else {
             menuDrawerLayout.openDrawer(GravityCompat.START);
         }
     }
