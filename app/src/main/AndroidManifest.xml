@@ -149,9 +149,9 @@
         <activity
             android:name=".view.InflationRateActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".view.JsonParserActivity">
+        <!--<activity android:name=".view.JsonParserActivity">-->
 
-        </activity>
+        <!--</activity>-->
     </application>
 
 </manifest>

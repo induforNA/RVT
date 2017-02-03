@@ -889,6 +889,10 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                     }
                 }
 
+                if(freqUnit == 1){
+                    harvestFre = 0;
+                }
+
                 for(CostElementYears costElementYears:costElement4.getCostElementYearses()){
                     if(costElementYears.getYear() == 0){
 

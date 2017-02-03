@@ -961,6 +961,10 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                     }
                 }
 
+                if(freqUnit == 1 && !currentSocialCapitalServey.equals("Pastureland")){
+                    harvestFre = 0;
+                }
+
                 for(RevenueProductYears revenueProductYears:revenueProduct4.getRevenueProductYearses()){
                     if(revenueProductYears.getYear() == 0){
                         //realm.beginTransaction();
