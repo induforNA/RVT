@@ -1036,23 +1036,31 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         RealmList<CashFlow> cashFlows = new RealmList<>();
         for (LandKind landKind : results.getLandKinds()) {
 
+            double  discRate;
+            int year = 0;
+
             if (landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")) {
                 // Log.e("DIS RATE ", landKind.getSocialCapitals().getDiscountRate()+"");
                 int k = 0;
+                discRate = landKind.getSocialCapitals().isDiscountFlag() ?  landKind.getSocialCapitals().getDiscountRateOverride() :  landKind.getSocialCapitals().getDiscountRate();
                 for (CostElement costElement : landKind.getForestLand().getCostElements()) {
                     for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
                         Log.e("RPPPPPPP ", costElementYears00 + "");
                     }
                     if (k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
-                            if (!landKind.getSocialCapitals().isDiscountFlag()) {
-                                //Log.e("MMM ", landKind.getSocialCapitals().getDiscountRate()+"");
-                                cashFlows.add(calculateCashFlow("Forestland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
-                            } else {
-                                //Log.e("NNN ", landKind.getSocialCapitals().getDiscountRateOverride()+"");
-                                cashFlows.add(calculateCashFlow("Forestland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
-                            }
+//                            if (!landKind.getSocialCapitals().isDiscountFlag()) {
+//                                //Log.e("MMM ", landKind.getSocialCapitals().getDiscountRate()+"");
+//                                cashFlows.add(calculateCashFlow("Forestland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
+//                            } else {
+//                                //Log.e("NNN ", landKind.getSocialCapitals().getDiscountRateOverride()+"");
+//                                cashFlows.add(calculateCashFlow("Forestland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
+//                            }
+                            cashFlows.add(calculateCashFlow("Forestland", costElementYears.getYear(), discRate));
+                            year =  costElementYears.getYear();
+
                         }
+                        cashFlows.add(calculateTerminalValue("Forestland", year, discRate));
                     }
                     k++;
                 }
@@ -1061,18 +1069,23 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 realm.commitTransaction();
             } else if (landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")) {
                 int k = 0;
+                discRate = landKind.getSocialCapitals().isDiscountFlag() ?  landKind.getSocialCapitals().getDiscountRateOverride() :  landKind.getSocialCapitals().getDiscountRate();
                 for (CostElement costElement : landKind.getCropLand().getCostElements()) {
                     for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
                         Log.e("RPPPPPPP ", costElementYears00 + "");
                     }
                     if (k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
-                            if (!landKind.getSocialCapitals().isDiscountFlag()) {
+                          /*  if (!landKind.getSocialCapitals().isDiscountFlag()) {
                                 cashFlows.add(calculateCashFlow("Cropland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
                             } else {
                                 cashFlows.add(calculateCashFlow("Cropland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
-                            }
+                            }  */
+                            cashFlows.add(calculateCashFlow("Cropland", costElementYears.getYear(), discRate));
+                            year =  costElementYears.getYear();
+
                         }
+                        cashFlows.add(calculateTerminalValue("Cropland", year, discRate));
                     }
                     k++;
                 }
@@ -1081,18 +1094,22 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 realm.commitTransaction();
             } else if (landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")) {
                 int k = 0;
+                discRate = landKind.getSocialCapitals().isDiscountFlag() ?  landKind.getSocialCapitals().getDiscountRateOverride() :  landKind.getSocialCapitals().getDiscountRate();
                 for (CostElement costElement : landKind.getPastureLand().getCostElements()) {
                     for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
                         Log.e("RPPPPPPP ", costElementYears00 + "");
                     }
                     if (k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
-                            if (!landKind.getSocialCapitals().isDiscountFlag()) {
+                        /*    if (!landKind.getSocialCapitals().isDiscountFlag()) {
                                 cashFlows.add(calculateCashFlow("Pastureland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
                             } else {
                                 cashFlows.add(calculateCashFlow("Pastureland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
-                            }
+                            }*/
+                            cashFlows.add(calculateCashFlow("Pastureland", costElementYears.getYear(), discRate));
+                            year =  costElementYears.getYear();
                         }
+                        cashFlows.add(calculateTerminalValue("Pastureland", year, discRate));
                     }
                     k++;
                 }
@@ -1101,18 +1118,22 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 realm.commitTransaction();
             } else if (landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")) {
                 int k = 0;
+                discRate = landKind.getSocialCapitals().isDiscountFlag() ?  landKind.getSocialCapitals().getDiscountRateOverride() :  landKind.getSocialCapitals().getDiscountRate();
                 for (CostElement costElement : landKind.getMiningLand().getCostElements()) {
                     for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
                         Log.e("RPPPPPPP ", costElementYears00 + "");
                     }
                     if (k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
-                            if (!landKind.getSocialCapitals().isDiscountFlag()) {
+                          /*  if (!landKind.getSocialCapitals().isDiscountFlag()) {
                                 cashFlows.add(calculateCashFlow("Mining Land", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
                             } else {
                                 cashFlows.add(calculateCashFlow("Mining Land", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
-                            }
+                            } */
+                            cashFlows.add(calculateCashFlow("Mining Land", costElementYears.getYear(), discRate));
+                            year =  costElementYears.getYear();
                         }
+                        cashFlows.add(calculateTerminalValue("Mining Land", year, discRate));
                     }
                     k++;
                 }
@@ -1246,6 +1267,130 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         // Log.e("CASH ",cashFlow.toString()+"");
         return cashFlow;
     }
+
+    private CashFlow calculateTerminalValue(String landKind, int year, double discountRateOverride) {
+        Survey results = realm.where(Survey.class)
+                .equalTo("surveyId", serveyId)
+                .findFirst();
+
+
+        RevenueProductYears revenueProductYears = realm.where(RevenueProductYears.class)
+                .equalTo("surveyId", serveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
+                .findFirst();
+
+        CostElementYears costElementYears = realm.where(CostElementYears.class)
+                .equalTo("surveyId", serveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
+                .findFirst();
+
+        OutlayYears outlayYears = realm.where(OutlayYears.class)
+                .equalTo("surveyId", serveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
+                .findFirst();
+
+        RealmResults<RevenueProductYears> revenueProductYearses = realm.where(RevenueProductYears.class)
+                .equalTo("surveyId", serveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
+                .findAll();
+
+        RealmResults<CostElementYears> costElementYearses = realm.where(CostElementYears.class)
+                .equalTo("surveyId", serveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
+                .findAll();
+
+        RealmResults<OutlayYears> outlayYearses = realm.where(OutlayYears.class)
+                .equalTo("surveyId", serveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
+                .findAll();
+
+        double disRate = discountRateOverride / 100;
+        double revenueTotal = 0;
+        double costTotal = 0;
+        double outlayTotal = 0;
+
+        double disFactor = 0;
+        // int year = Calendar.getInstance().get(Calendar.YEAR);
+        double terminalValue = 0;
+
+
+        BigDecimal bigDecimalOne = new BigDecimal("1");
+
+        for (RevenueProductYears revenueProductYears1 : revenueProductYearses) {
+            revenueTotal = revenueTotal + revenueProductYears1.getSubtotal();
+
+            double powerFactor = Math.pow(1 + disRate, revenueProductYears.getProjectedIndex());
+            BigDecimal bigDecimalPowerFactor = new BigDecimal(powerFactor);
+            BigDecimal bigDecimalDisFactor = bigDecimalOne.divide(bigDecimalPowerFactor, MathContext.DECIMAL64);
+
+            disFactor = bigDecimalDisFactor.doubleValue();
+
+            // disFactor = 1 / Math.pow(1+disRate,revenueProductYears.getProjectedIndex());
+//            Log.e("PRO IN  ",disRate+" "+revenueProductYears.getProjectedIndex()+"");
+        }
+
+        for (CostElementYears costElementYears1 : costElementYearses) {
+            costTotal = costTotal + costElementYears1.getSubtotal();
+
+            double powerFactor = Math.pow(1 + disRate, costElementYears.getProjectedIndex());
+            BigDecimal bigDecimalPowerFactor = new BigDecimal(powerFactor);
+            BigDecimal bigDecimalDisFactor = bigDecimalOne.divide(bigDecimalPowerFactor, MathContext.DECIMAL64);
+
+            disFactor = bigDecimalDisFactor.doubleValue();
+            // disFactor = 1 / Math.pow(1+disRate,costElementYears.getProjectedIndex());
+//            Log.e("PRO IN  ",disRate+" "+costElementYears.getProjectedIndex()+"");
+        }
+
+        for (OutlayYears outlayYears1 : outlayYearses) {
+            outlayTotal = outlayTotal + outlayYears1.getPrice();
+        }
+        for (LandKind landKind1 : results.getLandKinds()) {
+            if (landKind1.getName().equals(landKind) && currentSocialCapitalServey.equals(landKind)) {
+                CashFlow cashFlow = null;
+                switch (landKind){
+                    case "Forestland" :
+                        cashFlow = landKind1.getForestLand().getCashFlows().get(14);
+                        break;
+                    case "Cropland" :
+                        cashFlow = landKind1.getCropLand().getCashFlows().get(14);
+                        break;
+                    case "Pastureland" :
+                        cashFlow = landKind1.getPastureLand().getCashFlows().get(14);
+                        break;
+                    case "Mining Land" :
+                        cashFlow = landKind1.getMiningLand().getCashFlows().get(14);
+                        break;
+                }
+                terminalValue =  disRate>inflationRate ? (cashFlow.getValue()/(disRate-inflationRate)) : 0;
+            }
+            Log.e("Terminal Value",terminalValue+"");
+        }
+
+        double discountedCashFlow = terminalValue * disFactor;
+
+        realm.beginTransaction();
+        CashFlow cashFlow = realm.createObject(CashFlow.class);
+        cashFlow.setId(getNextKeyCashFlow());
+        cashFlow.setSurveyId(serveyId);
+        cashFlow.setYear(year);
+        cashFlow.setValue(terminalValue);
+        cashFlow.setDiscountingFactor(disFactor);
+        cashFlow.setDiscountedCashFlow(discountedCashFlow);
+        cashFlow.setTotalRevenue(revenueTotal);
+        cashFlow.setTotalCost(costTotal);
+        cashFlow.setTotalOutlay(outlayTotal);
+        realm.commitTransaction();
+
+        return cashFlow;
+
+    }
+
 
     public void calculateNPV() {
         Survey results = realm.where(Survey.class)
