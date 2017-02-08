@@ -222,7 +222,7 @@
     <string name="qn_natural_d_2">Number of times</string>
     <string name="qn_natural_d_3">Time period</string>
     <string name="qn_natural_d_4">Select year</string>
-    <string name="qn_natural_d_5">What was the quantity of products harvested each time?</string>
+    <string name="qn_natural_d_5">What was the quantity of products %1$s each time per household?</string>
     <string name="string_quantity">Quantity</string>
     <string name="hint_number">Quantity</string>
     <string name="text_unit">Unit</string>
@@ -307,6 +307,7 @@
     <string name="button_export">Export Data</string>
     <string name="text_times">times</string>
     <string name="restore_original_inflation_rate">Restore original Inflation rate</string>
+    <string name="string_household">Number of households that %1$s :</string>
 
 
 </resources>

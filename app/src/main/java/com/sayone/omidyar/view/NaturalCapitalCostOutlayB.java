@@ -46,6 +46,7 @@ import static android.R.layout.simple_spinner_item;
 
 public class NaturalCapitalCostOutlayB extends BaseActivity {
 
+    private static final int PROJECTION_COUNT = 15;
     Context context;
     Realm realm;
     SharedPreferences sharedPref;
@@ -150,7 +151,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         Survey survey = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
         for (LandKind landKind : survey.getLandKinds()) {
             if (landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")) {
-                for (int i = 0; i <= 15; i++) {
+                for (int i = 0; i <= PROJECTION_COUNT; i++) {
                     yearList.add(String.valueOf(year));
                     year++;
                 }
@@ -164,7 +165,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                     }
                 }
             } else if (landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")) {
-                for (int i = 0; i <= 5; i++) {
+                for (int i = 0; i <= PROJECTION_COUNT; i++) {
                     yearList.add(String.valueOf(year));
                     year++;
                 }
@@ -178,7 +179,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                     }
                 }
             } else if (landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")) {
-                for (int i = 0; i <= 8; i++) {
+                for (int i = 0; i <= PROJECTION_COUNT; i++) {
                     yearList.add(String.valueOf(year));
                     year++;
                 }
@@ -192,7 +193,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                     }
                 }
             } else if (landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")) {
-                for (int i = 0; i <= 5; i++) {
+                for (int i = 0; i <= PROJECTION_COUNT; i++) {
                     yearList.add(String.valueOf(year));
                     year++;
                 }

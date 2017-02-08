@@ -36,6 +36,8 @@ public class CostElementYears extends RealmObject {
 
     private double subtotal;
 
+    private double households;
+
     public long getId() {
         return id;
     }
@@ -138,5 +140,33 @@ public class CostElementYears extends RealmObject {
 
     public void setProjectedIndex(double projectedIndex) {
         this.projectedIndex = projectedIndex;
+    }
+
+    public double getHouseholds() {
+        return households;
+    }
+
+    public void setHouseholds(double households) {
+        this.households = households;
+    }
+
+    @Override
+    public String toString() {
+        return "CostElementYears{" +
+                "id=" + id +
+                ", surveyId='" + surveyId + '\'' +
+                ", landKind='" + landKind + '\'' +
+                ", costElementId=" + costElementId +
+                ", costFrequencyValue=" + costFrequencyValue +
+                ", costFrequencyUnit=" + costFrequencyUnit +
+                ", costPerPeriodValue=" + costPerPeriodValue +
+                ", costPerPeriodUnit='" + costPerPeriodUnit + '\'' +
+                ", costPerUnitValue=" + costPerUnitValue +
+                ", costPerUnitUnit='" + costPerUnitUnit + '\'' +
+                ", year=" + year +
+                ", projectedIndex=" + projectedIndex +
+                ", subtotal=" + subtotal +
+                ", households=" + households +
+                '}';
     }
 }

@@ -39,6 +39,7 @@ import io.realm.RealmResults;
 
 public class NaturalCapitalCostOutlay extends BaseActivity {
 
+    private static final int PROJECTION_COUNT = 15;
     Context context;
     Realm realm;
     SharedPreferences sharedPref;
@@ -348,10 +349,10 @@ public class NaturalCapitalCostOutlay extends BaseActivity {
 
     public RealmList<OutlayYears> addOutlayYears(String name, long outlayYearsId) {
         RealmList<OutlayYears> outlayYearses = new RealmList<>();
-        int yearsCount = 0;
+        //int yearsCount = 0;
         int year = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
 
-        if (currentSocialCapitalServey.equals("Forestland")) {
+       /* if (currentSocialCapitalServey.equals("Forestland")) {
             yearsCount = 15;
         } else if (currentSocialCapitalServey.equals("Cropland")) {
             yearsCount = 5;
@@ -359,9 +360,9 @@ public class NaturalCapitalCostOutlay extends BaseActivity {
             yearsCount = 8;
         } else if (currentSocialCapitalServey.equals("Mining Land")) {
             yearsCount = 5;
-        }
+        }*/
 
-        for (int i = 0; i <= yearsCount; i++) {
+        for (int i = 0; i <= PROJECTION_COUNT; i++) {
             OutlayYears outlayYearsCheck;
             outlayYearsCheck = realm.where(OutlayYears.class)
                     .equalTo("outlayId", outlayYearsId)

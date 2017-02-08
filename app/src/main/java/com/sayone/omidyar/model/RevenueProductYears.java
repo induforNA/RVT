@@ -38,6 +38,8 @@ public class RevenueProductYears extends RealmObject {
 
     private double harvestArea;
 
+    private double households;
+
     public long getId() {
         return id;
     }
@@ -150,6 +152,14 @@ public class RevenueProductYears extends RealmObject {
         this.harvestArea = harvestArea;
     }
 
+    public double getHouseholds() {
+        return households;
+    }
+
+    public void setHouseholds(double households) {
+        this.households = households;
+    }
+
     @Override
     public String toString() {
         return "RevenueProductYears{" +
@@ -167,6 +177,7 @@ public class RevenueProductYears extends RealmObject {
                 ", projectedIndex=" + projectedIndex +
                 ", subtotal=" + subtotal +
                 ", harvestArea=" + harvestArea +
+                ", households=" + households +
                 '}';
     }
 }
