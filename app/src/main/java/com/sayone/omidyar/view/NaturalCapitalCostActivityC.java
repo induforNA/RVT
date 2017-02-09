@@ -1038,6 +1038,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
             double  discRate;
             int year = 0;
+            CashFlow cashFlowTemp = null;
 
             if (landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")) {
                 // Log.e("DIS RATE ", landKind.getSocialCapitals().getDiscountRate()+"");
@@ -1049,18 +1050,12 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                     }
                     if (k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
-//                            if (!landKind.getSocialCapitals().isDiscountFlag()) {
-//                                //Log.e("MMM ", landKind.getSocialCapitals().getDiscountRate()+"");
-//                                cashFlows.add(calculateCashFlow("Forestland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
-//                            } else {
-//                                //Log.e("NNN ", landKind.getSocialCapitals().getDiscountRateOverride()+"");
-//                                cashFlows.add(calculateCashFlow("Forestland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
-//                            }
-                            cashFlows.add(calculateCashFlow("Forestland", costElementYears.getYear(), discRate));
+                            cashFlowTemp = calculateCashFlow("Forestland", costElementYears.getYear(), discRate);
+                            cashFlows.add(cashFlowTemp);
                             year =  costElementYears.getYear();
 
                         }
-                        cashFlows.add(calculateTerminalValue("Forestland", year, discRate));
+                        cashFlows.add(calculateTerminalValue("Forestland", year, cashFlowTemp, discRate));
                     }
                     k++;
                 }
@@ -1076,16 +1071,12 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                     }
                     if (k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
-                          /*  if (!landKind.getSocialCapitals().isDiscountFlag()) {
-                                cashFlows.add(calculateCashFlow("Cropland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
-                            } else {
-                                cashFlows.add(calculateCashFlow("Cropland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
-                            }  */
-                            cashFlows.add(calculateCashFlow("Cropland", costElementYears.getYear(), discRate));
+                            cashFlowTemp = calculateCashFlow("Cropland", costElementYears.getYear(), discRate);
+                            cashFlows.add(cashFlowTemp);
                             year =  costElementYears.getYear();
 
                         }
-                        cashFlows.add(calculateTerminalValue("Cropland", year, discRate));
+                        cashFlows.add(calculateTerminalValue("Cropland", year, cashFlowTemp, discRate));
                     }
                     k++;
                 }
@@ -1101,15 +1092,11 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                     }
                     if (k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
-                        /*    if (!landKind.getSocialCapitals().isDiscountFlag()) {
-                                cashFlows.add(calculateCashFlow("Pastureland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
-                            } else {
-                                cashFlows.add(calculateCashFlow("Pastureland", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
-                            }*/
-                            cashFlows.add(calculateCashFlow("Pastureland", costElementYears.getYear(), discRate));
+                            cashFlowTemp = calculateCashFlow("Pastureland", costElementYears.getYear(), discRate);
+                            cashFlows.add(cashFlowTemp);
                             year =  costElementYears.getYear();
                         }
-                        cashFlows.add(calculateTerminalValue("Pastureland", year, discRate));
+                        cashFlows.add(calculateTerminalValue("Pastureland", year, cashFlowTemp, discRate));
                     }
                     k++;
                 }
@@ -1125,15 +1112,11 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                     }
                     if (k <= 0) {
                         for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
-                          /*  if (!landKind.getSocialCapitals().isDiscountFlag()) {
-                                cashFlows.add(calculateCashFlow("Mining Land", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
-                            } else {
-                                cashFlows.add(calculateCashFlow("Mining Land", costElementYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
-                            } */
-                            cashFlows.add(calculateCashFlow("Mining Land", costElementYears.getYear(), discRate));
+                            cashFlowTemp = calculateCashFlow("Mining Land", costElementYears.getYear(), discRate);
+                            cashFlows.add(cashFlowTemp);
                             year =  costElementYears.getYear();
                         }
-                        cashFlows.add(calculateTerminalValue("Mining Land", year, discRate));
+                        cashFlows.add(calculateTerminalValue("Mining Land", year, cashFlowTemp, discRate));
                     }
                     k++;
                 }
@@ -1142,8 +1125,6 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 realm.commitTransaction();
             }
         }
-
-
     }
 
     public CashFlow calculateCashFlow(String landKind, int year, double disRatePersent) {
@@ -1268,11 +1249,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         return cashFlow;
     }
 
-    private CashFlow calculateTerminalValue(String landKind, int year, double discountRateOverride) {
-        Survey results = realm.where(Survey.class)
-                .equalTo("surveyId", serveyId)
-                .findFirst();
-
+    private CashFlow calculateTerminalValue(String landKind, int year, CashFlow cashFlowTemp, double discountRateOverride) {
 
         RevenueProductYears revenueProductYears = realm.where(RevenueProductYears.class)
                 .equalTo("surveyId", serveyId)
@@ -1281,12 +1258,6 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 .findFirst();
 
         CostElementYears costElementYears = realm.where(CostElementYears.class)
-                .equalTo("surveyId", serveyId)
-                .equalTo("landKind", landKind)
-                .equalTo("year", year)
-                .findFirst();
-
-        OutlayYears outlayYears = realm.where(OutlayYears.class)
                 .equalTo("surveyId", serveyId)
                 .equalTo("landKind", landKind)
                 .equalTo("year", year)
@@ -1316,9 +1287,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         double outlayTotal = 0;
 
         double disFactor = 0;
-        // int year = Calendar.getInstance().get(Calendar.YEAR);
         double terminalValue = 0;
-
 
         BigDecimal bigDecimalOne = new BigDecimal("1");
 
@@ -1330,9 +1299,6 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             BigDecimal bigDecimalDisFactor = bigDecimalOne.divide(bigDecimalPowerFactor, MathContext.DECIMAL64);
 
             disFactor = bigDecimalDisFactor.doubleValue();
-
-            // disFactor = 1 / Math.pow(1+disRate,revenueProductYears.getProjectedIndex());
-//            Log.e("PRO IN  ",disRate+" "+revenueProductYears.getProjectedIndex()+"");
         }
 
         for (CostElementYears costElementYears1 : costElementYearses) {
@@ -1343,34 +1309,13 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             BigDecimal bigDecimalDisFactor = bigDecimalOne.divide(bigDecimalPowerFactor, MathContext.DECIMAL64);
 
             disFactor = bigDecimalDisFactor.doubleValue();
-            // disFactor = 1 / Math.pow(1+disRate,costElementYears.getProjectedIndex());
-//            Log.e("PRO IN  ",disRate+" "+costElementYears.getProjectedIndex()+"");
         }
 
         for (OutlayYears outlayYears1 : outlayYearses) {
             outlayTotal = outlayTotal + outlayYears1.getPrice();
         }
-        for (LandKind landKind1 : results.getLandKinds()) {
-            if (landKind1.getName().equals(landKind) && currentSocialCapitalServey.equals(landKind)) {
-                CashFlow cashFlow = null;
-                switch (landKind){
-                    case "Forestland" :
-                        cashFlow = landKind1.getForestLand().getCashFlows().get(14);
-                        break;
-                    case "Cropland" :
-                        cashFlow = landKind1.getCropLand().getCashFlows().get(14);
-                        break;
-                    case "Pastureland" :
-                        cashFlow = landKind1.getPastureLand().getCashFlows().get(14);
-                        break;
-                    case "Mining Land" :
-                        cashFlow = landKind1.getMiningLand().getCashFlows().get(14);
-                        break;
-                }
-                terminalValue =  disRate>inflationRate ? (cashFlow.getValue()/(disRate-inflationRate)) : 0;
-            }
-            Log.e("Terminal Value",terminalValue+"");
-        }
+
+        terminalValue =  disRate>inflationRate ? (cashFlowTemp.getValue()/(disRate-inflationRate)) : 0;
 
         double discountedCashFlow = terminalValue * disFactor;
 

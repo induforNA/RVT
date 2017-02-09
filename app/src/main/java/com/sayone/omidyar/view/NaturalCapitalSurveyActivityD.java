@@ -1031,11 +1031,6 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                     }
                     if (k <= 0) {
                         for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
-                          /*  if (!landKind.getSocialCapitals().isDiscountFlag()) {
-                                cashFlows.add(calculateCashFlow("Forestland", revenueProductYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
-                            } else {
-                                cashFlows.add(calculateCashFlow("Forestland", revenueProductYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
-                            }*/
                             cashFlowTemp = calculateCashFlow("Forestland", revenueProductYears.getYear(), discRate);
                             cashFlows.add(cashFlowTemp);
                             year =  revenueProductYears.getYear();
@@ -1059,11 +1054,6 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                     }
                     if (k <= 0) {
                         for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
-                            /*if (!landKind.getSocialCapitals().isDiscountFlag()) {
-                                cashFlows.add(calculateCashFlow("Cropland", revenueProductYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
-                            } else {
-                                cashFlows.add(calculateCashFlow("Cropland", revenueProductYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
-                            }*/
                             cashFlowTemp = calculateCashFlow("Cropland", revenueProductYears.getYear(), discRate);
                             cashFlows.add(cashFlowTemp);
                             year =  revenueProductYears.getYear();
@@ -1086,11 +1076,6 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                     }
                     if (k <= 0) {
                         for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
-                           /* if (!landKind.getSocialCapitals().isDiscountFlag()) {
-                                cashFlows.add(calculateCashFlow("Pastureland", revenueProductYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
-                            } else {
-                                cashFlows.add(calculateCashFlow("Pastureland", revenueProductYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
-                            }*/
                             cashFlowTemp = calculateCashFlow("Pastureland", revenueProductYears.getYear(), discRate);
                             cashFlows.add(cashFlowTemp);
                             year =  revenueProductYears.getYear();
@@ -1113,11 +1098,6 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                     }
                     if (k <= 0) {
                         for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
-                           /* if (!landKind.getSocialCapitals().isDiscountFlag()) {
-                                cashFlows.add(calculateCashFlow("Mining Land", revenueProductYears.getYear(), landKind.getSocialCapitals().getDiscountRate()));
-                            } else {
-                                cashFlows.add(calculateCashFlow("Mining Land", revenueProductYears.getYear(), landKind.getSocialCapitals().getDiscountRateOverride()));
-                            }*/
                             cashFlowTemp = calculateCashFlow("Mining Land", revenueProductYears.getYear(), discRate);
                             cashFlows.add(cashFlowTemp);
                             year =  revenueProductYears.getYear();
@@ -1134,10 +1114,6 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
     }
 
     private CashFlow calculateTerminalValue(String landKind, int year, CashFlow cashFlowTemp, double discountRateOverride) {
-        Survey results = realm.where(Survey.class)
-                .equalTo("surveyId", serveyId)
-                .findFirst();
-
 
         RevenueProductYears revenueProductYears = realm.where(RevenueProductYears.class)
                 .equalTo("surveyId", serveyId)
@@ -1146,12 +1122,6 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 .findFirst();
 
         CostElementYears costElementYears = realm.where(CostElementYears.class)
-                .equalTo("surveyId", serveyId)
-                .equalTo("landKind", landKind)
-                .equalTo("year", year)
-                .findFirst();
-
-        OutlayYears outlayYears = realm.where(OutlayYears.class)
                 .equalTo("surveyId", serveyId)
                 .equalTo("landKind", landKind)
                 .equalTo("year", year)
@@ -1181,9 +1151,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         double outlayTotal = 0;
 
         double disFactor = 0;
-        // int year = Calendar.getInstance().get(Calendar.YEAR);
         double terminalValue = 0;
-
 
         BigDecimal bigDecimalOne = new BigDecimal("1");
 
@@ -1195,9 +1163,6 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             BigDecimal bigDecimalDisFactor = bigDecimalOne.divide(bigDecimalPowerFactor, MathContext.DECIMAL64);
 
             disFactor = bigDecimalDisFactor.doubleValue();
-
-            // disFactor = 1 / Math.pow(1+disRate,revenueProductYears.getProjectedIndex());
-//            Log.e("PRO IN  ",disRate+" "+revenueProductYears.getProjectedIndex()+"");
         }
 
         for (CostElementYears costElementYears1 : costElementYearses) {
@@ -1208,35 +1173,11 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             BigDecimal bigDecimalDisFactor = bigDecimalOne.divide(bigDecimalPowerFactor, MathContext.DECIMAL64);
 
             disFactor = bigDecimalDisFactor.doubleValue();
-            // disFactor = 1 / Math.pow(1+disRate,costElementYears.getProjectedIndex());
-//            Log.e("PRO IN  ",disRate+" "+costElementYears.getProjectedIndex()+"");
         }
 
         for (OutlayYears outlayYears1 : outlayYearses) {
             outlayTotal = outlayTotal + outlayYears1.getPrice();
         }
-      /*  for (LandKind landKind1 : results.getLandKinds()) {
-            if (landKind1.getName().equals(landKind) && currentSocialCapitalServey.equals(landKind)) {
-                CashFlow cashFlow = null;
-                switch (landKind){
-                    case "Forestland" :
-                        cashFlow = landKind1.getForestLand().getCashFlows().get(14);
-                        break;
-                    case "Cropland" :
-                        cashFlow = landKind1.getCropLand().getCashFlows().get(14);
-                        break;
-                    case "Pastureland" :
-                        cashFlow = landKind1.getPastureLand().getCashFlows().get(14);
-                        break;
-                    case "Mining Land" :
-                        cashFlow = landKind1.getMiningLand().getCashFlows().get(14);
-                        break;
-                }
-                terminalValue =  disRate>inflationRate ? (cashFlow.getValue()/(disRate-inflationRate)) : 0;
-                Log.e("Terminal Value",terminalValue+"");
-
-            }
-        }*/
 
         terminalValue =  disRate>inflationRate ? (cashFlowTemp.getValue()/(disRate-inflationRate)) : 0;
 
