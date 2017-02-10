@@ -68,14 +68,14 @@ public class StartLandTypeActivity extends BaseActivity implements View.OnClickL
 
         //  landType.setText(currentSocialCapitalServey);
 
-        if (currentSocialCapitalServey.equals("Forestland"))
+        if (currentSocialCapitalServey.equals(getString(R.string.string_forestland)))
             landType.setText(getResources().getText(R.string.string_forestland));
-        if (currentSocialCapitalServey.equals("Pastureland"))
+        if (currentSocialCapitalServey.equals(getString(R.string.string_pastureland)))
             landType.setText(getResources().getText(R.string.string_pastureland));
-        if (currentSocialCapitalServey.equals("Mining Land"))
+        if (currentSocialCapitalServey.equals(getString(R.string.string_miningland)))
             landType.setText(getResources().getText(R.string.string_miningland));
-        if (currentSocialCapitalServey.equals("Cropland"))
-            landType.setText(getResources().getText(R.string.title_cropland));
+        if (currentSocialCapitalServey.equals(getString(R.string.string_cropland)))
+            landType.setText(getResources().getText(R.string.string_cropland));
         //  landType.setText(currentSocialCapitalServey);
 
         backButton.setOnClickListener(this);

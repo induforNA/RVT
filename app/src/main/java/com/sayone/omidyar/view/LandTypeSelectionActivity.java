@@ -102,18 +102,18 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
                 .findFirst();
         for (LandKind landKindItrate : survey.getLandKinds()) {
             Log.e(TAG + " 11", landKindItrate.toString());
-            if (landKindItrate.getName().equals("Forestland") && landKindItrate.getStatus().equals("active")) {
+            if (landKindItrate.getName().equals(getString(R.string.string_forestland)) && landKindItrate.getStatus().equals("active")) {
                 forestland.setChecked(true);
-                landTypeNames.add("Forestland");
-            } else if (landKindItrate.getName().equals("Cropland") && landKindItrate.getStatus().equals("active")) {
+                landTypeNames.add(getString(R.string.string_forestland));
+            } else if (landKindItrate.getName().equals(getString(R.string.string_cropland)) && landKindItrate.getStatus().equals("active")) {
                 cropland.setChecked(true);
-                landTypeNames.add("Cropland");
-            } else if (landKindItrate.getName().equals("Pastureland") && landKindItrate.getStatus().equals("active")) {
+                landTypeNames.add(getString(R.string.string_cropland));
+            } else if (landKindItrate.getName().equals(getString(R.string.string_pastureland)) && landKindItrate.getStatus().equals("active")) {
                 pastureland.setChecked(true);
-                landTypeNames.add("Pastureland");
-            } else if (landKindItrate.getName().equals("Mining Land") && landKindItrate.getStatus().equals("active")) {
+                landTypeNames.add(getString(R.string.string_pastureland));
+            } else if (landKindItrate.getName().equals(getString(R.string.string_miningland)) && landKindItrate.getStatus().equals("active")) {
                 miningland.setChecked(true);
-                landTypeNames.add("Mining Land");
+                landTypeNames.add(getString(R.string.string_miningland));
             }
         }
 
@@ -135,7 +135,7 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
         boolean checked = ((CheckBox) view).isChecked();
         switch (view.getId()) {
             case R.id.forestland:
-                addLandTyeInSet(checked, "Forestland");
+                addLandTyeInSet(checked, getString(R.string.string_forestland));
 //                if (checked) {
 //                    landTypeNames.add("Forestland");
 //                }else{
@@ -143,7 +143,7 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
 //                }
                 break;
             case R.id.cropland:
-                addLandTyeInSet(checked, "Cropland");
+                addLandTyeInSet(checked, getString(R.string.string_cropland));
 //                if (checked) {
 //                    landTypeNames.add("Cropland");
 //                }else{
@@ -151,7 +151,7 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
 //                }
                 break;
             case R.id.pastureland:
-                addLandTyeInSet(checked, "Pastureland");
+                addLandTyeInSet(checked, getString(R.string.string_pastureland));
 //                if (checked) {
 //                    landTypeNames.add("Pastureland");
 //                }else{
@@ -159,7 +159,7 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
 //                }
                 break;
             case R.id.miningland:
-                addLandTyeInSet(checked, "Mining Land");
+                addLandTyeInSet(checked, getString(R.string.string_miningland));
 //                if (checked) {
 //                    landTypeNames.add("Mining Land");
 //                }else{

@@ -72,7 +72,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
 
     Button buttonSave;
 
-    Spinner spinnerYear, spinnerCurrency, spinnerItem;
+    Spinner spinnerYear, spinnerItem;
 
     TextView landType;
     TextView questionRevenue;
@@ -84,7 +84,6 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
     ArrayAdapter<String> year_adapter;
     ArrayList<String> yearList;
 
-    ArrayAdapter<String> curreny_adapter;
     ArrayList<String> currenyList;
 
     ArrayAdapter<String> occuranceAdapter;
@@ -117,7 +116,6 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
 
 
         spinnerYear = (Spinner) findViewById(R.id.spinner_year);
-        spinnerCurrency = (Spinner) findViewById(R.id.spinner_currency);
         spinnerItem = (Spinner) findViewById(R.id.spinner_item);
         spinnerOccurance = (Spinner) findViewById(R.id.spinner_occurance);
 
@@ -128,9 +126,6 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
 
         year_adapter = new ArrayAdapter<>(this, simple_spinner_item, yearList);
         spinnerYear.setAdapter(year_adapter);
-
-        curreny_adapter = new ArrayAdapter<>(this, simple_spinner_item, currenyList);
-        spinnerCurrency.setAdapter(curreny_adapter);
 
         item_adapter = new ArrayAdapter<>(this, simple_spinner_item, itemList);
         spinnerItem.setAdapter(item_adapter);
@@ -150,12 +145,10 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
 
 
         currenyList.add("INR");
-        curreny_adapter.notifyDataSetChanged();
-
 
         Survey survey = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
         for (LandKind landKind : survey.getLandKinds()) {
-            if (landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")) {
+            if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalServey.equals(getString(R.string.string_forestland))) {
                 for (int i = 0; i <= PROJECTION_COUNT; i++) {
                     yearList.add(String.valueOf(year));
                     year++;
@@ -169,7 +162,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                         costOutlays.add(outlay);
                     }
                 }
-            } else if (landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")) {
+            } else if (landKind.getName().equals(getString(R.string.string_cropland)) && currentSocialCapitalServey.equals(getString(R.string.string_cropland))) {
                 for (int i = 0; i <= PROJECTION_COUNT; i++) {
                     yearList.add(String.valueOf(year));
                     year++;
@@ -183,7 +176,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                         costOutlays.add(outlay);
                     }
                 }
-            } else if (landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")) {
+            } else if (landKind.getName().equals(getString(R.string.string_pastureland)) && currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
                 for (int i = 0; i <= PROJECTION_COUNT; i++) {
                     yearList.add(String.valueOf(year));
                     year++;
@@ -197,7 +190,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                         costOutlays.add(outlay);
                     }
                 }
-            } else if (landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")) {
+            } else if (landKind.getName().equals(getString(R.string.string_miningland)) && currentSocialCapitalServey.equals(getString(R.string.string_miningland))) {
                 for (int i = 0; i <= PROJECTION_COUNT; i++) {
                     yearList.add(String.valueOf(year));
                     year++;
@@ -254,25 +247,25 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
 //        if(currentSocialCapitalServey.equals("Forestland")){
 //            questionRevenue.setText("Add investment/cost outlay items");
 //
-//        }else if(currentSocialCapitalServey.equals("Cropland")){
+//        }else if(currentSocialCapitalServey.equals(getString(R.string.string_cropland))){
 //            questionRevenue.setText("Add investment/cost outlay items");
 //
-//        }else if(currentSocialCapitalServey.equals("Pastureland")){
+//        }else if(currentSocialCapitalServey.equals(getString(R.string.string_pastureland))){
 //            questionRevenue.setText("Add investment/cost outlay items");
 //
-//        }else if(currentSocialCapitalServey.equals("Mining Land")){
+//        }else if(currentSocialCapitalServey.equals(getString(R.string.string_miningland))){
 //            questionRevenue.setText("Add investment/cost outlay items");
 //
 //        }
 
 //        landType.setText(currentSocialCapitalServey);
-        if (currentSocialCapitalServey.equals("Forestland"))
+        if (currentSocialCapitalServey.equals(getString(R.string.string_forestland)))
             landType.setText(getResources().getText(R.string.string_forestland));
-        if (currentSocialCapitalServey.equals("Pastureland"))
+        if (currentSocialCapitalServey.equals(getString(R.string.string_pastureland)))
             landType.setText(getResources().getText(R.string.string_pastureland));
-        if (currentSocialCapitalServey.equals("Mining Land"))
+        if (currentSocialCapitalServey.equals(getString(R.string.string_miningland)))
             landType.setText(getResources().getText(R.string.string_miningland));
-        if (currentSocialCapitalServey.equals("Cropland"))
+        if (currentSocialCapitalServey.equals(getString(R.string.string_cropland)))
             landType.setText(getResources().getText(R.string.title_cropland));
 
 //        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -419,7 +412,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
             int year = 0;
             CashFlow cashFlowTemp = null;
 
-            if (landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")) {
+            if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalServey.equals(getString(R.string.string_forestland))) {
                 // Log.e("DIS RATE ", landKind.getSocialCapitals().getDiscountRate()+"");
                 int k = 0;
                 discRate = landKind.getSocialCapitals().isDiscountFlag() ?  landKind.getSocialCapitals().getDiscountRateOverride() :  landKind.getSocialCapitals().getDiscountRate();
@@ -427,11 +420,11 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                 for (RevenueProduct revenueProduct : landKind.getForestLand().getRevenueProducts()) {
                     if (k <= 0) {
                         for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
-                            cashFlowTemp = calculateCashFlow("Forestland", revenueProductYears.getYear(), discRate);
+                            cashFlowTemp = calculateCashFlow(getString(R.string.string_forestland), revenueProductYears.getYear(), discRate);
                             cashFlows.add(cashFlowTemp);
                             year =  revenueProductYears.getYear();
                         }
-                        cashFlows.add(calculateTerminalValue("Forestland", year, cashFlowTemp, discRate));
+                        cashFlows.add(calculateTerminalValue(getString(R.string.string_forestland), year, cashFlowTemp, discRate));
                     }
                     k++;
                 }
@@ -440,54 +433,54 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                 realm.commitTransaction();
 
                 // Log.e("MM ",landKind.getForestLand().getCashFlows().get(0).toString());
-            } else if (landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")) {
+            } else if (landKind.getName().equals(getString(R.string.string_cropland)) && currentSocialCapitalServey.equals(getString(R.string.string_cropland))) {
                 int k = 0;
                 discRate = landKind.getSocialCapitals().isDiscountFlag() ?  landKind.getSocialCapitals().getDiscountRateOverride() :  landKind.getSocialCapitals().getDiscountRate();
 
                 for (RevenueProduct revenueProduct : landKind.getCropLand().getRevenueProducts()) {
                     if (k <= 0) {
                         for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
-                            cashFlowTemp = calculateCashFlow("Cropland", revenueProductYears.getYear(), discRate);
+                            cashFlowTemp = calculateCashFlow(getString(R.string.string_cropland), revenueProductYears.getYear(), discRate);
                             cashFlows.add(cashFlowTemp);
                             year =  revenueProductYears.getYear();
                         }
-                        cashFlows.add(calculateTerminalValue("Cropland", year, cashFlowTemp, discRate));
+                        cashFlows.add(calculateTerminalValue(getString(R.string.string_cropland), year, cashFlowTemp, discRate));
                     }
                     k++;
                 }
                 realm.beginTransaction();
                 landKind.getCropLand().setCashFlows(cashFlows);
                 realm.commitTransaction();
-            } else if (landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")) {
+            } else if (landKind.getName().equals(getString(R.string.string_pastureland)) && currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
                 int k = 0;
                 discRate = landKind.getSocialCapitals().isDiscountFlag() ?  landKind.getSocialCapitals().getDiscountRateOverride() :  landKind.getSocialCapitals().getDiscountRate();
 
                 for (RevenueProduct revenueProduct : landKind.getPastureLand().getRevenueProducts()) {
                     if (k <= 0) {
                         for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
-                            cashFlowTemp = calculateCashFlow("Pastureland", revenueProductYears.getYear(), discRate);
+                            cashFlowTemp = calculateCashFlow(getString(R.string.string_pastureland), revenueProductYears.getYear(), discRate);
                             cashFlows.add(cashFlowTemp);
                             year =  revenueProductYears.getYear();
                         }
-                        cashFlows.add(calculateTerminalValue("Pastureland", year, cashFlowTemp, discRate));
+                        cashFlows.add(calculateTerminalValue(getString(R.string.string_pastureland), year, cashFlowTemp, discRate));
                     }
                     k++;
                 }
                 realm.beginTransaction();
                 landKind.getPastureLand().setCashFlows(cashFlows);
                 realm.commitTransaction();
-            } else if (landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")) {
+            } else if (landKind.getName().equals(getString(R.string.string_miningland)) && currentSocialCapitalServey.equals(getString(R.string.string_miningland))) {
                 int k = 0;
                 discRate = landKind.getSocialCapitals().isDiscountFlag() ?  landKind.getSocialCapitals().getDiscountRateOverride() :  landKind.getSocialCapitals().getDiscountRate();
 
                 for (RevenueProduct revenueProduct : landKind.getMiningLand().getRevenueProducts()) {
                     if (k <= 0) {
                         for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
-                            cashFlowTemp = calculateCashFlow("Mining Land", revenueProductYears.getYear(), discRate);
+                            cashFlowTemp = calculateCashFlow(getString(R.string.string_miningland), revenueProductYears.getYear(), discRate);
                             cashFlows.add(cashFlowTemp);
                             year =  revenueProductYears.getYear();
                         }
-                        cashFlows.add(calculateTerminalValue("Mining Land", year, cashFlowTemp, discRate));
+                        cashFlows.add(calculateTerminalValue(getString(R.string.string_miningland), year, cashFlowTemp, discRate));
                     }
                     k++;
                 }
@@ -696,7 +689,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                 .findFirst();
         int year = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
         for (LandKind landKind : results.getLandKinds()) {
-            if (landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")) {
+            if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalServey.equals(getString(R.string.string_forestland))) {
 
                 double npv = 0;
                 for (CashFlow cashFlow : landKind.getForestLand().getCashFlows()) {
@@ -720,7 +713,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                     results.getComponents().setForestValue(npv);
                     realm.commitTransaction();
                 }
-            } else if (landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")) {
+            } else if (landKind.getName().equals(getString(R.string.string_cropland)) && currentSocialCapitalServey.equals(getString(R.string.string_cropland))) {
                 double npv = 0;
                 for (CashFlow cashFlow : landKind.getCropLand().getCashFlows()) {
                     if (cashFlow.getYear() >= year) {
@@ -744,7 +737,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                     realm.commitTransaction();
                 }
 
-            } else if (landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")) {
+            } else if (landKind.getName().equals(getString(R.string.string_pastureland)) && currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
                 double npv = 0;
                 for (CashFlow cashFlow : landKind.getPastureLand().getCashFlows()) {
                     if (cashFlow.getYear() >= year) {
@@ -767,7 +760,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                     results.getComponents().setPastureValue(npv);
                     realm.commitTransaction();
                 }
-            } else if (landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")) {
+            } else if (landKind.getName().equals(getString(R.string.string_miningland)) && currentSocialCapitalServey.equals(getString(R.string.string_miningland))) {
                 double npv = 0;
                 for (CashFlow cashFlow : landKind.getMiningLand().getCashFlows()) {
                     if (cashFlow.getYear() >= year) {

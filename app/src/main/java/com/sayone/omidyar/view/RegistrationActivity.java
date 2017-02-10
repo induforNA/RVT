@@ -251,10 +251,10 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         formattediId = enId+formattediId;
         RealmList<LandKind> landKinds = new RealmList<>();
 
-        landKinds.add(insertAllLandKinds(formattediId,"Forestland"));
-        landKinds.add(insertAllLandKinds(formattediId,"Cropland"));
-        landKinds.add(insertAllLandKinds(formattediId,"Pastureland"));
-        landKinds.add(insertAllLandKinds(formattediId,"Mining Land"));
+        landKinds.add(insertAllLandKinds(formattediId,getString(R.string.string_forestland)));
+        landKinds.add(insertAllLandKinds(formattediId,getString(R.string.string_cropland)));
+        landKinds.add(insertAllLandKinds(formattediId,getString(R.string.string_pastureland)));
+        landKinds.add(insertAllLandKinds(formattediId,getString(R.string.string_miningland)));
 
         realm.beginTransaction();
         Survey survey = realm.createObject(Survey.class);
@@ -287,22 +287,22 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         CropLand cropLand = null;
         PastureLand pastureLand = null;
         MiningLand miningLand = null;
-        if(landTypeName.equals("Forestland")){
+        if(landTypeName.equals(getString(R.string.string_forestland))){
             realm.beginTransaction();
             forestLand = realm.createObject(ForestLand.class);
             forestLand.setId(getNextKeyForestLand());
             realm.commitTransaction();
-        }else if(landTypeName.equals("Cropland")){
+        }else if(landTypeName.equals(getString(R.string.string_cropland))){
             realm.beginTransaction();
             cropLand = realm.createObject(CropLand.class);
             cropLand.setId(getNextKeyCropLand());
             realm.commitTransaction();
-        }else if(landTypeName.equals("Pastureland")){
+        }else if(landTypeName.equals(getString(R.string.string_pastureland))){
             realm.beginTransaction();
             pastureLand = realm.createObject(PastureLand.class);
             pastureLand.setId(getNextKeyPastureLand());
             realm.commitTransaction();
-        }else if(landTypeName.equals("Mining Land")){
+        }else if(landTypeName.equals(getString(R.string.string_miningland))){
             realm.beginTransaction();
             miningLand = realm.createObject(MiningLand.class);
             miningLand.setId(getNextKeyMiningLand());

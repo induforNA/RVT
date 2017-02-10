@@ -104,14 +104,14 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
         landName = (TextView) findViewById(R.id.land_name);
         map = (View) findViewById(R.id.map);
 
-        if (currentSocialCapitalServey.equals("Forestland"))
+        if (currentSocialCapitalServey.equals(getString(R.string.string_forestland)))
             landName.setText(getResources().getText(R.string.string_forestland));
-        if (currentSocialCapitalServey.equals("Pastureland"))
+        if (currentSocialCapitalServey.equals(getString(R.string.string_pastureland)))
             landName.setText(getResources().getText(R.string.string_pastureland));
-        if (currentSocialCapitalServey.equals("Mining Land"))
+        if (currentSocialCapitalServey.equals(getString(R.string.string_miningland)))
             landName.setText(getResources().getText(R.string.string_miningland));
-        if (currentSocialCapitalServey.equals("Cropland"))
-            landName.setText(getResources().getText(R.string.title_cropland));
+        if (currentSocialCapitalServey.equals(getString(R.string.string_cropland)))
+            landName.setText(getResources().getText(R.string.string_cropland));
         //  landName.setText(currentSocialCapitalServey);
         nextButton.setOnClickListener(this);
         backButton.setOnClickListener(this);

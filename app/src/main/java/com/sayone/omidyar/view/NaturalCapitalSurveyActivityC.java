@@ -108,36 +108,36 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
         logout.setOnClickListener(this);
         startSurvey.setOnClickListener(this);
         surveyIdDrawer.setText(serveyId);
-        if (currentSocialCapitalServey.equals("Forestland"))
+        if (currentSocialCapitalServey.equals(getString(R.string.string_forestland)))
             landType.setText(getResources().getText(R.string.string_forestland));
-        if (currentSocialCapitalServey.equals("Pastureland"))
+        if (currentSocialCapitalServey.equals(getString(R.string.string_pastureland)))
             landType.setText(getResources().getText(R.string.string_pastureland));
-        if (currentSocialCapitalServey.equals("Mining Land"))
+        if (currentSocialCapitalServey.equals(getString(R.string.string_miningland)))
             landType.setText(getResources().getText(R.string.string_miningland));
-        if (currentSocialCapitalServey.equals("Cropland"))
-            landType.setText(getResources().getText(R.string.title_cropland));
+        if (currentSocialCapitalServey.equals(getString(R.string.string_cropland)))
+            landType.setText(getResources().getText(R.string.string_cropland));
         // landType.setText(currentSocialCapitalServey);
 
         Survey results = realm.where(Survey.class)
                 .equalTo("surveyId", serveyId)
                 .findFirst();
         for (LandKind landKind : results.getLandKinds()) {
-            if (landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")) {
+            if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalServey.equals(getString(R.string.string_forestland))) {
                 question.setText(getResources().getText(R.string.qn_natural_c));
                 if (landKind.getForestLand().getRevenueProducts().size() > 0) {
                     loadYears(landKind.getForestLand().getRevenueProducts().get(0).getRevenueProductYearses());
                 }
-            } else if (landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")) {
+            } else if (landKind.getName().equals(getString(R.string.string_cropland)) && currentSocialCapitalServey.equals(getString(R.string.string_cropland))) {
                 question.setText(getResources().getText(R.string.qn_natural_c));
                 if (landKind.getCropLand().getRevenueProducts().size() > 0) {
                     loadYears(landKind.getCropLand().getRevenueProducts().get(0).getRevenueProductYearses());
                 }
-            } else if (landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")) {
+            } else if (landKind.getName().equals(getString(R.string.string_pastureland)) && currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
                 question.setText(getResources().getText(R.string.year_data_livestock));
                 if (landKind.getPastureLand().getRevenueProducts().size() > 0) {
                     loadYears(landKind.getPastureLand().getRevenueProducts().get(0).getRevenueProductYearses());
                 }
-            } else if (landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")) {
+            } else if (landKind.getName().equals(getString(R.string.string_miningland)) && currentSocialCapitalServey.equals(getString(R.string.string_miningland))) {
                 question.setText(getResources().getText(R.string.year_data_extraction));
                 if (landKind.getMiningLand().getRevenueProducts().size() > 0) {
                     loadYears(landKind.getMiningLand().getRevenueProducts().get(0).getRevenueProductYearses());
@@ -396,7 +396,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                         .equalTo("surveyId", serveyId)
                         .findFirst();
                 for (LandKind landKind : results.getLandKinds()) {
-                    if (landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")) {
+                    if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalServey.equals(getString(R.string.string_forestland))) {
                         for (RevenueProduct revenueProduct1 : landKind.getForestLand().getRevenueProducts()) {
                             //Log.e("LAND ", revenueProduct1.getName());
                             //Log.e("LAND AA ", revenueProduct1.getRevenueProductYearses().size()+"");
@@ -406,15 +406,15 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                                 //editText.setText("233");
                                 //Log.e("SSS ",editText.getText().toString());
                                 if (!editText.getSelectedItem().toString().equals("")) {
-                                    revenueProductYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), revenueProduct1.getId(), "Forestland", realm));
+                                    revenueProductYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), revenueProduct1.getId(), getString(R.string.string_forestland), realm));
 
                                 }
                             }
                             // int year = Calendar.getInstance().get(Calendar.YEAR);
                             int year = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
-                            revenueProductYearsArrayList.add(saveTrend(revenueProduct1.getId(), "Forestland", realm));
+                            revenueProductYearsArrayList.add(saveTrend(revenueProduct1.getId(), getString(R.string.string_forestland), realm));
                             for (int k = 0; k <= PROJECTION_COUNT; k++) {
-                                revenueProductYearsArrayList.add(saveProjectionYears(year, revenueProduct1.getId(), "Forestland", k, realm));
+                                revenueProductYearsArrayList.add(saveProjectionYears(year, revenueProduct1.getId(), getString(R.string.string_forestland), k, realm));
                                 year++;
                             }
 
@@ -424,7 +424,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                             //realm.commitTransaction();
                             revenueProductYearsArrayList.clear();
                         }
-                    } else if (landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")) {
+                    } else if (landKind.getName().equals(getString(R.string.string_cropland)) && currentSocialCapitalServey.equals(getString(R.string.string_cropland))) {
                         for (RevenueProduct revenueProduct1 : landKind.getCropLand().getRevenueProducts()) {
                             //Log.e("LAND ", revenueProduct1.getName());
                             //Log.e("LAND AA ", revenueProduct1.getRevenueProductYearses().size()+"");
@@ -433,14 +433,14 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                             for (Spinner editText : editTexts) {
                                 //editText.setText("233");
                                 //Log.e("SSS ",editText.getText().toString());
-                                revenueProductYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), revenueProduct1.getId(), "Cropland", realm));
+                                revenueProductYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), revenueProduct1.getId(), getString(R.string.string_cropland), realm));
                             }
 
                             // int year = Calendar.getInstance().get(Calendar.YEAR);
                             int year = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
-                            revenueProductYearsArrayList.add(saveTrend(revenueProduct1.getId(), "Cropland", realm));
+                            revenueProductYearsArrayList.add(saveTrend(revenueProduct1.getId(), getString(R.string.string_cropland), realm));
                             for (int k = 0; k <= PROJECTION_COUNT; k++) {
-                                revenueProductYearsArrayList.add(saveProjectionYears(year, revenueProduct1.getId(), "Cropland", k, realm));
+                                revenueProductYearsArrayList.add(saveProjectionYears(year, revenueProduct1.getId(), getString(R.string.string_cropland), k, realm));
                                 year++;
                             }
 
@@ -450,7 +450,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                             //realm.commitTransaction();
                             revenueProductYearsArrayList.clear();
                         }
-                    } else if (landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")) {
+                    } else if (landKind.getName().equals(getString(R.string.string_pastureland)) && currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
                         for (RevenueProduct revenueProduct1 : landKind.getPastureLand().getRevenueProducts()) {
                             //Log.e("LAND ", revenueProduct1.getName());
                             //Log.e("LAND AA ", revenueProduct1.getRevenueProductYearses().size()+"");
@@ -459,14 +459,14 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                             for (Spinner editText : editTexts) {
                                 //editText.setText("233");
                                 //Log.e("SSS ",editText.getText().toString());
-                                revenueProductYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), revenueProduct1.getId(), "Pastureland", realm));
+                                revenueProductYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), revenueProduct1.getId(), getString(R.string.string_pastureland), realm));
                             }
 
                             // int year = Calendar.getInstance().get(Calendar.YEAR);
                             int year = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
-                            revenueProductYearsArrayList.add(saveTrend(revenueProduct1.getId(), "Pastureland", realm));
+                            revenueProductYearsArrayList.add(saveTrend(revenueProduct1.getId(), getString(R.string.string_pastureland), realm));
                             for (int k = 0; k <= PROJECTION_COUNT; k++) {
-                                revenueProductYearsArrayList.add(saveProjectionYears(year, revenueProduct1.getId(), "Pastureland", k, realm));
+                                revenueProductYearsArrayList.add(saveProjectionYears(year, revenueProduct1.getId(), getString(R.string.string_pastureland), k, realm));
                                 year++;
                             }
 
@@ -476,7 +476,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                             //realm.commitTransaction();
                             revenueProductYearsArrayList.clear();
                         }
-                    } else if (landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")) {
+                    } else if (landKind.getName().equals(getString(R.string.string_miningland)) && currentSocialCapitalServey.equals(getString(R.string.string_miningland))) {
                         for (RevenueProduct revenueProduct1 : landKind.getMiningLand().getRevenueProducts()) {
                             //Log.e("LAND ", revenueProduct1.getName());
                             //Log.e("LAND AA ", revenueProduct1.getRevenueProductYearses().size()+"");
@@ -485,14 +485,14 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                             for (Spinner editText : editTexts) {
                                 //editText.setText("233");
                                 //Log.e("SSS ",editText.getText().toString());
-                                revenueProductYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), revenueProduct1.getId(), "Mining Land", realm));
+                                revenueProductYearsArrayList.add(saveProductYears(Integer.parseInt(editText.getSelectedItem().toString()), revenueProduct1.getId(), getString(R.string.string_miningland), realm));
                             }
 
                             // int year = Calendar.getInstance().get(Calendar.YEAR);
                             int year = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
-                            revenueProductYearsArrayList.add(saveTrend(revenueProduct1.getId(), "Mining Land", realm));
+                            revenueProductYearsArrayList.add(saveTrend(revenueProduct1.getId(), getString(R.string.string_miningland), realm));
                             for (int k = 0; k <= PROJECTION_COUNT; k++) {
-                                revenueProductYearsArrayList.add(saveProjectionYears(year, revenueProduct1.getId(), "Mining Land", k, realm));
+                                revenueProductYearsArrayList.add(saveProjectionYears(year, revenueProduct1.getId(), getString(R.string.string_miningland), k, realm));
                                 year++;
                             }
 

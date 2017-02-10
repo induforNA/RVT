@@ -75,7 +75,7 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
         costProductsToSave = new RealmList<>();
         Survey survey = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
         for (LandKind landKind : survey.getLandKinds()) {
-            if (landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")) {
+            if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalServey.equals(getString(R.string.string_forestland))) {
                 landKindName = landKind.getName();
                 //costElements = landKind.getForestLand().getRevenueProducts();
                 for (CostElement costElement : landKind.getForestLand().getCostElements()) {
@@ -84,7 +84,7 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
                         costElements.add(costElement);
                     }
                 }
-            } else if (landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")) {
+            } else if (landKind.getName().equals(getString(R.string.string_cropland)) && currentSocialCapitalServey.equals(getString(R.string.string_cropland))) {
                 landKindName = landKind.getName();
                 //costElements = landKind.getForestLand().getRevenueProducts();
                 for (CostElement costElement : landKind.getCropLand().getCostElements()) {
@@ -93,7 +93,7 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
                         costElements.add(costElement);
                     }
                 }
-            } else if (landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")) {
+            } else if (landKind.getName().equals(getString(R.string.string_pastureland)) && currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
                 landKindName = landKind.getName();
                 //costElements = landKind.getForestLand().getRevenueProducts();
                 for (CostElement costElement : landKind.getPastureLand().getCostElements()) {
@@ -102,7 +102,7 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
                         costElements.add(costElement);
                     }
                 }
-            } else if (landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")) {
+            } else if (landKind.getName().equals(getString(R.string.string_miningland)) && currentSocialCapitalServey.equals(getString(R.string.string_miningland))) {
                 landKindName = landKind.getName();
                 //costElements = landKind.getForestLand().getRevenueProducts();
                 for (CostElement costElement : landKind.getMiningLand().getCostElements()) {
@@ -127,14 +127,14 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
         landType = (TextView) findViewById(R.id.land_type);
 
 
-        if (currentSocialCapitalServey.equals("Forestland"))
+        if (currentSocialCapitalServey.equals(getString(R.string.string_forestland)))
             landType.setText(getResources().getText(R.string.string_forestland));
-        if (currentSocialCapitalServey.equals("Pastureland"))
+        if (currentSocialCapitalServey.equals(getString(R.string.string_pastureland)))
             landType.setText(getResources().getText(R.string.string_pastureland));
-        if (currentSocialCapitalServey.equals("Mining Land"))
+        if (currentSocialCapitalServey.equals(getString(R.string.string_miningland)))
             landType.setText(getResources().getText(R.string.string_miningland));
-        if (currentSocialCapitalServey.equals("Cropland"))
-            landType.setText(getResources().getText(R.string.title_cropland));
+        if (currentSocialCapitalServey.equals(getString(R.string.string_cropland)))
+            landType.setText(getResources().getText(R.string.string_cropland));
         //  landType.setText(currentSocialCapitalServey);
 
         timberList = (RecyclerView) findViewById(R.id.timber_list);
@@ -242,25 +242,25 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
 
                             for (LandKind landKind : surveyRevenueProduct.getLandKinds()) {
                                 Log.e("BBB ", landKind.getName() + " " + landKind.getForestLand());
-                                if (landKind.getName().equals("Forestland") && currentSocialCapitalServey.equals("Forestland")) {
+                                if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalServey.equals(getString(R.string.string_forestland))) {
                                     Log.e("BBB ", costElements.size() + "");
                                     Log.e("AAA ", landKind.getForestLand().getCostElements().toString());
                                     realm.beginTransaction();
                                     landKind.getForestLand().setCostElements(costProductsToSave);
                                     realm.commitTransaction();
-                                } else if (landKind.getName().equals("Cropland") && currentSocialCapitalServey.equals("Cropland")) {
+                                } else if (landKind.getName().equals(getString(R.string.string_cropland)) && currentSocialCapitalServey.equals(getString(R.string.string_cropland))) {
                                     Log.e("BBB ", costElements.size() + "");
                                     Log.e("AAA ", landKind.getCropLand().getCostElements().toString());
                                     realm.beginTransaction();
                                     landKind.getCropLand().setCostElements(costProductsToSave);
                                     realm.commitTransaction();
-                                } else if (landKind.getName().equals("Pastureland") && currentSocialCapitalServey.equals("Pastureland")) {
+                                } else if (landKind.getName().equals(getString(R.string.string_pastureland)) && currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
                                     Log.e("BBB ", costElements.size() + "");
                                     Log.e("AAA ", landKind.getPastureLand().getCostElements().toString());
                                     realm.beginTransaction();
                                     landKind.getPastureLand().setCostElements(costProductsToSave);
                                     realm.commitTransaction();
-                                } else if (landKind.getName().equals("Mining Land") && currentSocialCapitalServey.equals("Mining Land")) {
+                                } else if (landKind.getName().equals(getString(R.string.string_miningland)) && currentSocialCapitalServey.equals(getString(R.string.string_miningland))) {
                                     Log.e("BBB ", costElements.size() + "");
                                     Log.e("AAA ", landKind.getMiningLand().getCostElements().toString());
                                     realm.beginTransaction();
