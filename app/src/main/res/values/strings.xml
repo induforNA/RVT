@@ -313,5 +313,15 @@
     <string name="qn_natural_capital_1">What was the quantity of %1$sed each time?</string>
     <string name="text_harvest">harvest</string>
     <string name="text_extract">extract</string>
+    <string name="question_override">We will project cash flows for the next 15 years based on the average of all of the data you entered. Does this average seem realistic going into the future?</string>
+    <string name="label_your_estimate">Your estimate (will override average value in projections)</string>
+    <string name="text_question_harvest">How often do you harvest %1$s?</string>
+    <string name="text_number_of_times">Number of times</string>
+    <string name="text_time_period">Time period</string>
+    <string name="text_number_of_households">Number of households that harvest %1$s</string>
+    <string name="text_question_quantity">How much %1$s was harvested each time per household?</string>
+    <string name="text_quantity">Quantity</string>
+    <string name="text_question_price">What was the price of %1$s per unit?</string>
+    <string name="text_price">Price</string>
 
 </resources>
