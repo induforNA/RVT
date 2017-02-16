@@ -46,6 +46,12 @@ public class Survey extends RealmObject {
 
     private Component components;
 
+    private RealmList<SharedCostElement> sharedCostElements;
+
+    private RealmList<CashFlow> sharedCashFlows;
+
+    private RealmList<Outlay> sharedOutlays;
+
     public long getId() {
         return id;
     }
@@ -201,5 +207,29 @@ public class Survey extends RealmObject {
                 ", inflationRate='" + inflationRate + '\'' +
                 ", components=" + components +
                 '}';
+    }
+
+    public RealmList<SharedCostElement> getSharedCostElements() {
+        return sharedCostElements;
+    }
+
+    public void setSharedCostElements(RealmList<SharedCostElement> sharedCostElements) {
+        this.sharedCostElements = sharedCostElements;
+    }
+
+    public RealmList<CashFlow> getSharedCashFlows() {
+        return sharedCashFlows;
+    }
+
+    public void setSharedCashFlows(RealmList<CashFlow> sharedCashFlows) {
+        this.sharedCashFlows = sharedCashFlows;
+    }
+
+    public RealmList<Outlay> getSharedOutlays() {
+        return sharedOutlays;
+    }
+
+    public void setSharedOutlays(RealmList<Outlay> sharedOutlays) {
+        this.sharedOutlays = sharedOutlays;
     }
 }

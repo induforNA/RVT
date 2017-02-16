@@ -380,6 +380,8 @@ public class CertificateActivity extends BaseActivity implements View.OnClickLis
             }
         }
 
+        totalVal = totalVal + surveyCheck.getComponents().getSharedCostValue();
+
 
         community.setText(surveyCheck.getCommunity().toString());
         parcelId.setText(surveyCheck.getSurveyId().toString());

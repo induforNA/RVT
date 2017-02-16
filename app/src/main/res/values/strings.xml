@@ -253,6 +253,7 @@
     <string name="qn_natural_complex_3_1">What was the price of </string>
     <string name="qn_natural_complex_3_2"> per unit?</string>
     <string name="costs_incur">What types of costs do you incur on this commons? (e.g. infrastructure, equipment, transportation, seeds/seedlings, fertilizer, water, labor)</string>
+    <string name="shared_costs_incur">What types of shared costs do you incur on this commons? </string>
     <string name="data_on_harvest_activities">How many years of data do you have on harvest activities?</string>
     <string name="registration_successful">Registration successful</string>
     <string name="percentage_area_harvested">Area harvested (in %)</string>

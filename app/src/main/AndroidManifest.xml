@@ -140,6 +140,21 @@
 
         <!-- </activity> -->
         <activity android:name=".view.NaturalCapitalTrend"></activity>
+        <activity
+            android:name=".view.NaturalCapitalSharedCostActivityA"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".view.NaturalCapitalSharedCostActivityB"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".view.NaturalCapitalSharedCostActivityC"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".view.NaturalCapitalSharedCostOutlay"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".view.NaturalCapitalSharedCostOutlayB"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

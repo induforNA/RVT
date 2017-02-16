@@ -1,5 +1,6 @@
 package com.sayone.omidyar.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -27,7 +28,7 @@ import io.realm.Realm;
 public class CostOutlayAdapter extends RecyclerView.Adapter<CostOutlayAdapter.CostOutlayViewHolder>{
 
     private List<Outlay> costOutlays;
-    private NaturalCapitalCostOutlay mContext;
+    private Activity mContext;
 
     public class CostOutlayViewHolder extends RecyclerView.ViewHolder {
         public TextView revenueProductName;
@@ -39,7 +40,7 @@ public class CostOutlayAdapter extends RecyclerView.Adapter<CostOutlayAdapter.Co
         }
     }
 
-    public CostOutlayAdapter(List<Outlay> revenueProducts, NaturalCapitalCostOutlay context) {
+    public CostOutlayAdapter(List<Outlay> revenueProducts, Activity context) {
         this.costOutlays = revenueProducts;
         mContext=context;
     }

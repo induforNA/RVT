@@ -43,6 +43,8 @@ public class Component extends RealmObject {
 
     private double totalSocialCapitalScore;
 
+    private double sharedCostValue;
+
     public long getId() {
         return id;
     }
@@ -177,5 +179,13 @@ public class Component extends RealmObject {
 
     public void setTotalValueStr(String totalValueStr) {
         this.totalValueStr = totalValueStr;
+    }
+
+    public double getSharedCostValue() {
+        return sharedCostValue;
+    }
+
+    public void setSharedCostValue(double sharedCostValue) {
+        this.sharedCostValue = sharedCostValue;
     }
 }
