@@ -29,29 +29,29 @@ public class GpsTrackerService extends Service {
     private class LocationListener implements android.location.LocationListener {
 
         public LocationListener(String provider) {
-//            Log.e(TAG, "LocationListener " + provider);
+
             mLastLocation = new Location(provider);
         }
 
         @Override
         public void onLocationChanged(Location location) {
-//            Log.e(TAG, "onLocationChanged: " + location);
+
             mLastLocation.set(location);
         }
 
         @Override
         public void onProviderDisabled(String provider) {
-//            Log.e(TAG, "onProviderDisabled: " + provider);
+
         }
 
         @Override
         public void onProviderEnabled(String provider) {
-//            Log.e(TAG, "onProviderEnabled: " + provider);
+
         }
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
-//            Log.e(TAG, "onStatusChanged: " + provider);
+
         }
     }
 
@@ -63,7 +63,6 @@ public class GpsTrackerService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-//        Log.e(TAG, "onStartCommand");
         super.onStartCommand(intent, flags, startId);
         return START_NOT_STICKY;
     }
@@ -77,24 +76,23 @@ public class GpsTrackerService extends Service {
                     LocationManager.NETWORK_PROVIDER, LOCATION_INTERVAL, LOCATION_DISTANCE,
                     mLocationListeners[1]);
         } catch (java.lang.SecurityException ex) {
-//            Log.i(TAG, "fail to request location update, ignore", ex);
+            Log.i(TAG, "fail to request location update, ignore", ex);
         } catch (IllegalArgumentException ex) {
-//            Log.d(TAG, "network provider does not exist, " + ex.getMessage());
+            Log.d(TAG, "network provider does not exist, " + ex.getMessage());
         }
         try {
             mLocationManager.requestLocationUpdates(
                     LocationManager.GPS_PROVIDER, LOCATION_INTERVAL, LOCATION_DISTANCE,
                     mLocationListeners[0]);
         } catch (java.lang.SecurityException ex) {
-//            Log.i(TAG, "fail to request location update, ignore", ex);
+            Log.i(TAG, "fail to request location update, ignore", ex);
         } catch (IllegalArgumentException ex) {
-//            Log.d(TAG, "gps provider does not exist " + ex.getMessage());
+            Log.d(TAG, "gps provider does not exist " + ex.getMessage());
         }
     }
 
     @Override
     public void onDestroy() {
-//        Log.e(TAG, "onDestroy");
         super.onDestroy();
         if (mLocationManager != null) {
             for (int i = 0; i < mLocationListeners.length; i++) {
@@ -111,7 +109,6 @@ public class GpsTrackerService extends Service {
     }
 
     private void initializeLocationManager() {
-//        Log.e(TAG, "initializeLocationManager");
         if (mLocationManager == null) {
             mLocationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
         }
@@ -119,7 +116,6 @@ public class GpsTrackerService extends Service {
 
     public class GpsTrackerServiceBinder extends Binder {
         GpsTrackerService getService() {
-            // Return this instance of GpsTrackerService so clients can call public methods
             return GpsTrackerService.this;
         }
     }
