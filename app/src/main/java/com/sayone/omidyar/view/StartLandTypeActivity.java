@@ -17,8 +17,6 @@ import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.LandKind;
 
-import java.util.Locale;
-
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -98,7 +96,7 @@ public class StartLandTypeActivity extends BaseActivity implements View.OnClickL
         Intent i;
         switch (v.getId()) {
             case R.id.next_button:
-                Intent intent = new Intent(StartLandTypeActivity.this, OmidyarMap.class);
+                Intent intent = new Intent(StartLandTypeActivity.this, GpsCoordinates.class);
                 startActivity(intent);
                 break;
             case R.id.back_button:
