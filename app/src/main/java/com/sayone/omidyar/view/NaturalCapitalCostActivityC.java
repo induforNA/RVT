@@ -217,9 +217,10 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         //  landType.setText(currentSocialCapitalServey);
 
 
+
         for (LandKind landKind : results.getLandKinds()) {
             if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalServey.equals(getString(R.string.string_forestland))) {
-                householdText.setText(getString(R.string.string_household,"harvest "+landKind.getForestLand().getRevenueProducts().get(currentCostProductIndex).getName()));
+                householdText.setText(getString(R.string.string_household,getString(R.string.text_incur_cost)+landKind.getForestLand().getRevenueProducts().get(currentCostProductIndex).getName()));
                 if (landKind.getForestLand().getCostElements().size() > 0) {
                     //loadYears(landKind.getForestLand().getRevenueProducts().get(0).getRevenueProductYearses());
                     revenueProducts = landKind.getForestLand().getCostElements();
@@ -232,7 +233,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                     }
                 }
             } else if (landKind.getName().equals(getString(R.string.string_cropland)) && currentSocialCapitalServey.equals(getString(R.string.string_cropland))) {
-                householdText.setText(getString(R.string.string_household,"harvest "+landKind.getCropLand().getRevenueProducts().get(currentCostProductIndex).getName()));
+                householdText.setText(getString(R.string.string_household, getString(R.string.text_incur_cost)+landKind.getCropLand().getRevenueProducts().get(currentCostProductIndex).getName()));
                 if (landKind.getCropLand().getCostElements().size() > 0) {
                     //loadYears(landKind.getForestLand().getRevenueProducts().get(0).getRevenueProductYearses());
                     revenueProducts = landKind.getCropLand().getCostElements();
@@ -245,7 +246,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                     }
                 }
             } else if (landKind.getName().equals(getString(R.string.string_pastureland)) && currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
-                householdText.setText(getString(R.string.string_household,"harvest "+landKind.getPastureLand().getRevenueProducts().get(currentCostProductIndex).getName()));
+                householdText.setText(getString(R.string.string_household,getString(R.string.text_incur_cost)+landKind.getPastureLand().getRevenueProducts().get(currentCostProductIndex).getName()));
 
                 if (landKind.getPastureLand().getCostElements().size() > 0) {
                     //loadYears(landKind.getForestLand().getRevenueProducts().get(0).getRevenueProductYearses());
@@ -259,7 +260,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                     }
                 }
             } else if (landKind.getName().equals(getString(R.string.string_miningland)) && currentSocialCapitalServey.equals(getString(R.string.string_miningland))) {
-                householdText.setText(getString(R.string.string_household,"extract "+landKind.getMiningLand().getRevenueProducts().get(currentCostProductIndex).getName()));
+                householdText.setText(getString(R.string.string_household,getString(R.string.text_incur_cost)+landKind.getMiningLand().getRevenueProducts().get(currentCostProductIndex).getName()));
 
                 if (landKind.getMiningLand().getCostElements().size() > 0) {
                     //loadYears(landKind.getForestLand().getRevenueProducts().get(0).getRevenueProductYearses());

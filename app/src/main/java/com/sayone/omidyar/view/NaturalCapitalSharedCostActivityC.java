@@ -204,6 +204,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
 
         unit = spinnerUnit.getSelectedItem().toString();
 
+
         buttonNext.setOnClickListener(this);
         buttonBack.setOnClickListener(this);
         imageViewMenuIcon.setOnClickListener(this);
@@ -490,6 +491,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
         // Log.e("LOAD ","REVENUE 11111");
 
         currentProductName = costElementLoad.getName();
+        householdText.setText(getString(R.string.string_household,getString(R.string.text_incur_cost)+costElementLoad.getName()));
 
         if (costElementLoad.getType().equals("Timber")) {
             loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1) + " " + costElementLoad.getName() + "" + getResources().getString(R.string.qn_natural_cost_1_2) + "?");
