@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -170,7 +169,7 @@ public class GpsCoordinates extends BaseActivity {
         String areaString = parcelArea.getText().toString();
 
         for (int i = 0; i < 6; i++) {
-            if (corners[i].getLatitude() == 0 || corners[i].getLongitude() == 0) {
+            if (corners[i] == null) {
                 return false;
             }
         }
@@ -189,8 +188,9 @@ public class GpsCoordinates extends BaseActivity {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             if (mBound) {
                 corners[index] = gpsTrackerService.getLocation();
-                gpsCoordinatesView.setText("GPS Coordinates : " + corners[index].getLatitude() + ", " + corners[index].getLongitude());
-                Log.d("Location", gpsTrackerService.getLocation().toString());
+                String latDMS = LocationConverter.getLatitudeDMS(corners[index]);
+                String lngDMS = LocationConverter.getLongitudeDMS(corners[index]);
+                gpsCoordinatesView.setText("GPS Coordinates : " + latDMS + ", " + lngDMS);
             }
         } else {
             if (ContextCompat.checkSelfPermission(GpsCoordinates.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
