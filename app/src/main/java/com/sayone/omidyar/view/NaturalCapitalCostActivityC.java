@@ -1023,8 +1023,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
             Intent intent = new Intent(getApplicationContext(), StartLandTypeActivity.class);
             startActivity(intent);
-        } else {
-            Intent intent = new Intent(getApplicationContext(), CertificateActivity.class);
+
+        }else{
+            Intent intent = new Intent(getApplicationContext(),NewCertificateActivity.class);
             startActivity(intent);
         }
     }

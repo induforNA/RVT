@@ -36,38 +36,25 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="@string/heading_certificate"
-                android:textSize="@dimen/heading_size" />
+                android:textSize="@dimen/heading_size"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
-
-        <ImageView
-            android:id="@+id/map_fullscreen"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:visibility="gone" />
+            android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/fullscreen"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <android.support.v7.widget.CardView
-                android:layout_width="fill_parent"
+            <LinearLayout
+                android:id="@+id/fullscreen"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                card_view:cardBackgroundColor="#fafafa"
-                card_view:cardCornerRadius="5dp"
-                card_view:cardElevation="2dp"
-                card_view:contentPadding="16dp">
-
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_margin="20dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -107,7 +94,7 @@
                             android:id="@+id/parcel_id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="new text"
+                            android:text="xxxxxxx"
                             android:textSize="@dimen/textfield_size" />
 
                         <TextView
@@ -141,13 +128,13 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/date_to_valuation"
+                            android:text="@string/survey_date"
                             android:textSize="@dimen/textfield_size" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/inflation_rate"
+                            android:text="@string/country"
                             android:textSize="@dimen/textfield_size" />
 
                     </LinearLayout>
@@ -166,80 +153,252 @@
                             android:textSize="@dimen/textfield_size" />
 
                         <TextView
-                            android:id="@+id/valuation_date"
+                            android:id="@+id/survey_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="xxxxxxx"
                             android:textSize="@dimen/textfield_size" />
 
                         <TextView
+                            android:id="@+id/country"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="xxxxxxx"
+                            android:textSize="@dimen/textfield_size" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/gps_coordinates"
+                    android:textSize="@dimen/textfield_size"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1st"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3rd"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="5th"
+                            android:textSize="@dimen/textfield_size" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/gps_coordinate_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="xxxxxx"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <TextView
+                            android:id="@+id/gps_coordinate_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="xxxxxx"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <TextView
+                            android:id="@+id/gps_coordinate_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="xxxxxx"
+                            android:textSize="@dimen/textfield_size" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2nd"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4th"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="6th"
+                            android:textSize="@dimen/textfield_size" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/gps_coordinate_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="xxxxxx"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <TextView
+                            android:id="@+id/gps_coordinate_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="xxxxxx"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <TextView
+                            android:id="@+id/gps_coordinate_6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="xxxxxx"
+                            android:textSize="@dimen/textfield_size" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:text="@string/parcel_size"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <TextView
+                            android:id="@+id/parcel_size"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:text="xxxxxx ha"
+                            android:textSize="@dimen/textfield_size" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/country_risk_rate"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <TextView
+                            android:id="@+id/country_risk_rate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="5%"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/inflation_rate"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <TextView
                             android:id="@+id/inflation_rate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="5%"
                             android:textSize="@dimen/textfield_size" />
 
                     </LinearLayout>
 
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
 
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_weight="1">
-
-                <LinearLayout
+                <GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_margin="20dp"
+                    android:alignmentMode="alignBounds"
+                    android:columnCount="2"
+                    android:rowCount="2"
+                    android:useDefaultMargins="true">
 
-                    <TextView
-                        android:id="@+id/heading_forest"
+                    <LinearLayout
+                        android:id="@+id/forestland_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/string_forestland"
-                        android:textSize="@dimen/textfield_size" />
+                        android:layout_columnSpan="1"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical">
 
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/forestland_layout"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        card_view:cardBackgroundColor="#fafafa"
-                        card_view:cardCornerRadius="5dp"
-                        card_view:cardElevation="2dp"
-                        card_view:contentPadding="16dp">
+                        <TextView
+                            android:id="@+id/heading_forest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/string_forestland"
+                            android:textSize="@dimen/textfield_size"
+                            android:textStyle="bold" />
 
                         <LinearLayout
-
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
                             android:layout_weight="1"
                             android:orientation="horizontal">
 
                             <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1">
-
-                                <ImageView
-                                    android:id="@+id/map_image_forest"
-                                    android:layout_width="200dp"
-                                    android:layout_height="80dp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/map" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
@@ -256,12 +415,6 @@
                                     android:text="@string/social_capital_score"
                                     android:textSize="@dimen/textfield_size" />
 
-                                <!--<TextView-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:text="@string/questions_completed"-->
-                                <!--android:textSize="@dimen/textfield_size" />-->
-
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -273,28 +426,17 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
 
-                                <LinearLayout
+
+                                <TextView
+                                    android:id="@+id/forest_value"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content">
-
-                                    <!--<TextView-->
-                                        <!--android:id="@+id/forest_value_symbol"-->
-                                        <!--android:layout_width="wrap_content"-->
-                                        <!--android:layout_height="wrap_content"-->
-                                        <!--android:text="*"-->
-                                        <!--android:textSize="@dimen/textfield_size" />-->
-
-                                    <TextView
-                                        android:id="@+id/forest_value"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="0"
-                                        android:textSize="@dimen/textfield_size" />
-
-                                </LinearLayout>
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textSize="@dimen/textfield_size" />
 
                                 <TextView
                                     android:id="@+id/forest_social_capital_score"
@@ -302,13 +444,6 @@
                                     android:layout_height="wrap_content"
                                     android:text="0"
                                     android:textSize="@dimen/textfield_size" />
-
-                                <!--<TextView-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:text="0"-->
-                                <!--android:id="@+id/questions_completed"-->
-                                <!--android:textSize="@dimen/textfield_size" />-->
 
                                 <TextView
                                     android:id="@+id/value_discount_rate_forest"
@@ -319,54 +454,35 @@
 
                             </LinearLayout>
 
-
                         </LinearLayout>
 
-                    </android.support.v7.widget.CardView>
+                    </LinearLayout>
 
-
-                    <TextView
-                        android:id="@+id/heading_cropland"
+                    <LinearLayout
+                        android:id="@+id/cropland_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/title_cropland"
-                        android:textSize="@dimen/textfield_size" />
+                        android:layout_columnSpan="1"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical">
 
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/cropland_layout"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        card_view:cardBackgroundColor="#fafafa"
-                        card_view:cardCornerRadius="5dp"
-                        card_view:cardElevation="2dp"
-                        card_view:contentPadding="16dp">
-
+                        <TextView
+                            android:id="@+id/heading_cropland"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/title_cropland"
+                            android:textSize="@dimen/textfield_size"
+                            android:textStyle="bold" />
 
                         <LinearLayout
-
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
                             android:layout_weight="1"
                             android:orientation="horizontal">
 
                             <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1">
-
-                                <ImageView
-                                    android:id="@+id/map_image_crop"
-                                    android:layout_width="200dp"
-                                    android:layout_height="80dp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/map" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
@@ -383,12 +499,6 @@
                                     android:text="@string/social_capital_score"
                                     android:textSize="@dimen/textfield_size" />
 
-                                <!--<TextView-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:text="@string/questions_completed"-->
-                                <!--android:textSize="@dimen/textfield_size" />-->
-
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -400,28 +510,17 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
 
-                                <LinearLayout
+
+                                <TextView
+                                    android:id="@+id/crop_value"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content">
-
-                                    <!--<TextView-->
-                                        <!--android:id="@+id/crop_value_symbol"-->
-                                        <!--android:layout_width="wrap_content"-->
-                                        <!--android:layout_height="wrap_content"-->
-                                        <!--android:text="*"-->
-                                        <!--android:textSize="@dimen/textfield_size" />-->
-
-                                    <TextView
-                                        android:id="@+id/crop_value"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="0"
-                                        android:textSize="@dimen/textfield_size" />
-
-                                </LinearLayout>
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textSize="@dimen/textfield_size" />
 
                                 <TextView
                                     android:id="@+id/crop_social_capital_score"
@@ -429,12 +528,6 @@
                                     android:layout_height="wrap_content"
                                     android:text="0"
                                     android:textSize="@dimen/textfield_size" />
-
-                                <!--<TextView-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:text="0"-->
-                                <!--android:textSize="@dimen/textfield_size" />-->
 
                                 <TextView
                                     android:id="@+id/value_discount_rate_crop"
@@ -447,50 +540,33 @@
 
                         </LinearLayout>
 
-                    </android.support.v7.widget.CardView>
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/heading_pastureland"
+                    <LinearLayout
+                        android:id="@+id/pastureland_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/string_pastureland"
-                        android:textSize="@dimen/textfield_size" />
+                        android:layout_columnSpan="1"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical">
 
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/pastureland_layout"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        card_view:cardBackgroundColor="#fafafa"
-                        card_view:cardCornerRadius="5dp"
-                        card_view:cardElevation="2dp"
-                        card_view:contentPadding="16dp">
+                        <TextView
+                            android:id="@+id/heading_pastureland"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/string_pastureland"
+                            android:textSize="@dimen/textfield_size"
+                            android:textStyle="bold" />
 
                         <LinearLayout
-
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
                             android:layout_weight="1"
-
                             android:orientation="horizontal">
 
                             <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1">
-
-                                <ImageView
-                                    android:id="@+id/map_image_pasture"
-                                    android:layout_width="200dp"
-                                    android:layout_height="80dp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/map" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
@@ -507,12 +583,6 @@
                                     android:text="@string/social_capital_score"
                                     android:textSize="@dimen/textfield_size" />
 
-                                <!--<TextView-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:text="@string/questions_completed"-->
-                                <!--android:textSize="@dimen/textfield_size" />-->
-
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -524,29 +594,17 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
 
-                                <LinearLayout
+
+                                <TextView
+                                    android:id="@+id/pasture_value"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content">
-
-                                    <!--<TextView-->
-                                        <!--android:id="@+id/pasture_value_symbol"-->
-                                        <!--android:layout_width="wrap_content"-->
-                                        <!--android:layout_height="wrap_content"-->
-                                        <!--android:text="*"-->
-                                        <!--android:textSize="@dimen/textfield_size" />-->
-
-
-                                    <TextView
-                                        android:id="@+id/pasture_value"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="0"
-                                        android:textSize="@dimen/textfield_size" />
-
-                                </LinearLayout>
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textSize="@dimen/textfield_size" />
 
                                 <TextView
                                     android:id="@+id/pasture_social_capital_score"
@@ -554,12 +612,6 @@
                                     android:layout_height="wrap_content"
                                     android:text="0"
                                     android:textSize="@dimen/textfield_size" />
-
-                                <!--<TextView-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:text="0"-->
-                                <!--android:textSize="@dimen/textfield_size" />-->
 
                                 <TextView
                                     android:id="@+id/value_discount_rate_pasture"
@@ -572,50 +624,33 @@
 
                         </LinearLayout>
 
-                    </android.support.v7.widget.CardView>
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/heading_miningland"
+                    <LinearLayout
+                        android:id="@+id/miningland_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/string_miningland"
-                        android:textSize="@dimen/textfield_size" />
+                        android:layout_columnSpan="1"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical">
 
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/miningland_layout"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        card_view:cardBackgroundColor="#fafafa"
-                        card_view:cardCornerRadius="5dp"
-                        card_view:cardElevation="2dp"
-                        card_view:contentPadding="16dp">
+                        <TextView
+                            android:id="@+id/heading_miningland"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/string_miningland"
+                            android:textSize="@dimen/textfield_size"
+                            android:textStyle="bold" />
 
                         <LinearLayout
-
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
                             android:layout_weight="1"
-
                             android:orientation="horizontal">
 
                             <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1">
-
-                                <ImageView
-                                    android:id="@+id/map_image_mining"
-                                    android:layout_width="200dp"
-                                    android:layout_height="80dp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/map" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
@@ -632,12 +667,6 @@
                                     android:text="@string/social_capital_score"
                                     android:textSize="@dimen/textfield_size" />
 
-                                <!--<TextView-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:text="@string/questions_completed"-->
-                                <!--android:textSize="@dimen/textfield_size" />-->
-
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -649,42 +678,24 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
 
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content">
-
-                                    <!--<TextView-->
-                                        <!--android:id="@+id/mining_value_symbol"-->
-                                        <!--android:layout_width="wrap_content"-->
-                                        <!--android:layout_height="wrap_content"-->
-                                        <!--android:text="*"-->
-                                        <!--android:textSize="@dimen/textfield_size" />-->
-
-
-                                    <TextView
-                                        android:id="@+id/mining_value"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="0"
-                                        android:textSize="@dimen/textfield_size" />
-
-                                </LinearLayout>
 
                                 <TextView
-                                    android:id="@+id/minimg_social_capital_score"
+                                    android:id="@+id/mining_value"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="0"
                                     android:textSize="@dimen/textfield_size" />
 
-                                <!--<TextView-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:text="0"-->
-                                <!--android:textSize="@dimen/textfield_size" />-->
+                                <TextView
+                                    android:id="@+id/mining_social_capital_score"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textSize="@dimen/textfield_size" />
 
                                 <TextView
                                     android:id="@+id/value_discount_rate_mining"
@@ -697,63 +708,57 @@
 
                         </LinearLayout>
 
-                    </android.support.v7.widget.CardView>
+                    </LinearLayout>
+
+                </GridLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:text="@string/total_parcel_value"
+                        android:textSize="@dimen/textfield_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/total_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="INR XXXX"
+                        android:textSize="@dimen/textfield_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:text="@string/parcel_value_per_ha"
+                        android:textSize="@dimen/textfield_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/parcel_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="INR XXXX"
+                        android:textSize="@dimen/textfield_size"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
-            </ScrollView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="180dp"
-                android:gravity="right">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/total"
-                    android:textSize="35dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/total_symbol"
-                    android:textSize="35dp"
-                    android:text=" "/>
-
-                <TextView
-                    android:id="@+id/total_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="35dp" />
-
             </LinearLayout>
 
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="20dp"-->
-            <!--android:layout_marginRight="20dp"-->
-            <!--android:gravity="right">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/qn_completed"-->
-            <!--android:textSize="@dimen/textfield_size" />-->
-
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="0%"-->
-            <!--android:textSize="@dimen/textfield_size" />-->
-
-            <!--</LinearLayout>-->
-
-        </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 

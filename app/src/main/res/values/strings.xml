@@ -308,6 +308,19 @@
     <string name="text_times">times</string>
     <string name="restore_original_inflation_rate">Restore original Inflation rate</string>
     <string name="string_household">Number of households that %1$s :</string>
-
+    <string name="qn_gps_1">Please walk to the first corner of the parcel, and click Yes.</string>
+    <string name="qn_gps_2">Please walk to the second corner of the parcel, and click Yes.</string>
+    <string name="qn_gps_3">Please walk to the third corner of the parcel, and click Yes.</string>
+    <string name="qn_gps_4">Please walk to the fourth corner of the parcel, and click Yes.</string>
+    <string name="qn_gps_5">Please walk to the fifth corner of the parcel, and click Yes.</string>
+    <string name="qn_gps_6">Please walk to the sixth corner of the parcel, and click Yes.</string>
+    <string name="qn_gps_area">What is the size of this parcel? Please convert local unit to hectare.</string>
+    <string name="gps_coordinates">GPS Coordinates</string>
+    <string name="country">Country</string>
+    <string name="parcel_size">Parcel Size</string>
+    <string name="parcel_value_per_ha">Parcel Value per ha</string>
+    <string name="total_parcel_value">Total Parcel Value</string>
+    <string name="country_risk_rate">Sovereign/Country Risk Rate</string>
+    <string name="survey_date">Survey Date</string>
 
 </resources>
