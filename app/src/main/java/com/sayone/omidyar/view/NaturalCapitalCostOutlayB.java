@@ -31,7 +31,6 @@ import com.sayone.omidyar.model.RevenueProductYears;
 import com.sayone.omidyar.model.Survey;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Locale;
 
 import io.realm.Realm;
@@ -802,7 +801,7 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
             Intent intent = new Intent(getApplicationContext(),StartLandTypeActivity.class);
             startActivity(intent);
         }else{
-            Intent intent = new Intent(getApplicationContext(),CertificateActivity.class);
+            Intent intent = new Intent(getApplicationContext(),NewCertificateActivity.class);
             startActivity(intent);
         }
     }

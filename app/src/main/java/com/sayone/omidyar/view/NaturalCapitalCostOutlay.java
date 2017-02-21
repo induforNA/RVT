@@ -21,15 +21,11 @@ import android.widget.Toast;
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.adapter.CostOutlayAdapter;
-import com.sayone.omidyar.adapter.RevenueAdapter;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.Outlay;
 import com.sayone.omidyar.model.OutlayYears;
-import com.sayone.omidyar.model.RevenueProduct;
-import com.sayone.omidyar.model.RevenueProductYears;
 import com.sayone.omidyar.model.Survey;
 
-import java.util.Calendar;
 import java.util.Locale;
 
 import io.realm.Realm;
@@ -415,7 +411,7 @@ public class NaturalCapitalCostOutlay extends BaseActivity {
             Intent intent = new Intent(getApplicationContext(),StartLandTypeActivity.class);
             startActivity(intent);
         }else{
-            Intent intent = new Intent(getApplicationContext(),CertificateActivity.class);
+            Intent intent = new Intent(getApplicationContext(),NewCertificateActivity.class);
             startActivity(intent);
         }
     }

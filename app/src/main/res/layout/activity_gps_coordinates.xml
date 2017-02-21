@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF1D8C83"
+    android:background="#FFFFFF"
     android:orientation="vertical"
     android:weightSum="1">
 
@@ -13,12 +13,13 @@
         android:layout_height="50dp"
         android:gravity="center"
         android:text="LandType"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="@dimen/textfield_size" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,20 +29,21 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_margin="10dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/qn_gps_1"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/black" />
 
                     <Button
                         android:id="@+id/get_loc_button_1"
@@ -56,8 +58,8 @@
                         android:id="@+id/gps_loc_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="GPS Coordinates : "
-                        android:textColor="@android:color/white" />
+                        android:text="Coordinates : "
+                        android:textColor="@android:color/black" />
 
                 </LinearLayout>
 
@@ -65,14 +67,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/qn_gps_2"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/black" />
 
                     <Button
                         android:id="@+id/get_loc_button_2"
@@ -87,8 +89,8 @@
                         android:id="@+id/gps_loc_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="GPS Coordinates : "
-                        android:textColor="@android:color/white" />
+                        android:text="Coordinates : "
+                        android:textColor="@android:color/black" />
 
                 </LinearLayout>
 
@@ -97,20 +99,21 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_margin="10dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/qn_gps_3"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/black" />
 
                     <Button
                         android:id="@+id/get_loc_button_3"
@@ -125,8 +128,8 @@
                         android:id="@+id/gps_loc_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="GPS Coordinates : "
-                        android:textColor="@android:color/white" />
+                        android:text="Coordinates : "
+                        android:textColor="@android:color/black" />
 
                 </LinearLayout>
 
@@ -134,14 +137,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/qn_gps_4"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/black" />
 
                     <Button
                         android:id="@+id/get_loc_button_4"
@@ -156,8 +159,8 @@
                         android:id="@+id/gps_loc_4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="GPS Coordinates : "
-                        android:textColor="@android:color/white" />
+                        android:text="Coordinates : "
+                        android:textColor="@android:color/black" />
 
                 </LinearLayout>
 
@@ -166,20 +169,21 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_margin="10dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/qn_gps_5"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/black" />
 
                     <Button
                         android:id="@+id/get_loc_button_5"
@@ -194,8 +198,8 @@
                         android:id="@+id/gps_loc_5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="GPS Coordinates : "
-                        android:textColor="@android:color/white" />
+                        android:text="Coordinates : "
+                        android:textColor="@android:color/black" />
 
                 </LinearLayout>
 
@@ -203,14 +207,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/qn_gps_6"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/black" />
 
                     <Button
                         android:id="@+id/get_loc_button_6"
@@ -225,8 +229,8 @@
                         android:id="@+id/gps_loc_6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="GPS Coordinates : "
-                        android:textColor="@android:color/white" />
+                        android:text="Coordinates : "
+                        android:textColor="@android:color/black" />
 
                 </LinearLayout>
 
@@ -235,41 +239,83 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:gravity="right"
-                android:orientation="horizontal">
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/save_button"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/button_save"
-                    android:textAllCaps="false"
-                    android:textColor="#ffffff"
-                    android:layout_gravity="right"/>
+                    android:text="@string/qn_gps_area"
+                    android:textColor="@android:color/black" />
 
-                <Button
-                    android:id="@+id/back_button"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/button_back"
-                    android:textAllCaps="false"
-                    android:textColor="#ffffff"
-                    android:layout_gravity="right"/>
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/next_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/button_next"
-                    android:textAllCaps="false"
-                    android:textColor="#ffffff"
-                    android:layout_gravity="right"/>
+                    <EditText
+                        android:id="@+id/parcel_area_edit"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:textColor="@android:color/black"
+                        android:inputType="numberDecimal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="ha"
+                        android:textColor="@android:color/black" />
+
+                </LinearLayout>
+
+
             </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_save"
+            android:textAllCaps="false"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_back"
+            android:textAllCaps="false"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/next_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_next"
+            android:textAllCaps="false"
+            android:textColor="#ffffff" />
+
+    </LinearLayout>
 
 </LinearLayout>

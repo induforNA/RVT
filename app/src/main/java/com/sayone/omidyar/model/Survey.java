@@ -46,6 +46,9 @@ public class Survey extends RealmObject {
 
     private Component components;
 
+    private RealmList<ParcelLocation> parcelLocations;
+
+
     public long getId() {
         return id;
     }
@@ -182,6 +185,14 @@ public class Survey extends RealmObject {
         this.surveyId = surveyId;
     }
 
+    public RealmList<ParcelLocation> getParcelLocations() {
+        return parcelLocations;
+    }
+
+    public void setParcelLocations(RealmList<ParcelLocation> parcelLocations) {
+        this.parcelLocations = parcelLocations;
+    }
+
     @Override
     public String toString() {
         return "Survey{" +
@@ -195,11 +206,14 @@ public class Survey extends RealmObject {
                 ", language='" + language + '\'' +
                 ", currency='" + currency + '\'' +
                 ", respondentGroup='" + respondentGroup + '\'' +
+                ", sendStatus=" + sendStatus +
                 ", date=" + date +
                 ", participants=" + participants +
                 ", landKinds=" + landKinds +
                 ", inflationRate='" + inflationRate + '\'' +
+                ", overRideInflationRate='" + overRideInflationRate + '\'' +
                 ", components=" + components +
+                ", parcelLocations=" + parcelLocations +
                 '}';
     }
 }

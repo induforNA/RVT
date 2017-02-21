@@ -8,32 +8,35 @@ import io.realm.annotations.PrimaryKey;
  */
 
 public class ParcelLocation extends RealmObject{
-    @PrimaryKey
-    private long id;
 
+    @PrimaryKey
     private String surveyId;
 
-    private int corner;
+    private double lat_1;
 
-    private double latitude;
+    private double lat_2;
 
-    private double longitude;
+    private double lat_3;
 
-    public double getLongitude() {
-        return longitude;
-    }
+    private double lat_4;
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
+    private double lat_5;
 
-    public long getId() {
-        return id;
-    }
+    private double lat_6;
 
-    public void setId(long id) {
-        this.id = id;
-    }
+    private double lng_1;
+
+    private double lng_2;
+
+    private double lng_3;
+
+    private double lng_4;
+
+    private double lng_5;
+
+    private double lng_6;
+
+    private float area;
 
     public String getSurveyId() {
         return surveyId;
@@ -43,30 +46,128 @@ public class ParcelLocation extends RealmObject{
         this.surveyId = surveyId;
     }
 
-    public int getCorner() {
-        return corner;
+
+    public float getArea() {
+        return area;
     }
 
-    public void setCorner(int corner) {
-        this.corner = corner;
+    public void setArea(float area) {
+        this.area = area;
     }
 
-    public double getLatitude() {
-        return latitude;
+    public double getLng_6() {
+        return lng_6;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public void setLng_6(double lng_6) {
+        this.lng_6 = lng_6;
+    }
+
+    public double getLat_1() {
+        return lat_1;
+    }
+
+    public void setLat_1(double lat_1) {
+        this.lat_1 = lat_1;
+    }
+
+    public double getLat_2() {
+        return lat_2;
+    }
+
+    public void setLat_2(double lat_2) {
+        this.lat_2 = lat_2;
+    }
+
+    public double getLat_3() {
+        return lat_3;
+    }
+
+    public void setLat_3(double lat_3) {
+        this.lat_3 = lat_3;
+    }
+
+    public double getLat_4() {
+        return lat_4;
+    }
+
+    public void setLat_4(double lat_4) {
+        this.lat_4 = lat_4;
+    }
+
+    public double getLat_5() {
+        return lat_5;
+    }
+
+    public void setLat_5(double lat_5) {
+        this.lat_5 = lat_5;
+    }
+
+    public double getLat_6() {
+        return lat_6;
+    }
+
+    public void setLat_6(double lat_6) {
+        this.lat_6 = lat_6;
+    }
+
+    public double getLng_1() {
+        return lng_1;
+    }
+
+    public void setLng_1(double lng_1) {
+        this.lng_1 = lng_1;
+    }
+
+    public double getLng_2() {
+        return lng_2;
+    }
+
+    public void setLng_2(double lng_2) {
+        this.lng_2 = lng_2;
+    }
+
+    public double getLng_3() {
+        return lng_3;
+    }
+
+    public void setLng_3(double lng_3) {
+        this.lng_3 = lng_3;
+    }
+
+    public double getLng_4() {
+        return lng_4;
+    }
+
+    public void setLng_4(double lng_4) {
+        this.lng_4 = lng_4;
+    }
+
+    public double getLng_5() {
+        return lng_5;
+    }
+
+    public void setLng_5(double lng_5) {
+        this.lng_5 = lng_5;
     }
 
     @Override
     public String toString() {
         return "ParcelLocation{" +
-                "id=" + id +
-                ", surveyId='" + surveyId + '\'' +
-                ", corner=" + corner +
-                ", latitude=" + latitude +
-                ", longitude=" + longitude +
+                "surveyId='" + surveyId + '\'' +
+                ", lat_1=" + lat_1 +
+                ", lat_2=" + lat_2 +
+                ", lat_3=" + lat_3 +
+                ", lat_4=" + lat_4 +
+                ", lat_5=" + lat_5 +
+                ", lat_6=" + lat_6 +
+                ", lng_1=" + lng_1 +
+                ", lng_2=" + lng_2 +
+                ", lng_3=" + lng_3 +
+                ", lng_4=" + lng_4 +
+                ", lng_5=" + lng_5 +
+                ", lng_6=" + lng_6 +
+                ", area=" + area +
                 '}';
     }
 }

@@ -87,7 +87,7 @@
             android:name=".view.SocialCapitalActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".view.CertificateActivity"
+            android:name=".view.NewCertificateActivity"
             android:screenOrientation="landscape">
 
         </activity>
