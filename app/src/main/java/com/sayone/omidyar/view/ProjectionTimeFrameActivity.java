@@ -24,13 +24,13 @@ public class ProjectionTimeFrameActivity extends BaseActivity {
         yearSpinner3 = (Spinner) findViewById(R.id.spinner_year3);
 
         ArrayAdapter<CharSequence> year1_adapter = ArrayAdapter.createFromResource(this,
-                R.array.year_array, android.R.layout.simple_spinner_item);
+                R.array.year_array, android.R.layout.simple_spinner_dropdown_item);
         year1_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<CharSequence> year2_adapter = ArrayAdapter.createFromResource(this,
-                R.array.year_array, android.R.layout.simple_spinner_item);
+                R.array.year_array, android.R.layout.simple_spinner_dropdown_item);
         year2_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<CharSequence> year3_adapter = ArrayAdapter.createFromResource(this,
-                R.array.year_array, android.R.layout.simple_spinner_item);
+                R.array.year_array, android.R.layout.simple_spinner_dropdown_item);
         year3_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         yearSpinner1.setAdapter(year1_adapter);

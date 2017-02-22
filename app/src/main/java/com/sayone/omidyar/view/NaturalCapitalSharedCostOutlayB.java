@@ -570,7 +570,7 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
             Intent intent = new Intent(getApplicationContext(), StartLandTypeActivity.class);
             startActivity(intent);
         } else {
-            Intent intent = new Intent(getApplicationContext(), CertificateActivity.class);
+            Intent intent = new Intent(getApplicationContext(), NewCertificateActivity.class);
             startActivity(intent);
         }
     }

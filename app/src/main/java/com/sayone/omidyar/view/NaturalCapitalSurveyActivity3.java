@@ -59,28 +59,28 @@ public class NaturalCapitalSurveyActivity3 extends BaseActivity implements View.
         serveyId = sharedPref.getString("surveyId", "");
 
         ArrayAdapter<CharSequence> infrastructureAdapter1 = ArrayAdapter.createFromResource(this,
-                R.array.number_of_harvests, android.R.layout.simple_spinner_item);
+                R.array.number_of_harvests, android.R.layout.simple_spinner_dropdown_item);
         infrastructureAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<CharSequence> infrastructureAdapter2 = ArrayAdapter.createFromResource(this,
-                R.array.number_of_harvests, android.R.layout.simple_spinner_item);
+                R.array.number_of_harvests, android.R.layout.simple_spinner_dropdown_item);
         infrastructureAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<CharSequence> infrastructureAdapter3 = ArrayAdapter.createFromResource(this,
-                R.array.number_of_harvests, android.R.layout.simple_spinner_item);
+                R.array.number_of_harvests, android.R.layout.simple_spinner_dropdown_item);
         infrastructureAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<CharSequence> infrastructureAdapter4 = ArrayAdapter.createFromResource(this,
-                R.array.number_of_harvests, android.R.layout.simple_spinner_item);
+                R.array.number_of_harvests, android.R.layout.simple_spinner_dropdown_item);
         infrastructureAdapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<CharSequence> infrastructureAdapter5 = ArrayAdapter.createFromResource(this,
-                R.array.number_of_harvests, android.R.layout.simple_spinner_item);
+                R.array.number_of_harvests, android.R.layout.simple_spinner_dropdown_item);
         infrastructureAdapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<CharSequence> infrastructureAdapter6 = ArrayAdapter.createFromResource(this,
-                R.array.number_of_harvests, android.R.layout.simple_spinner_item);
+                R.array.number_of_harvests, android.R.layout.simple_spinner_dropdown_item);
         infrastructureAdapter6.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<CharSequence> infrastructureAdapter7 = ArrayAdapter.createFromResource(this,
-                R.array.number_of_harvests, android.R.layout.simple_spinner_item);
+                R.array.number_of_harvests, android.R.layout.simple_spinner_dropdown_item);
         infrastructureAdapter7.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<CharSequence> infrastructureAdapter8 = ArrayAdapter.createFromResource(this,
-                R.array.number_of_harvests, android.R.layout.simple_spinner_item);
+                R.array.number_of_harvests, android.R.layout.simple_spinner_dropdown_item);
         infrastructureAdapter8.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinnerInfrastructure1.setAdapter(infrastructureAdapter1);

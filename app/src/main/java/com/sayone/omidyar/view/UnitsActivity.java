@@ -145,10 +145,10 @@ public class UnitsActivity extends BaseActivity implements View.OnClickListener 
 
 
         ArrayAdapter<CharSequence> unit_adapter1 = ArrayAdapter.createFromResource(this,
-                R.array.unit_array, android.R.layout.simple_spinner_item);
+                R.array.unit_array, android.R.layout.simple_spinner_dropdown_item);
         unit_adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<CharSequence> unit_adapter2 = ArrayAdapter.createFromResource(this,
-                R.array.unit_array, android.R.layout.simple_spinner_item);
+                R.array.unit_array, android.R.layout.simple_spinner_dropdown_item);
         unit_adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         unitSpinner1.setAdapter(unit_adapter1);

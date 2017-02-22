@@ -176,9 +176,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         timePeriodList = new ArrayList<>();
         unitList = new ArrayList<>();
 
-        year_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, yearList);
-        timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, timePeriodList);
-        unit_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, unitList);
+        year_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, yearList);
+        timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodList);
+        unit_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, unitList);
 
         language = Locale.getDefault().getDisplayLanguage();
         Survey results = realm.where(Survey.class)
@@ -1241,8 +1241,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
             Intent intent = new Intent(getApplicationContext(), StartLandTypeActivity.class);
             startActivity(intent);
-        } else {
-            Intent intent = new Intent(getApplicationContext(), CertificateActivity.class);
+
+        }else{
+            Intent intent = new Intent(getApplicationContext(),NewCertificateActivity.class);
             startActivity(intent);
         }
     }

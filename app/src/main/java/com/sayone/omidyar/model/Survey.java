@@ -42,6 +42,8 @@ public class Survey extends RealmObject {
 
     private String inflationRate;
 
+    private String riskRate;
+
     private String overRideInflationRate;
 
     private Component components;
@@ -51,6 +53,8 @@ public class Survey extends RealmObject {
     private RealmList<CashFlow> sharedCashFlows;
 
     private RealmList<Outlay> sharedOutlays;
+
+    private RealmList<ParcelLocation> parcelLocations;
 
     public long getId() {
         return id;
@@ -188,6 +192,22 @@ public class Survey extends RealmObject {
         this.surveyId = surveyId;
     }
 
+    public RealmList<ParcelLocation> getParcelLocations() {
+        return parcelLocations;
+    }
+
+    public void setParcelLocations(RealmList<ParcelLocation> parcelLocations) {
+        this.parcelLocations = parcelLocations;
+    }
+
+    public String getRiskRate() {
+        return riskRate;
+    }
+
+    public void setRiskRate(String riskRate) {
+        this.riskRate = riskRate;
+    }
+
     @Override
     public String toString() {
         return "Survey{" +
@@ -201,11 +221,15 @@ public class Survey extends RealmObject {
                 ", language='" + language + '\'' +
                 ", currency='" + currency + '\'' +
                 ", respondentGroup='" + respondentGroup + '\'' +
+                ", sendStatus=" + sendStatus +
                 ", date=" + date +
                 ", participants=" + participants +
                 ", landKinds=" + landKinds +
                 ", inflationRate='" + inflationRate + '\'' +
+                ", riskRate='" + riskRate + '\'' +
+                ", overRideInflationRate='" + overRideInflationRate + '\'' +
                 ", components=" + components +
+                ", parcelLocations=" + parcelLocations +
                 '}';
     }
 

@@ -40,7 +40,7 @@ import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
 
-import static android.R.layout.simple_spinner_item;
+import static android.R.layout.simple_spinner_dropdown_item;
 
 /**
  * Created by sayone on 18/10/16.
@@ -124,13 +124,14 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         itemList = new ArrayList<>();
         timePeriodList = new ArrayList<>();
 
-        year_adapter = new ArrayAdapter<>(this, simple_spinner_item, yearList);
+        year_adapter = new ArrayAdapter<>(this, simple_spinner_dropdown_item, yearList);
         spinnerYear.setAdapter(year_adapter);
 
-        item_adapter = new ArrayAdapter<>(this, simple_spinner_item, itemList);
+
+        item_adapter = new ArrayAdapter<>(this, simple_spinner_dropdown_item, itemList);
         spinnerItem.setAdapter(item_adapter);
 
-        occuranceAdapter = new ArrayAdapter<>(this, simple_spinner_item, timePeriodList);
+        occuranceAdapter = new ArrayAdapter<>(this, simple_spinner_dropdown_item, timePeriodList);
 
 //        ArrayAdapter<CharSequence> occurance_adapter = ArrayAdapter.createFromResource(this,
 //                R.array.time_period_array, android.R.layout.simple_spinner_item);

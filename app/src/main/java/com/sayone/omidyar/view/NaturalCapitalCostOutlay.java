@@ -338,6 +338,16 @@ public class NaturalCapitalCostOutlay extends BaseActivity {
         //int yearsCount = 0;
         int year = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
 
+       /* if (currentSocialCapitalServey.equals("Forestland")) {
+            yearsCount = 15;New
+        } else if (currentSocialCapitalServey.equals("Cropland")) {
+            yearsCount = 5;
+        } else if (currentSocialCapitalServey.equals("Pastureland")) {
+            yearsCount = 8;
+        } else if (currentSocialCapitalServey.equals("Mining Land")) {
+            yearsCount = 5;
+        }*/
+
         for (int i = 0; i <= PROJECTION_COUNT; i++) {
             OutlayYears outlayYearsCheck;
             outlayYearsCheck = realm.where(OutlayYears.class)
@@ -384,8 +394,9 @@ public class NaturalCapitalCostOutlay extends BaseActivity {
 
             Intent intent = new Intent(getApplicationContext(), StartLandTypeActivity.class);
             startActivity(intent);
-        } else {
-            Intent intent = new Intent(getApplicationContext(), CertificateActivity.class);
+
+        }else{
+            Intent intent = new Intent(getApplicationContext(),NewCertificateActivity.class);
             startActivity(intent);
         }
     }

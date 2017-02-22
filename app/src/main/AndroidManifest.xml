@@ -22,6 +22,13 @@
             android:name="io.fabric.ApiKey"
             android:value="589d3c8f8b997c0c35337806ec6f75402fca3f66" />
 
+        <service android:name=".view.GpsTrackerService" />
+
+        <activity
+            android:name=".view.GpsCoordinates"
+            android:screenOrientation="landscape" >
+
+        </activity>
         <activity
             android:name=".view.AdminRatesActivity"
             android:screenOrientation="landscape"></activity>
@@ -74,8 +81,10 @@
             android:name=".view.SocialCapitalActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".view.CertificateActivity"
-            android:screenOrientation="landscape"></activity>
+            android:name=".view.NewCertificateActivity"
+            android:screenOrientation="landscape">
+
+        </activity>
         <activity
             android:name=".view.NaturalCapitalSurveyActivityD"
             android:screenOrientation="landscape"></activity>
