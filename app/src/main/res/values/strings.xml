@@ -312,8 +312,8 @@
     <string name="restore_original_inflation_rate">Restore original Inflation rate</string>
     <string name="string_household">Number of households that %1$s :</string>
     <string name="qn_natural_capital_1">What was the quantity of %1$sed each time?</string>
-    <string name="text_harvest">harvest</string>
-    <string name="text_extract">extract</string>
+    <string name="text_harvest">\u0020harvest</string>
+    <string name="text_extract">\u0020extract</string>
     <string name="text_incur_cost">incur cost\u0020</string>
     <string name="question_override">We will project cash flows for the next 15 years based on the average of all of the data you entered. Does this average seem realistic going into the future?</string>
     <string name="label_your_estimate">Your estimate (will override average value in projections)</string>

@@ -1,71 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/menu_drawer_layout"
-    android:background="@android:color/white"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <!-- The main content view -->
-    <FrameLayout
-        android:id="@+id/content_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.sayone.omidyar.view.NaturalCapitalSurveyActivityC">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <ImageView
-                    android:id="@+id/image_view_menu_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/ic_menu_black_36dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:layout_marginRight="10dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/title_natural_capital"
-                    android:textSize="@dimen/textfield_size" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_keyboard_arrow_right_black_36dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@id/land_type"
-                    android:text="@string/string_forestland"
-                    android:textSize="@dimen/textfield_size" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
+    android:background="@color/white">
         <TextView
             android:textStyle="bold"
             android:layout_marginLeft="20dp"
@@ -96,17 +35,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:checkedButton="@+id/radio_button_negative"
                 android:layout_margin="5dp">
                 <RadioButton
                     android:id="@+id/radio_button_positive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:text="@string/radio_button_yes"/>
                 <RadioButton
                     android:id="@+id/radio_button_negative"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:textColor="@color/black"
                     android:text="@string/radio_button_no"/>
             </RadioGroup>
 
@@ -160,12 +102,14 @@
                     android:id="@+id/text_question_harvest"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:text="@string/text_question_harvest"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:weightSum="2"
+                    android:layout_marginTop="2dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -192,7 +136,8 @@
                             android:id="@+id/edit_trend_frequency"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="0dp"
+                            android:textColor="@color/black"
+                            android:inputType="numberDecimal"
                             android:layout_weight="1"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -200,6 +145,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:weightSum="2"
+                    android:layout_marginTop="2dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -227,7 +173,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:focusable="false"
-                            android:padding="0dp"
+                            android:textColor="@color/black"
                             android:background="@color/colorDisable"
                             android:layout_weight="1"/>
                     </LinearLayout>
@@ -237,6 +183,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:weightSum="2"
+                    android:layout_marginTop="2dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -264,7 +211,8 @@
                             android:id="@+id/edit_trend_num_households"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="0dp"
+                            android:textColor="@color/black"
+                            android:inputType="numberDecimal"
                             android:layout_weight="1"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -272,12 +220,14 @@
                     android:id="@+id/text_question_per_household"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:text="@string/text_question_quantity"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:weightSum="2"
+                    android:layout_marginTop="2dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -304,7 +254,8 @@
                             android:id="@+id/edit_trend_quantity"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="0dp"
+                            android:inputType="numberDecimal"
+                            android:textColor="@color/black"
                             android:layout_weight="1"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -312,6 +263,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:weightSum="2"
+                    android:layout_marginTop="2dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -337,7 +289,7 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="0dp"
+                            android:textColor="@color/black"
                             android:focusable="false"
                             android:background="@color/colorDisable"
                             android:layout_weight="1"/>
@@ -347,12 +299,14 @@
                     android:id="@+id/text_question_per_unit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:text="@string/text_question_price"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:weightSum="2"
+                    android:layout_marginTop="2dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -379,7 +333,8 @@
                             android:id="@+id/edit_trend_price"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="0dp"
+                            android:textColor="@color/black"
+                            android:inputType="numberDecimal"
                             android:layout_weight="1"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -387,6 +342,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:weightSum="2"
+                    android:layout_marginTop="2dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -413,7 +369,8 @@
                             android:id="@+id/edit_trend_area"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="0dp"
+                            android:textColor="@color/black"
+                            android:inputType="numberDecimal"
                             android:layout_weight="1"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -427,6 +384,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
+            android:layout_gravity="bottom"
             android:orientation="horizontal">
 
             <View
@@ -440,6 +398,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/button_back"
                 android:textAllCaps="false"
+                android:background="@color/colorPrimary"
                 android:textColor="@android:color/white" />
 
             <Button
@@ -448,12 +407,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:text="@string/button_next"
+                android:background="@color/colorPrimary"
                 android:textAllCaps="false"
                 android:textColor="#ffffff" />
         </LinearLayout>
     </LinearLayout>
 
-    <include
+   <!-- <include
         android:id="@+id/left_drawer"
         layout="@layout/navigation_drawer_menu" />
-</android.support.v4.widget.DrawerLayout>
+</android.support.v4.widget.DrawerLayout>-->
