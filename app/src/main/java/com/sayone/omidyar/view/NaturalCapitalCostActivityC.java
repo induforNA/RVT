@@ -158,9 +158,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         timePeriodList = new ArrayList<>();
         unitList = new ArrayList<>();
 
-        year_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, yearList);
-        timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, timePeriodList);
-        unit_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, unitList);
+        year_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, yearList);
+        timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodList);
+        unit_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, unitList);
 
         language = Locale.getDefault().getDisplayLanguage();
         Survey results = realm.where(Survey.class)

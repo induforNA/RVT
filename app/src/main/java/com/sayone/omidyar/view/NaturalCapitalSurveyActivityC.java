@@ -150,7 +150,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
 
 
         ArrayAdapter<CharSequence> year_adapter = ArrayAdapter.createFromResource(this,
-                R.array.year_array, android.R.layout.simple_spinner_item);
+                R.array.year_array, android.R.layout.simple_spinner_dropdown_item);
         year_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinnerYear.setAdapter(year_adapter);
@@ -191,7 +191,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                 }
 
 
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, yearArray);
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, yearArray);
                 //ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,yearArray);
 
                 final Spinner spinner = new Spinner(this);
@@ -268,7 +268,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                 yearArray.add(year--);
             }
 
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, yearArray);
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, yearArray);
 
             final Spinner spinner = new Spinner(this);
             spinner.setLayoutParams(mRparams);

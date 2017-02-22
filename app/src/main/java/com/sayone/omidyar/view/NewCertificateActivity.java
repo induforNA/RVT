@@ -179,10 +179,6 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         }
 
         for (LandKind landKind : landKinds) {
-            //Sovereign/Country Risk Rate
-            double riskRate = landKind.getSocialCapitals().getSovereign() * 100.00;
-            double roundOffRisk = Math.round(riskRate * 100.0) / 100.0;
-            countryRiskRate.setText(String.valueOf(roundOffRisk) + "%");
 
             if (landKind.getName().equals("Forestland")) {
                 forestlandLayout.setVisibility(View.VISIBLE);
@@ -352,41 +348,33 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         surveyIdDrawer.setText(surveyId);
         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
 
-        double lowerLimit;
-        double upperLimit;
-        if (totalVal > 0) {
-            lowerLimit = totalVal * 0.9999;
-            lowerLimit = Math.round(lowerLimit);
-            upperLimit = totalVal * 1.0001;
-            upperLimit = Math.round(upperLimit);
-        } else if (totalVal < 0) {
-            lowerLimit = totalVal * 1.0001;
-            lowerLimit = Math.round(lowerLimit);
-            upperLimit = totalVal * 0.9999;
-            upperLimit = Math.round(upperLimit);
-        } else {
-            lowerLimit = 0;
-            upperLimit = 0;
-        }
+//        double lowerLimit;
+//        double upperLimit;
+//        if (totalVal > 0) {
+//            lowerLimit = totalVal * 0.9999;
+//            lowerLimit = Math.round(lowerLimit);
+//            upperLimit = totalVal * 1.0001;
+//            upperLimit = Math.round(upperLimit);
+//        } else if (totalVal < 0) {
+//            lowerLimit = totalVal * 1.0001;
+//            lowerLimit = Math.round(lowerLimit);
+//            upperLimit = totalVal * 0.9999;
+//            upperLimit = Math.round(upperLimit);
+//        } else {
+//            lowerLimit = 0;
+//            upperLimit = 0;
+//        }
 
-        String lowerLimitStr = String.valueOf((long) lowerLimit);
-        String upperLimitStr = String.valueOf((long) upperLimit);
+//        String lowerLimitStr = String.valueOf((long) lowerLimit);
+//        String upperLimitStr = String.valueOf((long) upperLimit);
 
-        numberProcess(lowerLimitStr);
-        Log.e("LOWER LIMIT Test ", numberProcess(lowerLimitStr));
-
-
-        Log.e("LOWER LIMIT ", String.valueOf(lowerLimit));
-        Log.e("LOWER LIMIT ", String.valueOf(Math.round(lowerLimit / 10000) * 10000));
-        Log.e("UPPER LIMIT ", String.valueOf((long) upperLimit));
-
-//        String totalValStr = String.valueOf(Math.round(lowerLimit/10000)*10000)+" to "+String.valueOf(Math.round(upperLimit/10000)*10000);
-
-        // formattedString(Math.round(lowerLimit/10000)*10000);
+//        numberProcess(lowerLimitStr);
+//        Log.e("LOWER LIMIT Test ", numberProcess(lowerLimitStr));
 
 
-//        String totalValStr = " ~ " + formattedString(Long.valueOf(numberProcess(lowerLimitStr))) + " — " + formattedString(Long.valueOf(numberProcess(upperLimitStr)));
-//        String totalValStrToSend = formattedStringNoSymbol(Long.valueOf(numberProcess(lowerLimitStr))) + " : " + formattedStringNoSymbol(Long.valueOf(numberProcess(upperLimitStr)));
+//        Log.e("LOWER LIMIT ", String.valueOf(lowerLimit));
+//        Log.e("LOWER LIMIT ", String.valueOf(Math.round(lowerLimit / 10000) * 10000));
+//        Log.e("UPPER LIMIT ", String.valueOf((long) upperLimit));
 
         String totalValStr = formattedString(Long.valueOf(numberProcess(String.valueOf((long) totalVal))));
         String totalValStrToSend = formattedStringNoSymbol(Long.valueOf(numberProcess(String.valueOf((long) totalVal))));
@@ -401,9 +389,14 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
 
         totalText.setText(totalValStr);
 
-        double infl = Double.parseDouble(surveyCheck.getInflationRate()) * 100.00;
-        double roundOff = Math.round(infl * 100.0) / 100.0;
-        inflationRate.setText(String.valueOf(roundOff) + "%");
+//        double infl = Double.parseDouble(surveyCheck.getInflationRate()) * 100.00;
+//        double roundOff = Math.round(infl * 100.0) / 100.0;
+        inflationRate.setText(surveyCheck.getInflationRate() + "%");
+
+        //Sovereign/Country Risk Rate
+//        double riskRate = surveyCheck.getRiskRate() * 100.00;
+//        double roundOffRisk = Math.round(riskRate * 100.0) / 100.0;
+        countryRiskRate.setText(surveyCheck.getRiskRate() + "%");
 
         parcelVal=totalVal/parcelArea;
         String parcelValStr = formattedString(Long.valueOf(numberProcess(String.valueOf((long) parcelVal))));

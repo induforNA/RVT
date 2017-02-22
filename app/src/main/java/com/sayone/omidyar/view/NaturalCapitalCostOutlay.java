@@ -353,7 +353,7 @@ public class NaturalCapitalCostOutlay extends BaseActivity {
         int year = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
 
        /* if (currentSocialCapitalServey.equals("Forestland")) {
-            yearsCount = 15;
+            yearsCount = 15;New
         } else if (currentSocialCapitalServey.equals("Cropland")) {
             yearsCount = 5;
         } else if (currentSocialCapitalServey.equals("Pastureland")) {

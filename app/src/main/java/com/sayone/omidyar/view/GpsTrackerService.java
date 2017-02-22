@@ -122,7 +122,7 @@ public class GpsTrackerService extends Service {
         if (mStatus == LocationProvider.OUT_OF_SERVICE) {
             Toast.makeText(getApplicationContext(), "GPS not available", Toast.LENGTH_SHORT).show();
         } else if (mStatus == LocationProvider.TEMPORARILY_UNAVAILABLE) {
-            Toast.makeText(getApplicationContext(), "Searching for GPS", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(), "Searching for GPS", Toast.LENGTH_SHORT).show();
         } else if (mStatus == LocationProvider.AVAILABLE) {
 
         }

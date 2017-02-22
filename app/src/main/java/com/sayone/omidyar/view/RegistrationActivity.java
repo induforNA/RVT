@@ -1,14 +1,17 @@
 package com.sayone.omidyar.view;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -45,7 +48,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
     private Realm realm;
 
     public Spinner countrySpinner, currencySpinner, languageSpinner;
-    public EditText respondentGroup, state, district, community, surveyor;
+    public EditText respondentGroup, state, district, community, surveyor, editRiskRate, editInflationRate;
     public Button signUp, login;
     public String country, language, currency, selectedDate;
     private DatePicker datePicker;
@@ -58,9 +61,11 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
     private SharedPreferences.Editor editor;
     Context context;
     private String androidId;
+    private static final int MY_PERMISSIONS_REQUEST = 0;
 
-    String inflationRateStr;
+    //    String inflationRateStr;
     double inflationRate = 0.05;
+    double riskRate;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,12 +79,11 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
         androidId = Settings.Secure.getString(getContentResolver(),
                 Settings.Secure.ANDROID_ID);
-        inflationRateStr = preferences.getString("inflationRate","5");
+//        inflationRateStr = preferences.getString("inflationRate", "5");
 
-        Log.e("IRATE ",inflationRateStr);
+//        Log.e("IRATE ", inflationRateStr);
 
-        inflationRate = Double.parseDouble(inflationRateStr)/100;
-
+//        inflationRate = Double.parseDouble(inflationRateStr) / 100;
 
         signUp = (Button) findViewById(R.id.button_sign_up);
         login = (Button) findViewById(R.id.button_login);
@@ -90,6 +94,8 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         community = (EditText) findViewById(R.id.edittext_community);
         surveyor = (EditText) findViewById(R.id.edittext_surveyor);
         dateView = (EditText) findViewById(R.id.edittext_date);
+        editRiskRate = (EditText) findViewById(R.id.reg_risk_rate);
+        editInflationRate = (EditText) findViewById(R.id.reg_inflation_rate);
 
         countrySpinner = (Spinner) findViewById(R.id.spinner_country);
         currencySpinner = (Spinner) findViewById(R.id.spinner_currency);
@@ -103,13 +109,13 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
 
         ArrayAdapter<CharSequence> country_adapter = ArrayAdapter.createFromResource(this,
-                R.array.country_array, android.R.layout.simple_spinner_item);
+                R.array.country_array, android.R.layout.simple_spinner_dropdown_item);
         country_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<CharSequence> language_adapter = ArrayAdapter.createFromResource(this,
-                R.array.language_array, android.R.layout.simple_spinner_item);
+                R.array.language_array, android.R.layout.simple_spinner_dropdown_item);
         language_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter<CharSequence> currency_adapter = ArrayAdapter.createFromResource(this,
-                R.array.currency_array, android.R.layout.simple_spinner_item);
+                R.array.currency_array, android.R.layout.simple_spinner_dropdown_item);
         currency_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         countrySpinner.setAdapter(country_adapter);
@@ -160,6 +166,13 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
             }
         });
+
+        if (ContextCompat.checkSelfPermission(RegistrationActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(RegistrationActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            } else {
+                ActivityCompat.requestPermissions(RegistrationActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST);
+            }
+        }
     }
 
     public void toastfunction(Context context, String message) {
@@ -174,7 +187,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
     }
 
     public int getNextKeySurvey() {
-        if(realm.where(Survey.class).max("id") == null){
+        if (realm.where(Survey.class).max("id") == null) {
             return 1;
         }
         return realm.where(Survey.class).max("id").intValue() + 1;
@@ -230,6 +243,10 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
                     toastfunction(getApplicationContext(), getResources().getString(R.string.empty_state_filed));
                 } else if (country.equals(getResources().getString(R.string.empty_country_filed))) {
                     toastfunction(getApplicationContext(), getResources().getString(R.string.empty_country_filed));
+                } else if (editRiskRate.getText().toString().equals("")) {
+                    toastfunction(getApplicationContext(), getResources().getString(R.string.empty_risk_rate));
+                } else if (editInflationRate.getText().toString().equals("")) {
+                    toastfunction(getApplicationContext(), getResources().getString(R.string.empty_inflation_rate));
                 } else {
                     toastfunction(getApplicationContext(), getResources().getString(R.string.registration_successful));
                     insertData();
@@ -248,13 +265,16 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
         enId = enId.toUpperCase();
 
-        formattediId = enId+formattediId;
+        formattediId = enId + formattediId;
         RealmList<LandKind> landKinds = new RealmList<>();
 
-        landKinds.add(insertAllLandKinds(formattediId,"Forestland"));
-        landKinds.add(insertAllLandKinds(formattediId,"Cropland"));
-        landKinds.add(insertAllLandKinds(formattediId,"Pastureland"));
-        landKinds.add(insertAllLandKinds(formattediId,"Mining Land"));
+        landKinds.add(insertAllLandKinds(formattediId, "Forestland"));
+        landKinds.add(insertAllLandKinds(formattediId, "Cropland"));
+        landKinds.add(insertAllLandKinds(formattediId, "Pastureland"));
+        landKinds.add(insertAllLandKinds(formattediId, "Mining Land"));
+
+        inflationRate = Double.parseDouble(editInflationRate.getText().toString());
+        riskRate = Double.parseDouble(editRiskRate.getText().toString());
 
         realm.beginTransaction();
         Survey survey = realm.createObject(Survey.class);
@@ -275,6 +295,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         survey.setDate(date);
         survey.setSendStatus(false);
         survey.setInflationRate(String.valueOf(inflationRate));
+        survey.setRiskRate(String.valueOf(riskRate));
         realm.commitTransaction();
 
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -282,27 +303,27 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         finish();
     }
 
-    public LandKind insertAllLandKinds(String serveyIdForLand, String landTypeName){
+    public LandKind insertAllLandKinds(String serveyIdForLand, String landTypeName) {
         ForestLand forestLand = null;
         CropLand cropLand = null;
         PastureLand pastureLand = null;
         MiningLand miningLand = null;
-        if(landTypeName.equals("Forestland")){
+        if (landTypeName.equals("Forestland")) {
             realm.beginTransaction();
             forestLand = realm.createObject(ForestLand.class);
             forestLand.setId(getNextKeyForestLand());
             realm.commitTransaction();
-        }else if(landTypeName.equals("Cropland")){
+        } else if (landTypeName.equals("Cropland")) {
             realm.beginTransaction();
             cropLand = realm.createObject(CropLand.class);
             cropLand.setId(getNextKeyCropLand());
             realm.commitTransaction();
-        }else if(landTypeName.equals("Pastureland")){
+        } else if (landTypeName.equals("Pastureland")) {
             realm.beginTransaction();
             pastureLand = realm.createObject(PastureLand.class);
             pastureLand.setId(getNextKeyPastureLand());
             realm.commitTransaction();
-        }else if(landTypeName.equals("Mining Land")){
+        } else if (landTypeName.equals("Mining Land")) {
             realm.beginTransaction();
             miningLand = realm.createObject(MiningLand.class);
             miningLand.setId(getNextKeyMiningLand());
@@ -354,5 +375,29 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
     public int getNextKeyMiningLand() {
         return realm.where(MiningLand.class).max("id").intValue() + 1;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    return;
+                } else {
+                    if (ContextCompat.checkSelfPermission(RegistrationActivity.this,
+                            Manifest.permission.ACCESS_FINE_LOCATION)
+                            != PackageManager.PERMISSION_GRANTED) {
+
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(RegistrationActivity.this,
+                                Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                        } else {
+                            ActivityCompat.requestPermissions(RegistrationActivity.this,
+                                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                    MY_PERMISSIONS_REQUEST);
+                        }
+                    }
+                }
+        }
     }
 }

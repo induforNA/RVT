@@ -47,6 +47,7 @@ public class GpsCoordinates extends BaseActivity {
     GpsTrackerService gpsTrackerService;
     boolean mBound = false;
     boolean isSaved = false;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,9 +107,6 @@ public class GpsCoordinates extends BaseActivity {
         switch (view.getId()) {
 
             case R.id.next_button:
-                if (!isSaved) {
-                    saveInputs();
-                }
                 Intent intent = new Intent(getApplicationContext(), SocialCapitalStartActivity.class);
                 startActivity(intent);
                 break;
@@ -251,6 +249,7 @@ public class GpsCoordinates extends BaseActivity {
     }
 
     public void getCoordinates(int gpsCoordinatesViewId, int index) {
+
         TextView gpsCoordinatesView = (TextView) findViewById(gpsCoordinatesViewId);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             if (mBound) {
@@ -266,8 +265,8 @@ public class GpsCoordinates extends BaseActivity {
                     String latDMS = LocationConverter.getLatitudeDMS(corners[index].getLatitude());
                     String lngDMS = LocationConverter.getLongitudeDMS(corners[index].getLongitude());
                     int accuracy = (int) location.getAccuracy();
-                    gpsCoordinatesView.setText("Coordinates : " + latDMS + ", " + lngDMS + " (Accuracy : " + accuracy + "m)");
-//                    Log.d("GPS", "Coordinates: " + corners[index].getLatitude() + ", " + corners[index].getLongitude() + "(Accuracy : " + accuracy + "m)");
+                    gpsCoordinatesView.setText("GPS Coordinates : " + latDMS + ", " + lngDMS + " (Accuracy : " + accuracy + "m)");
+                    Log.d("GPS", "Coordinates: " + corners[index].getLatitude() + ", " + corners[index].getLongitude() + "(Accuracy : " + accuracy + "m)");
                 }
             }
         } else {
@@ -288,19 +287,27 @@ public class GpsCoordinates extends BaseActivity {
                 ActivityCompat.requestPermissions(GpsCoordinates.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST);
             }
         }
-        Intent intent = new Intent(this, GpsTrackerService.class);
-        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-
+        startLocationService();
         super.onStart();
     }
 
     protected void onStop() {
+        stopLocationService();
+        super.onStop();
+    }
+
+    private void startLocationService() {
+        intent = new Intent(this, GpsTrackerService.class);
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    private void stopLocationService() {
         // Unbind from the service
         if (mBound) {
             unbindService(mConnection);
             mBound = false;
         }
-        super.onStop();
+        stopService(intent);
     }
 
     @Override
@@ -344,4 +351,5 @@ public class GpsCoordinates extends BaseActivity {
             mBound = false;
         }
     };
+
 }
