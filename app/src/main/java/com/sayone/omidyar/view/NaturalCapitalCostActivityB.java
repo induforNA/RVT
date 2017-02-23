@@ -230,7 +230,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
                 yearArray.add(year--);
             }
 
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, yearArray);
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, yearArray);
 
             final Spinner spinner = new Spinner(this);
             spinner.setLayoutParams(mRparams);
