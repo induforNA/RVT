@@ -862,9 +862,20 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 double freqUnit = 0;
                 String quaUnit = "";
                 String priceCurrency = "";
+                double previousFrequencyUnit = 0;
+
                 if(lastYearIndex++ < totalYearsCount) {
                     if (costElement4.getCostElementYearses().size() > 0) {
                         if (costElement4.getCostElementYearses().get(0).getCostFrequencyUnit() == 0) {
+                            for (CostElementYears costElementYears : costElement4.getCostElementYearses()){
+                                if (costElementYears.getProjectedIndex() < 0) {
+                                    if(previousFrequencyUnit == 0) {
+                                        previousFrequencyUnit = costElementYears.getCostFrequencyUnit();
+                                    }
+                                    previousFrequencyUnit = (previousFrequencyUnit < costElementYears.getCostFrequencyUnit())
+                                            ? previousFrequencyUnit : costElementYears.getCostFrequencyUnit();
+                                }
+                            }
                             for (CostElementYears costElementYears : costElement4.getCostElementYearses()) {
                                 if (costElementYears.getProjectedIndex() < 0) {
                                     harvestFre = 0;
@@ -878,6 +889,10 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                                     quaUnit = costElementYears.getCostPerPeriodUnit();
                                     priceCurrency = costElementYears.getCostPerUnitUnit();
                                     household = costElementYears.getHouseholds();
+                                }
+                                if( costElementYears.getCostFrequencyUnit() != previousFrequencyUnit){
+                                    harvestFre = harvestFre * (freqUnit/previousFrequencyUnit);
+                                    freqUnit = previousFrequencyUnit;
                                 }
                             }
                         } else {

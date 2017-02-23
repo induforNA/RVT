@@ -27,6 +27,7 @@ import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.CashFlow;
 import com.sayone.omidyar.model.Component;
+import com.sayone.omidyar.model.CostElementYears;
 import com.sayone.omidyar.model.Frequency;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.Quantity;
@@ -812,9 +813,21 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                 double freqUnit = 0;
                 String quaUnit = "";
                 String priceCurrency = "";
+
+                double previousFrequencyUnit = 0;
+
                 if(lastYearIndex++ < totalYearsCount) {
                     if (costElement4.getCostElementYearses().size() > 0) {
                         if (costElement4.getCostElementYearses().get(0).getCostFrequencyUnit() == 0) {
+                            for (SharedCostElementYears costElementYears : costElement4.getCostElementYearses()){
+                                if (costElementYears.getProjectedIndex() < 0) {
+                                    if(previousFrequencyUnit == 0) {
+                                        previousFrequencyUnit = costElementYears.getCostFrequencyUnit();
+                                    }
+                                    previousFrequencyUnit = (previousFrequencyUnit < costElementYears.getCostFrequencyUnit())
+                                            ? previousFrequencyUnit : costElementYears.getCostFrequencyUnit();
+                                }
+                            }
                             for (SharedCostElementYears costElementYears : costElement4.getCostElementYearses()) {
                                 if (costElementYears.getProjectedIndex() < 0) {
                                     harvestFre = 0;
@@ -828,6 +841,10 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                                     quaUnit = costElementYears.getCostPerPeriodUnit();
                                     priceCurrency = costElementYears.getCostPerUnitUnit();
                                     household = costElementYears.getHouseholds();
+                                }
+                                if( costElementYears.getCostFrequencyUnit() != previousFrequencyUnit){
+                                    harvestFre = harvestFre * (freqUnit/previousFrequencyUnit);
+                                    freqUnit = previousFrequencyUnit;
                                 }
                             }
                         } else {

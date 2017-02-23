@@ -1016,26 +1016,20 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 String quaUnit = "";
                 String priceCurrency = "";
                 
-                //TODO uncoment convert to single unit
-//
-//                double previousFrequencyUnit = 0;
-//                double currentFrequencyUnit = 0;
-
+                double previousFrequencyUnit = 0;
 
                 if (lastYearIndex++ < totalYearsCount) {
                     if (revenueProduct4.getRevenueProductYearses().size() > 0) {
                         if (revenueProduct4.getRevenueProductYearses().get(0).getHarvestFrequencyUnit() == 0) {
-                            //TODO uncoment convert to single unit
-
-//                            for (RevenueProductYears revenueProductYear : revenueProduct4.getRevenueProductYearses()){
-//                                if (revenueProductYear.getProjectedIndex() < 0) {
-//                                    if(previousFrequencyUnit == 0) {
-//                                        previousFrequencyUnit = revenueProductYear.getHarvestFrequencyUnit();
-//                                    }
-//                                    previousFrequencyUnit = (previousFrequencyUnit < revenueProductYear.getHarvestFrequencyUnit())
-//                                            ? previousFrequencyUnit : revenueProductYear.getHarvestFrequencyUnit();
-//                                }
-//                            }
+                            for (RevenueProductYears revenueProductYear : revenueProduct4.getRevenueProductYearses()){
+                                if (revenueProductYear.getProjectedIndex() < 0) {
+                                    if(previousFrequencyUnit == 0) {
+                                        previousFrequencyUnit = revenueProductYear.getHarvestFrequencyUnit();
+                                    }
+                                    previousFrequencyUnit = (previousFrequencyUnit < revenueProductYear.getHarvestFrequencyUnit())
+                                            ? previousFrequencyUnit : revenueProductYear.getHarvestFrequencyUnit();
+                                }
+                            }
                             for (RevenueProductYears revenueProductYears : revenueProduct4.getRevenueProductYearses()) {
                                 if (revenueProductYears.getProjectedIndex() < 0) {
                                     harvestFre = 0;
@@ -1050,11 +1044,10 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                                     priceCurrency = revenueProductYears.getMarketPriceCurrency();
                                     harvestArea = harvestArea + revenueProductYears.getHarvestArea();
                                     household = revenueProductYears.getHouseholds();
-//                                    TODO uncoment convert to single unit
-//                                    if( revenueProductYears.getHarvestFrequencyUnit() != previousFrequencyUnit){
-//                                        freqUnit = previousFrequencyUnit;
-//
-//                                    }
+                                    if( revenueProductYears.getHarvestFrequencyUnit() != previousFrequencyUnit){
+                                        harvestFre = harvestFre * (freqUnit/previousFrequencyUnit);
+                                        freqUnit = previousFrequencyUnit;
+                                    }
                                 }
                             }
 

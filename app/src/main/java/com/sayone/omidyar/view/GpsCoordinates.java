@@ -148,12 +148,13 @@ public class GpsCoordinates extends BaseActivity {
     }
 
     private void loadSavedCoordinates() {
-        RealmResults<ParcelLocation> parcelLocations = realm.where(ParcelLocation.class).
+        Survey survey = realm.where(Survey.class).
                 equalTo("surveyId", surveyId)
-                .findAll();
+                .findFirst();
+        ParcelLocation parcelLocation ;
 
-        if (parcelLocations.size() >= 0) {
-            for (ParcelLocation parcelLocation : parcelLocations) {
+        if (survey.getParcelLocations() != null) {
+                parcelLocation = survey.getParcelLocations();
                 Location temp = new Location("");
 
                 temp.setLatitude(parcelLocation.getLat_1());
@@ -175,12 +176,13 @@ public class GpsCoordinates extends BaseActivity {
                 temp.setLongitude(parcelLocation.getLng_6());
                 corners[5] = temp;
 
-                String coordinate_1 = LocationConverter.getLatitudeDMS(parcelLocation.getLat_1()) + ", " + LocationConverter.getLongitudeDMS(parcelLocation.getLng_1());
-                String coordinate_2 = LocationConverter.getLatitudeDMS(parcelLocation.getLat_2()) + ", " + LocationConverter.getLongitudeDMS(parcelLocation.getLng_2());
-                String coordinate_3 = LocationConverter.getLatitudeDMS(parcelLocation.getLat_3()) + ", " + LocationConverter.getLongitudeDMS(parcelLocation.getLng_3());
-                String coordinate_4 = LocationConverter.getLatitudeDMS(parcelLocation.getLat_4()) + ", " + LocationConverter.getLongitudeDMS(parcelLocation.getLng_4());
-                String coordinate_5 = LocationConverter.getLatitudeDMS(parcelLocation.getLat_5()) + ", " + LocationConverter.getLongitudeDMS(parcelLocation.getLng_5());
-                String coordinate_6 = LocationConverter.getLatitudeDMS(parcelLocation.getLat_6()) + ", " + LocationConverter.getLongitudeDMS(parcelLocation.getLng_6());
+                String coordinate_1 = parcelLocation.getCoordinateOne();
+                String coordinate_2 = parcelLocation.getCoordinateTwo();
+                String coordinate_3 = parcelLocation.getCoordinateThree();
+                String coordinate_4 = parcelLocation.getCoordinateFour();
+                String coordinate_5 = parcelLocation.getCoordinateFive();
+                String coordinate_6 = parcelLocation.getCoordinateSix();
+
                 String parcelSize = Float.toString(parcelLocation.getArea());
 
                 gpsLocation_1.setText("Coordinates : " + coordinate_1);
@@ -191,7 +193,6 @@ public class GpsCoordinates extends BaseActivity {
                 gpsLocation_6.setText("Coordinates : " + coordinate_6);
                 parcelArea.setText(parcelSize);
                 area = parcelLocation.getArea();
-            }
         }
     }
 

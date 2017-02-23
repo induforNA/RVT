@@ -156,17 +156,19 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         headingMining.setVisibility(View.GONE);
 
         //GPS Coordinates
-        RealmResults<ParcelLocation> parcelLocations = realm.where(ParcelLocation.class).
+        Survey survey = realm.where(Survey.class).
                 equalTo("surveyId", surveyId)
-                .findAll();
+                .findFirst();
 
-        for (ParcelLocation parcelLocation : parcelLocations) {
-            String coordinate_1 = LocationConverter.getLatitudeDMS(parcelLocation.getLat_1()) + ", " + LocationConverter.getLongitudeDMS(parcelLocation.getLng_1());
-            String coordinate_2 = LocationConverter.getLatitudeDMS(parcelLocation.getLat_2()) + ", " + LocationConverter.getLongitudeDMS(parcelLocation.getLng_2());
-            String coordinate_3 = LocationConverter.getLatitudeDMS(parcelLocation.getLat_3()) + ", " + LocationConverter.getLongitudeDMS(parcelLocation.getLng_3());
-            String coordinate_4 = LocationConverter.getLatitudeDMS(parcelLocation.getLat_4()) + ", " + LocationConverter.getLongitudeDMS(parcelLocation.getLng_4());
-            String coordinate_5 = LocationConverter.getLatitudeDMS(parcelLocation.getLat_5()) + ", " + LocationConverter.getLongitudeDMS(parcelLocation.getLng_5());
-            String coordinate_6 = LocationConverter.getLatitudeDMS(parcelLocation.getLat_6()) + ", " + LocationConverter.getLongitudeDMS(parcelLocation.getLng_6());
+        ParcelLocation parcelLocation = survey.getParcelLocations();
+
+        if(parcelLocation != null) {
+            String coordinate_1 = parcelLocation.getCoordinateOne();
+            String coordinate_2 = parcelLocation.getCoordinateTwo();
+            String coordinate_3 = parcelLocation.getCoordinateThree();
+            String coordinate_4 = parcelLocation.getCoordinateFour();
+            String coordinate_5 = parcelLocation.getCoordinateFive();
+            String coordinate_6 = parcelLocation.getCoordinateSix();
             parcelArea = parcelLocation.getArea();
 
             gpsCoordinate_1.setText(coordinate_1);
