@@ -1,5 +1,7 @@
 package com.sayone.omidyar.model;
 
+import com.sayone.omidyar.view.LocationConverter;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -10,6 +12,8 @@ import io.realm.annotations.PrimaryKey;
 public class ParcelLocation extends RealmObject{
 
     @PrimaryKey
+    private long id;
+
     private String surveyId;
 
     private double lat_1;
@@ -45,7 +49,6 @@ public class ParcelLocation extends RealmObject{
     public void setSurveyId(String surveyId) {
         this.surveyId = surveyId;
     }
-
 
     public float getArea() {
         return area;
@@ -151,6 +154,30 @@ public class ParcelLocation extends RealmObject{
         this.lng_5 = lng_5;
     }
 
+    public String getCoordinateOne(){
+       return  LocationConverter.getLatitudeDMS(getLat_1()) + ", " + LocationConverter.getLongitudeDMS(getLng_1());
+    }
+
+    public String getCoordinateTwo(){
+        return  LocationConverter.getLatitudeDMS(getLat_2()) + ", " + LocationConverter.getLongitudeDMS(getLng_2());
+    }
+
+    public String getCoordinateThree(){
+        return  LocationConverter.getLatitudeDMS(getLat_3()) + ", " + LocationConverter.getLongitudeDMS(getLng_3());
+    }
+
+    public String getCoordinateFour(){
+        return LocationConverter.getLatitudeDMS(getLat_4()) + ", " + LocationConverter.getLongitudeDMS(getLng_4());
+    }
+
+    public String getCoordinateFive(){
+        return LocationConverter.getLatitudeDMS(getLat_5()) + ", " + LocationConverter.getLongitudeDMS(getLng_5());
+    }
+
+    public String getCoordinateSix(){
+        return  LocationConverter.getLatitudeDMS(getLat_6()) + ", " + LocationConverter.getLongitudeDMS(getLng_6());
+    }
+
     @Override
     public String toString() {
         return "ParcelLocation{" +
@@ -169,5 +196,13 @@ public class ParcelLocation extends RealmObject{
                 ", lng_6=" + lng_6 +
                 ", area=" + area +
                 '}';
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

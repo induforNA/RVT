@@ -53,10 +53,13 @@ import com.sayone.omidyar.model.MiningLand;
 import com.sayone.omidyar.model.MultipleAnswer;
 import com.sayone.omidyar.model.Outlay;
 import com.sayone.omidyar.model.OutlayYears;
+import com.sayone.omidyar.model.ParcelLocation;
 import com.sayone.omidyar.model.Participant;
 import com.sayone.omidyar.model.PastureLand;
 import com.sayone.omidyar.model.RevenueProduct;
 import com.sayone.omidyar.model.RevenueProductYears;
+import com.sayone.omidyar.model.SharedCostElement;
+import com.sayone.omidyar.model.SharedCostElementYears;
 import com.sayone.omidyar.model.SocialCapital;
 import com.sayone.omidyar.model.SocialCapitalAnswer;
 import com.sayone.omidyar.model.SocialCapitalAnswerOptions;
@@ -329,10 +332,10 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                                 jsonObject.put("respondentGroup", "");
                             } else
                                 jsonObject.put("respondentGroup", survey.getRespondentGroup());
-                            if (survey.getDate() == null) {
+                            if (survey.getDateString() == null) {
                                 jsonObject.put("date", "");
                             } else
-                                jsonObject.put("date", survey.getDate());
+                                jsonObject.put("date", survey.getDateString());
                             if (survey.getParticipants() == null) {
                                 jsonObject.put("participants", "");
                             } else
@@ -349,6 +352,28 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                                 jsonObject.put("components", "");
                             } else
                                 jsonObject.put("components", getComponent(survey.getComponents()));
+                            if (survey.getParcelLocations() == null) {
+                                jsonObject.put("gpsCoordinates", "");
+                            } else
+                                jsonObject.put("gpsCoordinates", getParcelLocations(survey.getParcelLocations()));
+                            if (survey.getRiskRate() == null) {
+                                jsonObject.put("sovRate", "");
+                            } else
+                                jsonObject.put("sovRate", survey.getRiskRate());
+
+                            if (survey.getSharedCashFlows() == null) {
+                                jsonObject.put("sharedCashFlow", "");
+                            } else
+                                jsonObject.put("sharedCashFlow", getCashFlows(survey.getSharedCashFlows()));
+                            if (survey.getSharedOutlays() == null) {
+                                jsonObject.put("sharedOutlays", "");
+                            } else
+                                jsonObject.put("sharedOutlays", getOutLays(survey.getSharedOutlays()));
+                            if (survey.getSharedCostElements() == null) {
+                                jsonObject.put("sharedCostElements", "");
+                            } else
+                                jsonObject.put("sharedCostElements", getSharedCostElements(survey.getSharedCostElements()));
+
                             makeJsonObjectRequest(survey.getSurveyId());
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -402,6 +427,168 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         }
     }
 
+    private JSONArray getSharedCostElements(RealmList<SharedCostElement> sharedCostElements) {
+        JSONArray jsonCostElementArray = new JSONArray();
+        for (SharedCostElement costelement : sharedCostElements) {
+            JSONObject jsonObjectCostElement = new JSONObject();
+            try {
+                if (costelement.getId() == 0) {
+                    jsonObjectCostElement.put("id", "");
+                } else
+                    jsonObjectCostElement.put("id", costelement.getId());
+                if (costelement.getSurveyId() == null) {
+                    jsonObjectCostElement.put("surveyId", "");
+                } else
+                    jsonObjectCostElement.put("surveyId", costelement.getSurveyId());
+                if (costelement.getCostElementYearses() == null) {
+                    jsonObjectCostElement.put("costElementYearses", "");
+                } else
+                    jsonObjectCostElement.put("costElementYearses", getSharedCostElementYears(costelement.getCostElementYearses()));
+                if (costelement.getLandKind() == null) {
+                    jsonObjectCostElement.put("landKind", "");
+                } else
+                    jsonObjectCostElement.put("landKind", costelement.getLandKind());
+                if (costelement.getName() == null) {
+                    jsonObjectCostElement.put("name", "");
+                } else
+                    jsonObjectCostElement.put("name", costelement.getName());
+                if (costelement.getType() == null) {
+                    jsonObjectCostElement.put("type", "");
+                } else
+                    jsonObjectCostElement.put("type", costelement.getType());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            jsonCostElementArray.put(jsonObjectCostElement);
+        }
+        return jsonCostElementArray;
+    }
+
+    private JSONArray getSharedCostElementYears(RealmList<SharedCostElementYears> costElementYearses) {
+        JSONArray jsonCostElementYearsArray = new JSONArray();
+        for (SharedCostElementYears costElementYears : costElementYearses) {
+            JSONObject jsonObjectCostElementYears = new JSONObject();
+            try {
+                if (costElementYears.getSurveyId() == null) {
+                    jsonObjectCostElementYears.put("surveyI1d", "");
+                } else
+                    jsonObjectCostElementYears.put("surveyI1d", costElementYears.getSurveyId());
+                if (costElementYears.getLandKind() == null) {
+                    jsonObjectCostElementYears.put("landKind", "");
+                } else
+                    jsonObjectCostElementYears.put("landKind", costElementYears.getLandKind());
+                if (costElementYears.getId() == 0) {
+                    jsonObjectCostElementYears.put("id", "");
+                } else
+                    jsonObjectCostElementYears.put("id", costElementYears.getId());
+                if (costElementYears.getCostFrequencyValue() == 0) {
+                    jsonObjectCostElementYears.put("costFrequencyValue", "");
+                } else
+                    jsonObjectCostElementYears.put("costFrequencyValue", costElementYears.getCostFrequencyValue());
+                if (costElementYears.getCostPerPeriodValue() == 0) {
+                    jsonObjectCostElementYears.put("costPerPeriodValue", "");
+                } else
+                    jsonObjectCostElementYears.put("costPerPeriodValue", costElementYears.getCostPerPeriodValue());
+                if (costElementYears.getCostPerUnitValue() == 0) {
+                    jsonObjectCostElementYears.put("costPerUnitValue", "");
+                } else
+                    jsonObjectCostElementYears.put("costPerUnitValue", costElementYears.getCostPerUnitValue());
+                if (costElementYears.getCostElementId() == 0) {
+                    jsonObjectCostElementYears.put("costElementId", "");
+                } else
+                    jsonObjectCostElementYears.put("costElementId", costElementYears.getCostElementId());
+                if (costElementYears.getCostFrequencyUnit() == 0) {
+                    jsonObjectCostElementYears.put("costFrequencyUnit", 0);
+                } else
+                    jsonObjectCostElementYears.put("costFrequencyUnit", costElementYears.getCostFrequencyUnit());
+                if (costElementYears.getCostPerPeriodUnit() == null) {
+                    jsonObjectCostElementYears.put("costPerPeriodUni", "");
+                } else
+                    jsonObjectCostElementYears.put("costPerPeriodUni", costElementYears.getCostPerPeriodUnit());
+
+
+                if (costElementYears.getProjectedIndex() == 0) {
+                    if (costElementYears.getYear() == 0) {
+                        jsonObjectCostElementYears.put("projectedIndex", "");
+                    } else {
+                        jsonObjectCostElementYears.put("projectedIndex", 0);
+                    }
+                } else {
+                    jsonObjectCostElementYears.put("projectedIndex", costElementYears.getProjectedIndex());
+                }
+
+
+                if (costElementYears.getSubtotal() == 0) {
+                    jsonObjectCostElementYears.put("subtotal", "");
+                } else
+                    jsonObjectCostElementYears.put("subtotal", costElementYears.getSubtotal());
+                if (costElementYears.getYear() == 0) {
+                    jsonObjectCostElementYears.put("year", "");
+                } else
+                    jsonObjectCostElementYears.put("year", costElementYears.getYear());
+                if (costElementYears.getCostPerUnitUnit() == null) {
+                    jsonObjectCostElementYears.put("costPerUnitUnit", "");
+                } else
+                    jsonObjectCostElementYears.put("costPerUnitUnit", costElementYears.getCostPerUnitUnit());
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            jsonCostElementYearsArray.put(jsonObjectCostElementYears);
+        }
+        return jsonCostElementYearsArray;
+    }
+
+    private JSONObject getParcelLocations(ParcelLocation parcelLocations) {
+
+        JSONObject jsonObjectParcel = new JSONObject();
+        try {
+            if (parcelLocations.getId() == 0) {
+                jsonObjectParcel.put("id", "");
+            } else
+                jsonObjectParcel.put("id", parcelLocations.getId());
+
+            if (parcelLocations.getArea() == 0) {
+                jsonObjectParcel.put("parcelArea", "");
+            } else
+                jsonObjectParcel.put("parcelArea", parcelLocations.getArea());
+
+            if (parcelLocations.getCoordinateOne().equals("")) {
+                jsonObjectParcel.put("coordinateOne", "");
+            } else
+                jsonObjectParcel.put("coordinateOne", parcelLocations.getCoordinateOne());
+
+            if (parcelLocations.getCoordinateTwo().equals("")) {
+                jsonObjectParcel.put("coordinateTwo", "");
+            } else
+                jsonObjectParcel.put("coordinateTwo", parcelLocations.getCoordinateTwo());
+
+            if (parcelLocations.getCoordinateThree().equals("")) {
+                jsonObjectParcel.put("coordinateThree", "");
+            } else
+                jsonObjectParcel.put("coordinateThree", parcelLocations.getCoordinateThree());
+
+            if (parcelLocations.getCoordinateFour().equals("")) {
+                jsonObjectParcel.put("coordinateFour", "");
+            } else
+                jsonObjectParcel.put("coordinateFour", parcelLocations.getCoordinateFour());
+
+            if (parcelLocations.getCoordinateFive().equals("")) {
+                jsonObjectParcel.put("coordinateFive", "");
+            } else
+                jsonObjectParcel.put("coordinateFive", parcelLocations.getCoordinateFive());
+
+            if (parcelLocations.getCoordinateSix().equals("")) {
+                jsonObjectParcel.put("coordinateSix", "");
+            } else
+                jsonObjectParcel.put("coordinateSix", parcelLocations.getCoordinateSix());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObjectParcel;
+    }
 
     private void makeJsonObjectRequest(String surId) {
 
@@ -1452,6 +1639,11 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 jsonObjectComponent.put("totalValueStr", "");
             } else {
                 jsonObjectComponent.put("totalValueStr", component.getTotalValueStr());
+            }
+            if (component.getSharedCostValue() == 0) {
+                jsonObjectComponent.put("sharedCostValue", "");
+            } else {
+                jsonObjectComponent.put("sharedCostValue", component.getSharedCostValue());
             }
         } catch (JSONException e) {
             e.printStackTrace();

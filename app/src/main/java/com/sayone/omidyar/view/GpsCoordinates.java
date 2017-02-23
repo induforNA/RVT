@@ -21,7 +21,9 @@ import android.widget.Toast;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
+import com.sayone.omidyar.model.Component;
 import com.sayone.omidyar.model.ParcelLocation;
+import com.sayone.omidyar.model.Survey;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -149,6 +151,7 @@ public class GpsCoordinates extends BaseActivity {
         RealmResults<ParcelLocation> parcelLocations = realm.where(ParcelLocation.class).
                 equalTo("surveyId", surveyId)
                 .findAll();
+
         if (parcelLocations.size() >= 0) {
             for (ParcelLocation parcelLocation : parcelLocations) {
                 Location temp = new Location("");
@@ -198,12 +201,17 @@ public class GpsCoordinates extends BaseActivity {
             Toast.makeText(GpsCoordinates.this, "Saving", Toast.LENGTH_SHORT).show();
             surveyId = preferences.getString("surveyId", "");
 
+            Survey survey = realm.where(Survey.class).
+                    equalTo("surveyId", surveyId)
+                    .findFirst();
+
             for (int i = 0; i < 6; i++) {
                 Log.d("GPS", "Location: " + corners[i]);
             }
 
             realm.beginTransaction();
-            ParcelLocation parcelLocation = new ParcelLocation();
+            ParcelLocation parcelLocation = realm.createObject(ParcelLocation.class);
+            parcelLocation.setId(getNextKeyComponent());
             parcelLocation.setSurveyId(surveyId);
             parcelLocation.setLat_1(corners[0].getLatitude());
             parcelLocation.setLat_2(corners[1].getLatitude());
@@ -221,6 +229,10 @@ public class GpsCoordinates extends BaseActivity {
             realm.copyToRealmOrUpdate(parcelLocation);
             realm.commitTransaction();
 
+            realm.beginTransaction();
+            survey.setParcelLocations(parcelLocation);
+            realm.commitTransaction();
+
             Toast.makeText(GpsCoordinates.this, "Saved", Toast.LENGTH_SHORT).show();
             isSaved = true;
         } else {
@@ -228,6 +240,10 @@ public class GpsCoordinates extends BaseActivity {
             isSaved = false;
         }
 
+    }
+
+    public int getNextKeyComponent() {
+        return realm.where(ParcelLocation.class).max("id").intValue() + 1;
     }
 
     private boolean validateInputs() {

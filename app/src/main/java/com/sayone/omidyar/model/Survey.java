@@ -1,5 +1,6 @@
 package com.sayone.omidyar.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import io.realm.RealmList;
@@ -54,7 +55,7 @@ public class Survey extends RealmObject {
 
     private RealmList<Outlay> sharedOutlays;
 
-    private RealmList<ParcelLocation> parcelLocations;
+    private ParcelLocation parcelLocations;
 
     public long getId() {
         return id;
@@ -148,6 +149,11 @@ public class Survey extends RealmObject {
         return date;
     }
 
+    public String getDateString() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd yyyy");
+        return dateFormat.format(date);
+    }
+
     public void setDate(Date date) {
         this.date = date;
     }
@@ -192,11 +198,11 @@ public class Survey extends RealmObject {
         this.surveyId = surveyId;
     }
 
-    public RealmList<ParcelLocation> getParcelLocations() {
+    public ParcelLocation getParcelLocations() {
         return parcelLocations;
     }
 
-    public void setParcelLocations(RealmList<ParcelLocation> parcelLocations) {
+    public void setParcelLocations(ParcelLocation parcelLocations) {
         this.parcelLocations = parcelLocations;
     }
 
