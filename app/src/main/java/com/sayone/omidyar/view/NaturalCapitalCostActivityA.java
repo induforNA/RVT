@@ -39,12 +39,9 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
     private ImageView imageViewMenuIcon;
     private ImageView drawerCloseBtn;
     private TextView landType;
-    private TextView textViewAbout;
-    private TextView logout;
-    private TextView startSurvey;
     private DrawerLayout menuDrawerLayout;
 
-    String serveyId;
+    String surveyId;
     Button buttonBack, buttonNext;
     ImageView buttonAddWood;
     RealmList<CostElement> costElements;
@@ -54,9 +51,20 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
     CostAdapter costAdapter;
 
     String landKindName;
-    String currentSocialCapitalServey;
+    String currentSocialCapitalSurvey;
     private String language;
     private TextView surveyIdDrawer;
+
+    //Side Nav
+    private TextView textViewAbout;
+    private TextView startSurvey;
+    private TextView harvestingForestProducts;
+    private TextView agriculture;
+    private TextView grazing;
+    private TextView mining;
+    private TextView sharedCostsOutlays;
+    private TextView certificate;
+    private TextView logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,14 +76,14 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
         realm = Realm.getDefaultInstance();
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        serveyId = sharedPref.getString("surveyId", "");
-        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey", "");
+        surveyId = sharedPref.getString("surveyId", "");
+        currentSocialCapitalSurvey = sharedPref.getString("currentSocialCapitalSurvey", "");
 
         costElements = new RealmList<>();
         costProductsToSave = new RealmList<>();
-        Survey survey = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
+        Survey survey = realm.where(Survey.class).equalTo("surveyId", surveyId).findFirst();
         for (LandKind landKind : survey.getLandKinds()) {
-            if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalServey.equals(getString(R.string.string_forestland))) {
+            if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalSurvey.equals(getString(R.string.string_forestland))) {
                 landKindName = landKind.getName();
                 //costElements = landKind.getForestLand().getRevenueProducts();
                 for (CostElement costElement : landKind.getForestLand().getCostElements()) {
@@ -84,7 +92,7 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
                         costElements.add(costElement);
                     }
                 }
-            } else if (landKind.getName().equals(getString(R.string.string_cropland)) && currentSocialCapitalServey.equals(getString(R.string.string_cropland))) {
+            } else if (landKind.getName().equals(getString(R.string.string_cropland)) && currentSocialCapitalSurvey.equals(getString(R.string.string_cropland))) {
                 landKindName = landKind.getName();
                 //costElements = landKind.getForestLand().getRevenueProducts();
                 for (CostElement costElement : landKind.getCropLand().getCostElements()) {
@@ -93,7 +101,7 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
                         costElements.add(costElement);
                     }
                 }
-            } else if (landKind.getName().equals(getString(R.string.string_pastureland)) && currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
+            } else if (landKind.getName().equals(getString(R.string.string_pastureland)) && currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))) {
                 landKindName = landKind.getName();
                 //costElements = landKind.getForestLand().getRevenueProducts();
                 for (CostElement costElement : landKind.getPastureLand().getCostElements()) {
@@ -102,7 +110,7 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
                         costElements.add(costElement);
                     }
                 }
-            } else if (landKind.getName().equals(getString(R.string.string_miningland)) && currentSocialCapitalServey.equals(getString(R.string.string_miningland))) {
+            } else if (landKind.getName().equals(getString(R.string.string_miningland)) && currentSocialCapitalSurvey.equals(getString(R.string.string_miningland))) {
                 landKindName = landKind.getName();
                 //costElements = landKind.getForestLand().getRevenueProducts();
                 for (CostElement costElement : landKind.getMiningLand().getCostElements()) {
@@ -127,15 +135,15 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
         landType = (TextView) findViewById(R.id.land_type);
 
 
-        if (currentSocialCapitalServey.equals(getString(R.string.string_forestland)))
+        if (currentSocialCapitalSurvey.equals(getString(R.string.string_forestland)))
             landType.setText(getResources().getText(R.string.string_forestland));
-        if (currentSocialCapitalServey.equals(getString(R.string.string_pastureland)))
+        if (currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland)))
             landType.setText(getResources().getText(R.string.string_pastureland));
-        if (currentSocialCapitalServey.equals(getString(R.string.string_miningland)))
+        if (currentSocialCapitalSurvey.equals(getString(R.string.string_miningland)))
             landType.setText(getResources().getText(R.string.string_miningland));
-        if (currentSocialCapitalServey.equals(getString(R.string.string_cropland)))
+        if (currentSocialCapitalSurvey.equals(getString(R.string.string_cropland)))
             landType.setText(getResources().getText(R.string.string_cropland));
-        //  landType.setText(currentSocialCapitalServey);
+        //  landType.setText(currentSocialCapitalSurvey);
 
         timberList = (RecyclerView) findViewById(R.id.timber_list);
 
@@ -145,7 +153,7 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
         timberList.setLayoutManager(mLayoutManager);
         timberList.setItemAnimator(new DefaultItemAnimator());
         timberList.setAdapter(costAdapter);
-        surveyIdDrawer.setText(serveyId);
+        surveyIdDrawer.setText(surveyId);
 
 
         buttonNext.setOnClickListener(this);
@@ -157,6 +165,27 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
         logout.setOnClickListener(this);
         startSurvey.setOnClickListener(this);
 
+        //Side Nav
+        textViewAbout = (TextView) findViewById(R.id.text_view_about);
+        startSurvey = (TextView) findViewById(R.id.text_start_survey);
+        harvestingForestProducts = (TextView) findViewById(R.id.text_harvesting_forest_products);
+        agriculture = (TextView) findViewById(R.id.text_agriculture);
+        grazing = (TextView) findViewById(R.id.text_grazing);
+        mining = (TextView) findViewById(R.id.text_mining);
+        sharedCostsOutlays = (TextView) findViewById(R.id.text_shared_costs_outlays);
+        certificate = (TextView) findViewById(R.id.text_certificate);
+        logout = (TextView) findViewById(R.id.logout);
+        textViewAbout.setOnClickListener(this);
+        startSurvey.setOnClickListener(this);
+        harvestingForestProducts.setOnClickListener(this);
+        agriculture.setOnClickListener(this);
+        grazing.setOnClickListener(this);
+        mining.setOnClickListener(this);
+        sharedCostsOutlays.setOnClickListener(this);
+        certificate.setOnClickListener(this);
+        logout.setOnClickListener(this);
+        setNav();
+
     }
 
     @Override
@@ -166,8 +195,8 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
 
             case R.id.button_next:
                 RealmResults<CostElement> costElements1 = realm.where(CostElement.class)
-                        .equalTo("surveyId", serveyId)
-                        .equalTo("landKind", currentSocialCapitalServey)
+                        .equalTo("surveyId", surveyId)
+                        .equalTo("landKind", currentSocialCapitalSurvey)
                         .findAll();
                 if (costElements1.size() <= 0) {
                     intent = new Intent(getApplicationContext(), NaturalCapitalCostOutlay.class);
@@ -232,35 +261,35 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
                             costElement.setName(name);
                             costElement.setType("Timber");
                             costElement.setLandKind(landKindName);
-                            costElement.setSurveyId(serveyId);
+                            costElement.setSurveyId(surveyId);
                             realm.commitTransaction();
 
                             costElements.add(costElement);
                             costProductsToSave.add(costElement);
-                            Survey surveyRevenueProduct = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
+                            Survey surveyRevenueProduct = realm.where(Survey.class).equalTo("surveyId", surveyId).findFirst();
 
 
                             for (LandKind landKind : surveyRevenueProduct.getLandKinds()) {
                                 Log.e("BBB ", landKind.getName() + " " + landKind.getForestLand());
-                                if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalServey.equals(getString(R.string.string_forestland))) {
+                                if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalSurvey.equals(getString(R.string.string_forestland))) {
                                     Log.e("BBB ", costElements.size() + "");
                                     Log.e("AAA ", landKind.getForestLand().getCostElements().toString());
                                     realm.beginTransaction();
                                     landKind.getForestLand().setCostElements(costProductsToSave);
                                     realm.commitTransaction();
-                                } else if (landKind.getName().equals(getString(R.string.string_cropland)) && currentSocialCapitalServey.equals(getString(R.string.string_cropland))) {
+                                } else if (landKind.getName().equals(getString(R.string.string_cropland)) && currentSocialCapitalSurvey.equals(getString(R.string.string_cropland))) {
                                     Log.e("BBB ", costElements.size() + "");
                                     Log.e("AAA ", landKind.getCropLand().getCostElements().toString());
                                     realm.beginTransaction();
                                     landKind.getCropLand().setCostElements(costProductsToSave);
                                     realm.commitTransaction();
-                                } else if (landKind.getName().equals(getString(R.string.string_pastureland)) && currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
+                                } else if (landKind.getName().equals(getString(R.string.string_pastureland)) && currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))) {
                                     Log.e("BBB ", costElements.size() + "");
                                     Log.e("AAA ", landKind.getPastureLand().getCostElements().toString());
                                     realm.beginTransaction();
                                     landKind.getPastureLand().setCostElements(costProductsToSave);
                                     realm.commitTransaction();
-                                } else if (landKind.getName().equals(getString(R.string.string_miningland)) && currentSocialCapitalServey.equals(getString(R.string.string_miningland))) {
+                                } else if (landKind.getName().equals(getString(R.string.string_miningland)) && currentSocialCapitalSurvey.equals(getString(R.string.string_miningland))) {
                                     Log.e("BBB ", costElements.size() + "");
                                     Log.e("AAA ", landKind.getMiningLand().getCostElements().toString());
                                     realm.beginTransaction();
@@ -295,6 +324,82 @@ public class NaturalCapitalCostActivityA extends BaseActivity implements View.On
 //                intent=new Intent(getApplicationContext(),NaturalCapitalSurveyActivityD.class);
 //                startActivity(intent);
                 break;
+            case R.id.text_harvesting_forest_products:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_forestland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_agriculture:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_cropland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_grazing:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_pastureland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_mining:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_miningland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_shared_costs_outlays:
+                Intent intent_outlay = new Intent(getApplicationContext(), NaturalCapitalSharedCostActivityA.class);
+                startActivity(intent_outlay);
+                break;
+            case R.id.text_certificate:
+                Intent intent_certificate = new Intent(getApplicationContext(),NewCertificateActivity.class);
+                startActivity(intent_certificate);
+                break;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        setNav();
+        super.onResume();
+    }
+
+    private void setNav() {
+        harvestingForestProducts.setVisibility(View.GONE);
+        agriculture.setVisibility(View.GONE);
+        grazing.setVisibility(View.GONE);
+        mining.setVisibility(View.GONE);
+
+        if (checkLandKind(getString(R.string.string_forestland))) {
+            harvestingForestProducts.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_cropland))) {
+            agriculture.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_pastureland))) {
+            grazing.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_miningland))) {
+            mining.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void startLandTypeActivity() {
+        Intent intent = new Intent(NaturalCapitalCostActivityA.this, StartLandTypeActivity.class);
+        startActivity(intent);
+    }
+
+    private void setCurrentSocialCapitalSurvey(String name) {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("currentSocialCapitalSurvey", name);
+        editor.apply();
+    }
+
+    private boolean checkLandKind(String name) {
+        LandKind landKind = realm.where(LandKind.class)
+                .equalTo("name", name)
+                .equalTo("surveyId", surveyId)
+                .findFirst();
+        if (landKind.getStatus().equals("active")) {
+            return true;
+        } else {
+            return false;
         }
     }
 

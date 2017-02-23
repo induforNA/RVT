@@ -31,15 +31,22 @@ public class StartLandTypeActivity extends BaseActivity implements View.OnClickL
     SharedPreferences sharedPref;
 
     Button backButton, nextButton;
-    String currentSocialCapitalServey, serveyId;
+    String currentSocialCapitalServey, surveyId;
     TextView landType;
     private ImageView imageViewMenuIcon;
     private ImageView drawerCloseBtn;
-    private TextView textViewAbout;
     private TextView surveyIdDrawer;
-    private TextView logout;
-    private TextView startSurvey;
     private DrawerLayout menuDrawerLayout;
+    //Side Nav
+    private TextView textViewAbout;
+    private TextView startSurvey;
+    private TextView harvestingForestProducts;
+    private TextView agriculture;
+    private TextView grazing;
+    private TextView mining;
+    private TextView sharedCostsOutlays;
+    private TextView certificate;
+    private TextView logout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,8 +57,8 @@ public class StartLandTypeActivity extends BaseActivity implements View.OnClickL
         realm = Realm.getDefaultInstance();
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        serveyId = sharedPref.getString("surveyId", "");
-        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey", "");
+        surveyId = sharedPref.getString("surveyId", "");
+        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalSurvey", "");
 
         backButton = (Button) findViewById(R.id.back_button);
         nextButton = (Button) findViewById(R.id.next_button);
@@ -59,14 +66,11 @@ public class StartLandTypeActivity extends BaseActivity implements View.OnClickL
         menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);
         imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
         drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
-        textViewAbout = (TextView) findViewById(R.id.text_view_about);
         surveyIdDrawer = (TextView) findViewById(R.id.text_view_id);
-        logout = (TextView) findViewById(R.id.logout);
-        startSurvey = (TextView) findViewById(R.id.text_start_survey);
 
-        surveyIdDrawer.setText(serveyId);
+        surveyIdDrawer.setText(surveyId);
 
-        //  landType.setText(currentSocialCapitalServey);
+        //  landType.setText(currentSocialCapitalSurvey);
 
         if (currentSocialCapitalServey.equals(getString(R.string.string_forestland)))
             landType.setText(getResources().getText(R.string.string_forestland));
@@ -76,18 +80,42 @@ public class StartLandTypeActivity extends BaseActivity implements View.OnClickL
             landType.setText(getResources().getText(R.string.string_miningland));
         if (currentSocialCapitalServey.equals(getString(R.string.string_cropland)))
             landType.setText(getResources().getText(R.string.string_cropland));
-        //  landType.setText(currentSocialCapitalServey);
+        //  landType.setText(currentSocialCapitalSurvey);
 
         backButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
         imageViewMenuIcon.setOnClickListener(this);
-        surveyIdDrawer.setText(serveyId);
+        surveyIdDrawer.setText(surveyId);
         drawerCloseBtn.setOnClickListener(this);
-        textViewAbout.setOnClickListener(this);
-        logout.setOnClickListener(this);
         backButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
+
+        //Side Nav
+        textViewAbout = (TextView) findViewById(R.id.text_view_about);
+        startSurvey = (TextView) findViewById(R.id.text_start_survey);
+        harvestingForestProducts = (TextView) findViewById(R.id.text_harvesting_forest_products);
+        agriculture = (TextView) findViewById(R.id.text_agriculture);
+        grazing = (TextView) findViewById(R.id.text_grazing);
+        mining = (TextView) findViewById(R.id.text_mining);
+        sharedCostsOutlays = (TextView) findViewById(R.id.text_shared_costs_outlays);
+        certificate = (TextView) findViewById(R.id.text_certificate);
+        logout = (TextView) findViewById(R.id.logout);
+        textViewAbout.setOnClickListener(this);
         startSurvey.setOnClickListener(this);
+        harvestingForestProducts.setOnClickListener(this);
+        agriculture.setOnClickListener(this);
+        grazing.setOnClickListener(this);
+        mining.setOnClickListener(this);
+        sharedCostsOutlays.setOnClickListener(this);
+        certificate.setOnClickListener(this);
+        logout.setOnClickListener(this);
+        setNav();
+    }
+
+    @Override
+    protected void onResume() {
+        setNav();
+        super.onResume();
     }
 
     @Override
@@ -122,12 +150,82 @@ public class StartLandTypeActivity extends BaseActivity implements View.OnClickL
             case R.id.image_view_menu_icon:
                 toggleMenuDrawer();
                 break;
+            case R.id.text_harvesting_forest_products:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_forestland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_agriculture:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_cropland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_grazing:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_pastureland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_mining:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_miningland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_shared_costs_outlays:
+                Intent intent_outlay = new Intent(getApplicationContext(), NaturalCapitalSharedCostActivityA.class);
+                startActivity(intent_outlay);
+                break;
+            case R.id.text_certificate:
+                Intent intent_certificate = new Intent(getApplicationContext(), NewCertificateActivity.class);
+                startActivity(intent_certificate);
+                break;
+        }
+    }
+
+    private void setNav() {
+        harvestingForestProducts.setVisibility(View.GONE);
+        agriculture.setVisibility(View.GONE);
+        grazing.setVisibility(View.GONE);
+        mining.setVisibility(View.GONE);
+
+        if (checkLandKind(getString(R.string.string_forestland))) {
+            harvestingForestProducts.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_cropland))) {
+            agriculture.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_pastureland))) {
+            grazing.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_miningland))) {
+            mining.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void startLandTypeActivity() {
+        Intent intent = new Intent(StartLandTypeActivity.this, StartLandTypeActivity.class);
+        startActivity(intent);
+    }
+
+    private void setCurrentSocialCapitalSurvey(String name) {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("currentSocialCapitalSurvey", name);
+        editor.apply();
+    }
+
+    private boolean checkLandKind(String name) {
+        LandKind landKind = realm.where(LandKind.class)
+                .equalTo("name", name)
+                .equalTo("surveyId", surveyId)
+                .findFirst();
+        if (landKind.getStatus().equals("active")) {
+            return true;
+        } else {
+            return false;
         }
     }
 
     public void previousLandKind() {
         RealmResults<LandKind> landKindRealmResults = realm.where(LandKind.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .equalTo("status", "active")
                 .findAll();
         if (landKindRealmResults != null) {
@@ -144,7 +242,7 @@ public class StartLandTypeActivity extends BaseActivity implements View.OnClickL
 
             if (j >= 0) {
                 SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("currentSocialCapitalServey", landKindRealmResults.get(j).getName());
+                editor.putString("currentSocialCapitalSurvey", landKindRealmResults.get(j).getName());
                 editor.apply();
                 finish();
 //                Intent intent = new Intent(getApplicationContext(), StartLandTypeActivity.class);

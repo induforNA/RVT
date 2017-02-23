@@ -42,7 +42,7 @@ public class SocialCapitalActivity1 extends BaseActivity {
     Context context;
 
     String currentSocialCapitalServey;
-    String serveyId;
+    String surveyId;
 
     private Button backButton;
     private Button nextButton;
@@ -67,10 +67,17 @@ public class SocialCapitalActivity1 extends BaseActivity {
     private DrawerLayout menuDrawerLayout;
     private ImageView imageViewMenuIcon;
     private ImageView drawerCloseBtn;
-    private TextView textViewAbout;
     private TextView surveyIdDrawer;
-    private TextView logout;
+    //Side Nav
+    private TextView textViewAbout;
     private TextView startSurvey;
+    private TextView harvestingForestProducts;
+    private TextView agriculture;
+    private TextView grazing;
+    private TextView mining;
+    private TextView sharedCostsOutlays;
+    private TextView certificate;
+    private TextView logout;
 
     private int currentQuestionId = 0;
 
@@ -91,8 +98,8 @@ public class SocialCapitalActivity1 extends BaseActivity {
         realm = Realm.getDefaultInstance();
         preferences = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        serveyId = preferences.getString("surveyId", "");
-        currentSocialCapitalServey = preferences.getString("currentSocialCapitalServey", "");
+        surveyId = preferences.getString("surveyId", "");
+        currentSocialCapitalServey = preferences.getString("currentSocialCapitalSurvey", "");
 
         socialCapitalAnswerOptionsesList = new RealmList<>();
 
@@ -116,10 +123,7 @@ public class SocialCapitalActivity1 extends BaseActivity {
         menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);
         imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
         drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
-        textViewAbout = (TextView) findViewById(R.id.text_view_about);
         surveyIdDrawer = (TextView) findViewById(R.id.text_view_id);
-        logout = (TextView) findViewById(R.id.logout);
-        startSurvey = (TextView) findViewById(R.id.text_start_survey);
 
 //        socialCapitalQuestionses = realm.where(SocialCapitalQuestions.class).findAll();
 //        for (SocialCapitalQuestions socialCapitalQuestions : socialCapitalQuestionses) {
@@ -133,7 +137,7 @@ public class SocialCapitalActivity1 extends BaseActivity {
 //        }
 
         landKind = realm.where(LandKind.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .equalTo("status", "active")
                 .equalTo("name", currentSocialCapitalServey)
                 .findFirst();
@@ -165,16 +169,40 @@ public class SocialCapitalActivity1 extends BaseActivity {
         backButton = (Button) findViewById(R.id.back_button);
         nextButton = (Button) findViewById(R.id.next_button);
 
-        surveyIdDrawer.setText(serveyId);
+        surveyIdDrawer.setText(surveyId);
 
         imageViewMenuIcon.setOnClickListener(this);
-        surveyIdDrawer.setText(serveyId);
+        surveyIdDrawer.setText(surveyId);
         drawerCloseBtn.setOnClickListener(this);
-        textViewAbout.setOnClickListener(this);
-        logout.setOnClickListener(this);
         backButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
+
+        //Side Nav
+        textViewAbout = (TextView) findViewById(R.id.text_view_about);
+        startSurvey = (TextView) findViewById(R.id.text_start_survey);
+        harvestingForestProducts = (TextView) findViewById(R.id.text_harvesting_forest_products);
+        agriculture = (TextView) findViewById(R.id.text_agriculture);
+        grazing = (TextView) findViewById(R.id.text_grazing);
+        mining = (TextView) findViewById(R.id.text_mining);
+        sharedCostsOutlays = (TextView) findViewById(R.id.text_shared_costs_outlays);
+        certificate = (TextView) findViewById(R.id.text_certificate);
+        logout = (TextView) findViewById(R.id.logout);
+        textViewAbout.setOnClickListener(this);
         startSurvey.setOnClickListener(this);
+        harvestingForestProducts.setOnClickListener(this);
+        agriculture.setOnClickListener(this);
+        grazing.setOnClickListener(this);
+        mining.setOnClickListener(this);
+        sharedCostsOutlays.setOnClickListener(this);
+        certificate.setOnClickListener(this);
+        logout.setOnClickListener(this);
+        setNav();
+    }
+
+    @Override
+    protected void onResume() {
+        setNav();
+        super.onResume();
     }
 
     @Override
@@ -215,7 +243,7 @@ public class SocialCapitalActivity1 extends BaseActivity {
 //                        realm.beginTransaction();
 //                        SocialCapitalAnswer socialCapitalAnswer = realm.createObject(SocialCapitalAnswer.class);
 //                        socialCapitalAnswer.setId(getNextKeySocialCapitalAnswer());
-//                        socialCapitalAnswer.setSurveyId(serveyId);
+//                        socialCapitalAnswer.setSurveyId(surveyId);
 //                        socialCapitalAnswer.setSocialCapitalQuestion(socialCapitalQuestionses.get(currentQuestionId));
 //                        socialCapitalAnswer.setMultipleAnswers(multipleAnswers);
 //                        realm.commitTransaction();
@@ -264,6 +292,30 @@ public class SocialCapitalActivity1 extends BaseActivity {
                 intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intents);
                 break;
+            case R.id.text_harvesting_forest_products:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_forestland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_agriculture:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_cropland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_grazing:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_pastureland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_mining:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_miningland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_shared_costs_outlays:
+                Intent intent_outlay = new Intent(getApplicationContext(), NaturalCapitalSharedCostActivityA.class);
+                startActivity(intent_outlay);
+                break;
+            case R.id.text_certificate:
+                Intent intent_certificate = new Intent(getApplicationContext(), NewCertificateActivity.class);
+                startActivity(intent_certificate);
+                break;
         }
     }
 
@@ -295,7 +347,7 @@ public class SocialCapitalActivity1 extends BaseActivity {
                                 RealmList<SocialCapitalAnswerOptions> options,
                                 RealmList<MultipleAnswer> multipleAnswers1) {
         LandKind landKind1 = realm.where(LandKind.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .equalTo("status", "active")
                 .equalTo("name", currentSocialCapitalServey)
                 .findFirst();
@@ -359,7 +411,7 @@ public class SocialCapitalActivity1 extends BaseActivity {
                               RealmList<MultipleAnswer> multipleAnswers) {
 
         LandKind landKind1 = realm.where(LandKind.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .equalTo("status", "active")
                 .equalTo("name", currentSocialCapitalServey)
                 .findFirst();
@@ -466,7 +518,7 @@ public class SocialCapitalActivity1 extends BaseActivity {
 
     public void getAllSurvey() {
         Survey survey = realm.where(Survey.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .findFirst();
 
     }
@@ -476,6 +528,52 @@ public class SocialCapitalActivity1 extends BaseActivity {
             menuDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
             menuDrawerLayout.openDrawer(GravityCompat.START);
+        }
+    }
+
+    private void setNav() {
+        harvestingForestProducts.setVisibility(View.GONE);
+        agriculture.setVisibility(View.GONE);
+        grazing.setVisibility(View.GONE);
+        mining.setVisibility(View.GONE);
+
+        if (checkLandKind(getString(R.string.string_forestland))) {
+            harvestingForestProducts.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_cropland))) {
+            agriculture.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_pastureland))) {
+            grazing.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_miningland))) {
+            mining.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void startLandTypeActivity() {
+        Intent intent = new Intent(SocialCapitalActivity1.this, StartLandTypeActivity.class);
+        startActivity(intent);
+    }
+
+    private void setCurrentSocialCapitalSurvey(String name) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("currentSocialCapitalSurvey", name);
+        editor.apply();
+    }
+
+    private boolean checkLandKind(String name) {
+        LandKind landKind = realm.where(LandKind.class)
+                .equalTo("name", name)
+                .equalTo("surveyId", surveyId)
+                .findFirst();
+        if (landKind.getStatus().equals("active")) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

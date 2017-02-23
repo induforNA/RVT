@@ -41,7 +41,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
 
     Realm realm;
     SharedPreferences sharedPref;
-    String serveyId;
+    String surveyId;
     String currentSocialCapitalServey;
 
     Spinner spinnerYear;
@@ -55,13 +55,21 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
     RealmList<RevenueProductYears> revenueProductYearsArrayList;
     private ImageView imageViewMenuIcon;
     private ImageView drawerCloseBtn;
-    private TextView textViewAbout;
-    private TextView logout;
-    private TextView startSurvey;
     private DrawerLayout menuDrawerLayout;
     private TextView surveyIdDrawer;
     private TextView landType;
     TextView enterYearHeading;
+
+    //Side Nav
+    private TextView textViewAbout;
+    private TextView startSurvey;
+    private TextView harvestingForestProducts;
+    private TextView agriculture;
+    private TextView grazing;
+    private TextView mining;
+    private TextView sharedCostsOutlays;
+    private TextView certificate;
+    private TextView logout;
 
     int i = 0;
 
@@ -74,9 +82,9 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
         realm = Realm.getDefaultInstance();
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        serveyId = sharedPref.getString("surveyId", "");
-        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey", "");
-        Log.e("SER ID ", serveyId);
+        surveyId = sharedPref.getString("surveyId", "");
+        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalSurvey", "");
+        Log.e("SER ID ", surveyId);
 
         editTexts = new ArrayList<>();
         revenueProductYearsArrayList = new RealmList<>();
@@ -90,9 +98,6 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
         menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);
         imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
         drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
-        textViewAbout = (TextView) findViewById(R.id.text_view_about);
-        logout = (TextView) findViewById(R.id.logout);
-        startSurvey = (TextView) findViewById(R.id.text_start_survey);
         surveyIdDrawer = (TextView) findViewById(R.id.text_view_id);
         enterYearHeading = (TextView) findViewById(R.id.enter_year_heading);
         landType = (TextView) findViewById(R.id.land_type);
@@ -104,10 +109,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
         addYearsButton.setOnClickListener(this);
         imageViewMenuIcon.setOnClickListener(this);
         drawerCloseBtn.setOnClickListener(this);
-        textViewAbout.setOnClickListener(this);
-        logout.setOnClickListener(this);
-        startSurvey.setOnClickListener(this);
-        surveyIdDrawer.setText(serveyId);
+        surveyIdDrawer.setText(surveyId);
         if (currentSocialCapitalServey.equals(getString(R.string.string_forestland)))
             landType.setText(getResources().getText(R.string.string_forestland));
         if (currentSocialCapitalServey.equals(getString(R.string.string_pastureland)))
@@ -116,10 +118,10 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
             landType.setText(getResources().getText(R.string.string_miningland));
         if (currentSocialCapitalServey.equals(getString(R.string.string_cropland)))
             landType.setText(getResources().getText(R.string.string_cropland));
-        // landType.setText(currentSocialCapitalServey);
+        // landType.setText(currentSocialCapitalSurvey);
 
         Survey results = realm.where(Survey.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .findFirst();
         for (LandKind landKind : results.getLandKinds()) {
             if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalServey.equals(getString(R.string.string_forestland))) {
@@ -171,6 +173,33 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
 
             }
         });
+
+        //Side Nav
+        textViewAbout = (TextView) findViewById(R.id.text_view_about);
+        startSurvey = (TextView) findViewById(R.id.text_start_survey);
+        harvestingForestProducts = (TextView) findViewById(R.id.text_harvesting_forest_products);
+        agriculture = (TextView) findViewById(R.id.text_agriculture);
+        grazing = (TextView) findViewById(R.id.text_grazing);
+        mining = (TextView) findViewById(R.id.text_mining);
+        sharedCostsOutlays = (TextView) findViewById(R.id.text_shared_costs_outlays);
+        certificate = (TextView) findViewById(R.id.text_certificate);
+        logout = (TextView) findViewById(R.id.logout);
+        textViewAbout.setOnClickListener(this);
+        startSurvey.setOnClickListener(this);
+        harvestingForestProducts.setOnClickListener(this);
+        agriculture.setOnClickListener(this);
+        grazing.setOnClickListener(this);
+        mining.setOnClickListener(this);
+        sharedCostsOutlays.setOnClickListener(this);
+        certificate.setOnClickListener(this);
+        logout.setOnClickListener(this);
+        setNav();
+    }
+
+    @Override
+    protected void onResume() {
+        setNav();
+        super.onResume();
     }
 
     public void loadYears(RealmList<RevenueProductYears> revenueProductYearsRealmList) {
@@ -379,8 +408,78 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
                 intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intents);
                 break;
+            case R.id.text_harvesting_forest_products:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_forestland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_agriculture:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_cropland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_grazing:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_pastureland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_mining:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_miningland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_shared_costs_outlays:
+                Intent intent_outlay = new Intent(getApplicationContext(), NaturalCapitalSharedCostActivityA.class);
+                startActivity(intent_outlay);
+                break;
+            case R.id.text_certificate:
+                Intent intent_certificate = new Intent(getApplicationContext(), NewCertificateActivity.class);
+                startActivity(intent_certificate);
+                break;
         }
 
+    }
+
+    private void setNav() {
+        harvestingForestProducts.setVisibility(View.GONE);
+        agriculture.setVisibility(View.GONE);
+        grazing.setVisibility(View.GONE);
+        mining.setVisibility(View.GONE);
+
+        if (checkLandKind(getString(R.string.string_forestland))) {
+            harvestingForestProducts.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_cropland))) {
+            agriculture.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_pastureland))) {
+            grazing.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_miningland))) {
+            mining.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void startLandTypeActivity() {
+        Intent intent = new Intent(NaturalCapitalSurveyActivityC.this, StartLandTypeActivity.class);
+        startActivity(intent);
+    }
+
+    private void setCurrentSocialCapitalSurvey(String name) {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("currentSocialCapitalSurvey", name);
+        editor.apply();
+    }
+
+    private boolean checkLandKind(String name) {
+        LandKind landKind = realm.where(LandKind.class)
+                .equalTo("name", name)
+                .equalTo("surveyId", surveyId)
+                .findFirst();
+        if (landKind.getStatus().equals("active")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void saveYears() {
@@ -393,7 +492,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
             @Override
             public void execute(Realm realm) {
                 Survey results = realm.where(Survey.class)
-                        .equalTo("surveyId", serveyId)
+                        .equalTo("surveyId", surveyId)
                         .findFirst();
                 for (LandKind landKind : results.getLandKinds()) {
                     if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalServey.equals(getString(R.string.string_forestland))) {
@@ -540,11 +639,10 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
 //        }
     }
 
-
     public RevenueProductYears saveProductYears(int yearVal, long revenueProductId, String landKindName, Realm realm) {
-        Log.e("CCC ", serveyId + " " + yearVal + " " + revenueProductId + " " + landKindName);
+        Log.e("CCC ", surveyId + " " + yearVal + " " + revenueProductId + " " + landKindName);
         RevenueProductYears revenueProductYearsCheck = realm.where(RevenueProductYears.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .equalTo("landKind", landKindName)
                 .equalTo("revenueProductId", revenueProductId)
                 .equalTo("year", yearVal)
@@ -561,7 +659,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
             revenueProductYears.setYear(yearVal);
             revenueProductYears.setRevenueProductId(revenueProductId);
             revenueProductYears.setLandKind(landKindName);
-            revenueProductYears.setSurveyId(serveyId);
+            revenueProductYears.setSurveyId(surveyId);
             //realm.commitTransaction();
             return revenueProductYears;
         } else {
@@ -570,9 +668,9 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
     }
 
     public RevenueProductYears saveTrend(long revenueProductId, String landKindName, Realm realm) {
-        Log.e("CCC ", serveyId + " " + 0 + " " + revenueProductId + " " + landKindName);
+        Log.e("CCC ", surveyId + " " + 0 + " " + revenueProductId + " " + landKindName);
         RevenueProductYears revenueProductYearsCheck = realm.where(RevenueProductYears.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .equalTo("landKind", landKindName)
                 .equalTo("revenueProductId", revenueProductId)
                 .equalTo("year", 0)
@@ -588,7 +686,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
             revenueProductYears.setYear(0);
             revenueProductYears.setRevenueProductId(revenueProductId);
             revenueProductYears.setLandKind(landKindName);
-            revenueProductYears.setSurveyId(serveyId);
+            revenueProductYears.setSurveyId(surveyId);
             //realm.commitTransaction();
             return revenueProductYears;
         } else {
@@ -597,9 +695,9 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
     }
 
     public RevenueProductYears saveProjectionYears(int yearVal, long revenueProductId, String landKindName, int projectionIndex, Realm realm) {
-        Log.e("CCC ", serveyId + " " + yearVal + " " + revenueProductId + " " + landKindName);
+        Log.e("CCC ", surveyId + " " + yearVal + " " + revenueProductId + " " + landKindName);
         RevenueProductYears revenueProductYearsCheck = realm.where(RevenueProductYears.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .equalTo("landKind", landKindName)
                 .equalTo("revenueProductId", revenueProductId)
                 .equalTo("year", yearVal)
@@ -617,7 +715,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
             revenueProductYears.setYear(yearVal);
             revenueProductYears.setRevenueProductId(revenueProductId);
             revenueProductYears.setLandKind(landKindName);
-            revenueProductYears.setSurveyId(serveyId);
+            revenueProductYears.setSurveyId(surveyId);
             revenueProductYears.setProjectedIndex(calculateProjectionIndex(projectionIndex));
             //realm.commitTransaction();
             return revenueProductYears;

@@ -83,7 +83,7 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
         preferences = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         serveyId = preferences.getString("surveyId", "");
-        currentSocialCapitalServey = preferences.getString("currentSocialCapitalServey", "");
+        currentSocialCapitalServey = preferences.getString("currentSocialCapitalSurvey", "");
         x = new ArrayList<>();
         y = new ArrayList<>();
         if (mGoogleApiClient == null) {
@@ -112,7 +112,7 @@ public class OmidyarMap extends BaseActivity implements OnMapReadyCallback,
             landName.setText(getResources().getText(R.string.string_miningland));
         if (currentSocialCapitalServey.equals(getString(R.string.string_cropland)))
             landName.setText(getResources().getText(R.string.string_cropland));
-        //  landName.setText(currentSocialCapitalServey);
+        //  landName.setText(currentSocialCapitalSurvey);
         nextButton.setOnClickListener(this);
         backButton.setOnClickListener(this);
         drawPolygon.setOnClickListener(this);

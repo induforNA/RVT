@@ -58,7 +58,7 @@
                         android:id="@+id/gps_loc_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/gps_coordinates"
+                        android:text="@string/gps_coordinates_dms"
                         android:textColor="@android:color/black" />
 
                 </LinearLayout>
@@ -89,7 +89,7 @@
                         android:id="@+id/gps_loc_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/gps_coordinates"
+                        android:text="@string/gps_coordinates_dms"
                         android:textColor="@android:color/black" />
 
                 </LinearLayout>
@@ -128,7 +128,7 @@
                         android:id="@+id/gps_loc_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/gps_coordinates"
+                        android:text="@string/gps_coordinates_dms"
                         android:textColor="@android:color/black" />
 
                 </LinearLayout>
@@ -159,7 +159,7 @@
                         android:id="@+id/gps_loc_4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/gps_coordinates"
+                        android:text="@string/gps_coordinates_dms"
                         android:textColor="@android:color/black" />
 
                 </LinearLayout>
@@ -198,7 +198,7 @@
                         android:id="@+id/gps_loc_5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/gps_coordinates"
+                        android:text="@string/gps_coordinates_dms"
                         android:textColor="@android:color/black" />
 
                 </LinearLayout>
@@ -229,7 +229,7 @@
                         android:id="@+id/gps_loc_6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/gps_coordinates"
+                        android:text="@string/gps_coordinates_dms"
                         android:textColor="@android:color/black" />
 
                 </LinearLayout>

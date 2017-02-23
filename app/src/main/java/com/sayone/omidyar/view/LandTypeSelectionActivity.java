@@ -38,10 +38,10 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
     Context context;
     SharedPreferences sharedPref;
     private Realm realm;
-    private String serveyId;
+    private String surveyId;
     Survey survey;
     RealmList<LandKind> landKinds;
-    String currentSocialCapitalServey;
+    String currentSocialCapitalSurvey;
 
     private Button nextButton;
     private Button backButton;
@@ -53,10 +53,17 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
     private DrawerLayout menuDrawerLayout;
     private ImageView imageViewMenuIcon;
     private ImageView drawerCloseBtn;
-    private TextView textViewAbout;
     private TextView surveyIdDrawer;
-    private TextView logout;
+    //Side Nav
+    private TextView textViewAbout;
     private TextView startSurvey;
+    private TextView harvestingForestProducts;
+    private TextView agriculture;
+    private TextView grazing;
+    private TextView mining;
+    private TextView sharedCostsOutlays;
+    private TextView certificate;
+    private TextView logout;
 
     Set<String> landTypeNames;
     private String language;
@@ -71,8 +78,8 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
         realm = Realm.getDefaultInstance();
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        serveyId = sharedPref.getString("surveyId", "");
-        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey", "");
+        surveyId = sharedPref.getString("surveyId", "");
+        currentSocialCapitalSurvey = sharedPref.getString("currentSocialCapitalSurvey", "");
 
         landKinds = new RealmList<>();
         landTypeNames = new HashSet<String>();
@@ -91,14 +98,10 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
         menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);
         imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
         drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
-        textViewAbout = (TextView) findViewById(R.id.text_view_about);
         surveyIdDrawer = (TextView) findViewById(R.id.text_view_id);
-        logout = (TextView) findViewById(R.id.logout);
-        startSurvey = (TextView) findViewById(R.id.text_start_survey);
-
 
         survey = realm.where(Survey.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .findFirst();
         for (LandKind landKindItrate : survey.getLandKinds()) {
             Log.e(TAG + " 11", landKindItrate.toString());
@@ -117,18 +120,42 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
             }
         }
 
-        surveyIdDrawer.setText(serveyId);
+        surveyIdDrawer.setText(surveyId);
 
         imageViewMenuIcon.setOnClickListener(this);
-        surveyIdDrawer.setText(serveyId);
+        surveyIdDrawer.setText(surveyId);
         drawerCloseBtn.setOnClickListener(this);
-        textViewAbout.setOnClickListener(this);
-        logout.setOnClickListener(this);
         imageViewMenuIcon.setOnClickListener(this);
         drawerCloseBtn.setOnClickListener(this);
         nextButton.setOnClickListener(this);
         backButton.setOnClickListener(this);
+
+        //Side Nav
+        textViewAbout = (TextView) findViewById(R.id.text_view_about);
+        startSurvey = (TextView) findViewById(R.id.text_start_survey);
+        harvestingForestProducts = (TextView) findViewById(R.id.text_harvesting_forest_products);
+        agriculture = (TextView) findViewById(R.id.text_agriculture);
+        grazing = (TextView) findViewById(R.id.text_grazing);
+        mining = (TextView) findViewById(R.id.text_mining);
+        sharedCostsOutlays = (TextView) findViewById(R.id.text_shared_costs_outlays);
+        certificate = (TextView) findViewById(R.id.text_certificate);
+        logout = (TextView) findViewById(R.id.logout);
+        textViewAbout.setOnClickListener(this);
         startSurvey.setOnClickListener(this);
+        harvestingForestProducts.setOnClickListener(this);
+        agriculture.setOnClickListener(this);
+        grazing.setOnClickListener(this);
+        mining.setOnClickListener(this);
+        sharedCostsOutlays.setOnClickListener(this);
+        certificate.setOnClickListener(this);
+        logout.setOnClickListener(this);
+        setNav();
+    }
+
+    @Override
+    protected void onResume() {
+        setNav();
+        super.onResume();
     }
 
     public void slectedLandKind(View view) {
@@ -174,14 +201,14 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
         if (checked) {
             LandKind landKind = realm.where(LandKind.class)
                     .equalTo("name", name)
-                    .equalTo("surveyId", serveyId)
+                    .equalTo("surveyId", surveyId)
                     .findFirst();
             SocialCapital socialCapital = null;
             if (landKind.getSocialCapitals() == null) {
                 realm.beginTransaction();
                 socialCapital = realm.createObject(SocialCapital.class);
                 socialCapital.setId(getNextKeySocialCapital());
-                socialCapital.setSurveyId(serveyId);
+                socialCapital.setSurveyId(surveyId);
                 realm.commitTransaction();
             }
 
@@ -194,7 +221,7 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
             landTypeNames.add(name);
         } else {
             LandKind landKind = realm.where(LandKind.class)
-                    .equalTo("surveyId", serveyId)
+                    .equalTo("surveyId", surveyId)
                     .equalTo("name", name)
                     .findFirst();
             SocialCapital socialCapital = null;
@@ -202,7 +229,7 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
                 realm.beginTransaction();
                 socialCapital = realm.createObject(SocialCapital.class);
                 socialCapital.setId(getNextKeySocialCapital());
-                socialCapital.setSurveyId(serveyId);
+                socialCapital.setSurveyId(surveyId);
                 realm.commitTransaction();
             }
 
@@ -213,6 +240,7 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
             landTypeNames.remove(name);
         }
         Log.e("CHECKED STATUS ", landTypeNames.toString());
+        setNav();
     }
 
     @Override
@@ -245,6 +273,76 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
                 intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intents);
                 break;
+            case R.id.text_harvesting_forest_products:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_forestland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_agriculture:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_cropland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_grazing:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_pastureland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_mining:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_miningland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_shared_costs_outlays:
+                Intent intent_outlay = new Intent(getApplicationContext(), NaturalCapitalSharedCostActivityA.class);
+                startActivity(intent_outlay);
+                break;
+            case R.id.text_certificate:
+                Intent intent_certificate = new Intent(getApplicationContext(),NewCertificateActivity.class);
+                startActivity(intent_certificate);
+                break;
+        }
+    }
+
+    private void setNav() {
+        harvestingForestProducts.setVisibility(View.GONE);
+        agriculture.setVisibility(View.GONE);
+        grazing.setVisibility(View.GONE);
+        mining.setVisibility(View.GONE);
+
+        if (checkLandKind(getString(R.string.string_forestland))) {
+            harvestingForestProducts.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_cropland))) {
+            agriculture.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_pastureland))) {
+            grazing.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_miningland))) {
+            mining.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void startLandTypeActivity() {
+        Intent intent = new Intent(LandTypeSelectionActivity.this, StartLandTypeActivity.class);
+        startActivity(intent);
+    }
+
+    private void setCurrentSocialCapitalSurvey(String name) {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("currentSocialCapitalSurvey", name);
+        editor.apply();
+    }
+
+    private boolean checkLandKind(String name) {
+        LandKind landKind = realm.where(LandKind.class)
+                .equalTo("name", name)
+                .equalTo("surveyId", surveyId)
+                .findFirst();
+        if (landKind.getStatus().equals("active")) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -258,13 +356,13 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
 
     public void saveLandKind() {
         RealmResults<LandKind> landKindRealmResults = realm.where(LandKind.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .equalTo("status", "active")
                 .findAll();
         if (landKindRealmResults.size() != 0) {
 
             RealmResults<LandKind> results = realm.where(LandKind.class)
-                    .equalTo("surveyId", serveyId)
+                    .equalTo("surveyId", surveyId)
                     .equalTo("status", "active")
                     .findAll();
             for (LandKind survey1 : results) {
@@ -273,7 +371,7 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
             }
 
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString("currentSocialCapitalServey", landKindRealmResults.get(0).getName());
+            editor.putString("currentSocialCapitalSurvey", landKindRealmResults.get(0).getName());
             editor.apply();
 
             Intent intent = new Intent(LandTypeSelectionActivity.this, StartLandTypeActivity.class);
