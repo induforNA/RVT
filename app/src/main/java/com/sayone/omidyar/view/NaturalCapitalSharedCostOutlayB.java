@@ -53,7 +53,7 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
     private Realm realm;
     private SharedPreferences sharedPref;
 
-    private String serveyId;
+    private String surveyId;
     private Button buttonBack, buttonNext;
     private ImageView buttonAddWood;
     private Spinner spinnerOccurance;
@@ -77,9 +77,6 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
     private int currentYearIndex, totalYears, currentItemIndex, totalIems;
     private ImageView imageViewMenuIcon;
     private ImageView drawerCloseBtn;
-    private TextView textViewAbout;
-    private TextView logout;
-    private TextView startSurvey;
     private TextView surveyIdDrawer;
     private EditText frequencyNumber;
     private DrawerLayout menuDrawerLayout;
@@ -87,6 +84,16 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
     private Survey survey;
     private double mSharedDiscountRate;
 
+    //Side Nav
+    private TextView textViewAbout;
+    private TextView startSurvey;
+    private TextView harvestingForestProducts;
+    private TextView agriculture;
+    private TextView grazing;
+    private TextView mining;
+    private TextView sharedCostsOutlays;
+    private TextView certificate;
+    private TextView logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,8 +105,8 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
         realm = Realm.getDefaultInstance();
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        serveyId = sharedPref.getString("surveyId", "");
-        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey", "");
+        surveyId = sharedPref.getString("surveyId", "");
+        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalSurvey", "");
 
         costOutlays = new RealmList<>();
         costOutlaysToSave = new RealmList<>();
@@ -131,7 +138,7 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
 
         currenyList.add("INR");
 
-        survey = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
+        survey = realm.where(Survey.class).equalTo("surveyId", surveyId).findFirst();
 
         for (int i = 0; i <= PROJECTION_COUNT; i++) {
             yearList.add(String.valueOf(year));
@@ -172,9 +179,6 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
         menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);
         imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
         drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
-        textViewAbout = (TextView) findViewById(R.id.text_view_about);
-        logout = (TextView) findViewById(R.id.logout);
-        startSurvey = (TextView) findViewById(R.id.text_start_survey);
         surveyIdDrawer = (TextView) findViewById(R.id.text_view_id);
         buttonSave = (Button) findViewById(R.id.button_save);
         costValue = (EditText) findViewById(R.id.cost_value);
@@ -195,10 +199,7 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
         buttonBack.setOnClickListener(this);
         imageViewMenuIcon.setOnClickListener(this);
         drawerCloseBtn.setOnClickListener(this);
-        textViewAbout.setOnClickListener(this);
-        logout.setOnClickListener(this);
-        startSurvey.setOnClickListener(this);
-        surveyIdDrawer.setText(serveyId);
+        surveyIdDrawer.setText(surveyId);
         buttonSave.setOnClickListener(this);
 
 
@@ -224,6 +225,33 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
 
             }
         });
+
+        //Side Nav
+        textViewAbout = (TextView) findViewById(R.id.text_view_about);
+        startSurvey = (TextView) findViewById(R.id.text_start_survey);
+        harvestingForestProducts = (TextView) findViewById(R.id.text_harvesting_forest_products);
+        agriculture = (TextView) findViewById(R.id.text_agriculture);
+        grazing = (TextView) findViewById(R.id.text_grazing);
+        mining = (TextView) findViewById(R.id.text_mining);
+        sharedCostsOutlays = (TextView) findViewById(R.id.text_shared_costs_outlays);
+        certificate = (TextView) findViewById(R.id.text_certificate);
+        logout = (TextView) findViewById(R.id.logout);
+        textViewAbout.setOnClickListener(this);
+        startSurvey.setOnClickListener(this);
+        harvestingForestProducts.setOnClickListener(this);
+        agriculture.setOnClickListener(this);
+        grazing.setOnClickListener(this);
+        mining.setOnClickListener(this);
+        sharedCostsOutlays.setOnClickListener(this);
+        certificate.setOnClickListener(this);
+        logout.setOnClickListener(this);
+        setNav();
+    }
+
+    @Override
+    protected void onResume() {
+        setNav();
+        super.onResume();
     }
 
     public void findNextData() {
@@ -283,12 +311,82 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
                 intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intents);
                 break;
+            case R.id.text_harvesting_forest_products:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_forestland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_agriculture:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_cropland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_grazing:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_pastureland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_mining:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_miningland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_shared_costs_outlays:
+                Intent intent_outlay = new Intent(getApplicationContext(), NaturalCapitalSharedCostActivityA.class);
+                startActivity(intent_outlay);
+                break;
+            case R.id.text_certificate:
+                Intent intent_certificate = new Intent(getApplicationContext(), NewCertificateActivity.class);
+                startActivity(intent_certificate);
+                break;
+        }
+    }
+
+    private void setNav() {
+        harvestingForestProducts.setVisibility(View.GONE);
+        agriculture.setVisibility(View.GONE);
+        grazing.setVisibility(View.GONE);
+        mining.setVisibility(View.GONE);
+
+        if (checkLandKind(getString(R.string.string_forestland))) {
+            harvestingForestProducts.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_cropland))) {
+            agriculture.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_pastureland))) {
+            grazing.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_miningland))) {
+            mining.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void startLandTypeActivity() {
+        Intent intent = new Intent(NaturalCapitalSharedCostOutlayB.this, StartLandTypeActivity.class);
+        startActivity(intent);
+    }
+
+    private void setCurrentSocialCapitalSurvey(String name) {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("currentSocialCapitalSurvey", name);
+        editor.apply();
+    }
+
+    private boolean checkLandKind(String name) {
+        LandKind landKind = realm.where(LandKind.class)
+                .equalTo("name", name)
+                .equalTo("surveyId", surveyId)
+                .findFirst();
+        if (landKind.getStatus().equals("active")) {
+            return true;
+        } else {
+            return false;
         }
     }
 
     public void allCashFlow() {
         Survey results = realm.where(Survey.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .findFirst();
         RealmList<CashFlow> cashFlows = new RealmList<>();
 
@@ -325,19 +423,19 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
     public CashFlow calculateCashFlow(String landKind, int year, double disRatePersent) {
 
         SharedCostElementYears costElementYears = realm.where(SharedCostElementYears.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .equalTo("landKind", landKind)
                 .equalTo("year", year)
                 .findFirst();
 
 
         RealmResults<SharedCostElementYears> costElementYearses = realm.where(SharedCostElementYears.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .equalTo("year", year)
                 .findAll();
 
         RealmResults<OutlayYears> outlayYearses = realm.where(OutlayYears.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .equalTo("year", year)
                 .findAll();
 
@@ -366,7 +464,7 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
         realm.beginTransaction();
         CashFlow cashFlow = realm.createObject(CashFlow.class);
         cashFlow.setId(getNextKeyCashFlow());
-        cashFlow.setSurveyId(serveyId);
+        cashFlow.setSurveyId(surveyId);
         cashFlow.setYear(year);
         cashFlow.setValue(cashFlowVal);
         cashFlow.setDiscountingFactor(disFactor);
@@ -381,7 +479,7 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
 
     private CashFlow calculateTerminalValue(String landKind, int year, CashFlow cashFlowTemp, double discountRateOverride) {
         Survey results = realm.where(Survey.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .findFirst();
 
         if (!results.getInflationRate().equals("")) {
@@ -389,17 +487,17 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
         }
 
         CostElementYears costElementYears = realm.where(CostElementYears.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .equalTo("year", year)
                 .findFirst();
 
         RealmResults<SharedCostElementYears> costElementYearses = realm.where(SharedCostElementYears.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .equalTo("year", year)
                 .findAll();
 
         RealmResults<OutlayYears> outlayYearses = realm.where(OutlayYears.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .equalTo("landKind", landKind)
                 .equalTo("year", year)
                 .findAll();
@@ -434,7 +532,7 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
         realm.beginTransaction();
         CashFlow cashFlow = realm.createObject(CashFlow.class);
         cashFlow.setId(getNextKeyCashFlow());
-        cashFlow.setSurveyId(serveyId);
+        cashFlow.setSurveyId(surveyId);
         cashFlow.setYear(year);
         cashFlow.setValue(terminalValue);
         cashFlow.setDiscountingFactor(disFactor);
@@ -449,7 +547,7 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
 
     public void calculateNPV() {
         Survey results = realm.where(Survey.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .findFirst();
         int year = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
 
@@ -463,7 +561,7 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
             realm.beginTransaction();
             Component component = realm.createObject(Component.class);
             component.setId(getNextKeyComponent());
-            component.setSurveyId(serveyId);
+            component.setSurveyId(surveyId);
             component.setSharedCostValue(npv);
             realm.commitTransaction();
 
@@ -491,7 +589,7 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
         int yearVal = Integer.parseInt(spinnerYear.getSelectedItem().toString());
 
         Outlay outlayResult = realm.where(Outlay.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .equalTo("landKind", "")
                 .equalTo("itemName", itemName)
                 .findFirst();
@@ -519,7 +617,7 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
 
     private void saveDatas() {
         Outlay outlayResult = realm.where(Outlay.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .equalTo("landKind", "")
                 .equalTo("itemName", spinnerItem.getSelectedItem().toString())
                 .findFirst();
@@ -547,7 +645,7 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
 
     public void nextLandKind() {
         RealmResults<LandKind> landKindRealmResults = realm.where(LandKind.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .equalTo("status", "active")
                 .findAll();
         int j = 0;
@@ -564,7 +662,7 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
 
         if (j < i) {
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString("currentSocialCapitalServey", landKindRealmResults.get(j).getName());
+            editor.putString("currentSocialCapitalSurvey", landKindRealmResults.get(j).getName());
             editor.apply();
 
             Intent intent = new Intent(getApplicationContext(), StartLandTypeActivity.class);

@@ -16,27 +16,40 @@ import android.widget.TextView;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
+import com.sayone.omidyar.model.LandKind;
+
+import io.realm.Realm;
 
 public class NaturalCapitalSurveyActivity3 extends BaseActivity implements View.OnClickListener {
 
+    private Realm realm;
     Spinner spinnerInfrastructure1, spinnerInfrastructure2, spinnerInfrastructure3, spinnerInfrastructure4, spinnerInfrastructure5, spinnerInfrastructure6, spinnerInfrastructure7, spinnerInfrastructure8;
     String infrastructure1, infrastructure2, infrastructure3, infrastructure4, infrastructure5, infrastructure6, infrastructure7, infrastructure8;
     Button buttonNext;
     private ImageView imageViewMenuIcon;
     private ImageView drawerCloseBtn;
-    private TextView textViewAbout;
-    private TextView logout;
-    private TextView startSurvey;
     private DrawerLayout menuDrawerLayout;
     private TextView surveyIdDrawer;
     private SharedPreferences sharedPref;
-    private String serveyId;
+    private String surveyId;
+
+    //Side Nav
+    private TextView textViewAbout;
+    private TextView startSurvey;
+    private TextView harvestingForestProducts;
+    private TextView agriculture;
+    private TextView grazing;
+    private TextView mining;
+    private TextView sharedCostsOutlays;
+    private TextView certificate;
+    private TextView logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_natural_capital_survey3);
 
+        realm = Realm.getDefaultInstance();
         spinnerInfrastructure1 = (Spinner) findViewById(R.id.spinner_infrastructure1);
         spinnerInfrastructure2 = (Spinner) findViewById(R.id.spinner_infrastructure2);
         spinnerInfrastructure3 = (Spinner) findViewById(R.id.spinner_infrastructure3);
@@ -48,15 +61,12 @@ public class NaturalCapitalSurveyActivity3 extends BaseActivity implements View.
         menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);
         imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
         drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
-        textViewAbout = (TextView) findViewById(R.id.text_view_about);
-        logout = (TextView) findViewById(R.id.logout);
-        startSurvey = (TextView) findViewById(R.id.text_start_survey);
         buttonNext = (Button) findViewById(R.id.button_next);
         surveyIdDrawer = (TextView) findViewById(R.id.text_view_id);
         Context context = this;
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        serveyId = sharedPref.getString("surveyId", "");
+        surveyId = sharedPref.getString("surveyId", "");
 
         ArrayAdapter<CharSequence> infrastructureAdapter1 = ArrayAdapter.createFromResource(this,
                 R.array.number_of_harvests, android.R.layout.simple_spinner_dropdown_item);
@@ -93,10 +103,7 @@ public class NaturalCapitalSurveyActivity3 extends BaseActivity implements View.
         spinnerInfrastructure8.setAdapter(infrastructureAdapter8);
         imageViewMenuIcon.setOnClickListener(this);
         drawerCloseBtn.setOnClickListener(this);
-        textViewAbout.setOnClickListener(this);
-        logout.setOnClickListener(this);
-        startSurvey.setOnClickListener(this);
-        surveyIdDrawer.setText(serveyId);
+        surveyIdDrawer.setText(surveyId);
 
         spinnerInfrastructure1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -210,6 +217,33 @@ public class NaturalCapitalSurveyActivity3 extends BaseActivity implements View.
             }
         });
 
+        //Side Nav
+        textViewAbout = (TextView) findViewById(R.id.text_view_about);
+        startSurvey = (TextView) findViewById(R.id.text_start_survey);
+        harvestingForestProducts = (TextView) findViewById(R.id.text_harvesting_forest_products);
+        agriculture = (TextView) findViewById(R.id.text_agriculture);
+        grazing = (TextView) findViewById(R.id.text_grazing);
+        mining = (TextView) findViewById(R.id.text_mining);
+        sharedCostsOutlays = (TextView) findViewById(R.id.text_shared_costs_outlays);
+        certificate = (TextView) findViewById(R.id.text_certificate);
+        logout = (TextView) findViewById(R.id.logout);
+        textViewAbout.setOnClickListener(this);
+        startSurvey.setOnClickListener(this);
+        harvestingForestProducts.setOnClickListener(this);
+        agriculture.setOnClickListener(this);
+        grazing.setOnClickListener(this);
+        mining.setOnClickListener(this);
+        sharedCostsOutlays.setOnClickListener(this);
+        certificate.setOnClickListener(this);
+        logout.setOnClickListener(this);
+        setNav();
+
+    }
+
+    @Override
+    protected void onResume() {
+        setNav();
+        super.onResume();
     }
 
     @Override
@@ -236,6 +270,76 @@ public class NaturalCapitalSurveyActivity3 extends BaseActivity implements View.
                 intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intents);
                 break;
+            case R.id.text_harvesting_forest_products:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_forestland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_agriculture:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_cropland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_grazing:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_pastureland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_mining:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_miningland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_shared_costs_outlays:
+                Intent intent_outlay = new Intent(getApplicationContext(), NaturalCapitalSharedCostActivityA.class);
+                startActivity(intent_outlay);
+                break;
+            case R.id.text_certificate:
+                Intent intent_certificate = new Intent(getApplicationContext(), NewCertificateActivity.class);
+                startActivity(intent_certificate);
+                break;
+        }
+    }
+
+    private void setNav() {
+        harvestingForestProducts.setVisibility(View.GONE);
+        agriculture.setVisibility(View.GONE);
+        grazing.setVisibility(View.GONE);
+        mining.setVisibility(View.GONE);
+
+        if (checkLandKind(getString(R.string.string_forestland))) {
+            harvestingForestProducts.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_cropland))) {
+            agriculture.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_pastureland))) {
+            grazing.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_miningland))) {
+            mining.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void startLandTypeActivity() {
+        Intent intent = new Intent(NaturalCapitalSurveyActivity3.this, StartLandTypeActivity.class);
+        startActivity(intent);
+    }
+
+    private void setCurrentSocialCapitalSurvey(String name) {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("currentSocialCapitalSurvey", name);
+        editor.apply();
+    }
+
+    private boolean checkLandKind(String name) {
+        LandKind landKind = realm.where(LandKind.class)
+                .equalTo("name", name)
+                .equalTo("surveyId", surveyId)
+                .findFirst();
+        if (landKind.getStatus().equals("active")) {
+            return true;
+        } else {
+            return false;
         }
     }
 

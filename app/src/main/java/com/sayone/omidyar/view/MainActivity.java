@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.adapter.ParticipantsAdapter;
+import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.Participant;
 import com.sayone.omidyar.model.Survey;
 
@@ -40,26 +41,34 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     SharedPreferences sharedPref;
     private Realm realm;
     private String androidId;
-    private String serveyId;
+    private String surveyId;
     Survey survey;
 
     private DrawerLayout menuDrawerLayout;
     private ImageView imageViewMenuIcon;
     private ImageView drawerCloseBtn;
-    private TextView textViewAbout;
-    private TextView startSurvey;
     private ImageView buttonAddParticipant;
     private RecyclerView recyclerView;
-    private TextView serveyIdTextView;
+    private TextView surveyIdTextView;
     private Button nextButton;
     private TextView surveyIdDrawer;
     private LinearLayout noParticipantLayout;
     private LinearLayout participantLayout;
-    private TextView logout;
 
     RealmList<Participant> participants;
     private ParticipantsAdapter participantsAdapter;
     private String language;
+
+    //Side Nav
+    private TextView textViewAbout;
+    private TextView startSurvey;
+    private TextView harvestingForestProducts;
+    private TextView agriculture;
+    private TextView grazing;
+    private TextView mining;
+    private TextView sharedCostsOutlays;
+    private TextView certificate;
+    private TextView logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,24 +84,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
-        serveyId = sharedPref.getString("surveyId", "");
-
+        surveyId = sharedPref.getString("surveyId", "");
 
         menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);
         imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
         drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
-        textViewAbout = (TextView) findViewById(R.id.text_view_about);
         surveyIdDrawer = (TextView) findViewById(R.id.text_view_id);
         buttonAddParticipant = (ImageView) findViewById(R.id.button_add_participant);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        serveyIdTextView = (TextView) findViewById(R.id.servey_id);
+        surveyIdTextView = (TextView) findViewById(R.id.servey_id);
         nextButton = (Button) findViewById(R.id.next_button);
         noParticipantLayout = (LinearLayout) findViewById(R.id.no_participant_layout);
         participantLayout = (LinearLayout) findViewById(R.id.participant_layout);
-        logout = (TextView) findViewById(R.id.logout);
-        startSurvey = (TextView) findViewById(R.id.text_start_survey);
-
-        serveyIdTextView.setText(serveyId);
+        surveyIdTextView.setText(surveyId);
 
         participantsAdapter = new ParticipantsAdapter(participants, MainActivity.this);
 
@@ -104,18 +108,34 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         //serveyIdPrefix = encodeDeviceId(androidId);
 
         imageViewMenuIcon.setOnClickListener(this);
-        surveyIdDrawer.setText(serveyId);
+        surveyIdDrawer.setText(surveyId);
         drawerCloseBtn.setOnClickListener(this);
-        textViewAbout.setOnClickListener(this);
         buttonAddParticipant.setOnClickListener(this);
         nextButton.setOnClickListener(this);
-        logout.setOnClickListener(this);
-        startSurvey.setOnClickListener(this);
 
+        //Side Nav
+        textViewAbout = (TextView) findViewById(R.id.text_view_about);
+        startSurvey = (TextView) findViewById(R.id.text_start_survey);
+        harvestingForestProducts = (TextView) findViewById(R.id.text_harvesting_forest_products);
+        agriculture = (TextView) findViewById(R.id.text_agriculture);
+        grazing = (TextView) findViewById(R.id.text_grazing);
+        mining = (TextView) findViewById(R.id.text_mining);
+        sharedCostsOutlays = (TextView) findViewById(R.id.text_shared_costs_outlays);
+        certificate = (TextView) findViewById(R.id.text_certificate);
+        logout = (TextView) findViewById(R.id.logout);
+        textViewAbout.setOnClickListener(this);
+        startSurvey.setOnClickListener(this);
+        harvestingForestProducts.setOnClickListener(this);
+        agriculture.setOnClickListener(this);
+        grazing.setOnClickListener(this);
+        mining.setOnClickListener(this);
+        sharedCostsOutlays.setOnClickListener(this);
+        certificate.setOnClickListener(this);
+        logout.setOnClickListener(this);
+        setNav();
 
         //realm.beginTransaction();
-        survey = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
-
+        survey = realm.where(Survey.class).equalTo("surveyId", surveyId).findFirst();
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(survey.getDate());
@@ -132,7 +152,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 //        Survey survey = realm.createObject(Survey.class);
 //        survey.setId(getNextKeySurvey());
-//        survey.setSurveyId(serveyId);
+//        survey.setSurveyId(surveyId);
 //        survey.setSurveyor("Riyas PK");
 //        survey.setRespondentGroup("Respondent group 1");
 //        survey.setState("Kerala");
@@ -172,6 +192,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         realm.close();
     }
 
+    @Override
+    protected void onResume() {
+        setNav();
+        super.onResume();
+    }
+
     public int getNextKeySurvey() {
         return realm.where(Survey.class).max("id").intValue() + 1;
     }
@@ -179,7 +205,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public int getNextKeyParticipant() {
         return realm.where(Participant.class).max("id").intValue() + 1;
     }
-
 
     @Override
     public void onClick(View v) {
@@ -198,6 +223,30 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 Intent intent = new Intent(MainActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                break;
+            case R.id.text_harvesting_forest_products:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_forestland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_agriculture:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_cropland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_grazing:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_pastureland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_mining:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_miningland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_shared_costs_outlays:
+                Intent intent_outlay = new Intent(getApplicationContext(), NaturalCapitalSharedCostActivityA.class);
+                startActivity(intent_outlay);
+                break;
+            case R.id.text_certificate:
+                Intent intent_certificate = new Intent(getApplicationContext(), NewCertificateActivity.class);
+                startActivity(intent_certificate);
                 break;
             case R.id.button_add_participant:
                 final Dialog dialog = new Dialog(context);
@@ -232,7 +281,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                             realm.beginTransaction();
                             Participant participant = realm.createObject(Participant.class);
                             participant.setId(getNextKeyParticipant());
-                            participant.setSurveyId(serveyId);
+                            participant.setSurveyId(surveyId);
                             participant.setName(name);
                             participant.setOccupation(occupation);
                             participant.setGender(gender);
@@ -247,7 +296,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                             participants.add(participant);
 
 
-                            Survey surveyParticipantUpdate = realm.where(Survey.class).equalTo("surveyId", serveyId).findFirst();
+                            Survey surveyParticipantUpdate = realm.where(Survey.class).equalTo("surveyId", surveyId).findFirst();
                             realm.beginTransaction();
 
                             surveyParticipantUpdate.setParticipants(participants);
@@ -284,6 +333,51 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
+    private void setNav() {
+        harvestingForestProducts.setVisibility(View.GONE);
+        agriculture.setVisibility(View.GONE);
+        grazing.setVisibility(View.GONE);
+        mining.setVisibility(View.GONE);
+
+        if (checkLandKind(getString(R.string.string_forestland))) {
+            harvestingForestProducts.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_cropland))) {
+            agriculture.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_pastureland))) {
+            grazing.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_miningland))) {
+            mining.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void startLandTypeActivity() {
+        Intent intent = new Intent(MainActivity.this, StartLandTypeActivity.class);
+        startActivity(intent);
+    }
+
+    private void setCurrentSocialCapitalSurvey(String name) {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("currentSocialCapitalSurvey", name);
+        editor.apply();
+    }
+
+    private boolean checkLandKind(String name) {
+        LandKind landKind = realm.where(LandKind.class)
+                .equalTo("name", name)
+                .equalTo("surveyId", surveyId)
+                .findFirst();
+        if (landKind.getStatus().equals("active")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public void toggleMenuDrawer() {
         if (menuDrawerLayout.isDrawerOpen(GravityCompat.START)) {

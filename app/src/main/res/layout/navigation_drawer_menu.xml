@@ -46,33 +46,107 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/text_view_about"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:paddingLeft="20dp"
-        android:text="@string/about_this_app"
-        android:textColor="#ffffff"
-        android:textSize="@dimen/textfield_size" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="20dp"
-        android:id="@+id/text_start_survey"
-        android:text="@string/string_start_survey"
-        android:textColor="#ffffff"
-        android:textSize="@dimen/textfield_size" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="20dp"
-        android:text="@string/string_logout"
-        android:textColor="#ffffff"
-        android:textSize="@dimen/textfield_size" />
+            <TextView
+                android:id="@+id/text_view_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:paddingLeft="20dp"
+                android:text="@string/about_this_app"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/navbar_item_text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:id="@+id/text_start_survey"
+                android:text="@string/string_start_survey"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/navbar_item_text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:id="@+id/text_harvesting_forest_products"
+                android:text="@string/string_forestland"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/navbar_item_text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:id="@+id/text_agriculture"
+                android:text="@string/string_cropland"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/navbar_item_text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:id="@+id/text_grazing"
+                android:text="@string/string_pastureland"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/navbar_item_text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:id="@+id/text_mining"
+                android:text="@string/string_miningland"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/navbar_item_text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:id="@+id/text_shared_costs_outlays"
+                android:text="@string/shared_costs_outlays"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/navbar_item_text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:id="@+id/text_certificate"
+                android:text="@string/string_certificate"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/navbar_item_text" />
+
+            <TextView
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:text="@string/string_logout"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/navbar_item_text" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </LinearLayout>

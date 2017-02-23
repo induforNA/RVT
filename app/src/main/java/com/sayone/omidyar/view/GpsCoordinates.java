@@ -61,7 +61,7 @@ public class GpsCoordinates extends BaseActivity {
         preferences = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         surveyId = preferences.getString("surveyId", "");
-        currentSocialCapitalServey = preferences.getString("currentSocialCapitalServey", "");
+        currentSocialCapitalServey = preferences.getString("currentSocialCapitalSurvey", "");
 
         nextButton = (Button) findViewById(R.id.next_button);
         backButton = (Button) findViewById(R.id.back_button);

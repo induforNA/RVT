@@ -46,9 +46,6 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
     private String currentSocialCapitalServey;
     private ImageView imageViewMenuIcon;
     private ImageView drawerCloseBtn;
-    private TextView textViewAbout;
-    private TextView logout;
-    private TextView startSurvey;
     private TextView respondentGroup;
     private TextView surveyIdDrawer;
     private DrawerLayout menuDrawerLayout;
@@ -59,12 +56,24 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
     private TextView pastureDiscountRateValue;
     private TextView miningDiscountRateValue;
 
+    //Side Nav
+    private TextView textViewAbout;
+    private TextView startSurvey;
+    private TextView harvestingForestProducts;
+    private TextView agriculture;
+    private TextView grazing;
+    private TextView mining;
+    private TextView sharedCostsOutlays;
+    private TextView certificate;
+    private TextView logout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_new_certificate);
 
+        realm = Realm.getDefaultInstance();
         parcelId = (TextView) findViewById(R.id.parcel_id);
         community = (TextView) findViewById(R.id.community_name);
         surveyorName = (TextView) findViewById(R.id.surveyor_name);
@@ -88,10 +97,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);
         imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
         drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
-        textViewAbout = (TextView) findViewById(R.id.text_view_about);
-        logout = (TextView) findViewById(R.id.logout);
-        startSurvey = (TextView) findViewById(R.id.text_start_survey);
-        surveyIdDrawer = (TextView) findViewById(R.id.text_view_id);
+                surveyIdDrawer = (TextView) findViewById(R.id.text_view_id);
         forestDiscountRateValue = (TextView) findViewById(R.id.value_discount_rate_forest);
         cropDiscountRateValue = (TextView) findViewById(R.id.value_discount_rate_crop);
         pastureDiscountRateValue = (TextView) findViewById(R.id.value_discount_rate_pasture);
@@ -112,9 +118,6 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         parcelSize = (TextView) findViewById(R.id.parcel_size);
         imageViewMenuIcon.setOnClickListener(this);
         drawerCloseBtn.setOnClickListener(this);
-        textViewAbout.setOnClickListener(this);
-        logout.setOnClickListener(this);
-        startSurvey.setOnClickListener(this);
 
         context = this;
 
@@ -123,7 +126,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         surveyId = sharedPref.getString("surveyId", "");
-        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey", "");
+        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalSurvey", "");
         Realm realm = Realm.getDefaultInstance();
         Survey surveyCheck = realm.where(Survey.class)
                 .equalTo("surveyId", surveyId)
@@ -154,6 +157,28 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
 
         mininglandLayout.setVisibility(View.GONE);
         headingMining.setVisibility(View.GONE);
+
+
+        //Side Nav
+        textViewAbout = (TextView) findViewById(R.id.text_view_about);
+        startSurvey = (TextView) findViewById(R.id.text_start_survey);
+        harvestingForestProducts = (TextView) findViewById(R.id.text_harvesting_forest_products);
+        agriculture = (TextView) findViewById(R.id.text_agriculture);
+        grazing = (TextView) findViewById(R.id.text_grazing);
+        mining = (TextView) findViewById(R.id.text_mining);
+        sharedCostsOutlays = (TextView) findViewById(R.id.text_shared_costs_outlays);
+        certificate = (TextView) findViewById(R.id.text_certificate);
+        logout = (TextView) findViewById(R.id.logout);
+        textViewAbout.setOnClickListener(this);
+        startSurvey.setOnClickListener(this);
+        harvestingForestProducts.setOnClickListener(this);
+        agriculture.setOnClickListener(this);
+        grazing.setOnClickListener(this);
+        mining.setOnClickListener(this);
+        sharedCostsOutlays.setOnClickListener(this);
+        certificate.setOnClickListener(this);
+        logout.setOnClickListener(this);
+        setNav();
 
         //GPS Coordinates
         Survey survey = realm.where(Survey.class).
@@ -404,6 +429,12 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         parcelValue.setText(parcelValStr);
     }
 
+    @Override
+    protected void onResume() {
+        setNav();
+        super.onResume();
+    }
+
     public String numberProcess(String numberStr) {
         String zerosStr = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
         int zerosCount = 0;
@@ -480,6 +511,76 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                 intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intents);
                 break;
+            case R.id.text_harvesting_forest_products:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_forestland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_agriculture:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_cropland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_grazing:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_pastureland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_mining:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_miningland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_shared_costs_outlays:
+                Intent intent_outlay = new Intent(getApplicationContext(), NaturalCapitalSharedCostActivityA.class);
+                startActivity(intent_outlay);
+                break;
+            case R.id.text_certificate:
+                Intent intent_certificate = new Intent(getApplicationContext(), NewCertificateActivity.class);
+                startActivity(intent_certificate);
+                break;
+        }
+    }
+
+    private void setNav() {
+        harvestingForestProducts.setVisibility(View.GONE);
+        agriculture.setVisibility(View.GONE);
+        grazing.setVisibility(View.GONE);
+        mining.setVisibility(View.GONE);
+
+        if (checkLandKind(getString(R.string.string_forestland))) {
+            harvestingForestProducts.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_cropland))) {
+            agriculture.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_pastureland))) {
+            grazing.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_miningland))) {
+            mining.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void startLandTypeActivity() {
+        Intent intent = new Intent(NewCertificateActivity.this, StartLandTypeActivity.class);
+        startActivity(intent);
+    }
+
+    private void setCurrentSocialCapitalSurvey(String name) {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("currentSocialCapitalSurvey", name);
+        editor.apply();
+    }
+
+    private boolean checkLandKind(String name) {
+        LandKind landKind = realm.where(LandKind.class)
+                .equalTo("name", name)
+                .equalTo("surveyId", surveyId)
+                .findFirst();
+        if (landKind.getStatus().equals("active")) {
+            return true;
+        } else {
+            return false;
         }
     }
 

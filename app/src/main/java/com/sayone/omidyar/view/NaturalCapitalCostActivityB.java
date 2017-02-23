@@ -40,8 +40,8 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
     private static final int PROJECTION_COUNT = 15;
     Realm realm;
     SharedPreferences sharedPref;
-    String serveyId;
-    String currentSocialCapitalServey;
+    String surveyId;
+    String currentSocialCapitalSurvey;
 
     Spinner spinnerYear;
     String year;
@@ -53,13 +53,21 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
     RealmList<CostElementYears> costElementYearsArrayList;
     private ImageView imageViewMenuIcon;
     private ImageView drawerCloseBtn;
-    private TextView textViewAbout;
-    private TextView logout;
-    private TextView startSurvey;
     private DrawerLayout menuDrawerLayout;
     private TextView surveyIdDrawer;
     private TextView landType;
     TextView enterYearHeading;
+
+    //Side Nav
+    private TextView textViewAbout;
+    private TextView startSurvey;
+    private TextView harvestingForestProducts;
+    private TextView agriculture;
+    private TextView grazing;
+    private TextView mining;
+    private TextView sharedCostsOutlays;
+    private TextView certificate;
+    private TextView logout;
 
     int i = 0;
 
@@ -72,9 +80,9 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
         realm = Realm.getDefaultInstance();
         sharedPref = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        serveyId = sharedPref.getString("surveyId", "");
-        currentSocialCapitalServey = sharedPref.getString("currentSocialCapitalServey", "");
-        //Log.e("SER ID ",serveyId);
+        surveyId = sharedPref.getString("surveyId", "");
+        currentSocialCapitalSurvey = sharedPref.getString("currentSocialCapitalSurvey", "");
+        //Log.e("SER ID ",surveyId);
 
         editTexts = new ArrayList<>();
         costElementYearsArrayList = new RealmList<>();
@@ -102,26 +110,26 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
         textViewAbout.setOnClickListener(this);
         logout.setOnClickListener(this);
         startSurvey.setOnClickListener(this);
-        surveyIdDrawer.setText(serveyId);
-        landType.setText(currentSocialCapitalServey);
+        surveyIdDrawer.setText(surveyId);
+        landType.setText(currentSocialCapitalSurvey);
 
         Survey results = realm.where(Survey.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .findFirst();
         for (LandKind landKind : results.getLandKinds()) {
-            if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalServey.equals(getString(R.string.string_forestland))) {
+            if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalSurvey.equals(getString(R.string.string_forestland))) {
                 if (landKind.getForestLand().getCostElements().size() > 0) {
                     loadYears(landKind.getForestLand().getCostElements().get(0).getCostElementYearses());
                 }
-            } else if (landKind.getName().equals(getString(R.string.string_cropland)) && currentSocialCapitalServey.equals(getString(R.string.string_cropland))) {
+            } else if (landKind.getName().equals(getString(R.string.string_cropland)) && currentSocialCapitalSurvey.equals(getString(R.string.string_cropland))) {
                 if (landKind.getCropLand().getCostElements().size() > 0) {
                     loadYears(landKind.getCropLand().getCostElements().get(0).getCostElementYearses());
                 }
-            } else if (landKind.getName().equals(getString(R.string.string_pastureland)) && currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
+            } else if (landKind.getName().equals(getString(R.string.string_pastureland)) && currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))) {
                 if (landKind.getPastureLand().getCostElements().size() > 0) {
                     loadYears(landKind.getPastureLand().getCostElements().get(0).getCostElementYearses());
                 }
-            } else if (landKind.getName().equals(getString(R.string.string_miningland)) && currentSocialCapitalServey.equals(getString(R.string.string_miningland))) {
+            } else if (landKind.getName().equals(getString(R.string.string_miningland)) && currentSocialCapitalSurvey.equals(getString(R.string.string_miningland))) {
                 if (landKind.getMiningLand().getCostElements().size() > 0) {
                     loadYears(landKind.getMiningLand().getCostElements().get(0).getCostElementYearses());
                 }
@@ -152,6 +160,33 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
 
             }
         });
+
+        //Side Nav
+        textViewAbout = (TextView) findViewById(R.id.text_view_about);
+        startSurvey = (TextView) findViewById(R.id.text_start_survey);
+        harvestingForestProducts = (TextView) findViewById(R.id.text_harvesting_forest_products);
+        agriculture = (TextView) findViewById(R.id.text_agriculture);
+        grazing = (TextView) findViewById(R.id.text_grazing);
+        mining = (TextView) findViewById(R.id.text_mining);
+        sharedCostsOutlays = (TextView) findViewById(R.id.text_shared_costs_outlays);
+        certificate = (TextView) findViewById(R.id.text_certificate);
+        logout = (TextView) findViewById(R.id.logout);
+        textViewAbout.setOnClickListener(this);
+        startSurvey.setOnClickListener(this);
+        harvestingForestProducts.setOnClickListener(this);
+        agriculture.setOnClickListener(this);
+        grazing.setOnClickListener(this);
+        mining.setOnClickListener(this);
+        sharedCostsOutlays.setOnClickListener(this);
+        certificate.setOnClickListener(this);
+        logout.setOnClickListener(this);
+        setNav();
+    }
+
+    @Override
+    protected void onResume() {
+        setNav();
+        super.onResume();
     }
 
     public void loadYears(RealmList<CostElementYears> costElementYearsRealmList) {
@@ -330,8 +365,78 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
                 intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intents);
                 break;
+            case R.id.text_harvesting_forest_products:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_forestland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_agriculture:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_cropland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_grazing:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_pastureland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_mining:
+                setCurrentSocialCapitalSurvey(getString(R.string.string_miningland));
+                startLandTypeActivity();
+                break;
+            case R.id.text_shared_costs_outlays:
+                Intent intent_outlay = new Intent(getApplicationContext(), NaturalCapitalSharedCostActivityA.class);
+                startActivity(intent_outlay);
+                break;
+            case R.id.text_certificate:
+                Intent intent_certificate = new Intent(getApplicationContext(),NewCertificateActivity.class);
+                startActivity(intent_certificate);
+                break;
         }
 
+    }
+
+    private void setNav() {
+        harvestingForestProducts.setVisibility(View.GONE);
+        agriculture.setVisibility(View.GONE);
+        grazing.setVisibility(View.GONE);
+        mining.setVisibility(View.GONE);
+
+        if (checkLandKind(getString(R.string.string_forestland))) {
+            harvestingForestProducts.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_cropland))) {
+            agriculture.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_pastureland))) {
+            grazing.setVisibility(View.VISIBLE);
+        }
+
+        if (checkLandKind(getString(R.string.string_miningland))) {
+            mining.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void startLandTypeActivity() {
+        Intent intent = new Intent(NaturalCapitalCostActivityB.this, StartLandTypeActivity.class);
+        startActivity(intent);
+    }
+
+    private void setCurrentSocialCapitalSurvey(String name) {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("currentSocialCapitalSurvey", name);
+        editor.apply();
+    }
+
+    private boolean checkLandKind(String name) {
+        LandKind landKind = realm.where(LandKind.class)
+                .equalTo("name", name)
+                .equalTo("surveyId", surveyId)
+                .findFirst();
+        if (landKind.getStatus().equals("active")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void saveYears() {
@@ -344,10 +449,10 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
             @Override
             public void execute(Realm realm) {
                 Survey results = realm.where(Survey.class)
-                        .equalTo("surveyId", serveyId)
+                        .equalTo("surveyId", surveyId)
                         .findFirst();
                 for (LandKind landKind : results.getLandKinds()) {
-                    if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalServey.equals(getString(R.string.string_forestland))) {
+                    if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalSurvey.equals(getString(R.string.string_forestland))) {
                         for (CostElement costElement1 : landKind.getForestLand().getCostElements()) {
                             //Log.e("LAND ", revenueProduct1.getName());
                             //Log.e("LAND AA ", revenueProduct1.getRevenueProductYearses().size()+"");
@@ -369,7 +474,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
                             costElement1.setCostElementYearses(costElementYearsArrayList);
                             costElementYearsArrayList.clear();
                         }
-                    } else if (landKind.getName().equals(getString(R.string.string_cropland)) && currentSocialCapitalServey.equals(getString(R.string.string_cropland))) {
+                    } else if (landKind.getName().equals(getString(R.string.string_cropland)) && currentSocialCapitalSurvey.equals(getString(R.string.string_cropland))) {
                         for (CostElement costElement1 : landKind.getCropLand().getCostElements()) {
                             //Log.e("LAND ", revenueProduct1.getName());
                             //Log.e("LAND AA ", revenueProduct1.getRevenueProductYearses().size()+"");
@@ -390,7 +495,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
                             costElement1.setCostElementYearses(costElementYearsArrayList);
                             costElementYearsArrayList.clear();
                         }
-                    } else if (landKind.getName().equals(getString(R.string.string_pastureland)) && currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
+                    } else if (landKind.getName().equals(getString(R.string.string_pastureland)) && currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))) {
                         for (CostElement costElement1 : landKind.getPastureLand().getCostElements()) {
                             //Log.e("LAND ", revenueProduct1.getName());
                             //Log.e("LAND AA ", revenueProduct1.getRevenueProductYearses().size()+"");
@@ -411,7 +516,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
                             costElement1.setCostElementYearses(costElementYearsArrayList);
                             costElementYearsArrayList.clear();
                         }
-                    } else if (landKind.getName().equals(getString(R.string.string_miningland)) && currentSocialCapitalServey.equals(getString(R.string.string_miningland))) {
+                    } else if (landKind.getName().equals(getString(R.string.string_miningland)) && currentSocialCapitalSurvey.equals(getString(R.string.string_miningland))) {
                         for (CostElement costElement1 : landKind.getMiningLand().getCostElements()) {
                             //Log.e("LAND ", revenueProduct1.getName());
                             //Log.e("LAND AA ", revenueProduct1.getRevenueProductYearses().size()+"");
@@ -457,11 +562,10 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
 
     }
 
-
     public CostElementYears saveProductYears(int yearVal, long costElementId, String landKindName, Realm realm) {
-        //Log.e("CCC ",serveyId+" "+yearVal+" "+costElementId+" "+landKindName);
+        //Log.e("CCC ",surveyId+" "+yearVal+" "+costElementId+" "+landKindName);
         CostElementYears costElementYearsCheck = realm.where(CostElementYears.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .equalTo("landKind", landKindName)
                 .equalTo("costElementId", costElementId)
                 .equalTo("year", yearVal)
@@ -477,7 +581,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
             costElementYears.setYear(yearVal);
             costElementYears.setCostElementId(costElementId);
             costElementYears.setLandKind(landKindName);
-            costElementYears.setSurveyId(serveyId);
+            costElementYears.setSurveyId(surveyId);
             return costElementYears;
         } else {
             return costElementYearsCheck;
@@ -485,9 +589,9 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
     }
 
     public CostElementYears saveTrend(long costElementId, String landKindName, Realm realm) {
-        //Log.e("CCC ",serveyId+" "+0+" "+costElementId+" "+landKindName);
+        //Log.e("CCC ",surveyId+" "+0+" "+costElementId+" "+landKindName);
         CostElementYears costElementYearsCheck = realm.where(CostElementYears.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .equalTo("landKind", landKindName)
                 .equalTo("costElementId", costElementId)
                 .equalTo("year", 0)
@@ -502,7 +606,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
             costElementYears.setYear(0);
             costElementYears.setCostElementId(costElementId);
             costElementYears.setLandKind(landKindName);
-            costElementYears.setSurveyId(serveyId);
+            costElementYears.setSurveyId(surveyId);
             return costElementYears;
         } else {
             return costElementYearsCheck;
@@ -510,9 +614,9 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
     }
 
     public CostElementYears saveProjectionYears(int yearVal, long costElementId, String landKindName, int projectionIndex, Realm realm) {
-        //Log.e("CCC ",serveyId+" "+yearVal+" "+costElementId+" "+landKindName);
+        //Log.e("CCC ",surveyId+" "+yearVal+" "+costElementId+" "+landKindName);
         CostElementYears costElementYearsCheck = realm.where(CostElementYears.class)
-                .equalTo("surveyId", serveyId)
+                .equalTo("surveyId", surveyId)
                 .equalTo("landKind", landKindName)
                 .equalTo("costElementId", costElementId)
                 .equalTo("year", yearVal)
@@ -527,7 +631,7 @@ public class NaturalCapitalCostActivityB extends BaseActivity implements View.On
             costElementYears.setYear(yearVal);
             costElementYears.setCostElementId(costElementId);
             costElementYears.setLandKind(landKindName);
-            costElementYears.setSurveyId(serveyId);
+            costElementYears.setSurveyId(surveyId);
             costElementYears.setProjectedIndex(calculateProjectionIndex(projectionIndex));
             return costElementYears;
         } else {
