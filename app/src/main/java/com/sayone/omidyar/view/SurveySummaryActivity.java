@@ -487,6 +487,10 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                     jsonObjectCostElementYears.put("id", "");
                 } else
                     jsonObjectCostElementYears.put("id", costElementYears.getId());
+                if (costElementYears.getHouseholds() == 0) {
+                    jsonObjectCostElementYears.put("households", "");
+                } else
+                    jsonObjectCostElementYears.put("households", costElementYears.getHouseholds());
                 if (costElementYears.getCostFrequencyValue() == 0) {
                     jsonObjectCostElementYears.put("costFrequencyValue", "");
                 } else
@@ -1040,7 +1044,10 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 } else {
                     jsonObjectRevenueProductYear.put("harvestFrequencyUnit", revenueProductYear.getHarvestFrequencyUnit());
                 }
-
+                if (revenueProductYear.getHouseholds() == 0) {
+                    jsonObjectRevenueProductYear.put("households", "");
+                } else
+                    jsonObjectRevenueProductYear.put("households", revenueProductYear.getHouseholds());
                 if (revenueProductYear.getMarketPriceCurrency() == null) {
                     jsonObjectRevenueProductYear.put("marketPriceCurrency", "");
                 } else
@@ -1298,7 +1305,10 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                     jsonObjectCostElementYears.put("costPerPeriodUni", "");
                 } else
                     jsonObjectCostElementYears.put("costPerPeriodUni", costElementYears.getCostPerPeriodUnit());
-
+                if (costElementYears.getHouseholds() == 0) {
+                    jsonObjectCostElementYears.put("households", "");
+                } else
+                    jsonObjectCostElementYears.put("households", costElementYears.getHouseholds());
 
                 if (costElementYears.getProjectedIndex() == 0) {
                     if (costElementYears.getYear() == 0) {
@@ -1646,6 +1656,11 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             } else {
                 jsonObjectComponent.put("totalValueStr", component.getTotalValueStr());
             }
+            if (component.getTotalValuePerHa().equals("")) {
+                jsonObjectComponent.put("totalValuePerHaStr", "");
+            } else {
+                jsonObjectComponent.put("totalValuePerHaStr", component.getTotalValuePerHa());
+            }
             if (component.getSharedCostValue() == 0) {
                 jsonObjectComponent.put("sharedCostValue", "");
             } else {
@@ -1836,8 +1851,6 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 exportDataEmail.setBackgroundResource(android.R.drawable.btn_default);
                 exportDataEmail.getBackground().setColorFilter(ContextCompat.getColor(this, R.color.colorDisable), PorterDuff.Mode.MULTIPLY);
                 break;
-
-
         }
     }
 

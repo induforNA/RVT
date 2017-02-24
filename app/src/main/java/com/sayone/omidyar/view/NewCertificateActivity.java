@@ -402,14 +402,18 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
 //        Log.e("LOWER LIMIT ", String.valueOf(Math.round(lowerLimit / 10000) * 10000));
 //        Log.e("UPPER LIMIT ", String.valueOf((long) upperLimit));
 
+        parcelVal=totalVal/parcelArea;
+
         String totalValStr = formattedString(Long.valueOf(numberProcess(String.valueOf((long) totalVal))));
         String totalValStrToSend = formattedStringNoSymbol(Long.valueOf(numberProcess(String.valueOf((long) totalVal))));
+        String totalValPerHaStrToSend = formattedStringNoSymbol(Long.valueOf(numberProcess(String.valueOf((long) parcelVal))));
 
         Log.e("Final Value ", totalValStr);
 
         if (surveyCheck.getComponents() != null) {
             realm.beginTransaction();
             surveyCheck.getComponents().setTotalValueStr(totalValStrToSend);
+            surveyCheck.getComponents().setTotalValuePerHa(totalValPerHaStrToSend);
             realm.commitTransaction();
         }
 
@@ -424,7 +428,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
 //        double roundOffRisk = Math.round(riskRate * 100.0) / 100.0;
         countryRiskRate.setText(surveyCheck.getRiskRate() + "%");
 
-        parcelVal=totalVal/parcelArea;
+
         String parcelValStr = formattedString(Long.valueOf(numberProcess(String.valueOf((long) parcelVal))));
         parcelValue.setText(parcelValStr);
     }

@@ -131,10 +131,6 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".view.OmidyarMap"
-            android:label="@string/title_activity_omidyar_map"
-            android:screenOrientation="landscape" />
-        <activity
             android:name=".view.NaturalCapitalCostOutlay"
             android:screenOrientation="landscape" />
         <activity
