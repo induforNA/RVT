@@ -37,9 +37,9 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
     LinearLayout fullscreen, forestlandLayout, croplandLayout, pasturelandLayout, mininglandLayout;
     Context context;
     double totalVal = 0;
-    double parcelVal=0;
-    float parcelArea=0;
-    TextView forestValue, cropValue, pastureValue, miningValue, totalText,parcelValue;
+    double parcelVal = 0;
+    float parcelArea = 0;
+    TextView forestValue, cropValue, pastureValue, miningValue, totalText, parcelValue;
     private Realm realm;
     private String surveyId;
     private Boolean flag = true;
@@ -97,7 +97,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         menuDrawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer_layout);
         imageViewMenuIcon = (ImageView) findViewById(R.id.image_view_menu_icon);
         drawerCloseBtn = (ImageView) findViewById(R.id.drawer_close_btn);
-                surveyIdDrawer = (TextView) findViewById(R.id.text_view_id);
+        surveyIdDrawer = (TextView) findViewById(R.id.text_view_id);
         forestDiscountRateValue = (TextView) findViewById(R.id.value_discount_rate_forest);
         cropDiscountRateValue = (TextView) findViewById(R.id.value_discount_rate_crop);
         pastureDiscountRateValue = (TextView) findViewById(R.id.value_discount_rate_pasture);
@@ -108,7 +108,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         pastureValue = (TextView) findViewById(R.id.pasture_value);
         miningValue = (TextView) findViewById(R.id.mining_value);
         totalText = (TextView) findViewById(R.id.total_text);
-        parcelValue=(TextView)findViewById(R.id.parcel_value);
+        parcelValue = (TextView) findViewById(R.id.parcel_value);
         gpsCoordinate_1 = (TextView) findViewById(R.id.gps_coordinate_1);
         gpsCoordinate_2 = (TextView) findViewById(R.id.gps_coordinate_2);
         gpsCoordinate_3 = (TextView) findViewById(R.id.gps_coordinate_3);
@@ -147,17 +147,9 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         Log.e("Language : ", Locale.getDefault().getDisplayLanguage());
 
         forestlandLayout.setVisibility(View.GONE);
-        headingForest.setVisibility(View.GONE);
-
         croplandLayout.setVisibility(View.GONE);
-        headingCrop.setVisibility(View.GONE);
-
         pasturelandLayout.setVisibility(View.GONE);
-        headingPasture.setVisibility(View.GONE);
-
         mininglandLayout.setVisibility(View.GONE);
-        headingMining.setVisibility(View.GONE);
-
 
         //Side Nav
         textViewAbout = (TextView) findViewById(R.id.text_view_about);
@@ -187,7 +179,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
 
         ParcelLocation parcelLocation = survey.getParcelLocations();
 
-        if(parcelLocation != null) {
+        if (parcelLocation != null) {
             String coordinate_1 = parcelLocation.getCoordinateOne();
             String coordinate_2 = parcelLocation.getCoordinateTwo();
             String coordinate_3 = parcelLocation.getCoordinateThree();
@@ -205,10 +197,10 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
             parcelSize.setText(Float.toString(parcelArea) + "ha");
         }
 
+
         for (LandKind landKind : landKinds) {
             if (landKind.getName().equals(getString(R.string.string_forestland))) {
                 forestlandLayout.setVisibility(View.VISIBLE);
-                headingForest.setVisibility(View.VISIBLE);
                 socialCapital = landKind.getSocialCapitals();
                 if (socialCapital.isDiscountFlag()) {
                     forestDiscountRateValue.setText(String.valueOf(roundTwo(socialCapital.getDiscountRateOverride())) + "%");
@@ -249,7 +241,6 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
 
             if (landKind.getName().equals(getString(R.string.string_cropland))) {
                 croplandLayout.setVisibility(View.VISIBLE);
-                headingCrop.setVisibility(View.VISIBLE);
                 socialCapital = landKind.getSocialCapitals();
                 if (socialCapital.isDiscountFlag()) {
                     cropDiscountRateValue.setText(String.valueOf(roundTwo(socialCapital.getDiscountRateOverride())) + "%");
@@ -288,7 +279,6 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
 
             if (landKind.getName().equals(getString(R.string.string_pastureland))) {
                 pasturelandLayout.setVisibility(View.VISIBLE);
-                headingPasture.setVisibility(View.VISIBLE);
                 socialCapital = landKind.getSocialCapitals();
                 if (socialCapital.isDiscountFlag()) {
                     pastureDiscountRateValue.setText(String.valueOf(roundTwo(socialCapital.getDiscountRateOverride())) + "%");
@@ -327,7 +317,6 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
 
             if (landKind.getName().equals(getString(R.string.string_miningland))) {
                 mininglandLayout.setVisibility(View.VISIBLE);
-                headingMining.setVisibility(View.VISIBLE);
                 socialCapital = landKind.getSocialCapitals();
                 if (socialCapital.isDiscountFlag()) {
                     miningDiscountRateValue.setText(String.valueOf(roundTwo(socialCapital.getDiscountRateOverride())) + "%");
@@ -424,7 +413,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
 //        double roundOffRisk = Math.round(riskRate * 100.0) / 100.0;
         countryRiskRate.setText(surveyCheck.getRiskRate() + "%");
 
-        parcelVal=totalVal/parcelArea;
+        parcelVal = totalVal / parcelArea;
         String parcelValStr = formattedString(Long.valueOf(numberProcess(String.valueOf((long) parcelVal))));
         parcelValue.setText(parcelValStr);
     }

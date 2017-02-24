@@ -69,12 +69,12 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
         buttonSave = (Button) findViewById(R.id.button_save);
         surveyIdSpinner = (Spinner) findViewById(R.id.spinner_survey_id);
 
-        spinnerSurveyId = (Spinner) findViewById(R.id.spinner_survey_id_inflatrion);
+        spinnerSurveyId = (Spinner) findViewById(R.id.spinner_survey_id_inflation_risk);
 
         landKindSpinner = (Spinner) findViewById(R.id.spinner_land_kind);
         inflationRate = (EditText) findViewById(R.id.override_inflation_rate);
         riskRate = (EditText) findViewById(R.id.override_country_risk_rate);
-        saveButtonInflation = (Button) findViewById(R.id.button_save_inlation);
+        saveButtonInflation = (Button) findViewById(R.id.button_save_inflation_risk);
         buttonRestoreInflation = (Button) findViewById(R.id.button_restore_original_project_rate);
 
         sourceInflationRate = (TextView) findViewById(R.id.admin_inflation_rate_source);
@@ -198,13 +198,13 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
                     survey1 = realm.where(Survey.class).equalTo("surveyId", surveyIdsList.get(position))
                             .findFirst();
 
-                    if (survey1.getOverRideInflationRate() == null || survey1.getOverRideInflationRate() == "") {
+                    if (survey1.getOverRideInflationRate() == null || survey1.getOverRideInflationRate().equals("")) {
                         inflationRate.setText(String.valueOf(Double.parseDouble(survey1.getInflationRate())));
                     } else {
                         inflationRate.setText(String.valueOf(Double.parseDouble(survey1.getOverRideInflationRate())));
                     }
 
-                    if (survey1.getOverRideRiskRate() == null || survey1.getOverRideRiskRate() == "") {
+                    if (survey1.getOverRideRiskRate() == null || survey1.getOverRideRiskRate().equals("")) {
                         riskRate.setText(String.valueOf(Double.parseDouble(survey1.getRiskRate())));
                     } else {
                         riskRate.setText(String.valueOf(Double.parseDouble(survey1.getOverRideRiskRate())));
@@ -306,7 +306,7 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
 
             case R.id.button_restore_original_project_rate:
 
-                if ((surveyIdSpinner.getSelectedItemPosition() != 0 || landKindSpinner.getSelectedItemPosition() != 0) &&
+                if ((spinnerSurveyId.getSelectedItemPosition() != 0 || landKindSpinner.getSelectedItemPosition() != 0) &&
                         survey1 != null) {
                     realm.beginTransaction();
                     survey1.setOverRideInflationRate("");
@@ -314,23 +314,21 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
                     Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
                     realm.commitTransaction();
 
+                    if (survey1.getInflationRate() == null || survey1.getInflationRate().equals("")) {
+                        inflationRate.setText("");
+                    } else {
+                        inflationRate.setText(String.valueOf(Double.parseDouble(survey1.getInflationRate())));
+                    }
+
+                    if (survey1.getRiskRate() == null || survey1.getRiskRate().equals("")) {
+                        riskRate.setText("");
+                    } else {
+                        riskRate.setText(String.valueOf(Double.parseDouble(survey1.getRiskRate())));
+                    }
+
                 } else
                     Toast.makeText(this, getResources().getText(R.string.select_surveyid_landkind), Toast.LENGTH_SHORT).show();
 
-                survey1 = realm.where(Survey.class).equalTo("surveyId", surveyIdsList.get(surveyIdsListPos))
-                        .findFirst();
-
-                if (survey1.getOverRideInflationRate() == null || survey1.getOverRideInflationRate() == "") {
-                    inflationRate.setText(String.valueOf(Double.parseDouble(survey1.getInflationRate())));
-                } else {
-                    inflationRate.setText(String.valueOf(Double.parseDouble(survey1.getOverRideInflationRate())));
-                }
-
-                if (survey1.getOverRideRiskRate() == null || survey1.getOverRideRiskRate() == "") {
-                    riskRate.setText(String.valueOf(Double.parseDouble(survey1.getOverRideRiskRate())));
-                } else {
-                    riskRate.setText(String.valueOf(Double.parseDouble(survey1.getOverRideRiskRate())));
-                }
                 break;
         }
     }
