@@ -2,12 +2,14 @@ package com.sayone.omidyar.view;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -23,12 +25,16 @@ import android.widget.Toast;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
+import com.sayone.omidyar.model.ApiClient;
+import com.sayone.omidyar.model.ApiInterface;
 import com.sayone.omidyar.model.CropLand;
+import com.sayone.omidyar.model.DevIdSend;
 import com.sayone.omidyar.model.ForestLand;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.MiningLand;
 import com.sayone.omidyar.model.PastureLand;
 import com.sayone.omidyar.model.Survey;
+import com.sayone.omidyar.model.UniqueId;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -38,6 +44,9 @@ import java.util.Date;
 
 import io.realm.Realm;
 import io.realm.RealmList;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by sayone on 16/9/16.
@@ -45,27 +54,44 @@ import io.realm.RealmList;
 public class RegistrationActivity extends BaseActivity implements View.OnClickListener {
 
     public static final String TAG = RegistrationActivity.class.getName();
+    private static final int MY_PERMISSIONS_REQUEST = 0;
+    private double inflationRate = 0.05;
+    private double riskRate;
     private Realm realm;
-
-    public Spinner countrySpinner, currencySpinner, languageSpinner;
-    public EditText respondentGroup, state, district, community, surveyor, editRiskRate, editInflationRate;
-    public Button signUp, login;
-    public String country, language, currency, selectedDate;
-    private DatePicker datePicker;
-    private Calendar calendar;
     private EditText dateView;
-    int surveyId;
-    private int year, month, day;
+    private int surveyId;
     private Date date;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
-    Context context;
-    private String androidId;
-    private static final int MY_PERMISSIONS_REQUEST = 0;
+    private Context context;
+    private ProgressDialog progressDialog;
+    private boolean isFirstLaunch;
+    private Button signUp;
+    private Button login;
+    private EditText respondentGroup;
+    private EditText state;
+    private EditText district;
+    private EditText community;
+    private EditText surveyor;
+    private EditText editRiskRate;
+    private EditText editInflationRate;
+    private Spinner countrySpinner;
+    private Spinner currencySpinner;
+    private Spinner languageSpinner;
+    private String country;
+    private String language;
+    private String currency;
+    private String selectedDate;
 
-    //    String inflationRateStr;
-    double inflationRate = 0.05;
-    double riskRate;
+    static String encode(long num, String symbols) {
+        final int B = symbols.length();
+        StringBuilder sb = new StringBuilder();
+        while (num != 0) {
+            sb.append(symbols.charAt((int) (num % B)));
+            num /= B;
+        }
+        return sb.reverse().toString();
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,14 +102,6 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         realm = Realm.getDefaultInstance();
         preferences = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-
-        androidId = Settings.Secure.getString(getContentResolver(),
-                Settings.Secure.ANDROID_ID);
-//        inflationRateStr = preferences.getString("inflationRate", "5");
-
-//        Log.e("IRATE ", inflationRateStr);
-
-//        inflationRate = Double.parseDouble(inflationRateStr) / 100;
 
         signUp = (Button) findViewById(R.id.button_sign_up);
         login = (Button) findViewById(R.id.button_login);
@@ -101,12 +119,10 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         currencySpinner = (Spinner) findViewById(R.id.spinner_currency);
         languageSpinner = (Spinner) findViewById(R.id.spinner_language);
 
-
         dateView.setInputType(InputType.TYPE_NULL);
         login.setOnClickListener(this);
         signUp.setOnClickListener(this);
         dateView.setOnClickListener(this);
-
 
         ArrayAdapter<CharSequence> country_adapter = ArrayAdapter.createFromResource(this,
                 R.array.country_array, android.R.layout.simple_spinner_dropdown_item);
@@ -173,6 +189,13 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
                 ActivityCompat.requestPermissions(RegistrationActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST);
             }
         }
+        isFirstLaunch = preferences.getBoolean("firstLaunch", true);
+        if (isFirstLaunch) {
+            progressDialog = new ProgressDialog(RegistrationActivity.this);
+            progressDialog.setMessage("Registering device id");
+            progressDialog.show();
+            getUniqueId();
+        }
     }
 
     public void toastfunction(Context context, String message) {
@@ -188,7 +211,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
     public int getNextKeySurvey() {
         if (realm.where(Survey.class).max("id") == null) {
-            return 1;
+            return 00001;
         }
         return realm.where(Survey.class).max("id").intValue() + 1;
     }
@@ -255,23 +278,49 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
+    private void getUniqueId() {
+        String androidId = Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+        DevIdSend devIdSend = new DevIdSend(androidId);
+
+        Call<UniqueId> call = apiService.getUniqueId(devIdSend);
+        call.enqueue(new Callback<UniqueId>() {
+            @Override
+            public void onResponse(Call<UniqueId> call, Response<UniqueId> response) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), response.body().getResponse(), Toast.LENGTH_SHORT).show();
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("uniqueId", response.body().getUniqueId());
+                editor.putBoolean("firstLaunch", false);
+                editor.apply();
+            }
+
+            @Override
+            public void onFailure(Call<UniqueId> call, Throwable t) {
+
+            }
+        });
+    }
+
     public void insertData() {
         surveyId = getNextKeySurvey();
 
-        String enId = encode(2555L, androidId);
+        String enId = preferences.getString("uniqueId", "0000");
 
-        //String formattediId = String.format("%04d", surveyId);
-        String formattediId = String.valueOf(surveyId);
+        String formattediId = String.format("%04d", surveyId);
 
         enId = enId.toUpperCase();
 
         formattediId = enId + formattediId;
         RealmList<LandKind> landKinds = new RealmList<>();
 
-        landKinds.add(insertAllLandKinds(formattediId,getString(R.string.string_forestland)));
-        landKinds.add(insertAllLandKinds(formattediId,getString(R.string.string_cropland)));
-        landKinds.add(insertAllLandKinds(formattediId,getString(R.string.string_pastureland)));
-        landKinds.add(insertAllLandKinds(formattediId,getString(R.string.string_miningland)));
+        landKinds.add(insertAllLandKinds(formattediId, getString(R.string.string_forestland)));
+        landKinds.add(insertAllLandKinds(formattediId, getString(R.string.string_cropland)));
+        landKinds.add(insertAllLandKinds(formattediId, getString(R.string.string_pastureland)));
+        landKinds.add(insertAllLandKinds(formattediId, getString(R.string.string_miningland)));
 
         inflationRate = Double.parseDouble(editInflationRate.getText().toString());
         riskRate = Double.parseDouble(editRiskRate.getText().toString());
@@ -308,22 +357,22 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         CropLand cropLand = null;
         PastureLand pastureLand = null;
         MiningLand miningLand = null;
-        if(landTypeName.equals(getString(R.string.string_forestland))){
+        if (landTypeName.equals(getString(R.string.string_forestland))) {
             realm.beginTransaction();
             forestLand = realm.createObject(ForestLand.class);
             forestLand.setId(getNextKeyForestLand());
             realm.commitTransaction();
-        }else if(landTypeName.equals(getString(R.string.string_cropland))){
+        } else if (landTypeName.equals(getString(R.string.string_cropland))) {
             realm.beginTransaction();
             cropLand = realm.createObject(CropLand.class);
             cropLand.setId(getNextKeyCropLand());
             realm.commitTransaction();
-        }else if(landTypeName.equals(getString(R.string.string_pastureland))){
+        } else if (landTypeName.equals(getString(R.string.string_pastureland))) {
             realm.beginTransaction();
             pastureLand = realm.createObject(PastureLand.class);
             pastureLand.setId(getNextKeyPastureLand());
             realm.commitTransaction();
-        }else if(landTypeName.equals(getString(R.string.string_miningland))){
+        } else if (landTypeName.equals(getString(R.string.string_miningland))) {
             realm.beginTransaction();
             miningLand = realm.createObject(MiningLand.class);
             miningLand.setId(getNextKeyMiningLand());
@@ -347,16 +396,6 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         return landKind;
     }
 
-    static String encode(long num, String symbols) {
-        final int B = symbols.length();
-        StringBuilder sb = new StringBuilder();
-        while (num != 0) {
-            sb.append(symbols.charAt((int) (num % B)));
-            num /= B;
-        }
-        return sb.reverse().toString();
-    }
-
     public int getNextKeyLandKind() {
         return realm.where(LandKind.class).max("id").intValue() + 1;
     }
@@ -378,7 +417,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
