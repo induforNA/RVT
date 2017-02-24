@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -21,6 +22,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sayone.omidyar.BaseActivity;
@@ -82,6 +84,8 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
     private String language;
     private String currency;
     private String selectedDate;
+    private TextView sourceRiskrate;
+    private TextView sourceInflationRate;
 
     static String encode(long num, String symbols) {
         final int B = symbols.length();
@@ -118,6 +122,11 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         countrySpinner = (Spinner) findViewById(R.id.spinner_country);
         currencySpinner = (Spinner) findViewById(R.id.spinner_currency);
         languageSpinner = (Spinner) findViewById(R.id.spinner_language);
+
+        sourceInflationRate = (TextView)findViewById(R.id.inflation_rate_source);
+        sourceRiskrate = (TextView)findViewById(R.id.risk_rate_source);
+        sourceInflationRate.setOnClickListener(this);
+        sourceRiskrate.setOnClickListener(this);
 
         dateView.setInputType(InputType.TYPE_NULL);
         login.setOnClickListener(this);
@@ -221,6 +230,14 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
         switch (view.getId()) {
 
+            case R.id.risk_rate_source:
+                Intent browserIntent1 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tradingeconomics.com/bonds"));
+                startActivity(browserIntent1);
+                break;
+            case R.id.inflation_rate_source:
+                Intent browserIntent2 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tradingeconomics.com/forecast/inflation-rate"));
+                startActivity(browserIntent2);
+                break;
             case R.id.button_login:
                 Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(i);

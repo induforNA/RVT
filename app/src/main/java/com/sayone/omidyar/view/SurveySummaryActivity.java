@@ -360,7 +360,6 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                                 jsonObject.put("sovRate", "");
                             } else
                                 jsonObject.put("sovRate", survey.getRiskRate());
-
                             if (survey.getSharedCashFlows() == null) {
                                 jsonObject.put("sharedCashFlow", "");
                             } else
@@ -373,7 +372,14 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                                 jsonObject.put("sharedCostElements", "");
                             } else
                                 jsonObject.put("sharedCostElements", getSharedCostElements(survey.getSharedCostElements()));
-
+                            if (survey.getOverRideInflationRate() == null) {
+                                jsonObject.put("overrideSovRate", "");
+                            } else
+                                jsonObject.put("overrideSovRate", survey.getOverRideRiskRate());
+                            if (survey.getOverRideInflationRate() == null) {
+                                jsonObject.put("overrideInflationRate", "");
+                            } else
+                                jsonObject.put("overrideInflationRate", survey.getOverRideInflationRate());
                             makeJsonObjectRequest(survey.getSurveyId());
                         } catch (JSONException e) {
                             e.printStackTrace();

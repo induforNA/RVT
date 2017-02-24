@@ -179,18 +179,22 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/country_risk_rate" />
+                    android:text="@string/country_risk_rate"
+                    android:textSize="@dimen/textfield_size"/>
 
                 <EditText
                     android:id="@+id/reg_risk_rate"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:textSize="@dimen/textfield_size"
+                    android:layout_marginLeft="10dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="%" />
+                    android:text="%"
+                    android:textSize="@dimen/textfield_size"/>
 
             </LinearLayout>
 
@@ -207,9 +211,12 @@
                     android:text="@string/reg_risk_rate_source" />
 
                 <TextView
+                    android:id="@+id/risk_rate_source"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="www.tradingeconomics.com/bonds" />
+                    android:text="www.tradingeconomics.com/bonds"
+                    android:textColor="@color/colorAccent"
+                    android:layout_marginLeft="5dp"/>
 
             </LinearLayout>
 
@@ -225,18 +232,22 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/inflation_rate" />
+                    android:text="@string/inflation_rate"
+                    android:textSize="@dimen/textfield_size"/>
 
                 <EditText
                     android:id="@+id/reg_inflation_rate"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:textSize="@dimen/textfield_size"
+                    android:layout_marginLeft="10dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="%" />
+                    android:text="%"
+                    android:textSize="@dimen/textfield_size"/>
 
             </LinearLayout>
 
@@ -253,9 +264,12 @@
                     android:text="@string/reg_inflation_rate_source" />
 
                 <TextView
+                    android:id="@+id/inflation_rate_source"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="www.tradingeconomics.com/forecast/inflation-rate" />
+                    android:text="www.tradingeconomics.com/forecast/inflation-rate"
+                    android:textColor="@color/colorAccent"
+                    android:layout_marginLeft="5dp"/>
 
             </LinearLayout>
 
