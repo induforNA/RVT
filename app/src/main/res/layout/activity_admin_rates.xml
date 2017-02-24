@@ -28,224 +28,300 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="150dp"
-        android:layout_marginRight="150dp"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <Spinner
-                android:id="@+id/spinner_survey_id"
-                style="@style/Widget.AppCompat.Spinner.Underlined"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="150dp"
+                android:layout_marginRight="150dp"
+                android:layout_marginTop="30dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/discount_rate"
-                    android:textSize="@dimen/textfield_size" />
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/edittext_discount_rate"
-                    android:layout_width="80dp"
+                    <Spinner
+                        android:id="@+id/spinner_survey_id"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/discount_rate"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <EditText
+                            android:id="@+id/edittext_discount_rate"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:enabled="false"
+                            android:selectAllOnFocus="true"
+                            android:text="0.0"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="@string/percentage"
+                            android:textSize="@dimen/textfield_size" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:selectAllOnFocus="true"
-                    android:enabled="false"
-                    android:text="0.0"
-                    android:textSize="@dimen/textfield_size" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/percentage"
-                    android:textSize="@dimen/textfield_size" />
+                    <Spinner
+                        android:id="@+id/spinner_land_kind"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/override_discount"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <EditText
+                            android:id="@+id/edittext_overridediscount"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:inputType="numberDecimal"
+                            android:selectAllOnFocus="true"
+                            android:singleLine="true"
+                            android:text="0.0"
+                            android:textSize="@dimen/textfield_size" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="@string/percentage"
+                            android:textSize="@dimen/textfield_size" />
+                    </LinearLayout>
+                </LinearLayout>
+
             </LinearLayout>
 
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <Spinner
-                android:id="@+id/spinner_land_kind"
-                style="@style/Widget.AppCompat.Spinner.Underlined"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+                android:layout_marginTop="50dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
+                <Button
+                    android:id="@+id/button_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="5dp"
+                    android:text="@string/button_save"
+                    android:textColor="@android:color/white" />
+
+                <!--<View-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:background="@android:color/darker_gray"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:layout_height="2dp"/>-->
+
+                <Button
+                    android:id="@+id/button_restore_original_discount_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/restore_original_discount_rate"
+                    android:textColor="@android:color/white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <Spinner
+                    android:id="@+id/spinner_survey_id_inflatrion"
+                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/inflation_rate"
+                    android:textSize="@dimen/textfield_size" />
+
+                <EditText
+                    android:id="@+id/override_inflation_rate"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:inputType="numberDecimal"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true"
+                    android:text="5"
+                    android:textSize="@dimen/textfield_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="%"
+                    android:textSize="@dimen/textfield_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/country_risk_rate"
+                    android:textSize="@dimen/textfield_size" />
+
+                <EditText
+                    android:id="@+id/override_country_risk_rate"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:inputType="numberDecimal"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true"
+                    android:text="5"
+                    android:textSize="@dimen/textfield_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="%"
+                    android:textSize="@dimen/textfield_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reg_risk_rate_source" />
+
+                <TextView
+                    android:id="@+id/admin_risk_rate_source"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="www.tradingeconomics.com/bonds"
+                    android:textColor="@color/colorAccent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/override_discount"
-                    android:textSize="@dimen/textfield_size" />
-
-                <EditText
-                    android:id="@+id/edittext_overridediscount"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:inputType="numberDecimal"
-                    android:selectAllOnFocus="true"
-                    android:singleLine="true"
-                    android:text="0.0"
-                    android:textSize="@dimen/textfield_size" />
+                    android:text="@string/reg_inflation_rate_source" />
 
                 <TextView
+                    android:id="@+id/admin_inflation_rate_source"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="@string/percentage"
-                    android:textSize="@dimen/textfield_size" />
+                    android:layout_marginLeft="5dp"
+                    android:text="www.tradingeconomics.com/forecast/inflation-rate"
+                    android:textColor="@color/colorAccent" />
+
             </LinearLayout>
-        </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+                <Button
+                    android:id="@+id/button_save_inlation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:padding="5dp"
+                    android:text="@string/button_save"
+                    android:textColor="@android:color/white" />
 
-        <Button
-            android:id="@+id/button_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:padding="5dp"
-            android:text="@string/button_save"
-            android:textColor="@android:color/white" />
+                <Button
+                    android:id="@+id/button_restore_original_project_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/restore_original_project_rates"
+                    android:textColor="@android:color/white" />
 
-        <!--<View-->
-        <!--android:layout_width="100dp"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:background="@android:color/darker_gray"-->
-        <!--android:layout_gravity="center_horizontal"-->
-        <!--android:layout_height="2dp"/>-->
-
-        <Button
-            android:id="@+id/button_restore_original_discount_rate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:text="@string/restore_original_discount_rate"
-            android:textColor="@android:color/white" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Spinner
-            android:id="@+id/spinner_survey_id_inflatrion"
-            style="@style/Widget.AppCompat.Spinner.Underlined"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/textfield_size"
-            android:text="@string/inflation_rate"/>
-
-        <EditText
-            android:layout_width="100dp"
-            android:id="@+id/inflation_rate"
-            android:singleLine="true"
-            android:inputType="numberDecimal"
-            android:layout_marginLeft="10dp"
-            android:gravity="center"
-            android:text="5"
-            android:selectAllOnFocus="true"
-            android:textSize="@dimen/textfield_size"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/textfield_size"
-            android:text="%"/>
-
-
+            </LinearLayout>
 
         </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/button_save_inlation"
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:padding="5dp"
-            android:text="@string/button_save"
-            android:textColor="@android:color/white" />
-
-        <Button
-            android:id="@+id/button_restore_original_inflation_rate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/restore_original_inflation_rate"
-            android:textColor="@android:color/white" />
-
-    </LinearLayout>
-
-
-
-
-
+    </ScrollView>
 
 </LinearLayout>

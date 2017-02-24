@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sayone.omidyar.BaseActivity;
@@ -62,6 +64,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
     Context context;
     private String androidId;
     private static final int MY_PERMISSIONS_REQUEST = 0;
+    private TextView sourceRiskrate,sourceInflationRate;
 
     //    String inflationRateStr;
     double inflationRate = 0.05;
@@ -101,12 +104,15 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         currencySpinner = (Spinner) findViewById(R.id.spinner_currency);
         languageSpinner = (Spinner) findViewById(R.id.spinner_language);
 
+        sourceInflationRate = (TextView)findViewById(R.id.inflation_rate_source);
+        sourceRiskrate = (TextView)findViewById(R.id.risk_rate_source);
+        sourceInflationRate.setOnClickListener(this);
+        sourceRiskrate.setOnClickListener(this);
 
         dateView.setInputType(InputType.TYPE_NULL);
         login.setOnClickListener(this);
         signUp.setOnClickListener(this);
         dateView.setOnClickListener(this);
-
 
         ArrayAdapter<CharSequence> country_adapter = ArrayAdapter.createFromResource(this,
                 R.array.country_array, android.R.layout.simple_spinner_dropdown_item);
@@ -198,6 +204,14 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
         switch (view.getId()) {
 
+            case R.id.risk_rate_source:
+                Intent browserIntent1 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tradingeconomics.com/bonds"));
+                startActivity(browserIntent1);
+                break;
+            case R.id.inflation_rate_source:
+                Intent browserIntent2 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tradingeconomics.com/forecast/inflation-rate"));
+                startActivity(browserIntent2);
+                break;
             case R.id.button_login:
                 Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(i);

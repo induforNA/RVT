@@ -47,6 +47,8 @@ public class Survey extends RealmObject {
 
     private String overRideInflationRate;
 
+    private String overRideRiskRate;
+
     private Component components;
 
     private RealmList<SharedCostElement> sharedCostElements;
@@ -214,6 +216,14 @@ public class Survey extends RealmObject {
         this.riskRate = riskRate;
     }
 
+    public String getOverRideRiskRate() {
+        return overRideRiskRate;
+    }
+
+    public void setOverRideRiskRate(String overRideRiskRate) {
+        this.overRideRiskRate = overRideRiskRate;
+    }
+
     @Override
     public String toString() {
         return "Survey{" +
@@ -234,6 +244,7 @@ public class Survey extends RealmObject {
                 ", inflationRate='" + inflationRate + '\'' +
                 ", riskRate='" + riskRate + '\'' +
                 ", overRideInflationRate='" + overRideInflationRate + '\'' +
+                ", overRideRiskRate='" + overRideRiskRate + '\'' +
                 ", components=" + components +
                 ", parcelLocations=" + parcelLocations +
                 '}';

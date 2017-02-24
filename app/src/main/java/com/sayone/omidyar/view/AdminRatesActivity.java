@@ -1,7 +1,9 @@
 package com.sayone.omidyar.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -10,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sayone.omidyar.BaseActivity;
@@ -27,11 +30,12 @@ import io.realm.RealmResults;
 public class AdminRatesActivity extends BaseActivity implements View.OnClickListener {
 
     public Spinner surveyIdSpinner, landKindSpinner;
-    public Spinner spinnerSurveyIdInflatrion;
-    private EditText discountRate, discountRateOverride, inflationRate;
+    public Spinner spinnerSurveyId;
+    private EditText discountRate, discountRateOverride, inflationRate, riskRate;
     ;
     private ArrayList<String> surveyIds = new ArrayList<>();
-    private ArrayList<String> surveyIdsListInflation = new ArrayList<>();
+    private ArrayList<String> surveyIdsList = new ArrayList<>();
+    private int surveyIdsListPos = -1;
     private ArrayList<String> surveyLandKinds = new ArrayList<>();
     private ArrayList<String> surveyLandKindsHindi = new ArrayList<>();
     private Button buttonSave, buttonREstore, saveButtonInflation, buttonRestoreInflation;
@@ -47,6 +51,7 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
     private Survey survey;
     private Survey survey1;
     private boolean flag = false;
+    private TextView sourceRiskrate, sourceInflationRate;
 
 
     @Override
@@ -64,12 +69,18 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
         buttonSave = (Button) findViewById(R.id.button_save);
         surveyIdSpinner = (Spinner) findViewById(R.id.spinner_survey_id);
 
-        spinnerSurveyIdInflatrion = (Spinner) findViewById(R.id.spinner_survey_id_inflatrion);
+        spinnerSurveyId = (Spinner) findViewById(R.id.spinner_survey_id_inflatrion);
 
         landKindSpinner = (Spinner) findViewById(R.id.spinner_land_kind);
-        inflationRate = (EditText) findViewById(R.id.inflation_rate);
+        inflationRate = (EditText) findViewById(R.id.override_inflation_rate);
+        riskRate = (EditText) findViewById(R.id.override_country_risk_rate);
         saveButtonInflation = (Button) findViewById(R.id.button_save_inlation);
-        buttonRestoreInflation = (Button) findViewById(R.id.button_restore_original_inflation_rate);
+        buttonRestoreInflation = (Button) findViewById(R.id.button_restore_original_project_rate);
+
+        sourceInflationRate = (TextView) findViewById(R.id.admin_inflation_rate_source);
+        sourceRiskrate = (TextView) findViewById(R.id.admin_risk_rate_source);
+        sourceInflationRate.setOnClickListener(this);
+        sourceRiskrate.setOnClickListener(this);
 
         //  inflationRate.setText(preferences.getString("inflationRate", ""));
 
@@ -78,25 +89,22 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
         RealmResults<Survey> surveyList = realm.where(Survey.class).findAll();
 
         surveyIds.add(0, getResources().getString(R.string.select_suvey_id));
-        surveyIdsListInflation.add(0, getResources().getString(R.string.select_suvey_id));
+        surveyIdsList.add(0, getResources().getString(R.string.select_suvey_id));
         surveyLandKinds.add(0, getResources().getString(R.string.select_landkind));
 
         for (Survey survey : surveyList) {
             String surveyIdLoop = survey.getSurveyId();
             surveyIds.add(surveyIdLoop);
-            surveyIdsListInflation.add(surveyIdLoop);
+            surveyIdsList.add(surveyIdLoop);
         }
 
-        surveyIdAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,
-                surveyIds);
-        surveyIdInflationAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,
-                surveyIdsListInflation);
-        landKindAdapter = new ArrayAdapter(AdminRatesActivity.this, android.R.layout.simple_spinner_dropdown_item,
-                surveyLandKinds);
+        surveyIdAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, surveyIds);
+        surveyIdInflationAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, surveyIdsList);
+        landKindAdapter = new ArrayAdapter(AdminRatesActivity.this, android.R.layout.simple_spinner_dropdown_item, surveyLandKinds);
 
         surveyIdSpinner.setAdapter(surveyIdAdapter);
         landKindSpinner.setAdapter(landKindAdapter);
-        spinnerSurveyIdInflatrion.setAdapter(surveyIdInflationAdapter);
+        spinnerSurveyId.setAdapter(surveyIdInflationAdapter);
 
         saveButtonInflation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,11 +114,14 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
                         realm.beginTransaction();
                         // inflationRate.setText(String.valueOf(Double.parseDouble(inflationRate.getText().toString())*100));
 
-                        double numToRound = Double.parseDouble(inflationRate.getText().toString()) / 100;
+                        double inflationRateToRound = Double.parseDouble(inflationRate.getText().toString());
+                        double inflationRateRounded = Math.round(inflationRateToRound * 100.0) / 100.0;
+                        survey1.setOverRideInflationRate(String.valueOf(inflationRateRounded));
 
-                        double roundOff = Math.round(numToRound * 100.0) / 100.0;
+                        double riskRateToRound = Double.parseDouble(riskRate.getText().toString());
+                        double riskRateRounded = Math.round(riskRateToRound * 100.0) / 100.0;
+                        survey1.setOverRideRiskRate(String.valueOf(riskRateRounded));
 
-                        survey1.setInflationRate(String.valueOf(roundOff));
                         realm.commitTransaction();
                         Toast toast = Toast.makeText(context, getResources().getText(R.string.text_data_saved), Toast.LENGTH_SHORT);
                         toast.show();
@@ -132,6 +143,7 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+                surveyIdsListPos = position;
                 surveyLandKinds.clear();
                 if (position != 0) {
                     surveyLandKinds.add(0, getResources().getString(R.string.select_landkind));
@@ -177,16 +189,26 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
             }
         });
 
-        spinnerSurveyIdInflatrion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerSurveyId.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
                 if (position != 0) {
                     flag = true;
-                    survey1 = realm.where(Survey.class).equalTo("surveyId", surveyIdsListInflation.get(position))
+                    survey1 = realm.where(Survey.class).equalTo("surveyId", surveyIdsList.get(position))
                             .findFirst();
-                    inflationRate.setText(String.valueOf(Double.parseDouble(survey1.getInflationRate()) * 100));
 
+                    if (survey1.getOverRideInflationRate() == null || survey1.getOverRideInflationRate() == "") {
+                        inflationRate.setText(String.valueOf(Double.parseDouble(survey1.getInflationRate())));
+                    } else {
+                        inflationRate.setText(String.valueOf(Double.parseDouble(survey1.getOverRideInflationRate())));
+                    }
+
+                    if (survey1.getOverRideRiskRate() == null || survey1.getOverRideRiskRate() == "") {
+                        riskRate.setText(String.valueOf(Double.parseDouble(survey1.getRiskRate())));
+                    } else {
+                        riskRate.setText(String.valueOf(Double.parseDouble(survey1.getOverRideRiskRate())));
+                    }
                 }
             }
 
@@ -195,7 +217,6 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
 
             }
         });
-
 
         landKindSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -237,6 +258,14 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.admin_risk_rate_source:
+                Intent browserIntent1 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tradingeconomics.com/bonds"));
+                startActivity(browserIntent1);
+                break;
+            case R.id.admin_inflation_rate_source:
+                Intent browserIntent2 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tradingeconomics.com/forecast/inflation-rate"));
+                startActivity(browserIntent2);
+                break;
             case R.id.button_restore_original_discount_rate:
                 discountRateOverride.setText(String.valueOf(0.0));
 
@@ -275,20 +304,33 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
                 }
                 break;
 
-            case R.id.button_restore_original_inflation_rate:
-
-                inflationRate.setText("" + 5);
+            case R.id.button_restore_original_project_rate:
 
                 if ((surveyIdSpinner.getSelectedItemPosition() != 0 || landKindSpinner.getSelectedItemPosition() != 0) &&
                         survey1 != null) {
                     realm.beginTransaction();
-                    survey1.setInflationRate("" + 0.5);
-                    Toast.makeText(this, getResources().getText(R.string.value_restored), Toast.LENGTH_SHORT).show();
+                    survey1.setOverRideInflationRate("");
+                    survey1.setOverRideRiskRate("");
+                    Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
                     realm.commitTransaction();
 
                 } else
                     Toast.makeText(this, getResources().getText(R.string.select_surveyid_landkind), Toast.LENGTH_SHORT).show();
 
+                survey1 = realm.where(Survey.class).equalTo("surveyId", surveyIdsList.get(surveyIdsListPos))
+                        .findFirst();
+
+                if (survey1.getOverRideInflationRate() == null || survey1.getOverRideInflationRate() == "") {
+                    inflationRate.setText(String.valueOf(Double.parseDouble(survey1.getInflationRate())));
+                } else {
+                    inflationRate.setText(String.valueOf(Double.parseDouble(survey1.getOverRideInflationRate())));
+                }
+
+                if (survey1.getOverRideRiskRate() == null || survey1.getOverRideRiskRate() == "") {
+                    riskRate.setText(String.valueOf(Double.parseDouble(survey1.getOverRideRiskRate())));
+                } else {
+                    riskRate.setText(String.valueOf(Double.parseDouble(survey1.getOverRideRiskRate())));
+                }
                 break;
         }
     }
