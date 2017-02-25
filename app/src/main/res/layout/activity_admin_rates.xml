@@ -212,7 +212,6 @@
                     android:inputType="numberDecimal"
                     android:selectAllOnFocus="true"
                     android:singleLine="true"
-                    android:text="5"
                     android:textSize="@dimen/textfield_size" />
 
                 <TextView
@@ -237,7 +236,6 @@
                     android:inputType="numberDecimal"
                     android:selectAllOnFocus="true"
                     android:singleLine="true"
-                    android:text="5"
                     android:textSize="@dimen/textfield_size" />
 
                 <TextView

@@ -200,9 +200,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 .findFirst();
 
         if(results.getOverRideInflationRate() != 0){
-            inflationRate = results.getOverRideInflationRate();
+            inflationRate = results.getOverRideInflationRate()/100;
         } else if (results.getInflationRate() != 0) {
-            inflationRate = results.getInflationRate();
+            inflationRate = results.getInflationRate()/100;
         }
         RealmResults<Frequency> frequencyResult = realm.where(Frequency.class).findAll();
         for (Frequency frequency : frequencyResult) {
@@ -985,7 +985,6 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                             Log.e("TOTAL  ", bigDecimalTotal.doubleValue() + "");
 
                         }
-
 //                        Log.e("TOTAL ",total+"");
 
                         //realm.beginTransaction();

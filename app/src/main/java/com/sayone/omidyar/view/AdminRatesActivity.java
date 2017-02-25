@@ -1,10 +1,12 @@
 package com.sayone.omidyar.view;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -106,36 +108,7 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
         landKindSpinner.setAdapter(landKindAdapter);
         spinnerSurveyId.setAdapter(surveyIdInflationAdapter);
 
-        saveButtonInflation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (flag) {
-                    if (!inflationRate.getText().toString().equals("")) {
-                        realm.beginTransaction();
-                        // inflationRate.setText(String.valueOf(Double.parseDouble(inflationRate.getText().toString())*100));
-
-                        double inflationRateToRound = Double.parseDouble(inflationRate.getText().toString());
-                        double inflationRateRounded = Math.round(inflationRateToRound * 100.0) / 100.0;
-                        survey1.setOverRideInflationRate(inflationRateRounded);
-
-                        double riskRateToRound = Double.parseDouble(riskRate.getText().toString());
-                        double riskRateRounded = Math.round(riskRateToRound * 100.0) / 100.0;
-                        survey1.setOverRideRiskRate(riskRateRounded);
-
-                        realm.commitTransaction();
-                        Toast toast = Toast.makeText(context, getResources().getText(R.string.text_data_saved), Toast.LENGTH_SHORT);
-                        toast.show();
-                    } else {
-                        survey1.setInflationRate(0.0);
-                    }
-                } else {
-                    Toast.makeText(context, "Select Id", Toast.LENGTH_SHORT).show();
-                }
-
-//                String rate = preferences.getString("inflationRate", "");
-                //   Log.e("Rate :", rate);
-            }
-        });
+        saveButtonInflation.setOnClickListener(this);
 
         surveyIdSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -285,24 +258,85 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
 
                 if ((surveyIdSpinner.getSelectedItemPosition() != 0 || landKindSpinner.getSelectedItemPosition() != 0) &&
                         socialCapital != null) {
-                    realm.beginTransaction();
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                    alertDialogBuilder.setMessage("Are you sure you want to change the value/s ?\n" );
+                    alertDialogBuilder.setPositiveButton("Yes",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface arg0, int arg1) {
+                                    realm.beginTransaction();
+                                    // inflationRate.setText(String.valueOf(Double.parseDouble(inflationRate.getText().toString())*100));
+                                    if (!discountRateOverride.getText().toString().equals("")) {
+                                        socialCapital.setDiscountRateOverride(Double.parseDouble(discountRateOverride.getText().toString()));
+                                        discountRate.setText(discountRateOverride.getText().toString());
 
-                    if (!discountRateOverride.getText().toString().equals("")) {
-                        socialCapital.setDiscountRateOverride(Double.parseDouble(discountRateOverride.getText().toString()));
-                        discountRate.setText(discountRateOverride.getText().toString());
+                                        socialCapital.setDiscountFlag(true);
+                                        Toast.makeText(AdminRatesActivity.this, getResources().getText(R.string.value_saved_success), Toast.LENGTH_SHORT).show();
 
-                        socialCapital.setDiscountFlag(true);
-                    } else {
-                        socialCapital.setDiscountRateOverride(0.0);
+                                    } else {
+                                        socialCapital.setDiscountRateOverride(0.0);
+                                    }
+                                    realm.commitTransaction();
 
-                    }
+                                }
+                            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
 
-                    realm.commitTransaction();
-                    Toast.makeText(this, getResources().getText(R.string.value_saved_success), Toast.LENGTH_SHORT).show();
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+
+
                 } else {
                     Toast.makeText(this, getResources().getText(R.string.select_surveyid_landkind), Toast.LENGTH_SHORT).show();
                 }
                 break;
+            case R.id.button_save_inflation_risk:
+            if (flag) {
+                if (!inflationRate.getText().toString().equals("")) {
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                    alertDialogBuilder.setMessage("Are you sure you want to change the value/s ?\n" +
+                            "min(discount rates) <= inflation rate," +
+                            " which would cause severe results of terminal value.");
+                    alertDialogBuilder.setPositiveButton("Yes",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface arg0, int arg1) {
+                                    realm.beginTransaction();
+                                    // inflationRate.setText(String.valueOf(Double.parseDouble(inflationRate.getText().toString())*100));
+
+                                    double inflationRateToRound = Double.parseDouble(inflationRate.getText().toString());
+                                    double inflationRateRounded = Math.round(inflationRateToRound * 100.0) / 100.0;
+                                    survey1.setOverRideInflationRate(inflationRateRounded);
+
+                                    double riskRateToRound = Double.parseDouble(riskRate.getText().toString());
+                                    double riskRateRounded = Math.round(riskRateToRound * 100.0) / 100.0;
+                                    survey1.setOverRideRiskRate(riskRateRounded);
+
+                                    realm.commitTransaction();
+                                    Toast toast = Toast.makeText(context, getResources().getText(R.string.text_data_saved), Toast.LENGTH_SHORT);
+                                    toast.show();
+                                }
+                            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+
+                } else {
+                    survey1.setInflationRate(0.0);
+                }
+            } else {
+                Toast.makeText(context, "Select Id", Toast.LENGTH_SHORT).show();
+            }
+            break;
 
             case R.id.button_restore_original_project_rate:
 

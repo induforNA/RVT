@@ -191,9 +191,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 .findFirst();
 
         if(results.getOverRideInflationRate() != 0){
-            inflationRate = results.getOverRideInflationRate();
+            inflationRate = results.getOverRideInflationRate()/100;
         } else if (results.getInflationRate() != 0) {
-            inflationRate = results.getInflationRate();
+            inflationRate = results.getInflationRate()/100;
         }
 
         RealmResults<Frequency> frequencyResult = realm.where(Frequency.class).findAll();

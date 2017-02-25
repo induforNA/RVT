@@ -259,40 +259,6 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                     break;
             }
             i++;
-
-
-//            if (i == 0) {
-//                if (type.equals("multiple")) {
-//                    changeDisplay(type, options, i, optionA, null, multipleAnswers,"optionA");
-//                } else {
-//                    changeDisplay(type, options, i, null, optionARadio, multipleAnswers,"");
-//                }
-//            } else if (i == 1) {
-//                if (type.equals("multiple")) {
-//                    changeDisplay(type, options, i, optionB, null, multipleAnswers,"optionB");
-//                } else {
-//                    changeDisplay(type, options, i, null, optionBRadio, multipleAnswers,"");
-//                }
-//            } else if (i == 2) {
-//                if (type.equals("multiple")) {
-//                    changeDisplay(type, options, i, optionC, null, multipleAnswers,"optionC");
-//                } else {
-//                    changeDisplay(type, options, i, null, optionCRadio, multipleAnswers,"");
-//                }
-//            } else if (i == 3) {
-//                if (type.equals("multiple")) {
-//                    changeDisplay(type, options, i, optionD, null, multipleAnswers,"optionD");
-//                } else {
-//                    changeDisplay(type, options, i, null, optionDRadio, multipleAnswers,"");
-//                }
-//            } else if (i == 4) {
-//                if (type.equals("multiple")) {
-//                    changeDisplay(type, options, i, optionE, null, multipleAnswers,"optionE");
-//                } else {
-//                    changeDisplay(type, options, i, null, optionERadio, multipleAnswers,"");
-//                }
-//            }
-//            i++;
         }
     }
 
@@ -608,14 +574,14 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
         Log.e("Rating ", spredTable.getRating());
         Log.e("Sovereign ", sov + "");
         Log.e("Spred ", spredTable.getSpread() + "");
-        Log.e("Discount rate ", spredTable.getSpread() + 7.16 + "");
+        Log.e("Discount rate ", spredTable.getSpread() + sov + "");
 
         realm.beginTransaction();
         landKindLoad.getSocialCapitals().setScore(totalFactorScore);
         landKindLoad.getSocialCapitals().setSovereign(sov);
         landKindLoad.getSocialCapitals().setSpread(spredTable.getSpread());
         landKindLoad.getSocialCapitals().setRating(spredTable.getRating());
-        landKindLoad.getSocialCapitals().setDiscountRate(spredTable.getSpread() + 7.16);
+        landKindLoad.getSocialCapitals().setDiscountRate(spredTable.getSpread() + sov);
         realm.commitTransaction();
         Log.e("SO ", landKindLoad.toString());
     }

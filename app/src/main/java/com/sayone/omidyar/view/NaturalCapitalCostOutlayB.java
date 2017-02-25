@@ -696,9 +696,9 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                 .findFirst();
 
         if(results.getOverRideInflationRate() != 0){
-            inflationRate = results.getOverRideInflationRate();
+            inflationRate = results.getOverRideInflationRate()/100;
         } else if (results.getInflationRate() != 0) {
-            inflationRate = results.getInflationRate();
+            inflationRate = results.getInflationRate()/100;
         }
 
         RevenueProductYears revenueProductYears = realm.where(RevenueProductYears.class)

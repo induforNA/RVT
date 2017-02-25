@@ -202,6 +202,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         if (isFirstLaunch) {
             progressDialog = new ProgressDialog(RegistrationActivity.this);
             progressDialog.setMessage("Registering device id");
+            progressDialog.setCancelable(false);
             progressDialog.show();
             getUniqueId();
         }
