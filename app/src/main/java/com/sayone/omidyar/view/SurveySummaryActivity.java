@@ -344,7 +344,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                                 jsonObject.put("landKinds", "");
                             } else
                                 jsonObject.put("landKinds", getLandKindArray(survey.getLandKinds()));
-                            if (survey.getInflationRate() == null) {
+                            if (survey.getInflationRate() == 0) {
                                 jsonObject.put("inflationRate", "");
                             } else
                                 jsonObject.put("inflationRate", survey.getInflationRate());
@@ -356,7 +356,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                                 jsonObject.put("gpsCoordinates", "");
                             } else
                                 jsonObject.put("gpsCoordinates", getParcelLocations(survey.getParcelLocations()));
-                            if (survey.getRiskRate() == null) {
+                            if (survey.getRiskRate() == 0) {
                                 jsonObject.put("sovRate", "");
                             } else
                                 jsonObject.put("sovRate", survey.getRiskRate());
@@ -372,11 +372,11 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                                 jsonObject.put("sharedCostElements", "");
                             } else
                                 jsonObject.put("sharedCostElements", getSharedCostElements(survey.getSharedCostElements()));
-                            if (survey.getOverRideInflationRate() == null) {
+                            if (survey.getOverRideInflationRate() == 0) {
                                 jsonObject.put("overrideSovRate", "");
                             } else
                                 jsonObject.put("overrideSovRate", survey.getOverRideRiskRate());
-                            if (survey.getOverRideInflationRate() == null) {
+                            if (survey.getOverRideInflationRate() == 0) {
                                 jsonObject.put("overrideInflationRate", "");
                             } else
                                 jsonObject.put("overrideInflationRate", survey.getOverRideInflationRate());

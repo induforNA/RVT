@@ -41,13 +41,13 @@ public class Survey extends RealmObject {
 
     private RealmList<LandKind> landKinds;
 
-    private String inflationRate;
+    private double inflationRate;
 
-    private String riskRate;
+    private double riskRate;
 
-    private String overRideInflationRate;
+    private double overRideInflationRate;
 
-    private String overRideRiskRate;
+    private double overRideRiskRate;
 
     private Component components;
 
@@ -91,11 +91,11 @@ public class Survey extends RealmObject {
         this.sendStatus = sendStatus;
     }
 
-    public String getOverRideInflationRate() {
+    public double getOverRideInflationRate() {
         return overRideInflationRate;
     }
 
-    public void setOverRideInflationRate(String overRideInflationRate) {
+    public void setOverRideInflationRate(double overRideInflationRate) {
         this.overRideInflationRate = overRideInflationRate;
     }
 
@@ -176,11 +176,11 @@ public class Survey extends RealmObject {
         this.landKinds = landKinds;
     }
 
-    public String getInflationRate() {
+    public double getInflationRate() {
         return inflationRate;
     }
 
-    public void setInflationRate(String inflationRate) {
+    public void setInflationRate(double inflationRate) {
         this.inflationRate = inflationRate;
     }
 
@@ -208,19 +208,19 @@ public class Survey extends RealmObject {
         this.parcelLocations = parcelLocations;
     }
 
-    public String getRiskRate() {
+    public double getRiskRate() {
         return riskRate;
     }
 
-    public void setRiskRate(String riskRate) {
+    public void setRiskRate(double riskRate) {
         this.riskRate = riskRate;
     }
 
-    public String getOverRideRiskRate() {
+    public double getOverRideRiskRate() {
         return overRideRiskRate;
     }
 
-    public void setOverRideRiskRate(String overRideRiskRate) {
+    public void setOverRideRiskRate(double overRideRiskRate) {
         this.overRideRiskRate = overRideRiskRate;
     }
 

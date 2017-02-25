@@ -182,7 +182,7 @@
                 android:gravity="center">
 
                 <Spinner
-                    android:id="@+id/spinner_survey_id_inflatrion"
+                    android:id="@+id/spinner_survey_id_inflation_risk"
                     style="@style/Widget.AppCompat.Spinner.Underlined"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
@@ -301,7 +301,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/button_save_inlation"
+                    android:id="@+id/button_save_inflation_risk"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"

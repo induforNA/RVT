@@ -579,6 +579,9 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                 .equalTo("status", "active")
                 .equalTo("name", currentSocialCapitalServey)
                 .findFirst();
+        Survey survey = realm.where(Survey.class)
+                .equalTo("surveyId", surveyId)
+                .findFirst();
         double totalFactorScore = 0.0;
         RealmList<SocialCapitalAnswer> socialCapitalAnswers = landKindLoad.getSocialCapitals().getSocialCapitalAnswers();
         for (SocialCapitalAnswer socialCapitalAnswer : socialCapitalAnswers) {
@@ -601,14 +604,15 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                     .greaterThan("lessThan", totalFactorScore)
                     .findFirst();
         }
+        double sov = survey.getOverRideRiskRate() ==  0 ? survey.getRiskRate() : survey.getOverRideRiskRate();
         Log.e("Rating ", spredTable.getRating());
-        Log.e("Sovereign ", 7.16 + "");
+        Log.e("Sovereign ", sov + "");
         Log.e("Spred ", spredTable.getSpread() + "");
         Log.e("Discount rate ", spredTable.getSpread() + 7.16 + "");
 
         realm.beginTransaction();
         landKindLoad.getSocialCapitals().setScore(totalFactorScore);
-        landKindLoad.getSocialCapitals().setSovereign(7.16);
+        landKindLoad.getSocialCapitals().setSovereign(sov);
         landKindLoad.getSocialCapitals().setSpread(spredTable.getSpread());
         landKindLoad.getSocialCapitals().setRating(spredTable.getRating());
         landKindLoad.getSocialCapitals().setDiscountRate(spredTable.getSpread() + 7.16);

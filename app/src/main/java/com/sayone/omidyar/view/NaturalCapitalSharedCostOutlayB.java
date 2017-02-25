@@ -482,8 +482,10 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
                 .equalTo("surveyId", surveyId)
                 .findFirst();
 
-        if (!results.getInflationRate().equals("")) {
-            inflationRate = Double.parseDouble(results.getInflationRate());
+        if(results.getOverRideInflationRate() != 0){
+            inflationRate = results.getOverRideInflationRate();
+        } else if (results.getInflationRate() != 0) {
+            inflationRate = results.getInflationRate();
         }
 
         CostElementYears costElementYears = realm.where(CostElementYears.class)

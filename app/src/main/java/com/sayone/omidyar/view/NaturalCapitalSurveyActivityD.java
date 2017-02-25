@@ -198,10 +198,12 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         Survey results = realm.where(Survey.class)
                 .equalTo("surveyId", surveyId)
                 .findFirst();
-        if (!results.getInflationRate().equals("")) {
-            inflationRate = Double.parseDouble(results.getInflationRate());
-        }
 
+        if(results.getOverRideInflationRate() != 0){
+            inflationRate = results.getOverRideInflationRate();
+        } else if (results.getInflationRate() != 0) {
+            inflationRate = results.getInflationRate();
+        }
         RealmResults<Frequency> frequencyResult = realm.where(Frequency.class).findAll();
         for (Frequency frequency : frequencyResult) {
             Log.e("HARVEST ", frequency.getHarvestFrequency() + " " + frequency.getFrequencyValue());

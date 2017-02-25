@@ -695,8 +695,10 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                 .equalTo("surveyId", surveyId)
                 .findFirst();
 
-        if (!results.getInflationRate().equals("")) {
-            inflationRate = Double.parseDouble(results.getInflationRate());
+        if(results.getOverRideInflationRate() != 0){
+            inflationRate = results.getOverRideInflationRate();
+        } else if (results.getInflationRate() != 0) {
+            inflationRate = results.getInflationRate();
         }
 
         RevenueProductYears revenueProductYears = realm.where(RevenueProductYears.class)

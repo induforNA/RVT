@@ -69,12 +69,12 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
         buttonSave = (Button) findViewById(R.id.button_save);
         surveyIdSpinner = (Spinner) findViewById(R.id.spinner_survey_id);
 
-        spinnerSurveyId = (Spinner) findViewById(R.id.spinner_survey_id_inflatrion);
+        spinnerSurveyId = (Spinner) findViewById(R.id.spinner_survey_id_inflation_risk);
 
         landKindSpinner = (Spinner) findViewById(R.id.spinner_land_kind);
         inflationRate = (EditText) findViewById(R.id.override_inflation_rate);
         riskRate = (EditText) findViewById(R.id.override_country_risk_rate);
-        saveButtonInflation = (Button) findViewById(R.id.button_save_inlation);
+        saveButtonInflation = (Button) findViewById(R.id.button_save_inflation_risk);
         buttonRestoreInflation = (Button) findViewById(R.id.button_restore_original_project_rate);
 
         sourceInflationRate = (TextView) findViewById(R.id.admin_inflation_rate_source);
@@ -116,17 +116,17 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
 
                         double inflationRateToRound = Double.parseDouble(inflationRate.getText().toString());
                         double inflationRateRounded = Math.round(inflationRateToRound * 100.0) / 100.0;
-                        survey1.setOverRideInflationRate(String.valueOf(inflationRateRounded));
+                        survey1.setOverRideInflationRate(inflationRateRounded);
 
                         double riskRateToRound = Double.parseDouble(riskRate.getText().toString());
                         double riskRateRounded = Math.round(riskRateToRound * 100.0) / 100.0;
-                        survey1.setOverRideRiskRate(String.valueOf(riskRateRounded));
+                        survey1.setOverRideRiskRate(riskRateRounded);
 
                         realm.commitTransaction();
                         Toast toast = Toast.makeText(context, getResources().getText(R.string.text_data_saved), Toast.LENGTH_SHORT);
                         toast.show();
                     } else {
-                        survey1.setInflationRate("" + 0.0);
+                        survey1.setInflationRate(0.0);
                     }
                 } else {
                     Toast.makeText(context, "Select Id", Toast.LENGTH_SHORT).show();
@@ -198,16 +198,16 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
                     survey1 = realm.where(Survey.class).equalTo("surveyId", surveyIdsList.get(position))
                             .findFirst();
 
-                    if (survey1.getOverRideInflationRate() == null || survey1.getOverRideInflationRate() == "") {
-                        inflationRate.setText(String.valueOf(Double.parseDouble(survey1.getInflationRate())));
+                    if (survey1.getOverRideInflationRate() == 0 ) {
+                        inflationRate.setText(String.valueOf(survey1.getInflationRate()));
                     } else {
-                        inflationRate.setText(String.valueOf(Double.parseDouble(survey1.getOverRideInflationRate())));
+                        inflationRate.setText(String.valueOf(survey1.getOverRideInflationRate()));
                     }
 
-                    if (survey1.getOverRideRiskRate() == null || survey1.getOverRideRiskRate() == "") {
-                        riskRate.setText(String.valueOf(Double.parseDouble(survey1.getRiskRate())));
+                    if (survey1.getOverRideRiskRate() == 0) {
+                        riskRate.setText(String.valueOf(survey1.getRiskRate()));
                     } else {
-                        riskRate.setText(String.valueOf(Double.parseDouble(survey1.getOverRideRiskRate())));
+                        riskRate.setText(String.valueOf(survey1.getOverRideRiskRate()));
                     }
                 }
             }
@@ -306,17 +306,21 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
 
             case R.id.button_restore_original_project_rate:
 
-                if ((surveyIdSpinner.getSelectedItemPosition() != 0 || landKindSpinner.getSelectedItemPosition() != 0) &&
+                if ((spinnerSurveyId.getSelectedItemPosition() != 0 || landKindSpinner.getSelectedItemPosition() != 0) &&
                         survey1 != null) {
                     realm.beginTransaction();
-                    survey1.setOverRideInflationRate("");
-                    survey1.setOverRideRiskRate("");
+                    survey1.setOverRideInflationRate(0);
+                    survey1.setOverRideRiskRate(0);
                     Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
                     realm.commitTransaction();
 
-                } else
-                    Toast.makeText(this, getResources().getText(R.string.select_surveyid_landkind), Toast.LENGTH_SHORT).show();
+                    if (survey1.getInflationRate() == 0 ) {
+                        inflationRate.setText(0);
+                    } else {
+                        inflationRate.setText(String.valueOf(survey1.getInflationRate()));
+                    }
 
+/*<<<<<<< HEAD
 
                 survey1 = realm.where(Survey.class).equalTo("surveyId", surveyIdsList.get(surveyIdsListPos))
                         .findFirst();
@@ -334,6 +338,17 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
                         riskRate.setText(String.valueOf(Double.parseDouble(survey1.getOverRideRiskRate())));
                     }
                 }
+=======
+               */     if (survey1.getRiskRate() == 0) {
+                        riskRate.setText("");
+                    } else {
+                        riskRate.setText(String.valueOf(survey1.getRiskRate()));
+                    }
+
+                } else
+                    Toast.makeText(this, getResources().getText(R.string.select_surveyid_landkind), Toast.LENGTH_SHORT).show();
+
+//>>>>>>> origin/omidyar_admin_rates
                 break;
         }
     }
