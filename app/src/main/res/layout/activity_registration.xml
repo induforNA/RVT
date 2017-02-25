@@ -184,7 +184,7 @@
 
                 <EditText
                     android:id="@+id/reg_risk_rate"
-                    android:layout_width="50dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
                     android:textSize="@dimen/textfield_size"
@@ -237,7 +237,7 @@
 
                 <EditText
                     android:id="@+id/reg_inflation_rate"
-                    android:layout_width="50dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
                     android:textSize="@dimen/textfield_size"

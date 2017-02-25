@@ -317,19 +317,22 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
                 } else
                     Toast.makeText(this, getResources().getText(R.string.select_surveyid_landkind), Toast.LENGTH_SHORT).show();
 
+
                 survey1 = realm.where(Survey.class).equalTo("surveyId", surveyIdsList.get(surveyIdsListPos))
                         .findFirst();
 
-                if (survey1.getOverRideInflationRate() == null || survey1.getOverRideInflationRate() == "") {
-                    inflationRate.setText(String.valueOf(Double.parseDouble(survey1.getInflationRate())));
-                } else {
-                    inflationRate.setText(String.valueOf(Double.parseDouble(survey1.getOverRideInflationRate())));
-                }
+                if(survey1 != null) {
+                    if (survey1.getOverRideInflationRate() == null || survey1.getOverRideInflationRate() == "") {
+                        inflationRate.setText(String.valueOf(Double.parseDouble(survey1.getInflationRate())));
+                    } else {
+                        inflationRate.setText(String.valueOf(Double.parseDouble(survey1.getOverRideInflationRate())));
+                    }
 
-                if (survey1.getOverRideRiskRate() == null || survey1.getOverRideRiskRate() == "") {
-                    riskRate.setText(String.valueOf(Double.parseDouble(survey1.getOverRideRiskRate())));
-                } else {
-                    riskRate.setText(String.valueOf(Double.parseDouble(survey1.getOverRideRiskRate())));
+                    if (survey1.getOverRideRiskRate() == null || survey1.getOverRideRiskRate() == "") {
+                        riskRate.setText(String.valueOf(Double.parseDouble(survey1.getOverRideRiskRate())));
+                    } else {
+                        riskRate.setText(String.valueOf(Double.parseDouble(survey1.getOverRideRiskRate())));
+                    }
                 }
                 break;
         }

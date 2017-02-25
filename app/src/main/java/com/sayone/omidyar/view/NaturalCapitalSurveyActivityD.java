@@ -205,7 +205,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         RealmResults<Frequency> frequencyResult = realm.where(Frequency.class).findAll();
         for (Frequency frequency : frequencyResult) {
             Log.e("HARVEST ", frequency.getHarvestFrequency() + " " + frequency.getFrequencyValue());
-            if (language.equals("हिन्दी")) {
+            if (language.equals("			")) {
                 timePeriodList.add(frequency.getHarvestFrequencyHindi());
             } else {
                 timePeriodList.add(frequency.getHarvestFrequency());
@@ -214,7 +214,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
         RealmResults<Quantity> quantityResult = realm.where(Quantity.class).findAll();
         for (Quantity quantity : quantityResult) {
-            if (language.equals("हिन्दी")) {
+            if (language.equals("			")) {
                 unitList.add(quantity.getQuantityNameHindi());
             } else {
                 unitList.add(quantity.getQuantityName());
@@ -402,16 +402,13 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             if (yearCounting == 1) {
                 finish();
             } else {
-                if(currentCostProductIndex < totalCostProductCount)
+        /*        if(currentCostProductIndex < totalCostProductCount)
                     loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
-                else
+                else*/
                     loadRevenueProduct(revenueProducts.get(currentCostProductIndexSave));
 
             }
         } else {
-            if(currentCostProductIndex < totalCostProductCount)
-                loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
-            else
                 loadRevenueProduct(revenueProducts.get(currentCostProductIndexSave));
         }
     }
@@ -424,9 +421,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
                 if (buttonNext.isClickable()) {
                     buttonNext.setClickable(false);
-                    if(currentCostProductIndex < totalCostProductCount)
+               /*     if(currentCostProductIndex < totalCostProductCount)
                         saveYearlyDatas(revenueProducts.get(currentCostProductIndex));
-                    else
+                    else*/
                         saveYearlyDatas(revenueProducts.get(currentCostProductIndexSave));
                 }
 //                Log.e("YEAR ","PRE "+previousYearIndex+" Cur "+currentYearIndex);
@@ -646,9 +643,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
 
         dialogQuestionHarvest.setText(getString(R.string.text_question_harvest, revenueProduct.getName()));
-        dialogQuestionHouseholds.setText(getString(R.string.text_question_harvest, revenueProduct.getName()));
-        dialogQuestionPerHousehold.setText(getString(R.string.text_question_harvest, revenueProduct.getName()));
-        dialogQuestionPerUnit.setText(getString(R.string.text_question_harvest, revenueProduct.getName()));
+        dialogQuestionHouseholds.setText(getString(R.string.text_number_of_households, revenueProduct.getName()));
+        dialogQuestionPerHousehold.setText(getString(R.string.text_question_quantity, revenueProduct.getName()));
+        dialogQuestionPerUnit.setText(getString(R.string.text_question_price, revenueProduct.getName()));
         dialogFrequency.setText(String.valueOf(mHarvestFre));
         dialogTimePeriod.setText(String.valueOf(mFreqUnit));
         dialogHouseholds.setText(String.valueOf(mHousehold));
@@ -777,9 +774,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                             if (buttonNext.isClickable()) {
                                 buttonNext.setClickable(false);
                                 nextProduct = true;
-                                if(currentCostProductIndex < totalCostProductCount)
+                             /*   if(currentCostProductIndex < totalCostProductCount)
                                     saveYearlyDatas(revenueProducts.get(currentCostProductIndex));
-                                else
+                                else*/
                                     saveYearlyDatas(revenueProducts.get(currentCostProductIndexSave));
                             }
                         }
@@ -789,10 +786,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                     if (buttonNext.isClickable()) {
                         buttonNext.setClickable(false);
                         nextProduct = true;
-                        if(currentCostProductIndex < totalCostProductCount)
-                           saveYearlyDatas(revenueProducts.get(currentCostProductIndex));
-                        else
-                           saveYearlyDatas(revenueProducts.get(currentCostProductIndexSave));
+                            saveYearlyDatas(revenueProducts.get(currentCostProductIndexSave));
+                       /* else
+                            saveYearlyDatas(revenueProducts.get(currentCostProductIndexSave));*/
                     }
                 }
             }
@@ -844,7 +840,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
         if (timePeriodList.size() != 0 && frequency != null) {
             // Log.e("TEST FRE ", timePeriod_adapter.getPosition(frequency.getHarvestFrequency())+"");
-            if (language.equals("हिन्दी")) {
+            if (language.equals("			")) {
                 spinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(frequency.getHarvestFrequencyHindi()));
             } else {
                 spinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(frequency.getHarvestFrequency()));
@@ -864,6 +860,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
     }
 
     public void saveYearlyDatas(final RevenueProduct revenueProduct2) {
+        Log.e("currentProductIndex",currentCostProductIndex+currentCostProductIndexSave+"");
         final long revenueProductId = revenueProduct2.getId();
         final ProgressDialog progress = new ProgressDialog(this);
         progress.setTitle(getResources().getString(R.string.loading));
@@ -883,7 +880,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                         String spinnerTimePeriodStr = spinnerTimePeriod.getSelectedItem().toString();
                         Log.e("SPINNER STR ", spinnerTimePeriodStr);
                         Frequency frequency;
-                        if (language.equals("हिन्दी")) {
+                        if (language.equals("			")) {
                             frequency = realm.where(Frequency.class)
                                     .equalTo("harvestFrequencyHindi", spinnerTimePeriodStr)
                                     .findFirst();
@@ -1051,7 +1048,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 double freqUnit = 0;
                 String quaUnit = "";
                 String priceCurrency = "";
-                
+
                 double previousFrequencyUnit = 0;
 
                 if (lastYearIndex++ < totalYearsCount) {
@@ -1209,9 +1206,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                         && currentCostProductIndex != 0 && !nextProduct) {
                     Log.e("REQQQQQQ", "REEEEEEE");
                     buttonNext.setClickable(true);
-                    if(currentCostProductIndex < totalCostProductCount)
+                   /* if(currentCostProductIndex < totalCostProductCount)
                         showTrendDialog(revenueProducts.get(currentCostProductIndex));
-                    else
+                    else*/
                         showTrendDialog(revenueProducts.get(currentCostProductIndexSave));
                 } else if (currentCostProductIndex < totalCostProductCount) {
                     loadRevenueProduct(revenueProducts.get(currentCostProductIndex));

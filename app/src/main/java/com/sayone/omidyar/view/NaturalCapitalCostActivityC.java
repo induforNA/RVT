@@ -1158,9 +1158,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         final EditText dialogEditArea = (EditText) dialog.findViewById(R.id.edit_trend_area);
 
         dialogQuestionHarvest.setText(getString(R.string.text_question_harvest, costElement.getName()));
-        dialogQuestionHouseholds.setText(getString(R.string.text_question_harvest, costElement.getName()));
-        dialogQuestionPerHousehold.setText(getString(R.string.text_question_harvest, costElement.getName()));
-        dialogQuestionPerUnit.setText(getString(R.string.text_question_harvest, costElement.getName()));
+        dialogQuestionHouseholds.setText(getString(R.string.text_number_of_households, costElement.getName()));
+        dialogQuestionPerHousehold.setText(getString(R.string.text_question_quantity, costElement.getName()));
+        dialogQuestionPerUnit.setText(getString(R.string.text_question_price, costElement.getName()));
         dialogFrequency.setText(String.valueOf(mHarvestFre));
         dialogTimePeriod.setText(String.valueOf(mFreqUnit));
         dialogHouseholds.setText(String.valueOf(mHousehold));
