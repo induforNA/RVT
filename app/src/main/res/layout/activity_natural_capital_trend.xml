@@ -407,6 +407,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:text="@string/button_next"
+            android:layout_marginLeft="10dp"
             android:background="@color/colorPrimary"
             android:textAllCaps="false"
             android:textColor="#ffffff" />

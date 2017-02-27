@@ -621,6 +621,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
     private void showTrendDialog(final RevenueProduct revenueProduct) {
         final Dialog dialog = new Dialog(NaturalCapitalSurveyActivityD.this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         dialog.setContentView(R.layout.activity_natural_capital_trend);
+        final long productId = revenueProduct.getId();
         Button dialogBack = (Button) dialog.findViewById(R.id.button_back);
         Button dialogNext = (Button) dialog.findViewById(R.id.button_next);
         final RadioGroup dialogRadioGroup = (RadioGroup) dialog.findViewById(R.id.radio_group);
@@ -655,6 +656,10 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         dialogUnit.setText(String.valueOf(mQuaUnit));
         dialogPrice.setText(String.valueOf(roundToTwoDecimal(mMarketPriceValue)));
         dialogArea.setText(String.valueOf(mHarvestArea));
+        if (currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
+            dialogHouseholds.setText((int) mHarvestArea);
+            dialogArea.setVisibility(View.GONE);
+        }
 
         if(mFreqUnit == 1.0) {
             dialogEditFrequency.setFocusable(false);
@@ -679,7 +684,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                         @Override
                         public void execute(Realm realm) {
                             RevenueProduct revenueProduct4 = realm.where(RevenueProduct.class)
-                                    .equalTo("id", revenueProduct.getId())
+                                    .equalTo("id", productId)
                                     .findFirst();
 
                             double harvestFre = mHarvestFre;
@@ -748,7 +753,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                                         BigDecimal bigDecimalNewHarvestArea = bigDecimalharvestFre.divide(bigDecimal12, MathContext.DECIMAL64);
                                         totalVal = bigDecimalNewHarvestArea.multiply(bigDecimalharvestTimes, MathContext.DECIMAL64)
                                                 .multiply(bigDecimalmarketPriceVal, MathContext.DECIMAL64)
-                                                .multiply(bigDecimalHarvestArea, MathContext.DECIMAL64)
+                                                .multiply(bigDecimalHousehold, MathContext.DECIMAL64)
                                                 .doubleValue();
                                     }
 
