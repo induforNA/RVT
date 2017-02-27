@@ -123,7 +123,7 @@ public class StartLandTypeActivity extends BaseActivity implements View.OnClickL
         Intent i;
         switch (v.getId()) {
             case R.id.next_button:
-                Intent intent = new Intent(StartLandTypeActivity.this, GpsCoordinates.class);
+                Intent intent = new Intent(StartLandTypeActivity.this, SocialCapitalStartActivity.class);
                 startActivity(intent);
                 break;
             case R.id.back_button:

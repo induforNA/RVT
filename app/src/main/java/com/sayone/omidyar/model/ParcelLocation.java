@@ -155,27 +155,52 @@ public class ParcelLocation extends RealmObject{
     }
 
     public String getCoordinateOne(){
-       return  LocationConverter.getLatitudeDMS(getLat_1()) + ", " + LocationConverter.getLongitudeDMS(getLng_1());
+        if (getLat_1()!=0){
+            return  LocationConverter.getLatitudeDMS(getLat_1()) + ", " + LocationConverter.getLongitudeDMS(getLng_1());
+        }else{
+            return "Not set";
+        }
+
     }
 
     public String getCoordinateTwo(){
-        return  LocationConverter.getLatitudeDMS(getLat_2()) + ", " + LocationConverter.getLongitudeDMS(getLng_2());
+        if (getLat_2()!=0){
+            return  LocationConverter.getLatitudeDMS(getLat_2()) + ", " + LocationConverter.getLongitudeDMS(getLng_2());
+        }else{
+            return "Not set";
+        }
     }
 
     public String getCoordinateThree(){
-        return  LocationConverter.getLatitudeDMS(getLat_3()) + ", " + LocationConverter.getLongitudeDMS(getLng_3());
+        if (getLat_3()!=0){
+            return  LocationConverter.getLatitudeDMS(getLat_3()) + ", " + LocationConverter.getLongitudeDMS(getLng_3());
+        }else{
+            return "Not set";
+        }
     }
 
     public String getCoordinateFour(){
-        return LocationConverter.getLatitudeDMS(getLat_4()) + ", " + LocationConverter.getLongitudeDMS(getLng_4());
+        if (getLat_4()!=0){
+            return LocationConverter.getLatitudeDMS(getLat_4()) + ", " + LocationConverter.getLongitudeDMS(getLng_4());
+        }else{
+            return "Not set";
+        }
     }
 
     public String getCoordinateFive(){
-        return LocationConverter.getLatitudeDMS(getLat_5()) + ", " + LocationConverter.getLongitudeDMS(getLng_5());
+        if (getLat_5()!=0){
+            return LocationConverter.getLatitudeDMS(getLat_5()) + ", " + LocationConverter.getLongitudeDMS(getLng_5());
+        }else{
+            return "Not set";
+        }
     }
 
     public String getCoordinateSix(){
-        return  LocationConverter.getLatitudeDMS(getLat_6()) + ", " + LocationConverter.getLongitudeDMS(getLng_6());
+        if (getLat_6()!=0){
+            return  LocationConverter.getLatitudeDMS(getLat_6()) + ", " + LocationConverter.getLongitudeDMS(getLng_6());
+        }else{
+            return "Not set";
+        }
     }
 
     @Override

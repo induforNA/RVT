@@ -21,12 +21,10 @@ import android.widget.Toast;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
-import com.sayone.omidyar.model.Component;
 import com.sayone.omidyar.model.ParcelLocation;
 import com.sayone.omidyar.model.Survey;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 /**
  * Created by sayone on 16-02-2017.
@@ -35,7 +33,7 @@ import io.realm.RealmResults;
 public class GpsCoordinates extends BaseActivity {
 
     private Realm realm;
-    Button nextButton, backButton, saveButton, getLocButton1, getLocButton2, getLocButton3, getLocButton4, getLocButton5, getLocButton6;
+    Button nextButton, backButton, getLocButton1, getLocButton2, getLocButton3, getLocButton4, getLocButton5, getLocButton6;
     TextView landName;
     TextView gpsLocation_1, gpsLocation_2, gpsLocation_3, gpsLocation_4, gpsLocation_5, gpsLocation_6;
     EditText parcelArea;
@@ -77,18 +75,20 @@ public class GpsCoordinates extends BaseActivity {
         gpsLocation_4 = (TextView) findViewById(R.id.gps_loc_4);
         gpsLocation_5 = (TextView) findViewById(R.id.gps_loc_5);
         gpsLocation_6 = (TextView) findViewById(R.id.gps_loc_6);
-        saveButton = (Button) findViewById(R.id.save_button);
         landName = (TextView) findViewById(R.id.land_name);
         parcelArea = (EditText) findViewById(R.id.parcel_area_edit);
         corners = new Location[6];
+        for (int i = 0; i < 6; i++) {
+            corners[i] = new Location("");
+        }
 
-        if (currentSocialCapitalServey.equals("Forestland"))
+        if (currentSocialCapitalServey.equals(getResources().getText(R.string.string_forestland)))
             landName.setText(getResources().getText(R.string.string_forestland));
-        if (currentSocialCapitalServey.equals("Pastureland"))
+        if (currentSocialCapitalServey.equals(getResources().getText(R.string.string_pastureland)))
             landName.setText(getResources().getText(R.string.string_pastureland));
-        if (currentSocialCapitalServey.equals("Mining Land"))
+        if (currentSocialCapitalServey.equals(getResources().getText(R.string.string_miningland)))
             landName.setText(getResources().getText(R.string.string_miningland));
-        if (currentSocialCapitalServey.equals("Cropland"))
+        if (currentSocialCapitalServey.equals(getResources().getText(R.string.title_cropland)))
             landName.setText(getResources().getText(R.string.title_cropland));
         nextButton.setOnClickListener(this);
         backButton.setOnClickListener(this);
@@ -98,7 +98,6 @@ public class GpsCoordinates extends BaseActivity {
         getLocButton4.setOnClickListener(this);
         getLocButton5.setOnClickListener(this);
         getLocButton6.setOnClickListener(this);
-        saveButton.setOnClickListener(this);
         getLocButton1.requestFocus();
 
         loadSavedCoordinates();
@@ -109,16 +108,17 @@ public class GpsCoordinates extends BaseActivity {
         switch (view.getId()) {
 
             case R.id.next_button:
-                Intent intent = new Intent(getApplicationContext(), SocialCapitalStartActivity.class);
-                startActivity(intent);
+                saveInputs();
+                if (isSaved) {
+                    Intent intent = new Intent(getApplicationContext(), StartLandTypeActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(GpsCoordinates.this, "Couldn't save", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.back_button:
                 finish();
-                break;
-
-            case R.id.save_button:
-                saveInputs();
                 break;
 
             case R.id.get_loc_button_1:
@@ -151,81 +151,69 @@ public class GpsCoordinates extends BaseActivity {
         Survey survey = realm.where(Survey.class).
                 equalTo("surveyId", surveyId)
                 .findFirst();
-        ParcelLocation parcelLocation ;
+        ParcelLocation parcelLocation;
 
         if (survey.getParcelLocations() != null) {
-                parcelLocation = survey.getParcelLocations();
-                Location temp = new Location("");
+            parcelLocation = survey.getParcelLocations();
 
-                temp.setLatitude(parcelLocation.getLat_1());
-                temp.setLongitude(parcelLocation.getLng_1());
-                corners[0] = temp;
-                temp.setLatitude(parcelLocation.getLat_2());
-                temp.setLongitude(parcelLocation.getLng_2());
-                corners[1] = temp;
-                temp.setLatitude(parcelLocation.getLat_3());
-                temp.setLongitude(parcelLocation.getLng_3());
-                corners[2] = temp;
-                temp.setLatitude(parcelLocation.getLat_4());
-                temp.setLongitude(parcelLocation.getLng_4());
-                corners[3] = temp;
-                temp.setLatitude(parcelLocation.getLat_5());
-                temp.setLongitude(parcelLocation.getLng_5());
-                corners[4] = temp;
-                temp.setLatitude(parcelLocation.getLat_6());
-                temp.setLongitude(parcelLocation.getLng_6());
-                corners[5] = temp;
+            corners[0].setLatitude(parcelLocation.getLat_1());
+            corners[0].setLongitude(parcelLocation.getLng_1());
+            corners[1].setLatitude(parcelLocation.getLat_2());
+            corners[1].setLongitude(parcelLocation.getLng_2());
+            corners[2].setLatitude(parcelLocation.getLat_3());
+            corners[2].setLongitude(parcelLocation.getLng_3());
+            corners[3].setLatitude(parcelLocation.getLat_4());
+            corners[3].setLongitude(parcelLocation.getLng_4());
+            corners[4].setLatitude(parcelLocation.getLat_5());
+            corners[4].setLongitude(parcelLocation.getLng_5());
+            corners[5].setLatitude(parcelLocation.getLat_6());
+            corners[5].setLongitude(parcelLocation.getLng_6());
 
-                String coordinate_1 = parcelLocation.getCoordinateOne();
-                String coordinate_2 = parcelLocation.getCoordinateTwo();
-                String coordinate_3 = parcelLocation.getCoordinateThree();
-                String coordinate_4 = parcelLocation.getCoordinateFour();
-                String coordinate_5 = parcelLocation.getCoordinateFive();
-                String coordinate_6 = parcelLocation.getCoordinateSix();
+            String coordinate_1 = parcelLocation.getCoordinateOne();
+            String coordinate_2 = parcelLocation.getCoordinateTwo();
+            String coordinate_3 = parcelLocation.getCoordinateThree();
+            String coordinate_4 = parcelLocation.getCoordinateFour();
+            String coordinate_5 = parcelLocation.getCoordinateFive();
+            String coordinate_6 = parcelLocation.getCoordinateSix();
 
-                String parcelSize = Float.toString(parcelLocation.getArea());
+            String parcelSize = Float.toString(parcelLocation.getArea());
 
-                gpsLocation_1.setText("Coordinates : " + coordinate_1);
-                gpsLocation_2.setText("Coordinates : " + coordinate_2);
-                gpsLocation_3.setText("Coordinates : " + coordinate_3);
-                gpsLocation_4.setText("Coordinates : " + coordinate_4);
-                gpsLocation_5.setText("Coordinates : " + coordinate_5);
-                gpsLocation_6.setText("Coordinates : " + coordinate_6);
-                parcelArea.setText(parcelSize);
-                area = parcelLocation.getArea();
+            gpsLocation_1.setText("GPS Coordinates : " + coordinate_1);
+            gpsLocation_2.setText("GPS Coordinates : " + coordinate_2);
+            gpsLocation_3.setText("GPS Coordinates : " + coordinate_3);
+            gpsLocation_4.setText("GPS Coordinates : " + coordinate_4);
+            gpsLocation_5.setText("GPS Coordinates : " + coordinate_5);
+            gpsLocation_6.setText("GPS Coordinates : " + coordinate_6);
+            parcelArea.setText(parcelSize);
+            area = parcelLocation.getArea();
         }
     }
 
     private void saveInputs() {
 
         if (validateInputs()) {
-            Toast.makeText(GpsCoordinates.this, "Saving", Toast.LENGTH_SHORT).show();
             surveyId = preferences.getString("surveyId", "");
 
             Survey survey = realm.where(Survey.class).
                     equalTo("surveyId", surveyId)
                     .findFirst();
-
-            for (int i = 0; i < 6; i++) {
-                Log.d("GPS", "Location: " + corners[i]);
-            }
-
+            
             realm.beginTransaction();
             ParcelLocation parcelLocation = realm.createObject(ParcelLocation.class);
             parcelLocation.setId(getNextKeyComponent());
             parcelLocation.setSurveyId(surveyId);
-            parcelLocation.setLat_1(corners[0].getLatitude());
-            parcelLocation.setLat_2(corners[1].getLatitude());
-            parcelLocation.setLat_3(corners[2].getLatitude());
-            parcelLocation.setLat_4(corners[3].getLatitude());
-            parcelLocation.setLat_5(corners[4].getLatitude());
-            parcelLocation.setLat_6(corners[5].getLatitude());
-            parcelLocation.setLng_1(corners[0].getLongitude());
-            parcelLocation.setLng_2(corners[1].getLongitude());
-            parcelLocation.setLng_3(corners[2].getLongitude());
-            parcelLocation.setLng_4(corners[3].getLongitude());
-            parcelLocation.setLng_5(corners[4].getLongitude());
-            parcelLocation.setLng_6(corners[5].getLongitude());
+            parcelLocation.setLat_1((corners[0] == null) ? 0 : corners[0].getLatitude());
+            parcelLocation.setLat_2((corners[1] == null) ? 0 : corners[1].getLatitude());
+            parcelLocation.setLat_3((corners[2] == null) ? 0 : corners[2].getLatitude());
+            parcelLocation.setLat_4((corners[3] == null) ? 0 : corners[3].getLatitude());
+            parcelLocation.setLat_5((corners[4] == null) ? 0 : corners[4].getLatitude());
+            parcelLocation.setLat_6((corners[5] == null) ? 0 : corners[5].getLatitude());
+            parcelLocation.setLng_1((corners[0] == null) ? 0 : corners[0].getLongitude());
+            parcelLocation.setLng_2((corners[1] == null) ? 0 : corners[1].getLongitude());
+            parcelLocation.setLng_3((corners[2] == null) ? 0 : corners[2].getLongitude());
+            parcelLocation.setLng_4((corners[3] == null) ? 0 : corners[3].getLongitude());
+            parcelLocation.setLng_5((corners[4] == null) ? 0 : corners[4].getLongitude());
+            parcelLocation.setLng_6((corners[5] == null) ? 0 : corners[5].getLongitude());
             parcelLocation.setArea(area);
             realm.copyToRealmOrUpdate(parcelLocation);
             realm.commitTransaction();
@@ -237,7 +225,6 @@ public class GpsCoordinates extends BaseActivity {
             Toast.makeText(GpsCoordinates.this, "Saved", Toast.LENGTH_SHORT).show();
             isSaved = true;
         } else {
-            Toast.makeText(GpsCoordinates.this, "Please get all corners and enter the area", Toast.LENGTH_SHORT).show();
             isSaved = false;
         }
 
@@ -249,19 +236,24 @@ public class GpsCoordinates extends BaseActivity {
 
     private boolean validateInputs() {
         String areaString = parcelArea.getText().toString();
-
+        int nullCount = 0;
         for (int i = 0; i < 6; i++) {
             if (corners[i] == null || corners[i].getLatitude() == 0 || corners[i].getLongitude() == 0) {
-                return false;
+                nullCount++;
             }
         }
 
+        if (nullCount > 3) {
+            Toast.makeText(GpsCoordinates.this, "Please set at least three corners", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         if (areaString.equals("")) {
+            Toast.makeText(GpsCoordinates.this, "Please enter the area", Toast.LENGTH_SHORT).show();
             return false;
         }
 
         area = Float.parseFloat(areaString);
-
         return true;
     }
 
