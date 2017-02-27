@@ -3,6 +3,7 @@ package com.sayone.omidyar.view;
 import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
@@ -12,10 +13,13 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,9 +38,11 @@ public class GpsCoordinates extends BaseActivity {
 
     private Realm realm;
     Button nextButton, backButton, getLocButton1, getLocButton2, getLocButton3, getLocButton4, getLocButton5, getLocButton6;
-//    TextView landName;
+    //    TextView landName;
     TextView gpsLocation_1, gpsLocation_2, gpsLocation_3, gpsLocation_4, gpsLocation_5, gpsLocation_6;
-    EditText parcelArea;
+//    EditText parcelArea;
+    public static TextView gpsStatusText;
+    public static ProgressBar gpsSearchingIndicator;
     private static final int MY_PERMISSIONS_REQUEST = 0;
     private SharedPreferences preferences;
     private Location[] corners;
@@ -48,6 +54,7 @@ public class GpsCoordinates extends BaseActivity {
     boolean mBound = false;
     boolean isSaved = false;
     Intent intent;
+    private String parcelSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +82,10 @@ public class GpsCoordinates extends BaseActivity {
         gpsLocation_4 = (TextView) findViewById(R.id.gps_loc_4);
         gpsLocation_5 = (TextView) findViewById(R.id.gps_loc_5);
         gpsLocation_6 = (TextView) findViewById(R.id.gps_loc_6);
+        gpsStatusText = (TextView) findViewById(R.id.gps_status_text);
+        gpsSearchingIndicator = (ProgressBar) findViewById(R.id.gps_searching_indicator);
 //        landName = (TextView) findViewById(R.id.land_name);
-        parcelArea = (EditText) findViewById(R.id.parcel_area_edit);
+//        parcelArea = (EditText) findViewById(R.id.parcel_area_edit);
         corners = new Location[6];
         for (int i = 0; i < 6; i++) {
             corners[i] = new Location("");
@@ -99,7 +108,7 @@ public class GpsCoordinates extends BaseActivity {
         getLocButton5.setOnClickListener(this);
         getLocButton6.setOnClickListener(this);
         getLocButton1.requestFocus();
-
+        parcelSize="";
         loadSavedCoordinates();
     }
 
@@ -108,13 +117,13 @@ public class GpsCoordinates extends BaseActivity {
         switch (view.getId()) {
 
             case R.id.next_button:
-                saveInputs();
-                if (isSaved) {
-                    Intent intent = new Intent(getApplicationContext(), StartLandTypeActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(GpsCoordinates.this, "Couldn't save", Toast.LENGTH_SHORT).show();
-                }
+                getParcelArea();
+//                if (isSaved) {
+//                    Intent intent = new Intent(getApplicationContext(), StartLandTypeActivity.class);
+//                    startActivity(intent);
+//                } else {
+//                    Toast.makeText(GpsCoordinates.this, "Couldn't save", Toast.LENGTH_SHORT).show();
+//                }
                 break;
 
             case R.id.back_button:
@@ -176,7 +185,7 @@ public class GpsCoordinates extends BaseActivity {
             String coordinate_5 = parcelLocation.getCoordinateFive();
             String coordinate_6 = parcelLocation.getCoordinateSix();
 
-            String parcelSize = Float.toString(parcelLocation.getArea());
+            parcelSize = Float.toString(parcelLocation.getArea());
 
             gpsLocation_1.setText("GPS Coordinates : " + coordinate_1);
             gpsLocation_2.setText("GPS Coordinates : " + coordinate_2);
@@ -184,9 +193,35 @@ public class GpsCoordinates extends BaseActivity {
             gpsLocation_4.setText("GPS Coordinates : " + coordinate_4);
             gpsLocation_5.setText("GPS Coordinates : " + coordinate_5);
             gpsLocation_6.setText("GPS Coordinates : " + coordinate_6);
-            parcelArea.setText(parcelSize);
+//            parcelArea.setText(parcelSize);
             area = parcelLocation.getArea();
         }
+    }
+
+    private void getParcelArea() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Parcel Area");
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        if (!parcelSize.equals("")){
+            input.setText(parcelSize);
+        }
+        builder.setView(input);
+        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String areaString = input.getText().toString();
+                area = (areaString == "") ? 0 : Float.parseFloat(areaString);
+                saveInputs();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
     }
 
     private void saveInputs() {
@@ -197,7 +232,7 @@ public class GpsCoordinates extends BaseActivity {
             Survey survey = realm.where(Survey.class).
                     equalTo("surveyId", surveyId)
                     .findFirst();
-            
+
             realm.beginTransaction();
             ParcelLocation parcelLocation = realm.createObject(ParcelLocation.class);
             parcelLocation.setId(getNextKeyComponent());
@@ -224,6 +259,8 @@ public class GpsCoordinates extends BaseActivity {
 
             Toast.makeText(GpsCoordinates.this, "Saved", Toast.LENGTH_SHORT).show();
             isSaved = true;
+            Intent intent = new Intent(getApplicationContext(), StartLandTypeActivity.class);
+            startActivity(intent);
         } else {
             isSaved = false;
         }
@@ -235,7 +272,6 @@ public class GpsCoordinates extends BaseActivity {
     }
 
     private boolean validateInputs() {
-        String areaString = parcelArea.getText().toString();
         int nullCount = 0;
         for (int i = 0; i < 6; i++) {
             if (corners[i] == null || corners[i].getLatitude() == 0 || corners[i].getLongitude() == 0) {
@@ -248,12 +284,10 @@ public class GpsCoordinates extends BaseActivity {
             return false;
         }
 
-        if (areaString.equals("")) {
+        if (area==0) {
             Toast.makeText(GpsCoordinates.this, "Please enter the area", Toast.LENGTH_SHORT).show();
             return false;
         }
-
-        area = Float.parseFloat(areaString);
         return true;
     }
 

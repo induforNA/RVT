@@ -68,7 +68,8 @@
                         android:hint="@string/respondent_group_hint"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:textSize="@dimen/textfield_size" />
+                        android:textSize="@dimen/textfield_size"
+                        android:nextFocusDown="@+id/edittext_district"/>
 
                     <EditText
                         android:id="@+id/edittext_surveyor"
@@ -78,7 +79,8 @@
                         android:hint="@string/surveyor_hint"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:textSize="@dimen/textfield_size" />
+                        android:textSize="@dimen/textfield_size"
+                        android:nextFocusDown="@+id/edittext_state"/>
 
 
                 </LinearLayout>
@@ -98,7 +100,8 @@
                         android:hint="@string/community_hint"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:textSize="@dimen/textfield_size" />
+                        android:textSize="@dimen/textfield_size"
+                        android:nextFocusDown="@id/edittext_respondent_group"/>
 
                     <EditText
                         android:id="@+id/edittext_district"
@@ -108,7 +111,8 @@
                         android:hint="@string/district_hint"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:textSize="@dimen/textfield_size" />
+                        android:textSize="@dimen/textfield_size"
+                        android:nextFocusDown="@id/edittext_surveyor"/>
 
                     <EditText
                         android:id="@+id/edittext_state"
@@ -118,7 +122,8 @@
                         android:hint="@string/state_hint"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:textSize="@dimen/textfield_size" />
+                        android:textSize="@dimen/textfield_size"
+                        android:nextFocusDown="@+id/reg_risk_rate"/>
 
 
                 </LinearLayout>

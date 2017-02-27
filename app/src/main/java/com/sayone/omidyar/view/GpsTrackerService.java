@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 /**
@@ -38,22 +39,38 @@ public class GpsTrackerService extends Service {
         @Override
         public void onLocationChanged(Location location) {
             mLastLocation.set(location);
+            GpsCoordinates.gpsSearchingIndicator.setVisibility(View.INVISIBLE);
+            GpsCoordinates.gpsStatusText.setText("Accuracy : " + (int) location.getAccuracy() + "m");
         }
 
         @Override
         public void onProviderDisabled(String provider) {
             isGPSEnabled = 0;
-            Toast.makeText(getApplicationContext(), "GPS disabled", Toast.LENGTH_SHORT).show();
+            GpsCoordinates.gpsStatusText.setText("GPS Status : Disabled");
         }
 
         @Override
         public void onProviderEnabled(String provider) {
             isGPSEnabled = 1;
-            Toast.makeText(getApplicationContext(), "GPS enabled", Toast.LENGTH_SHORT).show();
+            GpsCoordinates.gpsStatusText.setText("GPS Status : Enabled");
         }
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
+            switch (status) {
+                case LocationProvider.OUT_OF_SERVICE:
+                    GpsCoordinates.gpsStatusText.setText("GPS Status : Out of service");
+                    break;
+                case LocationProvider.TEMPORARILY_UNAVAILABLE:
+                    GpsCoordinates.gpsSearchingIndicator.setVisibility(View.VISIBLE);
+                    GpsCoordinates.gpsStatusText.setText("GPS Status : Temporarily unavailable");
+                    break;
+                case LocationProvider.AVAILABLE:
+                    GpsCoordinates.gpsSearchingIndicator.setVisibility(View.INVISIBLE);
+                    GpsCoordinates.gpsStatusText.setText("GPS Status : Available ");
+                    break;
+            }
+
             mStatus = status;
         }
     }
@@ -71,7 +88,6 @@ public class GpsTrackerService extends Service {
 
     @Override
     public void onCreate() {
-        Log.e(TAG, "onCreate");
         initializeLocationManager();
         try {
             mLocationManager.requestLocationUpdates(
@@ -82,6 +98,8 @@ public class GpsTrackerService extends Service {
         } catch (IllegalArgumentException ex) {
             Log.d(TAG, "gps provider does not exist " + ex.getMessage());
         }
+
+        GpsCoordinates.gpsStatusText.setText("GPS Status : Searching");
     }
 
     @Override
