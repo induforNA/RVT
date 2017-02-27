@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
-        android:text="LandType"
+        android:text="@string/gps_coordinates"
         android:textColor="@android:color/black"
         android:textSize="@dimen/textfield_size" />
 

@@ -34,7 +34,7 @@ public class GpsCoordinates extends BaseActivity {
 
     private Realm realm;
     Button nextButton, backButton, getLocButton1, getLocButton2, getLocButton3, getLocButton4, getLocButton5, getLocButton6;
-    TextView landName;
+//    TextView landName;
     TextView gpsLocation_1, gpsLocation_2, gpsLocation_3, gpsLocation_4, gpsLocation_5, gpsLocation_6;
     EditText parcelArea;
     private static final int MY_PERMISSIONS_REQUEST = 0;
@@ -75,21 +75,21 @@ public class GpsCoordinates extends BaseActivity {
         gpsLocation_4 = (TextView) findViewById(R.id.gps_loc_4);
         gpsLocation_5 = (TextView) findViewById(R.id.gps_loc_5);
         gpsLocation_6 = (TextView) findViewById(R.id.gps_loc_6);
-        landName = (TextView) findViewById(R.id.land_name);
+//        landName = (TextView) findViewById(R.id.land_name);
         parcelArea = (EditText) findViewById(R.id.parcel_area_edit);
         corners = new Location[6];
         for (int i = 0; i < 6; i++) {
             corners[i] = new Location("");
         }
 
-        if (currentSocialCapitalServey.equals(getResources().getText(R.string.string_forestland)))
-            landName.setText(getResources().getText(R.string.string_forestland));
-        if (currentSocialCapitalServey.equals(getResources().getText(R.string.string_pastureland)))
-            landName.setText(getResources().getText(R.string.string_pastureland));
-        if (currentSocialCapitalServey.equals(getResources().getText(R.string.string_miningland)))
-            landName.setText(getResources().getText(R.string.string_miningland));
-        if (currentSocialCapitalServey.equals(getResources().getText(R.string.title_cropland)))
-            landName.setText(getResources().getText(R.string.title_cropland));
+//        if (currentSocialCapitalServey.equals(getResources().getText(R.string.string_forestland)))
+//            landName.setText(getResources().getText(R.string.string_forestland));
+//        if (currentSocialCapitalServey.equals(getResources().getText(R.string.string_pastureland)))
+//            landName.setText(getResources().getText(R.string.string_pastureland));
+//        if (currentSocialCapitalServey.equals(getResources().getText(R.string.string_miningland)))
+//            landName.setText(getResources().getText(R.string.string_miningland));
+//        if (currentSocialCapitalServey.equals(getResources().getText(R.string.title_cropland)))
+//            landName.setText(getResources().getText(R.string.title_cropland));
         nextButton.setOnClickListener(this);
         backButton.setOnClickListener(this);
         getLocButton1.setOnClickListener(this);
