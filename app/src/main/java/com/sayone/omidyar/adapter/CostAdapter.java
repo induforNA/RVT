@@ -95,7 +95,7 @@ public class CostAdapter extends RecyclerView.Adapter<CostAdapter.CostProductVie
                 public void onClick(View view) {
                     Realm realm = Realm.getDefaultInstance();
                     realm.beginTransaction();
-                    CostElement costElement = realm.where(CostElement.class)
+                    SharedCostElement costElement = realm.where(SharedCostElement.class)
                             .equalTo("name", holder.costProductName.getText().toString())
                             .findFirst();
                     costElement.deleteFromRealm();

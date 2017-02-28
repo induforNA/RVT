@@ -444,6 +444,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 loadRevenueProduct(revenueProducts.get(currentCostProductIndexSave));
             }
         } else {
+            if(currentCostProductIndex < totalCostProductCount) {
+                loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
+            } else
             loadRevenueProduct(revenueProducts.get(currentCostProductIndexSave));
         }
 
@@ -855,12 +858,12 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                                 .multiply(bigDecimalQuanityEditStr, MathContext.DECIMAL64);
 
 
-                        if (currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))) {
+                     /*   if (currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))) {
                             bigDecimalTotal = bigDecimalFrequency.multiply(bigDecimalNoOfTimes, MathContext.DECIMAL64)
                                     .multiply(bigDecimalPrice, MathContext.DECIMAL64)
                                     .multiply(bigDecimalQuanityEditStr, MathContext.DECIMAL64);
                         }
-
+*/
                         double total = bigDecimalTotal.doubleValue();
 
 
@@ -1136,6 +1139,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
     private void showTrendDialog(final CostElement costElement) {
 
+        final long costElementId = costElement.getId();
         final Dialog dialog = new Dialog(NaturalCapitalCostActivityC.this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         dialog.setContentView(R.layout.activity_natural_capital_trend);
         Button dialogBack = (Button) dialog.findViewById(R.id.button_back);
@@ -1194,8 +1198,8 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                     realm.executeTransactionAsync(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
-                            RevenueProduct revenueProduct4 = realm.where(RevenueProduct.class)
-                                    .equalTo("id", costElement.getId())
+                            CostElement revenueProduct4 = realm.where(CostElement.class)
+                                    .equalTo("id", costElementId)
                                     .findFirst();
                             double harvestFre = mHarvestFre;
                             double harvestTimes = mHarvestTimes;
@@ -1218,24 +1222,21 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                             if (!dialogEditArea.getText().toString().equals(""))
                                 harvestArea = Double.parseDouble(dialogEditArea.getText().toString());
 
-                            for (RevenueProductYears revenueProductYears : revenueProduct4.getRevenueProductYearses()) {
-                                if (revenueProductYears.getYear() == 0) {
-                                    revenueProductYears.setHarvestFrequencyValue(harvestFre);
-                                    revenueProductYears.setQuantityValue(harvestTimes);
-                                    revenueProductYears.setMarketPriceValue(harvestPrice);
-                                    revenueProductYears.setProjectedIndex(0);
-                                    revenueProductYears.setSubtotal(0);
-                                    revenueProductYears.setHouseholds(household);
-                                    revenueProductYears.setHarvestFrequencyUnit(mFreqUnit);
-                                    revenueProductYears.setQuantityUnit(mQuaUnit);
-                                    revenueProductYears.setMarketPriceCurrency(mPriceCurrency);
+                            for (CostElementYears costElementYears : revenueProduct4.getCostElementYearses()) {
+                                if (costElementYears.getYear() == 0) {
 
-                                    if (currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))) {
-                                        revenueProductYears.setHarvestArea(harvestArea);
-                                    }
+                                    costElementYears.setCostFrequencyValue((int) harvestFre);
+                                    costElementYears.setCostFrequencyUnit(mFreqUnit);
+                                    costElementYears.setCostPerPeriodValue(harvestTimes);
+                                    costElementYears.setCostPerPeriodUnit(mQuaUnit);
+                                    costElementYears.setCostPerUnitValue(harvestPrice);
+                                    costElementYears.setCostPerUnitUnit(mPriceCurrency);
+                                    costElementYears.setHouseholds(household);
+                                    costElementYears.setProjectedIndex(0);
+                                    costElementYears.setSubtotal(0);
                                 }
-                                if (revenueProductYears.getProjectedIndex() > 0) {
-                                    BigDecimal bigDecimalPowerFactor = new BigDecimal(Math.pow((1 + inflationRate), revenueProductYears.getProjectedIndex()), MathContext.DECIMAL64);
+                                if (costElementYears.getProjectedIndex() > 0) {
+                                    BigDecimal bigDecimalPowerFactor = new BigDecimal(Math.pow((1 + inflationRate), costElementYears.getProjectedIndex()), MathContext.DECIMAL64);
                                     BigDecimal bigDecimalHarvestPrice = new BigDecimal(harvestPrice);
 
                                     double marketPriceVal = bigDecimalPowerFactor.multiply(bigDecimalHarvestPrice, MathContext.DECIMAL64).doubleValue();
@@ -1256,20 +1257,10 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                                     BigDecimal bigDecimalHarvestArea = new BigDecimal(harvestArea);
                                     BigDecimal bigDecimalHousehold = new BigDecimal(household);
 
-
                                     double totalVal = bigDecimalfreqUnit.multiply(bigDecimalharvestFre, MathContext.DECIMAL64)
                                             .multiply(bigDecimalharvestTimes, MathContext.DECIMAL64)
                                             .multiply(bigDecimalHousehold, MathContext.DECIMAL64)
                                             .multiply(bigDecimalmarketPriceVal, MathContext.DECIMAL64).doubleValue();
-
-                                    if (currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))) {
-                                        BigDecimal bigDecimal12 = new BigDecimal("12");
-                                        BigDecimal bigDecimalNewHarvestArea = bigDecimalharvestFre.divide(bigDecimal12, MathContext.DECIMAL64);
-                                        totalVal = bigDecimalNewHarvestArea.multiply(bigDecimalharvestTimes, MathContext.DECIMAL64)
-                                                .multiply(bigDecimalmarketPriceVal, MathContext.DECIMAL64)
-                                                .multiply(bigDecimalHarvestArea, MathContext.DECIMAL64)
-                                                .doubleValue();
-                                    }
 
 //                        double totalVal = freqUnit
 //                                * harvestFre
@@ -1278,18 +1269,14 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                                     //totalVal = roundToTwoDecimal(totalVal);
 
                                     //realm.beginTransaction();
-                                    revenueProductYears.setHarvestFrequencyValue(harvestFre);
-                                    revenueProductYears.setHarvestFrequencyUnit(mFreqUnit);
-                                    revenueProductYears.setQuantityValue(harvestTimes);
-                                    revenueProductYears.setQuantityUnit(mQuaUnit);
-                                    revenueProductYears.setMarketPriceValue(marketPriceVal);
-                                    revenueProductYears.setMarketPriceCurrency(mPriceCurrency);
-                                    revenueProductYears.setHouseholds(household);
-                                    revenueProductYears.setSubtotal(totalVal);
-
-                                    if (currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))) {
-                                        revenueProductYears.setHarvestArea(harvestArea);
-                                    }
+                                    costElementYears.setCostFrequencyValue((int) harvestFre);
+                                    costElementYears.setCostFrequencyUnit(mFreqUnit);
+                                    costElementYears.setCostPerPeriodValue(harvestTimes);
+                                    costElementYears.setCostPerPeriodUnit(mQuaUnit);
+                                    costElementYears.setCostPerUnitValue(marketPriceVal);
+                                    costElementYears.setCostPerUnitUnit(mPriceCurrency);
+                                    costElementYears.setHouseholds(household);
+                                    costElementYears.setSubtotal(totalVal);
                                 }
                             }
                         }

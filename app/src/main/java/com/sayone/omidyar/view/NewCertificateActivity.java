@@ -362,6 +362,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         surveyDate.setText(s);
         surveyIdDrawer.setText(surveyId);
         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
+        totalVal = totalVal + surveyCheck.getComponents().getSharedCostValue();
 
 //        double lowerLimit;
 //        double upperLimit;

@@ -14,8 +14,8 @@ import android.os.IBinder;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.text.InputType;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,9 +38,7 @@ public class GpsCoordinates extends BaseActivity {
 
     private Realm realm;
     Button nextButton, backButton, getLocButton1, getLocButton2, getLocButton3, getLocButton4, getLocButton5, getLocButton6;
-    //    TextView landName;
     TextView gpsLocation_1, gpsLocation_2, gpsLocation_3, gpsLocation_4, gpsLocation_5, gpsLocation_6;
-//    EditText parcelArea;
     public static TextView gpsStatusText;
     public static ProgressBar gpsSearchingIndicator;
     private static final int MY_PERMISSIONS_REQUEST = 0;
@@ -55,6 +53,7 @@ public class GpsCoordinates extends BaseActivity {
     boolean isSaved = false;
     Intent intent;
     private String parcelSize;
+    LayoutInflater inflater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,21 +83,11 @@ public class GpsCoordinates extends BaseActivity {
         gpsLocation_6 = (TextView) findViewById(R.id.gps_loc_6);
         gpsStatusText = (TextView) findViewById(R.id.gps_status_text);
         gpsSearchingIndicator = (ProgressBar) findViewById(R.id.gps_searching_indicator);
-//        landName = (TextView) findViewById(R.id.land_name);
-//        parcelArea = (EditText) findViewById(R.id.parcel_area_edit);
         corners = new Location[6];
         for (int i = 0; i < 6; i++) {
             corners[i] = new Location("");
         }
 
-//        if (currentSocialCapitalServey.equals(getResources().getText(R.string.string_forestland)))
-//            landName.setText(getResources().getText(R.string.string_forestland));
-//        if (currentSocialCapitalServey.equals(getResources().getText(R.string.string_pastureland)))
-//            landName.setText(getResources().getText(R.string.string_pastureland));
-//        if (currentSocialCapitalServey.equals(getResources().getText(R.string.string_miningland)))
-//            landName.setText(getResources().getText(R.string.string_miningland));
-//        if (currentSocialCapitalServey.equals(getResources().getText(R.string.title_cropland)))
-//            landName.setText(getResources().getText(R.string.title_cropland));
         nextButton.setOnClickListener(this);
         backButton.setOnClickListener(this);
         getLocButton1.setOnClickListener(this);
@@ -109,6 +98,7 @@ public class GpsCoordinates extends BaseActivity {
         getLocButton6.setOnClickListener(this);
         getLocButton1.requestFocus();
         parcelSize="";
+        inflater = this.getLayoutInflater();
         loadSavedCoordinates();
     }
 
@@ -118,12 +108,6 @@ public class GpsCoordinates extends BaseActivity {
 
             case R.id.next_button:
                 getParcelArea();
-//                if (isSaved) {
-//                    Intent intent = new Intent(getApplicationContext(), StartLandTypeActivity.class);
-//                    startActivity(intent);
-//                } else {
-//                    Toast.makeText(GpsCoordinates.this, "Couldn't save", Toast.LENGTH_SHORT).show();
-//                }
                 break;
 
             case R.id.back_button:
@@ -193,25 +177,25 @@ public class GpsCoordinates extends BaseActivity {
             gpsLocation_4.setText("GPS Coordinates : " + coordinate_4);
             gpsLocation_5.setText("GPS Coordinates : " + coordinate_5);
             gpsLocation_6.setText("GPS Coordinates : " + coordinate_6);
-//            parcelArea.setText(parcelSize);
             area = parcelLocation.getArea();
         }
     }
 
     private void getParcelArea() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View dialogView = inflater.inflate(R.layout.parcel_area, null);
         builder.setTitle("Parcel Area");
-        final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        final EditText areaInput = (EditText)dialogView.findViewById(R.id.parcel_area_edit);
         if (!parcelSize.equals("")){
-            input.setText(parcelSize);
+            areaInput.setText(parcelSize);
         }
-        builder.setView(input);
+        builder.setView(dialogView);
         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String areaString = input.getText().toString();
-                area = (areaString == "") ? 0 : Float.parseFloat(areaString);
+
+                String areaString = areaInput.getText().toString();
+                area = (areaString.equals("")) ? 0 : Float.parseFloat(areaString);
                 saveInputs();
             }
         });

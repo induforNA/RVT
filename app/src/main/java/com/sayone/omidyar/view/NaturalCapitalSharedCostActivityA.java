@@ -82,9 +82,7 @@ public class NaturalCapitalSharedCostActivityA extends BaseActivity implements V
         Survey survey = realm.where(Survey.class).equalTo("surveyId", surveyId).findFirst();
         for (SharedCostElement costElement : survey.getSharedCostElements()) {
             costProductsToSave.add(costElement);
-            if (costElement.getType().equals("Timber")) {
-                costElements.add(costElement);
-            }
+            costElements.add(costElement);
         }
 
         buttonBack = (Button) findViewById(R.id.button_back);
