@@ -348,6 +348,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/text_area_question"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/percentage_area_harvested"

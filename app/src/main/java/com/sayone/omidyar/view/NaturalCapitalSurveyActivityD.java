@@ -581,7 +581,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             noOfTimesEdit.setEnabled(true);
         } else {
             householdQuestion.setText(getString(R.string.string_household, "harvest " + revenueProductLoad.getName()));
-            loadQuestions.setText(getResources().getString(R.string.qn_natural_complex_1_1) + " " + revenueProductLoad.getName() + getResources().getString(R.string.qn_natural_complex_1_2) + "?");
+            loadQuestions.setText(getResources().getString(R.string.qn_natural_complex_1_1) + " harvest " + revenueProductLoad.getName() + getResources().getString(R.string.qn_natural_complex_1_2) + "?");
             quantityQuestion.setText(getResources().getString(R.string.qn_natural_capital_1, revenueProductLoad.getName() + getString(R.string.text_harvest)));
             productQuestion.setText(getResources().getString(R.string.qn_natural_complex_3_1) + " " + revenueProductLoad.getName() + " " + getResources().getString(R.string.qn_natural_complex_3_2));
             areaQuestion.setText(getResources().getString(R.string.percentage_area_harvested));
@@ -590,6 +590,10 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 areaQuestion.setText(getResources().getString(R.string.percentage_area_extracted));
 
             }
+        }
+        if(currentSocialCapitalServey.equals(getString(R.string.string_miningland))){
+            householdQuestion.setText(getString(R.string.string_household, "extract " + revenueProductLoad.getName()));
+            loadQuestions.setText(getResources().getString(R.string.qn_natural_complex_1_1) + " extract " + revenueProductLoad.getName() + getResources().getString(R.string.qn_natural_complex_1_2) + "?");
         }
         productReveneIdCheck = revenueProductLoad.getId();
 
@@ -634,6 +638,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         TextView dialogUnit = (TextView) dialog.findViewById(R.id.text_trend_unit);
         TextView dialogPrice = (TextView) dialog.findViewById(R.id.text_trend_price);
         TextView dialogArea = (TextView) dialog.findViewById(R.id.text_trend_area);
+        TextView dialogQuestionArea = (TextView) dialog.findViewById(R.id.text_area_question);
         TextView dialogQuestionHarvest = (TextView) dialog.findViewById(R.id.text_question_harvest);
         TextView dialogQuestionHouseholds = (TextView) dialog.findViewById(R.id.text_question_households);
         TextView dialogQuestionPerHousehold = (TextView) dialog.findViewById(R.id.text_question_per_household);
@@ -650,10 +655,17 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         final EditText dialogLivestock = (EditText) dialog.findViewById(R.id.livestock_edit);
 
 
-        dialogQuestionHarvest.setText(getString(R.string.text_question_harvest, revenueProduct.getName()));
-        dialogQuestionHouseholds.setText(getString(R.string.text_number_of_households, revenueProduct.getName()));
-        dialogQuestionPerHousehold.setText(getString(R.string.text_question_quantity, revenueProduct.getName()));
+        dialogQuestionHarvest.setText(getString(R.string.text_question_harvest,getString(R.string.text_harvest)+ revenueProduct.getName()));
+        dialogQuestionHouseholds.setText(getString(R.string.text_number_of_households, getString(R.string.text_harvest)+revenueProduct.getName()));
+        dialogQuestionPerHousehold.setText(getString(R.string.text_question_quantity, revenueProduct.getName()+" was harvested "));
         dialogQuestionPerUnit.setText(getString(R.string.text_question_price, revenueProduct.getName()));
+        dialogQuestionArea.setText(R.string.percentage_area_harvested);
+        if(currentSocialCapitalServey.equals(getString(R.string.string_miningland))){
+            dialogQuestionHarvest.setText(getString(R.string.text_question_harvest, getString(R.string.text_extract)+ revenueProduct.getName()));
+            dialogQuestionHouseholds.setText(getString(R.string.text_number_of_households, getString(R.string.text_extract)+revenueProduct.getName()));
+            dialogQuestionPerHousehold.setText(getString(R.string.text_question_quantity, revenueProduct.getName()+" was extracted "));
+            dialogQuestionArea.setText(R.string.percentage_area_extracted);
+        }
         dialogFrequency.setText(String.valueOf(mHarvestFre));
         dialogTimePeriod.setText(String.valueOf(mFreqUnit));
         dialogHouseholds.setText(String.valueOf(mHousehold));

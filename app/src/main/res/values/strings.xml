@@ -246,7 +246,7 @@
     <string name="string_add_revenue">Add a product</string>
     <string name="image_saved">Image saved</string>
     <string name="save_failed">Save failed</string>
-    <string name="qn_natural_complex_1_1">How often do you harvest </string>
+    <string name="qn_natural_complex_1_1">How often do you </string>
     <string name="qn_natural_complex_1_2"></string>
     <string name="qn_natural_complex_2_1">What was the quantity of </string>
     <string name="qn_natural_complex_2_2"> harvested each time?</string>
@@ -317,11 +317,11 @@
     <string name="text_incur_cost">incur cost\u0020</string>
     <string name="question_override">We will project cash flows for the next 15 years based on the average of all of the data you entered. Does this average seem realistic going into the future?</string>
     <string name="label_your_estimate">Your estimate (will override average value in projections)</string>
-    <string name="text_question_harvest">How often do you harvest %1$s?</string>
+    <string name="text_question_harvest">How often do you %1$s?</string>
     <string name="text_number_of_times">Number of times</string>
     <string name="text_time_period">Time period</string>
-    <string name="text_number_of_households">Number of households that harvest %1$s</string>
-    <string name="text_question_quantity">How much %1$s was harvested each time per household?</string>
+    <string name="text_number_of_households">Number of households that %1$s</string>
+    <string name="text_question_quantity">How much %1$seach time per household?</string>
     <string name="text_quantity">Quantity</string>
     <string name="text_question_price">What was the price of %1$s per unit?</string>
     <string name="text_price">Price</string>
