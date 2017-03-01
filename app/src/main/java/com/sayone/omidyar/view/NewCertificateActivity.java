@@ -393,6 +393,18 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
 //        Log.e("UPPER LIMIT ", String.valueOf((long) upperLimit));
 
         parcelVal=totalVal/parcelArea;
+        if(totalVal > 500) {
+            if(totalVal >=1000) {
+                totalVal = (totalVal/1000)*1000;
+            }
+            else totalVal = 1000;
+        }
+        if(parcelVal > 500 ) {
+            if(parcelVal >=1000) {
+                parcelVal = (parcelVal/1000)*1000;
+            }
+            else parcelVal = 1000;
+        }
 
         String totalValStr = formattedString(Long.valueOf(numberProcess(String.valueOf((long) totalVal))));
         String totalValStrToSend = formattedStringNoSymbol(Long.valueOf(numberProcess(String.valueOf((long) totalVal))));
