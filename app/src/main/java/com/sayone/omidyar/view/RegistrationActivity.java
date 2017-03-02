@@ -77,12 +77,12 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
     private EditText surveyor;
     private EditText editRiskRate;
     private EditText editInflationRate;
-    private Spinner countrySpinner;
-    private Spinner currencySpinner;
+    private EditText country;
+    private EditText currency;
     private Spinner languageSpinner;
-    private String country;
+    //    private String country;
     private String language;
-    private String currency;
+    //    private String currency;
     private String selectedDate;
     private TextView sourceRiskrate;
     private TextView sourceInflationRate;
@@ -119,12 +119,12 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         editRiskRate = (EditText) findViewById(R.id.reg_risk_rate);
         editInflationRate = (EditText) findViewById(R.id.reg_inflation_rate);
 
-        countrySpinner = (Spinner) findViewById(R.id.spinner_country);
-        currencySpinner = (Spinner) findViewById(R.id.spinner_currency);
-        languageSpinner = (Spinner) findViewById(R.id.spinner_language);
+        country = (EditText) findViewById(R.id.edittext_country);
+        currency = (EditText) findViewById(R.id.edittext_currency);
+        languageSpinner = (Spinner) findViewById(R.id.edittext_language);
 
-        sourceInflationRate = (TextView)findViewById(R.id.inflation_rate_source);
-        sourceRiskrate = (TextView)findViewById(R.id.risk_rate_source);
+        sourceInflationRate = (TextView) findViewById(R.id.inflation_rate_source);
+        sourceRiskrate = (TextView) findViewById(R.id.risk_rate_source);
         sourceInflationRate.setOnClickListener(this);
         sourceRiskrate.setOnClickListener(this);
 
@@ -143,26 +143,26 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
                 R.array.currency_array, android.R.layout.simple_spinner_dropdown_item);
         currency_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        countrySpinner.setAdapter(country_adapter);
+//        country.setAdapter(country_adapter);
         languageSpinner.setAdapter(language_adapter);
-        currencySpinner.setAdapter(currency_adapter);
-        country = countrySpinner.getSelectedItem().toString();
+//        currency.setAdapter(currency_adapter);
+//        country = country.getText().toString();
         language = languageSpinner.getSelectedItem().toString();
-        currency = currencySpinner.getSelectedItem().toString();
+//        currency = currency.getText().toString();
 
-        countrySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent,
-                                       View view, int pos, long id) {
-                country = parent.getItemAtPosition(pos).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-
-            }
-        });
+//        country.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent,
+//                                       View view, int pos, long id) {
+//                country = parent.getItemAtPosition(pos).toString();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> arg0) {
+//
+//            }
+//        });
 
         languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -178,19 +178,19 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
             }
         });
 
-        currencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent,
-                                       View view, int pos, long id) {
-                currency = parent.getItemAtPosition(pos).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-
-            }
-        });
+//        currency.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent,
+//                                       View view, int pos, long id) {
+//                currency = parent.getItemAtPosition(pos).toString();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> arg0) {
+//
+//            }
+//        });
 
         if (ContextCompat.checkSelfPermission(RegistrationActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(RegistrationActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)) {
@@ -274,23 +274,31 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
                     toastfunction(getApplicationContext(), getResources().getString(R.string.empty_surveyor_filed));
                 } else if (language.equals(getResources().getString(R.string.empty_language_field))) {
                     toastfunction(getApplicationContext(), getResources().getString(R.string.empty_language_field));
-                } else if (currency.equals(getResources().getString(R.string.empty_currency_field))) {
+                } else if (currency.getText().toString().equals("")) {
                     toastfunction(getApplicationContext(), getResources().getString(R.string.empty_currency_field));
+                } else if (currency.getText().toString().length()>3) {
+                    toastfunction(getApplicationContext(), getResources().getString(R.string.invalid_currency_field));
                 } else if (community.getText().toString().equals("")) {
                     toastfunction(getApplicationContext(), getResources().getString(R.string.empty_community_field));
                 } else if (district.getText().toString().equals("")) {
                     toastfunction(getApplicationContext(), getResources().getString(R.string.empty_district_filed));
                 } else if (state.getText().toString().equals("")) {
                     toastfunction(getApplicationContext(), getResources().getString(R.string.empty_state_filed));
-                } else if (country.equals(getResources().getString(R.string.empty_country_filed))) {
+                } else if (country.getText().toString().equals("")) {
                     toastfunction(getApplicationContext(), getResources().getString(R.string.empty_country_filed));
                 } else if (editRiskRate.getText().toString().equals("")) {
                     toastfunction(getApplicationContext(), getResources().getString(R.string.empty_risk_rate));
                 } else if (editInflationRate.getText().toString().equals("")) {
                     toastfunction(getApplicationContext(), getResources().getString(R.string.empty_inflation_rate));
                 } else {
-                    toastfunction(getApplicationContext(), getResources().getString(R.string.registration_successful));
-                    insertData();
+                    double tempInflationRate = Double.parseDouble(editInflationRate.getText().toString());
+                    double tempRiskRate = Double.parseDouble(editRiskRate.getText().toString());
+                    if (tempRiskRate < tempInflationRate) {
+                        toastfunction(getApplicationContext(), getResources().getString(R.string.sovereign_larger_than_inflation));
+                    } else {
+                        toastfunction(getApplicationContext(), getResources().getString(R.string.registration_successful));
+                        insertData();
+                    }
                 }
                 break;
         }
@@ -356,9 +364,9 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         survey.setState(state.getText().toString());
         survey.setDistrict(district.getText().toString());
         survey.setCommunity(community.getText().toString());
-        survey.setCountry(country);
+        survey.setCountry(country.getText().toString());
         survey.setLanguage(language);
-        survey.setCurrency(currency);
+        survey.setCurrency(currency.getText().toString());
         survey.setDate(date);
         survey.setSendStatus(false);
         survey.setInflationRate(inflationRate);

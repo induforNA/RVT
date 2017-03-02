@@ -256,7 +256,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/reg_risk_rate_source" />
+                    android:text="@string/reg_risk_rate_source"
+                    android:textStyle="italic"/>
 
                 <TextView
                     android:id="@+id/admin_risk_rate_source"
@@ -264,7 +265,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:text="www.tradingeconomics.com/bonds"
-                    android:textColor="@color/colorAccent" />
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="italic"/>
 
             </LinearLayout>
 
@@ -279,7 +281,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/reg_inflation_rate_source" />
+                    android:text="@string/reg_inflation_rate_source"
+                    android:textStyle="italic"/>
 
                 <TextView
                     android:id="@+id/admin_inflation_rate_source"
@@ -287,7 +290,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:text="www.tradingeconomics.com/forecast/inflation-rate"
-                    android:textColor="@color/colorAccent" />
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="italic"/>
 
             </LinearLayout>
 

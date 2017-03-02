@@ -8,6 +8,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
     TextView headingForest, headingCrop, headingPasture, headingMining;
     TextView gpsCoordinate_1, gpsCoordinate_2, gpsCoordinate_3, gpsCoordinate_4, gpsCoordinate_5, gpsCoordinate_6, parcelSize;
     LinearLayout fullscreen, forestlandLayout, croplandLayout, pasturelandLayout, mininglandLayout;
+    GridLayout parcelGridLayout;
     Context context;
     double totalVal = 0;
     double parcelVal = 0;
@@ -44,19 +46,21 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
     private String surveyId;
     private Boolean flag = true;
     private String currentSocialCapitalServey;
-    private ImageView imageViewMenuIcon;
-    private ImageView drawerCloseBtn;
     private TextView respondentGroup;
-    private TextView surveyIdDrawer;
-    private DrawerLayout menuDrawerLayout;
+
     private String serveyId;
     private SocialCapital socialCapital;
     private TextView forestDiscountRateValue;
     private TextView cropDiscountRateValue;
     private TextView pastureDiscountRateValue;
     private TextView miningDiscountRateValue;
+    private String currency;
 
     //Side Nav
+    private ImageView imageViewMenuIcon;
+    private ImageView drawerCloseBtn;
+    private TextView surveyIdDrawer;
+    private DrawerLayout menuDrawerLayout;
     private TextView textViewAbout;
     private TextView startSurvey;
     private TextView harvestingForestProducts;
@@ -89,6 +93,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         croplandLayout = (LinearLayout) findViewById(R.id.cropland_layout);
         pasturelandLayout = (LinearLayout) findViewById(R.id.pastureland_layout);
         mininglandLayout = (LinearLayout) findViewById(R.id.miningland_layout);
+        parcelGridLayout = (GridLayout) findViewById(R.id.parcel_grid_layout);
         headingCrop = (TextView) findViewById(R.id.heading_cropland);
         headingForest = (TextView) findViewById(R.id.heading_forest);
         headingPasture = (TextView) findViewById(R.id.heading_pastureland);
@@ -143,6 +148,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         Log.e("CHECK ", surveyCheck.toString());
 
         Log.e("Symbol:", surveyCheck.getCurrency());
+        currency = surveyCheck.getCurrency();
 
         Log.e("Language : ", Locale.getDefault().getDisplayLanguage());
 
@@ -222,11 +228,11 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         if (!(surveyCheck.getComponents().getForestValue() < 0)) {
                             String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getForestValue()));
-                            forestValue.setText(" ₹" + yourFormattedString);
+                            forestValue.setText(" " + currency + " " + yourFormattedString);
                         } else {
                             double value = (surveyCheck.getComponents().getForestValue());
                             String yourFormattedString = valueFormatter.format(roundTwo(value) * -1);
-                            forestValue.setText("- ₹" + yourFormattedString);
+                            forestValue.setText("- " + currency + " " + yourFormattedString);
                         }
 
                         //forestValue.setText(roundTwo(surveyCheck.getComponents().getForestValue())+"");
@@ -261,11 +267,11 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         if (!(surveyCheck.getComponents().getCroplandValue() < 0)) {
                             String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getCroplandValue()));
-                            cropValue.setText(" ₹" + yourFormattedString);
+                            cropValue.setText(" " + currency + " " + yourFormattedString);
                         } else {
                             double value = surveyCheck.getComponents().getCroplandValue();
                             String yourFormattedString = valueFormatter.format(roundTwo(value) * -1);
-                            cropValue.setText("- ₹" + yourFormattedString);
+                            cropValue.setText("- " + currency + " " + yourFormattedString);
                         }
 
                         totalVal = totalVal + surveyCheck.getComponents().getCroplandValue();
@@ -298,11 +304,11 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         if (!(surveyCheck.getComponents().getPastureValue() < 0)) {
                             String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getPastureValue()));
-                            pastureValue.setText(" ₹" + yourFormattedString);
+                            pastureValue.setText(" " + currency + " " + yourFormattedString);
                         } else {
                             double value = surveyCheck.getComponents().getPastureValue();
                             String yourFormattedString = valueFormatter.format(roundTwo(value) * -1);
-                            pastureValue.setText("- ₹" + yourFormattedString);
+                            pastureValue.setText("- " + currency + " " + yourFormattedString);
                         }
 
 
@@ -337,11 +343,11 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         if (!(surveyCheck.getComponents().getMiningLandValue() < 0)) {
                             String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getMiningLandValue()));
-                            miningValue.setText(" ₹" + yourFormattedString);
+                            miningValue.setText(" " + currency + " " + yourFormattedString);
                         } else {
                             double value = surveyCheck.getComponents().getMiningLandValue();
                             String yourFormattedString = valueFormatter.format(roundTwo(value) * -1);
-                            miningValue.setText("- ₹" + yourFormattedString);
+                            miningValue.setText("- " + currency + " " + yourFormattedString);
                         }
 
                         totalVal = totalVal + surveyCheck.getComponents().getMiningLandValue();
@@ -354,6 +360,24 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
             }
         }
 
+//        forestlandLayout.setVisibility(View.GONE);
+//        croplandLayout.setVisibility(View.GONE);
+//        pasturelandLayout.setVisibility(View.GONE);
+//        mininglandLayout.setVisibility(View.GONE);
+
+        if (forestlandLayout.getVisibility() == View.GONE) {
+            parcelGridLayout.removeView(forestlandLayout);
+        }
+        if (croplandLayout.getVisibility() == View.GONE) {
+            parcelGridLayout.removeView(croplandLayout);
+        }
+        if (pasturelandLayout.getVisibility() == View.GONE) {
+            parcelGridLayout.removeView(pasturelandLayout);
+        }
+        if (mininglandLayout.getVisibility() == View.GONE) {
+            parcelGridLayout.removeView(mininglandLayout);
+        }
+
         community.setText(surveyCheck.getCommunity().toString());
         parcelId.setText(surveyCheck.getSurveyId().toString());
         surveyorName.setText(surveyCheck.getSurveyor().toString());
@@ -362,7 +386,8 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         surveyDate.setText(s);
         surveyIdDrawer.setText(surveyId);
         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
-        totalVal = totalVal + surveyCheck.getComponents().getSharedCostValue();
+        if (surveyCheck.getComponents() != null)
+            totalVal = totalVal + surveyCheck.getComponents().getSharedCostValue();
 
 //        double lowerLimit;
 //        double upperLimit;
@@ -392,18 +417,16 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
 //        Log.e("LOWER LIMIT ", String.valueOf(Math.round(lowerLimit / 10000) * 10000));
 //        Log.e("UPPER LIMIT ", String.valueOf((long) upperLimit));
 
-        parcelVal=totalVal/parcelArea;
-        if(totalVal > 500) {
-            if(totalVal >=1000) {
-                totalVal = (totalVal/1000)*1000;
-            }
-            else totalVal = 1000;
+        parcelVal = totalVal / parcelArea;
+        if (totalVal > 500) {
+            if (totalVal >= 1000) {
+                totalVal = (totalVal / 1000) * 1000;
+            } else totalVal = 1000;
         }
-        if(parcelVal > 500 ) {
-            if(parcelVal >=1000) {
-                parcelVal = (parcelVal/1000)*1000;
-            }
-            else parcelVal = 1000;
+        if (parcelVal > 500) {
+            if (parcelVal >= 1000) {
+                parcelVal = (parcelVal / 1000) * 1000;
+            } else parcelVal = 1000;
         }
 
         String totalValStr = formattedString(Long.valueOf(numberProcess(String.valueOf((long) totalVal))));
@@ -460,9 +483,9 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
 
         String fString = "0";
         if (l < 0) {
-            fString = "- ₹" + valueFormatter1.format(l * -1);
+            fString = "- " + currency + " " + valueFormatter1.format(l * -1);
         } else {
-            fString = "₹" + valueFormatter1.format(l);
+            fString = " " + currency + " " + valueFormatter1.format(l);
         }
         return fString;
     }
