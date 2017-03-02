@@ -216,7 +216,8 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             emailIdsStr = sharedPref.getString("emailIdsStr", "");
         }
         if (emailIdsStr.equals("")) {
-            emailIdsStr = "yijia.chen@indufor-na.com, daphne.yin@indufor-na.com";
+            emailIdsStr="";
+//            emailIdsStr = "yijia.chen@indufor-na.com, daphne.yin@indufor-na.com";
             // emailIdsStr = "riyas.sayone@gmail.com,issac.sayone@gmail.com";
         }
         inputA.setText(emailIdsStr);

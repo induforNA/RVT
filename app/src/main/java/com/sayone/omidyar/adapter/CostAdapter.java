@@ -1,7 +1,6 @@
 package com.sayone.omidyar.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,8 +12,6 @@ import android.widget.Toast;
 
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.CostElement;
-import com.sayone.omidyar.model.Quantity;
-import com.sayone.omidyar.model.RevenueProduct;
 import com.sayone.omidyar.model.SharedCostElement;
 import com.sayone.omidyar.view.NaturalCapitalCostActivityA;
 import com.sayone.omidyar.view.NaturalCapitalSharedCostActivityA;
@@ -82,7 +79,7 @@ public class CostAdapter extends RecyclerView.Adapter<CostAdapter.CostProductVie
                     Toast toast = Toast.makeText(mContext,mContext.getResources().getText(R.string.text_deleted), Toast.LENGTH_SHORT);
                     toast.show();
 
-                    Intent intent=new Intent(mContext,NaturalCapitalSharedCostActivityA.class);
+                    Intent intent = new Intent(mContext, NaturalCapitalCostActivityA.class);
                     mContext.startActivity(intent);
                     mContext.finish();
                 }
@@ -103,7 +100,7 @@ public class CostAdapter extends RecyclerView.Adapter<CostAdapter.CostProductVie
                     Toast toast = Toast.makeText(mContext, mContext.getResources().getText(R.string.text_deleted), Toast.LENGTH_SHORT);
                     toast.show();
 
-                    Intent intent = new Intent(mContext, NaturalCapitalCostActivityA.class);
+                    Intent intent=new Intent(mContext,NaturalCapitalSharedCostActivityA.class);
                     mContext.startActivity(intent);
                     mContext.finish();
                 }

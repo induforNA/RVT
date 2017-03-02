@@ -210,7 +210,7 @@ public class CroplandSurveyA extends BaseActivity implements View.OnClickListene
                 startLandTypeActivity();
                 break;
             case R.id.text_shared_costs_outlays:
-                Intent intent_outlay = new Intent(getApplicationContext(), NaturalCapitalSharedCostActivityA.class);
+                Intent intent_outlay = new Intent(getApplicationContext(), SharedCostSurveyStartActivity.class);
                 startActivity(intent_outlay);
                 break;
             case R.id.text_certificate:
