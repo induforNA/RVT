@@ -125,6 +125,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
     private TextView logout;
     private boolean isTrend = false;
     private double harvestFreDisp;
+    private ArrayList timePeriodListSecOneTime;
+    private ArrayList<String> timePeriodListSec;
+    private ArrayList<String> unitListSec;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,6 +198,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         yearList = new ArrayList<>();
         timePeriodList = new ArrayList<>();
         unitList = new ArrayList<>();
+        timePeriodListSec = new ArrayList<>();
+        timePeriodListSecOneTime = new ArrayList<>();
 
         year_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, yearList);
         timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, timePeriodList);
@@ -216,6 +221,11 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 timePeriodList.add(frequency.getHarvestFrequencyHindi());
             } else {
                 timePeriodList.add(frequency.getHarvestFrequency());
+                if(!frequency.getHarvestFrequency().equals("one-time")){
+                    timePeriodListSec.add(frequency.getHarvestFrequency());
+                } else {
+                    timePeriodListSecOneTime.add(frequency.getHarvestFrequency());
+                }
             }
         }
 
@@ -307,6 +317,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             public void onItemSelected(AdapterView<?> parent,
                                        View view, int pos, long id) {
                 unit = parent.getItemAtPosition(pos).toString();
+                unitListSec = new ArrayList<>();
+                unitListSec.add(unit);
             }
 
             @Override
@@ -411,7 +423,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             if (yearCounting == 1) {
                 finish();
             } else {
-        /*        if(currentCostProductIndex < totalCostProductCount)
+             /*   if(currentCostProductIndex < totalCostProductCount)
                     loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
                 else*/
                     loadRevenueProduct(revenueProducts.get(currentCostProductIndexSave));
@@ -943,8 +955,29 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 .equalTo("frequencyValue", (int) revenueProductYearsLoad.getHarvestFrequencyUnit())
                 .findFirst();
 
-        if (timePeriodList.size() != 0 && frequency != null) {
+        if (timePeriodList.size() != 0) {
+            if(currentYearIndexSave == 0){
+                timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodList);
+            } else {
+                if(frequency != null) {
+                    if (frequency.getFrequencyValue() == 1)
+                        timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodListSecOneTime);
+                    else
+                        timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodListSec);
+                } else {
+                    if(spinnerTimePeriod.getSelectedItem().equals("one-time")){
+                        timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodListSecOneTime);
+                        spinnerTimePeriod.setSelection(0);
+                    } else {
+                        timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodListSec);
+                    }
+                }
+            }
             // Log.e("TEST FRE ", timePeriod_adapter.getPosition(frequency.getHarvestFrequency())+"");
+        }
+        spinnerTimePeriod.setAdapter(timePeriod_adapter);
+
+        if(frequency != null) {
             if (language.equals("			")) {
                 spinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(frequency.getHarvestFrequencyHindi()));
             } else {
@@ -956,10 +989,24 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 .equalTo("quantityName", revenueProductYearsLoad.getQuantityUnit())
                 .findFirst();
 
+        if(unitList.size() != 0){
+            if(currentYearIndexSave == 0) {
+                unit_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, unitList);
+            } else {
+                if(quantity != null) {
+                    unitListSec = new ArrayList<>();
+                    unitListSec.add(quantity.getQuantityName());
+                }
+                unit_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, unitListSec);
+            }
+        }
+        spinnerUnit.setAdapter(unit_adapter);
+
         if (unitList.size() != 0 && quantity != null) {
             // Log.e("QUANTITY ", unit_adapter.getPosition(quantity.getQuantityName())+"");
             spinnerUnit.setSelection(unit_adapter.getPosition(quantity.getQuantityName()));
         }
+
         previousYearIndex = currentYearIndex;
         currentYearIndex++;
     }

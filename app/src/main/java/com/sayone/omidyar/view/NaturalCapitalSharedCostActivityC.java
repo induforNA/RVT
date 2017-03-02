@@ -125,6 +125,9 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
     private TextView logout;
     private double harvestFreDisp;
     private boolean isTrend;
+    private ArrayList timePeriodListSecOneTime;
+    private ArrayList<String> timePeriodListSec;
+    private ArrayList<String> unitListSec;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,6 +177,8 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
         yearList = new ArrayList<>();
         timePeriodList = new ArrayList<>();
         unitList = new ArrayList<>();
+        timePeriodListSec = new ArrayList<>();
+        timePeriodListSecOneTime = new ArrayList<>();
 
         year_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, yearList);
         timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodList);
@@ -195,6 +200,11 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                 timePeriodList.add(frequency.getHarvestFrequencyHindi());
             } else {
                 timePeriodList.add(frequency.getHarvestFrequency());
+                if(!frequency.getHarvestFrequency().equals("one-time")){
+                    timePeriodListSec.add(frequency.getHarvestFrequency());
+                } else {
+                    timePeriodListSecOneTime.add(frequency.getHarvestFrequency());
+                }
             }
         }
 
@@ -263,6 +273,8 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
             public void onItemSelected(AdapterView<?> parent,
                                        View view, int pos, long id) {
                 unit = parent.getItemAtPosition(pos).toString();
+                unitListSec = new ArrayList<>();
+                unitListSec.add(unit);
             }
 
             @Override
@@ -413,12 +425,6 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
             loadRevenueProduct(revenueProducts.get(currentCostProductIndexSave));
         }
 
-
-//        if(revenueProducts.size() == 1 && revenueProducts.get(currentCostProductIndex).getCostElementYearses().size() == 1){
-//            finish();
-//        }else {
-//            loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
-//        }
     }
 
     @Override
@@ -426,11 +432,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
         Intent intent;
         switch (view.getId()) {
             case R.id.button_next:
-//                allCashFlow();
-//                calculateNPV();
-//
-//                intent=new Intent(getApplicationContext(),NaturalCapitalCostActivityA.class);
-//                startActivity(intent);
+
                 if (buttonNext.isClickable()) {
                     buttonNext.setClickable(false);
                     saveYearlyDatas(revenueProducts.get(currentCostProductIndexSave));
@@ -439,55 +441,6 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
 
             case R.id.button_back:
                 backButtonAction();
-//                int currentYearBackIndex = getIndexYears(spinnerYear.getSelectedItem().toString());
-//                int currentPrductNameBackIndex = getIndexRevenueProducts(currentProductName);
-//                if(currentYearBackIndex != -1 &&  currentPrductNameBackIndex != -1){
-//                    if(currentPrductNameBackIndex == 0){
-//                        if(currentYearBackIndex == 0){
-//                            finish();
-//                        }else{
-//                            currentYearIndex = currentYearBackIndex - 1;
-//                            currentCostProductIndex = currentPrductNameBackIndex;
-//                        }
-//                    }else{
-//                        if(currentYearBackIndex == 0){
-//                            currentCostProductIndex = currentPrductNameBackIndex - 1;
-//                            currentYearIndex = yearList.size() - 1;
-//                        }else{
-//                            currentYearIndex = currentYearBackIndex - 1;
-//                            currentCostProductIndex = currentPrductNameBackIndex;
-//                        }
-//                    }
-//                }
-
-
-//                finish();
-//                //Log.e("YEAR ","PRE "+previousYearIndex+" Cur "+currentYearIndex);
-//                //Log.e("COST ","PRE "+previousCostProductIndex+" Cur "+currentCostProductIndex   );
-//
-//                currentYearIndex = previousYearIndex;
-//                currentCostProductIndex = previousCostProductIndex;
-//                if(currentYearIndex > 0){
-//                    currentYearIndex--;
-//                }else if(currentYearIndex == 0){
-//                    if(currentCostProductIndex > 0){
-//                        currentCostProductIndex--;
-//                        currentYearIndex = totalYearsCount - 1;
-//                        // loadRevenueProduct(costOutlays.get(currentCostProductIndex));
-//                    }else if(currentCostProductIndex == 0) {
-//                        if(productRevenueIdCheck == 0 || productRevenueIdCheck == productRevenueIdCon){
-//                            finish();
-//                        }else {
-//                            currentYearIndex = totalYearsCount - 1;
-//                        }
-//                    }else{
-//                        finish();
-//                    }
-//                }else{
-//                    finish();
-//                }
-
-                // loadRevenueProduct(revenueProducts.get(currentCostProductIndex));
 
                 break;
 
@@ -536,13 +489,6 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                 Intent intent_certificate = new Intent(getApplicationContext(), NewCertificateActivity.class);
                 startActivity(intent_certificate);
                 break;
-
-
-//            case R.id.save_btn:
-//                // saveYearlyDatas(costOutlays.get(currentCostProductIndexSave));
-//
-//
-//                break;
 
         }
     }
@@ -650,12 +596,6 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
             }
         }
 
-        //totalYearsCount = revenueProductLoad.getRevenueProductYearses().size();
-//        Log.e("Current year ",currentYearIndex+"");
-//        Log.e("Total year ",totalYearsCount+"");
-//        Log.e("Current cost ",currentCostProductIndex+"");
-//        Log.e("Total cost ",totalCostProductCount+"");
-
         currentCostProductIndexSave = currentCostProductIndex;
         currentYearIndexSave = currentYearIndex;
 
@@ -667,10 +607,6 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                 currentYearIndex = 0;
             }
         }
-//        Log.e("Current year ",currentYearIndex+"");
-//        Log.e("Total year ",totalYearsCount+"");
-//        Log.e("Current cost ",currentCostProductIndex+"");
-//        Log.e("Total cost ",totalCostProductCount+"");
     }
 
     public void loadRevenueYears(SharedCostElementYears costElementYearsLoad, SharedCostElement costElementLoad1) {
@@ -709,6 +645,28 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                 .equalTo("frequencyValue", (int) costElementYearsLoad.getCostFrequencyUnit())
                 .findFirst();
 
+        if (timePeriodList.size() != 0) {
+            if(currentYearIndexSave == 0){
+                timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodList);
+            } else {
+                if(frequency != null) {
+                    if (frequency.getFrequencyValue() == 1)
+                        timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodListSecOneTime);
+                    else
+                        timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodListSec);
+                } else {
+                    if(spinnerTimePeriod.getSelectedItem().equals("one-time")){
+                        timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodListSecOneTime);
+                        spinnerTimePeriod.setSelection(0);
+                    } else {
+                        timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodListSec);
+                    }
+                }
+            }
+            // Log.e("TEST FRE ", timePeriod_adapter.getPosition(frequency.getHarvestFrequency())+"");
+        }
+        spinnerTimePeriod.setAdapter(timePeriod_adapter);
+
         if (timePeriodList.size() != 0 && frequency != null) {
             // Log.e("TEST FRE ", timePeriod_adapter.getPosition(frequency.getHarvestFrequency())+"");
 
@@ -720,6 +678,20 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
         Quantity quantity = realm.where(Quantity.class)
                 .equalTo("quantityName", costElementYearsLoad.getCostPerPeriodUnit())
                 .findFirst();
+
+        if(unitList.size() != 0){
+            if(currentYearIndexSave == 0) {
+                unit_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, unitList);
+            } else {
+                if(quantity != null) {
+                    unitListSec = new ArrayList<>();
+                    unitListSec.add(quantity.getQuantityName());
+                }
+                unit_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, unitListSec);
+            }
+        }
+        spinnerUnit.setAdapter(unit_adapter);
+
 
         if (unitList.size() != 0 && quantity != null) {
             // Log.e("QUANTITY ", unit_adapter.getPosition(quantity.getQuantityName())+"");
@@ -1177,7 +1149,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
         dialogQuestionPerHousehold.setText(getString(R.string.text_question_quantity, costElement.getName()));
         dialogQuestionPerUnit.setText(getString(R.string.text_question_price, costElement.getName()));
         dialogFrequency.setText(String.valueOf(harvestFreDisp));
-        dialogTimePeriod.setText(String.valueOf(mFreqUnit));
+        dialogTimePeriod.setText(timePeriod);
         dialogHouseholds.setText(String.valueOf(mHousehold));
         dialogQuantity.setText(String.valueOf(roundToTwoDecimal(mHarvestTimes)));
         dialogUnit.setText(String.valueOf(mQuaUnit));

@@ -131,6 +131,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
     private TextView logout;
     private double harvestFreDisp;
     private boolean isTrend;
+    private ArrayList timePeriodListSecOneTime;
+    private ArrayList<String> timePeriodListSec;
+    private ArrayList<String> unitListSec;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,6 +186,8 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         yearList = new ArrayList<>();
         timePeriodList = new ArrayList<>();
         unitList = new ArrayList<>();
+        timePeriodListSec = new ArrayList<>();
+        timePeriodListSecOneTime = new ArrayList<>();
 
         year_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, yearList);
         timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodList);
@@ -205,6 +210,11 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 timePeriodList.add(frequency.getHarvestFrequencyHindi());
             } else {
                 timePeriodList.add(frequency.getHarvestFrequency());
+                if(!frequency.getHarvestFrequency().equals("one-time")){
+                    timePeriodListSec.add(frequency.getHarvestFrequency());
+                } else {
+                    timePeriodListSecOneTime.add(frequency.getHarvestFrequency());
+                }
             }
         }
 
@@ -343,6 +353,8 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             public void onItemSelected(AdapterView<?> parent,
                                        View view, int pos, long id) {
                 unit = parent.getItemAtPosition(pos).toString();
+                unitListSec = new ArrayList<>();
+                unitListSec.add(unit);
             }
 
             @Override
@@ -753,6 +765,28 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 .equalTo("frequencyValue", (int) costElementYearsLoad.getCostFrequencyUnit())
                 .findFirst();
 
+        if (timePeriodList.size() != 0) {
+            if(currentYearIndexSave == 0){
+                timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodList);
+            } else {
+                if(frequency != null) {
+                    if (frequency.getFrequencyValue() == 1)
+                        timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodListSecOneTime);
+                    else
+                        timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodListSec);
+                } else {
+                    if(spinnerTimePeriod.getSelectedItem().equals("one-time")){
+                        timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodListSecOneTime);
+                        spinnerTimePeriod.setSelection(0);
+                    } else {
+                        timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodListSec);
+                    }
+                }
+            }
+            // Log.e("TEST FRE ", timePeriod_adapter.getPosition(frequency.getHarvestFrequency())+"");
+        }
+        spinnerTimePeriod.setAdapter(timePeriod_adapter);
+
         if (timePeriodList.size() != 0 && frequency != null) {
             // Log.e("TEST FRE ", timePeriod_adapter.getPosition(frequency.getHarvestFrequency())+"");
 
@@ -764,6 +798,19 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         Quantity quantity = realm.where(Quantity.class)
                 .equalTo("quantityName", costElementYearsLoad.getCostPerPeriodUnit())
                 .findFirst();
+
+        if(unitList.size() != 0){
+            if(currentYearIndexSave == 0) {
+                unit_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, unitList);
+            } else {
+                if(quantity != null) {
+                    unitListSec = new ArrayList<>();
+                    unitListSec.add(quantity.getQuantityName());
+                }
+                unit_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, unitListSec);
+            }
+        }
+        spinnerUnit.setAdapter(unit_adapter);
 
         if (unitList.size() != 0 && quantity != null) {
             // Log.e("QUANTITY ", unit_adapter.getPosition(quantity.getQuantityName())+"");
@@ -1253,7 +1300,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         dialogQuestionPerHousehold.setText(getString(R.string.text_question_quantity, costElement.getName()));
         dialogQuestionPerUnit.setText(getString(R.string.text_question_price, costElement.getName()));
         dialogFrequency.setText(String.valueOf(harvestFreDisp));
-        dialogTimePeriod.setText(String.valueOf(mFreqUnit));
+        dialogTimePeriod.setText(timePeriod);
         dialogHouseholds.setText(String.valueOf(roundToTwoDecimal(mHousehold)));
         dialogQuantity.setText(String.valueOf(roundToTwoDecimal(mHarvestTimes)));
         dialogUnit.setText(String.valueOf(mQuaUnit));
