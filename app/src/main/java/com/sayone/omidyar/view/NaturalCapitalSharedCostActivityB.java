@@ -104,7 +104,7 @@ public class NaturalCapitalSharedCostActivityB extends BaseActivity implements V
         imageViewMenuIcon.setOnClickListener(this);
         drawerCloseBtn.setOnClickListener(this);
         surveyIdDrawer.setText(surveyId);
-        landType.setText(currentSocialCapitalSurvey);
+        landType.setText(getResources().getText(R.string.shared_costs_outlays));
 
         Survey results = realm.where(Survey.class)
                 .equalTo("surveyId", surveyId)
@@ -349,7 +349,7 @@ public class NaturalCapitalSharedCostActivityB extends BaseActivity implements V
                 startLandTypeActivity();
                 break;
             case R.id.text_shared_costs_outlays:
-                Intent intent_outlay = new Intent(getApplicationContext(), NaturalCapitalSharedCostActivityA.class);
+                Intent intent_outlay = new Intent(getApplicationContext(), SharedCostSurveyStartActivity.class);
                 startActivity(intent_outlay);
                 break;
             case R.id.text_certificate:

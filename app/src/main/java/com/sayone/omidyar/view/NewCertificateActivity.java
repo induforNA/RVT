@@ -362,7 +362,8 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         surveyDate.setText(s);
         surveyIdDrawer.setText(surveyId);
         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
-        totalVal = totalVal + surveyCheck.getComponents().getSharedCostValue();
+        if(surveyCheck.getComponents() != null)
+            totalVal = totalVal + surveyCheck.getComponents().getSharedCostValue();
 
 //        double lowerLimit;
 //        double upperLimit;
@@ -395,20 +396,20 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         parcelVal=totalVal/parcelArea;
         if(totalVal > 500) {
             if(totalVal >=1000) {
-                totalVal = (totalVal/1000)*1000;
+                totalVal = (Math.round(totalVal/1000))*1000;
             }
             else totalVal = 1000;
         }
         if(parcelVal > 500 ) {
             if(parcelVal >=1000) {
-                parcelVal = (parcelVal/1000)*1000;
+                parcelVal = (Math.round(parcelVal/1000))*1000;
             }
             else parcelVal = 1000;
         }
 
-        String totalValStr = formattedString(Long.valueOf(numberProcess(String.valueOf((long) totalVal))));
-        String totalValStrToSend = formattedStringNoSymbol(Long.valueOf(numberProcess(String.valueOf((long) totalVal))));
-        String totalValPerHaStrToSend = formattedStringNoSymbol(Long.valueOf(numberProcess(String.valueOf((long) parcelVal))));
+        String totalValStr = formattedString(Long.valueOf(String.valueOf((long) totalVal)));
+        String totalValStrToSend = formattedStringNoSymbol(Long.valueOf(String.valueOf((long) totalVal)));
+        String totalValPerHaStrToSend = formattedStringNoSymbol(Long.valueOf(String.valueOf((long) parcelVal)));
 
         Log.e("Final Value ", totalValStr);
 
@@ -433,7 +434,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
 //        double roundOffRisk = Math.round(riskRate * 100.0) / 100.0;
         countryRiskRate.setText(sovereign + "%");
 
-        String parcelValStr = formattedString(Long.valueOf(numberProcess(String.valueOf((long) parcelVal))));
+        String parcelValStr = formattedString(Long.valueOf(String.valueOf((long) parcelVal)));
         parcelValue.setText(parcelValStr);
     }
 
@@ -443,7 +444,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         super.onResume();
     }
 
-    public String numberProcess(String numberStr) {
+   /* public String numberProcess(String numberStr) {
         String zerosStr = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
         int zerosCount = 0;
         long q = Long.valueOf(numberStr);
@@ -454,7 +455,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         }
         return String.valueOf(q) + zerosStr.substring(0, zerosCount);
     }
-
+*/
     public String formattedString(long l) {
         DecimalFormat valueFormatter1 = new DecimalFormat("#,###,###");
 
@@ -536,7 +537,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                 startLandTypeActivity();
                 break;
             case R.id.text_shared_costs_outlays:
-                Intent intent_outlay = new Intent(getApplicationContext(), NaturalCapitalSharedCostActivityA.class);
+                Intent intent_outlay = new Intent(getApplicationContext(), SharedCostSurveyStartActivity.class);
                 startActivity(intent_outlay);
                 break;
             case R.id.text_certificate:

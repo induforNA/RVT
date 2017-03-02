@@ -20,7 +20,7 @@ import java.util.Locale;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-public class NaturalCapitalSurveyStartActivity extends BaseActivity implements View.OnClickListener {
+public class SharedCostSurveyStartActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView landType;
     private Realm realm;
@@ -49,7 +49,7 @@ public class NaturalCapitalSurveyStartActivity extends BaseActivity implements V
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_natural_capital_survey_start);
+        setContentView(R.layout.activity_shared_cost_survey_start);
 
         context = this;
         realm = Realm.getDefaultInstance();
@@ -85,14 +85,7 @@ public class NaturalCapitalSurveyStartActivity extends BaseActivity implements V
             editor.apply();
         }
 
-        if (currentSocialCapitalServey.equals(getString(R.string.string_forestland)))
-            landType.setText(getResources().getText(R.string.string_forestland));
-        if (currentSocialCapitalServey.equals(getString(R.string.string_pastureland)))
-            landType.setText(getResources().getText(R.string.string_pastureland));
-        if (currentSocialCapitalServey.equals(getString(R.string.string_miningland)))
-            landType.setText(getResources().getText(R.string.string_miningland));
-        if (currentSocialCapitalServey.equals(getString(R.string.string_cropland)))
-            landType.setText(getResources().getText(R.string.string_cropland));
+        landType.setText(getString(R.string.shared_costs_outlays));
 
         //Side Nav
         textViewAbout = (TextView) findViewById(R.id.text_view_about);
@@ -128,7 +121,7 @@ public class NaturalCapitalSurveyStartActivity extends BaseActivity implements V
         switch (view.getId()) {
 
             case R.id.button_next:
-                intent = new Intent(getApplicationContext(), NaturalCapitalSurveyActivityA.class);
+                intent = new Intent(getApplicationContext(), NaturalCapitalSharedCostActivityA.class);
                 startActivity(intent);
                 break;
             case R.id.button_back:
@@ -205,7 +198,7 @@ public class NaturalCapitalSurveyStartActivity extends BaseActivity implements V
     }
 
     private void startLandTypeActivity() {
-        Intent intent = new Intent(NaturalCapitalSurveyStartActivity.this, StartLandTypeActivity.class);
+        Intent intent = new Intent(SharedCostSurveyStartActivity.this, StartLandTypeActivity.class);
         startActivity(intent);
     }
 

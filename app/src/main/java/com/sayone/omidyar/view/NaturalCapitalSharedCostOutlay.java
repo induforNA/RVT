@@ -106,14 +106,9 @@ public class NaturalCapitalSharedCostOutlay extends BaseActivity {
         surveyIdDrawer = (TextView) findViewById(R.id.text_view_id);
 
         outlayItemList = (RecyclerView) findViewById(R.id.timber_list);
-        if (currentSocialCapitalServey.equals(getString(R.string.string_forestland)))
-            landType.setText(getResources().getText(R.string.string_forestland));
-        if (currentSocialCapitalServey.equals(getString(R.string.string_pastureland)))
-            landType.setText(getResources().getText(R.string.string_pastureland));
-        if (currentSocialCapitalServey.equals(getString(R.string.string_miningland)))
-            landType.setText(getResources().getText(R.string.string_miningland));
-        if (currentSocialCapitalServey.equals(getString(R.string.string_cropland)))
-            landType.setText(getResources().getText(R.string.string_cropland));
+
+        landType.setText(getResources().getText(R.string.shared_costs_outlays));
+        questionRevenue.setText(getResources().getText(R.string.shared_outlay_question));
 
         costOutlayAdapter = new CostOutlayAdapter(costOutlays, this);
 
@@ -172,7 +167,8 @@ public class NaturalCapitalSharedCostOutlay extends BaseActivity {
                     intent = new Intent(getApplicationContext(), NaturalCapitalSharedCostOutlayB.class);
                     startActivity(intent);
                 } else {
-                    nextLandKind();
+                    intent = new Intent(getApplicationContext(), NewCertificateActivity.class);
+                    startActivity(intent);
                 }
                 break;
             case R.id.button_back:
@@ -282,7 +278,7 @@ public class NaturalCapitalSharedCostOutlay extends BaseActivity {
                 startLandTypeActivity();
                 break;
             case R.id.text_shared_costs_outlays:
-                Intent intent_outlay = new Intent(getApplicationContext(), NaturalCapitalSharedCostActivityA.class);
+                Intent intent_outlay = new Intent(getApplicationContext(), SharedCostSurveyStartActivity.class);
                 startActivity(intent_outlay);
                 break;
             case R.id.text_certificate:

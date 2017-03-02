@@ -95,14 +95,16 @@ public class NaturalCapitalSharedCostActivityA extends BaseActivity implements V
         landType = (TextView) findViewById(R.id.land_type);
 
 
-        if (currentSocialCapitalSurvey.equals(getString(R.string.string_forestland)))
-            landType.setText(getResources().getText(R.string.string_forestland));
-        if (currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland)))
-            landType.setText(getResources().getText(R.string.string_pastureland));
-        if (currentSocialCapitalSurvey.equals(getString(R.string.string_miningland)))
-            landType.setText(getResources().getText(R.string.string_miningland));
-        if (currentSocialCapitalSurvey.equals(getString(R.string.string_cropland)))
-            landType.setText(getResources().getText(R.string.string_cropland));
+//        if (currentSocialCapitalSurvey.equals(getString(R.string.string_forestland)))
+//            landType.setText(getResources().getText(R.string.string_forestland));
+//        if (currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland)))
+//            landType.setText(getResources().getText(R.string.string_pastureland));
+//        if (currentSocialCapitalSurvey.equals(getString(R.string.string_miningland)))
+//            landType.setText(getResources().getText(R.string.string_miningland));
+//        if (currentSocialCapitalSurvey.equals(getString(R.string.string_cropland)))
+//            landType.setText(getResources().getText(R.string.string_cropland));
+
+        landType.setText(getResources().getText(R.string.shared_costs_outlays));
 
         timberList = (RecyclerView) findViewById(R.id.timber_list);
 
@@ -158,7 +160,7 @@ public class NaturalCapitalSharedCostActivityA extends BaseActivity implements V
                         .equalTo("surveyId", surveyId)
                         .findAll();
                 if (costElements1.size() <= 0) {
-                    intent = new Intent(getApplicationContext(), NaturalCapitalCostOutlay.class);
+                    intent = new Intent(getApplicationContext(), NaturalCapitalSharedCostOutlay.class);
                     startActivity(intent);
                 } else {
                     intent = new Intent(getApplicationContext(), NaturalCapitalSharedCostActivityB.class);
@@ -259,7 +261,7 @@ public class NaturalCapitalSharedCostActivityA extends BaseActivity implements V
                 startLandTypeActivity();
                 break;
             case R.id.text_shared_costs_outlays:
-                Intent intent_outlay = new Intent(getApplicationContext(), NaturalCapitalSharedCostActivityA.class);
+                Intent intent_outlay = new Intent(getApplicationContext(), SharedCostSurveyStartActivity.class);
                 startActivity(intent_outlay);
                 break;
             case R.id.text_certificate:

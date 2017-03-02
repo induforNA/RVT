@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
@@ -34,6 +36,7 @@ import com.sayone.omidyar.model.OutlayYears;
 import com.sayone.omidyar.model.Quantity;
 import com.sayone.omidyar.model.RevenueProduct;
 import com.sayone.omidyar.model.RevenueProductYears;
+import com.sayone.omidyar.model.SharedCostElementYears;
 import com.sayone.omidyar.model.Survey;
 
 import java.math.BigDecimal;
@@ -121,6 +124,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
     private TextView certificate;
     private TextView logout;
     private boolean isTrend = false;
+    private double harvestFreDisp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -193,7 +197,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         unitList = new ArrayList<>();
 
         year_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, yearList);
-        timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodList);
+        timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, timePeriodList);
         unit_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, unitList);
 
         Survey results = realm.where(Survey.class)
@@ -374,6 +378,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
     public void backButtonAction() {
         int currentYearBackIndex = getIndexYears(spinnerYear.getSelectedItem().toString());
         int currentPrductNameBackIndex = getIndexRevenueProducts(currentProductName);
+        if(isTrend)
+            isTrend = false;
         if (currentYearBackIndex != -1 && currentPrductNameBackIndex != -1) {
             if (currentPrductNameBackIndex == 0) {
                 if (currentYearBackIndex == 0) {
@@ -483,7 +489,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 break;
 
             case R.id.text_shared_costs_outlays:
-                Intent intent_outlay = new Intent(getApplicationContext(), NaturalCapitalSharedCostActivityA.class);
+                Intent intent_outlay = new Intent(getApplicationContext(), SharedCostSurveyStartActivity.class);
                 startActivity(intent_outlay);
                 break;
 
@@ -626,7 +632,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
     private void showTrendDialog(final RevenueProduct revenueProduct) {
         final long productId = revenueProduct.getId();
         isTrend = true;
-        final Dialog dialog = new Dialog(NaturalCapitalSurveyActivityD.this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+
+        final Dialog dialog = new Dialog(NaturalCapitalSurveyActivityD.this, android.R.style.Theme_Holo_Light_NoActionBar_Fullscreen);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this,R.color.blackDisable)));
         dialog.setContentView(R.layout.activity_natural_capital_trend);
         Button dialogBack = (Button) dialog.findViewById(R.id.button_back);
         Button dialogNext = (Button) dialog.findViewById(R.id.button_next);
@@ -646,17 +654,76 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         LinearLayout containerTimePeriod = (LinearLayout) dialog.findViewById(R.id.container_timePeriod);
         LinearLayout containerArea = (LinearLayout) dialog.findViewById(R.id.container_area);
 
-
         final EditText dialogEditFrequency = (EditText) dialog.findViewById(R.id.edit_trend_frequency);
         final EditText dialogEditHousehold = (EditText) dialog.findViewById(R.id.edit_trend_num_households);
         final EditText dialogEditQuantity = (EditText) dialog.findViewById(R.id.edit_trend_quantity);
         final EditText dialogEditPrice = (EditText) dialog.findViewById(R.id.edit_trend_price);
         final EditText dialogEditArea = (EditText) dialog.findViewById(R.id.edit_trend_area);
         final EditText dialogLivestock = (EditText) dialog.findViewById(R.id.livestock_edit);
+        final Spinner dialogSpinnerTimePeriod = (Spinner) dialog.findViewById(R.id.dialog_spinner_time_period);
+        final Spinner dialogSpinnerQuantityUnit = (Spinner) dialog.findViewById(R.id.dialog_spinner_quantity_unit);
 
+        dialogSpinnerTimePeriod.setAdapter(timePeriod_adapter);
+        dialogSpinnerQuantityUnit.setAdapter(unit_adapter);
+        Quantity quantity = realm.where(Quantity.class)
+                .equalTo("quantityName", mQuaUnit )
+                .findFirst();
+        Frequency frequency = realm.where(Frequency.class)
+                .equalTo("harvestFrequency", timePeriod )
+                .findFirst();
 
-        dialogQuestionHarvest.setText(getString(R.string.text_question_harvest,getString(R.string.text_harvest)+ revenueProduct.getName()));
-        dialogQuestionHouseholds.setText(getString(R.string.text_number_of_households, getString(R.string.text_harvest)+revenueProduct.getName()));
+        if (timePeriodList.size() != 0 && frequency != null) {
+            // Log.e("TEST FRE ", timePeriod_adapter.getPosition(frequency.getHarvestFrequency())+"");
+            if (language.equals("			")) {
+                dialogSpinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(frequency.getHarvestFrequencyHindi()));
+            } else {
+                dialogSpinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(frequency.getHarvestFrequency()));
+            }
+        }
+
+        if (unitList.size() != 0 && quantity != null) {
+            // Log.e("QUANTITY ", unit_adapter.getPosition(quantity.getQuantityName())+"");
+            dialogSpinnerQuantityUnit.setSelection(unit_adapter.getPosition(quantity.getQuantityName()));
+        }
+        dialogSpinnerTimePeriod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent,
+                                       View view, int pos, long id) {
+                timePeriod = parent.getItemAtPosition(pos).toString();
+
+                // Log.e("Time period ",timePeriod);
+                if (timePeriod.equals("one-time") && !currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
+                    noOfTimesEdit.setText("1");
+                    noOfTimesEdit.setEnabled(false);
+                } else {
+                    noOfTimesEdit.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+            }
+        });
+
+        dialogSpinnerQuantityUnit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent,
+                                       View view, int pos, long id) {
+                unit = parent.getItemAtPosition(pos).toString();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+            }
+        });
+
+        dialogQuestionHarvest.setText(getString(R.string.text_question_harvest,getString(R.string.text_harvest)+ " "+revenueProduct.getName()));
+        dialogQuestionHouseholds.setText(getString(R.string.text_number_of_households, getString(R.string.text_harvest)+" "+revenueProduct.getName()));
         dialogQuestionPerHousehold.setText(getString(R.string.text_question_quantity, revenueProduct.getName()+" was harvested "));
         dialogQuestionPerUnit.setText(getString(R.string.text_question_price, revenueProduct.getName()));
         dialogQuestionArea.setText(R.string.percentage_area_harvested);
@@ -666,13 +733,13 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             dialogQuestionPerHousehold.setText(getString(R.string.text_question_quantity, revenueProduct.getName()+" was extracted "));
             dialogQuestionArea.setText(R.string.percentage_area_extracted);
         }
-        dialogFrequency.setText(String.valueOf(mHarvestFre));
-        dialogTimePeriod.setText(String.valueOf(mFreqUnit));
-        dialogHouseholds.setText(String.valueOf(mHousehold));
-        dialogQuantity.setText(String.valueOf(mHarvestTimes));
+        dialogFrequency.setText(String.valueOf(harvestFreDisp));
+        dialogTimePeriod.setText(timePeriod);
+        dialogHouseholds.setText(String.valueOf(roundToTwoDecimal(mHousehold)));
+        dialogQuantity.setText(String.valueOf(roundToTwoDecimal(mHarvestTimes)));
         dialogUnit.setText(String.valueOf(mQuaUnit));
         dialogPrice.setText(String.valueOf(roundToTwoDecimal(mMarketPriceValue)));
-        dialogArea.setText(String.valueOf(mHarvestArea));
+        dialogArea.setText(String.valueOf(roundToTwoDecimal(mHarvestArea)));
 
         if(currentSocialCapitalServey.equals(getString(R.string.string_pastureland))){
             containerTimePeriod.setVisibility(View.GONE);
@@ -681,11 +748,11 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             containerTimePeriod.setVisibility(View.VISIBLE);
             containerArea.setVisibility(View.VISIBLE);        }
 
-        if(mFreqUnit == 1.0 && !currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
+        /*if(mFreqUnit == 1.0 && !currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
             dialogEditFrequency.setFocusable(false);
             dialogEditFrequency.setBackgroundColor(ContextCompat.getColor(this,R.color.colorDisable));
         } else
-            dialogEditFrequency.setFocusable(true);
+            dialogEditFrequency.setFocusable(true);*/
 
         dialogBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -698,13 +765,19 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             @Override
             public void onClick(View v) {
 
-                if (dialogRadioGroup.getCheckedRadioButtonId() == R.id.radio_button_positive) {
+                if (dialogRadioGroup.getCheckedRadioButtonId() == R.id.radio_button_negative) {
 
                     realm.executeTransactionAsync(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
                             RevenueProduct revenueProduct4 = realm.where(RevenueProduct.class)
                                     .equalTo("id", productId)
+                                    .findFirst();
+                            Quantity quantity = realm.where(Quantity.class)
+                                    .equalTo("quantityName", unit )
+                                    .findFirst();
+                            Frequency frequency = realm.where(Frequency.class)
+                                    .equalTo("harvestFrequency", timePeriod )
                                     .findFirst();
 
                             double harvestFre = mHarvestFre;
@@ -739,8 +812,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                                     revenueProductYears.setProjectedIndex(0);
                                     revenueProductYears.setSubtotal(0);
                                     revenueProductYears.setHouseholds(household);
-                                    revenueProductYears.setHarvestFrequencyUnit(mFreqUnit);
-                                    revenueProductYears.setQuantityUnit(mQuaUnit);
+                                    revenueProductYears.setHarvestFrequencyUnit(frequency.getFrequencyValue());
+                                    revenueProductYears.setQuantityUnit(quantity.getQuantityName());
                                     revenueProductYears.setMarketPriceCurrency(mPriceCurrency);
 
                                     if (currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
@@ -782,17 +855,19 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
                                     //realm.beginTransaction();
                                     revenueProductYears.setHarvestFrequencyValue(harvestFre);
-                                    revenueProductYears.setHarvestFrequencyUnit(mFreqUnit);
+                                    revenueProductYears.setHarvestFrequencyUnit(frequency.getFrequencyValue());
                                     revenueProductYears.setQuantityValue(harvestTimes);
-                                    revenueProductYears.setQuantityUnit(mQuaUnit);
+                                    revenueProductYears.setQuantityUnit(quantity.getQuantityName());
                                     revenueProductYears.setMarketPriceValue(marketPriceVal);
                                     revenueProductYears.setMarketPriceCurrency(mPriceCurrency);
                                     revenueProductYears.setHouseholds(household);
                                     revenueProductYears.setSubtotal(totalVal);
+                                    revenueProductYears.setHarvestArea(harvestArea);
 
+/*
                                     if (currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
                                         revenueProductYears.setHarvestArea(harvestArea);
-                                    }
+                                    }*/
                                 }
                             }
                         }
@@ -1096,26 +1171,40 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                                             ? previousFrequencyUnit : revenueProductYear.getHarvestFrequencyUnit();
                                 }
                             }
+                            int eleCount = 0;
+                            harvestFreDisp = 0;
                             for (RevenueProductYears revenueProductYears : revenueProduct4.getRevenueProductYearses()) {
                                 if (revenueProductYears.getProjectedIndex() < 0) {
+                                    harvestFreDisp += harvestFre;
+
                                     harvestFre = 0;
-                                    if (harvestTimes < revenueProductYears.getQuantityValue()) {
+                                   /* if (harvestTimes < revenueProductYears.getQuantityValue()) {
                                         harvestTimes = revenueProductYears.getQuantityValue();
                                     }
                                     if (harvestPrice < revenueProductYears.getMarketPriceValue()) {
                                         harvestPrice = revenueProductYears.getMarketPriceValue();
-                                    }
+                                    }*/
+//                                    harvestFre = revenueProductYears.getHarvestFrequencyValue();
+                                    harvestTimes = harvestTimes + revenueProductYears.getQuantityValue();
+                                    household = household + revenueProductYears.getHouseholds();
+                                    harvestPrice = harvestPrice + revenueProductYears.getMarketPriceValue();
+
                                     freqUnit = revenueProductYears.getHarvestFrequencyUnit();
                                     quaUnit = revenueProductYears.getQuantityUnit();
                                     priceCurrency = revenueProductYears.getMarketPriceCurrency();
                                     harvestArea = harvestArea + revenueProductYears.getHarvestArea();
-                                    household = revenueProductYears.getHouseholds();
                                     if( revenueProductYears.getHarvestFrequencyUnit() != previousFrequencyUnit){
                                         harvestFre = harvestFre * (freqUnit/previousFrequencyUnit);
                                         freqUnit = previousFrequencyUnit;
                                     }
+                                    eleCount++;
                                 }
                             }
+                            harvestFreDisp = harvestFreDisp / eleCount;
+                            harvestTimes = harvestTimes / eleCount;
+                            harvestPrice = harvestPrice / eleCount;
+                            harvestArea = harvestArea / eleCount;
+                            household = household / eleCount;
 
                         } else {
                             int eleCount = 0;
@@ -1123,11 +1212,11 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
                                 if (revenueProductYears.getProjectedIndex() < 0) {
 
-                                    harvestFre = revenueProductYears.getHarvestFrequencyValue();
+                                    harvestFre += revenueProductYears.getHarvestFrequencyValue();
                                     harvestTimes = harvestTimes + revenueProductYears.getQuantityValue();
                                     harvestPrice = harvestPrice + revenueProductYears.getMarketPriceValue();
                                     harvestArea = harvestArea + revenueProductYears.getHarvestArea();
-                                    household += revenueProductYears.getHouseholds();
+                                    household = household + revenueProductYears.getHouseholds();
 
                                     freqUnit = revenueProductYears.getHarvestFrequencyUnit();
                                     quaUnit = revenueProductYears.getQuantityUnit();
@@ -1137,10 +1226,12 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                                 }
                             }
 
+                            harvestFre = harvestFre / eleCount;
                             harvestTimes = harvestTimes / eleCount;
                             harvestPrice = harvestPrice / eleCount;
                             harvestArea = harvestArea / eleCount;
                             household = household / eleCount;
+                            harvestFreDisp = harvestFre;
                         }
                     }
 
@@ -1160,6 +1251,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                             revenueProductYears.setProjectedIndex(0);
                             revenueProductYears.setSubtotal(0);
                             revenueProductYears.setHouseholds(household);
+                            revenueProductYears.setHarvestArea(harvestArea);
+                            mHarvestArea = harvestArea;
                             mHarvestFre = harvestFre;
                             mFreqUnit = freqUnit;
                             mHarvestTimes = harvestTimes;
@@ -1167,10 +1260,10 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                             mMarketPriceValue = harvestPrice;
                             mPriceCurrency = priceCurrency;
                             mHousehold = household;
-                            if (currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
+                           /* if (currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
                                 revenueProductYears.setHarvestArea(harvestArea);
                                 mHarvestArea = harvestArea;
-                            }
+                            }*/
                             //realm.commitTransaction();
 //                        Log.e("REV ",revenueProductYears.toString());
                         }
@@ -1220,10 +1313,11 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                             revenueProductYears.setMarketPriceCurrency(priceCurrency);
                             revenueProductYears.setHouseholds(household);
                             revenueProductYears.setSubtotal(totalVal);
+                            revenueProductYears.setHarvestArea(harvestArea);
 
-                            if (currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
+                           /* if (currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
                                 revenueProductYears.setHarvestArea(harvestArea);
-                            }
+                            }*/
                             //realm.commitTransaction();
                         Log.e("REV ",revenueProductYears.toString());
                         }

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="20dp"
     android:background="@color/white">
     <TextView
         android:textStyle="bold"
@@ -35,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:checkedButton="@+id/radio_button_negative"
+            android:checkedButton="@+id/radio_button_positive"
             android:layout_margin="5dp">
             <RadioButton
                 android:id="@+id/radio_button_positive"
@@ -103,6 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:layout_marginBottom="5dp"
                 android:text="@string/text_question_harvest"/>
 
             <LinearLayout
@@ -116,6 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/text_number_of_times"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"/>
 
                 <LinearLayout
@@ -153,6 +156,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/text_time_period"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"/>
 
                 <LinearLayout
@@ -169,14 +173,21 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="XX"/>
-                    <EditText
+
+                    <Spinner
+                        android:id="@+id/dialog_spinner_time_period"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+                  <!--  <EditText
                         android:id="@+id/edit_trend_time_perioid"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:focusable="false"
                         android:textColor="@color/black"
                         android:background="@color/colorDisable"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"/>-->
                 </LinearLayout>
             </LinearLayout>
 
@@ -190,6 +201,7 @@
                 <TextView
                     android:id="@+id/text_question_households"
                     android:layout_width="match_parent"
+                    android:layout_gravity="center_vertical"
                     android:layout_height="wrap_content"
                     android:text="@string/text_number_of_households"
                     android:layout_weight="1"/>
@@ -222,6 +234,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:layout_marginBottom="5dp"
                 android:text="@string/text_question_quantity"/>
 
             <LinearLayout
@@ -235,6 +248,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/text_quantity"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"/>
 
                 <LinearLayout
@@ -271,6 +285,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/text_unit"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"/>
 
                 <LinearLayout
@@ -287,13 +302,12 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="XX"/>
-                    <EditText
+                    <Spinner
+                        android:id="@+id/dialog_spinner_quantity_unit"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:focusable="false"
-                        android:background="@color/colorDisable"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
             </LinearLayout>
             <TextView
@@ -301,6 +315,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:layout_marginBottom="5dp"
                 android:text="@string/text_question_price"/>
 
             <LinearLayout
@@ -314,6 +329,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/text_price"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"/>
 
                 <LinearLayout
@@ -351,6 +367,7 @@
                     android:id="@+id/text_area_question"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:text="@string/percentage_area_harvested"
                     android:layout_weight="1"/>
 
@@ -387,6 +404,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="bottom"
         android:orientation="horizontal">
 

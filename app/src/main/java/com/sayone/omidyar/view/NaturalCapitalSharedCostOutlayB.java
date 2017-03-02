@@ -186,14 +186,16 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
 
         calculateDiscountRate(survey.getLandKinds());
 
-        if (currentSocialCapitalServey.equals(getString(R.string.string_forestland)))
+        /*if (currentSocialCapitalServey.equals(getString(R.string.string_forestland)))
             landType.setText(getResources().getText(R.string.string_forestland));
         if (currentSocialCapitalServey.equals(getString(R.string.string_pastureland)))
             landType.setText(getResources().getText(R.string.string_pastureland));
         if (currentSocialCapitalServey.equals(getString(R.string.string_miningland)))
             landType.setText(getResources().getText(R.string.string_miningland));
         if (currentSocialCapitalServey.equals(getString(R.string.string_cropland)))
-            landType.setText(getResources().getText(R.string.title_cropland));
+            landType.setText(getResources().getText(R.string.title_cropland));*/
+
+        landType.setText(getResources().getText(R.string.shared_costs_outlays));
 
         buttonNext.setOnClickListener(this);
         buttonBack.setOnClickListener(this);
@@ -328,7 +330,7 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
                 startLandTypeActivity();
                 break;
             case R.id.text_shared_costs_outlays:
-                Intent intent_outlay = new Intent(getApplicationContext(), NaturalCapitalSharedCostActivityA.class);
+                Intent intent_outlay = new Intent(getApplicationContext(), SharedCostSurveyStartActivity.class);
                 startActivity(intent_outlay);
                 break;
             case R.id.text_certificate:

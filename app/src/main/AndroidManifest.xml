@@ -159,6 +159,9 @@
         <activity
             android:name=".view.NaturalCapitalSharedCostOutlayB"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".view.SharedCostSurveyStartActivity"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

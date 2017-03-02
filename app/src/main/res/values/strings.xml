@@ -347,5 +347,10 @@
     <string name="shared_costs_outlays">Shared Costs and Outlays</string>
     <string name="string_certificate">Certificate</string>
     <string name="restore_original_project_rates">Restore Original Project Rates</string>
+    <string name="shared_outlay_question">Add shared investment/cost</string>
+    <string name="app_title">Rural Land Valuation Tool</string>
+    <!--    <string name="title_shared_cost">Shared Cost</string>
+        <string name="title_shared_cost_outlay">Shared Cost Outlays</string>
+        <string name="title_shared_start">Shared Costs And Outlays</string>-->
 
 </resources>
