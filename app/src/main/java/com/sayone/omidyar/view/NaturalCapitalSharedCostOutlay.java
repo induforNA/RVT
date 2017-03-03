@@ -361,33 +361,33 @@ public class NaturalCapitalSharedCostOutlay extends BaseActivity {
         return outlayYearses;
     }
 
-    public void nextLandKind() {
-        RealmResults<LandKind> landKindRealmResults = realm.where(LandKind.class)
-                .equalTo("surveyId", surveyId)
-                .equalTo("status", "active")
-                .findAll();
-        int j = 0;
-        int i = 0;
-        for (LandKind landKind : landKindRealmResults) {
-            Log.e("TAG ", landKind.toString());
-            if (landKind.getName().equals("")) {
-                j = i + 1;
-            }
-            i++;
-        }
-
-        if (j < i) {
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString("currentSocialCapitalSurvey", landKindRealmResults.get(j).getName());
-            editor.apply();
-
-            Intent intent = new Intent(getApplicationContext(), StartLandTypeActivity.class);
-            startActivity(intent);
-        } else {
-            Intent intent = new Intent(getApplicationContext(), NewCertificateActivity.class);
-            startActivity(intent);
-        }
-    }
+//    public void nextLandKind() {
+//        RealmResults<LandKind> landKindRealmResults = realm.where(LandKind.class)
+//                .equalTo("surveyId", surveyId)
+//                .equalTo("status", "active")
+//                .findAll();
+//        int j = 0;
+//        int i = 0;
+//        for (LandKind landKind : landKindRealmResults) {
+//            Log.e("TAG ", landKind.toString());
+//            if (landKind.getName().equals("")) {
+//                j = i + 1;
+//            }
+//            i++;
+//        }
+//
+//        if (j < i) {
+//            SharedPreferences.Editor editor = sharedPref.edit();
+//            editor.putString("currentSocialCapitalSurvey", landKindRealmResults.get(j).getName());
+//            editor.apply();
+//
+//            Intent intent = new Intent(getApplicationContext(), StartLandTypeActivity.class);
+//            startActivity(intent);
+//        } else {
+//            Intent intent = new Intent(getApplicationContext(), NewCertificateActivity.class);
+//            startActivity(intent);
+//        }
+//    }
 
     public int getNextKeyOutlay() {
         return realm.where(Outlay.class).max("id").intValue() + 1;

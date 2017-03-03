@@ -360,11 +360,6 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
             }
         }
 
-//        forestlandLayout.setVisibility(View.GONE);
-//        croplandLayout.setVisibility(View.GONE);
-//        pasturelandLayout.setVisibility(View.GONE);
-//        mininglandLayout.setVisibility(View.GONE);
-
         if (forestlandLayout.getVisibility() == View.GONE) {
             parcelGridLayout.removeView(forestlandLayout);
         }
@@ -424,12 +419,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
             }
             else totalVal = 1000;
         }
-        if(parcelVal > 500 ) {
-            if(parcelVal >=1000) {
-                parcelVal = (Math.round(parcelVal/1000))*1000;
-            }
-            else parcelVal = 1000;
-        }
+        parcelVal = Math.round(parcelVal);
 
         String totalValStr = formattedString(Long.valueOf(String.valueOf((long) totalVal)));
         String totalValStrToSend = formattedStringNoSymbol(Long.valueOf(String.valueOf((long) totalVal)));

@@ -589,10 +589,10 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             areaContainer.setVisibility(View.GONE);
             livestockContainer.setVisibility(View.VISIBLE);
             householdQuestion.setText(getString(R.string.string_household, "harvest " + revenueProductLoad.getName()));
-            loadQuestions.setText("How many months of a year do you graze " + revenueProductLoad.getName() + " on this piece of land?");
-            quantityQuestion.setText("Total amount of fodder consumed per animal per year");
-            productQuestion.setText("Market Price of fodder");
-            livestockQuestion.setText("Number of livestock");
+            loadQuestions.setText(getString(R.string.text_question_livestock) + revenueProductLoad.getName() + " on this piece of land?");
+            quantityQuestion.setText(getString(R.string.text_quantity_question_livestock));
+            productQuestion.setText(getString(R.string.text_product_question_livestock));
+            livestockQuestion.setText(getString(R.string.text_question_number_livestock));
             timePerHead.setVisibility(View.INVISIBLE);
             spinnerTimePeriod.setVisibility(View.INVISIBLE);
             numTimesHead.setVisibility(View.INVISIBLE);
@@ -740,11 +740,12 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         dialogQuestionPerUnit.setText(getString(R.string.text_question_price, revenueProduct.getName()));
         dialogQuestionArea.setText(R.string.percentage_area_harvested);
         if(currentSocialCapitalServey.equals(getString(R.string.string_miningland))){
-            dialogQuestionHarvest.setText(getString(R.string.text_question_harvest, getString(R.string.text_extract)+ revenueProduct.getName()));
-            dialogQuestionHouseholds.setText(getString(R.string.text_number_of_households, getString(R.string.text_extract)+revenueProduct.getName()));
+            dialogQuestionHarvest.setText(getString(R.string.text_question_harvest, getString(R.string.text_extract)+" "+ revenueProduct.getName()));
+            dialogQuestionHouseholds.setText(getString(R.string.text_number_of_households, getString(R.string.text_extract)+" "+revenueProduct.getName()));
             dialogQuestionPerHousehold.setText(getString(R.string.text_question_quantity, revenueProduct.getName()+" was extracted "));
             dialogQuestionArea.setText(R.string.percentage_area_extracted);
         }
+
         dialogFrequency.setText(String.valueOf(harvestFreDisp));
         dialogTimePeriod.setText(timePeriod);
         dialogHouseholds.setText(String.valueOf(roundToTwoDecimal(mHousehold)));
@@ -754,6 +755,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         dialogArea.setText(String.valueOf(roundToTwoDecimal(mHarvestArea)));
 
         if(currentSocialCapitalServey.equals(getString(R.string.string_pastureland))){
+            dialogQuestionHarvest.setText(getString(R.string.text_question_livestock) +revenueProduct.getName());
+            dialogQuestionHouseholds.setText(getString(R.string.text_question_number_livestock));
             containerTimePeriod.setVisibility(View.GONE);
             containerArea.setVisibility(View.GONE);
         } else {
@@ -891,9 +894,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                             if (buttonNext.isClickable()) {
                                 buttonNext.setClickable(false);
                                 nextProduct = true;
-                                if(currentCostProductIndex < totalCostProductCount)
+                                /*if(currentCostProductIndex < totalCostProductCount)
                                     saveYearlyDatas(revenueProducts.get(currentCostProductIndex));
-                                else
+                                else*/
                                 saveYearlyDatas(revenueProducts.get(currentCostProductIndexSave));
                             }
                         }

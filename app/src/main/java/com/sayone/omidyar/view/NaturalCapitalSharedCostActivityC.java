@@ -330,7 +330,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
         double totalValNum = 0;
 
         for (LandKind landKind : landKinds) {
-            if (landKind.getStatus().equals("active")) {
+            if (landKind.getStatus().equals("active") && results.getComponents() != null) {
                 if (landKind.getSocialCapitals().isDiscountFlag()) {
                     landDisc = landKind.getSocialCapitals().getDiscountRateOverride();
                 } else {
@@ -1297,34 +1297,34 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
         buttonNext.setClickable(true);
     }
 
-    public void nextLandKind() {
-        RealmResults<LandKind> landKindRealmResults = realm.where(LandKind.class)
-                .equalTo("surveyId", surveyId)
-                .equalTo("status", "active")
-                .findAll();
-        int j = 0;
-        int i = 0;
-        for (LandKind landKind : landKindRealmResults) {
-            //Log.e("TAG ", landKind.toString());
-            //Log.e(TAG, String.valueOf(survey1.getParticipants().size()));
-            if (landKind.getName().equals(currentSocialCapitalSurvey)) {
-                j = i + 1;
-            }
-            i++;
-        }
-
-        if (j < i) {
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString("currentSocialCapitalSurvey", landKindRealmResults.get(j).getName());
-            editor.apply();
-
-            Intent intent = new Intent(getApplicationContext(), StartLandTypeActivity.class);
-            startActivity(intent);
-        } else {
-            Intent intent = new Intent(getApplicationContext(), NewCertificateActivity.class);
-            startActivity(intent);
-        }
-    }
+//    public void nextLandKind() {
+//        RealmResults<LandKind> landKindRealmResults = realm.where(LandKind.class)
+//                .equalTo("surveyId", surveyId)
+//                .equalTo("status", "active")
+//                .findAll();
+//        int j = 0;
+//        int i = 0;
+//        for (LandKind landKind : landKindRealmResults) {
+//            //Log.e("TAG ", landKind.toString());
+//            //Log.e(TAG, String.valueOf(survey1.getParticipants().size()));
+//            if (landKind.getName().equals(currentSocialCapitalSurvey)) {
+//                j = i + 1;
+//            }
+//            i++;
+//        }
+//
+//        if (j < i) {
+//            SharedPreferences.Editor editor = sharedPref.edit();
+//            editor.putString("currentSocialCapitalSurvey", landKindRealmResults.get(j).getName());
+//            editor.apply();
+//
+//            Intent intent = new Intent(getApplicationContext(), StartLandTypeActivity.class);
+//            startActivity(intent);
+//        } else {
+//            Intent intent = new Intent(getApplicationContext(), NewCertificateActivity.class);
+//            startActivity(intent);
+//        }
+//    }
 
     public void allCashFlow() {
         Survey results = realm.where(Survey.class)

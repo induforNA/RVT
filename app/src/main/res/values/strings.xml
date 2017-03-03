@@ -354,4 +354,8 @@
     <string name="country_hint">Country</string>
     <string name="sovereign_larger_than_inflation">Sovereign rate should be larger than inflation rate</string>
     <string name="invalid_currency_field">Currency should be 3 characters</string>
+    <string name="text_question_livestock">How many months of a year do you graze\u0020</string>
+    <string name="text_quantity_question_livestock">Total amount of fodder consumed per animal per year</string>
+    <string name="text_product_question_livestock">Market Price of fodder</string>
+    <string name="text_question_number_livestock">Number of livestock</string>
 </resources>

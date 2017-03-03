@@ -496,7 +496,7 @@ public class NaturalCapitalCostOutlay extends BaseActivity {
             startActivity(intent);
 
         } else {
-            Intent intent = new Intent(getApplicationContext(), NewCertificateActivity.class);
+            Intent intent = new Intent(getApplicationContext(), SharedCostSurveyStartActivity.class);
             startActivity(intent);
         }
     }
