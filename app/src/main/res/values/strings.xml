@@ -232,7 +232,7 @@
     <string name="string_currency">Currency</string>
     <string name="qn_natural_3_1">Do you plan on incurring any new future costs, seperate from those already entered for the past?</string>
     <string name="qn_natural_3_2">What type of costs?</string>
-    <string name="qn_land_selection_1">What kinds of land use are valued on your land?</string>
+    <string name="qn_land_selection_1">What kind of resources are valued on you land?</string>
     <string name="string_add_participant">Add a participant</string>
     <string name="string_add_crop">Add a crop</string>
     <string name="string_fill_name">Fill name</string>

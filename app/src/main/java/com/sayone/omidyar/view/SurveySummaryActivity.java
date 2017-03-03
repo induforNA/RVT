@@ -232,7 +232,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
         alertDialogBuilder.setView(inputA);
 
 
-        alertDialogBuilder.setMessage("Enter email ids separated by commas");
+        alertDialogBuilder.setMessage("Enter email addresses separated by commas");
         alertDialogBuilder.setPositiveButton("Send Data",
                 new DialogInterface.OnClickListener() {
                     @Override
