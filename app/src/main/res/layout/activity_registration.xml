@@ -123,7 +123,7 @@
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textSize="@dimen/textfield_size"
-                        android:nextFocusDown="@+id/reg_risk_rate"/>
+                        android:nextFocusDown="@+id/edittext_currency"/>
 
 
                 </LinearLayout>
@@ -157,8 +157,12 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
+                    android:singleLine="true"
                     android:hint="@string/currency_hint"
-                    android:inputType="textCapCharacters"/>
+                    android:inputType="textCapCharacters"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:nextFocusDown="@+id/edittext_country"
+                    android:maxLength="3"/>
 
                 <EditText
                     android:id="@+id/edittext_country"
@@ -169,7 +173,8 @@
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     android:hint="@string/country_hint"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:nextFocusDown="@+id/reg_risk_rate"/>
 
             </LinearLayout>
 

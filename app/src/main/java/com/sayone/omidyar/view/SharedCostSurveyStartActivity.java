@@ -79,10 +79,12 @@ public class SharedCostSurveyStartActivity extends BaseActivity implements View.
                     .equalTo("surveyId", surveyId)
                     .equalTo("status", "active")
                     .findAll();
-            SharedPreferences.Editor editor = preferences.edit();
-            currentSocialCapitalServey = landKindRealmResults.get(0).getName();
-            editor.putString("currentSocialCapitalSurvey", currentSocialCapitalServey);
-            editor.apply();
+            if(landKindRealmResults.size() != 0) {
+                SharedPreferences.Editor editor = preferences.edit();
+                currentSocialCapitalServey = landKindRealmResults.get(0).getName();
+                editor.putString("currentSocialCapitalSurvey", currentSocialCapitalServey);
+                editor.apply();
+            }
         }
 
         landType.setText(getString(R.string.shared_costs_outlays));
