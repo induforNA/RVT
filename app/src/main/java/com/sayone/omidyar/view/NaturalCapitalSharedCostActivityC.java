@@ -1525,7 +1525,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
             disFactor = bigDecimalDisFactor.doubleValue();
         }
 
-        terminalValue = disRate > inflationRate ? (cashFlowTemp.getValue() / (disRate - inflationRate)) : 0;
+        terminalValue = disRate != 0 ? (cashFlowTemp.getValue() / (disRate)) : 0;
 
         double discountedCashFlow = terminalValue * disFactor;
 

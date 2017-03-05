@@ -1844,7 +1844,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             outlayTotal = outlayTotal + outlayYears1.getPrice();
         }
 
-        terminalValue = disRate > inflationRate ? (cashFlowTemp.getValue() / (disRate - inflationRate)) : 0;
+        terminalValue = disRate != 0 ? (cashFlowTemp.getValue() / (disRate)) : 0;
 
         double discountedCashFlow = terminalValue * disFactor;
 

@@ -1680,7 +1680,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             outlayTotal = outlayTotal + outlayYears1.getPrice();
         }
 
-        terminalValue = disRate > inflationRate ? (cashFlowTemp.getValue() / (disRate - inflationRate)) : 0;
+        terminalValue = disRate != 0 ? (cashFlowTemp.getValue() / (disRate)) : 0;
 
         double discountedCashFlow = terminalValue * disFactor;
 
