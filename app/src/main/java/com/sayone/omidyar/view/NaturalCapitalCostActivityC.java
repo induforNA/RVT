@@ -1055,7 +1055,8 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                             }
                             for (CostElementYears costElementYears : costElement4.getCostElementYearses()) {
                                 if (costElementYears.getProjectedIndex() < 0) {
-                                    harvestFre += costElementYears.getCostFrequencyValue();
+                                    double harvestFreTemp ;
+                                    double previousFreqTemp = previousFrequencyUnit == 2 ? 1 : previousFrequencyUnit;
                                     harvestTimes = harvestTimes + costElementYears.getCostPerPeriodValue();
                                     harvestPrice = harvestPrice + costElementYears.getCostPerUnitValue();
 
@@ -1065,9 +1066,12 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                                     household += costElementYears.getHouseholds();
 
                                     if (costElementYears.getCostFrequencyUnit() != previousFrequencyUnit) {
-                                        harvestFre = harvestFre * (freqUnit / previousFrequencyUnit);
+                                        harvestFreTemp = (freqUnit / previousFreqTemp) * costElementYears.getCostFrequencyUnit();
                                         freqUnit = previousFrequencyUnit;
+                                    } else {
+                                        harvestFreTemp = costElementYears.getCostFrequencyUnit();
                                     }
+                                    harvestFre += harvestFreTemp;
                                     eleCount++;
                                 }
                             }

@@ -1337,7 +1337,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
                                 if (revenueProductYears.getProjectedIndex() < 0) {
 
-                                    harvestFre += revenueProductYears.getHarvestFrequencyValue();
+                                    double harvestFreTemp ;
+                                    double previousFreqTemp = previousFrequencyUnit == 2 ? 1 : previousFrequencyUnit;
+
                                     harvestTimes = harvestTimes + revenueProductYears.getQuantityValue();
                                     harvestPrice = harvestPrice + revenueProductYears.getMarketPriceValue();
                                     harvestArea = harvestArea + revenueProductYears.getHarvestArea();
@@ -1348,9 +1350,13 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                                     priceCurrency = revenueProductYears.getMarketPriceCurrency();
 
                                     if (revenueProductYears.getHarvestFrequencyUnit() != previousFrequencyUnit) {
-                                        harvestFre = harvestFre * (freqUnit / previousFrequencyUnit);
+                                        harvestFreTemp = (freqUnit / previousFreqTemp) * revenueProductYears.getHarvestFrequencyValue();
                                         freqUnit = previousFrequencyUnit;
+                                    } else {
+                                        harvestFreTemp = revenueProductYears.getHarvestFrequencyValue();
                                     }
+                                    harvestFre += harvestFreTemp;
+
                                     eleCount++;
                                 }
                             }
