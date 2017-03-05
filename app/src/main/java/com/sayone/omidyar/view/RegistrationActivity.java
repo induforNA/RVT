@@ -291,14 +291,14 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
                 } else if (editInflationRate.getText().toString().equals("")) {
                     toastfunction(getApplicationContext(), getResources().getString(R.string.empty_inflation_rate));
                 } else {
-                    double tempInflationRate = Double.parseDouble(editInflationRate.getText().toString());
-                    double tempRiskRate = Double.parseDouble(editRiskRate.getText().toString());
-                    if (tempRiskRate < tempInflationRate) {
-                        toastfunction(getApplicationContext(), getResources().getString(R.string.sovereign_larger_than_inflation));
-                    } else {
+//                    double tempInflationRate = Double.parseDouble(editInflationRate.getText().toString());
+//                    double tempRiskRate = Double.parseDouble(editRiskRate.getText().toString());
+//                    if (tempRiskRate < tempInflationRate) {
+//                        toastfunction(getApplicationContext(), getResources().getString(R.string.sovereign_larger_than_inflation));
+//                    } else {
                         toastfunction(getApplicationContext(), getResources().getString(R.string.registration_successful));
                         insertData();
-                    }
+//                    }
                 }
                 break;
         }

@@ -22,6 +22,16 @@ public class SharedCostElement extends RealmObject {
 
     private RealmList<SharedCostElementYears> costElementYearses;
 
+    public SharedCostElementYears getCostElementTrend() {
+        return costElementTrend;
+    }
+
+    public void setCostElementTrend(SharedCostElementYears costElementTrend) {
+        this.costElementTrend = costElementTrend;
+    }
+
+    private SharedCostElementYears costElementTrend;
+
     public long getId() {
         return id;
     }

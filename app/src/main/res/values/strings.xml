@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Omidyar</string>
+    <string name="app_name">RVT</string>
     <string name="checkbox_id">checkbox id</string>
     <string-array name="country_array">
         <!--<item>Select country</item>-->
@@ -348,7 +348,7 @@
     <string name="string_certificate">Certificate</string>
     <string name="restore_original_project_rates">Restore Original Project Rates</string>
     <string name="shared_outlay_question">Add shared investment/cost</string>
-    <string name="app_title">Rural Land Valuation Tool</string>
+    <string name="app_title">Rural Valuation Tool</string>
     <string name="language_hint">Language</string>
     <string name="currency_hint">Currency</string>
     <string name="country_hint">Country</string>

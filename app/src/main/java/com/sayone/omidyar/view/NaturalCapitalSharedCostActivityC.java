@@ -29,6 +29,7 @@ import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.CashFlow;
 import com.sayone.omidyar.model.Component;
+import com.sayone.omidyar.model.CostElementYears;
 import com.sayone.omidyar.model.Frequency;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.Quantity;
@@ -1088,6 +1089,18 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
         dialogEditArea.setEnabled(false);
         dialogSpinnerTimePeriod.setEnabled(false);
         dialogSpinnerQuantityUnit.setEnabled(false);
+
+        SharedCostElementYears costElementTrend = costElement.getCostElementTrend();
+        if(costElementTrend != null){
+            if(costElementTrend.getCostFrequencyValue() != 0)
+                dialogEditFrequency.setText(String.valueOf(costElementTrend.getCostFrequencyValue()));
+            if(costElementTrend.getHouseholds() != 0)
+                dialogEditHousehold.setText(String.valueOf(costElementTrend.getHouseholds()));
+            if(costElementTrend.getCostPerUnitValue() != 0)
+                dialogEditPrice.setText(String.valueOf(costElementTrend.getCostPerUnitValue()));
+            if(costElementTrend.getCostPerPeriodValue() != 0)
+                dialogEditQuantity.setText(String.valueOf(costElementTrend.getCostPerPeriodValue()));
+        }
         dialogRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
@@ -1127,13 +1140,19 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
             if (language.equals("			")) {
                 dialogSpinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(frequency.getHarvestFrequencyHindi()));
             } else {
-                dialogSpinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(frequency.getHarvestFrequency()));
+                if(costElementTrend != null && costElementTrend.getCostFrequencyUnit() != 0)
+                    dialogSpinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(String.valueOf(costElementTrend.getCostFrequencyUnit())));
+                else
+                    dialogSpinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(frequency.getHarvestFrequency()));
             }
         }
 
         if (unitList.size() != 0 && quantity != null) {
             // Log.e("QUANTITY ", unit_adapter.getPosition(quantity.getQuantityName())+"");
-            dialogSpinnerQuantityUnit.setSelection(unit_adapter.getPosition(quantity.getQuantityName()));
+            if(costElementTrend != null && costElementTrend.getCostPerPeriodUnit() != null)
+                dialogSpinnerQuantityUnit.setSelection(unit_adapter.getPosition(costElementTrend.getCostPerPeriodUnit()));
+            else
+                dialogSpinnerQuantityUnit.setSelection(unit_adapter.getPosition(quantity.getQuantityName()));
         }
         dialogSpinnerTimePeriod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -1208,7 +1227,11 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                     realm.executeTransactionAsync(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
-                            SharedCostElement sharedCostElementCostElement = realm.where(SharedCostElement.class)
+                            SharedCostElement sharedCostElement = realm.where(SharedCostElement.class)
+                                    .equalTo("id", costElementId)
+                                    .findFirst();
+
+                            SharedCostElementYears costElementTrend = realm.where(SharedCostElementYears.class)
                                     .equalTo("id", costElementId)
                                     .findFirst();
 
@@ -1245,18 +1268,28 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                                 harvestFre = 0;
                             }
 
-                            for (SharedCostElementYears costElementYears : sharedCostElementCostElement.getCostElementYearses()) {
+                            for (SharedCostElementYears costElementYears : sharedCostElement.getCostElementYearses()) {
                                 if (costElementYears.getYear() == 0) {
 
                                     costElementYears.setCostFrequencyValue((int) harvestFre);
+                                    costElementTrend.setCostFrequencyValue((int) harvestFre);
                                     costElementYears.setCostPerPeriodValue(harvestTimes);
+                                    costElementTrend.setCostPerPeriodValue(harvestTimes);
                                     costElementYears.setCostPerUnitValue(harvestPrice);
+                                    costElementTrend.setCostPerUnitValue(harvestPrice);
                                     costElementYears.setCostPerUnitUnit(mPriceCurrency);
+                                    costElementTrend.setCostPerUnitUnit(mPriceCurrency);
                                     costElementYears.setHouseholds(household);
+                                    costElementTrend.setHouseholds(household);
                                     costElementYears.setProjectedIndex(0);
+                                    costElementTrend.setProjectedIndex(0);
                                     costElementYears.setSubtotal(0);
+                                    costElementTrend.setSubtotal(0);
                                     costElementYears.setCostFrequencyUnit(frequency.getFrequencyValue());
+                                    costElementTrend.setCostFrequencyUnit(frequency.getFrequencyValue());
                                     costElementYears.setCostPerPeriodUnit(quantity.getQuantityName());
+                                    costElementTrend.setCostPerPeriodUnit(quantity.getQuantityName());
+                                    sharedCostElement.setCostElementTrend(costElementTrend);
                                 }
                                 if (costElementYears.getProjectedIndex() > 0) {
                                     BigDecimal bigDecimalPowerFactor = new BigDecimal(Math.pow((1 + inflationRate), costElementYears.getProjectedIndex()), MathContext.DECIMAL64);

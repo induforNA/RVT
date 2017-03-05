@@ -22,6 +22,16 @@ public class RevenueProduct extends RealmObject {
 
     private RealmList<RevenueProductYears> revenueProductYearses;
 
+    public RevenueProductYears getRevenueProductTrend() {
+        return revenueProductTrend;
+    }
+
+    public void setRevenueProductTrend(RevenueProductYears revenueProductTrend) {
+        this.revenueProductTrend = revenueProductTrend;
+    }
+
+    private RevenueProductYears revenueProductTrend;
+
     public long getId() {
         return id;
     }
