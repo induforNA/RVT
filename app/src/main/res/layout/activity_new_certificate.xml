@@ -426,7 +426,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:columnCount="2">
+                    android:columnCount="2"
+                    android:columnOrderPreserved="true"
+                    android:layout_gravity="left">
 
                     <LinearLayout
                         android:id="@+id/forestland_layout"

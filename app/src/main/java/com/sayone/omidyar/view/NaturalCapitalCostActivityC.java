@@ -1288,7 +1288,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 timePeriod = parent.getItemAtPosition(pos).toString();
 
                 // Log.e("Time period ",timePeriod);
-                if (timePeriod.equals("one-time") && !currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))) {
+                if (timePeriod.equals("one-time")) {
                     dialogEditFrequency.setText("1");
                     dialogEditFrequency.setEnabled(false);
                 } else {
