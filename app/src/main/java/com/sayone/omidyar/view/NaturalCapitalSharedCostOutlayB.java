@@ -686,6 +686,9 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
     }
 
     private void calculateDiscountRate(RealmList<LandKind> landKinds) {
+        Survey results = realm.where(Survey.class)
+                .equalTo("surveyId", surveyId)
+                .findFirst();
         double landDisc;
 
         double totalVal = 0;
@@ -720,5 +723,9 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
             }
         }
         mSharedDiscountRate = totalValNum / totalVal;
+        realm.beginTransaction();
+        results.setSharedDiscountRate(mSharedDiscountRate);
+        realm.commitTransaction();
+
     }
 }

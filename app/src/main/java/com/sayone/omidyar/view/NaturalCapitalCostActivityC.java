@@ -1079,10 +1079,10 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                                     household += costElementYears.getHouseholds();
 
                                     if (costElementYears.getCostFrequencyUnit() != previousFrequencyUnit) {
-                                        harvestFreTemp = (freqUnit / previousFreqTemp) * costElementYears.getCostFrequencyUnit();
+                                        harvestFreTemp = (freqUnit / previousFreqTemp) * costElementYears.getCostFrequencyValue();
                                         freqUnit = previousFrequencyUnit;
                                     } else {
-                                        harvestFreTemp = costElementYears.getCostFrequencyUnit();
+                                        harvestFreTemp = costElementYears.getCostFrequencyValue();
                                     }
                                     harvestFre += harvestFreTemp;
                                     eleCount++;

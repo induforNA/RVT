@@ -45,6 +45,8 @@ public class Survey extends RealmObject {
 
     private double riskRate;
 
+    private double sharedDiscountRate;
+
     private double overRideInflationRate;
 
     private double overRideRiskRate;
@@ -272,5 +274,13 @@ public class Survey extends RealmObject {
 
     public void setSharedOutlays(RealmList<Outlay> sharedOutlays) {
         this.sharedOutlays = sharedOutlays;
+    }
+
+    public double getSharedDiscountRate() {
+        return sharedDiscountRate;
+    }
+
+    public void setSharedDiscountRate(double sharedDiscountRate) {
+        this.sharedDiscountRate = sharedDiscountRate;
     }
 }

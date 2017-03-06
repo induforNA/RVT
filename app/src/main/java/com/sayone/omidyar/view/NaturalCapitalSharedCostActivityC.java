@@ -907,7 +907,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
 
                             for (SharedCostElementYears costElementYears : costElement4.getCostElementYearses()) {
                                 if (costElementYears.getProjectedIndex() < 0) {
-                                    harvestFreDisp += harvestFre;
+                                    harvestFreDisp += costElementYears.getCostFrequencyValue();
                                     harvestFre = 0;
                                     harvestTimes = harvestTimes + costElementYears.getCostPerPeriodValue();
                                     household = household + costElementYears.getHouseholds();
@@ -953,10 +953,10 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                                     household += costElementYears.getHouseholds();
 
                                     if (costElementYears.getCostFrequencyUnit() != previousFrequencyUnit) {
-                                        harvestFreTemp = (freqUnit / previousFreqTemp) * costElementYears.getCostFrequencyUnit();
+                                        harvestFreTemp = (freqUnit / previousFreqTemp) * costElementYears.getCostFrequencyValue();
                                         freqUnit = previousFrequencyUnit;
                                     } else {
-                                        harvestFreTemp = costElementYears.getCostFrequencyUnit();
+                                        harvestFreTemp = costElementYears.getCostFrequencyValue();
                                     }
                                     harvestFre += harvestFreTemp;
                                     eleCount++;

@@ -381,6 +381,10 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                                 jsonObject.put("overrideInflationRate", "");
                             } else
                                 jsonObject.put("overrideInflationRate", survey.getOverRideInflationRate());
+                            if (survey.getSharedDiscountRate() == 0) {
+                                jsonObject.put("sharedDiscountrate", "");
+                            } else
+                                jsonObject.put("sharedDiscountrate", survey.getSharedDiscountRate());
                             makeJsonObjectRequest(survey.getSurveyId());
                         } catch (JSONException e) {
                             e.printStackTrace();
