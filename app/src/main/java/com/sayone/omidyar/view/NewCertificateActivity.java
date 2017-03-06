@@ -376,6 +376,8 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         if (surveyCheck.getComponents() != null)
             totalVal = totalVal + surveyCheck.getComponents().getSharedCostValue();
 
+        //--------------------------- area
+        parcelArea = parcelArea > 0 ? parcelArea : 1;
         parcelVal = totalVal / parcelArea;
         if (totalVal > 500) {
             if (totalVal >= 1000) {
