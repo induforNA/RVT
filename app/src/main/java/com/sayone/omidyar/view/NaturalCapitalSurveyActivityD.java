@@ -762,7 +762,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                     dialogEditFrequency.setText("1");
                     dialogEditFrequency.setEnabled(false);
                 } else {
-                    dialogEditFrequency.setEnabled(true);
+                    if (dialogRadioGroup.getCheckedRadioButtonId() == R.id.radio_button_negative) {
+                        dialogEditFrequency.setEnabled(true);
+                    }
                 }
             }
 

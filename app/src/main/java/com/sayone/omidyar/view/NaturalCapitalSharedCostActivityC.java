@@ -29,7 +29,6 @@ import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.CashFlow;
 import com.sayone.omidyar.model.Component;
-import com.sayone.omidyar.model.CostElementYears;
 import com.sayone.omidyar.model.Frequency;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.Quantity;
@@ -1093,7 +1092,9 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
         dialogEditPrice.setEnabled(false);
         dialogEditArea.setEnabled(false);
         dialogSpinnerTimePeriod.setEnabled(false);
+        dialogSpinnerTimePeriod.setClickable(false);
         dialogSpinnerQuantityUnit.setEnabled(false);
+        dialogSpinnerQuantityUnit.setClickable(false);
 
         SharedCostElementYears costElementTrend = costElement.getCostElementTrend();
         if(costElementTrend != null){
@@ -1119,7 +1120,9 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                     dialogEditPrice.setEnabled(true);
                     dialogEditArea.setEnabled(true);
                     dialogSpinnerTimePeriod.setEnabled(true);
+                    dialogSpinnerTimePeriod.setClickable(true);
                     dialogSpinnerQuantityUnit.setEnabled(true);
+                    dialogSpinnerQuantityUnit.setClickable(true);
                 } else if (dialogRadioGroup.getCheckedRadioButtonId() == R.id.radio_button_positive) {
                     dialogEditFrequency.setEnabled(false);
                     dialogEditHousehold.setEnabled(false);
@@ -1127,7 +1130,9 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                     dialogEditPrice.setEnabled(false);
                     dialogEditArea.setEnabled(false);
                     dialogSpinnerTimePeriod.setEnabled(false);
+                    dialogSpinnerTimePeriod.setClickable(false);
                     dialogSpinnerQuantityUnit.setEnabled(false);
+                    dialogSpinnerQuantityUnit.setClickable(false);
                 }
             }
         });
@@ -1171,7 +1176,9 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                     dialogEditFrequency.setText("1");
                     dialogEditFrequency.setEnabled(false);
                 } else {
-                    dialogEditFrequency.setEnabled(true);
+                    if (dialogRadioGroup.getCheckedRadioButtonId() == R.id.radio_button_negative) {
+                        dialogEditFrequency.setEnabled(true);
+                    }
                 }
             }
 

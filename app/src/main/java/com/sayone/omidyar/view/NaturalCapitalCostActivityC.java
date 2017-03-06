@@ -1292,7 +1292,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                     dialogEditFrequency.setText("1");
                     dialogEditFrequency.setEnabled(false);
                 } else {
-                    dialogEditFrequency.setEnabled(true);
+                    if (dialogRadioGroup.getCheckedRadioButtonId() == R.id.radio_button_negative) {
+                        dialogEditFrequency.setEnabled(true);
+                    }
                 }
             }
 
