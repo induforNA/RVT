@@ -921,12 +921,11 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                                 .multiply(bigDecimalQuanityEditStr, MathContext.DECIMAL64);
 
 
-                     /*   if (currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))) {
+                       /* if (currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))) {
                             bigDecimalTotal = bigDecimalFrequency.multiply(bigDecimalNoOfTimes, MathContext.DECIMAL64)
                                     .multiply(bigDecimalPrice, MathContext.DECIMAL64)
                                     .multiply(bigDecimalQuanityEditStr, MathContext.DECIMAL64);
-                        }
-*/
+                        }*/
                         double total = bigDecimalTotal.doubleValue();
 
 
@@ -1303,7 +1302,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 timePeriod = parent.getItemAtPosition(pos).toString();
 
                 // Log.e("Time period ",timePeriod);
-                if (timePeriod.equals("one-time")) {
+                if (timePeriod.equals("one-time") && !currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))) {
                     dialogEditFrequency.setText("1");
                     dialogEditFrequency.setEnabled(false);
                 } else {
@@ -1440,7 +1439,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                             if (!dialogEditArea.getText().toString().equals(""))
                                 harvestArea = Double.parseDouble(dialogEditArea.getText().toString());
 
-                            if(harvestFre == 1) {
+                            if(harvestFre == 1 && !currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))) {
                                 harvestFre = 0;
                             }
 
@@ -1480,6 +1479,8 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                                     BigDecimal bigDecimalfreqUnit = new BigDecimal(mFreqUnit);
                                     if (!currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))) {
                                         if (mFreqUnit == 2) {
+                                            bigDecimalfreqUnit = new BigDecimal(1);
+                                        } else if( mFreqUnit == 0 && currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))){
                                             bigDecimalfreqUnit = new BigDecimal(1);
                                         }
                                     }

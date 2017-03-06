@@ -784,7 +784,10 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                         BigDecimal bigDecimalFrequency;
                         if (frequency.getFrequencyValue() == 2) {
                             bigDecimalFrequency = new BigDecimal(1);
-                        } else {
+                        } else  if(frequency.getFrequencyValue() == 0 && currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))){
+                            bigDecimalFrequency = new BigDecimal(1);
+                        }
+                        else {
                             bigDecimalFrequency = new BigDecimal(frequency.getFrequencyValue());
                         }
 
@@ -1010,6 +1013,9 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                             }
 
                             BigDecimal bigDecimalharvestFre = new BigDecimal(harvestFre);
+                            if(harvestFre == 0 && currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))){
+                                bigDecimalfreqUnit = new BigDecimal(1);
+                            }
 
                             BigDecimal bigDecimalharvestTimes = new BigDecimal(harvestTimes);
                             BigDecimal bigDecimalmarketPriceVal = new BigDecimal(marketPriceVal);
@@ -1188,7 +1194,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                 timePeriod = parent.getItemAtPosition(pos).toString();
 
                 // Log.e("Time period ",timePeriod);
-                if (timePeriod.equals("one-time")) {
+                if (timePeriod.equals("one-time") && !currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))) {
                     dialogEditFrequency.setText("1");
                     dialogEditFrequency.setEnabled(false);
                 } else {

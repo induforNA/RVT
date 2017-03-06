@@ -793,7 +793,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             }
         });
 
-        if (timePeriod.equals("one-time")) {
+        if (timePeriod.equals("one-time") && ! currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
             dialogEditFrequency.setText("1");
             dialogEditFrequency.setEnabled(false);
             mHarvestFre = 0;
