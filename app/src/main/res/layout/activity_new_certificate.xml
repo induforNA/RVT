@@ -350,32 +350,36 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:weightSum="2">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
                             android:text="@string/parcel_size"
-                            android:textSize="@dimen/textfield_size" />
+                            android:textSize="@dimen/textfield_size"
+                            android:layout_weight="1"/>
 
                         <TextView
                             android:id="@+id/parcel_size"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
                             android:text="xxxxxx ha"
-                            android:textSize="@dimen/textfield_size" />
+                            android:textSize="@dimen/textfield_size"
+                            android:layout_weight="1"/>
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:weightSum="2">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="@string/country_risk_rate"
@@ -383,14 +387,22 @@
 
                         <TextView
                             android:id="@+id/country_risk_rate"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="5%"
                             android:textSize="@dimen/textfield_size" />
 
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="2"
+                        android:orientation="horizontal">
+
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="@string/inflation_rate"
@@ -398,7 +410,7 @@
 
                         <TextView
                             android:id="@+id/inflation_rate"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="5%"
@@ -414,7 +426,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:columnCount="2">
+                    android:columnCount="2"
+                    android:columnOrderPreserved="true"
+                    android:layout_gravity="left">
 
                     <LinearLayout
                         android:id="@+id/forestland_layout"

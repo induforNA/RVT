@@ -1107,7 +1107,9 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
         dialogEditPrice.setEnabled(false);
         dialogEditArea.setEnabled(false);
         dialogSpinnerTimePeriod.setEnabled(false);
+        dialogSpinnerTimePeriod.setClickable(false);
         dialogSpinnerQuantityUnit.setEnabled(false);
+        dialogSpinnerQuantityUnit.setClickable(false);
 
         SharedCostElementYears costElementTrend = costElement.getCostElementTrend();
         if(costElementTrend != null){
@@ -1133,7 +1135,9 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                     dialogEditPrice.setEnabled(true);
                     dialogEditArea.setEnabled(true);
                     dialogSpinnerTimePeriod.setEnabled(true);
+                    dialogSpinnerTimePeriod.setClickable(true);
                     dialogSpinnerQuantityUnit.setEnabled(true);
+                    dialogSpinnerQuantityUnit.setClickable(true);
                 } else if (dialogRadioGroup.getCheckedRadioButtonId() == R.id.radio_button_positive) {
                     dialogEditFrequency.setEnabled(false);
                     dialogEditHousehold.setEnabled(false);
@@ -1141,7 +1145,9 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                     dialogEditPrice.setEnabled(false);
                     dialogEditArea.setEnabled(false);
                     dialogSpinnerTimePeriod.setEnabled(false);
+                    dialogSpinnerTimePeriod.setClickable(false);
                     dialogSpinnerQuantityUnit.setEnabled(false);
+                    dialogSpinnerQuantityUnit.setClickable(false);
                 }
             }
         });
@@ -1181,11 +1187,13 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                 timePeriod = parent.getItemAtPosition(pos).toString();
 
                 // Log.e("Time period ",timePeriod);
-                if (timePeriod.equals("one-time") && !currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))) {
+                if (timePeriod.equals("one-time")) {
                     dialogEditFrequency.setText("1");
                     dialogEditFrequency.setEnabled(false);
                 } else {
-                    dialogEditFrequency.setEnabled(true);
+                    if (dialogRadioGroup.getCheckedRadioButtonId() == R.id.radio_button_negative) {
+                        dialogEditFrequency.setEnabled(true);
+                    }
                 }
             }
 

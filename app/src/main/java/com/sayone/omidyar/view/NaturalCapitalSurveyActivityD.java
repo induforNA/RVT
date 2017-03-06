@@ -688,7 +688,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 if (dialogRadioGroup.getCheckedRadioButtonId() == R.id.radio_button_negative) {
-                    if(mFreqUnit == 1)
+                    if(mFreqUnit == 1 && !currentSocialCapitalServey.equals(getString(R.string.string_pastureland)))
                         dialogEditFrequency.setEnabled(false);
                     else
                         dialogEditFrequency.setEnabled(true);
@@ -766,7 +766,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                     dialogEditFrequency.setText("1");
                     dialogEditFrequency.setEnabled(false);
                 } else {
-                    dialogEditFrequency.setEnabled(true);
+                    if (dialogRadioGroup.getCheckedRadioButtonId() == R.id.radio_button_negative) {
+                        dialogEditFrequency.setEnabled(true);
+                    }
                 }
             }
 
@@ -791,7 +793,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             }
         });
 
-        if (timePeriod.equals("one-time") && !currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
+        if (timePeriod.equals("one-time")) {
             dialogEditFrequency.setText("1");
             dialogEditFrequency.setEnabled(false);
             mHarvestFre = 0;
