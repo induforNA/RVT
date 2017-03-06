@@ -14,6 +14,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -1126,7 +1127,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 if (dialogRadioGroup.getCheckedRadioButtonId() == R.id.radio_button_negative) {
-                    if(mFreqUnit == 1)
+                    if(timePeriod.equals("one-time"))
                         dialogEditFrequency.setEnabled(false);
                     else
                         dialogEditFrequency.setEnabled(true);
