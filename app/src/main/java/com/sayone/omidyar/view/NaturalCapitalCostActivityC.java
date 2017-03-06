@@ -1366,7 +1366,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 if (dialogRadioGroup.getCheckedRadioButtonId() == R.id.radio_button_negative) {
-                    if(mFreqUnit == 1)
+                    if(timePeriod.equals("one-time"))
                         dialogEditFrequency.setEnabled(false);
                     else
                         dialogEditFrequency.setEnabled(true);
