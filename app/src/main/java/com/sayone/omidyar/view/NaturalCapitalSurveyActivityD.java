@@ -866,7 +866,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                                     .equalTo("harvestFrequency", timePeriod)
                                     .findFirst();
 
-                            double harvestFre = mHarvestFre;
+                            double harvestFre = frequency.getFrequencyValue();
                             double harvestTimes = mHarvestTimes;
                             double harvestPrice = mHarvestPrice;
                             double harvestArea = mHarvestArea;

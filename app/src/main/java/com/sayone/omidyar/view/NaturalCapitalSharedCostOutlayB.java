@@ -518,7 +518,7 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
 
         for (SharedCostElementYears costElementYears1 : costElementYearses) {
             costTotal = costTotal + costElementYears1.getSubtotal();
-            double powerFactor = Math.pow(1 + disRate, costElementYears.getProjectedIndex());
+            double powerFactor = Math.pow(1 + disRate, costElementYears1.getProjectedIndex());
             BigDecimal bigDecimalPowerFactor = new BigDecimal(powerFactor);
             BigDecimal bigDecimalDisFactor = bigDecimalOne.divide(bigDecimalPowerFactor, MathContext.DECIMAL64);
 
@@ -722,7 +722,7 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
                 }
             }
         }
-        mSharedDiscountRate = totalValNum / totalVal;
+        mSharedDiscountRate = totalValNum / (totalVal == 0 ? 1 : totalVal);
         realm.beginTransaction();
         results.setSharedDiscountRate(mSharedDiscountRate);
         realm.commitTransaction();

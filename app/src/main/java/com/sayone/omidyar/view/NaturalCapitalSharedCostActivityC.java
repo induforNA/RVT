@@ -1276,7 +1276,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                                     .equalTo("harvestFrequency", timePeriod)
                                     .findFirst();
 
-                            double harvestFre = mHarvestFre;
+                            double harvestFre = frequency.getFrequencyValue();
                             double harvestTimes = mHarvestTimes;
                             double harvestPrice = mHarvestPrice;
                             double harvestArea = mHarvestArea;
@@ -1298,7 +1298,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                             if (!dialogEditArea.getText().toString().equals(""))
                                 harvestArea = Double.parseDouble(dialogEditArea.getText().toString());
 
-                            if(harvestFre == 1) {
+                            if(frequency.getFrequencyValue() == 1) {
                                 harvestFre = 0;
                             }
 

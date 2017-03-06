@@ -1418,7 +1418,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                                     .equalTo("harvestFrequency", timePeriod)
                                     .findFirst();
 
-                            double harvestFre = mHarvestFre;
+                            double harvestFre = frequency.getFrequencyValue();
                             double harvestTimes = mHarvestTimes;
                             double harvestPrice = mHarvestPrice;
                             double harvestArea = mHarvestArea;
