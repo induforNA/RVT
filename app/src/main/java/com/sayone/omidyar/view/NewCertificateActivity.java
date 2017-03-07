@@ -195,7 +195,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
             gpsCoordinate_4.setText(coordinate_4);
             gpsCoordinate_5.setText(coordinate_5);
             gpsCoordinate_6.setText(coordinate_6);
-            parcelSize.setText(Float.toString(parcelArea) + "ha");
+            parcelSize.setText(Float.toString(parcelArea) + " ha");
         }
 
 
@@ -221,7 +221,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         if (!(surveyCheck.getComponents().getForestValue() < 0)) {
                             String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getForestValue()));
-                            forestValue.setText(" " + currency + " " + yourFormattedString);
+                            forestValue.setText(currency + " " + yourFormattedString);
                         } else {
                             double value = (surveyCheck.getComponents().getForestValue());
                             String yourFormattedString = valueFormatter.format(roundTwo(value) * -1);
@@ -259,7 +259,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         if (!(surveyCheck.getComponents().getCroplandValue() < 0)) {
                             String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getCroplandValue()));
-                            cropValue.setText(" " + currency + " " + yourFormattedString);
+                            cropValue.setText(currency + " " + yourFormattedString);
                         } else {
                             double value = surveyCheck.getComponents().getCroplandValue();
                             String yourFormattedString = valueFormatter.format(roundTwo(value) * -1);
@@ -296,7 +296,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         if (!(surveyCheck.getComponents().getPastureValue() < 0)) {
                             String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getPastureValue()));
-                            pastureValue.setText(" " + currency + " " + yourFormattedString);
+                            pastureValue.setText(currency + " " + yourFormattedString);
                         } else {
                             double value = surveyCheck.getComponents().getPastureValue();
                             String yourFormattedString = valueFormatter.format(roundTwo(value) * -1);
@@ -335,7 +335,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         if (!(surveyCheck.getComponents().getMiningLandValue() < 0)) {
                             String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getMiningLandValue()));
-                            miningValue.setText(" " + currency + " " + yourFormattedString);
+                            miningValue.setText(currency + " " + yourFormattedString);
                         } else {
                             double value = surveyCheck.getComponents().getMiningLandValue();
                             String yourFormattedString = valueFormatter.format(roundTwo(value) * -1);
