@@ -291,7 +291,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             }
         }
 
-        unit = spinnerUnit.getSelectedItem().toString();
+        if(spinnerUnit.getSelectedItem() != null)
+          unit = spinnerUnit.getSelectedItem().toString();
 
         buttonNext.setOnClickListener(this);
         buttonBack.setOnClickListener(this);
@@ -800,12 +801,15 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             }
         });
 
-        if (timePeriod.equals("one-time") && ! currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
+        if (timePeriod.equals("one-time") && !currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
             dialogEditFrequency.setText("1");
             dialogEditFrequency.setEnabled(false);
             mHarvestFre = 0;
         } else {
-            dialogEditFrequency.setEnabled(true);
+            if (dialogRadioGroup.getCheckedRadioButtonId() == R.id.radio_button_negative) {
+                dialogEditFrequency.setEnabled(true);
+            } else
+                dialogEditFrequency.setEnabled(false);
         }
 
         dialogQuestionHarvest.setText(getString(R.string.text_question_harvest, getString(R.string.text_harvest) + " " + revenueProduct.getName()));
@@ -1082,6 +1086,12 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             } else {
                 spinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(frequency.getHarvestFrequency()));
             }
+        } else {
+            Frequency frequency1 = realm.where(Frequency.class)
+                    .equalTo("frequencyValue", previousFrequencyUnit)
+                    .findFirst();
+            if(frequency1 != null)
+                spinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(frequency1.getHarvestFrequency()));
         }
 
         Quantity quantity = realm.where(Quantity.class)
@@ -1108,6 +1118,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         if (unitList.size() != 0 && quantity != null) {
             // Log.e("QUANTITY ", unit_adapter.getPosition(quantity.getQuantityName())+"");
             spinnerUnit.setSelection(unit_adapter.getPosition(quantity.getQuantityName()));
+        } else if(quantity == null) {
+            spinnerUnit.setSelection(unit_adapter.getPosition(previousQuantityUnit));
         }
 
         previousYearIndex = currentYearIndex;

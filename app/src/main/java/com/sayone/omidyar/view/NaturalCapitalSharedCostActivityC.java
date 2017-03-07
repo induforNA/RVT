@@ -243,7 +243,8 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
             }
         }
 
-        unit = spinnerUnit.getSelectedItem().toString();
+        if(spinnerTimePeriod.getSelectedItem() != null)
+            unit = spinnerUnit.getSelectedItem().toString();
 
 
         buttonNext.setOnClickListener(this);
@@ -677,6 +678,12 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
 
             spinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(frequency.getHarvestFrequency()));
             //spinnerTimePeriod.setSelection(timePeriodList.indexOf(frequency.getHarvestFrequency()));
+        } else {
+            Frequency frequency1 = realm.where(Frequency.class)
+                    .equalTo("frequencyValue", previousFrequencyUnit)
+                    .findFirst();
+            if(frequency1 != null)
+                spinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(frequency1.getHarvestFrequency()));
         }
 
 
@@ -704,6 +711,8 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
         if (unitList.size() != 0 && quantity != null) {
             // Log.e("QUANTITY ", unit_adapter.getPosition(quantity.getQuantityName())+"");
             spinnerUnit.setSelection(unit_adapter.getPosition(quantity.getQuantityName()));
+        }  else if(quantity == null) {
+            spinnerUnit.setSelection(unit_adapter.getPosition(previousQuantityUnit));
         }
 
         previousYearIndex = currentYearIndex;
