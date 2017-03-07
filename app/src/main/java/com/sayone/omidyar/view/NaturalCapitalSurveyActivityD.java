@@ -740,8 +740,12 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             if (language.equals("			")) {
                 dialogSpinnerTimePeriod.setSelection(dialog_timePeriod_adapter.getPosition(frequency.getHarvestFrequencyHindi()));
             } else {
-                if(revenueProductTrend != null && revenueProductTrend.getHarvestFrequencyUnit() != 0)
-                    dialogSpinnerTimePeriod.setSelection(dialog_timePeriod_adapter.getPosition(String.valueOf(revenueProductTrend.getHarvestFrequencyUnit())));
+                if(revenueProductTrend != null && revenueProductTrend.getHarvestFrequencyUnit() != 0) {
+                    Frequency frequency1 = realm.where(Frequency.class)
+                            .equalTo("frequencyValue", (int) revenueProductTrend.getHarvestFrequencyUnit())
+                            .findFirst();
+                    dialogSpinnerTimePeriod.setSelection(dialog_timePeriod_adapter.getPosition(frequency1.getHarvestFrequency()));
+                }
                 else
                     dialogSpinnerTimePeriod.setSelection(dialog_timePeriod_adapter.getPosition(frequency.getHarvestFrequency()));
             }
@@ -749,9 +753,12 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
         if (unitList.size() != 0 && quantity != null) {
             // Log.e("QUANTITY ", unit_adapter.getPosition(quantity.getQuantityName())+"");
-            if(revenueProductTrend != null && revenueProductTrend.getQuantityUnit() != null)
-                dialogSpinnerQuantityUnit.setSelection(dialog_unit_adapter.getPosition(revenueProductTrend.getQuantityUnit()));
-            else
+            if(revenueProductTrend != null && revenueProductTrend.getQuantityUnit() != null) {
+                Quantity quantity1 = realm.where(Quantity.class)
+                        .equalTo("quantityName", revenueProductTrend.getQuantityUnit())
+                        .findFirst();
+                dialogSpinnerQuantityUnit.setSelection(dialog_unit_adapter.getPosition(quantity1.getQuantityName()));
+            }else
                 dialogSpinnerQuantityUnit.setSelection(dialog_unit_adapter.getPosition(quantity.getQuantityName()));
         }
         dialogSpinnerTimePeriod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

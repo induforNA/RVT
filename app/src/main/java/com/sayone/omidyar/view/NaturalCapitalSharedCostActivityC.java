@@ -1174,8 +1174,12 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
             if (language.equals("			")) {
                 dialogSpinnerTimePeriod.setSelection(dialog_timePeriod_adapter.getPosition(frequency.getHarvestFrequencyHindi()));
             } else {
-                if(costElementTrend != null && costElementTrend.getCostFrequencyUnit() != 0)
-                    dialogSpinnerTimePeriod.setSelection(dialog_timePeriod_adapter.getPosition(String.valueOf(costElementTrend.getCostFrequencyUnit())));
+                if(costElementTrend != null && costElementTrend.getCostFrequencyUnit() != 0) {
+                    Frequency frequency1 = realm.where(Frequency.class)
+                            .equalTo("frequencyValue", (int) costElementTrend.getCostFrequencyUnit())
+                            .findFirst();
+                    dialogSpinnerTimePeriod.setSelection(dialog_timePeriod_adapter.getPosition(frequency1.getHarvestFrequency()));
+                }
                 else
                     dialogSpinnerTimePeriod.setSelection(dialog_timePeriod_adapter.getPosition(frequency.getHarvestFrequency()));
             }
@@ -1183,8 +1187,12 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
 
         if (unitList.size() != 0 && quantity != null) {
             // Log.e("QUANTITY ", unit_adapter.getPosition(quantity.getQuantityName())+"");
-            if(costElementTrend != null && costElementTrend.getCostPerPeriodUnit() != null)
-                dialogSpinnerQuantityUnit.setSelection(dialog_unit_adapter.getPosition(costElementTrend.getCostPerPeriodUnit()));
+            if(costElementTrend != null && costElementTrend.getCostPerPeriodUnit() != null) {
+                Quantity quantity1 = realm.where(Quantity.class)
+                        .equalTo("quantityName", costElementTrend.getCostPerPeriodUnit())
+                        .findFirst();
+                dialogSpinnerQuantityUnit.setSelection(dialog_unit_adapter.getPosition(quantity1.getQuantityName()));
+            }
             else
                 dialogSpinnerQuantityUnit.setSelection(dialog_unit_adapter.getPosition(quantity.getQuantityName()));
         }
