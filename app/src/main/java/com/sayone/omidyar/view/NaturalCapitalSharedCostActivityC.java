@@ -243,7 +243,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
             }
         }
 
-        if(spinnerTimePeriod.getSelectedItem() != null)
+        if(spinnerUnit.getSelectedItem() != null)
             unit = spinnerUnit.getSelectedItem().toString();
 
 

@@ -318,7 +318,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
 
         ///year= spinnerYear.getSelectedItem().toString();
-        if(spinnerTimePeriod.getSelectedItem() != null)
+        if(spinnerUnit.getSelectedItem() != null)
             unit = spinnerUnit.getSelectedItem().toString();
 //        timePeriod= spinnerTimePeriod.getSelectedItem().toString();
 

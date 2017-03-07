@@ -1656,12 +1656,12 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             } else {
                 jsonObjectComponent.put("totalSocialCapitalScore", component.getTotalSocialCapitalScore());
             }
-            if (component.getTotalValueStr().equals("")) {
+            if (component.getTotalValueStr() == null || component.getTotalValueStr().equals("") ) {
                 jsonObjectComponent.put("totalValueStr", "");
             } else {
                 jsonObjectComponent.put("totalValueStr", component.getTotalValueStr());
             }
-            if (component.getTotalValuePerHa().equals("")) {
+            if (component.getTotalValuePerHa() == null || component.getTotalValuePerHa().equals("")) {
                 jsonObjectComponent.put("totalValuePerHaStr", "");
             } else {
                 jsonObjectComponent.put("totalValuePerHaStr", component.getTotalValuePerHa());
