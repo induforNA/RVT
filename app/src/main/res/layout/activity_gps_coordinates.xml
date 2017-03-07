@@ -59,7 +59,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/qn_gps_1"
                             android:textColor="@android:color/black" />
@@ -75,7 +75,7 @@
 
                         <TextView
                             android:id="@+id/gps_loc_1"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/gps_coordinates_dms"
                             android:textColor="@android:color/black" />
@@ -90,7 +90,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/qn_gps_2"
                             android:textColor="@android:color/black" />
@@ -106,7 +106,7 @@
 
                         <TextView
                             android:id="@+id/gps_loc_2"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/gps_coordinates_dms"
                             android:textColor="@android:color/black" />
@@ -130,7 +130,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/qn_gps_3"
                             android:textColor="@android:color/black" />
@@ -146,7 +146,7 @@
 
                         <TextView
                             android:id="@+id/gps_loc_3"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/gps_coordinates_dms"
                             android:textColor="@android:color/black" />
@@ -161,7 +161,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/qn_gps_4"
                             android:textColor="@android:color/black" />
@@ -177,7 +177,7 @@
 
                         <TextView
                             android:id="@+id/gps_loc_4"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/gps_coordinates_dms"
                             android:textColor="@android:color/black" />
@@ -201,7 +201,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/qn_gps_5"
                             android:textColor="@android:color/black" />
@@ -217,7 +217,7 @@
 
                         <TextView
                             android:id="@+id/gps_loc_5"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/gps_coordinates_dms"
                             android:textColor="@android:color/black" />
@@ -232,7 +232,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/qn_gps_6"
                             android:textColor="@android:color/black" />
@@ -248,7 +248,7 @@
 
                         <TextView
                             android:id="@+id/gps_loc_6"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/gps_coordinates_dms"
                             android:textColor="@android:color/black" />

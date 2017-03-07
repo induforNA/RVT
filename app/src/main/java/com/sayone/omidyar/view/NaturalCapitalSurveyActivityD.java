@@ -890,7 +890,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                             if (dialogLivestock != null && !dialogLivestock.getText().toString().equals(""))
                                 household = Double.parseDouble(dialogLivestock.getText().toString());
 
-                            if(harvestFre == 1) {
+                            if(frequency.getFrequencyValue() == 1 && !currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
                                 harvestFre = 0;
                             }
 

@@ -1439,7 +1439,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                             if (!dialogEditArea.getText().toString().equals(""))
                                 harvestArea = Double.parseDouble(dialogEditArea.getText().toString());
 
-                            if(harvestFre == 1 && !currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))) {
+                            if(frequency.getFrequencyValue() == 1) {
                                 harvestFre = 0;
                             }
 

@@ -439,6 +439,7 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
         RealmResults<OutlayYears> outlayYearses = realm.where(OutlayYears.class)
                 .equalTo("surveyId", surveyId)
                 .equalTo("year", year)
+                .equalTo("landKind", "")
                 .findAll();
 
         double revenueTotal = 0;

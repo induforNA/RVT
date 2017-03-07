@@ -786,6 +786,8 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                             bigDecimalFrequency = new BigDecimal(1);
                         } else  if(frequency.getFrequencyValue() == 0 && currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))){
                             bigDecimalFrequency = new BigDecimal(1);
+                        } else if(frequency.getFrequencyValue() == 1) {
+                            bigDecimalFrequency = new BigDecimal(0);
                         }
                         else {
                             bigDecimalFrequency = new BigDecimal(frequency.getFrequencyValue());
@@ -1298,7 +1300,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                             if (!dialogEditArea.getText().toString().equals(""))
                                 harvestArea = Double.parseDouble(dialogEditArea.getText().toString());
 
-                            if(harvestFre == 1) {
+                            if(frequency.getFrequencyValue() == 1) {
                                 harvestFre = 0;
                             }
 

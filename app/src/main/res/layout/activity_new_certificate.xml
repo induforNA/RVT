@@ -481,7 +481,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:text="0"
-                                        android:textSize="@dimen/textfield_size" />
+                                        android:textSize="@dimen/textfield_size"
+                                        android:singleLine="true"
+                                        android:maxLines="1"/>
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -503,7 +505,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:text="0"
-                                        android:textSize="@dimen/textfield_size" />
+                                        android:textSize="@dimen/textfield_size"
+                                        android:singleLine="true"
+                                        android:maxLines="1" />
 
                                 </LinearLayout>
 
@@ -526,7 +530,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:text="0"
-                                        android:textSize="@dimen/textfield_size" />
+                                        android:textSize="@dimen/textfield_size"
+                                        android:singleLine="true"
+                                        android:maxLines="1" />
 
                                 </LinearLayout>
 
@@ -587,7 +593,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:text="0"
-                                        android:textSize="@dimen/textfield_size" />
+                                        android:textSize="@dimen/textfield_size"
+                                        android:singleLine="true"
+                                        android:maxLines="1"/>
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -609,7 +617,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:text="0"
-                                        android:textSize="@dimen/textfield_size" />
+                                        android:textSize="@dimen/textfield_size"
+                                        android:singleLine="true"
+                                        android:maxLines="1" />
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -631,7 +641,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:text="0"
-                                        android:textSize="@dimen/textfield_size" />
+                                        android:textSize="@dimen/textfield_size"
+                                        android:singleLine="true"
+                                        android:maxLines="1"/>
                                 </LinearLayout>
 
                             </LinearLayout>
@@ -658,7 +670,7 @@
                             android:text="@string/string_pastureland"
                             android:textAlignment="center"
                             android:textSize="@dimen/textfield_size"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -691,7 +703,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:text="0"
-                                        android:textSize="@dimen/textfield_size" />
+                                        android:textSize="@dimen/textfield_size"
+                                        android:singleLine="true"
+                                        android:maxLines="1"  />
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -713,7 +727,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:text="0"
-                                        android:textSize="@dimen/textfield_size" />
+                                        android:textSize="@dimen/textfield_size"
+                                        android:singleLine="true"
+                                        android:maxLines="1" />
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -735,7 +751,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:text="0"
-                                        android:textSize="@dimen/textfield_size" />
+                                        android:textSize="@dimen/textfield_size"
+                                        android:singleLine="true"
+                                        android:maxLines="1" />
                                 </LinearLayout>
 
 
@@ -798,7 +816,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:text="0"
-                                        android:textSize="@dimen/textfield_size" />
+                                        android:textSize="@dimen/textfield_size"
+                                        android:singleLine="true"
+                                        android:maxLines="1" />
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -820,7 +840,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:text="0"
-                                        android:textSize="@dimen/textfield_size" />
+                                        android:textSize="@dimen/textfield_size"
+                                        android:singleLine="true"
+                                        android:maxLines="1"/>
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -842,7 +864,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:text="0"
-                                        android:textSize="@dimen/textfield_size" />
+                                        android:textSize="@dimen/textfield_size"
+                                        android:singleLine="true"
+                                        android:maxLines="1" />
                                 </LinearLayout>
 
 

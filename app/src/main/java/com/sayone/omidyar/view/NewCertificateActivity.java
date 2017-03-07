@@ -365,6 +365,11 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
             parcelGridLayout.removeView(mininglandLayout);
         }
 
+        forestlandLayout.setMinimumWidth(500);
+        croplandLayout.setMinimumWidth(500);
+        pasturelandLayout.setMinimumWidth(500);
+        mininglandLayout.setMinimumWidth(500);
+
         community.setText(surveyCheck.getCommunity().toString());
         parcelId.setText(surveyCheck.getSurveyId().toString());
         surveyorName.setText(surveyCheck.getSurveyor().toString());
@@ -376,7 +381,6 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         if (surveyCheck.getComponents() != null)
             totalVal = totalVal + surveyCheck.getComponents().getSharedCostValue();
 
-        //--------------------------- area
         parcelArea = parcelArea > 0 ? parcelArea : 1;
         parcelVal = totalVal / parcelArea;
         if (totalVal > 500) {
