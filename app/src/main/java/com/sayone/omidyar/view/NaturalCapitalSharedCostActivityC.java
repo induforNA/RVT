@@ -33,6 +33,8 @@ import com.sayone.omidyar.model.Component;
 import com.sayone.omidyar.model.Frequency;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.Quantity;
+import com.sayone.omidyar.model.RevenueProduct;
+import com.sayone.omidyar.model.RevenueProductYears;
 import com.sayone.omidyar.model.SharedCostElement;
 import com.sayone.omidyar.model.SharedCostElementYears;
 import com.sayone.omidyar.model.Survey;
@@ -994,7 +996,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                     for (SharedCostElementYears costElementYears : costElement4.getCostElementYearses()) {
                         if (costElementYears.getYear() == 0) {
 
-                            costElementYears.setCostFrequencyValue((int) harvestFre);
+                            costElementYears.setCostFrequencyValue(harvestFre);
                             costElementYears.setCostFrequencyUnit(freqUnit);
                             costElementYears.setCostPerPeriodValue(harvestTimes);
                             costElementYears.setCostPerPeriodUnit(quaUnit);
@@ -1036,7 +1038,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                                     .multiply(bigDecimalHousehold, MathContext.DECIMAL64)
                                     .multiply(bigDecimalmarketPriceVal, MathContext.DECIMAL64).doubleValue();
 
-                            costElementYears.setCostFrequencyValue((int) harvestFre);
+                            costElementYears.setCostFrequencyValue(harvestFre);
                             costElementYears.setCostFrequencyUnit(freqUnit);
                             costElementYears.setCostPerPeriodValue(harvestTimes);
                             costElementYears.setCostPerPeriodUnit(quaUnit);
@@ -1324,8 +1326,8 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                             for (SharedCostElementYears costElementYears : sharedCostElement.getCostElementYearses()) {
                                 if (costElementYears.getYear() == 0) {
 
-                                    costElementYears.setCostFrequencyValue((int) harvestFre);
-                                    costElementTrend.setCostFrequencyValue((int) harvestFre);
+                                    costElementYears.setCostFrequencyValue( harvestFre);
+                                    costElementTrend.setCostFrequencyValue( harvestFre);
                                     costElementYears.setCostPerPeriodValue(harvestTimes);
                                     costElementTrend.setCostPerPeriodValue(harvestTimes);
                                     costElementYears.setCostPerUnitValue(harvestPrice);
@@ -1372,7 +1374,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                                             .multiply(bigDecimalHousehold, MathContext.DECIMAL64)
                                             .multiply(bigDecimalmarketPriceVal, MathContext.DECIMAL64).doubleValue();
 
-                                    costElementYears.setCostFrequencyValue((int) harvestFre);
+                                    costElementYears.setCostFrequencyValue( harvestFre);
                                     costElementYears.setCostPerPeriodValue(harvestTimes);
                                     costElementYears.setCostPerUnitValue(marketPriceVal);
                                     costElementYears.setCostPerUnitUnit(mPriceCurrency);
@@ -1396,12 +1398,33 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                         }
                     });
                 } else {
-                    dialog.dismiss();
-                    if (buttonNext.isClickable()) {
-                        buttonNext.setClickable(false);
-                        nextProduct = true;
-                        saveYearlyDatas(revenueProducts.get(currentCostProductIndexSave));
-                    }
+                    realm.executeTransactionAsync(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            RevenueProduct revenueProduct4 = realm.where(RevenueProduct.class)
+                                    .equalTo("id", costElementId)
+                                    .findFirst();
+
+                            for (RevenueProductYears revenueProductYears : revenueProduct4.getRevenueProductYearses()) {
+                                if (revenueProductYears.getYear() == 0) {
+                                    revenueProduct4.setRevenueProductTrend(null);
+                                }
+                            }
+
+                        }
+                    }, new Realm.Transaction.OnSuccess() {
+
+                        @Override
+                        public void onSuccess() {
+                            dialog.dismiss();
+                            if (buttonNext.isClickable()) {
+                                buttonNext.setClickable(false);
+                                nextProduct = true;
+                                saveYearlyDatas(revenueProducts.get(currentCostProductIndexSave));
+                            }
+                        }
+                    });
+
                 }
             }
         });

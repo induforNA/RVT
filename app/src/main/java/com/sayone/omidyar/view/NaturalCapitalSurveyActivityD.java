@@ -925,11 +925,13 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                                     revenueProductTrend.setQuantityUnit(quantity.getQuantityName());
                                     revenueProductYears.setMarketPriceCurrency(mPriceCurrency);
                                     revenueProductTrend.setMarketPriceCurrency(mPriceCurrency);
+                                    revenueProductYears.setHarvestArea(harvestArea);
+                                    revenueProductTrend.setHarvestArea(harvestArea);
                                     revenueProduct4.setRevenueProductTrend(revenueProductTrend);
 
+/*
                                     if (currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
-                                        revenueProductYears.setHarvestArea(harvestArea);
-                                    }
+                                    }*/
                                 }
                                 if (revenueProductYears.getProjectedIndex() > 0) {
                                     BigDecimal bigDecimalPowerFactor = new BigDecimal(Math.pow((1 + inflationRate), revenueProductYears.getProjectedIndex()), MathContext.DECIMAL64);
@@ -997,14 +999,34 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                         }
                     });
                 } else {
-                    dialog.dismiss();
-                    if (buttonNext.isClickable()) {
-                        buttonNext.setClickable(false);
-                        nextProduct = true;
-                        saveYearlyDatas(revenueProducts.get(currentCostProductIndexSave));
+                    realm.executeTransactionAsync(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            RevenueProduct revenueProduct4 = realm.where(RevenueProduct.class)
+                                    .equalTo("id", productId)
+                                    .findFirst();
+
+                            for (RevenueProductYears revenueProductYears : revenueProduct4.getRevenueProductYearses()) {
+                                if (revenueProductYears.getYear() == 0) {
+                                    revenueProduct4.setRevenueProductTrend(null);
+                                }
+                            }
+
+                        }
+                    }, new Realm.Transaction.OnSuccess() {
+
+                        @Override
+                        public void onSuccess() {
+                            dialog.dismiss();
+                            if (buttonNext.isClickable()) {
+                                buttonNext.setClickable(false);
+                                nextProduct = true;
+                                saveYearlyDatas(revenueProducts.get(currentCostProductIndexSave));
                        /* else
                             saveYearlyDatas(revenueProducts.get(currentCostProductIndexSave));*/
-                    }
+                            }
+                        }
+                    });
                 }
             }
         });

@@ -723,7 +723,7 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
                 }
             }
         }
-        mSharedDiscountRate = totalValNum / totalVal;
+        mSharedDiscountRate = (totalVal == 0) ? 0 : (totalValNum / totalVal);
         realm.beginTransaction();
         results.setSharedDiscountRate(mSharedDiscountRate);
         realm.commitTransaction();

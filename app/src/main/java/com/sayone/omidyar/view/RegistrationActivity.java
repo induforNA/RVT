@@ -220,10 +220,19 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
     }
 
     public int getNextKeySurvey() {
-        if (realm.where(Survey.class).max("id") == null) {
-            return 00001;
-        }
-        return realm.where(Survey.class).max("id").intValue() + 1;
+        SharedPreferences.Editor editor = preferences.edit();
+        if(preferences.getInt("serialNumber",0) == 0) {
+            editor.putInt("serialNumber",1);
+        } else
+            editor.putInt("serialNumber",preferences.getInt("serialNumber", 0)+1);
+        editor.apply();
+
+       /* if (realm.where(Survey.class).max("id") == null) {
+            return Integer.parseInt(preferences.getString("serialNumber", "0000"))+1;
+//            return 00001;
+        }*/
+
+        return preferences.getInt("serialNumber",0);
     }
 
     @Override

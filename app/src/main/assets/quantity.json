@@ -84,5 +84,11 @@
       "quantityType":"Time",
       "quantityValue":1
     }
+    {
+      "quantityName":"Others",
+      "quantityNameHindi":"अन्य",
+      "quantityType":"Other",
+      "quantityValue":1
+    }
   ]
 }
