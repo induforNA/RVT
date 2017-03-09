@@ -36,6 +36,7 @@ import com.sayone.omidyar.model.OutlayYears;
 import com.sayone.omidyar.model.Quantity;
 import com.sayone.omidyar.model.RevenueProduct;
 import com.sayone.omidyar.model.RevenueProductYears;
+import com.sayone.omidyar.model.SpredTable;
 import com.sayone.omidyar.model.Survey;
 
 import java.math.BigDecimal;
@@ -89,7 +90,6 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
     String currentProductName;
     double mHarvestFre = 0;
     double mHarvestTimes = 0;
-    double mHarvestPrice = 0;
     double mHarvestArea = 0;
     double mHousehold = 0;
     double mFreqUnit = 0;
@@ -867,9 +867,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                             RevenueProduct revenueProduct4 = realm.where(RevenueProduct.class)
                                     .equalTo("id", productId)
                                     .findFirst();
-                            RevenueProductYears revenueProductTrend = realm.where(RevenueProductYears.class)
-                                    .equalTo("id", productId)
-                                    .findFirst();
+
+                            RevenueProductYears revenueProductTrend = realm.createObject(RevenueProductYears.class);
+
                             Quantity quantity = realm.where(Quantity.class)
                                     .equalTo("quantityName", unit)
                                     .findFirst();
@@ -879,7 +879,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
                             double harvestFre = mHarvestFre;
                             double harvestTimes = mHarvestTimes;
-                            double harvestPrice = mHarvestPrice;
+                            double harvestPrice = mMarketPriceValue;
                             double harvestArea = mHarvestArea;
                             double household = mHousehold;
 
@@ -907,6 +907,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
                             for (RevenueProductYears revenueProductYears : revenueProduct4.getRevenueProductYearses()) {
                                 if (revenueProductYears.getYear() == 0) {
+                                    revenueProductTrend.setId(getNextKeyTrend(realm));
                                     revenueProductYears.setHarvestFrequencyValue(harvestFre);
                                     revenueProductTrend.setHarvestFrequencyValue(harvestFre);
                                     revenueProductYears.setQuantityValue(harvestTimes);
@@ -988,6 +989,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
                         @Override
                         public void onSuccess() {
+                            RevenueProduct revenueProduct4 = realm.where(RevenueProduct.class)
+                                    .equalTo("id", productId)
+                                    .findFirst();
                             dialog.dismiss();
                             if (buttonNext.isClickable()) {
                                 buttonNext.setClickable(false);
@@ -1988,5 +1992,11 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         val = Math.round(val);
         val = val / 100;
         return val;
+    }
+    public int getNextKeyTrend(Realm realm) {
+        if (realm.where(RevenueProductYears.class).max("id") == null) {
+            return 1;
+        }
+        return realm.where(RevenueProductYears.class).max("id").intValue() + 1;
     }
 }

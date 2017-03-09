@@ -104,7 +104,6 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
 
     double mHarvestFre = 0;
     double mHarvestTimes = 0;
-    double mHarvestPrice = 0;
     double mHarvestArea = 0;
     double mHousehold = 0;
     public double mMarketPriceValue;
@@ -1286,9 +1285,8 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                                     .equalTo("id", costElementId)
                                     .findFirst();
 
-                            SharedCostElementYears costElementTrend = realm.where(SharedCostElementYears.class)
-                                    .equalTo("id", costElementId)
-                                    .findFirst();
+                            SharedCostElementYears costElementTrend = realm.createObject(SharedCostElementYears.class);
+
 
                             Quantity quantity = realm.where(Quantity.class)
                                     .equalTo("quantityName", unit)
@@ -1299,7 +1297,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
 
                             double harvestFre = mHarvestFre;
                             double harvestTimes = mHarvestTimes;
-                            double harvestPrice = mHarvestPrice;
+                            double harvestPrice = mMarketPriceValue;
                             double harvestArea = mHarvestArea;
                             double household = mHousehold;
 
@@ -1326,6 +1324,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                             for (SharedCostElementYears costElementYears : sharedCostElement.getCostElementYearses()) {
                                 if (costElementYears.getYear() == 0) {
 
+                                    costElementTrend.setId(getNextKeyTrend(realm));
                                     costElementYears.setCostFrequencyValue( harvestFre);
                                     costElementTrend.setCostFrequencyValue( harvestFre);
                                     costElementYears.setCostPerPeriodValue(harvestTimes);
@@ -1671,5 +1670,11 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
         val = Math.round(val);
         val = val / 100;
         return val;
+    }
+    public int getNextKeyTrend(Realm realm) {
+        if (realm.where(SharedCostElementYears.class).max("id") == null) {
+            return 1;
+        }
+        return realm.where(SharedCostElementYears.class).max("id").intValue() + 1;
     }
 }

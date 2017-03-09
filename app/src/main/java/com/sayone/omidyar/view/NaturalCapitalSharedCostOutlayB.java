@@ -21,7 +21,6 @@ import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.CashFlow;
 import com.sayone.omidyar.model.Component;
-import com.sayone.omidyar.model.CostElementYears;
 import com.sayone.omidyar.model.Frequency;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.Outlay;
@@ -491,7 +490,7 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
             inflationRate = results.getInflationRate()/100;
         }
 
-        CostElementYears costElementYears = realm.where(CostElementYears.class)
+        SharedCostElementYears costElementYears = realm.where(SharedCostElementYears.class)
                 .equalTo("surveyId", surveyId)
                 .equalTo("year", year)
                 .findFirst();

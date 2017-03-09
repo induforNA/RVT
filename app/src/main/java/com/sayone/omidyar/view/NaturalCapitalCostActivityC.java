@@ -37,6 +37,7 @@ import com.sayone.omidyar.model.OutlayYears;
 import com.sayone.omidyar.model.Quantity;
 import com.sayone.omidyar.model.RevenueProduct;
 import com.sayone.omidyar.model.RevenueProductYears;
+import com.sayone.omidyar.model.SharedCostElementYears;
 import com.sayone.omidyar.model.Survey;
 
 import java.math.BigDecimal;
@@ -110,7 +111,6 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
     double mHarvestFre = 0;
     double mHarvestTimes = 0;
-    double mHarvestPrice = 0;
     double mHarvestArea = 0;
     double mHousehold = 0;
     public double mMarketPriceValue;
@@ -1426,9 +1426,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                                     .equalTo("id", costElementId)
                                     .findFirst();
 
-                            CostElementYears costElementTrend = realm.where(CostElementYears.class)
-                                    .equalTo("id", costElementId)
-                                    .findFirst();
+                            CostElementYears costElementTrend = realm.createObject(CostElementYears.class);
 
                             Quantity quantity = realm.where(Quantity.class)
                                     .equalTo("quantityName", unit)
@@ -1439,7 +1437,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
                             double harvestFre = mHarvestFre;
                             double harvestTimes = mHarvestTimes;
-                            double harvestPrice = mHarvestPrice;
+                            double harvestPrice = mMarketPriceValue;
                             double harvestArea = mHarvestArea;
                             double household = mHousehold;
 
@@ -1465,6 +1463,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                             for (CostElementYears costElementYears : revenueProduct4.getCostElementYearses()) {
                                 if (costElementYears.getYear() == 0) {
 
+                                    costElementTrend.setId(getNextKeyTrend(realm));
                                     costElementYears.setCostFrequencyValue(harvestFre);
                                     costElementTrend.setCostFrequencyValue(harvestFre);
                                     costElementYears.setCostPerPeriodValue(harvestTimes);
@@ -2063,5 +2062,11 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         val = Math.round(val);
         val = val / 100;
         return val;
+    }
+    public int getNextKeyTrend(Realm realm) {
+        if (realm.where(CostElementYears.class).max("id") == null) {
+            return 1;
+        }
+        return realm.where(CostElementYears.class).max("id").intValue() + 1;
     }
 }
