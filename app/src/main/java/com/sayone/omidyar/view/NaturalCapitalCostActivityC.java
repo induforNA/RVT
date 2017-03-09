@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -1250,7 +1251,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         TextView dialogQuestionPerHousehold = (TextView) dialog.findViewById(R.id.text_question_per_household);
         TextView dialogQuestionPerUnit = (TextView) dialog.findViewById(R.id.text_question_per_unit);
         LinearLayout containerArea = (LinearLayout) dialog.findViewById(R.id.container_area);
-
+        RadioButton dialogRadioNegative = (RadioButton) dialog.findViewById(R.id.radio_button_negative);
 
         final EditText dialogEditFrequency = (EditText) dialog.findViewById(R.id.edit_trend_frequency);
         final EditText dialogEditHousehold = (EditText) dialog.findViewById(R.id.edit_trend_num_households);
@@ -1275,6 +1276,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
         CostElementYears costElementTrend = costElement.getCostElementTrend();
         if(costElementTrend != null){
+            dialogRadioNegative.setChecked(true);
             if(costElementTrend.getCostFrequencyValue() != 0)
                 dialogEditFrequency.setText(String.valueOf(costElementTrend.getCostFrequencyValue()));
             if(costElementTrend.getHouseholds() != 0)

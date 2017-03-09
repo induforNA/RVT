@@ -726,7 +726,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             if(revenueProductTrend.getMarketPriceValue() != 0)
                 dialogEditPrice.setText(String.valueOf(revenueProductTrend.getMarketPriceValue()));
             if(revenueProductTrend.getHarvestArea() != 0)
-                dialogArea.setText(String.valueOf(revenueProductTrend.getHarvestArea()));
+                dialogEditArea.setText(String.valueOf(revenueProductTrend.getHarvestArea()));
         }
 
         ArrayAdapter<String> dialog_timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, timePeriodList);
@@ -993,9 +993,6 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
                         @Override
                         public void onSuccess() {
-                            RevenueProduct revenueProduct4 = realm.where(RevenueProduct.class)
-                                    .equalTo("id", productId)
-                                    .findFirst();
                             dialog.dismiss();
                             if (buttonNext.isClickable()) {
                                 buttonNext.setClickable(false);
