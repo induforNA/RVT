@@ -1,6 +1,24 @@
 {
   "quantity":[
     {
+      "quantityName":"Kilogram",
+      "quantityNameHindi":"किलोग्राम",
+      "quantityType":"Weight",
+      "quantityValue":1
+    },
+    {
+      "quantityName":"Gram",
+      "quantityNameHindi":"ग्राम",
+      "quantityType":"Weight",
+      "quantityValue":0.001
+    },
+    {
+      "quantityName":"Milligram",
+      "quantityNameHindi":"मिलिग्रॅम ",
+      "quantityType":"Weight",
+      "quantityValue":0.000001
+    },
+    {
       "quantityName":"Cubic Meter",
       "quantityNameHindi":"क्यूबिक मीटर ",
       "quantityType":"Volume",
@@ -35,24 +53,6 @@
       "quantityNameHindi":"मिल्लीलीटेर ",
       "quantityType":"Volume",
       "quantityValue":0.001
-    },
-    {
-      "quantityName":"Kilogram",
-      "quantityNameHindi":"किलोग्राम",
-      "quantityType":"Weight",
-      "quantityValue":1
-    },
-    {
-      "quantityName":"Gram",
-      "quantityNameHindi":"ग्राम",
-      "quantityType":"Weight",
-      "quantityValue":0.001
-    },
-    {
-      "quantityName":"Milligram",
-      "quantityNameHindi":"मिलिग्रॅम ",
-      "quantityType":"Weight",
-      "quantityValue":0.000001
     },
     {
       "quantityName":"Pound",
