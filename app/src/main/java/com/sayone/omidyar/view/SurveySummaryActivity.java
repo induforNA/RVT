@@ -1874,11 +1874,21 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
         Log.e("EMl ", jsonArrayEmails.toString());
 
-        // jsonArrayEmails.put("issac.sayone@gmail.com");
+        set = sharedPref.getStringSet("surveySet", null);
+        if (set != null) {
+            if (!set.isEmpty()) {
+                for (String temp : set) {
+                    jsonArray.put(temp);
+                    strings.add(temp);
+                }
+            }
+        }
+
+    /*    // jsonArrayEmails.put("issac.sayone@gmail.com");
         for (Survey surveyExport : surveyExports) {
             jsonArray.put(surveyExport.getSurveyId());
             strings.add(surveyExport.getSurveyId());
-        }
+        }*/
 
         JSONObject object = new JSONObject();
         try {
@@ -1905,8 +1915,14 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             public void onResponse(Call<ExportData> call, retrofit2.Response<ExportData> response) {
                 Log.e("Response ", "" + response.toString());
                 exportDataEmail.setEnabled(true);
-                Toast toast = Toast.makeText(context, "Data exported", Toast.LENGTH_SHORT);
-                toast.show();
+                if(response.body().getResponse().equals("failed")) {
+                    Toast toast = Toast.makeText(context, "Export Failed\nIncomplete Survey", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    Toast toast = Toast.makeText(context, "Data exported", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+
             }
 
             @Override

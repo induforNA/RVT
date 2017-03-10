@@ -203,7 +203,7 @@ public class Survey extends RealmObject {
     }
 
     public ParcelLocation getParcelLocations() {
-        return parcelLocations;
+        return (parcelLocations == null) ? new ParcelLocation() : parcelLocations;
     }
 
     public void setParcelLocations(ParcelLocation parcelLocations) {

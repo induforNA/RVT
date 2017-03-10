@@ -42,6 +42,9 @@ public class ParcelLocation extends RealmObject{
 
     private float area;
 
+    public ParcelLocation() {
+    }
+
     public String getSurveyId() {
         return surveyId;
     }
