@@ -157,7 +157,7 @@
     },
     {
       "questionno": 6,
-      "question": "Do households in this community use the parcel and access the resource based upon locally recognized customary norms?",
+      "question": "Do households in this community use the parcel for this specific land use activity or resource flow based on locally recognized customary norms?",
       "questionHindi": "क्या इस समुदाय में घरों पार्सल का उपयोग और स्थानीय स्तर पर मान्यता प्राप्त प्रथागत मानदंडों पर आधारित संसाधन उपयोग करते हैं?",
       "weight": "5",
       "optiontype": "single",
@@ -181,7 +181,7 @@
     },
     {
       "questionno": 7,
-      "question": "Is there a group or committee in this community with specific responsibility to manage or oversee matters related to use of this parcel?",
+      "question": "Is there a group or committee in this community with specific responsibility to manage or oversee matters related to this specific land use activity or resource flow on this parcel?",
       "questionHindi": "इस समुदाय में इस पार्सल के उपयोग से संबंधित मामलों की देखरेख करने का विशेष जिम्मेदारी के साथ एक प्रबंधन या समिति है?",
       "weight": "5",
       "optiontype": "single",
@@ -200,7 +200,7 @@
     },
     {
       "questionno": 8,
-      "question": "Are there rules and regulations associated with this parcel that were created by the community itself?",
+      "question": "Are there rules and regulations associated with this specific land use activity or resource flow that were created by the community itself?",
       "questionHindi": "क्या इस पार्सल के साथ जुड़े समुदाय स्वयं के द्वारा बनाया गया नियमों हैं?",
       "weight": "5",
       "optiontype": "single",
@@ -224,7 +224,7 @@
     },
     {
       "questionno": 9,
-      "question": "Do all stakeholders within the community generally have equal access to the parcel?",
+      "question": "Do all stakeholders within the community generally have equal access to the parcel for this specific land use activity or resource flow?",
       "questionHindi": "प्रबंधन समूह समुदाय के सभी वर्गों के प्रतिनिधि शामिल करता है?",
       "weight": "5",
       "optiontype": "single",
@@ -272,7 +272,7 @@
     },
     {
       "questionno": 11,
-      "question": "Are the rules and regulations associated with this parcel generally viewed as fair and legitimate?",
+      "question": "Are the rules and regulations associated with this specific land use activity or resource flow on this parcel generally viewed as fair and legitimate?",
       "questionHindi": "क्या इस पार्सल के साथ जुड़े नियमों आम तौर पर उचित और वैध के रूप में देखा जाता हैं?",
       "weight": "5",
       "optiontype": "single",
@@ -301,7 +301,7 @@
     },
     {
       "questionno": 12,
-      "question": "How long have the institutions for this parcel been operating?",
+      "question": "How long have the institutions associated with this specific land use activity or resource flow on this parcel been operating?",
       "questionHindi": "इस पार्सल के लिए संस्थानों कब से काम कर रहा है?",
       "weight": "5",
       "optiontype": "single",
