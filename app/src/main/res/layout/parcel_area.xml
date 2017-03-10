@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Parcel Area(in hectare)"
+        android:text="@string/get_parcel_area_text"
         android:textSize="@dimen/textfield_size"/>
 
     <EditText

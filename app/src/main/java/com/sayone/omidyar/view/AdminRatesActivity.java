@@ -334,7 +334,7 @@ public class AdminRatesActivity extends BaseActivity implements View.OnClickList
                     survey1.setInflationRate(0.0);
                 }
             } else {
-                Toast.makeText(context, "Select Id", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Select ID", Toast.LENGTH_SHORT).show();
             }
             break;
 

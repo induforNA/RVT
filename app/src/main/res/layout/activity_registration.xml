@@ -10,11 +10,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        android:layout_weight="1"
         android:background="@color/colorPrimary"
         android:elevation="3dp"
         android:gravity="center"
-        android:orientation="vertical"
-        android:layout_weight="1">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -67,9 +67,9 @@
                         android:layout_gravity="center"
                         android:hint="@string/respondent_group_hint"
                         android:maxLines="1"
+                        android:nextFocusDown="@+id/edittext_district"
                         android:singleLine="true"
-                        android:textSize="@dimen/textfield_size"
-                        android:nextFocusDown="@+id/edittext_district"/>
+                        android:textSize="@dimen/textfield_size" />
 
                     <EditText
                         android:id="@+id/edittext_surveyor"
@@ -78,9 +78,9 @@
                         android:layout_gravity="center"
                         android:hint="@string/surveyor_hint"
                         android:maxLines="1"
+                        android:nextFocusDown="@+id/edittext_state"
                         android:singleLine="true"
-                        android:textSize="@dimen/textfield_size"
-                        android:nextFocusDown="@+id/edittext_state"/>
+                        android:textSize="@dimen/textfield_size" />
 
 
                 </LinearLayout>
@@ -99,9 +99,9 @@
                         android:layout_gravity="center"
                         android:hint="@string/community_hint"
                         android:maxLines="1"
+                        android:nextFocusDown="@id/edittext_respondent_group"
                         android:singleLine="true"
-                        android:textSize="@dimen/textfield_size"
-                        android:nextFocusDown="@id/edittext_respondent_group"/>
+                        android:textSize="@dimen/textfield_size" />
 
                     <EditText
                         android:id="@+id/edittext_district"
@@ -110,9 +110,9 @@
                         android:layout_gravity="center"
                         android:hint="@string/district_hint"
                         android:maxLines="1"
+                        android:nextFocusDown="@id/edittext_surveyor"
                         android:singleLine="true"
-                        android:textSize="@dimen/textfield_size"
-                        android:nextFocusDown="@id/edittext_surveyor"/>
+                        android:textSize="@dimen/textfield_size" />
 
                     <EditText
                         android:id="@+id/edittext_state"
@@ -121,9 +121,9 @@
                         android:layout_gravity="center"
                         android:hint="@string/state_hint"
                         android:maxLines="1"
+                        android:nextFocusDown="@+id/edittext_currency"
                         android:singleLine="true"
-                        android:textSize="@dimen/textfield_size"
-                        android:nextFocusDown="@+id/edittext_currency"/>
+                        android:textSize="@dimen/textfield_size" />
 
 
                 </LinearLayout>
@@ -157,12 +157,12 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:singleLine="true"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:hint="@string/currency_hint"
                     android:inputType="textCapCharacters"
-                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:maxLength="3"
                     android:nextFocusDown="@+id/edittext_country"
-                    android:maxLength="3"/>
+                    android:singleLine="true" />
 
                 <EditText
                     android:id="@+id/edittext_country"
@@ -174,7 +174,7 @@
                     android:layout_weight="1"
                     android:hint="@string/country_hint"
                     android:inputType="text"
-                    android:nextFocusDown="@+id/reg_risk_rate"/>
+                    android:nextFocusDown="@+id/reg_risk_rate" />
 
             </LinearLayout>
 
@@ -184,33 +184,56 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:layout_marginTop="20dp"
-                android:gravity="left"
                 android:orientation="horizontal"
                 android:weightSum="2">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/country_risk_rate"
-                    android:textSize="@dimen/textfield_size"
-                    android:layout_weight="1"/>
 
                 <EditText
                     android:id="@+id/reg_risk_rate"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    android:textSize="@dimen/textfield_size"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:layout_marginStart="100dp"/>
+                    android:hint="@string/risk_rate_hint"
+                    android:inputType="numberDecimal"
+                    android:nextFocusDown="@+id/reg_risk_rate"
+                    android:textSize="@dimen/textfield_size" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="%"
+                    android:textSize="@dimen/textfield_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="%"
-                    android:textSize="@dimen/textfield_size"
-                    android:layout_marginRight="200dp"/>
+                    android:text="@string/reg_risk_rate_source"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/risk_rate_source"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/reg_risk_rate_source_link"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="italic" />
 
             </LinearLayout>
 
@@ -219,27 +242,71 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <EditText
+                    android:id="@+id/reg_inflation_rate"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:hint="@string/inflation_rate_hint"
+                    android:inputType="numberDecimal"
+                    android:nextFocusDown="@+id/reg_risk_rate"
+                    android:textSize="@dimen/textfield_size" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/reg_risk_rate_source"
-                    android:textStyle="italic"/>
-
-                <TextView
-                    android:id="@+id/risk_rate_source"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="www.tradingeconomics.com/bonds"
-                    android:textColor="@color/colorAccent"
-                    android:layout_marginLeft="5dp"
-                    android:textStyle="italic"
-                    />
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="%"
+                    android:textSize="@dimen/textfield_size" />
 
             </LinearLayout>
 
-            <LinearLayout
+            <!--  <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="50dp"
+                  android:layout_marginRight="50dp"
+                  android:layout_marginTop="20dp"
+                  android:gravity="left"
+                  android:orientation="horizontal"
+                  android:weightSum="2">
+
+                  <TextView
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:text="@string/country_risk_rate"
+                      android:textSize="@dimen/textfield_size"
+                      android:layout_weight="1"/>
+
+                  <EditText
+                      android:id="@+id/reg_risk_rate"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:inputType="numberDecimal"
+                      android:textSize="@dimen/textfield_size"
+                      android:layout_marginLeft="10dp"
+                      android:layout_weight="1"
+                      android:layout_marginStart="100dp"/>
+
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="%"
+                      android:textSize="@dimen/textfield_size"
+                      android:layout_marginRight="200dp"/>
+
+              </LinearLayout>-->
+
+
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
@@ -273,29 +340,31 @@
                     android:textSize="@dimen/textfield_size"
                     android:layout_marginRight="200dp"/>
 
-            </LinearLayout>
+            </LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/reg_inflation_rate_source"
-                    android:textStyle="italic"/>
+                    android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/inflation_rate_source"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="www.tradingeconomics.com/forecast/inflation-rate"
-                    android:textColor="@color/colorAccent"
                     android:layout_marginLeft="5dp"
-                    android:textStyle="italic"/>
+                    android:text="@string/reg_inflation_rate_source_link"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="italic" />
 
             </LinearLayout>
 
@@ -306,31 +375,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
+        android:layout_weight="1"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_weight="1">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/button_login"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_gravity="left"
             android:layout_marginRight="100dp"
+            android:layout_marginTop="20dp"
             android:background="@android:color/transparent"
-            android:text="@string/login_button"
-            android:layout_gravity="left" />
+            android:text="@string/login_button" />
 
         <Button
             android:id="@+id/button_sign_up"
             android:layout_width="150dp"
             android:layout_height="60dp"
             android:layout_gravity="right"
-            android:layout_marginTop="50dp"
             android:layout_marginLeft="100dp"
+            android:layout_marginTop="50dp"
             android:text="@string/sign_up_button"
             android:textColor="@android:color/white" />
 

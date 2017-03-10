@@ -286,8 +286,8 @@
     <string name="specify_unit">Specify unit</string>
     <string name="convert_unit_international">Convert unit to international unit</string>
     <string name="specified_unit">specified unit</string>
-    <string name="select_suvey_id">Select Survey Id</string>
-    <string name="select_landkind">Select Resource Type</string>
+    <string name="select_suvey_id">Select Survey ID</string>
+    <string name="select_landkind">Select Land Use Activity Type</string>
 
     <string name="hint_add_timber">Add Timber</string>
     <string name="hint_add_croptype">Add Crop Type</string>
@@ -301,7 +301,7 @@
     <string name="loading">Loading</string>
     <string name="wait_while_loading">Wait while loading...</string>
     <string name="value_restored">Value Restored Successfully</string>
-    <string name="select_surveyid_landkind">Select Survey Id and Land Kind to Save</string>
+    <string name="select_surveyid_landkind">Select Survey ID and Land Kind to Save</string>
     <string name="value_saved_success">Value Saved Successfully</string>
     <string name="text_data_saved">Data saved</string>
     <string name="text_deleted">Deleted</string>
@@ -339,14 +339,16 @@
     <string name="total_parcel_value">Total Parcel Value</string>
     <string name="country_risk_rate">Sovereign/Country Risk Rate</string>
     <string name="survey_date">Survey Date</string>
-    <string name="reg_risk_rate_source">Source: 10-year treasury bond interest rate : </string>
-    <string name="reg_inflation_rate_source">Source : </string>
+    <string name="reg_risk_rate_source">Sovereign/country risk rate source: 10-year government bond interest rate: </string>
+    <string name="reg_risk_rate_source_link">www.tradingeconomics.com/bonds</string>
+    <string name="reg_inflation_rate_source">Inflation rate source: </string>
+    <string name="reg_inflation_rate_source_link">www.tradingeconomics.com/forecast/inflation-rate</string>
     <string name="empty_risk_rate">Enter sovereign/country risk rate</string>
     <string name="empty_inflation_rate">Enter inflation rate</string>
     <string name="gps_coordinates_dms">GPS Coordinates : 0°00\'00.0\"N 0°00\'00.0\"E</string>
     <string name="shared_costs_outlays">Shared Costs and Outlays</string>
     <string name="string_certificate">Certificate</string>
-    <string name="restore_original_project_rates">Restore Original Project Rates</string>
+    <string name="restore_original_project_rates">Restore Original Inflation and Risk Rates</string>
     <string name="shared_outlay_question">Add shared investment/cost</string>
     <string name="app_title">Rural Valuation Tool</string>
     <string name="language_hint">Language</string>
@@ -358,4 +360,7 @@
     <string name="text_quantity_question_livestock">Total amount of fodder consumed per animal per year</string>
     <string name="text_product_question_livestock">Market Price of fodder</string>
     <string name="text_question_number_livestock">Number of livestock</string>
+    <string name="risk_rate_hint">Sovereign/Country Risk Rate</string>
+    <string name="inflation_rate_hint">Inflation Rate</string>
+    <string name="get_parcel_area_text">Parcel Area(hectare)</string>
 </resources>
