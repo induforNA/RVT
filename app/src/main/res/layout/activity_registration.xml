@@ -198,7 +198,7 @@
                     android:paddingLeft="5dp"
                     android:hint="@string/risk_rate_hint"
                     android:inputType="numberDecimal"
-                    android:nextFocusDown="@+id/reg_risk_rate"
+                    android:nextFocusDown="@+id/reg_inflation_rate"
                     android:textSize="@dimen/textfield_size" />
 
                 <TextView
@@ -257,7 +257,6 @@
                     android:hint="@string/inflation_rate_hint"
                     android:paddingLeft="5dp"
                     android:inputType="numberDecimal"
-                    android:nextFocusDown="@+id/reg_risk_rate"
                     android:textSize="@dimen/textfield_size" />
 
                 <TextView

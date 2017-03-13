@@ -36,9 +36,7 @@ import com.sayone.omidyar.model.Frequency;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.OutlayYears;
 import com.sayone.omidyar.model.Quantity;
-import com.sayone.omidyar.model.RevenueProduct;
 import com.sayone.omidyar.model.RevenueProductYears;
-import com.sayone.omidyar.model.SharedCostElementYears;
 import com.sayone.omidyar.model.Survey;
 
 import java.math.BigDecimal;
@@ -823,6 +821,9 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
             if (currentYearIndexSave == 0) {
                 unit_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, unitList);
             } else {
+                if(previousQuantityUnit == null) {
+                    previousQuantityUnit = unitList.get(0);
+                }
                 if(quantity != null && !previousQuantityUnit.equalsIgnoreCase(quantity.getQuantityName())) {
                     unitListSec = new ArrayList<>();
                     unitListSec.add(previousQuantityUnit);
@@ -1554,13 +1555,13 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                     realm.executeTransactionAsync(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
-                            RevenueProduct revenueProduct4 = realm.where(RevenueProduct.class)
+                            CostElement revenueProduct4 = realm.where(CostElement.class)
                                     .equalTo("id", costElementId)
                                     .findFirst();
 
-                            for (RevenueProductYears revenueProductYears : revenueProduct4.getRevenueProductYearses()) {
+                            for (CostElementYears revenueProductYears : revenueProduct4.getCostElementYearses()) {
                                 if (revenueProductYears.getYear() == 0) {
-                                    revenueProduct4.setRevenueProductTrend(null);
+                                    revenueProduct4.setCostElementTrend(null);
                                 }
                             }
 

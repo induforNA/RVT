@@ -14,7 +14,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -34,8 +33,6 @@ import com.sayone.omidyar.model.Component;
 import com.sayone.omidyar.model.Frequency;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.Quantity;
-import com.sayone.omidyar.model.RevenueProduct;
-import com.sayone.omidyar.model.RevenueProductYears;
 import com.sayone.omidyar.model.SharedCostElement;
 import com.sayone.omidyar.model.SharedCostElementYears;
 import com.sayone.omidyar.model.Survey;
@@ -699,6 +696,9 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
             if (currentYearIndexSave == 0) {
                 unit_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, unitList);
             } else {
+                if(previousQuantityUnit == null) {
+                    previousQuantityUnit = unitList.get(0);
+                }
                 if(quantity != null && !previousQuantityUnit.equalsIgnoreCase(quantity.getQuantityName())) {
                     unitListSec = new ArrayList<>();
                     unitListSec.add(previousQuantityUnit);
@@ -1406,13 +1406,13 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                     realm.executeTransactionAsync(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
-                            RevenueProduct revenueProduct4 = realm.where(RevenueProduct.class)
+                            SharedCostElement revenueProduct4 = realm.where(SharedCostElement.class)
                                     .equalTo("id", costElementId)
                                     .findFirst();
 
-                            for (RevenueProductYears revenueProductYears : revenueProduct4.getRevenueProductYearses()) {
+                            for (SharedCostElementYears revenueProductYears : revenueProduct4.getCostElementYearses()) {
                                 if (revenueProductYears.getYear() == 0) {
-                                    revenueProduct4.setRevenueProductTrend(null);
+                                    revenueProduct4.setCostElementTrend(null);
                                 }
                             }
 

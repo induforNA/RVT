@@ -244,7 +244,6 @@ public class GpsCoordinates extends BaseActivity {
 
         if (survey.getParcelLocations() != null) {
             parcelLocation = survey.getParcelLocations();
-
             corners[0].setLatitude(parcelLocation.getLat_1());
             corners[0].setLongitude(parcelLocation.getLng_1());
             corners[1].setLatitude(parcelLocation.getLat_2());
@@ -278,6 +277,17 @@ public class GpsCoordinates extends BaseActivity {
     }
 
     private void getParcelArea() {
+
+        Survey survey = realm.where(Survey.class).
+                equalTo("surveyId", surveyId)
+                .findFirst();
+        ParcelLocation parcelLocation;
+
+        if (survey.getParcelLocations() != null) {
+            parcelLocation = survey.getParcelLocations();
+            parcelSize = Float.toString(parcelLocation.getArea());
+        }
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View dialogView = inflater.inflate(R.layout.parcel_area, null);
 //        builder.setTitle("Parcel Area");
@@ -359,17 +369,17 @@ public class GpsCoordinates extends BaseActivity {
     }
 
     private boolean validateInputs() {
-        int nullCount = 0;
-        for (int i = 0; i < 6; i++) {
-            if (corners[i] == null || corners[i].getLatitude() == 0 || corners[i].getLongitude() == 0) {
-                nullCount++;
-            }
-        }
-
-        if (nullCount > 3) {
-            Toast.makeText(GpsCoordinates.this, "Please set at least three corners", Toast.LENGTH_SHORT).show();
-            return false;
-        }
+//        int nullCount = 0;
+//        for (int i = 0; i < 6; i++) {
+//            if (corners[i] == null || corners[i].getLatitude() == 0 || corners[i].getLongitude() == 0) {
+//                nullCount++;
+//            }
+//        }
+//
+//        if (nullCount > 3) {
+//            Toast.makeText(GpsCoordinates.this, "Please set at least three corners", Toast.LENGTH_SHORT).show();
+//            return false;
+//        }
 
         if (area == 0) {
             Toast.makeText(GpsCoordinates.this, "Please enter the area", Toast.LENGTH_SHORT).show();

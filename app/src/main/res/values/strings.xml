@@ -181,7 +181,7 @@
     <string name="text_summary_surveys">Summary of surveys</string>
     <string name="title_activity_omidyar_map">Map</string>
     <string name="heading_admin_dashboard">Admin Dashboard</string>
-    <string name="heading_certificate">Community Asset Valuation Certificate</string>
+    <string name="heading_certificate">Valuation Certificate</string>
     <string name="string_forestland">Forestry</string>
     <string name="string_pastureland">Grazing</string>
     <string name="string_miningland">Mining</string>
@@ -273,7 +273,7 @@
     <string name="natural_outlay_qn1">Give details of investment/cost outlay items added</string>
     <string name="natural_outlay_qn2">Choose outlay item</string>
     <string name="natural_outlay_qn3">In which year do you expect to first incur the cost?</string>
-    <string name="natural_outlay_qn4">Amount</string>
+    <string name="natural_outlay_qn4">Total cost</string>
     <string name="natural_outlay_qn5">Choose currency</string>
     <string name="natural_outlay_qn6">How often does this expense occur?</string>
     <string name="natural_outlay_a_qn1">Add future investment/cost outlay items</string>
@@ -348,10 +348,10 @@
     <string name="empty_risk_rate">Enter sovereign/country risk rate</string>
     <string name="empty_inflation_rate">Enter inflation rate</string>
     <string name="gps_coordinates_dms">GPS Coordinates : 0°00\'00.0\"N 0°00\'00.0\"E</string>
-    <string name="shared_costs_outlays">Shared Costs and Outlays</string>
+    <string name="shared_costs_outlays">Shared Costs</string>
     <string name="string_certificate">Certificate</string>
     <string name="restore_original_project_rates">Restore Original Inflation and Risk Rates</string>
-    <string name="shared_outlay_question">Add shared investment/cost</string>
+    <string name="shared_outlay_question">Add future shared investments/costs</string>
     <string name="app_title">Rural Valuation Tool</string>
     <string name="language_hint">Language</string>
     <string name="currency_hint">Currency</string>

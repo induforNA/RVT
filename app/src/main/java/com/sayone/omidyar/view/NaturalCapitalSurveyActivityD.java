@@ -1131,6 +1131,9 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             if (currentYearIndexSave == 0) {
                 unit_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, unitList);
             } else {
+                if(previousQuantityUnit == null) {
+                    previousQuantityUnit = unitList.get(0);
+                }
                 if(quantity != null && !previousQuantityUnit.equalsIgnoreCase(quantity.getQuantityName())) {
                     unitListSec = new ArrayList<>();
                     unitListSec.add(previousQuantityUnit);
