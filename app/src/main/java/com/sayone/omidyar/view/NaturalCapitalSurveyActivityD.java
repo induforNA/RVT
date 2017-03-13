@@ -656,6 +656,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         final RadioGroup dialogRadioGroup = (RadioGroup) dialog.findViewById(R.id.radio_group);
         RadioButton dialogRadioPositive = (RadioButton) dialog.findViewById(R.id.radio_button_positive);
         RadioButton dialogRadioNegative = (RadioButton) dialog.findViewById(R.id.radio_button_negative);
+        TextView dialogQuesOverride = (TextView) dialog.findViewById(R.id.text_ques_override);
         TextView dialogFrequency = (TextView) dialog.findViewById(R.id.text_trend_frequency);
         TextView dialogTimePeriod = (TextView) dialog.findViewById(R.id.text_trend_time_perioid);
         final TextView dialogHouseholds = (TextView) dialog.findViewById(R.id.text_trend_num_households);
@@ -816,6 +817,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                 dialogEditFrequency.setEnabled(false);
         }
 
+        dialogQuesOverride.setText(getString(R.string.question_override,revenueProduct.getName()));
         dialogQuestionHarvest.setText(getString(R.string.text_question_harvest, getString(R.string.text_harvest) + " " + revenueProduct.getName()));
         dialogQuestionHouseholds.setText(getString(R.string.text_number_of_households, getString(R.string.text_harvest) + " " + revenueProduct.getName()));
         dialogQuestionPerHousehold.setText(getString(R.string.text_question_quantity, revenueProduct.getName() + " was harvested "));

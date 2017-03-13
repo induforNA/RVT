@@ -569,18 +569,19 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
 
         if (costElementLoad.getType().equals("Timber")) {
             loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1) + " " + costElementLoad.getName() + "" + getResources().getString(R.string.qn_natural_cost_1_2) + "?");
-            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1) + " " + costElementLoad.getName() + " " + getResources().getString(R.string.qn_natural_cost_2_2) + "?");
+//            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1) + " " + costElementLoad.getName() + " " + getResources().getString(R.string.qn_natural_cost_2_2) + "?");
             productQuestion.setText(getResources().getString(R.string.qn_natural_cost_3_1) + " " + costElementLoad.getName() + " " + getResources().getString(R.string.qn_natural_cost_3_2));
         } else if (costElementLoad.getType().equals("Non Timber")) {
             loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1) + " " + costElementLoad.getName() + "" + getResources().getString(R.string.qn_natural_cost_1_2) + "?");
-            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1) + " " + costElementLoad.getName() + " " + getResources().getString(R.string.qn_natural_cost_2_2) + "?");
+//            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1) + " " + costElementLoad.getName() + " " + getResources().getString(R.string.qn_natural_cost_2_2) + "?");
             productQuestion.setText(getResources().getString(R.string.qn_natural_cost_3_1) + " " + costElementLoad.getName() + " " + getResources().getString(R.string.qn_natural_cost_3_2));
         } else {
             loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1) + " " + costElementLoad.getName() + "" + getResources().getString(R.string.qn_natural_cost_1_2) + "?");
-            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1) + " " + costElementLoad.getName() + " " + getResources().getString(R.string.qn_natural_cost_2_2) + "?");
+//            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1) + " " + costElementLoad.getName() + " " + getResources().getString(R.string.qn_natural_cost_2_2) + "?");
             productQuestion.setText(getResources().getString(R.string.qn_natural_cost_3_1) + " " + costElementLoad.getName() + " " + getResources().getString(R.string.qn_natural_cost_3_2));
         }
-        householdText.setText(getString(R.string.string_household, getString(R.string.text_incur_cost) + costElementLoad.getName()));
+        quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2,costElementLoad.getName()));
+        householdText.setText(getString(R.string.string_household, getString(R.string.text_incur_cost,costElementLoad.getName())));
         productReveneIdCheck = costElementLoad.getId();
 
 
@@ -1096,6 +1097,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
         Button dialogNext = (Button) dialog.findViewById(R.id.button_next);
         final RadioGroup dialogRadioGroup = (RadioGroup) dialog.findViewById(R.id.radio_group);
         RadioButton dialogRadioNegative = (RadioButton) dialog.findViewById(R.id.radio_button_negative);
+        TextView dialogQuesOverride = (TextView) dialog.findViewById(R.id.text_ques_override);
         TextView dialogFrequency = (TextView) dialog.findViewById(R.id.text_trend_frequency);
         TextView dialogTimePeriod = (TextView) dialog.findViewById(R.id.text_trend_time_perioid);
         TextView dialogHouseholds = (TextView) dialog.findViewById(R.id.text_trend_num_households);
@@ -1248,7 +1250,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
             }
         });
 
-
+        dialogQuesOverride.setText(getString(R.string.question_override,costElement.getName()));
         dialogQuestionHarvest.setText(getString(R.string.text_question_harvest, costElement.getName()));
         dialogQuestionHouseholds.setText(getString(R.string.text_number_of_households, costElement.getName()));
         dialogQuestionPerHousehold.setText(getString(R.string.text_question_quantity, costElement.getName()));
