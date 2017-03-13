@@ -186,8 +186,8 @@
     <string name="string_pastureland">Grazing</string>
     <string name="string_miningland">Mining</string>
     <string name="string_cropland">Agriculture</string>
-    <string name="title_natural_capital">Natural capital</string>
-    <string name="title_social_capital">Social capital survey</string>
+    <string name="title_natural_capital">Natural Capital Survey</string>
+    <string name="title_social_capital">Social Capital Survey</string>
     <string name="qn_what_crop_doyou_harvest">What crops do you harvest, if any?</string>
     <string name="button_add">Add</string>
     <string name="string_powered_by">Powered by</string>
@@ -275,7 +275,7 @@
     <string name="natural_outlay_qn4">Amount</string>
     <string name="natural_outlay_qn5">Choose currency</string>
     <string name="natural_outlay_qn6">How often does this expense occur?</string>
-    <string name="natural_outlay_a_qn1">Add investment/cost outlay items</string>
+    <string name="natural_outlay_a_qn1">Add future investment/cost outlay items</string>
     <string name="natural_outlay_a_qn2">Add cost outlay item</string>
     <string name="year_data_livestock">How many years of data do you have on livestock activity?</string>
     <string name="year_data_extraction">How many years of data do you have on extraction activities?</string>
