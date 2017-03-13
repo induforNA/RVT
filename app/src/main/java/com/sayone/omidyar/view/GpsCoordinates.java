@@ -282,7 +282,7 @@ public class GpsCoordinates extends BaseActivity {
         View dialogView = inflater.inflate(R.layout.parcel_area, null);
 //        builder.setTitle("Parcel Area");
         final EditText areaInput = (EditText) dialogView.findViewById(R.id.parcel_area_edit);
-        if (!parcelSize.equals("")) {
+        if (!parcelSize.equals("") && !parcelSize.equals("0.0")) {
             areaInput.setText(parcelSize);
         }
         builder.setView(dialogView);
