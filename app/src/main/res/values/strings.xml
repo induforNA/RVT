@@ -27,7 +27,7 @@
     <string-array name="land_use_array">
         <item>Select land use type</item>
         <item>Agriculture</item>
-        <item>Harvesting Forest Products</item>
+        <item>Forestry</item>
         <item>Grazing</item>
         <item>Mining</item>
     </string-array>
@@ -182,7 +182,7 @@
     <string name="title_activity_omidyar_map">Map</string>
     <string name="heading_admin_dashboard">Admin Dashboard</string>
     <string name="heading_certificate">Community Asset Valuation Certificate</string>
-    <string name="string_forestland">Harvesting Forest Products</string>
+    <string name="string_forestland">Forestry</string>
     <string name="string_pastureland">Grazing</string>
     <string name="string_miningland">Mining</string>
     <string name="string_cropland">Agriculture</string>
@@ -217,7 +217,7 @@
     <string name="name_of_wood">Name of wood</string>
     <string name="string_crop">Crop</string>
     <string name="qn_natural_a">What wood do you harvest, if any?</string>
-    <string name="qn_natural_b">What non-timber forest products (e.g. food, herbal medicine) do you harvest, if any?</string>
+    <string name="qn_natural_b">What non-timber forest products (e.g. fuelwood, fodder, food, medicine) do you harvest if any?</string>
     <string name="qn_natural_c">How many years of data do you have on harvest activities?</string>
     <string name="qn_natural_d_1">How often do you harvest Product?</string>
     <string name="qn_natural_d_2">Number of times</string>
@@ -232,14 +232,15 @@
     <string name="string_currency">Currency</string>
     <string name="qn_natural_3_1">Do you plan on incurring any new future costs, seperate from those already entered for the past?</string>
     <string name="qn_natural_3_2">What type of costs?</string>
-    <string name="qn_land_selection_1">What kind of resources are valued on you land?</string>
+    <!--<string name="qn_land_selection_1">What kind of resources are valued on you land?</string>-->
+    <string name="qn_land_selection_1">What are the major land use activities or resource flows on your land?</string>
     <string name="string_add_participant">Add a participant</string>
     <string name="string_add_crop">Add a crop</string>
     <string name="string_fill_name">Fill name</string>
     <string name="string_atleast_one">Select atleast one</string>
     <string name="string_add_cost_element">Add a cost element</string>
     <string name="select_no_of_years">Select number of years</string>
-    <string name="qn_natural_A_1">What wood do you harvest, if any?</string>
+    <string name="qn_natural_A_1">What timber do you harvest, if any?</string>
     <string name="qn_natural_A_2">What crops do you harvest, if any?</string>
     <string name="qn_natural_A_3">What livestock do you raise, if any?</string>
     <string name="qn_natural_A_4">What do you extract, if anything?</string>
@@ -252,7 +253,7 @@
     <string name="qn_natural_complex_2_2"> harvested each time?</string>
     <string name="qn_natural_complex_3_1">What was the price of </string>
     <string name="qn_natural_complex_3_2"> per unit?</string>
-    <string name="costs_incur">What types of costs do you incur on this commons? (e.g. infrastructure, equipment, transportation, seeds/seedlings, fertilizer, water, labor)</string>
+    <string name="costs_incur">What types of costs do you incur on this parcel specific to this land use activity or resource flow? (e.g. infrastructure, equipment, transportation, seeds/seedlings, fertilizer, water, labor)</string>
     <string name="shared_costs_incur">What types of shared costs do you incur on this commons? </string>
     <string name="data_on_harvest_activities">How many years of data do you have on harvest activities?</string>
     <string name="registration_successful">Registration successful</string>
@@ -260,7 +261,7 @@
     <string name="percentage_area_extracted">Area extracted (in %)</string>
     <string name="qn_cost_1">How many years of data do you have on costs?</string>
     <string name="qn_natural_cost_1_2"></string>
-    <string name="qn_natural_cost_1_1">How often do you incur cost of </string>
+    <string name="qn_natural_cost_1_1">How often do you incur %1$s costs?</string>
     <string name="qn_natural_cost_2_1">What was the cost of </string>
     <string name="qn_natural_cost_2_2">per time period</string>
     <string name="qn_natural_cost_3_1">What was the cost of</string>
@@ -315,7 +316,7 @@
     <string name="text_harvest">\u0020harvest</string>
     <string name="text_extract">\u0020extract</string>
     <string name="text_incur_cost">incur cost\u0020</string>
-    <string name="question_override">We will project cash flows for the next 15 years based on the average of all of the data you entered. Does this average seem realistic going into the future?</string>
+    <string name="question_override">We will project cash flows for the next 15 years based on the average of the data you entered for %1$s. Does this average seem realistic? If not, please enter your estimate.</string>
     <string name="label_your_estimate">Your estimate (will override average value in projections)</string>
     <string name="text_question_harvest">How often do you %1$s?</string>
     <string name="text_number_of_times">Number of times</string>
