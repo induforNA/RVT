@@ -195,6 +195,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
+                    android:paddingLeft="5dp"
                     android:hint="@string/risk_rate_hint"
                     android:inputType="numberDecimal"
                     android:nextFocusDown="@+id/reg_risk_rate"
@@ -254,6 +255,7 @@
                     android:layout_weight="1"
                     android:layout_marginRight="10dp"
                     android:hint="@string/inflation_rate_hint"
+                    android:paddingLeft="5dp"
                     android:inputType="numberDecimal"
                     android:nextFocusDown="@+id/reg_risk_rate"
                     android:textSize="@dimen/textfield_size" />

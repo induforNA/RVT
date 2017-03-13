@@ -364,5 +364,5 @@
     <string name="text_question_number_livestock">Number of livestock</string>
     <string name="risk_rate_hint">Sovereign/Country Risk Rate</string>
     <string name="inflation_rate_hint">Inflation Rate</string>
-    <string name="get_parcel_area_text">Parcel Area(hectare)</string>
+    <string name="get_parcel_area_text">Parcel Area(hectares)</string>
 </resources>
