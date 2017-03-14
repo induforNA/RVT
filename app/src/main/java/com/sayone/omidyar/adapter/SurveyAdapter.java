@@ -57,6 +57,7 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private String surveyId;
     Set<String> set;
     private SharedPreferences.Editor editor;
+    private boolean isEnabled;
 
 
     public class SurveyViewHolder extends RecyclerView.ViewHolder {
@@ -153,7 +154,7 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             surveyRequest = survey;
             if (survey.isSendStatus()) {
                 ((SurveyViewHolder) holder).exportButton.setVisibility(View.VISIBLE);
-                mContext.setButtonEnabled();
+//                mContext.setButtonEnabled();
 
             } else {
                 ((SurveyViewHolder) holder).exportButton.setVisibility(View.INVISIBLE);
@@ -166,13 +167,25 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     if (flag1) {
                         ((SurveyViewHolder) holder).checkBoxSurvey.setChecked(true);
                         realm.beginTransaction();
-                        survey.setSendStatus(true);
+                        //survey.setSendStatus(true);
                         realm.commitTransaction();
                         set.add(survey.getSurveyId());
                         editor = sharedPref.edit();
                         editor.clear();
                         editor.putStringSet("surveySet", set);
                         editor.apply();
+                        for(String temp : set) {
+                            isEnabled = true;
+                            Survey survey = realm.where(Survey.class).equalTo("surveyId", temp).findFirst();
+                            if(!survey.isSendStatus()){
+                                isEnabled = false;
+                                break;
+                            }
+                        }
+                        if(isEnabled)
+                            mContext.setButtonEnabled();
+                        else
+                            mContext.setButtonDisabled();
                     } else {
                         ((SurveyViewHolder) holder).checkBoxSurvey.setChecked(false);
 //                        realm.beginTransaction();
@@ -183,6 +196,18 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         editor.clear();
                         editor.putStringSet("surveySet", set);
                         editor.apply();
+                        for(String temp : set) {
+                            isEnabled = true;
+                            Survey survey = realm.where(Survey.class).equalTo("surveyId", temp).findFirst();
+                            if(!survey.isSendStatus()){
+                                isEnabled = false;
+                                break;
+                            }
+                        }
+                        if(isEnabled)
+                            mContext.setButtonEnabled();
+                        else
+                            mContext.setButtonDisabled();
                     }
 // notifyDataSetChanged();
                     flag1 = toggle1();
@@ -197,9 +222,9 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 set.clear();
             }
             if (((SurveyViewHolder) holder).checkBoxSurvey.isChecked()) {
-                realm.beginTransaction();
-                survey.setSendStatus(true);
-                realm.commitTransaction();
+/*                realm.beginTransaction();
+//                survey.setSendStatus(true);
+                realm.commitTransaction();*/
                 set.add(survey.getSurveyId());
             }
 

@@ -4,8 +4,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -39,11 +41,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public static final String TAG = MainActivity.class.getName();
     Context context;
     SharedPreferences sharedPref;
+    Survey survey;
+    RealmList<Participant> participants;
     private Realm realm;
     private String androidId;
     private String surveyId;
-    Survey survey;
-
     private DrawerLayout menuDrawerLayout;
     private ImageView imageViewMenuIcon;
     private ImageView drawerCloseBtn;
@@ -54,8 +56,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private TextView surveyIdDrawer;
     private LinearLayout noParticipantLayout;
     private LinearLayout participantLayout;
-
-    RealmList<Participant> participants;
     private ParticipantsAdapter participantsAdapter;
     private String language;
 
@@ -322,8 +322,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 dialog.show();
                 break;
             case R.id.next_button:
-                Intent intentToLandTypeSelectionActivity = new Intent(MainActivity.this, LandTypeSelectionActivity.class);
-                startActivity(intentToLandTypeSelectionActivity);
+                final Dialog dialog1 = new Dialog(MainActivity.this, android.R.style.Theme_Holo_Light_NoActionBar_Fullscreen);
+                dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.blackDisable)));
+                dialog1.setContentView(R.layout.layout_show_save_warning);
+                Button dialogNext = (Button) dialog1.findViewById(R.id.button_next);
+
+                dialogNext.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intentToLandTypeSelectionActivity = new Intent(MainActivity.this, LandTypeSelectionActivity.class);
+                        startActivity(intentToLandTypeSelectionActivity);
+                        dialog1.dismiss();
+                    }
+                });
+                dialog1.show();
                 break;
             case R.id.logout:
                 Intent intents = new Intent(MainActivity.this, RegistrationActivity.class);

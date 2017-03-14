@@ -2,7 +2,7 @@
   "socialCapitalQuestions": [
     {
       "questionno": 1,
-      "question": "What rights do households in this community have over this parcel?",
+      "question": "What rights do households in this community have over this parcel specific to this specific land use activity?",
       "questionHindi": "इस पार्सल पर इस समुदाय के परिवारों का अधिकार क्या है?",
       "weight": "20",
       "optiontype": "multiple",
@@ -36,7 +36,7 @@
     },
     {
       "questionno": 2,
-      "question": "What rights to this parcel are provided through a state-backed and legally recognized record (i.e. title, lease, etc.)?",
+      "question": "What rights to this parcel specific to this land use activity are provided through a state-backed and legally recognized record i.e. title, lease, etc.)?",
       "questionHindi": "राज्य का समर्थन किया और कानूनी रूप से मान्यता प्राप्त रिकॉर्ड के माध्यम (अर्थात शीर्षक, पट्टे आदि) से इस पार्सल को क्या अधिकार  प्रदान की जाती हैं?",
       "weight": "20",
       "optiontype": "multiple",
@@ -70,7 +70,7 @@
     },
     {
       "questionno": 3,
-      "question": "Are the boundaries for this parcel well known and understood by government authorities and/or community members?",
+      "question": "Are the boundaries for the land use activity on this parcel well known and understood by government authorities and/or community members?",
       "questionHindi": "इस पार्सल के लिए सीमाओं को अच्छी तरह से जाना जाता है और सरकार के अधिकारियों और / या समुदाय के सदस्यों द्वारा समझ रहे हैं?",
       "weight": "5",
       "optiontype": "single",
@@ -94,7 +94,7 @@
     },
     {
       "questionno": 4,
-      "question": "Does this group feel confident that they will be able to continue to use the parcel without constraints indefinitely into the future?",
+      "question": "Does this group feel confident that they will be able to continue to use the parcel for this land use activity without constraints indefinitely into the future?",
       "questionHindi": "क्या इस समूह को भरोसा है कि वे भविष्य में अनिश्चित काल के लिए बाधाओं के बिना पार्सल का उपयोग करने के लिए जारी रखने  को सक्षम हो जाएगा लगता है?",
       "weight": "5",
       "optiontype": "single",
@@ -128,7 +128,7 @@
     },
     {
       "questionno": 5,
-      "question": "Are there any current disputes related to the boundaries or rights associated with this parcel?",
+      "question": "Are there any current disputes related to the boundaries or rights associated with this parcel specific to this land use activity?",
       "questionHindi": "वहाँ किसी भी वर्तमान सीमाओं या इस पार्सल के साथ जुड़े अधिकारों से संबंधित विवादों हैं?",
       "weight": "5",
       "optiontype": "single",
