@@ -137,7 +137,7 @@
     <string name="country_risk">Country risk</string>
     <string name="social_capital_factor">Social capital factor</string>
     <string name="button_calc_discount_rate">Calculate discount rate</string>
-    <string name="discount_rate">Discount rate</string>
+    <string name="discount_rate">Discount Rate</string>
     <string name="override_discount">Override discount rate</string>
     <string name="restore_original_discount_rate">Restore original discount rate</string>
     <string name="button_save">Save</string>
@@ -154,13 +154,13 @@
     <string name="button_reset_data">Reset all data</string>
     <string name="button_send_to_server">Send data to server</string>
     <string name="parcel_id">Parcel ID</string>
-    <string name="site">Respondent group</string>
-    <string name="surveyor_name">Surveyor name</string>
+    <string name="site">Respondent Group</string>
+    <string name="surveyor_name">Surveyor Name</string>
     <string name="date_to_valuation">Valuation date</string>
     <string name="inflation_rate">Inflation Rate</string>
     <string name="title_cropland">Agriculture</string>
     <string name="value">Value</string>
-    <string name="social_capital_score">Social capital score</string>
+    <string name="social_capital_score">Social Capital Score</string>
     <string name="questions_completed">Questions completed</string>
     <string name="total">Total : </string>
     <string name="qn_completed">Questions completed -</string>
@@ -364,7 +364,7 @@
     <string name="text_question_number_livestock">Number of livestock</string>
     <string name="risk_rate_hint">Sovereign/Country Risk Rate</string>
     <string name="inflation_rate_hint">Inflation Rate</string>
-    <string name="get_parcel_area_text">Parcel Area(hectares)</string>
+    <string name="get_parcel_area_text">Parcel Area (hectares)</string>
     <string name="text_save_warning">The survey will only be saved after you click Save or Next on each page, not Back.</string>
     <string name="text_got_it">Got It</string>
 </resources>
