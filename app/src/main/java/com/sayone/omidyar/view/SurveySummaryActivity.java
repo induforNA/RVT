@@ -1921,7 +1921,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 Log.e("Response ", "" + response.toString());
                 exportDataEmail.setEnabled(true);
                 if(response.body().getResponse().equals("failed")) {
-                    Toast toast = Toast.makeText(context, "Export Failed\nIncomplete Survey", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(context, "Export Failed", Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
                     Toast toast = Toast.makeText(context, "Data exported", Toast.LENGTH_SHORT);
