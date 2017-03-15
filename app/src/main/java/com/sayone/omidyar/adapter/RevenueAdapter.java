@@ -13,10 +13,12 @@ import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.CostElement;
 import com.sayone.omidyar.model.Participant;
 import com.sayone.omidyar.model.RevenueProduct;
+import com.sayone.omidyar.model.RevenueProductYears;
 import com.sayone.omidyar.view.NaturalCapitalCostActivityA;
 import com.sayone.omidyar.view.NaturalCapitalSurveyActivityA;
 import com.sayone.omidyar.view.NaturalCapitalSurveyActivityB;
 
+import java.util.Iterator;
 import java.util.List;
 
 import io.realm.Realm;
@@ -65,6 +67,8 @@ public class RevenueAdapter extends RecyclerView.Adapter<RevenueAdapter.RevenueP
                 RevenueProduct revenueProduct = realm.where(RevenueProduct.class)
                         .equalTo("name",holder.revenueProductName.getText().toString())
                         .findFirst();
+
+                revenueProduct.getRevenueProductYearses().deleteAllFromRealm();
                 revenueProduct.deleteFromRealm();
                 realm.commitTransaction();
                 Toast toast = Toast.makeText(mContext,mContext.getResources().getText(R.string.text_deleted), Toast.LENGTH_SHORT);
@@ -81,7 +85,5 @@ public class RevenueAdapter extends RecyclerView.Adapter<RevenueAdapter.RevenueP
     public int getItemCount() {
         return revenueProducts.size();
     }
-
-
 
 }

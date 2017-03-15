@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.adapter.RevenueAdapter;
 import com.sayone.omidyar.model.RevenueProduct;
+import com.sayone.omidyar.model.RevenueProductYears;
 
 import java.util.List;
 
@@ -62,6 +63,7 @@ public class RevenueAdapterB extends RecyclerView.Adapter<RevenueAdapterB.Revenu
                 RevenueProduct revenueProduct = realm.where(RevenueProduct.class)
                         .equalTo("name", holder.revenueProductName.getText().toString())
                         .findFirst();
+                revenueProduct.getRevenueProductYearses().deleteAllFromRealm();
                 revenueProduct.deleteFromRealm();
                 realm.commitTransaction();
                 Toast toast = Toast.makeText(mContext, mContext.getResources().getText(R.string.text_deleted), Toast.LENGTH_SHORT);

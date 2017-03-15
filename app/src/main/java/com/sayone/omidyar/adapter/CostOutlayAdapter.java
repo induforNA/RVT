@@ -65,6 +65,7 @@ public class CostOutlayAdapter extends RecyclerView.Adapter<CostOutlayAdapter.Co
                 Outlay outlay = realm.where(Outlay.class)
                         .equalTo("itemName",holder.revenueProductName.getText().toString())
                         .findFirst();
+                outlay.getOutlayYearses().deleteAllFromRealm();
                 outlay.deleteFromRealm();
                 realm.commitTransaction();
                 Toast toast = Toast.makeText(mContext,mContext.getResources().getText(R.string.text_deleted), Toast.LENGTH_SHORT);

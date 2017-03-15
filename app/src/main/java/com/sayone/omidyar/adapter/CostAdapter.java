@@ -12,7 +12,9 @@ import android.widget.Toast;
 
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.CostElement;
+import com.sayone.omidyar.model.CostElementYears;
 import com.sayone.omidyar.model.SharedCostElement;
+import com.sayone.omidyar.model.SharedCostElementYears;
 import com.sayone.omidyar.view.NaturalCapitalCostActivityA;
 import com.sayone.omidyar.view.NaturalCapitalSharedCostActivityA;
 
@@ -74,6 +76,7 @@ public class CostAdapter extends RecyclerView.Adapter<CostAdapter.CostProductVie
                     CostElement costElement = realm.where(CostElement.class)
                             .equalTo("name",holder.costProductName.getText().toString())
                             .findFirst();
+                    costElement.getCostElementYearses().deleteAllFromRealm();
                     costElement.deleteFromRealm();
                     realm.commitTransaction();
                     Toast toast = Toast.makeText(mContext,mContext.getResources().getText(R.string.text_deleted), Toast.LENGTH_SHORT);
@@ -95,6 +98,7 @@ public class CostAdapter extends RecyclerView.Adapter<CostAdapter.CostProductVie
                     SharedCostElement costElement = realm.where(SharedCostElement.class)
                             .equalTo("name", holder.costProductName.getText().toString())
                             .findFirst();
+                    costElement.getCostElementYearses().deleteAllFromRealm();
                     costElement.deleteFromRealm();
                     realm.commitTransaction();
                     Toast toast = Toast.makeText(mContext, mContext.getResources().getText(R.string.text_deleted), Toast.LENGTH_SHORT);
