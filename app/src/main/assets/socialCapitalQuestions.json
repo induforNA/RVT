@@ -2,7 +2,7 @@
   "socialCapitalQuestions": [
     {
       "questionno": 1,
-      "question": "What rights do households in this community have over this parcel specific to this specific land use activity?",
+      "question": "What rights do households in this community have over this parcel specific to this land use activity?",
       "questionHindi": "इस पार्सल पर इस समुदाय के परिवारों का अधिकार क्या है?",
       "weight": "20",
       "optiontype": "multiple",
