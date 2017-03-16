@@ -15,17 +15,31 @@ import android.widget.TextView;
 
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
+import com.sayone.omidyar.model.CashFlow;
+import com.sayone.omidyar.model.Component;
+import com.sayone.omidyar.model.CostElement;
+import com.sayone.omidyar.model.CostElementYears;
 import com.sayone.omidyar.model.LandKind;
+import com.sayone.omidyar.model.Outlay;
+import com.sayone.omidyar.model.OutlayYears;
 import com.sayone.omidyar.model.ParcelLocation;
+import com.sayone.omidyar.model.RevenueProduct;
+import com.sayone.omidyar.model.RevenueProductYears;
+import com.sayone.omidyar.model.SharedCostElement;
+import com.sayone.omidyar.model.SharedCostElementYears;
 import com.sayone.omidyar.model.SocialCapital;
 import com.sayone.omidyar.model.Survey;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.text.DecimalFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Locale;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmResults;
 
 public class NewCertificateActivity extends BaseActivity implements View.OnClickListener {
@@ -70,6 +84,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
     private TextView sharedCostsOutlays;
     private TextView certificate;
     private TextView logout;
+    private double mSharedDiscountRate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,16 +147,6 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                 .equalTo("surveyId", surveyId)
                 .findFirst();
 
-        Format formatter = new SimpleDateFormat("MMM d, yyyy");
-        String s = formatter.format(surveyCheck.getDate());
-
-        RealmResults<LandKind> landKinds = realm.where(LandKind.class)
-                .equalTo("surveyId", surveyId)
-                .equalTo("status", "active")
-                .findAll();
-
-        Log.e("CHECK ", surveyCheck.toString());
-
         Log.e("Symbol:", surveyCheck.getCurrency());
         currency = surveyCheck.getCurrency();
 
@@ -172,13 +177,30 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         certificate.setOnClickListener(this);
         logout.setOnClickListener(this);
         setNav();
+        allCashFlow();
+        sharedCashFlow();
 
+        setDatas();
         //GPS Coordinates
-        Survey survey = realm.where(Survey.class).
+
+    }
+
+    private void setDatas() {
+        Survey surveyCheck = realm.where(Survey.class).
                 equalTo("surveyId", surveyId)
                 .findFirst();
 
-        ParcelLocation parcelLocation = survey.getParcelLocations();
+        RealmResults<LandKind> landKinds = realm.where(LandKind.class)
+                .equalTo("surveyId", surveyId)
+                .equalTo("status", "active")
+                .findAll();
+
+        Log.e("CHECK ", surveyCheck.toString());
+
+        Format formatter = new SimpleDateFormat("MMM d, yyyy");
+        String s = formatter.format(surveyCheck.getDate());
+
+        ParcelLocation parcelLocation = surveyCheck.getParcelLocations();
 
         if (parcelLocation != null) {
             String coordinate_1 = parcelLocation.getCoordinateOne();
@@ -565,4 +587,825 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
             menuDrawerLayout.openDrawer(GravityCompat.START);
         }
     }
+
+    public void allCashFlow() {
+        Survey results = realm.where(Survey.class)
+                .equalTo("surveyId", surveyId)
+                .findFirst();
+        RealmList<CashFlow> cashFlows = new RealmList<>();
+        for (LandKind landKind : results.getLandKinds()) {
+
+            double discRate;
+            int year = 0;
+            CashFlow cashFlowTemp = null;
+
+            if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalServey.equals(getString(R.string.string_forestland))) {
+                // Log.e("DIS RATE ", landKind.getSocialCapitals().getDiscountRate()+"");
+                int k = 0;
+                discRate = landKind.getSocialCapitals().isDiscountFlag() ? landKind.getSocialCapitals().getDiscountRateOverride() : landKind.getSocialCapitals().getDiscountRate();
+
+                if(!landKind.getForestLand().getRevenueProducts().isEmpty()) {
+                    for (RevenueProduct revenueProduct : landKind.getForestLand().getRevenueProducts()) {
+                        if (k <= 0) {
+                            for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
+                                cashFlowTemp = calculateCashFlow(getString(R.string.string_forestland), revenueProductYears.getYear(), discRate);
+                                cashFlows.add(cashFlowTemp);
+                                year = revenueProductYears.getYear();
+                            }
+                            cashFlows.add(calculateTerminalValue(getString(R.string.string_forestland), year, cashFlowTemp, discRate));
+                        }
+                        k++;
+                    }
+                } else if(!landKind.getForestLand().getCostElements().isEmpty()){
+                    for (CostElement costElement : landKind.getForestLand().getCostElements()) {
+                        for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
+                            Log.e("RPPPPPPP ", costElementYears00 + "");
+                        }
+                        if (k <= 0) {
+                            for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
+                                cashFlowTemp = calculateCashFlow(getString(R.string.string_forestland), costElementYears.getYear(), discRate);
+                                cashFlows.add(cashFlowTemp);
+                                year = costElementYears.getYear();
+
+                            }
+                            cashFlows.add(calculateTerminalValue(getString(R.string.string_forestland), year, cashFlowTemp, discRate));
+                        }
+                        k++;
+                    }
+                } else if (!landKind.getForestLand().getOutlays().isEmpty()){
+                    for (Outlay outlay : landKind.getForestLand().getOutlays()) {
+                        for (OutlayYears outlay1 : outlay.getOutlayYearses()) {
+                            Log.e("RPPPPPPP ", outlay1 + "");
+                        }
+                        if (k <= 0) {
+                            for (OutlayYears outlayYears : outlay.getOutlayYearses()) {
+                                cashFlowTemp = calculateCashFlow(getString(R.string.string_forestland), outlayYears.getYear(), discRate);
+                                cashFlows.add(cashFlowTemp);
+                                year = outlayYears.getYear();
+
+                            }
+                            cashFlows.add(calculateTerminalValue(getString(R.string.string_forestland), year, cashFlowTemp, discRate));
+                        }
+                        k++;
+                    }
+                }
+                realm.beginTransaction();
+                landKind.getForestLand().setCashFlows(cashFlows);
+                realm.commitTransaction();
+
+                // Log.e("MM ",landKind.getForestLand().getCashFlows().get(0).toString());
+            } else if (landKind.getName().equals(getString(R.string.string_cropland)) && currentSocialCapitalServey.equals(getString(R.string.string_cropland))) {
+                int k = 0;
+                discRate = landKind.getSocialCapitals().isDiscountFlag() ? landKind.getSocialCapitals().getDiscountRateOverride() : landKind.getSocialCapitals().getDiscountRate();
+
+                if(!landKind.getCropLand().getRevenueProducts().isEmpty()) {
+                    for (RevenueProduct revenueProduct : landKind.getCropLand().getRevenueProducts()) {
+                        if (k <= 0) {
+                            for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
+                                cashFlowTemp = calculateCashFlow(getString(R.string.string_cropland), revenueProductYears.getYear(), discRate);
+                                cashFlows.add(cashFlowTemp);
+                                year = revenueProductYears.getYear();
+                            }
+                            cashFlows.add(calculateTerminalValue(getString(R.string.string_cropland), year, cashFlowTemp, discRate));
+                        }
+                        k++;
+                    }
+                } else if(!landKind.getCropLand().getCostElements().isEmpty()){
+                    for (CostElement costElement : landKind.getCropLand().getCostElements()) {
+                        for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
+                            Log.e("RPPPPPPP ", costElementYears00 + "");
+                        }
+                        if (k <= 0) {
+                            for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
+                                cashFlowTemp = calculateCashFlow(getString(R.string.string_cropland), costElementYears.getYear(), discRate);
+                                cashFlows.add(cashFlowTemp);
+                                year = costElementYears.getYear();
+
+                            }
+                            cashFlows.add(calculateTerminalValue(getString(R.string.string_cropland), year, cashFlowTemp, discRate));
+                        }
+                        k++;
+                    }
+                } else if (!landKind.getCropLand().getOutlays().isEmpty()){
+                    for (Outlay outlay : landKind.getCropLand().getOutlays()) {
+                        for (OutlayYears outlay1 : outlay.getOutlayYearses()) {
+                            Log.e("RPPPPPPP ", outlay1 + "");
+                        }
+                        if (k <= 0) {
+                            for (OutlayYears outlayYears : outlay.getOutlayYearses()) {
+                                cashFlowTemp = calculateCashFlow(getString(R.string.string_forestland), outlayYears.getYear(), discRate);
+                                cashFlows.add(cashFlowTemp);
+                                year = outlayYears.getYear();
+
+                            }
+                            cashFlows.add(calculateTerminalValue(getString(R.string.string_forestland), year, cashFlowTemp, discRate));
+                        }
+                        k++;
+                    }
+                }
+
+                realm.beginTransaction();
+                landKind.getCropLand().setCashFlows(cashFlows);
+                realm.commitTransaction();
+            } else if (landKind.getName().equals(getString(R.string.string_pastureland)) && currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
+                int k = 0;
+                discRate = landKind.getSocialCapitals().isDiscountFlag() ? landKind.getSocialCapitals().getDiscountRateOverride() : landKind.getSocialCapitals().getDiscountRate();
+
+                if(!landKind.getPastureLand().getRevenueProducts().isEmpty()) {
+                    for (RevenueProduct revenueProduct : landKind.getPastureLand().getRevenueProducts()) {
+                        if (k <= 0) {
+                            for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
+                                cashFlowTemp = calculateCashFlow(getString(R.string.string_pastureland), revenueProductYears.getYear(), discRate);
+                                cashFlows.add(cashFlowTemp);
+                                year = revenueProductYears.getYear();
+                            }
+                            cashFlows.add(calculateTerminalValue(getString(R.string.string_pastureland), year, cashFlowTemp, discRate));
+                        }
+                        k++;
+                    }
+                } else if(!landKind.getPastureLand().getCostElements().isEmpty()){
+                    for (CostElement costElement : landKind.getPastureLand().getCostElements()) {
+                        for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
+                            Log.e("RPPPPPPP ", costElementYears00 + "");
+                        }
+                        if (k <= 0) {
+                            for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
+                                cashFlowTemp = calculateCashFlow(getString(R.string.string_pastureland), costElementYears.getYear(), discRate);
+                                cashFlows.add(cashFlowTemp);
+                                year = costElementYears.getYear();
+
+                            }
+                            cashFlows.add(calculateTerminalValue(getString(R.string.string_pastureland), year, cashFlowTemp, discRate));
+                        }
+                        k++;
+                    }
+                } else if (!landKind.getPastureLand().getOutlays().isEmpty()){
+                    for (Outlay outlay : landKind.getPastureLand().getOutlays()) {
+                        for (OutlayYears outlay1 : outlay.getOutlayYearses()) {
+                            Log.e("RPPPPPPP ", outlay1 + "");
+                        }
+                        if (k <= 0) {
+                            for (OutlayYears outlayYears : outlay.getOutlayYearses()) {
+                                cashFlowTemp = calculateCashFlow(getString(R.string.string_pastureland), outlayYears.getYear(), discRate);
+                                cashFlows.add(cashFlowTemp);
+                                year = outlayYears.getYear();
+
+                            }
+                            cashFlows.add(calculateTerminalValue(getString(R.string.string_pastureland), year, cashFlowTemp, discRate));
+                        }
+                        k++;
+                    }
+                }
+
+                realm.beginTransaction();
+                landKind.getPastureLand().setCashFlows(cashFlows);
+                realm.commitTransaction();
+            } else if (landKind.getName().equals(getString(R.string.string_miningland)) && currentSocialCapitalServey.equals(getString(R.string.string_miningland))) {
+                int k = 0;
+                discRate = landKind.getSocialCapitals().isDiscountFlag() ? landKind.getSocialCapitals().getDiscountRateOverride() : landKind.getSocialCapitals().getDiscountRate();
+
+                if(!landKind.getMiningLand().getRevenueProducts().isEmpty()) {
+                    for (RevenueProduct revenueProduct : landKind.getMiningLand().getRevenueProducts()) {
+                        if (k <= 0) {
+                            for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
+                                cashFlowTemp = calculateCashFlow(getString(R.string.string_miningland), revenueProductYears.getYear(), discRate);
+                                cashFlows.add(cashFlowTemp);
+                                year = revenueProductYears.getYear();
+                            }
+                            cashFlows.add(calculateTerminalValue(getString(R.string.string_miningland), year, cashFlowTemp, discRate));
+                        }
+                        k++;
+                    }
+                } else if(!landKind.getMiningLand().getCostElements().isEmpty()){
+                    for (CostElement costElement : landKind.getMiningLand().getCostElements()) {
+                        for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
+                            Log.e("RPPPPPPP ", costElementYears00 + "");
+                        }
+                        if (k <= 0) {
+                            for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
+                                cashFlowTemp = calculateCashFlow(getString(R.string.string_miningland), costElementYears.getYear(), discRate);
+                                cashFlows.add(cashFlowTemp);
+                                year = costElementYears.getYear();
+
+                            }
+                            cashFlows.add(calculateTerminalValue(getString(R.string.string_miningland), year, cashFlowTemp, discRate));
+                        }
+                        k++;
+                    }
+                } else if (!landKind.getMiningLand().getOutlays().isEmpty()){
+                    for (Outlay outlay : landKind.getMiningLand().getOutlays()) {
+                        for (OutlayYears outlay1 : outlay.getOutlayYearses()) {
+                            Log.e("RPPPPPPP ", outlay1 + "");
+                        }
+                        if (k <= 0) {
+                            for (OutlayYears outlayYears : outlay.getOutlayYearses()) {
+                                cashFlowTemp = calculateCashFlow(getString(R.string.string_miningland), outlayYears.getYear(), discRate);
+                                cashFlows.add(cashFlowTemp);
+                                year = outlayYears.getYear();
+
+                            }
+                            cashFlows.add(calculateTerminalValue(getString(R.string.string_miningland), year, cashFlowTemp, discRate));
+                        }
+                        k++;
+                    }
+                }
+
+                realm.beginTransaction();
+                landKind.getMiningLand().setCashFlows(cashFlows);
+                realm.commitTransaction();
+            }
+        }
+        calculateNPV();
+    }
+
+    public CashFlow calculateCashFlow(String landKind, int year, double disRatePersent) {
+        RevenueProductYears revenueProductYears = realm.where(RevenueProductYears.class)
+                .equalTo("surveyId", surveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
+                .findFirst();
+
+        CostElementYears costElementYears = realm.where(CostElementYears.class)
+                .equalTo("surveyId", surveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
+                .findFirst();
+
+        OutlayYears outlayYears = realm.where(OutlayYears.class)
+                .equalTo("surveyId", surveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
+                .findFirst();
+
+        RealmResults<RevenueProductYears> revenueProductYearses = realm.where(RevenueProductYears.class)
+                .equalTo("surveyId", surveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
+                .findAll();
+
+        RealmResults<CostElementYears> costElementYearses = realm.where(CostElementYears.class)
+                .equalTo("surveyId", surveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
+                .findAll();
+
+        RealmResults<OutlayYears> outlayYearses = realm.where(OutlayYears.class)
+                .equalTo("surveyId", surveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
+                .findAll();
+
+
+        double revenueTotal = 0;
+        double costTotal = 0;
+        double outlayTotal = 0;
+        double disRate = disRatePersent / 100;
+
+        double disFactor = 0;
+        int year1 = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
+
+
+        for (RevenueProductYears revenueProductYears1 : revenueProductYearses) {
+            revenueTotal = revenueTotal + revenueProductYears1.getSubtotal();
+            disFactor = 1 / Math.pow(1 + disRate, revenueProductYears.getProjectedIndex());
+        }
+
+        for (CostElementYears costElementYears1 : costElementYearses) {
+            costTotal = costTotal + costElementYears1.getSubtotal();
+            disFactor = 1 / Math.pow(1 + disRate, costElementYears.getProjectedIndex());
+        }
+
+        for (OutlayYears outlayYears1 : outlayYearses) {
+            outlayTotal = outlayTotal + outlayYears1.getPrice();
+            if(disFactor == 0)
+               disFactor = 1 / Math.pow(1 + disRate, calculateProjectionIndex(year - year1) );
+        }
+
+//        if(revenueProductYears != null){
+//            revenueTotal = revenueProductYears.getSubtotal();
+//            disFactor = 1 / Math.pow(1+disRate,revenueProductYears.getProjectedIndex());
+//        }
+//        if(costElementYears != null){
+//            costTotal = costElementYears.getSubtotal();
+//            disFactor = 1 / Math.pow(1+disRate,costElementYears.getProjectedIndex());
+//        }
+//        if(outlayYears != null){
+//            outlayTotal = outlayYears.getPrice();
+//            Log.e("AA  ",""+outlayYears.getPrice());
+//        }
+
+//        Log.e("TEST  ",outlayTotal+"");
+//        Log.e("DIS FACT ",outlayYears+"");
+        double cashFlowVal = revenueTotal - costTotal - outlayTotal;
+        //Log.e("cashFlowVal ",cashFlowVal+"");
+
+
+        double discountedCashFlow = cashFlowVal * disFactor;
+
+
+        realm.beginTransaction();
+        CashFlow cashFlow = realm.createObject(CashFlow.class);
+        cashFlow.setId(getNextKeyCashFlow());
+        cashFlow.setSurveyId(surveyId);
+        cashFlow.setYear(year);
+        cashFlow.setValue(cashFlowVal);
+        cashFlow.setDiscountingFactor(disFactor);
+        cashFlow.setDiscountedCashFlow(discountedCashFlow);
+
+        cashFlow.setTotalRevenue(revenueTotal);
+        cashFlow.setTotalCost(costTotal);
+        cashFlow.setTotalOutlay(outlayTotal);
+        realm.commitTransaction();
+        return cashFlow;
+    }
+
+    private CashFlow calculateTerminalValue(String landKind, int year, CashFlow cashFlowTemp, double discountRateOverride) {
+        Survey results = realm.where(Survey.class)
+                .equalTo("surveyId", surveyId)
+                .findFirst();
+
+        RevenueProductYears revenueProductYears = realm.where(RevenueProductYears.class)
+                .equalTo("surveyId", surveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
+                .findFirst();
+
+        CostElementYears costElementYears = realm.where(CostElementYears.class)
+                .equalTo("surveyId", surveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
+                .findFirst();
+
+        RealmResults<RevenueProductYears> revenueProductYearses = realm.where(RevenueProductYears.class)
+                .equalTo("surveyId", surveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
+                .findAll();
+
+        RealmResults<CostElementYears> costElementYearses = realm.where(CostElementYears.class)
+                .equalTo("surveyId", surveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
+                .findAll();
+
+        RealmResults<OutlayYears> outlayYearses = realm.where(OutlayYears.class)
+                .equalTo("surveyId", surveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
+                .findAll();
+
+        double disRate = discountRateOverride / 100;
+        double revenueTotal = 0;
+        double costTotal = 0;
+        double outlayTotal = 0;
+
+        double disFactor = 0;
+        double terminalValue = 0;
+        int year1 = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
+
+        BigDecimal bigDecimalOne = new BigDecimal("1");
+
+        for (RevenueProductYears revenueProductYears1 : revenueProductYearses) {
+            revenueTotal = revenueTotal + revenueProductYears1.getSubtotal();
+
+            double powerFactor = Math.pow(1 + disRate, revenueProductYears.getProjectedIndex());
+            BigDecimal bigDecimalPowerFactor = new BigDecimal(powerFactor);
+            BigDecimal bigDecimalDisFactor = bigDecimalOne.divide(bigDecimalPowerFactor, MathContext.DECIMAL64);
+
+            disFactor = bigDecimalDisFactor.doubleValue();
+        }
+
+        for (CostElementYears costElementYears1 : costElementYearses) {
+            costTotal = costTotal + costElementYears1.getSubtotal();
+
+            double powerFactor = Math.pow(1 + disRate, costElementYears.getProjectedIndex());
+            BigDecimal bigDecimalPowerFactor = new BigDecimal(powerFactor);
+            BigDecimal bigDecimalDisFactor = bigDecimalOne.divide(bigDecimalPowerFactor, MathContext.DECIMAL64);
+
+            disFactor = bigDecimalDisFactor.doubleValue();
+        }
+
+        for (OutlayYears outlayYears1 : outlayYearses) {
+            outlayTotal = outlayTotal + outlayYears1.getPrice();
+            if(disFactor == 0)
+                disFactor = 1 / Math.pow(1 + disRate, calculateProjectionIndex(year - year1) );
+        }
+
+        terminalValue = disRate != 0 ? (cashFlowTemp.getValue() / (disRate)) : 0;
+
+        double discountedCashFlow = terminalValue * disFactor;
+
+        realm.beginTransaction();
+        CashFlow cashFlow = realm.createObject(CashFlow.class);
+        cashFlow.setId(getNextKeyCashFlow());
+        cashFlow.setSurveyId(surveyId);
+        cashFlow.setYear(year);
+        cashFlow.setValue(terminalValue);
+        cashFlow.setDiscountingFactor(disFactor);
+        cashFlow.setDiscountedCashFlow(discountedCashFlow);
+        cashFlow.setTotalRevenue(revenueTotal);
+        cashFlow.setTotalCost(costTotal);
+        cashFlow.setTotalOutlay(outlayTotal);
+        realm.commitTransaction();
+
+        return cashFlow;
+    }
+
+    public void calculateNPV() {
+        Survey results = realm.where(Survey.class)
+                .equalTo("surveyId", surveyId)
+                .findFirst();
+        int year = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
+        for (LandKind landKind : results.getLandKinds()) {
+            if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalServey.equals(getString(R.string.string_forestland))) {
+
+                double npv = 0;
+                for (CashFlow cashFlow : landKind.getForestLand().getCashFlows()) {
+                    if (cashFlow.getYear() >= year) {
+                        npv = npv + cashFlow.getDiscountedCashFlow();
+                    }
+                }
+                if (results.getComponents() == null) {
+                    realm.beginTransaction();
+                    Component component = realm.createObject(Component.class);
+                    component.setId(getNextKeyComponent());
+                    component.setSurveyId(surveyId);
+                    component.setForestValue(npv);
+                    realm.commitTransaction();
+
+                    realm.beginTransaction();
+                    results.setComponents(component);
+                    realm.commitTransaction();
+                } else {
+                    realm.beginTransaction();
+                    results.getComponents().setForestValue(npv);
+                    realm.commitTransaction();
+                }
+            } else if (landKind.getName().equals(getString(R.string.string_cropland)) && currentSocialCapitalServey.equals(getString(R.string.string_cropland))) {
+                double npv = 0;
+                for (CashFlow cashFlow : landKind.getCropLand().getCashFlows()) {
+                    if (cashFlow.getYear() >= year) {
+                        npv = npv + cashFlow.getDiscountedCashFlow();
+                    }
+                }
+                if (results.getComponents() == null) {
+                    realm.beginTransaction();
+                    Component component = realm.createObject(Component.class);
+                    component.setId(getNextKeyComponent());
+                    component.setSurveyId(surveyId);
+                    component.setCroplandValue(npv);
+                    realm.commitTransaction();
+
+                    realm.beginTransaction();
+                    results.setComponents(component);
+                    realm.commitTransaction();
+                } else {
+                    realm.beginTransaction();
+                    results.getComponents().setCroplandValue(npv);
+                    realm.commitTransaction();
+                }
+
+            } else if (landKind.getName().equals(getString(R.string.string_pastureland)) && currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
+                double npv = 0;
+                for (CashFlow cashFlow : landKind.getPastureLand().getCashFlows()) {
+                    if (cashFlow.getYear() >= year) {
+                        npv = npv + cashFlow.getDiscountedCashFlow();
+                    }
+                }
+                if (results.getComponents() == null) {
+                    realm.beginTransaction();
+                    Component component = realm.createObject(Component.class);
+                    component.setId(getNextKeyComponent());
+                    component.setSurveyId(surveyId);
+                    component.setPastureValue(npv);
+                    realm.commitTransaction();
+
+                    realm.beginTransaction();
+                    results.setComponents(component);
+                    realm.commitTransaction();
+                } else {
+                    realm.beginTransaction();
+                    results.getComponents().setPastureValue(npv);
+                    realm.commitTransaction();
+                }
+            } else if (landKind.getName().equals(getString(R.string.string_miningland)) && currentSocialCapitalServey.equals(getString(R.string.string_miningland))) {
+                double npv = 0;
+                for (CashFlow cashFlow : landKind.getMiningLand().getCashFlows()) {
+                    if (cashFlow.getYear() >= year) {
+                        npv = npv + cashFlow.getDiscountedCashFlow();
+                    }
+                }
+                if (results.getComponents() == null) {
+                    realm.beginTransaction();
+                    Component component = realm.createObject(Component.class);
+                    component.setId(getNextKeyComponent());
+                    component.setSurveyId(surveyId);
+                    component.setMiningLandValue(npv);
+                    realm.commitTransaction();
+
+                    realm.beginTransaction();
+                    results.setComponents(component);
+                    realm.commitTransaction();
+                } else {
+                    realm.beginTransaction();
+                    results.getComponents().setMiningLandValue(npv);
+                    realm.commitTransaction();
+                }
+            }
+        }
+    }
+
+    public void sharedCashFlow() {
+        Survey results = realm.where(Survey.class)
+                .equalTo("surveyId", surveyId)
+                .findFirst();
+        RealmList<CashFlow> cashFlows = new RealmList<>();
+
+
+        int k = 0;
+        int year = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
+        CashFlow cashFlowTemp = null;
+
+
+        if(!results.getSharedCostElements().isEmpty()) {
+            for (SharedCostElement costElement : results.getSharedCostElements()) {
+                for (SharedCostElementYears costElementYears00 : costElement.getCostElementYearses()) {
+                    Log.e("RPPPPPPP ", costElementYears00 + "");
+                }
+                if (k <= 0) {
+                    for (SharedCostElementYears costElementYears : costElement.getCostElementYearses()) {
+                        cashFlowTemp = calculateSharedCashFlow("", costElementYears.getYear(), results.getSharedDiscountRate());
+                        cashFlows.add(cashFlowTemp);
+                        year = costElementYears.getYear();
+                        Log.e("SHARED CASHFLOW", cashFlowTemp.toString());
+
+                    }
+                    cashFlows.add(calculateSharedTerminalValue("", year, cashFlowTemp, results.getSharedDiscountRate()));
+                    Log.e("SHARED TER CASHFLOW", calculateSharedTerminalValue("", year, cashFlowTemp, mSharedDiscountRate).toString());
+
+                }
+                k++;
+            }
+        } else if(!results.getSharedOutlays().isEmpty()) {
+            for (Outlay outlay : results.getSharedOutlays()) {
+                for (OutlayYears outlay1 : outlay.getOutlayYearses()) {
+                    Log.e("RPPPPPPP ", outlay1 + "");
+                }
+                if (k <= 0) {
+                    for (OutlayYears outlayYears : outlay.getOutlayYearses()) {
+                        cashFlowTemp = calculateSharedCashFlow("", outlayYears.getYear(), mSharedDiscountRate);
+                        cashFlows.add(cashFlowTemp);
+                        year = outlayYears.getYear();
+
+                    }
+                    cashFlows.add(calculateSharedTerminalValue("", year, cashFlowTemp, mSharedDiscountRate));
+                }
+                k++;
+            }
+        }
+        realm.beginTransaction();
+        results.setSharedCashFlows(cashFlows);
+        realm.commitTransaction();
+        calculateDiscountRate(results.getLandKinds());
+        calculateSharedNPV();
+    }
+
+    public CashFlow calculateSharedCashFlow(String landKind, int year, double disRatePersent) {
+
+        SharedCostElementYears costElementYears = realm.where(SharedCostElementYears.class)
+                .equalTo("surveyId", surveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
+                .findFirst();
+
+
+        RealmResults<SharedCostElementYears> costElementYearses = realm.where(SharedCostElementYears.class)
+                .equalTo("surveyId", surveyId)
+                .equalTo("year", year)
+                .findAll();
+
+        RealmResults<OutlayYears> outlayYearses = realm.where(OutlayYears.class)
+                .equalTo("surveyId", surveyId)
+                .equalTo("year", year)
+                .equalTo("landKind", "")
+                .findAll();
+
+        double revenueTotal = 0;
+        double costTotal = 0;
+        double outlayTotal = 0;
+        double disRate = disRatePersent / 100;
+
+        double disFactor = 0;
+        int year1 = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
+
+
+        for (SharedCostElementYears costElementYears1 : costElementYearses) {
+            costTotal = costTotal + costElementYears1.getSubtotal();
+            disFactor = 1 / Math.pow(1 + disRate, costElementYears.getProjectedIndex());
+        }
+
+        for (OutlayYears outlayYears1 : outlayYearses) {
+            if (outlayYears1.getYear() == year)
+                outlayTotal = outlayTotal + outlayYears1.getPrice();
+            if(disFactor == 0)
+                disFactor = 1 / Math.pow(1 + disRate, calculateProjectionIndex(year - year1) );
+        }
+
+        double cashFlowVal = revenueTotal - costTotal - outlayTotal;
+
+        double discountedCashFlow = cashFlowVal * disFactor;
+
+        realm.beginTransaction();
+        CashFlow cashFlow = realm.createObject(CashFlow.class);
+        cashFlow.setId(getNextKeyCashFlow());
+        cashFlow.setSurveyId(surveyId);
+        cashFlow.setYear(year);
+        cashFlow.setValue(cashFlowVal);
+        cashFlow.setDiscountingFactor(disFactor);
+        cashFlow.setDiscountedCashFlow(discountedCashFlow);
+
+        cashFlow.setTotalRevenue(revenueTotal);
+        cashFlow.setTotalCost(costTotal);
+        cashFlow.setTotalOutlay(outlayTotal);
+        realm.commitTransaction();
+        return cashFlow;
+    }
+
+    private CashFlow calculateSharedTerminalValue(String landKind, int year, CashFlow cashFlowTemp, double discountRateOverride) {
+        Survey results = realm.where(Survey.class)
+                .equalTo("surveyId", surveyId)
+                .findFirst();
+
+        SharedCostElementYears costElementYears = realm.where(SharedCostElementYears.class)
+                .equalTo("surveyId", surveyId)
+                .equalTo("year", year)
+                .findFirst();
+
+        RealmResults<SharedCostElementYears> costElementYearses = realm.where(SharedCostElementYears.class)
+                .equalTo("surveyId", surveyId)
+                .equalTo("year", year)
+                .findAll();
+
+        RealmResults<OutlayYears> outlayYearses = realm.where(OutlayYears.class)
+                .equalTo("surveyId", surveyId)
+                .equalTo("landKind", landKind)
+                .equalTo("year", year)
+                .findAll();
+
+        double disRate = discountRateOverride / 100;
+        double revenueTotal = 0;
+        double costTotal = 0;
+        double outlayTotal = 0;
+
+        double disFactor = 0;
+        double terminalValue = 0;
+        int year1 = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
+
+        BigDecimal bigDecimalOne = new BigDecimal("1");
+
+        for (SharedCostElementYears costElementYears1 : costElementYearses) {
+            costTotal = costTotal + costElementYears1.getSubtotal();
+            double powerFactor = Math.pow(1 + disRate, costElementYears.getProjectedIndex());
+            BigDecimal bigDecimalPowerFactor = new BigDecimal(powerFactor);
+            BigDecimal bigDecimalDisFactor = bigDecimalOne.divide(bigDecimalPowerFactor, MathContext.DECIMAL64);
+
+            disFactor = bigDecimalDisFactor.doubleValue();
+        }
+
+        for (OutlayYears outlayYears1 : outlayYearses) {
+            outlayTotal = outlayTotal + outlayYears1.getPrice();
+            if(disFactor == 0)
+                disFactor = 1 / Math.pow(1 + disRate, calculateProjectionIndex(year - year1) );
+        }
+
+        terminalValue = disRate != 0 ? (cashFlowTemp.getValue() / (disRate)) : 0;
+
+        double discountedCashFlow = terminalValue * disFactor;
+
+        realm.beginTransaction();
+        CashFlow cashFlow = realm.createObject(CashFlow.class);
+        cashFlow.setId(getNextKeyCashFlow());
+        cashFlow.setSurveyId(surveyId);
+        cashFlow.setYear(year);
+        cashFlow.setValue(terminalValue);
+        cashFlow.setDiscountingFactor(disFactor);
+        cashFlow.setDiscountedCashFlow(discountedCashFlow);
+        cashFlow.setTotalRevenue(revenueTotal);
+        cashFlow.setTotalCost(costTotal);
+        cashFlow.setTotalOutlay(outlayTotal);
+        realm.commitTransaction();
+
+        return cashFlow;
+    }
+
+    public void calculateSharedNPV() {
+        Survey results = realm.where(Survey.class)
+                .equalTo("surveyId", surveyId)
+                .findFirst();
+        int year = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
+
+        double npv = 0;
+        for (CashFlow cashFlow : results.getSharedCashFlows()) {
+            if (cashFlow.getYear() >= year) {
+                npv = npv + cashFlow.getDiscountedCashFlow();
+            }
+        }
+        if (results.getComponents() == null) {
+            realm.beginTransaction();
+            Component component = realm.createObject(Component.class);
+            component.setId(getNextKeyComponent());
+            component.setSurveyId(surveyId);
+            component.setSharedCostValue(npv);
+            realm.commitTransaction();
+
+            realm.beginTransaction();
+            results.setComponents(component);
+            realm.commitTransaction();
+        } else {
+            realm.beginTransaction();
+            results.getComponents().setSharedCostValue(npv);
+            realm.commitTransaction();
+        }
+        Log.e("SHARED NPV", npv + "");
+    }
+
+    public int getNextKeyComponent() {
+        return realm.where(Component.class).max("id").intValue() + 1;
+    }
+
+    public int getNextKeyCashFlow() {
+        return realm.where(CashFlow.class).max("id").intValue() + 1;
+    }
+
+    private void calculateDiscountRate(RealmList<LandKind> landKinds) {
+        Survey results = realm.where(Survey.class)
+                .equalTo("surveyId", surveyId)
+                .findFirst();
+        double landDisc;
+
+        double totalVal = 0;
+        double totalValNum = 0;
+
+        for (LandKind landKind : landKinds) {
+            if (landKind.getStatus().equals("active")) {
+                if (landKind.getSocialCapitals().isDiscountFlag()) {
+                    landDisc = landKind.getSocialCapitals().getDiscountRateOverride();
+                } else {
+                    landDisc = landKind.getSocialCapitals().getDiscountRate();
+                }
+                if (landKind.getName().equals(getString(R.string.string_forestland))) {
+                    totalValNum = totalValNum + (results.getComponents().getForestValue() * landDisc);
+                    totalVal = totalVal + results.getComponents().getForestValue();
+                }
+
+                if (landKind.getName().equals(getString(R.string.string_cropland))) {
+                    totalValNum = totalValNum + (results.getComponents().getCroplandValue() * landDisc);
+                    totalVal = totalVal + results.getComponents().getCroplandValue();
+                }
+
+                if (landKind.getName().equals(getString(R.string.string_pastureland))) {
+                    totalValNum = totalValNum + (results.getComponents().getPastureValue() * landDisc);
+                    totalVal = totalVal + results.getComponents().getPastureValue();
+                }
+
+                if (landKind.getName().equals(getString(R.string.string_miningland))) {
+                    totalValNum = totalValNum + (results.getComponents().getMiningLandValue() * landDisc);
+                    totalVal = totalVal + results.getComponents().getMiningLandValue();
+                }
+            }
+        }
+        mSharedDiscountRate = (totalVal == 0) ? 0 : (totalValNum / totalVal);
+        realm.beginTransaction();
+        results.setSharedDiscountRate(mSharedDiscountRate);
+        realm.commitTransaction();
+
+    }
+    public double calculateProjectionIndex(double val) {
+        double resVal = 0;
+
+        // int year = Calendar.getInstance().get(Calendar.YEAR);
+        int year = sharedPref.getInt("surveyyear", Calendar.getInstance().get(Calendar.YEAR));
+        int i;
+        for (i = 0; i <= val; i++) {
+            if (i == 0) {
+                resVal = 0;
+            } else if (year % 4 == 0) {
+                BigDecimal bigDecimal1 = new BigDecimal("366.0");
+                BigDecimal bigDecimal2 = new BigDecimal("365.0");
+
+                //double aa = 366.0 / 365.0;
+                BigDecimal bigDecimal3 = bigDecimal1.divide(bigDecimal2, MathContext.DECIMAL64);
+                double aa = bigDecimal3.doubleValue();
+
+                Log.e("PRO IND BB ", aa + "");
+                resVal = resVal + aa;
+            } else {
+                resVal = resVal + 1;
+            }
+            year++;
+        }
+        Log.e("PRO IND AA ", resVal + "");
+        return resVal;
+    }
+
 }

@@ -389,7 +389,6 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
                 }
             }
@@ -413,6 +412,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                         realm.commitTransaction();                    }
                     Toast toast = Toast.makeText(context, getResources().getText(R.string.completed_text), Toast.LENGTH_SHORT);
                     toast.show();
+                    surveyAdapter.notifyDataSetChanged();
                 }
             }, 3000);
 
@@ -1692,23 +1692,23 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                     if (!set.isEmpty()) {
                         for (String temp : set) {
                             Log.e("Sirvey : ", temp);
-                            realm.beginTransaction();
-                            Survey survey = realm.where(Survey.class).equalTo("surveyId", temp).findFirst();
-                            survey.setSendStatus(true);
+                           // realm.beginTransaction();
+                           // Survey survey = realm.where(Survey.class).equalTo("surveyId", temp).findFirst();
+                          //  survey.setSendStatus(true);
                             exportDataEmail.setVisibility(View.VISIBLE);
-                            realm.commitTransaction();
+                         //   realm.commitTransaction();
                             new LongOperation().execute("");
                         }
                     }
                 } else {
                     Toast.makeText(this, "Empty", Toast.LENGTH_SHORT).show();
-                    for (String temp : set) {
-                        Log.e("Sirvey : ", temp);
-                        realm.beginTransaction();
-                        Survey survey = realm.where(Survey.class).equalTo("surveyId", temp).findFirst();
-                        survey.setSendStatus(true);
-                        realm.commitTransaction();
-                    }
+//                    for (String temp : set) {
+//                        Log.e("Sirvey : ", temp);
+//                        realm.beginTransaction();
+//                        Survey survey = realm.where(Survey.class).equalTo("surveyId", temp).findFirst();
+//                        survey.setSendStatus(true);
+//                        realm.commitTransaction();
+//                    }
                 }
 
                 break;

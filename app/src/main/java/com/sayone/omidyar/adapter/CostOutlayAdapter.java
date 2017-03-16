@@ -12,14 +12,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sayone.omidyar.R;
+import com.sayone.omidyar.model.CostElement;
 import com.sayone.omidyar.model.Outlay;
 import com.sayone.omidyar.model.RevenueProduct;
+import com.sayone.omidyar.model.SharedCostElement;
+import com.sayone.omidyar.view.NaturalCapitalCostActivityA;
 import com.sayone.omidyar.view.NaturalCapitalCostOutlay;
+import com.sayone.omidyar.view.NaturalCapitalSharedCostActivityA;
+import com.sayone.omidyar.view.NaturalCapitalSharedCostOutlay;
 import com.sayone.omidyar.view.NaturalCapitalSurveyActivityB;
 
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 
 /**
  * Created by sayone on 5/10/16.
@@ -27,6 +33,7 @@ import io.realm.Realm;
 
 public class CostOutlayAdapter extends RecyclerView.Adapter<CostOutlayAdapter.CostOutlayViewHolder>{
 
+    private boolean isShared;
     private List<Outlay> costOutlays;
     private Activity mContext;
 
@@ -40,7 +47,12 @@ public class CostOutlayAdapter extends RecyclerView.Adapter<CostOutlayAdapter.Co
         }
     }
 
-    public CostOutlayAdapter(List<Outlay> revenueProducts, Activity context) {
+    public CostOutlayAdapter(List<Outlay> revenueProducts, NaturalCapitalCostOutlay context) {
+        this.costOutlays = revenueProducts;
+        mContext=context;
+    }
+    public CostOutlayAdapter(List<Outlay> revenueProducts, NaturalCapitalSharedCostOutlay context) {
+        this.isShared = true;
         this.costOutlays = revenueProducts;
         mContext=context;
     }
@@ -57,24 +69,46 @@ public class CostOutlayAdapter extends RecyclerView.Adapter<CostOutlayAdapter.Co
     public void onBindViewHolder(final CostOutlayViewHolder holder, int position) {
         Outlay costOutlay = costOutlays.get(position);
         holder.revenueProductName.setText(costOutlay.getItemName());
-        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Realm realm = Realm.getDefaultInstance();
-                realm.beginTransaction();
-                Outlay outlay = realm.where(Outlay.class)
-                        .equalTo("itemName",holder.revenueProductName.getText().toString())
-                        .findFirst();
-                outlay.getOutlayYearses().deleteAllFromRealm();
-                outlay.deleteFromRealm();
-                realm.commitTransaction();
-                Toast toast = Toast.makeText(mContext,mContext.getResources().getText(R.string.text_deleted), Toast.LENGTH_SHORT);
-                toast.show();
-                Intent intent=new Intent(mContext,NaturalCapitalCostOutlay.class);
-                mContext.startActivity(intent);
-                mContext.finish();
-            }
-        });
+
+        if(!isShared){
+            holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Realm realm = Realm.getDefaultInstance();
+                    realm.beginTransaction();
+                    Outlay outlay = realm.where(Outlay.class)
+                            .equalTo("itemName",holder.revenueProductName.getText().toString())
+                            .findFirst();
+                    outlay.getOutlayYearses().deleteAllFromRealm();
+                    outlay.deleteFromRealm();
+                    realm.commitTransaction();
+                    Toast toast = Toast.makeText(mContext,mContext.getResources().getText(R.string.text_deleted), Toast.LENGTH_SHORT);
+                    toast.show();
+                    Intent intent=new Intent(mContext,NaturalCapitalCostOutlay.class);
+                    mContext.startActivity(intent);
+                    mContext.finish();
+                }
+            });
+        } else {
+            holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Realm realm = Realm.getDefaultInstance();
+                    realm.beginTransaction();
+                    Outlay outlay = realm.where(Outlay.class)
+                            .equalTo("itemName", holder.revenueProductName.getText().toString())
+                            .findFirst();
+                    outlay.getOutlayYearses().deleteAllFromRealm();
+                    outlay.deleteFromRealm();
+                    realm.commitTransaction();
+                    Toast toast = Toast.makeText(mContext, mContext.getResources().getText(R.string.text_deleted), Toast.LENGTH_SHORT);
+                    toast.show();
+                    Intent intent = new Intent(mContext, NaturalCapitalSharedCostOutlay.class);
+                    mContext.startActivity(intent);
+                    mContext.finish();
+                }
+            });
+        }
     }
 
     @Override

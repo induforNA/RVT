@@ -204,10 +204,14 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                                 break;
                             }
                         }
-                        if(isEnabled)
-                            mContext.setButtonEnabled();
-                        else
+                        if(set.isEmpty()){
                             mContext.setButtonDisabled();
+                        } else {
+                            if (isEnabled)
+                                mContext.setButtonEnabled();
+                            else
+                                mContext.setButtonDisabled();
+                        }
                     }
 // notifyDataSetChanged();
                     flag1 = toggle1();
@@ -314,6 +318,4 @@ public class SurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public int getItemCount() {
         return surveyList.size() + 1;
     }
-
-
 }
