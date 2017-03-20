@@ -367,4 +367,5 @@
     <string name="get_parcel_area_text">Parcel Area (hectares)</string>
     <string name="text_save_warning">The survey will only be saved after you click Save or Next on each page, not Back.</string>
     <string name="text_got_it">Got It</string>
+    <string name="text_developed">Developed by Indufor North America in partnership with the Foundation for Ecological Security and Ulster University with support from Omidyar Network</string>
 </resources>

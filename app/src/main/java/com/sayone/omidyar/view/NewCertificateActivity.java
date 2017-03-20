@@ -599,220 +599,222 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
             int year = 0;
             CashFlow cashFlowTemp = null;
 
-            if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalServey.equals(getString(R.string.string_forestland))) {
-                // Log.e("DIS RATE ", landKind.getSocialCapitals().getDiscountRate()+"");
-                int k = 0;
-                discRate = landKind.getSocialCapitals().isDiscountFlag() ? landKind.getSocialCapitals().getDiscountRateOverride() : landKind.getSocialCapitals().getDiscountRate();
+            if (landKind.getStatus().equals("active")) {
+                if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalServey.equals(getString(R.string.string_forestland))) {
+                    // Log.e("DIS RATE ", landKind.getSocialCapitals().getDiscountRate()+"");
+                    int k = 0;
+                    discRate = landKind.getSocialCapitals().isDiscountFlag() ? landKind.getSocialCapitals().getDiscountRateOverride() : landKind.getSocialCapitals().getDiscountRate();
 
-                if(!landKind.getForestLand().getRevenueProducts().isEmpty()) {
-                    for (RevenueProduct revenueProduct : landKind.getForestLand().getRevenueProducts()) {
-                        if (k <= 0) {
-                            for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
-                                cashFlowTemp = calculateCashFlow(getString(R.string.string_forestland), revenueProductYears.getYear(), discRate);
-                                cashFlows.add(cashFlowTemp);
-                                year = revenueProductYears.getYear();
+                    if (!landKind.getForestLand().getRevenueProducts().isEmpty()) {
+                        for (RevenueProduct revenueProduct : landKind.getForestLand().getRevenueProducts()) {
+                            if (k <= 0) {
+                                for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
+                                    cashFlowTemp = calculateCashFlow(getString(R.string.string_forestland), revenueProductYears.getYear(), discRate);
+                                    cashFlows.add(cashFlowTemp);
+                                    year = revenueProductYears.getYear();
+                                }
+                                cashFlows.add(calculateTerminalValue(getString(R.string.string_forestland), year, cashFlowTemp, discRate));
                             }
-                            cashFlows.add(calculateTerminalValue(getString(R.string.string_forestland), year, cashFlowTemp, discRate));
+                            k++;
                         }
-                        k++;
-                    }
-                } else if(!landKind.getForestLand().getCostElements().isEmpty()){
-                    for (CostElement costElement : landKind.getForestLand().getCostElements()) {
-                        for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
-                            Log.e("RPPPPPPP ", costElementYears00 + "");
-                        }
-                        if (k <= 0) {
-                            for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
-                                cashFlowTemp = calculateCashFlow(getString(R.string.string_forestland), costElementYears.getYear(), discRate);
-                                cashFlows.add(cashFlowTemp);
-                                year = costElementYears.getYear();
+                    } else if (!landKind.getForestLand().getCostElements().isEmpty()) {
+                        for (CostElement costElement : landKind.getForestLand().getCostElements()) {
+                            for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
+                                Log.e("RPPPPPPP ", costElementYears00 + "");
+                            }
+                            if (k <= 0) {
+                                for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
+                                    cashFlowTemp = calculateCashFlow(getString(R.string.string_forestland), costElementYears.getYear(), discRate);
+                                    cashFlows.add(cashFlowTemp);
+                                    year = costElementYears.getYear();
 
+                                }
+                                cashFlows.add(calculateTerminalValue(getString(R.string.string_forestland), year, cashFlowTemp, discRate));
                             }
-                            cashFlows.add(calculateTerminalValue(getString(R.string.string_forestland), year, cashFlowTemp, discRate));
+                            k++;
                         }
-                        k++;
-                    }
-                } else if (!landKind.getForestLand().getOutlays().isEmpty()){
-                    for (Outlay outlay : landKind.getForestLand().getOutlays()) {
-                        for (OutlayYears outlay1 : outlay.getOutlayYearses()) {
-                            Log.e("RPPPPPPP ", outlay1 + "");
-                        }
-                        if (k <= 0) {
-                            for (OutlayYears outlayYears : outlay.getOutlayYearses()) {
-                                cashFlowTemp = calculateCashFlow(getString(R.string.string_forestland), outlayYears.getYear(), discRate);
-                                cashFlows.add(cashFlowTemp);
-                                year = outlayYears.getYear();
+                    } else if (!landKind.getForestLand().getOutlays().isEmpty()) {
+                        for (Outlay outlay : landKind.getForestLand().getOutlays()) {
+                            for (OutlayYears outlay1 : outlay.getOutlayYearses()) {
+                                Log.e("RPPPPPPP ", outlay1 + "");
+                            }
+                            if (k <= 0) {
+                                for (OutlayYears outlayYears : outlay.getOutlayYearses()) {
+                                    cashFlowTemp = calculateCashFlow(getString(R.string.string_forestland), outlayYears.getYear(), discRate);
+                                    cashFlows.add(cashFlowTemp);
+                                    year = outlayYears.getYear();
 
+                                }
+                                cashFlows.add(calculateTerminalValue(getString(R.string.string_forestland), year, cashFlowTemp, discRate));
                             }
-                            cashFlows.add(calculateTerminalValue(getString(R.string.string_forestland), year, cashFlowTemp, discRate));
+                            k++;
                         }
-                        k++;
                     }
+                    realm.beginTransaction();
+                    landKind.getForestLand().setCashFlows(cashFlows);
+                    realm.commitTransaction();
+
+                    // Log.e("MM ",landKind.getForestLand().getCashFlows().get(0).toString());
+                } else if (landKind.getName().equals(getString(R.string.string_cropland)) && currentSocialCapitalServey.equals(getString(R.string.string_cropland))) {
+                    int k = 0;
+                    discRate = landKind.getSocialCapitals().isDiscountFlag() ? landKind.getSocialCapitals().getDiscountRateOverride() : landKind.getSocialCapitals().getDiscountRate();
+
+                    if (!landKind.getCropLand().getRevenueProducts().isEmpty()) {
+                        for (RevenueProduct revenueProduct : landKind.getCropLand().getRevenueProducts()) {
+                            if (k <= 0) {
+                                for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
+                                    cashFlowTemp = calculateCashFlow(getString(R.string.string_cropland), revenueProductYears.getYear(), discRate);
+                                    cashFlows.add(cashFlowTemp);
+                                    year = revenueProductYears.getYear();
+                                }
+                                cashFlows.add(calculateTerminalValue(getString(R.string.string_cropland), year, cashFlowTemp, discRate));
+                            }
+                            k++;
+                        }
+                    } else if (!landKind.getCropLand().getCostElements().isEmpty()) {
+                        for (CostElement costElement : landKind.getCropLand().getCostElements()) {
+                            for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
+                                Log.e("RPPPPPPP ", costElementYears00 + "");
+                            }
+                            if (k <= 0) {
+                                for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
+                                    cashFlowTemp = calculateCashFlow(getString(R.string.string_cropland), costElementYears.getYear(), discRate);
+                                    cashFlows.add(cashFlowTemp);
+                                    year = costElementYears.getYear();
+
+                                }
+                                cashFlows.add(calculateTerminalValue(getString(R.string.string_cropland), year, cashFlowTemp, discRate));
+                            }
+                            k++;
+                        }
+                    } else if (!landKind.getCropLand().getOutlays().isEmpty()) {
+                        for (Outlay outlay : landKind.getCropLand().getOutlays()) {
+                            for (OutlayYears outlay1 : outlay.getOutlayYearses()) {
+                                Log.e("RPPPPPPP ", outlay1 + "");
+                            }
+                            if (k <= 0) {
+                                for (OutlayYears outlayYears : outlay.getOutlayYearses()) {
+                                    cashFlowTemp = calculateCashFlow(getString(R.string.string_forestland), outlayYears.getYear(), discRate);
+                                    cashFlows.add(cashFlowTemp);
+                                    year = outlayYears.getYear();
+
+                                }
+                                cashFlows.add(calculateTerminalValue(getString(R.string.string_forestland), year, cashFlowTemp, discRate));
+                            }
+                            k++;
+                        }
+                    }
+
+                    realm.beginTransaction();
+                    landKind.getCropLand().setCashFlows(cashFlows);
+                    realm.commitTransaction();
+                } else if (landKind.getName().equals(getString(R.string.string_pastureland)) && currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
+                    int k = 0;
+                    discRate = landKind.getSocialCapitals().isDiscountFlag() ? landKind.getSocialCapitals().getDiscountRateOverride() : landKind.getSocialCapitals().getDiscountRate();
+
+                    if (!landKind.getPastureLand().getRevenueProducts().isEmpty()) {
+                        for (RevenueProduct revenueProduct : landKind.getPastureLand().getRevenueProducts()) {
+                            if (k <= 0) {
+                                for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
+                                    cashFlowTemp = calculateCashFlow(getString(R.string.string_pastureland), revenueProductYears.getYear(), discRate);
+                                    cashFlows.add(cashFlowTemp);
+                                    year = revenueProductYears.getYear();
+                                }
+                                cashFlows.add(calculateTerminalValue(getString(R.string.string_pastureland), year, cashFlowTemp, discRate));
+                            }
+                            k++;
+                        }
+                    } else if (!landKind.getPastureLand().getCostElements().isEmpty()) {
+                        for (CostElement costElement : landKind.getPastureLand().getCostElements()) {
+                            for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
+                                Log.e("RPPPPPPP ", costElementYears00 + "");
+                            }
+                            if (k <= 0) {
+                                for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
+                                    cashFlowTemp = calculateCashFlow(getString(R.string.string_pastureland), costElementYears.getYear(), discRate);
+                                    cashFlows.add(cashFlowTemp);
+                                    year = costElementYears.getYear();
+
+                                }
+                                cashFlows.add(calculateTerminalValue(getString(R.string.string_pastureland), year, cashFlowTemp, discRate));
+                            }
+                            k++;
+                        }
+                    } else if (!landKind.getPastureLand().getOutlays().isEmpty()) {
+                        for (Outlay outlay : landKind.getPastureLand().getOutlays()) {
+                            for (OutlayYears outlay1 : outlay.getOutlayYearses()) {
+                                Log.e("RPPPPPPP ", outlay1 + "");
+                            }
+                            if (k <= 0) {
+                                for (OutlayYears outlayYears : outlay.getOutlayYearses()) {
+                                    cashFlowTemp = calculateCashFlow(getString(R.string.string_pastureland), outlayYears.getYear(), discRate);
+                                    cashFlows.add(cashFlowTemp);
+                                    year = outlayYears.getYear();
+
+                                }
+                                cashFlows.add(calculateTerminalValue(getString(R.string.string_pastureland), year, cashFlowTemp, discRate));
+                            }
+                            k++;
+                        }
+                    }
+
+                    realm.beginTransaction();
+                    landKind.getPastureLand().setCashFlows(cashFlows);
+                    realm.commitTransaction();
+                } else if (landKind.getName().equals(getString(R.string.string_miningland)) && currentSocialCapitalServey.equals(getString(R.string.string_miningland))) {
+                    int k = 0;
+                    discRate = landKind.getSocialCapitals().isDiscountFlag() ? landKind.getSocialCapitals().getDiscountRateOverride() : landKind.getSocialCapitals().getDiscountRate();
+
+                    if (!landKind.getMiningLand().getRevenueProducts().isEmpty()) {
+                        for (RevenueProduct revenueProduct : landKind.getMiningLand().getRevenueProducts()) {
+                            if (k <= 0) {
+                                for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
+                                    cashFlowTemp = calculateCashFlow(getString(R.string.string_miningland), revenueProductYears.getYear(), discRate);
+                                    cashFlows.add(cashFlowTemp);
+                                    year = revenueProductYears.getYear();
+                                }
+                                cashFlows.add(calculateTerminalValue(getString(R.string.string_miningland), year, cashFlowTemp, discRate));
+                            }
+                            k++;
+                        }
+                    } else if (!landKind.getMiningLand().getCostElements().isEmpty()) {
+                        for (CostElement costElement : landKind.getMiningLand().getCostElements()) {
+                            for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
+                                Log.e("RPPPPPPP ", costElementYears00 + "");
+                            }
+                            if (k <= 0) {
+                                for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
+                                    cashFlowTemp = calculateCashFlow(getString(R.string.string_miningland), costElementYears.getYear(), discRate);
+                                    cashFlows.add(cashFlowTemp);
+                                    year = costElementYears.getYear();
+
+                                }
+                                cashFlows.add(calculateTerminalValue(getString(R.string.string_miningland), year, cashFlowTemp, discRate));
+                            }
+                            k++;
+                        }
+                    } else if (!landKind.getMiningLand().getOutlays().isEmpty()) {
+                        for (Outlay outlay : landKind.getMiningLand().getOutlays()) {
+                            for (OutlayYears outlay1 : outlay.getOutlayYearses()) {
+                                Log.e("RPPPPPPP ", outlay1 + "");
+                            }
+                            if (k <= 0) {
+                                for (OutlayYears outlayYears : outlay.getOutlayYearses()) {
+                                    cashFlowTemp = calculateCashFlow(getString(R.string.string_miningland), outlayYears.getYear(), discRate);
+                                    cashFlows.add(cashFlowTemp);
+                                    year = outlayYears.getYear();
+
+                                }
+                                cashFlows.add(calculateTerminalValue(getString(R.string.string_miningland), year, cashFlowTemp, discRate));
+                            }
+                            k++;
+                        }
+                    }
+
+                    realm.beginTransaction();
+                    landKind.getMiningLand().setCashFlows(cashFlows);
+                    realm.commitTransaction();
                 }
-                realm.beginTransaction();
-                landKind.getForestLand().setCashFlows(cashFlows);
-                realm.commitTransaction();
-
-                // Log.e("MM ",landKind.getForestLand().getCashFlows().get(0).toString());
-            } else if (landKind.getName().equals(getString(R.string.string_cropland)) && currentSocialCapitalServey.equals(getString(R.string.string_cropland))) {
-                int k = 0;
-                discRate = landKind.getSocialCapitals().isDiscountFlag() ? landKind.getSocialCapitals().getDiscountRateOverride() : landKind.getSocialCapitals().getDiscountRate();
-
-                if(!landKind.getCropLand().getRevenueProducts().isEmpty()) {
-                    for (RevenueProduct revenueProduct : landKind.getCropLand().getRevenueProducts()) {
-                        if (k <= 0) {
-                            for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
-                                cashFlowTemp = calculateCashFlow(getString(R.string.string_cropland), revenueProductYears.getYear(), discRate);
-                                cashFlows.add(cashFlowTemp);
-                                year = revenueProductYears.getYear();
-                            }
-                            cashFlows.add(calculateTerminalValue(getString(R.string.string_cropland), year, cashFlowTemp, discRate));
-                        }
-                        k++;
-                    }
-                } else if(!landKind.getCropLand().getCostElements().isEmpty()){
-                    for (CostElement costElement : landKind.getCropLand().getCostElements()) {
-                        for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
-                            Log.e("RPPPPPPP ", costElementYears00 + "");
-                        }
-                        if (k <= 0) {
-                            for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
-                                cashFlowTemp = calculateCashFlow(getString(R.string.string_cropland), costElementYears.getYear(), discRate);
-                                cashFlows.add(cashFlowTemp);
-                                year = costElementYears.getYear();
-
-                            }
-                            cashFlows.add(calculateTerminalValue(getString(R.string.string_cropland), year, cashFlowTemp, discRate));
-                        }
-                        k++;
-                    }
-                } else if (!landKind.getCropLand().getOutlays().isEmpty()){
-                    for (Outlay outlay : landKind.getCropLand().getOutlays()) {
-                        for (OutlayYears outlay1 : outlay.getOutlayYearses()) {
-                            Log.e("RPPPPPPP ", outlay1 + "");
-                        }
-                        if (k <= 0) {
-                            for (OutlayYears outlayYears : outlay.getOutlayYearses()) {
-                                cashFlowTemp = calculateCashFlow(getString(R.string.string_forestland), outlayYears.getYear(), discRate);
-                                cashFlows.add(cashFlowTemp);
-                                year = outlayYears.getYear();
-
-                            }
-                            cashFlows.add(calculateTerminalValue(getString(R.string.string_forestland), year, cashFlowTemp, discRate));
-                        }
-                        k++;
-                    }
-                }
-
-                realm.beginTransaction();
-                landKind.getCropLand().setCashFlows(cashFlows);
-                realm.commitTransaction();
-            } else if (landKind.getName().equals(getString(R.string.string_pastureland)) && currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
-                int k = 0;
-                discRate = landKind.getSocialCapitals().isDiscountFlag() ? landKind.getSocialCapitals().getDiscountRateOverride() : landKind.getSocialCapitals().getDiscountRate();
-
-                if(!landKind.getPastureLand().getRevenueProducts().isEmpty()) {
-                    for (RevenueProduct revenueProduct : landKind.getPastureLand().getRevenueProducts()) {
-                        if (k <= 0) {
-                            for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
-                                cashFlowTemp = calculateCashFlow(getString(R.string.string_pastureland), revenueProductYears.getYear(), discRate);
-                                cashFlows.add(cashFlowTemp);
-                                year = revenueProductYears.getYear();
-                            }
-                            cashFlows.add(calculateTerminalValue(getString(R.string.string_pastureland), year, cashFlowTemp, discRate));
-                        }
-                        k++;
-                    }
-                } else if(!landKind.getPastureLand().getCostElements().isEmpty()){
-                    for (CostElement costElement : landKind.getPastureLand().getCostElements()) {
-                        for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
-                            Log.e("RPPPPPPP ", costElementYears00 + "");
-                        }
-                        if (k <= 0) {
-                            for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
-                                cashFlowTemp = calculateCashFlow(getString(R.string.string_pastureland), costElementYears.getYear(), discRate);
-                                cashFlows.add(cashFlowTemp);
-                                year = costElementYears.getYear();
-
-                            }
-                            cashFlows.add(calculateTerminalValue(getString(R.string.string_pastureland), year, cashFlowTemp, discRate));
-                        }
-                        k++;
-                    }
-                } else if (!landKind.getPastureLand().getOutlays().isEmpty()){
-                    for (Outlay outlay : landKind.getPastureLand().getOutlays()) {
-                        for (OutlayYears outlay1 : outlay.getOutlayYearses()) {
-                            Log.e("RPPPPPPP ", outlay1 + "");
-                        }
-                        if (k <= 0) {
-                            for (OutlayYears outlayYears : outlay.getOutlayYearses()) {
-                                cashFlowTemp = calculateCashFlow(getString(R.string.string_pastureland), outlayYears.getYear(), discRate);
-                                cashFlows.add(cashFlowTemp);
-                                year = outlayYears.getYear();
-
-                            }
-                            cashFlows.add(calculateTerminalValue(getString(R.string.string_pastureland), year, cashFlowTemp, discRate));
-                        }
-                        k++;
-                    }
-                }
-
-                realm.beginTransaction();
-                landKind.getPastureLand().setCashFlows(cashFlows);
-                realm.commitTransaction();
-            } else if (landKind.getName().equals(getString(R.string.string_miningland)) && currentSocialCapitalServey.equals(getString(R.string.string_miningland))) {
-                int k = 0;
-                discRate = landKind.getSocialCapitals().isDiscountFlag() ? landKind.getSocialCapitals().getDiscountRateOverride() : landKind.getSocialCapitals().getDiscountRate();
-
-                if(!landKind.getMiningLand().getRevenueProducts().isEmpty()) {
-                    for (RevenueProduct revenueProduct : landKind.getMiningLand().getRevenueProducts()) {
-                        if (k <= 0) {
-                            for (RevenueProductYears revenueProductYears : revenueProduct.getRevenueProductYearses()) {
-                                cashFlowTemp = calculateCashFlow(getString(R.string.string_miningland), revenueProductYears.getYear(), discRate);
-                                cashFlows.add(cashFlowTemp);
-                                year = revenueProductYears.getYear();
-                            }
-                            cashFlows.add(calculateTerminalValue(getString(R.string.string_miningland), year, cashFlowTemp, discRate));
-                        }
-                        k++;
-                    }
-                } else if(!landKind.getMiningLand().getCostElements().isEmpty()){
-                    for (CostElement costElement : landKind.getMiningLand().getCostElements()) {
-                        for (CostElementYears costElementYears00 : costElement.getCostElementYearses()) {
-                            Log.e("RPPPPPPP ", costElementYears00 + "");
-                        }
-                        if (k <= 0) {
-                            for (CostElementYears costElementYears : costElement.getCostElementYearses()) {
-                                cashFlowTemp = calculateCashFlow(getString(R.string.string_miningland), costElementYears.getYear(), discRate);
-                                cashFlows.add(cashFlowTemp);
-                                year = costElementYears.getYear();
-
-                            }
-                            cashFlows.add(calculateTerminalValue(getString(R.string.string_miningland), year, cashFlowTemp, discRate));
-                        }
-                        k++;
-                    }
-                } else if (!landKind.getMiningLand().getOutlays().isEmpty()){
-                    for (Outlay outlay : landKind.getMiningLand().getOutlays()) {
-                        for (OutlayYears outlay1 : outlay.getOutlayYearses()) {
-                            Log.e("RPPPPPPP ", outlay1 + "");
-                        }
-                        if (k <= 0) {
-                            for (OutlayYears outlayYears : outlay.getOutlayYearses()) {
-                                cashFlowTemp = calculateCashFlow(getString(R.string.string_miningland), outlayYears.getYear(), discRate);
-                                cashFlows.add(cashFlowTemp);
-                                year = outlayYears.getYear();
-
-                            }
-                            cashFlows.add(calculateTerminalValue(getString(R.string.string_miningland), year, cashFlowTemp, discRate));
-                        }
-                        k++;
-                    }
-                }
-
-                realm.beginTransaction();
-                landKind.getMiningLand().setCashFlows(cashFlows);
-                realm.commitTransaction();
             }
         }
         calculateNPV();
