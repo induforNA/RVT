@@ -630,7 +630,7 @@
     <string name="natural_outlay_qn4">Total cost</string>
     <string name="natural_outlay_qn5">Choose currency</string>
     <string name="natural_outlay_qn6">How often does this expense occur?</string>
-    <string name="natural_outlay_a_qn1">Add future costs</string>
+    <string name="natural_outlay_a_qn1">Future costs</string>
     <string name="natural_outlay_a_qn2">Add cost</string>
     <string name="year_data_livestock">How many years of data do you have on livestock activity?</string>
     <string name="year_data_extraction">How many years of data do you have on extraction activities?</string>
@@ -705,7 +705,7 @@
     <string name="shared_costs_outlays">Shared Costs</string>
     <string name="string_certificate">Certificate</string>
     <string name="restore_original_project_rates">Restore Original Inflation and Risk Rates</string>
-    <string name="shared_outlay_question">Add future shared costs</string>
+    <string name="shared_outlay_question">Future costs</string>
     <string name="app_title">Rural Valuation Tool</string>
     <string name="language_hint">Language</string>
     <string name="currency_hint">Currency</string>

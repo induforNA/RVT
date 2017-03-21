@@ -31,6 +31,8 @@
                 android:layout_weight="1"
                 android:gravity="left"
                 android:text="@string/string_name"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
@@ -41,6 +43,8 @@
                 android:layout_weight="1"
                 android:gravity="left"
                 android:text="@string/string_occupation"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
