@@ -8,6 +8,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -86,6 +87,9 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
     private TextView logout;
     private double mSharedDiscountRate;
 
+    private Button certificateSaveButton;
+    private Button certificateExitButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,6 +138,10 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         gpsCoordinate_5 = (TextView) findViewById(R.id.gps_coordinate_5);
         gpsCoordinate_6 = (TextView) findViewById(R.id.gps_coordinate_6);
         parcelSize = (TextView) findViewById(R.id.parcel_size);
+        certificateExitButton = (Button) findViewById(R.id.certificate_exit_button);
+        certificateSaveButton = (Button) findViewById(R.id.certificate_save_button);
+        certificateExitButton.setOnClickListener(this);
+        certificateSaveButton.setOnClickListener(this);
         imageViewMenuIcon.setOnClickListener(this);
         drawerCloseBtn.setOnClickListener(this);
         context = this;
@@ -243,11 +251,11 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         if (!(surveyCheck.getComponents().getForestValue() < 0)) {
                             String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getForestValue()));
-                            forestValue.setText(yourFormattedString+ " "+ currency);
+                            forestValue.setText(yourFormattedString + " " + currency);
                         } else {
                             double value = (surveyCheck.getComponents().getForestValue());
                             String yourFormattedString = valueFormatter.format(roundTwo(value) * -1);
-                            forestValue.setText("- " + yourFormattedString+ " "+ currency);
+                            forestValue.setText("- " + yourFormattedString + " " + currency);
                         }
 
                         //forestValue.setText(roundTwo(surveyCheck.getComponents().getForestValue())+"");
@@ -281,11 +289,11 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         if (!(surveyCheck.getComponents().getCroplandValue() < 0)) {
                             String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getCroplandValue()));
-                            cropValue.setText(yourFormattedString+ " "+ currency);
+                            cropValue.setText(yourFormattedString + " " + currency);
                         } else {
                             double value = surveyCheck.getComponents().getCroplandValue();
                             String yourFormattedString = valueFormatter.format(roundTwo(value) * -1);
-                            cropValue.setText("- " + yourFormattedString + " "+ currency);
+                            cropValue.setText("- " + yourFormattedString + " " + currency);
                         }
 
                         totalVal = totalVal + surveyCheck.getComponents().getCroplandValue();
@@ -318,11 +326,11 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         if (!(surveyCheck.getComponents().getPastureValue() < 0)) {
                             String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getPastureValue()));
-                            pastureValue.setText(yourFormattedString+ " "+ currency);
+                            pastureValue.setText(yourFormattedString + " " + currency);
                         } else {
                             double value = surveyCheck.getComponents().getPastureValue();
                             String yourFormattedString = valueFormatter.format(roundTwo(value) * -1);
-                            pastureValue.setText("- " + yourFormattedString+ " "+ currency);
+                            pastureValue.setText("- " + yourFormattedString + " " + currency);
                         }
 
 
@@ -357,11 +365,11 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                         DecimalFormat valueFormatter = new DecimalFormat("#,###,###");
                         if (!(surveyCheck.getComponents().getMiningLandValue() < 0)) {
                             String yourFormattedString = valueFormatter.format(roundTwo(surveyCheck.getComponents().getMiningLandValue()));
-                            miningValue.setText(yourFormattedString+ " "+ currency);
+                            miningValue.setText(yourFormattedString + " " + currency);
                         } else {
                             double value = surveyCheck.getComponents().getMiningLandValue();
                             String yourFormattedString = valueFormatter.format(roundTwo(value) * -1);
-                            miningValue.setText("- " + yourFormattedString+ " "+ currency);
+                            miningValue.setText("- " + yourFormattedString + " " + currency);
                         }
 
                         totalVal = totalVal + surveyCheck.getComponents().getMiningLandValue();
@@ -448,9 +456,9 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
 
         String fString = "0";
         if (l < 0) {
-            fString = "- " + valueFormatter1.format(l * -1)+ " "+ currency ;
+            fString = "- " + valueFormatter1.format(l * -1) + " " + currency;
         } else {
-            fString = " " + valueFormatter1.format(l)+ " "+ currency;
+            fString = " " + valueFormatter1.format(l) + " " + currency;
         }
         return fString;
     }
@@ -531,6 +539,17 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                 Intent intent_certificate = new Intent(getApplicationContext(), NewCertificateActivity.class);
                 startActivity(intent_certificate);
                 break;
+            case R.id.certificate_exit_button:
+                Intent logoutIntent = new Intent(getApplicationContext(), RegistrationActivity.class);
+                logoutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(logoutIntent);
+                break;
+            case R.id.certificate_save_button:
+                Intent startSurveyIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startSurveyIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(startSurveyIntent);
+                break;
+
         }
     }
 
@@ -879,8 +898,8 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
 
         for (OutlayYears outlayYears1 : outlayYearses) {
             outlayTotal = outlayTotal + outlayYears1.getPrice();
-            if(disFactor == 0)
-               disFactor = 1 / Math.pow(1 + disRate, calculateProjectionIndex(year - year1) );
+            if (disFactor == 0)
+                disFactor = 1 / Math.pow(1 + disRate, calculateProjectionIndex(year - year1));
         }
 
 //        if(revenueProductYears != null){
@@ -989,8 +1008,8 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
 
         for (OutlayYears outlayYears1 : outlayYearses) {
             outlayTotal = outlayTotal + outlayYears1.getPrice();
-            if(disFactor == 0)
-                disFactor = 1 / Math.pow(1 + disRate, calculateProjectionIndex(year - year1) );
+            if (disFactor == 0)
+                disFactor = 1 / Math.pow(1 + disRate, calculateProjectionIndex(year - year1));
         }
 
         terminalValue = disRate != 0 ? (cashFlowTemp.getValue() / (disRate)) : 0;
@@ -1129,7 +1148,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         CashFlow cashFlowTemp = null;
 
 
-        if(!results.getSharedCostElements().isEmpty()) {
+        if (!results.getSharedCostElements().isEmpty()) {
             for (SharedCostElement costElement : results.getSharedCostElements()) {
                 for (SharedCostElementYears costElementYears00 : costElement.getCostElementYearses()) {
                     Log.e("RPPPPPPP ", costElementYears00 + "");
@@ -1148,7 +1167,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                 }
                 k++;
             }
-        } else if(!results.getSharedOutlays().isEmpty()) {
+        } else if (!results.getSharedOutlays().isEmpty()) {
             for (Outlay outlay : results.getSharedOutlays()) {
                 for (OutlayYears outlay1 : outlay.getOutlayYearses()) {
                     Log.e("RPPPPPPP ", outlay1 + "");
@@ -1209,8 +1228,8 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         for (OutlayYears outlayYears1 : outlayYearses) {
             if (outlayYears1.getYear() == year)
                 outlayTotal = outlayTotal + outlayYears1.getPrice();
-            if(disFactor == 0)
-                disFactor = 1 / Math.pow(1 + disRate, calculateProjectionIndex(year - year1) );
+            if (disFactor == 0)
+                disFactor = 1 / Math.pow(1 + disRate, calculateProjectionIndex(year - year1));
         }
 
         double cashFlowVal = revenueTotal - costTotal - outlayTotal;
@@ -1276,8 +1295,8 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
 
         for (OutlayYears outlayYears1 : outlayYearses) {
             outlayTotal = outlayTotal + outlayYears1.getPrice();
-            if(disFactor == 0)
-                disFactor = 1 / Math.pow(1 + disRate, calculateProjectionIndex(year - year1) );
+            if (disFactor == 0)
+                disFactor = 1 / Math.pow(1 + disRate, calculateProjectionIndex(year - year1));
         }
 
         terminalValue = disRate != 0 ? (cashFlowTemp.getValue() / (disRate)) : 0;
@@ -1382,6 +1401,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         realm.commitTransaction();
 
     }
+
     public double calculateProjectionIndex(double val) {
         double resVal = 0;
 

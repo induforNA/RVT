@@ -1,31 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_weight="1"
+    android:orientation="vertical"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:paddingTop="30dp">
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/get_parcel_area_text"
-        android:textSize="@dimen/textfield_size"/>
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/parcel_area_edit"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/get_parcel_area_question"
+            android:textSize="@dimen/textfield_size" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <RadioGroup
+                android:id="@+id/parcel_area_ques_ans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/parcel_area_ques_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/get_parcel_area_ques_yes"
+                    android:textSize="@dimen/textfield_size"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/parcel_area_ques_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/get_parcel_area_ques_no"
+                    android:textSize="@dimen/textfield_size"
+                    android:layout_marginLeft="20dp"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/parcel_area_input_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:inputType="numberDecimal"
-        android:layout_marginLeft="20dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/parcel_area_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/get_parcel_area_text"
+            android:inputType="numberDecimal"
         android:layout_marginRight="20dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ha"
-        android:textSize="@dimen/textfield_size"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ha"
+            android:textSize="@dimen/textfield_size" />
+
+    </LinearLayout>
+
+
 </LinearLayout>

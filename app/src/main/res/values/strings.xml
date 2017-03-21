@@ -719,6 +719,9 @@
     <string name="risk_rate_hint">Sovereign/Country Risk Rate</string>
     <string name="inflation_rate_hint">Inflation Rate</string>
     <string name="get_parcel_area_text">Parcel Area (hectares)</string>
+    <string name="get_parcel_area_ques_yes">Yes</string>
+    <string name="get_parcel_area_ques_no">No</string>
+    <string name="get_parcel_area_question">Do you know the size of your parcel in hectares?</string>
     <string name="text_save_warning">The survey will only be saved after you click Save or Next on each page, not Back.</string>
     <string name="text_got_it">Got It</string>
     <string name="text_developed">Developed by Indufor North America in partnership with the Foundation for Ecological Security and Ulster University with support from Omidyar Network</string>
@@ -733,4 +736,6 @@
         Equipping households, communities, the investment community, and governments with a tool to ascertain an economic value on the range of assets (tangible and intangible) held and used local residents might help reduce information asymmetry and
         empower local residents to negotiate from a stronger position thereby reducing conflicts and improving investment outcomes.</string>
     <string name="text_ok">OK</string>
+    <string name="certificate_button_save">Save</string>
+    <string name="certificate_button_exit">Exit</string>
 </resources>
