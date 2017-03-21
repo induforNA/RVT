@@ -47,41 +47,76 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="30dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/edittext_date"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center"
-                        android:hint="@string/date_hint"
-                        android:onClick="setDate"
-                        android:textSize="@dimen/textfield_size" />
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="10dp"
+                            android:textSize="@dimen/textfield_size"
+                            android:text="@string/date_hint"/>
 
-                    <EditText
-                        android:id="@+id/edittext_respondent_group"
+                        <EditText
+                            android:id="@+id/edittext_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:nextFocusDown="@+id/edittext_surveyor"
+                            android:onClick="setDate"
+                            android:textSize="@dimen/textfield_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center"
-                        android:hint="@string/respondent_group_hint"
-                        android:maxLines="1"
-                        android:nextFocusDown="@+id/edittext_district"
-                        android:singleLine="true"
-                        android:textSize="@dimen/textfield_size" />
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="5dp"
+                            android:textSize="@dimen/textfield_size"
+                            android:text="@string/community_hint"/>
 
-                    <EditText
-                        android:id="@+id/edittext_surveyor"
+                        <EditText
+                            android:id="@+id/edittext_community"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:maxLines="1"
+                            android:nextFocusDown="@+id/edittext_respondent_group"
+                            android:singleLine="true"
+                            android:textSize="@dimen/textfield_size" />
+                    </LinearLayout>
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center"
-                        android:hint="@string/surveyor_hint"
-                        android:maxLines="1"
-                        android:nextFocusDown="@+id/edittext_state"
-                        android:singleLine="true"
-                        android:textSize="@dimen/textfield_size" />
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="5dp"
+                            android:textSize="@dimen/textfield_size"
+                            android:text="@string/district_hint"/>
 
+                        <EditText
+                            android:id="@+id/edittext_district"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:maxLines="1"
+                            android:nextFocusDown="@+id/edittext_state"
+                            android:singleLine="true"
+                            android:textSize="@dimen/textfield_size" />
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -92,40 +127,76 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/edittext_community"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center"
-                        android:hint="@string/community_hint"
-                        android:maxLines="1"
-                        android:nextFocusDown="@id/edittext_respondent_group"
-                        android:singleLine="true"
-                        android:textSize="@dimen/textfield_size" />
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="5dp"
+                            android:textSize="@dimen/textfield_size"
+                            android:text="@string/surveyor_hint"/>
 
-                    <EditText
-                        android:id="@+id/edittext_district"
+                        <EditText
+                            android:id="@+id/edittext_surveyor"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:maxLines="1"
+                            android:nextFocusDown="@+id/edittext_community"
+                            android:singleLine="true"
+                            android:textSize="@dimen/textfield_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center"
-                        android:hint="@string/district_hint"
-                        android:maxLines="1"
-                        android:nextFocusDown="@id/edittext_surveyor"
-                        android:singleLine="true"
-                        android:textSize="@dimen/textfield_size" />
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="5dp"
+                            android:textSize="@dimen/textfield_size"
+                            android:text="@string/respondent_group_hint"/>
 
-                    <EditText
-                        android:id="@+id/edittext_state"
+                        <EditText
+                            android:id="@+id/edittext_respondent_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:maxLines="1"
+                            android:nextFocusDown="@+id/edittext_district"
+                            android:singleLine="true"
+                            android:textSize="@dimen/textfield_size" />
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center"
-                        android:hint="@string/state_hint"
-                        android:maxLines="1"
-                        android:nextFocusDown="@+id/edittext_currency"
-                        android:singleLine="true"
-                        android:textSize="@dimen/textfield_size" />
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="5dp"
+                            android:textSize="@dimen/textfield_size"
+                            android:text="@string/state_hint"/>
 
-
+                        <EditText
+                            android:id="@+id/edittext_state"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:maxLines="1"
+                            android:nextFocusDown="@+id/spinner_country"
+                            android:singleLine="true"
+                            android:textSize="@dimen/textfield_size" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -139,42 +210,34 @@
                 android:orientation="horizontal">
 
                 <Spinner
-                    android:id="@+id/edittext_language"
+                    android:id="@+id/spinner_country"
+                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:nextFocusDown="@+id/spinner_currency"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1" />
+                <Spinner
+                    android:id="@+id/spinner_currency"
                     style="@style/Widget.AppCompat.Spinner.Underlined"
                     android:layout_width="200dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginRight="10dp"
+                    android:nextFocusDown="@+id/edittext_language"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1" />
-
-                <EditText
-                    android:id="@+id/edittext_currency"
+                <Spinner
+                    android:id="@+id/edittext_language"
+                    style="@style/Widget.AppCompat.Spinner.Underlined"
                     android:layout_width="200dp"
                     android:layout_height="60dp"
+                    android:nextFocusDown="@+id/reg_risk_rate"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                    android:hint="@string/currency_hint"
-                    android:inputType="textCapCharacters"
-                    android:maxLength="3"
-                    android:nextFocusDown="@+id/edittext_country"
-                    android:singleLine="true" />
-
-                <EditText
-                    android:id="@+id/edittext_country"
-                    android:layout_width="200dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:hint="@string/country_hint"
-                    android:inputType="text"
-                    android:nextFocusDown="@+id/reg_risk_rate" />
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
@@ -187,19 +250,38 @@
                 android:orientation="horizontal"
                 android:weightSum="2">
 
-                <EditText
-                    android:id="@+id/reg_risk_rate"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:paddingLeft="5dp"
-                    android:hint="@string/risk_rate_hint"
-                    android:inputType="numberDecimal"
-                    android:nextFocusDown="@+id/reg_inflation_rate"
-                    android:textSize="@dimen/textfield_size" />
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="5dp"
+                        android:textSize="@dimen/textfield_size"
+                        android:text="@string/risk_rate_hint"/>
+                    <EditText
+                        android:id="@+id/reg_risk_rate"
+                        android:layout_width="80dp"
+                        android:layout_height="60dp"
+                        android:padding="10dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="10dp"
+                        android:paddingLeft="5dp"
+                        android:gravity="center_horizontal"
+                        android:inputType="numberDecimal"
+                        android:nextFocusDown="@+id/reg_inflation_rate"
+                        android:textSize="@dimen/textfield_size" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="%"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="@dimen/textfield_size" />
+
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -246,24 +328,43 @@
                 android:orientation="horizontal"
                 android:weightSum="2">
 
-                <EditText
-                    android:id="@+id/reg_inflation_rate"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:layout_marginRight="10dp"
-                    android:hint="@string/inflation_rate_hint"
-                    android:paddingLeft="5dp"
-                    android:inputType="numberDecimal"
-                    android:textSize="@dimen/textfield_size" />
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="5dp"
+                        android:textSize="@dimen/textfield_size"
+                        android:text="@string/inflation_rate_hint"/>
+                    <EditText
+                        android:id="@+id/reg_inflation_rate"
+                        android:layout_width="80dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center_horizontal"
+                        android:nextFocusDown="@+id/button_sign_up"
+                        android:paddingLeft="5dp"
+                        android:inputType="numberDecimal"
+                        android:textSize="@dimen/textfield_size" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="%"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="@dimen/textfield_size" />
+                </LinearLayout>
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
+                    android:padding="10dp"
                     android:gravity="center_vertical"
                     android:text="%"
                     android:textSize="@dimen/textfield_size" />
@@ -381,28 +482,41 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
+        android:weightSum="3"
         android:gravity="center"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/button_login"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="left"
-            android:layout_marginRight="100dp"
+            android:layout_weight="1"
             android:layout_marginTop="20dp"
             android:background="@android:color/transparent"
             android:text="@string/login_button" />
 
         <Button
             android:id="@+id/button_sign_up"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_gravity="right"
-            android:layout_marginLeft="100dp"
             android:layout_marginTop="50dp"
             android:text="@string/sign_up_button"
+            android:layout_weight="1"
+            android:imeOptions="actionGo"
+            android:background="@color/colorPrimary"
             android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/button_about"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="right"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="50dp"
+            android:text="@string/about_this_app"
+            android:layout_weight="1"/>
 
     </LinearLayout>
 
