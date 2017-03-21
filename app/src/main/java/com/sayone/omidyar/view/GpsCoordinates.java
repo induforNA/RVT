@@ -9,6 +9,7 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.IdRes;
@@ -410,34 +411,53 @@ public class GpsCoordinates extends BaseActivity {
     }
 
     public void getCoordinates(int gpsCoordinatesViewId, int index) {
-
-        TextView gpsCoordinatesView = (TextView) findViewById(gpsCoordinatesViewId);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            if (mBound) {
-                Location location = gpsTrackerService.getLocation();
-                if (location == null) {
-                    gpsCoordinatesView.setText("GPS Coordinates : -");
-                } else if (location.getLatitude() == 0 || location.getLongitude() == 0) {
-                    gpsCoordinatesView.setText("GPS Coordinates : -");
-                } else {
-                    corners[index] = new Location("");
-                    corners[index].setLatitude(location.getLatitude());
-                    corners[index].setLongitude(location.getLongitude());
-                    String latDMS = LocationConverter.getLatitudeDMS(corners[index].getLatitude());
-                    String lngDMS = LocationConverter.getLongitudeDMS(corners[index].getLongitude());
-                    int accuracy = (int) location.getAccuracy();
-                    gpsCoordinatesView.setText("GPS Coordinates : " + latDMS + ", " + lngDMS + " (Accuracy : " + accuracy + "m)");
-                    Log.d("GPS", "Coordinates: " + corners[index].getLatitude() + ", " + corners[index].getLongitude() + "(Accuracy : " + accuracy + "m)");
-                }
-            }
+        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            showNoGpsAlert();
         } else {
-            if (ContextCompat.checkSelfPermission(GpsCoordinates.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(GpsCoordinates.this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                } else {
-                    ActivityCompat.requestPermissions(GpsCoordinates.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST);
+            TextView gpsCoordinatesView = (TextView) findViewById(gpsCoordinatesViewId);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                if (mBound) {
+                    Location location = gpsTrackerService.getLocation();
+                    if (location == null) {
+                        gpsCoordinatesView.setText("GPS Coordinates : Not set");
+                    } else if (location.getLatitude() == 0 || location.getLongitude() == 0) {
+                        gpsCoordinatesView.setText("GPS Coordinates : Not set");
+                    } else {
+                        corners[index] = new Location("");
+                        corners[index].setLatitude(location.getLatitude());
+                        corners[index].setLongitude(location.getLongitude());
+                        String latDMS = LocationConverter.getLatitudeDMS(corners[index].getLatitude());
+                        String lngDMS = LocationConverter.getLongitudeDMS(corners[index].getLongitude());
+                        int accuracy = (int) location.getAccuracy();
+                        gpsCoordinatesView.setText("GPS Coordinates : " + latDMS + ", " + lngDMS + " (Accuracy : " + accuracy + "m)");
+                        Log.d("GPS", "Coordinates: " + corners[index].getLatitude() + ", " + corners[index].getLongitude() + "(Accuracy : " + accuracy + "m)");
+                    }
+                }
+            } else {
+                if (ContextCompat.checkSelfPermission(GpsCoordinates.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(GpsCoordinates.this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                    } else {
+                        ActivityCompat.requestPermissions(GpsCoordinates.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST);
+                    }
                 }
             }
         }
+    }
+
+    private void showNoGpsAlert() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                dialog.cancel();
+            }
+        });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 
     protected void onStart() {
