@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.annotation.IdRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
@@ -22,7 +23,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -292,6 +295,20 @@ public class GpsCoordinates extends BaseActivity {
         View dialogView = inflater.inflate(R.layout.parcel_area, null);
 //        builder.setTitle("Parcel Area");
         final EditText areaInput = (EditText) dialogView.findViewById(R.id.parcel_area_edit);
+        final RadioGroup parcelAreaAns = (RadioGroup) dialogView.findViewById(R.id.parcel_area_ques_ans);
+        final LinearLayout parcelAreaInputLayout = (LinearLayout) dialogView.findViewById(R.id.parcel_area_input_layout);
+
+        parcelAreaAns.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                if (checkedId == R.id.parcel_area_ques_yes) {
+                    parcelAreaInputLayout.setVisibility(View.VISIBLE);
+                } else if (checkedId == R.id.parcel_area_ques_no) {
+                    parcelAreaInputLayout.setVisibility(View.GONE);
+                }
+            }
+        });
+
         if (!parcelSize.equals("") && !parcelSize.equals("0.0")) {
             areaInput.setText(parcelSize);
         }
@@ -299,9 +316,12 @@ public class GpsCoordinates extends BaseActivity {
         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-                String areaString = areaInput.getText().toString();
-                area = (areaString.equals("")) ? 0 : Float.parseFloat(areaString);
+                if (parcelAreaInputLayout.getVisibility() == View.VISIBLE) {
+                    String areaString = areaInput.getText().toString();
+                    area = (areaString.equals("")) ? -1 : Float.parseFloat(areaString);
+                } else {
+                    area = 0;
+                }
                 saveInputs();
             }
         });
@@ -381,8 +401,8 @@ public class GpsCoordinates extends BaseActivity {
 //            return false;
 //        }
 
-        if (area == 0) {
-            Toast.makeText(GpsCoordinates.this, "Please enter the area", Toast.LENGTH_SHORT).show();
+        if (Float.isNaN(area) || area == -1) {
+            Toast.makeText(GpsCoordinates.this, "Please enter a valid parcel area", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
