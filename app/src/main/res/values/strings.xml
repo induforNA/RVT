@@ -45,7 +45,7 @@
         <item>	Congo, Democratic Republic of the	</item>
         <item>	Congo, Republic of the	</item>
         <item>	Costa Rica	</item>
-        <item>	Cote d'Ivoire	</item>
+        <item>	Cote d\'Ivoire	</item>
         <item>	Croatia	</item>
         <item>	Cuba	</item>
         <item>	Curacao	</item>
@@ -624,14 +624,14 @@
     <string name="title_start_survey">Start Survey</string>
     <string name="inflation_rate_heading">INFLATION RATE</string>
 
-    <string name="natural_outlay_qn1">Give details of investment/cost outlay items added</string>
+    <string name="natural_outlay_qn1">Give details of future costs</string>
     <string name="natural_outlay_qn2">Choose outlay item</string>
     <string name="natural_outlay_qn3">In which year do you expect to first incur the cost?</string>
     <string name="natural_outlay_qn4">Total cost</string>
     <string name="natural_outlay_qn5">Choose currency</string>
     <string name="natural_outlay_qn6">How often does this expense occur?</string>
-    <string name="natural_outlay_a_qn1">Add future investments/costs</string>
-    <string name="natural_outlay_a_qn2">Add cost outlay item</string>
+    <string name="natural_outlay_a_qn1">Add future costs</string>
+    <string name="natural_outlay_a_qn2">Add cost</string>
     <string name="year_data_livestock">How many years of data do you have on livestock activity?</string>
     <string name="year_data_extraction">How many years of data do you have on extraction activities?</string>
     <string name="sending_data">Sending Data</string>
@@ -672,7 +672,7 @@
     <string name="text_extract">\u0020extract</string>
     <string name="text_incur_cost">incur %1$s costs\u0020</string>
     <string name="question_override">We will project cash flows for the next 15 years based on the average of the data you entered for %1$s. Does this average seem realistic? If not, please enter your estimate.</string>
-    <string name="label_your_estimate">Your estimate (will override average value in projections)</string>
+    <string name="label_your_estimate">New estimate (overrides average)</string>
     <string name="text_question_harvest">How often do you %1$s?</string>
     <string name="text_number_of_times">Number of times</string>
     <string name="text_time_period">Time period</string>
@@ -705,7 +705,7 @@
     <string name="shared_costs_outlays">Shared Costs</string>
     <string name="string_certificate">Certificate</string>
     <string name="restore_original_project_rates">Restore Original Inflation and Risk Rates</string>
-    <string name="shared_outlay_question">Add future shared investments/costs</string>
+    <string name="shared_outlay_question">Add future shared costs</string>
     <string name="app_title">Rural Valuation Tool</string>
     <string name="language_hint">Language</string>
     <string name="currency_hint">Currency</string>
