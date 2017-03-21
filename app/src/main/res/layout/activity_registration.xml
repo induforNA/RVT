@@ -47,26 +47,28 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="30dp"
+                    android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
                         <TextView
-                            android:layout_width="130dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
+                            android:paddingLeft="5dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="10dp"
-                            android:textSize="@dimen/textfield_size"
+                            android:textSize="@dimen/textfield_size_lower"
                             android:text="@string/date_hint"/>
 
                         <EditText
                             android:id="@+id/edittext_date"
                             android:layout_width="match_parent"
-                            android:layout_height="60dp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:nextFocusDown="@+id/edittext_surveyor"
                             android:onClick="setDate"
@@ -75,20 +77,22 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
                         <TextView
-                            android:layout_width="130dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="10dp"
                             android:layout_marginTop="5dp"
-                            android:textSize="@dimen/textfield_size"
+                            android:paddingLeft="5dp"
+                            android:textSize="@dimen/textfield_size_lower"
                             android:text="@string/community_hint"/>
 
                         <EditText
                             android:id="@+id/edittext_community"
                             android:layout_width="match_parent"
-                            android:layout_height="60dp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:maxLines="1"
                             android:nextFocusDown="@+id/edittext_respondent_group"
@@ -97,20 +101,22 @@
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
                         <TextView
-                            android:layout_width="130dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="10dp"
                             android:layout_marginTop="5dp"
-                            android:textSize="@dimen/textfield_size"
+                            android:paddingLeft="5dp"
+                            android:textSize="@dimen/textfield_size_lower"
                             android:text="@string/district_hint"/>
 
                         <EditText
                             android:id="@+id/edittext_district"
                             android:layout_width="match_parent"
-                            android:layout_height="60dp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:maxLines="1"
                             android:nextFocusDown="@+id/edittext_state"
@@ -129,20 +135,22 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
                         <TextView
-                            android:layout_width="170dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="10dp"
                             android:layout_marginTop="5dp"
-                            android:textSize="@dimen/textfield_size"
+                            android:paddingLeft="5dp"
+                            android:textSize="@dimen/textfield_size_lower"
                             android:text="@string/surveyor_hint"/>
 
                         <EditText
                             android:id="@+id/edittext_surveyor"
                             android:layout_width="match_parent"
-                            android:layout_height="60dp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:maxLines="1"
                             android:nextFocusDown="@+id/edittext_community"
@@ -152,20 +160,22 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
                         <TextView
-                            android:layout_width="170dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="10dp"
                             android:layout_marginTop="5dp"
-                            android:textSize="@dimen/textfield_size"
+                            android:paddingLeft="5dp"
+                            android:textSize="@dimen/textfield_size_lower"
                             android:text="@string/respondent_group_hint"/>
 
                         <EditText
                             android:id="@+id/edittext_respondent_group"
                             android:layout_width="match_parent"
-                            android:layout_height="60dp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:maxLines="1"
                             android:nextFocusDown="@+id/edittext_district"
@@ -177,20 +187,22 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
                         <TextView
-                            android:layout_width="170dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="10dp"
                             android:layout_marginTop="5dp"
-                            android:textSize="@dimen/textfield_size"
+                            android:paddingLeft="5dp"
+                            android:textSize="@dimen/textfield_size_lower"
                             android:text="@string/state_hint"/>
 
                         <EditText
                             android:id="@+id/edittext_state"
                             android:layout_width="match_parent"
-                            android:layout_height="60dp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:maxLines="1"
                             android:nextFocusDown="@+id/spinner_country"
@@ -269,7 +281,6 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="10dp"
-                        android:paddingLeft="5dp"
                         android:gravity="center_horizontal"
                         android:inputType="numberDecimal"
                         android:nextFocusDown="@+id/reg_inflation_rate"
@@ -348,7 +359,6 @@
                         android:layout_marginRight="10dp"
                         android:gravity="center_horizontal"
                         android:nextFocusDown="@+id/button_sign_up"
-                        android:paddingLeft="5dp"
                         android:inputType="numberDecimal"
                         android:textSize="@dimen/textfield_size" />
                     <TextView
@@ -370,79 +380,6 @@
                     android:textSize="@dimen/textfield_size" />
 
             </LinearLayout>
-
-            <!--  <LinearLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginLeft="50dp"
-                  android:layout_marginRight="50dp"
-                  android:layout_marginTop="20dp"
-                  android:gravity="left"
-                  android:orientation="horizontal"
-                  android:weightSum="2">
-
-                  <TextView
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:text="@string/country_risk_rate"
-                      android:textSize="@dimen/textfield_size"
-                      android:layout_weight="1"/>
-
-                  <EditText
-                      android:id="@+id/reg_risk_rate"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:inputType="numberDecimal"
-                      android:textSize="@dimen/textfield_size"
-                      android:layout_marginLeft="10dp"
-                      android:layout_weight="1"
-                      android:layout_marginStart="100dp"/>
-
-                  <TextView
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="%"
-                      android:textSize="@dimen/textfield_size"
-                      android:layout_marginRight="200dp"/>
-
-              </LinearLayout>-->
-
-
-            <!--<LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginTop="20dp"
-                android:gravity="left"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/inflation_rate"
-                    android:textSize="@dimen/textfield_size"
-                    android:layout_weight="1"/>
-
-                <EditText
-                    android:id="@+id/reg_inflation_rate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    android:textSize="@dimen/textfield_size"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="100dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="%"
-                    android:textSize="@dimen/textfield_size"
-                    android:layout_marginRight="200dp"/>
-
-            </LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -519,5 +456,4 @@
             android:layout_weight="1"/>
 
     </LinearLayout>
-
 </LinearLayout>

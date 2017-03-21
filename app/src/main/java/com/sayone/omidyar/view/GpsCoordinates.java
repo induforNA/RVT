@@ -81,6 +81,7 @@ public class GpsCoordinates extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gps_coordinates);
+        setContentView(R.layout.activity_gps_coordinates);
 
         context = this;
         realm = Realm.getDefaultInstance();
