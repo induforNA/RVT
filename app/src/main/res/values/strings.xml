@@ -738,4 +738,8 @@
     <string name="text_ok">OK</string>
     <string name="certificate_button_save">Save</string>
     <string name="certificate_button_exit">Exit</string>
+    <string-array name="genders">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
 </resources>

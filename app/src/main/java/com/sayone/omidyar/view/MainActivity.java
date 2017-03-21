@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -258,7 +259,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 Button saveParticipant = (Button) dialog.findViewById(R.id.save_participant);
                 final EditText editTextParticipant = (EditText) dialog.findViewById(R.id.edit_text_participant);
                 final EditText editTextOccupation = (EditText) dialog.findViewById(R.id.edit_text_occupation);
-                final EditText editTextGender = (EditText) dialog.findViewById(R.id.edit_text_gender);
+//                final EditText editTextGender = (EditText) dialog.findViewById(R.id.edit_text_gender);
+                final Spinner spinnerGender = (Spinner) dialog.findViewById(R.id.spinner_gender);
                 final EditText editTextAge = (EditText) dialog.findViewById(R.id.edit_text_age);
                 final EditText editTextEducation = (EditText) dialog.findViewById(R.id.edit_text_education);
 
@@ -274,7 +276,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     public void onClick(View v) {
                         String name = editTextParticipant.getText().toString();
                         String occupation = editTextOccupation.getText().toString();
-                        String gender = editTextGender.getText().toString();
+//                        String gender = editTextGender.getText().toString();
+                        String gender = spinnerGender.getSelectedItem().toString();
                         String age = editTextAge.getText().toString();
                         String education = editTextEducation.getText().toString();
                         if (!name.equals("")) {

@@ -1,71 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="10dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:padding="10dp">
+
     <EditText
         android:id="@+id/edit_text_participant"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:hint="@string/name_of_participant"
         android:singleLine="true"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content" />
+        android:paddingLeft="12dp"/>
+
     <EditText
         android:id="@+id/edit_text_occupation"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:hint="@string/string_occupation"
-        android:layout_width="300dp"
         android:singleLine="true"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/edit_text_gender"
+        android:paddingLeft="12dp"/>
+
+    <!--<EditText-->
+    <!--android:id="@+id/edit_text_gender"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:hint="@string/string_gender"-->
+    <!--android:singleLine="true"-->
+    <!--android:layout_width="300dp"-->
+    <!--android:layout_height="wrap_content" />-->
+
+    <Spinner
+        android:id="@+id/spinner_gender"
+        style="@style/Widget.AppCompat.Spinner.Underlined"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
-        android:hint="@string/string_gender"
-        android:singleLine="true"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content" />
+        android:entries="@array/genders">
+
+    </Spinner>
+
     <EditText
-        android:inputType="number"
         android:id="@+id/edit_text_age"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:hint="@string/string_age"
-        android:singleLine="true"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content" />
-    <EditText
         android:inputType="number"
+        android:singleLine="true"
+        android:paddingLeft="12dp"/>
+
+    <EditText
         android:id="@+id/edit_text_education"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:hint="@string/string_years_of_education"
+        android:inputType="number"
         android:singleLine="true"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content" />
+        android:paddingLeft="12dp"/>
+
     <LinearLayout
-        android:gravity="right"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="right"
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/popup_cancel"
-            android:textAllCaps="false"
-            android:text="@string/button_cancel"
-            android:backgroundTint="#29b7ab"
-            android:textColor="@android:color/white"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:backgroundTint="#29b7ab"
+            android:text="@string/button_cancel"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
+
         <Button
             android:id="@+id/save_participant"
-            android:textAllCaps="false"
-            android:backgroundTint="#29b7ab"
-            android:textColor="#ffffff"
-            android:text="@string/button_save"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:backgroundTint="#29b7ab"
+            android:text="@string/button_save"
+            android:textAllCaps="false"
+            android:textColor="#ffffff" />
     </LinearLayout>
 
 </LinearLayout>
