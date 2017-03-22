@@ -567,19 +567,19 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
         if (costElementLoad.getType().equals("Timber")) {
            // loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1) + " " + costElementLoad.getName() + "" + getResources().getString(R.string.qn_natural_cost_1_2) + "?");
 //            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1) + " " + costElementLoad.getName() + " " + getResources().getString(R.string.qn_natural_cost_2_2) + "?");
-            productQuestion.setText(getResources().getString(R.string.qn_natural_cost_3_1) + " " + costElementLoad.getName() + " " + getResources().getString(R.string.qn_natural_cost_3_2));
+            productQuestion.setText(getResources().getString(R.string.qn_natural_cost_3, costElementLoad.getName()));
         } else if (costElementLoad.getType().equals("Non Timber")) {
          //   loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1) + " " + costElementLoad.getName() + "" + getResources().getString(R.string.qn_natural_cost_1_2) + "?");
 //            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1) + " " + costElementLoad.getName() + " " + getResources().getString(R.string.qn_natural_cost_2_2) + "?");
-            productQuestion.setText(getResources().getString(R.string.qn_natural_cost_3_1) + " " + costElementLoad.getName() + " " + getResources().getString(R.string.qn_natural_cost_3_2));
+            productQuestion.setText(getResources().getString(R.string.qn_natural_cost_3, costElementLoad.getName()));
         } else {
        //     loadQuestions.setText(getResources().getString(R.string.qn_natural_cost_1_1) + " " + costElementLoad.getName() + "" + getResources().getString(R.string.qn_natural_cost_1_2) + "?");
 //            quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2_1) + " " + costElementLoad.getName() + " " + getResources().getString(R.string.qn_natural_cost_2_2) + "?");
-            productQuestion.setText(getResources().getString(R.string.qn_natural_cost_3_1) + " " + costElementLoad.getName() + " " + getResources().getString(R.string.qn_natural_cost_3_2));
+            productQuestion.setText(getResources().getString(R.string.qn_natural_cost_3, costElementLoad.getName()));
         }
         loadQuestions.setText(getString(R.string.qn_natural_cost_1_1,costElementLoad.getName()));
         quantityQuestion.setText(getResources().getString(R.string.qn_natural_cost_2,costElementLoad.getName()));
-        householdText.setText(getString(R.string.string_household, getString(R.string.text_incur_cost,costElementLoad.getName())));
+        householdText.setText(getString(R.string.string_household_cost,costElementLoad.getName()));
         productReveneIdCheck = costElementLoad.getId();
 
 
@@ -1252,9 +1252,9 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
         });
 
         dialogQuesOverride.setText(getString(R.string.question_override,costElement.getName()));
-        dialogQuestionHarvest.setText(getString(R.string.text_question_harvest, costElement.getName()));
-        dialogQuestionHouseholds.setText(getString(R.string.text_number_of_households, costElement.getName()));
-        dialogQuestionPerHousehold.setText(getString(R.string.text_question_quantity, costElement.getName()));
+        dialogQuestionHarvest.setText(getString(R.string.qn_natural_cost_1_1, costElement.getName()));
+        dialogQuestionHouseholds.setText(getString(R.string.string_household_cost, costElement.getName()));
+        dialogQuestionPerHousehold.setText(getString(R.string.qn_natural_cost_3, costElement.getName()));
         dialogQuestionPerUnit.setText(getString(R.string.text_question_price, costElement.getName()));
         dialogFrequency.setText(String.valueOf(roundToTwoDecimal(harvestFreDisp)));
         dialogTimePeriod.setText(frequency.getHarvestFrequency());

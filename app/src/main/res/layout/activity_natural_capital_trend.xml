@@ -109,7 +109,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="@string/text_question_harvest"/>
+                android:text="@string/string_household_harvest"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -209,7 +209,7 @@
                     android:layout_width="match_parent"
                     android:layout_gravity="center_vertical"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_number_of_households"
+                    android:text="@string/string_household_harvest"
                     android:layout_weight="1"/>
 
                 <LinearLayout
@@ -240,7 +240,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="@string/text_question_quantity"/>
+                android:text="@string/text_question_quantity_harvest"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -1,37 +1,13 @@
 <resources>
     <string name="app_name">ओमिडयर </string>
-    <string-array name="country_array">
-        <!--<item>देश चुनिए</item>-->
-        <item>इंडिया</item>
-        <!--<item>ऑस्ट्रेलिया</item>-->
-        <!--<item>यूयेसे</item>-->
-        <!--<item>छीना</item>-->
-        <!--<item>जॅमेका</item>-->
-        <!--<item>जापान</item>-->
-        <!--<item>ब्रासिल</item>-->
-        <!--<item>इंग्लेंड</item>-->
-    </string-array>
+
     <string-array name="language_array">
         <!--<item>भाषा चुनिए</item>-->
         <item>इंग्लीश</item>
-        <!--<item>हिन्दी</item>-->
-    </string-array>
-    <string-array name="currency_array">
-        <!--<item>मुद्रा चुनें</item>-->
-        <item>INR</item>
-        <!--<item>USD</item>-->
-        <!--<item>EUR</item>-->
-        <!--<item>AUD</item>-->
+        <item>हिन्दी</item>
     </string-array>
 
-        <string-array name="land_use_array">
-            <item>भूमि उपयोग के प्रकारचुनें</item>
-            <item>खेती</item>
-            <item>वन भूम</item>
-            <item>चरागाह भूमि</item>
-            <item>खनन भूमि</item>
-        </string-array>
-        <string-array name="unit_array">
+    <string-array name="unit_array">
             <item>मात्रक चुनें</item>
             <item>क्यूबिक मीटर </item>
             <item>क्यूबिक किलोमीटर </item>
@@ -44,16 +20,9 @@
             <item>मिलिग्रॅम </item>
             <item>पौंड </item>
             <item>आउन्स </item>
+            <item>अन्य </item>
         </string-array>
-        <string-array name="time_period_array">
-            <item>समय अवधिचुनें</item>
-            <item>एक बार</item>
-            <item>हर दिन</item>
-            <item>प्रति सप्ताह</item>
-            <item>प्रति माह</item>
-            <item>प्रति वर्ष</item>
-        </string-array>
-        <string-array name="number_of_harvests">
+    <string-array name="number_of_harvests">
             <item>गिनती का चयन</item>
             <item>0</item>
             <item>1</item>
@@ -112,21 +81,13 @@
     <string name="empty_respondent_group">प्रतिवादी समूह खाली नहीं हो सकता</string>
     <string name="empty_state_filed">राज्य खाली नहीं हो सकता</string>
     <string name="empty_district_filed">जिला खाली नहीं हो सकता</string>
-    <string name="empty_country_filed">देश चुनिए</string>
-    <string name="empty_currency_field">मुद्रा चुनें</string>
     <string name="empty_language_field">भाषा चुनिए</string>
-    <string name="registration_success">पंजीकरण सफल</string>
     <string name="empty_passcode">पासकोड खाली नहीं हो सकता</string>
     <string name="empty_date_filed">तारीख़ चुनें</string>
     <string name="empty_survey_field">सर्वेक्षण आईडी प्रदान करें</string>
     <string name="survey_absent">सर्वेक्षण आईडी अस्तित्व में नहीं है</string>
     <string name="admin_rate_heading">प्रशासक दरें</string>
-    <string name="risk_free_rate">जोखिम मुक्त दरों</string>
     <string name="percentage">%</string>
-    <string name="equity_market_risk_premium">इक्विटी बाजार जोखिम प्रीमियम</string>
-    <string name="country_risk">देश जोखिम</string>
-    <string name="social_capital_factor">सामाजिक पूंजी कारक</string>
-    <string name="button_calc_discount_rate">छूट की दर की गणना</string>
     <string name="discount_rate">छूट की दर</string>
     <string name="override_discount">छूट की दर ऊपर चढ़ा देना</string>
     <string name="restore_original_discount_rate">मूल छूट की दर पुनर्स्थापित करना </string>
@@ -136,50 +97,39 @@
     <string name="time_frame_qstn2">साल आप अपने प्रक्षेपण शुरू करना चाहते हैं </string>
     <string name="time_frame_qstn3">प्रक्षेपण केलिए वर्षों की संख्या</string>
     <string name="summary_of_survey_heading">सर्वेक्षणों का सारांश</string>
-    <string name="in_progress_text">चालू</string>
     <string name="completed_text">संपूरित </string>
     <string name="select_all">सब चुने </string>
-    <string name="text_survey1">सर्वेक्षण1</string>
     <string name="text_survey2">सर्वेक्षण2</string>
     <string name="button_reset_data">सभी डेटा रीसेट करे </string>
     <string name="button_send_to_server">सर्वर को डेटा भेजें</string>
     <string name="parcel_id">पार्सल आईडी</string>
     <string name="site">प्रतिवादी समूह</string>
     <string name="surveyor_name">सर्वेयर नाम</string>
-    <string name="date_to_valuation">मूल्यांकन करने के लिए तिथि</string>
     <string name="inflation_rate">मँहगाई दर</string>
-    <string name="title_cropland">खेती</string>
+    <string name="title_cropland">कृषि</string>
     <string name="value">मूल्य</string>
     <string name="social_capital_score">सामाजिक पूंजी स्कोर</string>
-    <string name="questions_completed">पूरा कर लिया है सवाल </string>
-    <string name="total">कुल : </string>
-    <string name="qn_completed">पूरा कर लिया है सवाल  -</string>
-    <string name="type_species1">प्रकार प्रजाति 1</string>
-    <string name="type_species2">प्रकार प्रजाति 2</string>
-    <string name="type_species3">प्रकार प्रजाति 3</string>
     <string name="number_of_years">वर्षों की संख्या</string>
     <string name="button_add_year">साल जोड़</string>
     <string name="enter_year_heading">साल प्रविष्टि करना</string>
-    <string name="enter_year_hint">साल प्रविष्टि करना</string>
     <string name="button_back">पीछे </string>
     <string name="button_next"> अगले </string>
     <string name="radio_button_yes">हाँ</string>
     <string name="radio_button_no">नहीं</string>
     <string name="text_rates">दरें</string>
-    <string name="text_project_time_frame">अनुमानित समय सीमा</string>
     <string name="text_units">यूनिट</string>
     <string name="text_summary_surveys">सर्वेक्षणों का सारांश</string>
-    <string name="title_activity_omidyar_map">नक्शे</string>
     <string name="heading_admin_dashboard">व्यवस्थापक डैशबोर्ड</string>
     <string name="heading_certificate">सामुदायिक परिसंपत्ति मूल्य निर्धारण प्रमाण पत्र</string>
-    <string name="string_forestland">वन भूमि</string>
-    <string name="string_pastureland">चरागाह भूमि</string>
-    <string name="string_miningland">खनन भूमि</string>
+    <string name="string_forestland">वानिकी</string>
+    <string name="string_pastureland">चराई</string>
+    <string name="string_miningland">खनन</string>
+    <string name="string_cropland">कृषि</string>
+
     <string name="title_natural_capital">प्राकृतिक पूंजी (वास्तविक)</string>
     <string name="title_social_capital">सामाजिक पूंजी सर्वेक्षण</string>
     <string name="qn_what_crop_doyou_harvest">आप क्या  फसलों काटते हैं, यदि कोई हो?</string>
     <string name="button_add">जोड़ना</string>
-    <string name="sponsor_name">इंडुफोर उत्तरी अमेरिका और पारिस्थितिक सुरक्षा  फाउंडेशन</string>
     <string name="heading_survey_login">सर्वेक्षण लॉगिन</string>
     <string name="survey_hash">सर्वेक्षण #</string>
     <string name="string_name">नाम</string>
@@ -188,10 +138,6 @@
     <string name="string_age">आयु</string>
     <string name="string_years_of_education">शिक्षा का वर्ष पूरे</string>
     <string name="string_no_participants_added">कोई भी साझीदार नहीं जोड़ा </string>
-    <string name="choose_location">नक्शे से स्थान चुनें</string>
-    <string name="select_plotted_region">साजिश रची क्षेत्र को चुने </string>
-    <string name="button_submit">प्रस्तुत करना</string>
-    <string name="button_clear">क्लियर </string>
     <string name="title_register_survey">रजिस्टर सर्वेक्षण</string>
     <string name="string_option1">विकल्प 1</string>
     <string name="string_option2">विकल्प 2</string>
@@ -202,68 +148,86 @@
     <string name="string_survey_id">सर्वेक्षण आईडी</string>
     <string name="string_start_survey">सर्वेक्षण शुरू करें</string>
     <string name="string_logout">लोग आउट</string>
-    <string name="name_of_wood">लकड़ी का नाम</string>
     <string name="string_crop">फ़सल</string>
-    <string name="qn_natural_a">आप क्या लकड़ी फसल करते है, यदि कोई हो?</string>
-    <string name="qn_natural_b">क्या गैर इमारती लकड़ी वन उत्पादों (उदाहरण के लिए भोजन, हर्बल दवा) आप फसल करते है, यदि कोई हो?</string>
+
+
+    <string name="qn_natural_b">क्या गैर-लकड़ी के वन उत्पादों (जैसे ईंधन, चारा, भोजन, दवा) आप कटाई करते हैं, यदि कोई हो?</string>
     <string name="qn_natural_c">आप के पास फसल की गतिविधियों पर कितने साल के डेटा है?</string>
     <string name="qn_natural_d_1">कितनी बार आप इस उत्पाद को फसल है?</string>
     <string name="qn_natural_d_2">कितने बार </string>
     <string name="qn_natural_d_3">कई बार</string>
     <string name="qn_natural_d_4">साल को चुने </string>
-    <string name="qn_natural_d_5">हर बार काटा उत्पाद की मात्रा क्या था?</string>
+
+
+    <string name="qn_natural_d_5">प्रति घर हर बार उत्पादों की मात्रा %1$s क्या थी?</string>
     <string name="string_quantity">मात्रा</string>
     <string name="hint_number">मात्रा</string>
     <string name="text_unit">यूनिट</string>
     <string name="qn_natural_d_6">प्रति यूनिट उत्पाद की कीमत क्या थी?</string>
     <string name="price">मूल्य</string>
-    <string name="string_currency">मुद्रा</string>
     <string name="qn_natural_3_1">क्या भविष्य की लागत वसूल करने पर योजना है जो पहले से ही वसूल किया लागत की अलावा है?</string>
     <string name="qn_natural_3_2">कोनसा लगत?</string>
-    <string name="qn_land_selection_1">भूमि के किस प्रकार का उपयोग अपनी जमीन पर मूल्यवान हैं?</string>
+
+
+    <string name="qn_land_selection_1">आपकी भूमि पर प्रमुख भूमि उपयोग गतिविधियां या संसाधन प्रवाह क्या हैं?</string>
     <string name="string_add_participant">एक भागीदार जोड़े</string>
     <string name="string_add_crop">एक फसल जोड़े</string>
     <string name="string_fill_name">नाम भरें</string>
     <string name="string_atleast_one">कम से कम एक चुने </string>
     <string name="string_add_cost_element">एक लागत अंश जोड़ें</string>
     <string name="select_no_of_years">साल की संख्या चुने </string>
-    <string name="qn_natural_A_1">आप क्या लकड़ी फसल करते है, यदि कोई हो?</string>
+
+    <string name="qn_natural_A_1">क्या लकड़ी तुम फसल करोगे, यदि कोई हो?</string>
     <string name="qn_natural_A_2">कोनसा फसल आप काटते है, यदि कोई हो?</string>
     <string name="qn_natural_A_3">आप क्या पशुधन बढ़ा है, यदि कोई हो?</string>
     <string name="qn_natural_A_4">आप क्या निकालने करते हैं, अगर कुछ है तो?</string>
     <string name="string_add_revenue">एक राजस्व उत्पाद जोड़ें</string>
-    <string name="image_saved">चित्र सवे हुवा </string>
     <string name="save_failed">सेव फेल हुआ</string>
-    <string name="qn_natural_complex_1_1">आप कितनी बार </string>
-    <string name="qn_natural_complex_1_2">  कटता है</string>
-    <string name="qn_natural_complex_2_1">हर बार काटा </string>
-    <string name="qn_natural_complex_2_2">  की मात्रा क्या था?</string>
+
+    <!--<string name="qn_natural_complex_1_1">How often do you </string>-->
+    <!--<string name="qn_natural_complex_1_1">आप कितनी बार </string>-->
+    <string name="qn_natural_complex_1_1">आप कितनी बार %1$s काटा करते हैं?</string>
+    <string name="qn_natural_complex_1_2">आप कितनी बार %1$s निकालते हैं?</string>
     <string name="qn_natural_complex_3_1">प्रति यूनिट</string>
     <string name="qn_natural_complex_3_2">  की कीमत क्या थी?</string>
-    <string name="costs_incur">इस उत्पाद की कटाई में किस प्रकार की लागत अपने ऊपर लेना है?(e.g. आधारिक संरचना, उपकरण, परिवहन, बीज/पौध, उर्वरक, पानी, श्रम)</string>
-    <string name="data_on_harvest_activities">आप के पास फसल की गतिविधियों पर कितने साल के डेटा है ?</string>
+
+    <string name="costs_incur">
+इस भूमि उपयोग गतिविधि या संसाधन प्रवाह के लिए इस पार्सल पर आपको किस तरह की लागतें आती हैं? (जैसे बुनियादी ढांचा, उपकरण, परिवहन, बीज / रोपण, उर्वरक, पानी, श्रम)</string>
+    <string name="shared_costs_incur"> इस पार्सल पर आप किस प्रकार की साझा लागतें लगाते हैं? </string>
+
+
+    <!--<string name="costs_incur">इस उत्पाद की कटाई में किस प्रकार की लागत अपने ऊपर लेना है?(e.g. आधारिक संरचना, उपकरण, परिवहन, बीज/पौध, उर्वरक, पानी, श्रम)</string>-->
     <string name="registration_successful">पंजीकरण सफल</string>
     <string name="title_start_survey">सर्वेक्षण शुरू करें</string>
-    <string name="string_powered_by">संचालक</string>
     <string name="percentage_area_harvested">काटा  क्षेत्र (% में)</string>
     <string name="qn_cost_1">लागत पर कितने साल के डेटा आप के पास हे?</string>
-    <string name="qn_natural_cost_1_2" > की लागत अपने ऊपर लेना है?</string>
-    <string name="qn_natural_cost_1_1" >आप %1$s की लागत कितनी बार अपने ऊपर लेना है?</string>
-    <string name="qn_natural_cost_2_1" >समय अवधि के अनुसार </string>
-    <string name="qn_natural_cost_2_2" >  की कीमत क्या था</string>
+    <!--<string name="qn_natural_cost_1_1" >आप %1$s की लागत कितनी बार अपने ऊपर लेना है?</string>-->
     <string name="qn_natural_cost_3_1" >प्रति इकाई </string>
     <string name="qn_natural_cost_3_2">  की लागत क्या था?</string>
     <string name="inflation_rate_heading">मँहगाई दर</string>
     <string name="natural_outlay_qn3">किस साल में आप पहली बार लागत उठाना उम्मीद करते हैं?</string>
-    <string name="natural_outlay_qn4">रकम</string>
+    <!--<string name="natural_outlay_qn4">रकम</string>-->
+    <string name="natural_outlay_qn4">Total cost</string>
+
     <string name="year_data_livestock">पशुधन गतिविधि पर कितने साल के डेटा है?</string>
 
-    <string name="natural_outlay_qn1">जोड़ा हुवा निवेश/ लागत परिव्यय आइटम की जानकारी दो</string>
+
+    <string name="percentage_area_extracted">निकाला गया क्षेत्र (% में)</string>
+
+    <string name="qn_natural_cost_1_1">आपको कितनी बार %1$s लागतें होती हैं?</string>
+    <string name="qn_natural_cost_2">%1$s लागत प्रति अवधि क्या थी?</string>
+
+    <!--<string name="natural_outlay_qn1">जोड़ा हुवा निवेश/ लागत परिव्यय आइटम की जानकारी दो</string>-->
+    <string name="natural_outlay_qn1">भविष्य की लागत का विवरण दें</string>
+
     <string name="natural_outlay_qn2">परिव्यय आइटम चुनें</string>
-    <string name="natural_outlay_qn5">मुद्रा चुनें</string>
     <string name="natural_outlay_qn6">कितनी बार इस खर्च होती है?</string>
-    <string name="natural_outlay_a_qn1">निवेश/ लागत परिव्यय आइटम जोड़ें</string>
-    <string name="natural_outlay_a_qn2">लागत परिव्यय आइटम जोड़ें</string>
+    <!--<string name="natural_outlay_a_qn1">निवेश/ लागत परिव्यय आइटम जोड़ें</string>-->
+    <!--<string name="natural_outlay_a_qn2">लागत परिव्यय आइटम जोड़ें</string>-->
+
+    <string name="natural_outlay_a_qn1">भविष्य की लागतें</string>
+    <string name="natural_outlay_a_qn2">लागत जोड़ें</string>
+
     <string name="year_data_extraction">निकासी की गतिविधियों पर कितने साल के डेटा है?</string>
     <string name="sending_data">डेटा भेज रहे हैं</string>
     <string name="wait_while_sending">भेज रहे हैं, जबकि प्रतीक्षा करें...</string>
@@ -274,7 +238,11 @@
     <string name="convert_unit_international">यूनिट को अंतरराष्ट्रीय यूनिट में परिवर्तित करो</string>
     <string name="specified_unit">निर्दिष्ट यूनिट</string>
     <string name="select_suvey_id">--सर्वेक्षण आयडी चुनें--</string>
-    <string name="select_landkind">--भूमि प्रकार चुनें--</string>
+    <!--<string name="select_landkind">&#45;&#45;भूमि प्रकार चुनें&#45;&#45;</string>-->
+
+    <string name="select_landkind">भूमि उपयोग गतिविधि प्रकार चुनें</string>
+
+
     <string name="hint_add_timber">इमारती लकड़ी जोड़े</string>
     <string name="hint_add_croptype">फसल प्रकार जोड़ें</string>
     <string name="hint_add_livestock">पशुधन जोड़े</string>
@@ -292,4 +260,83 @@
     <string name="text_deleted">डिलीट कर दिया</string>
     <string name="select_option">एक विकल्प चुनें</string>
 
+    <string name="string_household_harvest">परिवारों की संख्या जो फसल %1$s :</string>
+    <string name="string_household_extract">%1$s निकालने वाले परिवारों की संख्या :</string>
+    <string name="string_household_cost">परिवारों की संख्या, जो कि %1$s लागतों को लागू करते हैं\u0020</string>
+
+    <string name="qn_natural_capital_1">हर बार कटाई की गई सी %1$s की मात्रा क्या थी?</string>
+    <string name="qn_natural_capital_1_extract">%1$s की मात्रा हर बार निकाली गई थी?</string>
+
+    <string name="question_override">हम आपके द्वारा %1$s के लिए दर्ज किए गए डेटा के औसत के आधार पर अगले 15 वर्षों में नकदी प्रवाह पेश करेंगे। क्या यह औसत यथार्थवादी लगता है? यदि नहीं, तो कृपया अपना अनुमान दर्ज करें </string>
+    <string name="label_your_estimate">नया अनुमान (औसत ओवरराइड)</string>
+    <string name="text_number_of_times">कितने बार</string>
+    <string name="text_time_period">समय सीमा</string>
+
+
+    <string name="text_question_quantity_harvest">प्रत्येक परिवार के प्रति प्रत्येक बार %1$s काटा जाता था?</string>
+    <string name="text_question_quantity_extract">प्रति परिवार प्रत्येक बार कितना %1$s निकाला गया था?</string>
+    <!--<string name="text_question_quantity_cost">How much %1$s was extracted each time per household?</string>-->
+
+    <string name="text_quantity">मात्रा</string>
+    <string name="text_question_price">प्रति यूनिट %1$s की कीमत क्या थी?</string>
+    <string name="text_price">मूल्य</string>
+    <string name="qn_gps_1">पार्सल के पहले कोने में चलें और OK क्लिक करें</string>
+    <string name="qn_gps_2">पार्सल के दूसरे कोने में चलें और OK क्लिक करें</string>
+    <string name="qn_gps_3">पार्सल के तीसरे कोने में चलें और OK क्लिक करें</string>
+    <string name="qn_gps_4">पार्सल के चौधे कोने में चलें और OK क्लिक करें</string>
+    <string name="qn_gps_5">पार्सल के पांचवां कोने में चलें और OK क्लिक करें</string>
+    <string name="qn_gps_6">पार्सल के छठे कोने में चलें और OK क्लिक करें</string>
+    <string name="gps_coordinates">GPS समन्वय</string>
+    <string name="country">देश</string>
+    <string name="parcel_size">पार्सल का आकार</string>
+    <string name="parcel_value_per_ha">पार्सल मूल्य प्रति हेक्टेयर</string>
+    <string name="total_parcel_value">कुल पार्सल मूल्य</string>
+    <string name="country_risk_rate">सोवेरीन/ देश रिस्क रेट</string>
+    <string name="survey_date">सर्वेक्षण तारीख</string>
+    <string name="reg_risk_rate_source">सोवेरीन/ देश रिस्क रेट स्रोत: 10-वर्षीय सरकारी बांड ब्याज रेट: </string>
+    <string name="reg_risk_rate_source_link">www.tradingeconomics.com/bonds</string>
+    <string name="reg_inflation_rate_source">इन्फ्लेशन रेट स्रोत : </string>
+    <string name="reg_inflation_rate_source_link">www.tradingeconomics.com/forecast/inflation-rate</string>
+    <string name="empty_risk_rate">सोवेरीन/ देश रिस्क रेट एंटर करें </string>
+    <string name="empty_inflation_rate">इन्फ्लेशन रेट एंटर करें</string>
+    <string name="gps_coordinates_dms">GPS समन्वय : 0°00\'00.0\"N 0°00\'00.0\"E</string>
+    <string name="shared_costs_outlays">साझा लागत</string>
+    <string name="string_certificate">प्रमाण पत्र</string>
+    <string name="restore_original_project_rates">मूल इन्फ्लेशन रेट और रिस्क रेट को पुनर्स्थापित करें</string>
+    <string name="shared_outlay_question">भविष्य की लागतें</string>
+    <string name="app_title">ग्रामीण मूल्यांकन उपकरण</string>
+    <string name="text_question_livestock">साल में कितने बार आप चाराते हैं\u0020</string>
+    <string name="text_quantity_question_livestock">चारा प्रति वर्ष प्रति पशु खपत की कुल राशि</string>
+    <string name="text_product_question_livestock">चारे का बाजार मूल्य</string>
+    <string name="text_question_number_livestock">पशुधन की संख्या</string>
+    <string name="risk_rate_hint">सोवेरीन/ देश रिस्क रेट</string>
+    <string name="inflation_rate_hint">इन्फ्लेशन रेट</string>
+    <string name="get_parcel_area_text">पार्सल क्षेत्र (हेक्टेर)</string>
+    <string name="get_parcel_area_ques_yes">हाँ</string>
+    <string name="get_parcel_area_ques_no">नहीं</string>
+    <string name="get_parcel_area_question">क्या आप अपने पार्सल का आकार हेक्टेयर में जानते हैं?</string>
+    <string name="text_save_warning">सर्वे तभी सेव होगा  जब आप प्रत्येक पेज पर सेव या नेक्स्ट क्लिक करेंगे, बेक नहीं</string>
+    <string name="text_got_it">समझ गया</string>
+    <string name="text_content_about_app">यह ग्रामीण भूमि मूल्यांकन में सहायता करने के लिए एक उपकरण है, जिसका निर्माण इंडुफ़र
+        उत्तरी अमेरिका एलएलसी पारिस्थितिकी सुरक्षा फाउंडेशन और अल्स्टर विश्वविद्यालय के साथ सहयोगद्वारा विकसित किया गया था।\n\n
+       अरबों लोग ग्रामीण क्षेत्रों में रहते हैं और अपनी आजीविका के लिए प्राकृतिक संसाधनों पर भरोसा करते हैं। हालांकि भूमि, आवास, आश्रय, भोजन,
+        साथ ही अमूर्त सेवाओं के साथ घरों और समुदायों को प्रदान किया जाता है, इन सेवाओं से जुड़ी आर्थिक मूल्य की अक्सर छोटी समझ नहीं होती है।
+        ग्रामीण परिसंपत्तियों के बारे में जानकारी की कमी अक्सर घरेलू और समुदायों को अपने प्राकृतिक पूंजी से लाभ उठाने के लिए अटकलें और छूटे अवसरों
+        को छोड़ देती है। जब उनकी भूमि या संसाधनों में बाहरी हितों का सामना करना पड़ता है, ग्रामीण निवासियों को उचित मुआवजे के लिए बातचीत करने के
+        लिए खुद को बीमार पड़ सकता है। इसी समय, ग्रामीण घरों और सामुदायिक परिसंपत्तियों के मूल्य को कम करके आकलन करके कंपनियां और सरकारें स्वयं
+        को जोखिम पैदा करती हैं यह तेजी से चिंता का विषय है क्योंकि भूमि में प्राकृतिक निवेश और प्राकृतिक संसाधन बढ़ते हैं।\n\n
+        अर्थव्यवस्था में प्राकृतिक संसाधनों पर मौद्रिक मूल्यों को रखने के लिए राष्ट्रीय संपदा लेखांकन प्रयासों में प्राकृतिक पूंजी के एकीकरण को बढ़ावा देने वाली
+        कुछ पहलों ये पहल प्राकृतिक संसाधनों द्वारा उत्पन्न असंख्य मूल्यों की पहचान करने के लिए कुछ जानकारी और मार्गदर्शन प्रदान करते हैं। फिर भी वे आम
+        तौर पर मैक्रो स्तर पर अपना ध्यान केंद्रित करते हैं और उन मूल्यों को कम कर देते हैं जो प्राकृतिक संसाधनों को घरों और समुदायों को प्रदान करते हैं।
+        सोशल कैपिटल अकाउंटिंग का नवप्रभावित क्षेत्र हैं।  सोशल नेटवर्क के माध्यम से उत्पन्न मूल्य पर अधिक जानकारी प्रदान करने की संभावना है, लेकिन इस
+        तिथि को स्पष्ट रूप से मजबूत सामाजिक पूंजी और प्राकृतिक पूंजी के बीच स्पष्ट रूप से नहीं बनाया गया है।\n\n
+        सोशल नेटवर्क के माध्यम से उत्पन्न मूल्य पर अधिक जानकारी प्रदान करने की संभावना है, लेकिन इस तिथि को स्पष्ट रूप से मजबूत सामाजिक पूंजी और
+        प्राकृतिक पूंजी के बीच स्पष्ट रूप से नहीं बनाया गया है।</string>
+    <string name="text_ok">OK</string>
+    <string name="certificate_button_save">Save</string>
+    <string name="certificate_button_exit">Exit</string>
+    <string-array name="genders">
+        <item>पुस्र्ष</item>
+        <item>स्त्री</item>
+    </string-array>
 </resources>

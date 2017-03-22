@@ -3,7 +3,7 @@
     {
       "questionno": 1,
       "question": " What rights do households in this community have over the parcel specific to this land use activity?",
-      "questionHindi": "इस पार्सल पर इस समुदाय के परिवारों का अधिकार क्या है?",
+      "questionHindi": "इस समुदाय के घरों में इस भूमि उपयोग गतिविधि के लिए विशिष्ट पार्सल के अधिकार क्या हैं?",
       "weight": "20",
       "optiontype": "multiple",
       "options": [
@@ -37,7 +37,7 @@
     {
       "questionno": 2,
       "question": "What rights to the parcel for this land use activity are provided through a state-backed and legally recognized record (i.e. title, lease, etc.)? (check all that apply)",
-      "questionHindi": "राज्य का समर्थन किया और कानूनी रूप से मान्यता प्राप्त रिकॉर्ड के माध्यम (अर्थात शीर्षक, पट्टे आदि) से इस पार्सल को क्या अधिकार  प्रदान की जाती हैं?",
+      "questionHindi": "इस भूमि उपयोग गतिविधि के लिए पार्सल के अधिकारों को राज्य समर्थित और कानूनी रूप से मान्यता प्राप्त रिकॉर्ड (यानी शीर्षक, पट्टे, आदि) के जरिए प्रदान किया जाता है? (लागू होने वाले सभी को चेक करें)",
       "weight": "20",
       "optiontype": "multiple",
       "options": [
@@ -71,7 +71,7 @@
     {
       "questionno": 3,
       "question": "Are the boundaries for the land use activity on this parcel well known and understood by government authorities and/or community members?",
-      "questionHindi": "इस पार्सल के लिए सीमाओं को अच्छी तरह से जाना जाता है और सरकार के अधिकारियों और / या समुदाय के सदस्यों द्वारा समझ रहे हैं?",
+      "questionHindi": "क्या इस पार्सल पर भूमि उपयोग की गतिविधियों की सीमाएं हैं जो सरकार के अधिकारियों और / या समुदाय के सदस्यों द्वारा अच्छी तरह से जानी जाती हैं और समझती हैं?",
       "weight": "5",
       "optiontype": "single",
       "options": [
@@ -95,7 +95,7 @@
     {
       "questionno": 4,
       "question": "Does this group feel confident that they will be able to continue to use the parcel for this land use activity without constraints indefinitely into the future?",
-      "questionHindi": "क्या इस समूह को भरोसा है कि वे भविष्य में अनिश्चित काल के लिए बाधाओं के बिना पार्सल का उपयोग करने के लिए जारी रखने  को सक्षम हो जाएगा लगता है?",
+      "questionHindi": "क्या यह समूह इस बात को आश्वस्त करता है कि वे इस भूमि उपयोग गतिविधि के लिए पार्सल का इस्तेमाल भविष्य में अनिश्चित काल बाधाएं के बिना जारी रखने में सक्षम रहेंगे?",
       "weight": "5",
       "optiontype": "single",
       "options": [
@@ -129,7 +129,7 @@
     {
       "questionno": 5,
       "question": " Are there any current disputes related to the boundaries or rights associated with the parcel related to this land use activity?",
-      "questionHindi": "वहाँ किसी भी वर्तमान सीमाओं या इस पार्सल के साथ जुड़े अधिकारों से संबंधित विवादों हैं?",
+      "questionHindi": "क्या पार्सल से जुड़ी सीमाओं या अधिकारों से संबंधित कोई मौजूदा विवाद इस भूमि उपयोग गतिविधि के लिए संबंधित हैं?",
       "weight": "5",
       "optiontype": "single",
       "options": [
@@ -158,7 +158,7 @@
     {
       "questionno": 6,
       "question": "  Do households in this community use the parcel for this land use activity based on locally recognized customary norms?",
-      "questionHindi": "क्या इस समुदाय में घरों पार्सल का उपयोग और स्थानीय स्तर पर मान्यता प्राप्त प्रथागत मानदंडों पर आधारित संसाधन उपयोग करते हैं?",
+      "questionHindi": "क्या इस समुदाय में परिवारों को स्थानीय रूप से मान्यता प्राप्त परंपरागत मानदंडों के आधार पर इस भूमि उपयोग गतिविधि के लिए पार्सल का इस्तेमाल किया जाता है?",
       "weight": "5",
       "optiontype": "single",
       "options": [
@@ -182,7 +182,7 @@
     {
       "questionno": 7,
       "question": " Is there a group or committee in this community with specific responsibility to manage or oversee matters related to use of this land use activity on the parcel?",
-      "questionHindi": "इस समुदाय में इस पार्सल के उपयोग से संबंधित मामलों की देखरेख करने का विशेष जिम्मेदारी के साथ एक प्रबंधन या समिति है?",
+      "questionHindi": "पार्सल पर इस भूमि उपयोग गतिविधि के उपयोग से संबंधित मामलों को प्रबंधित करने या उनकी देखरेख करने के लिए इस समूह में कोई समिति है?",
       "weight": "5",
       "optiontype": "single",
       "options": [
@@ -201,7 +201,7 @@
     {
       "questionno": 8,
       "question": "Are there rules and regulations associated with this land use activity on the parcel that were created by the community itself?",
-      "questionHindi": "क्या इस पार्सल के साथ जुड़े समुदाय स्वयं के द्वारा बनाया गया नियमों हैं?",
+      "questionHindi": "क्या इस पार्सल पर इस भूमि उपयोग गतिविधि से जुड़े नियम और विनियम हैं जो कि समुदाय द्वारा बनाए गए थे?",
       "weight": "5",
       "optiontype": "single",
       "options": [
@@ -225,7 +225,7 @@
     {
       "questionno": 9,
       "question": "Do all stakeholders within the community generally have equal access to the parcel for this land use activity?",
-      "questionHindi": "प्रबंधन समूह समुदाय के सभी वर्गों के प्रतिनिधि शामिल करता है?",
+      "questionHindi": "क्या समुदाय के भीतर सभी हितधारकों को आम तौर पर इस भूमि उपयोग गतिविधि के लिए पार्सल तक समान पहुंच है?",
       "weight": "5",
       "optiontype": "single",
       "options": [
@@ -249,7 +249,7 @@
     {
       "questionno": 10,
       "question": "Does the management group include representatives from all segments of the community?",
-      "questionHindi": "प्रबंधन समूह समुदाय के सभी वर्गों के प्रतिनिधि शामिल करता है?",
+      "questionHindi": "क्या प्रबंधन समूह में समुदाय के सभी वर्गों के प्रतिनिधि शामिल हैं?",
       "weight": "5",
       "optiontype": "single",
       "options": [
@@ -273,7 +273,7 @@
     {
       "questionno": 11,
       "question": "Are the rules and regulations associated with this land use activity on the parcel generally viewed as fair and legitimate?",
-      "questionHindi": "क्या इस पार्सल के साथ जुड़े नियमों आम तौर पर उचित और वैध के रूप में देखा जाता हैं?",
+      "questionHindi": "क्या पार्सल पर इस भूमि उपयोग गतिविधि से संबद्ध नियमों और विनियम आम तौर पर उचित और वैध मानते हैं?",
       "weight": "5",
       "optiontype": "single",
       "options": [
@@ -302,7 +302,7 @@
     {
       "questionno": 12,
       "question": "How long have the institutions associated with this land use activity on the parcel been operating?",
-      "questionHindi": "इस पार्सल के लिए संस्थानों कब से काम कर रहा है?",
+      "questionHindi": "पार्सल पर इस भूमि उपयोग गतिविधि से जुड़ा संस्थान कितने समय से चल रहे हैं?",
       "weight": "5",
       "optiontype": "single",
       "options": [
@@ -336,7 +336,7 @@
     {
       "questionno": 13,
       "question": "How often are decisions made by the committee ignored or not implemented?",
-      "questionHindi": "कितनी बार समिति द्वारा किए गए फैसले को नजरअंदाज कर दिया है या नहीं लागू कर रहे हैं?",
+      "questionHindi": "ककितनी बार समिति द्वारा किए गए फैसले को नजरअंदाज किया जाता है या लागू नहीं किया जाता है?",
       "weight": "5",
       "optiontype": "single",
       "options": [
@@ -365,7 +365,7 @@
     {
       "questionno": 14,
       "question": "How much of your community's use of the resources/products",
-      "questionHindi": "अपने समुदाय की आजीविका का कितना इस पार्सल द्वारा उत्पन्न होता है?",
+      "questionHindi": "इस सामग्रियों के इस्तेमाल से जुड़े संसाधनों / उत्पादों के आपके समुदाय का कितना उपयोग इस विशिष्ट पार्सल से आता है?",
       "weight": "5",
       "optiontype": "single",
       "options": [

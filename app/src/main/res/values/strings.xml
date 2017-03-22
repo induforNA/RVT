@@ -211,7 +211,7 @@
     <string-array name="language_array">
         <!--<item>Select language</item>-->
         <item>English</item>
-        <!--<item>Hindi</item>-->
+        <item>Hindi</item>
     </string-array>
     <string-array name="currency_array">
         <!--<item>Select currency</item>-->
@@ -378,13 +378,6 @@
         <item>	ZMW	</item>
         <item>	Other	</item>
     </string-array>
-    <string-array name="land_use_array">
-        <item>Select land use type</item>
-        <item>Agriculture</item>
-        <item>Forestry</item>
-        <item>Grazing</item>
-        <item>Mining</item>
-    </string-array>
     <string-array name="unit_array">
         <item>Select unit</item>
         <item>Cubic Meter</item>
@@ -400,14 +393,7 @@
         <item>Ounce</item>
         <item>Hours</item>
         <item>Days</item>
-    </string-array>
-    <string-array name="time_period_array">
-        <item>Select time period</item>
-        <item>one-time</item>
-        <item>per day</item>
-        <item>per week</item>
-        <item>per month</item>
-        <item>per year</item>
+        <item>Others</item>
     </string-array>
     <string-array name="number_of_harvests">
         <item>Select choice</item>
@@ -468,10 +454,7 @@
     <string name="empty_respondent_group">Respondent group cannot be empty</string>
     <string name="empty_state_filed">State cannot be empty</string>
     <string name="empty_district_filed">District cannot be empty</string>
-    <string name="empty_country_filed">Enter country name</string>
-    <string name="empty_currency_field">Enter currency</string>
     <string name="empty_language_field">Select language</string>
-    <string name="registration_success">Registration Successful</string>
     <string name="empty_passcode">Passcode cannot be empty</string>
     <string name="empty_date_filed">Select date</string>
     <!--  <string name="about_this_tool_para1">This is a tool intended to assist in community asset valuation, developed by Indufor North America LLC in collaboration with the Foundation for Ecological Security.
@@ -485,12 +468,7 @@
     <string name="empty_survey_field">Provide survey id</string>
     <string name="survey_absent">survey id doesn\'t exist</string>
     <string name="admin_rate_heading">Admin rates</string>
-    <string name="risk_free_rate">Risk free rate</string>
     <string name="percentage">%</string>
-    <string name="equity_market_risk_premium">Equity market risk premium</string>
-    <string name="country_risk">Country risk</string>
-    <string name="social_capital_factor">Social capital factor</string>
-    <string name="button_calc_discount_rate">Calculate discount rate</string>
     <string name="discount_rate">Discount Rate</string>
     <string name="override_discount">Override discount rate</string>
     <string name="restore_original_discount_rate">Restore original discount rate</string>
@@ -500,40 +478,28 @@
     <string name="time_frame_qstn2">Year you would like your projection to start from</string>
     <string name="time_frame_qstn3">Number of years to project</string>
     <string name="summary_of_survey_heading">Summary of surveys</string>
-    <string name="in_progress_text">In progress</string>
     <string name="completed_text">Completed  </string>
     <string name="select_all">Select all</string>
-    <string name="text_survey1">Survey1</string>
     <string name="text_survey2">Survey2</string>
     <string name="button_reset_data">Reset all data</string>
     <string name="button_send_to_server">Send data to server</string>
     <string name="parcel_id">Parcel ID</string>
     <string name="site">Respondent Group</string>
     <string name="surveyor_name">Surveyor Name</string>
-    <string name="date_to_valuation">Valuation date</string>
     <string name="inflation_rate">Inflation Rate</string>
     <string name="title_cropland">Agriculture</string>
     <string name="value">Value</string>
     <string name="social_capital_score">Social Capital Score</string>
-    <string name="questions_completed">Questions completed</string>
-    <string name="total">Total : </string>
-    <string name="qn_completed">Questions completed -</string>
-    <string name="type_species1">Type species 1</string>
-    <string name="type_species2">Type species 2</string>
-    <string name="type_species3">Type species 3</string>
     <string name="number_of_years">Number of years</string>
     <string name="button_add_year">Add years</string>
     <string name="enter_year_heading">Enter years</string>
-    <string name="enter_year_hint">enter year</string>
     <string name="button_back">Back</string>
     <string name="button_next">Next</string>
     <string name="radio_button_yes">Yes</string>
     <string name="radio_button_no">No</string>
     <string name="text_rates">Rates</string>
-    <string name="text_project_time_frame">Projection time frame</string>
     <string name="text_units">Units</string>
     <string name="text_summary_surveys">Summary of surveys</string>
-    <string name="title_activity_omidyar_map">Map</string>
     <string name="heading_admin_dashboard">Admin Dashboard</string>
     <string name="heading_certificate">Valuation Certificate</string>
     <string name="string_forestland">Forestry</string>
@@ -544,8 +510,6 @@
     <string name="title_social_capital">Social Capital Survey</string>
     <string name="qn_what_crop_doyou_harvest">What crops do you harvest, if any?</string>
     <string name="button_add">Add</string>
-    <string name="string_powered_by">Powered by</string>
-    <string name="sponsor_name">Indufor North America and Foundation for Ecological Security</string>
     <string name="heading_survey_login">survey login</string>
     <string name="survey_hash">Survey #</string>
     <string name="string_name">Name</string>
@@ -554,10 +518,6 @@
     <string name="string_age">Age</string>
     <string name="string_years_of_education">Years of education</string>
     <string name="string_no_participants_added">No participants added</string>
-    <string name="choose_location">Choose location from map</string>
-    <string name="select_plotted_region">Select plotted region</string>
-    <string name="button_submit">Submit</string>
-    <string name="button_clear">Clear</string>
     <string name="title_register_survey">register survey</string>
     <string name="string_option1">option 1</string>
     <string name="string_option2">option 2</string>
@@ -568,9 +528,9 @@
     <string name="string_survey_id">Survey ID</string>
     <string name="string_start_survey">Start Survey</string>
     <string name="string_logout">Logout</string>
-    <string name="name_of_wood">Name of wood</string>
     <string name="string_crop">Crop</string>
-    <string name="qn_natural_a">What wood do you harvest, if any?</string>
+
+
     <string name="qn_natural_b">What non-timber forest products (e.g. fuelwood, fodder, food, medicine) do you harvest if any?</string>
     <string name="qn_natural_c">How many years of data do you have on harvest activities?</string>
     <string name="qn_natural_d_1">How often do you harvest Product?</string>
@@ -583,7 +543,6 @@
     <string name="text_unit">Unit</string>
     <string name="qn_natural_d_6">What was the price of the product per unit?</string>
     <string name="price">Price</string>
-    <string name="string_currency">Currency</string>
     <string name="qn_natural_3_1">Do you plan on incurring any new future costs, seperate from those already entered for the past?</string>
     <string name="qn_natural_3_2">What type of costs?</string>
     <!--<string name="qn_land_selection_1">What kind of resources are valued on you land?</string>-->
@@ -599,28 +558,21 @@
     <string name="qn_natural_A_3">What livestock do you raise, if any?</string>
     <string name="qn_natural_A_4">What do you extract, if anything?</string>
     <string name="string_add_revenue">Add a product</string>
-    <string name="image_saved">Image saved</string>
     <string name="save_failed">Save failed</string>
-    <string name="qn_natural_complex_1_1">How often do you </string>
-    <string name="qn_natural_complex_1_2"></string>
-    <string name="qn_natural_complex_2_1">What was the quantity of </string>
-    <string name="qn_natural_complex_2_2"> harvested each time?</string>
+    <string name="qn_natural_complex_1_1">How often do you harvest %1$s?</string>
+    <string name="qn_natural_complex_1_2">How often do you extract %1$s?</string>
     <string name="qn_natural_complex_3_1">What was the price of </string>
     <string name="qn_natural_complex_3_2"> per unit?</string>
     <string name="costs_incur">What types of costs do you incur on this parcel specific to this land use activity or resource flow? (e.g. infrastructure, equipment, transportation, seeds/seedlings, fertilizer, water, labor)</string>
     <string name="shared_costs_incur"> What types of shared costs do you incur on this parcel? </string>
-    <string name="data_on_harvest_activities">How many years of data do you have on harvest activities?</string>
     <string name="registration_successful">Registration successful</string>
     <string name="percentage_area_harvested">Area harvested (in %)</string>
     <string name="percentage_area_extracted">Area extracted (in %)</string>
     <string name="qn_cost_1">How many years of data do you have on costs?</string>
-    <string name="qn_natural_cost_1_2"></string>
     <string name="qn_natural_cost_1_1">How often do you incur %1$s costs?</string>
-    <string name="qn_natural_cost_2_1">What was the cost of </string>
-    <string name="qn_natural_cost_2_2">per time period</string>
     <string name="qn_natural_cost_2">What was the %1$s cost per period?</string>
-    <string name="qn_natural_cost_3_1">What was the cost of</string>
-    <string name="qn_natural_cost_3_2">per unit?</string>
+    <string name="qn_natural_cost_3">What was the cost of %1$s per unit?</string>
+
     <string name="title_start_survey">Start Survey</string>
     <string name="inflation_rate_heading">INFLATION RATE</string>
 
@@ -628,7 +580,6 @@
     <string name="natural_outlay_qn2">Choose outlay item</string>
     <string name="natural_outlay_qn3">In which year do you expect to first incur the cost?</string>
     <string name="natural_outlay_qn4">Total cost</string>
-    <string name="natural_outlay_qn5">Choose currency</string>
     <string name="natural_outlay_qn6">How often does this expense occur?</string>
     <string name="natural_outlay_a_qn1">Future costs</string>
     <string name="natural_outlay_a_qn2">Add cost</string>
@@ -665,19 +616,23 @@
 
     <string name="button_export">Export Data</string>
     <string name="text_times">times</string>
-    <string name="restore_original_inflation_rate">Restore original Inflation rate</string>
-    <string name="string_household">Number of households that %1$s :</string>
-    <string name="qn_natural_capital_1">What was the quantity of %1$sed each time?</string>
-    <string name="text_harvest">\u0020harvest</string>
-    <string name="text_extract">\u0020extract</string>
-    <string name="text_incur_cost">incur %1$s costs\u0020</string>
+
+    <string name="string_household_harvest">Number of households that harvest %1$s :</string>
+    <string name="string_household_extract">Number of households that extract %1$s :</string>
+    <string name="string_household_cost">Number of households that incur %1$s costs\u0020</string>
+
+    <string name="qn_natural_capital_1">What was the quantity of %1$s harvested each time?</string>
+    <string name="qn_natural_capital_1_extract">What was the quantity of %1$s extracted each time?</string>
+
     <string name="question_override">We will project cash flows for the next 15 years based on the average of the data you entered for %1$s. Does this average seem realistic? If not, please enter your estimate.</string>
     <string name="label_your_estimate">New estimate (overrides average)</string>
     <string name="text_question_harvest">How often do you %1$s?</string>
     <string name="text_number_of_times">Number of times</string>
     <string name="text_time_period">Time period</string>
-    <string name="text_number_of_households">Number of households that %1$s</string>
-    <string name="text_question_quantity">How much %1$seach time per household?</string>
+
+    <string name="text_question_quantity_harvest">How much %1$s was harvested each time per household?</string>
+    <string name="text_question_quantity_extract">How much %1$s was extracted each time per household?</string>
+
     <string name="text_quantity">Quantity</string>
     <string name="text_question_price">What was the price of %1$s per unit?</string>
     <string name="text_price">Price</string>
@@ -687,7 +642,6 @@
     <string name="qn_gps_4">Please walk to the fourth corner of the parcel, and click OK.</string>
     <string name="qn_gps_5">Please walk to the fifth corner of the parcel, and click OK.</string>
     <string name="qn_gps_6">Please walk to the sixth corner of the parcel, and click OK.</string>
-    <string name="qn_gps_area">What is the size of this parcel? Please convert local unit to hectare.</string>
     <string name="gps_coordinates">GPS Coordinates</string>
     <string name="country">Country</string>
     <string name="parcel_size">Parcel Size</string>
@@ -707,11 +661,6 @@
     <string name="restore_original_project_rates">Restore Original Inflation and Risk Rates</string>
     <string name="shared_outlay_question">Future costs</string>
     <string name="app_title">Rural Valuation Tool</string>
-    <string name="language_hint">Language</string>
-    <string name="currency_hint">Currency</string>
-    <string name="country_hint">Country</string>
-    <string name="sovereign_larger_than_inflation">Sovereign rate should be larger than inflation rate</string>
-    <string name="invalid_currency_field">Currency should be 3 characters</string>
     <string name="text_question_livestock">How many months of a year do you graze\u0020</string>
     <string name="text_quantity_question_livestock">Total amount of fodder consumed per animal per year</string>
     <string name="text_product_question_livestock">Market Price of fodder</string>

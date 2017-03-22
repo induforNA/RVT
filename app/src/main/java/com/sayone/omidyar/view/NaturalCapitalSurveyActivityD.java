@@ -591,7 +591,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         if (revenueProductLoad.getType().equals("Livestock")) {
             areaContainer.setVisibility(View.GONE);
             livestockContainer.setVisibility(View.VISIBLE);
-            householdQuestion.setText(getString(R.string.string_household, "harvest " + revenueProductLoad.getName()));
+            householdQuestion.setText(getString(R.string.string_household_harvest,revenueProductLoad.getName()));
             loadQuestions.setText(getString(R.string.text_question_livestock) + revenueProductLoad.getName() + " on this piece of land?");
             quantityQuestion.setText(getString(R.string.text_quantity_question_livestock));
             productQuestion.setText(getString(R.string.text_product_question_livestock));
@@ -601,20 +601,20 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             numTimesHead.setVisibility(View.INVISIBLE);
             noOfTimesEdit.setEnabled(true);
         } else {
-            householdQuestion.setText(getString(R.string.string_household, "harvest " + revenueProductLoad.getName()));
-            loadQuestions.setText(getResources().getString(R.string.qn_natural_complex_1_1) + " harvest " + revenueProductLoad.getName() + getResources().getString(R.string.qn_natural_complex_1_2) + "?");
-            quantityQuestion.setText(getResources().getString(R.string.qn_natural_capital_1, revenueProductLoad.getName() + getString(R.string.text_harvest)));
+            householdQuestion.setText(getString(R.string.string_household_harvest,revenueProductLoad.getName()));
+            loadQuestions.setText(getString(R.string.qn_natural_complex_1_1,revenueProductLoad.getName()));
+            quantityQuestion.setText(getResources().getString(R.string.qn_natural_capital_1, revenueProductLoad.getName()));
             productQuestion.setText(getResources().getString(R.string.qn_natural_complex_3_1) + " " + revenueProductLoad.getName() + " " + getResources().getString(R.string.qn_natural_complex_3_2));
             areaQuestion.setText(getResources().getString(R.string.percentage_area_harvested));
             if (revenueProductLoad.getLandKind().equals(getString(R.string.string_miningland))) {
-                quantityQuestion.setText(getResources().getString(R.string.qn_natural_capital_1, revenueProductLoad.getName() + getString(R.string.text_extract)));
+                quantityQuestion.setText(getResources().getString(R.string.qn_natural_capital_1_extract, revenueProductLoad.getName()));
                 areaQuestion.setText(getResources().getString(R.string.percentage_area_extracted));
 
             }
         }
         if (currentSocialCapitalServey.equals(getString(R.string.string_miningland))) {
-            householdQuestion.setText(getString(R.string.string_household, "extract " + revenueProductLoad.getName()));
-            loadQuestions.setText(getResources().getString(R.string.qn_natural_complex_1_1) + " extract " + revenueProductLoad.getName() + getResources().getString(R.string.qn_natural_complex_1_2) + "?");
+            householdQuestion.setText(getString(R.string.string_household_extract,revenueProductLoad.getName()));
+            loadQuestions.setText(getString(R.string.qn_natural_complex_1_2,revenueProductLoad.getName()));
         }
         productReveneIdCheck = revenueProductLoad.getId();
 
@@ -818,15 +818,15 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         }
 
         dialogQuesOverride.setText(getString(R.string.question_override,revenueProduct.getName()));
-        dialogQuestionHarvest.setText(getString(R.string.text_question_harvest, getString(R.string.text_harvest) + " " + revenueProduct.getName()));
-        dialogQuestionHouseholds.setText(getString(R.string.text_number_of_households, getString(R.string.text_harvest) + " " + revenueProduct.getName()));
-        dialogQuestionPerHousehold.setText(getString(R.string.text_question_quantity, revenueProduct.getName() + " was harvested "));
+        dialogQuestionHarvest.setText(getString(R.string.qn_natural_complex_1_1,revenueProduct.getName()));
+        dialogQuestionHouseholds.setText(getString(R.string.string_household_harvest,revenueProduct.getName()));
+        dialogQuestionPerHousehold.setText(getString(R.string.text_question_quantity_harvest, revenueProduct.getName()));
         dialogQuestionPerUnit.setText(getString(R.string.text_question_price, revenueProduct.getName()));
         dialogQuestionArea.setText(R.string.percentage_area_harvested);
         if(currentSocialCapitalServey.equals(getString(R.string.string_miningland))){
-            dialogQuestionHarvest.setText(getString(R.string.text_question_harvest, getString(R.string.text_extract)+" "+ revenueProduct.getName()));
-            dialogQuestionHouseholds.setText(getString(R.string.text_number_of_households, getString(R.string.text_extract)+" "+revenueProduct.getName()));
-            dialogQuestionPerHousehold.setText(getString(R.string.text_question_quantity, revenueProduct.getName()+" was extracted "));
+            dialogQuestionHarvest.setText(getString(R.string.qn_natural_complex_1_2, revenueProduct.getName()));
+            dialogQuestionHouseholds.setText(getString(R.string.string_household_harvest, revenueProduct.getName()));
+            dialogQuestionPerHousehold.setText(getString(R.string.text_question_quantity_extract, revenueProduct.getName()));
             dialogQuestionArea.setText(R.string.percentage_area_extracted);
         }
 
