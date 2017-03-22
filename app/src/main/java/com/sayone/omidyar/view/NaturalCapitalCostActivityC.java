@@ -208,7 +208,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
         RealmResults<Frequency> frequencyResult = realm.where(Frequency.class).findAll();
         for (Frequency frequency : frequencyResult) {
-            if (language.equals("हिन्दी")) {
+            if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi")) {
                 timePeriodList.add(frequency.getHarvestFrequencyHindi());
             } else {
                 timePeriodList.add(frequency.getHarvestFrequency());
@@ -222,7 +222,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
         RealmResults<Quantity> quantityResult = realm.where(Quantity.class).findAll();
         for (Quantity quantity : quantityResult) {
-            if (language.equals("हिन्दी")) {
+            if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi")) {
                 unitList.add(quantity.getQuantityNameHindi());
             } else {
                 unitList.add(quantity.getQuantityName());
@@ -868,7 +868,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                         String spinnerTimePeriodStr = spinnerTimePeriod.getSelectedItem().toString();
                         Frequency frequency;
 
-                        if (language.equals("हिन्दी")) {
+                        if (language.equals("HINDI")) {
                             frequency = realm.where(Frequency.class)
                                     .equalTo("harvestFrequencyHindi", spinnerTimePeriodStr)
                                     .findFirst();
@@ -1295,7 +1295,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 
         if (timePeriodList.size() != 0 && frequency != null) {
             // Log.e("TEST FRE ", timePeriod_adapter.getPosition(frequency.getHarvestFrequency())+"");
-            if (language.equals("			")) {
+            if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi")) {
                 dialogSpinnerTimePeriod.setSelection(dialog_timePeriod_adapter.getPosition(frequency.getHarvestFrequencyHindi()));
             } else {
                 if(costElementTrend != null && costElementTrend.getCostFrequencyUnit() != 0){

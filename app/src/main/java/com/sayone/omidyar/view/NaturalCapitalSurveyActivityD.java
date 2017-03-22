@@ -219,7 +219,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         RealmResults<Frequency> frequencyResult = realm.where(Frequency.class).findAll();
         for (Frequency frequency : frequencyResult) {
             Log.e("HARVEST ", frequency.getHarvestFrequency() + " " + frequency.getFrequencyValue());
-            if (language.equals("			")) {
+            if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi")) {
                 timePeriodList.add(frequency.getHarvestFrequencyHindi());
             } else {
                 timePeriodList.add(frequency.getHarvestFrequency());
@@ -233,7 +233,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
         RealmResults<Quantity> quantityResult = realm.where(Quantity.class).findAll();
         for (Quantity quantity : quantityResult) {
-            if (language.equals("			")) {
+            if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi")) {
                 unitList.add(quantity.getQuantityNameHindi());
             } else {
                 unitList.add(quantity.getQuantityName());
@@ -743,7 +743,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
         if (timePeriodList.size() != 0 && frequency != null) {
             // Log.e("TEST FRE ", timePeriod_adapter.getPosition(frequency.getHarvestFrequency())+"");
-            if (language.equals("			")) {
+            if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi")) {
                 dialogSpinnerTimePeriod.setSelection(dialog_timePeriod_adapter.getPosition(frequency.getHarvestFrequencyHindi()));
             } else {
                 if(revenueProductTrend != null && revenueProductTrend.getHarvestFrequencyUnit() != 0) {
@@ -1110,7 +1110,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         spinnerTimePeriod.setAdapter(timePeriod_adapter);
 
         if (frequency != null) {
-            if (language.equals("			")) {
+            if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi")) {
                 spinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(frequency.getHarvestFrequencyHindi()));
             } else {
                 spinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(frequency.getHarvestFrequency()));
@@ -1179,7 +1179,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                         String spinnerTimePeriodStr = spinnerTimePeriod.getSelectedItem().toString();
                         Log.e("SPINNER STR ", spinnerTimePeriodStr);
                         Frequency frequency;
-                        if (language.equals("			")) {
+                        if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi")) {
                             frequency = realm.where(Frequency.class)
                                     .equalTo("harvestFrequencyHindi", spinnerTimePeriodStr)
                                     .findFirst();

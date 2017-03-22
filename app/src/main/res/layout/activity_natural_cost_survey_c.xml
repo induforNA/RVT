@@ -173,7 +173,7 @@
                         android:id="@+id/household_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/string_household"
+                        android:text="@string/string_household_cost"
                         android:textSize="@dimen/textfield_size" />
 
                     <EditText

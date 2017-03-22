@@ -395,26 +395,6 @@
         <item>Days</item>
         <item>Others</item>
     </string-array>
-    <string-array name="number_of_harvests">
-        <item>Select choice</item>
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
-        <item>11</item>
-        <item>12</item>
-        <item>13</item>
-        <item>14</item>
-        <item>15</item>
-
-    </string-array>
     <string-array name="year_array">
         <item>year</item>
         <item>1</item>
@@ -508,8 +488,6 @@
     <string name="string_cropland">Agriculture</string>
     <string name="title_natural_capital">Natural Capital Survey</string>
     <string name="title_social_capital">Social Capital Survey</string>
-    <string name="qn_what_crop_doyou_harvest">What crops do you harvest, if any?</string>
-    <string name="button_add">Add</string>
     <string name="heading_survey_login">survey login</string>
     <string name="survey_hash">Survey #</string>
     <string name="string_name">Name</string>
@@ -528,7 +506,6 @@
     <string name="string_survey_id">Survey ID</string>
     <string name="string_start_survey">Start Survey</string>
     <string name="string_logout">Logout</string>
-    <string name="string_crop">Crop</string>
 
 
     <string name="qn_natural_b">What non-timber forest products (e.g. fuelwood, fodder, food, medicine) do you harvest if any?</string>
@@ -543,12 +520,9 @@
     <string name="text_unit">Unit</string>
     <string name="qn_natural_d_6">What was the price of the product per unit?</string>
     <string name="price">Price</string>
-    <string name="qn_natural_3_1">Do you plan on incurring any new future costs, seperate from those already entered for the past?</string>
-    <string name="qn_natural_3_2">What type of costs?</string>
     <!--<string name="qn_land_selection_1">What kind of resources are valued on you land?</string>-->
     <string name="qn_land_selection_1">What are the major land use activities or resource flows on your land?</string>
     <string name="string_add_participant">Add a participant</string>
-    <string name="string_add_crop">Add a crop</string>
     <string name="string_fill_name">Fill name</string>
     <string name="string_atleast_one">Select atleast one</string>
     <string name="string_add_cost_element">Add a cost element</string>
@@ -626,7 +600,6 @@
 
     <string name="question_override">We will project cash flows for the next 15 years based on the average of the data you entered for %1$s. Does this average seem realistic? If not, please enter your estimate.</string>
     <string name="label_your_estimate">New estimate (overrides average)</string>
-    <string name="text_question_harvest">How often do you %1$s?</string>
     <string name="text_number_of_times">Number of times</string>
     <string name="text_time_period">Time period</string>
 
@@ -643,6 +616,7 @@
     <string name="qn_gps_5">Please walk to the fifth corner of the parcel, and click OK.</string>
     <string name="qn_gps_6">Please walk to the sixth corner of the parcel, and click OK.</string>
     <string name="gps_coordinates">GPS Coordinates</string>
+    <string name="text_gps_coordinates">GPS Coordinates : %1$s</string>
     <string name="country">Country</string>
     <string name="parcel_size">Parcel Size</string>
     <string name="parcel_value_per_ha">Parcel Value per ha</string>
@@ -685,8 +659,19 @@
         Equipping households, communities, the investment community, and governments with a tool to ascertain an economic value on the range of assets (tangible and intangible) held and used local residents might help reduce information asymmetry and
         empower local residents to negotiate from a stronger position thereby reducing conflicts and improving investment outcomes.</string>
     <string name="text_ok">OK</string>
-    <string name="certificate_button_save">Save</string>
-    <string name="certificate_button_exit">Exit</string>
+    <string name="button_exit">Exit</string>
+    <string name="text_not_set">Not Set</string>
+    <string name="text_accuracy">Accuracy : %1$s m</string>
+    <string name="text_gps_status">GPS Status : %1$s</string>
+    <string name="text_disabled">Disabled</string>
+    <string name="text_enabled">Enabled</string>
+    <string name="text_out_of_service">Out of service</string>
+    <string name="text_temporarily_out">Temporarily unavailable</string>
+    <string name="text_available">Available</string>
+    <string name="text_searching">Searching</string>
+    <string name="text_gps_unavailable">GPS not available</string>
+    <string name="text_enable_gps">Please enable GPS</string>
+    <string name="text_gps_enable_request">Your GPS seems to be disabled, do you want to enable it?</string>
     <string-array name="genders">
         <item>Male</item>
         <item>Female</item>

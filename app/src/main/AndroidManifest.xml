@@ -95,13 +95,7 @@
             android:name=".view.NaturalCapitalSurveyActivityC"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".view.NaturalCapitalSurveyActivity3"
-            android:screenOrientation="landscape" />
-        <activity
             android:name=".view.NaturalCapitalSurveyStartActivity"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".view.CroplandSurveyA"
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.NaturalCapitalSurveyActivityB"

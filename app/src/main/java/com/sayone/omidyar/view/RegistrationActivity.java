@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -15,6 +17,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.InputType;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -43,6 +46,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -140,6 +144,15 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         about.setOnClickListener(this);
         dateView.setOnClickListener(this);
 
+        language = Locale.getDefault().getDisplayLanguage();
+
+        Locale myLocale = new Locale(language);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+
         ArrayAdapter<CharSequence> country_adapter = ArrayAdapter.createFromResource(this,
                 R.array.country_array, android.R.layout.simple_spinner_dropdown_item);
         country_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -177,6 +190,13 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
             public void onItemSelected(AdapterView<?> parent,
                                        View view, int pos, long id) {
                 language = parent.getItemAtPosition(pos).toString();
+                Locale myLocale = new Locale(language);
+                Resources res = getResources();
+                DisplayMetrics dm = res.getDisplayMetrics();
+                Configuration conf = res.getConfiguration();
+                conf.locale = myLocale;
+                res.updateConfiguration(conf, dm);
+
             }
 
             @Override

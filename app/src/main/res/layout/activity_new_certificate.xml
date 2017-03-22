@@ -941,7 +941,7 @@
                 android:id="@+id/certificate_exit_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/certificate_button_exit"
+                android:text="@string/button_exit"
                 android:textAllCaps="false"
                 android:textColor="#ffffff" />
 
@@ -949,7 +949,7 @@
                 android:id="@+id/certificate_save_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/certificate_button_save"
+                android:text="@string/button_save"
                 android:textAllCaps="false"
                 android:textColor="#ffffff" />
 

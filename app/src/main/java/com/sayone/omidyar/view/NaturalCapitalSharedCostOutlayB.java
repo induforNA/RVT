@@ -154,7 +154,7 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
         RealmResults<Frequency> frequencyResult = realm.where(Frequency.class).findAll();
         for (Frequency frequency : frequencyResult) {
             Log.e("HARVEST ", frequency.getHarvestFrequency() + " " + frequency.getFrequencyValue());
-            if (language.equals("हिन्दी")) {
+            if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi")) {
                 timePeriodList.add(frequency.getHarvestFrequencyHindi());
             } else {
                 timePeriodList.add(frequency.getHarvestFrequency());

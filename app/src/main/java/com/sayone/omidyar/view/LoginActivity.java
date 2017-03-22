@@ -3,7 +3,10 @@ package com.sayone.omidyar.view;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +15,8 @@ import android.widget.Toast;
 import com.sayone.omidyar.BaseActivity;
 import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.Survey;
+
+import java.util.Locale;
 
 import io.realm.Realm;
 
@@ -77,6 +82,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                 editor = preferences.edit();
                                 editor.putString("surveyId", survey);
                                 editor.apply();
+                                Locale myLocale = new Locale(surveyCheck.getLanguage());
+                                Resources res = getResources();
+                                DisplayMetrics dm = res.getDisplayMetrics();
+                                Configuration conf = res.getConfiguration();
+                                conf.locale = myLocale;
+                                res.updateConfiguration(conf, dm);
                                 intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
                                 finish();

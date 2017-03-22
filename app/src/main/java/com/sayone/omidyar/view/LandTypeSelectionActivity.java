@@ -339,7 +339,7 @@ public class LandTypeSelectionActivity extends BaseActivity implements View.OnCl
                 .equalTo("name", name)
                 .equalTo("surveyId", surveyId)
                 .findFirst();
-        if (landKind.getStatus().equals("active")) {
+        if (landKind != null && landKind.getStatus().equals("active")) {
             return true;
         } else {
             return false;

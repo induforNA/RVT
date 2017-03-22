@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -13,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -137,6 +140,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         //realm.beginTransaction();
         survey = realm.where(Survey.class).equalTo("surveyId", surveyId).findFirst();
+
+        language = survey.getLanguage();
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(survey.getDate());
@@ -387,7 +392,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 .equalTo("name", name)
                 .equalTo("surveyId", surveyId)
                 .findFirst();
-        if (landKind.getStatus().equals("active")) {
+        if (landKind != null && landKind.getStatus().equals("active")) {
             return true;
         } else {
             return false;

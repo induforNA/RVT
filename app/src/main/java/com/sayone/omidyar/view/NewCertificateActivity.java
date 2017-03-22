@@ -211,12 +211,12 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         ParcelLocation parcelLocation = surveyCheck.getParcelLocations();
 
         if (parcelLocation != null) {
-            String coordinate_1 = parcelLocation.getCoordinateOne();
-            String coordinate_2 = parcelLocation.getCoordinateTwo();
-            String coordinate_3 = parcelLocation.getCoordinateThree();
-            String coordinate_4 = parcelLocation.getCoordinateFour();
-            String coordinate_5 = parcelLocation.getCoordinateFive();
-            String coordinate_6 = parcelLocation.getCoordinateSix();
+            String coordinate_1 = parcelLocation.getCoordinateOne().equals("Not Set") ? getString(R.string.text_not_set) :  parcelLocation.getCoordinateOne();
+            String coordinate_2 = parcelLocation.getCoordinateTwo().equals("Not Set") ? getString(R.string.text_not_set) :  parcelLocation.getCoordinateTwo();
+            String coordinate_3 = parcelLocation.getCoordinateThree().equals("Not Set") ? getString(R.string.text_not_set) :  parcelLocation.getCoordinateThree();
+            String coordinate_4 = parcelLocation.getCoordinateFour().equals("Not Set") ? getString(R.string.text_not_set) :  parcelLocation.getCoordinateFour();
+            String coordinate_5 = parcelLocation.getCoordinateFive().equals("Not Set") ? getString(R.string.text_not_set) :  parcelLocation.getCoordinateFive();
+            String coordinate_6 = parcelLocation.getCoordinateSix().equals("Not Set") ? getString(R.string.text_not_set) :  parcelLocation.getCoordinateSix();
             parcelArea = parcelLocation.getArea();
 
             gpsCoordinate_1.setText(coordinate_1);

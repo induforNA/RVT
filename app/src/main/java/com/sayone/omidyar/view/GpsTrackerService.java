@@ -16,6 +16,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.sayone.omidyar.R;
+
 /**
  * Created by sayone on 16/2/17.
  */
@@ -40,34 +42,34 @@ public class GpsTrackerService extends Service {
         public void onLocationChanged(Location location) {
             mLastLocation.set(location);
             GpsCoordinates.gpsSearchingIndicator.setVisibility(View.INVISIBLE);
-            GpsCoordinates.gpsStatusText.setText("Accuracy : " + (int) location.getAccuracy() + "m");
+            GpsCoordinates.gpsStatusText.setText(getString(R.string.text_gps_coordinates,String.valueOf((int)location.getAccuracy())));
         }
 
         @Override
         public void onProviderDisabled(String provider) {
             isGPSEnabled = 0;
-            GpsCoordinates.gpsStatusText.setText("GPS Status : Disabled");
+            GpsCoordinates.gpsStatusText.setText(getString(R.string.text_gps_status,getString(R.string.text_disabled)));
         }
 
         @Override
         public void onProviderEnabled(String provider) {
             isGPSEnabled = 1;
-            GpsCoordinates.gpsStatusText.setText("GPS Status : Enabled");
+            GpsCoordinates.gpsStatusText.setText(getString(R.string.text_gps_status,getString(R.string.text_enabled)));
         }
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
             switch (status) {
                 case LocationProvider.OUT_OF_SERVICE:
-                    GpsCoordinates.gpsStatusText.setText("GPS Status : Out of service");
+                    GpsCoordinates.gpsStatusText.setText(getString(R.string.text_gps_status,getString(R.string.text_out_of_service)));
                     break;
                 case LocationProvider.TEMPORARILY_UNAVAILABLE:
                     GpsCoordinates.gpsSearchingIndicator.setVisibility(View.VISIBLE);
-                    GpsCoordinates.gpsStatusText.setText("GPS Status : Temporarily unavailable");
+                    GpsCoordinates.gpsStatusText.setText(getString(R.string.text_gps_status,getString(R.string.text_temporarily_out)));
                     break;
                 case LocationProvider.AVAILABLE:
                     GpsCoordinates.gpsSearchingIndicator.setVisibility(View.INVISIBLE);
-                    GpsCoordinates.gpsStatusText.setText("GPS Status : Available ");
+                    GpsCoordinates.gpsStatusText.setText(getString(R.string.text_gps_status,getString(R.string.text_available)));
                     break;
             }
 
@@ -99,7 +101,7 @@ public class GpsTrackerService extends Service {
             Log.d(TAG, "gps provider does not exist " + ex.getMessage());
         }
 
-        GpsCoordinates.gpsStatusText.setText("GPS Status : Searching");
+        GpsCoordinates.gpsStatusText.setText(getString(R.string.text_gps_status,getString(R.string.text_searching)));
     }
 
     @Override
@@ -138,14 +140,14 @@ public class GpsTrackerService extends Service {
 
     public Location getLocation() {
         if (mStatus == LocationProvider.OUT_OF_SERVICE) {
-            Toast.makeText(getApplicationContext(), "GPS not available", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.text_gps_unavailable), Toast.LENGTH_SHORT).show();
         } else if (mStatus == LocationProvider.TEMPORARILY_UNAVAILABLE) {
 //            Toast.makeText(getApplicationContext(), "Searching for GPS", Toast.LENGTH_SHORT).show();
         } else if (mStatus == LocationProvider.AVAILABLE) {
 
         }
         if (isGPSEnabled == 0) {
-            Toast.makeText(getApplicationContext(), "Please enable GPS", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.text_enable_gps), Toast.LENGTH_SHORT).show();
             return null;
         }
         return mLastLocation;

@@ -420,9 +420,9 @@ public class GpsCoordinates extends BaseActivity {
                 if (mBound) {
                     Location location = gpsTrackerService.getLocation();
                     if (location == null) {
-                        gpsCoordinatesView.setText("GPS Coordinates : Not set");
+                        gpsCoordinatesView.setText(getString(R.string.text_gps_coordinates,getString(R.string.text_not_set)));
                     } else if (location.getLatitude() == 0 || location.getLongitude() == 0) {
-                        gpsCoordinatesView.setText("GPS Coordinates : Not set");
+                        gpsCoordinatesView.setText(getString(R.string.text_gps_coordinates,getString(R.string.text_not_set)));
                     } else {
                         corners[index] = new Location("");
                         corners[index].setLatitude(location.getLatitude());
@@ -430,7 +430,7 @@ public class GpsCoordinates extends BaseActivity {
                         String latDMS = LocationConverter.getLatitudeDMS(corners[index].getLatitude());
                         String lngDMS = LocationConverter.getLongitudeDMS(corners[index].getLongitude());
                         int accuracy = (int) location.getAccuracy();
-                        gpsCoordinatesView.setText("GPS Coordinates : " + latDMS + ", " + lngDMS + " (Accuracy : " + accuracy + "m)");
+                        gpsCoordinatesView.setText(getString(R.string.text_gps_coordinates,latDMS + ", " + lngDMS +"("+ getString(R.string.text_accuracy,String.valueOf(accuracy))+")"));
                         Log.d("GPS", "Coordinates: " + corners[index].getLatitude() + ", " + corners[index].getLongitude() + "(Accuracy : " + accuracy + "m)");
                     }
                 }
@@ -447,11 +447,11 @@ public class GpsCoordinates extends BaseActivity {
 
     private void showNoGpsAlert() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setMessage(getString(R.string.text_gps_enable_request)).setCancelable(false).setPositiveButton(getString(R.string.radio_button_yes), new DialogInterface.OnClickListener() {
             public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                 startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
             }
-        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+        }).setNegativeButton(getString(R.string.radio_button_no), new DialogInterface.OnClickListener() {
             public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                 dialog.cancel();
             }

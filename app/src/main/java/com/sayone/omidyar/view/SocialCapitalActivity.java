@@ -172,16 +172,20 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
     }
 
     public void loadQuestion(int currentQId) {
+        Survey survey = realm.where(Survey.class)
+                .equalTo("surveyId", surveyId)
+                .findFirst();
         LandKind landKindLoad = realm.where(LandKind.class)
                 .equalTo("surveyId", surveyId)
                 .equalTo("status", "active")
                 .equalTo("name", currentSocialCapitalServey)
                 .findFirst();
+        language = survey.getLanguage();
         for (SocialCapitalAnswer socialCapitalAnswer : landKindLoad.getSocialCapitals().getSocialCapitalAnswers()) {
             Log.e("NN ", socialCapitalAnswer.toString());
         }
         SocialCapitalQuestions socialCapitalQuestionsLandKindLoad = landKindLoad.getSocialCapitals().getSocialCapitalAnswers().get(currentQId).getSocialCapitalQuestion();
-        if (language.equals("हिन्दी")) {
+        if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi")) {
             setQuestionView(socialCapitalQuestionsLandKindLoad.getOptionType(),
                     socialCapitalQuestionsLandKindLoad.getQuestionHindi(),
                     socialCapitalQuestionsLandKindLoad.getSocialCapitalAnswerOptionses(),
@@ -292,7 +296,7 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                     }
                 }
                 checkBox.setVisibility(View.VISIBLE);
-                if (language.equals("हिन्दी")) {
+                if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi")) {
                     checkBox.setText(options.get(index).getOptionsHindi());
                 } else {
                     checkBox.setText(options.get(index).getOptions());
@@ -313,7 +317,7 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                 }
 
                 radioButton.setVisibility(View.VISIBLE);
-                if (language.equals("हिन्दी")) {
+                if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi")) {
                     radioButton.setText(options.get(index).getOptionsHindi());
                 } else {
                     radioButton.setText(options.get(index).getOptions());
