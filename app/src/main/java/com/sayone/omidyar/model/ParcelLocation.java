@@ -161,7 +161,7 @@ public class ParcelLocation extends RealmObject{
         if (getLat_1()!=0){
             return  LocationConverter.getLatitudeDMS(getLat_1()) + ", " + LocationConverter.getLongitudeDMS(getLng_1());
         }else{
-            return "Not set";
+            return "Not Set";
         }
 
     }
@@ -170,7 +170,7 @@ public class ParcelLocation extends RealmObject{
         if (getLat_2()!=0){
             return  LocationConverter.getLatitudeDMS(getLat_2()) + ", " + LocationConverter.getLongitudeDMS(getLng_2());
         }else{
-            return "Not set";
+            return "Not Set";
         }
     }
 
@@ -178,7 +178,7 @@ public class ParcelLocation extends RealmObject{
         if (getLat_3()!=0){
             return  LocationConverter.getLatitudeDMS(getLat_3()) + ", " + LocationConverter.getLongitudeDMS(getLng_3());
         }else{
-            return "Not set";
+            return "Not Set";
         }
     }
 
@@ -186,7 +186,7 @@ public class ParcelLocation extends RealmObject{
         if (getLat_4()!=0){
             return LocationConverter.getLatitudeDMS(getLat_4()) + ", " + LocationConverter.getLongitudeDMS(getLng_4());
         }else{
-            return "Not set";
+            return "Not Set";
         }
     }
 
@@ -194,7 +194,7 @@ public class ParcelLocation extends RealmObject{
         if (getLat_5()!=0){
             return LocationConverter.getLatitudeDMS(getLat_5()) + ", " + LocationConverter.getLongitudeDMS(getLng_5());
         }else{
-            return "Not set";
+            return "Not Set";
         }
     }
 
@@ -202,7 +202,7 @@ public class ParcelLocation extends RealmObject{
         if (getLat_6()!=0){
             return  LocationConverter.getLatitudeDMS(getLat_6()) + ", " + LocationConverter.getLongitudeDMS(getLng_6());
         }else{
-            return "Not set";
+            return "Not Set";
         }
     }
 

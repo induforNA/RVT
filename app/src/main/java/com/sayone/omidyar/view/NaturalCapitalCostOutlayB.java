@@ -156,6 +156,8 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
         currencyList.add("INR");
 
         Survey survey = realm.where(Survey.class).equalTo("surveyId", surveyId).findFirst();
+        language = survey.getLanguage();
+
         for (LandKind landKind : survey.getLandKinds()) {
             if (landKind.getName().equals(getString(R.string.string_forestland)) && currentSocialCapitalServey.equals(getString(R.string.string_forestland))) {
                 for (int i = 0; i <= PROJECTION_COUNT; i++) {

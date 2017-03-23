@@ -193,10 +193,17 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
         } else if (results.getInflationRate() != 0) {
             inflationRate = results.getInflationRate() / 100;
         }
+        language = results.getLanguage();
+
         RealmResults<Frequency> frequencyResult = realm.where(Frequency.class).findAll();
         for (Frequency frequency : frequencyResult) {
             if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi")) {
                 timePeriodList.add(frequency.getHarvestFrequencyHindi());
+                if (!frequency.getHarvestFrequency().equals("one-time")) {
+                    timePeriodListSec.add(frequency.getHarvestFrequencyHindi());
+                } else {
+                    timePeriodListSecOneTime.add(frequency.getHarvestFrequencyHindi());
+                }
             } else {
                 timePeriodList.add(frequency.getHarvestFrequency());
                 if (!frequency.getHarvestFrequency().equals("one-time")) {
@@ -1188,30 +1195,56 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
         if (timePeriodList.size() != 0 && frequency != null) {
             // Log.e("TEST FRE ", timePeriod_adapter.getPosition(frequency.getHarvestFrequency())+"");
             if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi")) {
-                dialogSpinnerTimePeriod.setSelection(dialog_timePeriod_adapter.getPosition(frequency.getHarvestFrequencyHindi()));
+                if(costElementTrend != null && costElementTrend.getCostFrequencyUnit() != 0) {
+                    Frequency frequency1 = realm.where(Frequency.class)
+                            .equalTo("frequencyValue", (int) costElementTrend.getCostFrequencyUnit())
+                            .findFirst();
+                    dialogSpinnerTimePeriod.setSelection(dialog_timePeriod_adapter.getPosition(frequency1.getHarvestFrequencyHindi()));
+                    dialogTimePeriod.setText(frequency1.getHarvestFrequencyHindi());
+                }
+                else {
+                    dialogSpinnerTimePeriod.setSelection(dialog_timePeriod_adapter.getPosition(frequency.getHarvestFrequencyHindi()));
+                    dialogTimePeriod.setText(frequency.getHarvestFrequencyHindi());
+                }
+
             } else {
                 if(costElementTrend != null && costElementTrend.getCostFrequencyUnit() != 0) {
                     Frequency frequency1 = realm.where(Frequency.class)
                             .equalTo("frequencyValue", (int) costElementTrend.getCostFrequencyUnit())
                             .findFirst();
                     dialogSpinnerTimePeriod.setSelection(dialog_timePeriod_adapter.getPosition(frequency1.getHarvestFrequency()));
+                    dialogTimePeriod.setText(frequency1.getHarvestFrequency());
                 }
-                else
+                else {
                     dialogSpinnerTimePeriod.setSelection(dialog_timePeriod_adapter.getPosition(frequency.getHarvestFrequency()));
+                    dialogTimePeriod.setText(frequency.getHarvestFrequency());
+                }
             }
         }
 
         if (unitList.size() != 0 && quantity != null) {
-            // Log.e("QUANTITY ", unit_adapter.getPosition(quantity.getQuantityName())+"");
-            if(costElementTrend != null && costElementTrend.getCostPerPeriodUnit() != null) {
-                Quantity quantity1 = realm.where(Quantity.class)
-                        .equalTo("quantityName", costElementTrend.getCostPerPeriodUnit())
-                        .findFirst();
-                dialogSpinnerQuantityUnit.setSelection(dialog_unit_adapter.getPosition(quantity1.getQuantityName()));
+            if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi")) {
+                if(costElementTrend != null && costElementTrend.getCostPerPeriodUnit() != null) {
+                    Quantity quantity1 = realm.where(Quantity.class)
+                            .equalTo("quantityName", costElementTrend.getCostPerPeriodUnit())
+                            .findFirst();
+                    dialogSpinnerQuantityUnit.setSelection(dialog_unit_adapter.getPosition(quantity1.getQuantityNameHindi()));
+                }
+                else
+                    dialogSpinnerQuantityUnit.setSelection(dialog_unit_adapter.getPosition(quantity.getQuantityNameHindi()));
+            } else {
+                // Log.e("QUANTITY ", unit_adapter.getPosition(quantity.getQuantityName())+"");
+                if(costElementTrend != null && costElementTrend.getCostPerPeriodUnit() != null) {
+                    Quantity quantity1 = realm.where(Quantity.class)
+                            .equalTo("quantityName", costElementTrend.getCostPerPeriodUnit())
+                            .findFirst();
+                    dialogSpinnerQuantityUnit.setSelection(dialog_unit_adapter.getPosition(quantity1.getQuantityName()));
+                }
+                else
+                    dialogSpinnerQuantityUnit.setSelection(dialog_unit_adapter.getPosition(quantity.getQuantityName()));
             }
-            else
-                dialogSpinnerQuantityUnit.setSelection(dialog_unit_adapter.getPosition(quantity.getQuantityName()));
-        }
+            // Log.e("QUANTITY ", unit_adapter.getPosition(quantity.getQuantityName())+"");
+           }
         dialogSpinnerTimePeriod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -1257,7 +1290,6 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
         dialogQuestionPerHousehold.setText(getString(R.string.qn_natural_cost_3, costElement.getName()));
         dialogQuestionPerUnit.setText(getString(R.string.text_question_price, costElement.getName()));
         dialogFrequency.setText(String.valueOf(roundToTwoDecimal(harvestFreDisp)));
-        dialogTimePeriod.setText(frequency.getHarvestFrequency());
         dialogHouseholds.setText(String.valueOf(mHousehold));
         dialogQuantity.setText(String.valueOf(roundToTwoDecimal(mHarvestTimes)));
         dialogUnit.setText(String.valueOf(mQuaUnit));

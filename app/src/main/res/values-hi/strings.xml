@@ -250,6 +250,8 @@
     <string name="text_question_quantity_extract">प्रति परिवार प्रत्येक बार कितना %1$s निकाला गया था?</string>
     <!--<string name="text_question_quantity_cost">How much %1$s was extracted each time per household?</string>-->
 
+    <string name="text_times">टाइम्स</string>
+
     <string name="text_quantity">मात्रा</string>
     <string name="text_question_price">प्रति यूनिट %1$s की कीमत क्या थी?</string>
     <string name="text_price">मूल्य</string>
@@ -278,7 +280,7 @@
     <string name="restore_original_project_rates">मूल इन्फ्लेशन रेट और रिस्क रेट को पुनर्स्थापित करें</string>
     <string name="shared_outlay_question">भविष्य की लागतें</string>
     <string name="app_title">ग्रामीण मूल्यांकन उपकरण</string>
-    <string name="text_question_livestock">साल में कितने बार आप चाराते हैं\u0020</string>
+    <string name="text_question_livestock">सजमीन के इस टुकड़े पर आप कितने महीनों के महीने %1$s खाते हैं?</string>
     <string name="text_quantity_question_livestock">चारा प्रति वर्ष प्रति पशु खपत की कुल राशि</string>
     <string name="text_product_question_livestock">चारे का बाजार मूल्य</string>
     <string name="text_question_number_livestock">पशुधन की संख्या</string>
@@ -288,7 +290,7 @@
     <string name="get_parcel_area_ques_yes">हाँ</string>
     <string name="get_parcel_area_ques_no">नहीं</string>
     <string name="get_parcel_area_question">क्या आप अपने पार्सल का आकार हेक्टेयर में जानते हैं?</string>
-    <string name="text_save_warning">सर्वे तभी सेव होगा  जब आप प्रत्येक पेज पर सेव या नेक्स्ट क्लिक करेंगे, बेक नहीं</string>
+    <string name="text_save_warning">सर्वे तभी सेव होगा  जब आप प्रत्येक पेज पर सेव या नेक्स्ट क्लिक करेंगे, बेक नहीं।</string>
     <string name="text_got_it">समझ गया</string>
     <string name="text_content_about_app">यह ग्रामीण भूमि मूल्यांकन में सहायता करने के लिए एक उपकरण है, जिसका निर्माण इंडुफ़र
         उत्तरी अमेरिका एलएलसी पारिस्थितिकी सुरक्षा फाउंडेशन और अल्स्टर विश्वविद्यालय के साथ सहयोगद्वारा विकसित किया गया था।\n\n

@@ -139,6 +139,8 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
 
         survey = realm.where(Survey.class).equalTo("surveyId", surveyId).findFirst();
 
+        language = survey.getLanguage();
+
         for (int i = 0; i <= PROJECTION_COUNT; i++) {
             yearList.add(String.valueOf(year));
             year++;

@@ -2,7 +2,7 @@
   "socialCapitalQuestions": [
     {
       "questionno": 1,
-      "question": " What rights do households in this community have over the parcel specific to this land use activity?",
+      "question": "What rights do households in this community have over the parcel specific to this land use activity?",
       "questionHindi": "इस समुदाय के घरों में इस भूमि उपयोग गतिविधि के लिए विशिष्ट पार्सल के अधिकार क्या हैं?",
       "weight": "20",
       "optiontype": "multiple",
@@ -128,7 +128,7 @@
     },
     {
       "questionno": 5,
-      "question": " Are there any current disputes related to the boundaries or rights associated with the parcel related to this land use activity?",
+      "question": "Are there any current disputes related to the boundaries or rights associated with the parcel related to this land use activity?",
       "questionHindi": "क्या पार्सल से जुड़ी सीमाओं या अधिकारों से संबंधित कोई मौजूदा विवाद इस भूमि उपयोग गतिविधि के लिए संबंधित हैं?",
       "weight": "5",
       "optiontype": "single",
@@ -157,7 +157,7 @@
     },
     {
       "questionno": 6,
-      "question": "  Do households in this community use the parcel for this land use activity based on locally recognized customary norms?",
+      "question": "Do households in this community use the parcel for this land use activity based on locally recognized customary norms?",
       "questionHindi": "क्या इस समुदाय में परिवारों को स्थानीय रूप से मान्यता प्राप्त परंपरागत मानदंडों के आधार पर इस भूमि उपयोग गतिविधि के लिए पार्सल का इस्तेमाल किया जाता है?",
       "weight": "5",
       "optiontype": "single",
@@ -181,7 +181,7 @@
     },
     {
       "questionno": 7,
-      "question": " Is there a group or committee in this community with specific responsibility to manage or oversee matters related to use of this land use activity on the parcel?",
+      "question": "Is there a group or committee in this community with specific responsibility to manage or oversee matters related to use of this land use activity on the parcel?",
       "questionHindi": "पार्सल पर इस भूमि उपयोग गतिविधि के उपयोग से संबंधित मामलों को प्रबंधित करने या उनकी देखरेख करने के लिए इस समूह में कोई समिति है?",
       "weight": "5",
       "optiontype": "single",

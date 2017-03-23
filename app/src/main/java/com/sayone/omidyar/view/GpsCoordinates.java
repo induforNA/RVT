@@ -82,7 +82,6 @@ public class GpsCoordinates extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gps_coordinates);
-        setContentView(R.layout.activity_gps_coordinates);
 
         context = this;
         realm = Realm.getDefaultInstance();
@@ -262,21 +261,21 @@ public class GpsCoordinates extends BaseActivity {
             corners[5].setLatitude(parcelLocation.getLat_6());
             corners[5].setLongitude(parcelLocation.getLng_6());
 
-            String coordinate_1 = parcelLocation.getCoordinateOne();
-            String coordinate_2 = parcelLocation.getCoordinateTwo();
-            String coordinate_3 = parcelLocation.getCoordinateThree();
-            String coordinate_4 = parcelLocation.getCoordinateFour();
-            String coordinate_5 = parcelLocation.getCoordinateFive();
-            String coordinate_6 = parcelLocation.getCoordinateSix();
+            String coordinate_1 = parcelLocation.getCoordinateOne().equals("Not Set") ? getString(R.string.text_not_set) :  parcelLocation.getCoordinateOne();
+            String coordinate_2 = parcelLocation.getCoordinateTwo().equals("Not Set") ? getString(R.string.text_not_set) :  parcelLocation.getCoordinateTwo();
+            String coordinate_3 = parcelLocation.getCoordinateThree().equals("Not Set") ? getString(R.string.text_not_set) :  parcelLocation.getCoordinateThree();
+            String coordinate_4 = parcelLocation.getCoordinateFour().equals("Not Set") ? getString(R.string.text_not_set) :  parcelLocation.getCoordinateFour();
+            String coordinate_5 = parcelLocation.getCoordinateFive().equals("Not Set") ? getString(R.string.text_not_set) :  parcelLocation.getCoordinateFive();
+            String coordinate_6 = parcelLocation.getCoordinateSix().equals("Not Set") ? getString(R.string.text_not_set) :  parcelLocation.getCoordinateSix();
 
             parcelSize = Float.toString(parcelLocation.getArea());
 
-            gpsLocation_1.setText("GPS Coordinates : " + coordinate_1);
-            gpsLocation_2.setText("GPS Coordinates : " + coordinate_2);
-            gpsLocation_3.setText("GPS Coordinates : " + coordinate_3);
-            gpsLocation_4.setText("GPS Coordinates : " + coordinate_4);
-            gpsLocation_5.setText("GPS Coordinates : " + coordinate_5);
-            gpsLocation_6.setText("GPS Coordinates : " + coordinate_6);
+            gpsLocation_1.setText(getString(R.string.text_gps_coordinates, coordinate_1));
+            gpsLocation_2.setText(getString(R.string.text_gps_coordinates, coordinate_2));
+            gpsLocation_3.setText(getString(R.string.text_gps_coordinates, coordinate_3));
+            gpsLocation_4.setText(getString(R.string.text_gps_coordinates, coordinate_4));
+            gpsLocation_5.setText(getString(R.string.text_gps_coordinates, coordinate_5));
+            gpsLocation_6.setText(getString(R.string.text_gps_coordinates, coordinate_6));
             area = parcelLocation.getArea();
         }
     }
@@ -315,7 +314,7 @@ public class GpsCoordinates extends BaseActivity {
             areaInput.setText(parcelSize);
         }
         builder.setView(dialogView);
-        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.button_save), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (parcelAreaInputLayout.getVisibility() == View.VISIBLE) {
@@ -327,7 +326,7 @@ public class GpsCoordinates extends BaseActivity {
                 saveInputs();
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.button_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

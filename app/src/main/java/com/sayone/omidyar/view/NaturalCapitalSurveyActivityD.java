@@ -216,11 +216,17 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         } else if (results.getInflationRate() != 0) {
             inflationRate = results.getInflationRate() / 100;
         }
+        language = results.getLanguage();
         RealmResults<Frequency> frequencyResult = realm.where(Frequency.class).findAll();
         for (Frequency frequency : frequencyResult) {
             Log.e("HARVEST ", frequency.getHarvestFrequency() + " " + frequency.getFrequencyValue());
             if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi")) {
                 timePeriodList.add(frequency.getHarvestFrequencyHindi());
+                if (!frequency.getHarvestFrequency().equals("one-time")) {
+                    timePeriodListSec.add(frequency.getHarvestFrequencyHindi());
+                } else {
+                    timePeriodListSecOneTime.add(frequency.getHarvestFrequencyHindi());
+                }
             } else {
                 timePeriodList.add(frequency.getHarvestFrequency());
                 if (!frequency.getHarvestFrequency().equals("one-time")) {
@@ -592,7 +598,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
             areaContainer.setVisibility(View.GONE);
             livestockContainer.setVisibility(View.VISIBLE);
             householdQuestion.setText(getString(R.string.string_household_harvest,revenueProductLoad.getName()));
-            loadQuestions.setText(getString(R.string.text_question_livestock) + revenueProductLoad.getName() + " on this piece of land?");
+            loadQuestions.setText(getString(R.string.text_question_livestock, revenueProductLoad.getName()));
             quantityQuestion.setText(getString(R.string.text_quantity_question_livestock));
             productQuestion.setText(getString(R.string.text_product_question_livestock));
             livestockQuestion.setText(getString(R.string.text_question_number_livestock));
@@ -744,28 +750,52 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         if (timePeriodList.size() != 0 && frequency != null) {
             // Log.e("TEST FRE ", timePeriod_adapter.getPosition(frequency.getHarvestFrequency())+"");
             if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi")) {
-                dialogSpinnerTimePeriod.setSelection(dialog_timePeriod_adapter.getPosition(frequency.getHarvestFrequencyHindi()));
+                if(revenueProductTrend != null && revenueProductTrend.getHarvestFrequencyUnit() != 0) {
+                    Frequency frequency1 = realm.where(Frequency.class)
+                            .equalTo("frequencyValue", (int) revenueProductTrend.getHarvestFrequencyUnit())
+                            .findFirst();
+                    dialogSpinnerTimePeriod.setSelection(dialog_timePeriod_adapter.getPosition(frequency1.getHarvestFrequencyHindi()));
+                    dialogTimePeriod.setText(frequency1.getHarvestFrequencyHindi());
+                }
+                else {
+                    dialogSpinnerTimePeriod.setSelection(dialog_timePeriod_adapter.getPosition(frequency.getHarvestFrequencyHindi()));
+                    dialogTimePeriod.setText(frequency.getHarvestFrequencyHindi());
+                }
+
             } else {
                 if(revenueProductTrend != null && revenueProductTrend.getHarvestFrequencyUnit() != 0) {
                     Frequency frequency1 = realm.where(Frequency.class)
                             .equalTo("frequencyValue", (int) revenueProductTrend.getHarvestFrequencyUnit())
                             .findFirst();
                     dialogSpinnerTimePeriod.setSelection(dialog_timePeriod_adapter.getPosition(frequency1.getHarvestFrequency()));
+                    dialogTimePeriod.setText(frequency1.getHarvestFrequency());
                 }
-                else
+                else {
                     dialogSpinnerTimePeriod.setSelection(dialog_timePeriod_adapter.getPosition(frequency.getHarvestFrequency()));
+                    dialogTimePeriod.setText(frequency.getHarvestFrequency());
+                }
             }
         }
 
         if (unitList.size() != 0 && quantity != null) {
-            // Log.e("QUANTITY ", unit_adapter.getPosition(quantity.getQuantityName())+"");
-            if(revenueProductTrend != null && revenueProductTrend.getQuantityUnit() != null) {
-                Quantity quantity1 = realm.where(Quantity.class)
-                        .equalTo("quantityName", revenueProductTrend.getQuantityUnit())
-                        .findFirst();
-                dialogSpinnerQuantityUnit.setSelection(dialog_unit_adapter.getPosition(quantity1.getQuantityName()));
-            }else
-                dialogSpinnerQuantityUnit.setSelection(dialog_unit_adapter.getPosition(quantity.getQuantityName()));
+            if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi")) {
+                if (revenueProductTrend != null && revenueProductTrend.getQuantityUnit() != null) {
+                    Quantity quantity1 = realm.where(Quantity.class)
+                            .equalTo("quantityName", revenueProductTrend.getQuantityUnit())
+                            .findFirst();
+                    dialogSpinnerQuantityUnit.setSelection(dialog_unit_adapter.getPosition(quantity1.getQuantityNameHindi()));
+                } else
+                    dialogSpinnerQuantityUnit.setSelection(dialog_unit_adapter.getPosition(quantity.getQuantityNameHindi()));
+            } else {
+                // Log.e("QUANTITY ", unit_adapter.getPosition(quantity.getQuantityName())+"");
+                if (revenueProductTrend != null && revenueProductTrend.getQuantityUnit() != null) {
+                    Quantity quantity1 = realm.where(Quantity.class)
+                            .equalTo("quantityName", revenueProductTrend.getQuantityUnit())
+                            .findFirst();
+                    dialogSpinnerQuantityUnit.setSelection(dialog_unit_adapter.getPosition(quantity1.getQuantityName()));
+                } else
+                    dialogSpinnerQuantityUnit.setSelection(dialog_unit_adapter.getPosition(quantity.getQuantityName()));
+            }
         }
         dialogSpinnerTimePeriod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -831,7 +861,6 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         }
 
         dialogFrequency.setText(String.valueOf(roundToTwoDecimal(harvestFreDisp)));
-        dialogTimePeriod.setText(frequency.getHarvestFrequency());
         dialogHouseholds.setText(String.valueOf(roundToTwoDecimal(mHousehold)));
         dialogQuantity.setText(String.valueOf(roundToTwoDecimal(mHarvestTimes)));
         dialogUnit.setText(String.valueOf(mQuaUnit));
@@ -839,7 +868,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         dialogArea.setText(String.valueOf(roundToTwoDecimal(mHarvestArea)));
 
         if(currentSocialCapitalServey.equals(getString(R.string.string_pastureland))){
-            dialogQuestionHarvest.setText(getString(R.string.text_question_livestock) +revenueProduct.getName());
+            dialogQuestionHarvest.setText(getString(R.string.text_question_livestock, revenueProduct.getName()));
             dialogQuestionHouseholds.setText(getString(R.string.text_question_number_livestock));
             containerTimePeriod.setVisibility(View.GONE);
             containerArea.setVisibility(View.GONE);
