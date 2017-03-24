@@ -3,10 +3,13 @@ package com.sayone.omidyar.view;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +21,8 @@ import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.SocialCapitalAnswer;
 import com.sayone.omidyar.model.SocialCapitalQuestions;
+
+import java.util.Locale;
 
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -203,6 +208,13 @@ public class SocialCapitalStartActivity extends BaseActivity implements View.OnC
                 startActivity(i);
                 break;
             case R.id.logout:
+                Locale myLocale = new Locale(Locale.getDefault().getDisplayLanguage());
+                Resources res = getResources();
+                DisplayMetrics dm = res.getDisplayMetrics();
+                Configuration conf = res.getConfiguration();
+                conf.locale = myLocale;
+                res.updateConfiguration(conf, dm);
+
                 i = new Intent(SocialCapitalStartActivity.this, RegistrationActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);

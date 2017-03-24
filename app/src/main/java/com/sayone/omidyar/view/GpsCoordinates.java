@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +38,8 @@ import com.sayone.omidyar.R;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.ParcelLocation;
 import com.sayone.omidyar.model.Survey;
+
+import java.util.Locale;
 
 import io.realm.Realm;
 
@@ -209,6 +214,13 @@ public class GpsCoordinates extends BaseActivity {
                 break;
 
             case R.id.logout:
+                Locale myLocale = new Locale(Locale.getDefault().getDisplayLanguage());
+                Resources res = getResources();
+                DisplayMetrics dm = res.getDisplayMetrics();
+                Configuration conf = res.getConfiguration();
+                conf.locale = myLocale;
+                res.updateConfiguration(conf, dm);
+
                 Intent intents = new Intent(getApplicationContext(), RegistrationActivity.class);
                 intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intents);

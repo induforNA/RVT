@@ -5,12 +5,15 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -467,6 +470,13 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                 startActivity(intentt);
                 break;
             case R.id.logout:
+                Locale myLocale = new Locale(Locale.getDefault().getDisplayLanguage());
+                Resources res = getResources();
+                DisplayMetrics dm = res.getDisplayMetrics();
+                Configuration conf = res.getConfiguration();
+                conf.locale = myLocale;
+                res.updateConfiguration(conf, dm);
+
                 Intent intents = new Intent(getApplicationContext(), RegistrationActivity.class);
                 intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intents);

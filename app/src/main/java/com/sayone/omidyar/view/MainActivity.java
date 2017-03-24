@@ -346,6 +346,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 dialog1.show();
                 break;
             case R.id.logout:
+                Locale myLocale = new Locale(Locale.getDefault().getDisplayLanguage());
+                Resources res = getResources();
+                DisplayMetrics dm = res.getDisplayMetrics();
+                Configuration conf = res.getConfiguration();
+                conf.locale = myLocale;
+                res.updateConfiguration(conf, dm);
+
                 Intent intents = new Intent(MainActivity.this, RegistrationActivity.class);
                 intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intents);

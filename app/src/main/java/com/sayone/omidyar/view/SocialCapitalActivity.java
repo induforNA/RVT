@@ -3,10 +3,13 @@ package com.sayone.omidyar.view;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -435,6 +438,13 @@ public class SocialCapitalActivity extends BaseActivity implements RadioGroup.On
                 startActivity(i);
                 break;
             case R.id.logout:
+                Locale myLocale = new Locale(Locale.getDefault().getDisplayLanguage());
+                Resources res = getResources();
+                DisplayMetrics dm = res.getDisplayMetrics();
+                Configuration conf = res.getConfiguration();
+                conf.locale = myLocale;
+                res.updateConfiguration(conf, dm);
+
                 Intent intent = new Intent(SocialCapitalActivity.this, RegistrationActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);

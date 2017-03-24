@@ -41,7 +41,7 @@
             <item>15</item>
         </string-array>
 
-    <string name="about_this_app">के बारे में इस उपकरण</string>
+    <string name="about_this_app">इस उपकरण के बारे में</string>
     <string name="preference_file_key">com.sayone.omidyar.PREFERENCE_FILE_KEY</string>
     <string name="sign_up_button">साइन अप</string>
     <string name="login_button">लॉग इन</string>
@@ -180,7 +180,7 @@
     <string name="inflation_rate_heading">मँहगाई दर</string>
     <string name="natural_outlay_qn3">किस साल में आप पहली बार लागत उठाना उम्मीद करते हैं?</string>
     <!--<string name="natural_outlay_qn4">रकम</string>-->
-    <string name="natural_outlay_qn4">Total cost</string>
+    <string name="natural_outlay_qn4">कुल लागत</string>
 
     <string name="year_data_livestock">पशुधन गतिविधि पर कितने साल के डेटा है?</string>
 
@@ -261,7 +261,7 @@
     <string name="qn_gps_4">पार्सल के चौधे कोने में चलें और ठीक क्लिक करें</string>
     <string name="qn_gps_5">पार्सल के पांचवां कोने में चलें और ठीक क्लिक करें</string>
     <string name="qn_gps_6">पार्सल के छठे कोने में चलें और ठीक क्लिक करें</string>
-    <string name="gps_coordinates">GPS समन्वय</string>
+    <string name="gps_coordinates">जीपीएस समन्वय</string>
     <string name="country">देश</string>
     <string name="parcel_size">पार्सल का आकार</string>
     <string name="parcel_value_per_ha">पार्सल मूल्य प्रति हेक्टेयर</string>
@@ -274,7 +274,7 @@
     <string name="reg_inflation_rate_source_link">www.tradingeconomics.com/forecast/inflation-rate</string>
     <string name="empty_risk_rate">सोवेरीन/ देश रिस्क रेट एंटर करें </string>
     <string name="empty_inflation_rate">इन्फ्लेशन रेट एंटर करें</string>
-    <string name="gps_coordinates_dms">GPS समन्वय : 0°00\'00.0\"N 0°00\'00.0\"E</string>
+    <string name="gps_coordinates_dms">जीपीएस समन्वय : 0°00\'00.0\"N 0°00\'00.0\"E</string>
     <string name="shared_costs_outlays">साझा लागत</string>
     <string name="string_certificate">प्रमाण पत्र</string>
     <string name="restore_original_project_rates">मूल इन्फ्लेशन रेट और रिस्क रेट को पुनर्स्थापित करें</string>
@@ -311,17 +311,17 @@
     <string name="button_exit">निकास</string>
     <string name="text_not_set">सेट नहीं</string>
     <string name="text_accuracy">सटीकता: %1$s मी</string>
-    <string name="text_gps_status">GPS स्थिति : %1$s</string>
+    <string name="text_gps_status">जीपीएस स्थिति : %1$s</string>
     <string name="text_disabled">निष्क्रिय</string>
     <string name="text_enabled">सक्षम</string>
     <string name="text_out_of_service">काम नहीं कर रहा</string>
     <string name="text_temporarily_out">अस्थाई रूप से अनुपलब्ध</string>
     <string name="text_available">उपलब्ध</string>
     <string name="text_searching">खोज कर</string>
-    <string name="text_gps_unavailable">GPS उपलब्ध नहीं है</string>
-    <string name="text_enable_gps">GPS सक्षम करें</string>
-    <string name="text_gps_enable_request">आपके GPS को निष्क्रिय किया जा रहा है, क्या आप इसे सक्षम करना चाहते हैं?</string>
-    <string name="text_gps_coordinates">GPS समन्वय : %1$s</string>
+    <string name="text_gps_unavailable">जीपीएस उपलब्ध नहीं है</string>
+    <string name="text_enable_gps">जीपीएस सक्षम करें</string>
+    <string name="text_gps_enable_request">आपके जीपीएस को निष्क्रिय किया जा रहा है, क्या आप इसे सक्षम करना चाहते हैं?</string>
+    <string name="text_gps_coordinates">जीपीएस समन्वय : %1$s</string>
 
     <string-array name="genders">
         <item>पुस्र्ष</item>

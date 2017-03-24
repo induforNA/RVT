@@ -3,9 +3,12 @@ package com.sayone.omidyar.view;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -511,6 +514,13 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                 break;
 
             case R.id.logout:
+                Locale myLocale1 = new Locale(Locale.getDefault().getDisplayLanguage());
+                Resources res1 = getResources();
+                DisplayMetrics dm1 = res1.getDisplayMetrics();
+                Configuration conf1 = res1.getConfiguration();
+                conf1.locale = myLocale1;
+                res1.updateConfiguration(conf1, dm1);
+
                 Intent intents = new Intent(getApplicationContext(), RegistrationActivity.class);
                 intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intents);
@@ -540,6 +550,13 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                 startActivity(intent_certificate);
                 break;
             case R.id.certificate_exit_button:
+                Locale myLocale = new Locale(Locale.getDefault().getDisplayLanguage());
+                Resources res = getResources();
+                DisplayMetrics dm = res.getDisplayMetrics();
+                Configuration conf = res.getConfiguration();
+                conf.locale = myLocale;
+                res.updateConfiguration(conf, dm);
+
                 Intent logoutIntent = new Intent(getApplicationContext(), RegistrationActivity.class);
                 logoutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(logoutIntent);
