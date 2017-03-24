@@ -309,7 +309,7 @@ public class NaturalCapitalSharedCostActivityB extends BaseActivity implements V
                 break;
 
             case R.id.add_years_button:
-                if (!year.equals("year")) {
+                if (!year.equals("year") && !year.equals("साल")) {
                     enterYearHeading.setVisibility(View.VISIBLE);
                     generateYearFields(Integer.parseInt(year));
                 } else {

@@ -385,7 +385,7 @@ public class NaturalCapitalSurveyActivityC extends BaseActivity implements View.
 
             case R.id.add_years_button:
                 //Log.e("Year ",year);
-                if (!year.equals("year")) {
+                if (!year.equals("year") && !year.equals("साल")) {
                     enterYearHeading.setVisibility(View.VISIBLE);
                     generateYearFields(Integer.parseInt(year));
                 } else {

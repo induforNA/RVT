@@ -202,7 +202,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
         for (Frequency frequency : frequencyResult) {
             if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi")) {
                 timePeriodList.add(frequency.getHarvestFrequencyHindi());
-                if (!frequency.getHarvestFrequency().equals("one-time")) {
+                if (!frequency.getHarvestFrequencyHindi().equals("एक बार")) {
                     timePeriodListSec.add(frequency.getHarvestFrequencyHindi());
                 } else {
                     timePeriodListSecOneTime.add(frequency.getHarvestFrequencyHindi());
@@ -298,7 +298,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
             public void onItemSelected(AdapterView<?> parent,
                                        View view, int pos, long id) {
                 timePeriod = parent.getItemAtPosition(pos).toString();
-                if (timePeriod.equals("one-time")) {
+                if ((timePeriod.equals("one-time") || timePeriod.equals("एक बार"))) {
                     noOfTimesEdit.setText("1");
                     noOfTimesEdit.setEnabled(false);
                 } else {
@@ -679,7 +679,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                     else
                         timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodListSec);
                 } else {
-                    if (spinnerTimePeriod.getSelectedItem().equals("one-time")) {
+                    if (spinnerTimePeriod.getSelectedItem().equals("one-time") || spinnerTimePeriod.getSelectedItem().equals("एक बार")) {
                         timePeriod_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timePeriodListSecOneTime);
                         spinnerTimePeriod.setSelection(0);
                     } else {
@@ -700,14 +700,26 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
             Frequency frequency1 = realm.where(Frequency.class)
                     .equalTo("frequencyValue", previousFrequencyUnit)
                     .findFirst();
-            if(frequency1 != null)
-                spinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(frequency1.getHarvestFrequency()));
+            if(frequency1 != null) {
+                if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi")) {
+                    spinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(frequency1.getHarvestFrequencyHindi()));
+
+                } else
+                    spinnerTimePeriod.setSelection(timePeriod_adapter.getPosition(frequency1.getHarvestFrequency()));
+            }
         }
 
+        Quantity quantity;
+        if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi"))   {
+            quantity = realm.where(Quantity.class)
+                    .equalTo("quantityNameHindi",  costElementYearsLoad.getCostPerPeriodUnit())
+                    .findFirst();
 
-        Quantity quantity = realm.where(Quantity.class)
-                .equalTo("quantityName", costElementYearsLoad.getCostPerPeriodUnit())
-                .findFirst();
+        } else {
+            quantity = realm.where(Quantity.class)
+                    .equalTo("quantityName",  costElementYearsLoad.getCostPerPeriodUnit())
+                    .findFirst();
+        }
 
         if (unitList.size() != 0) {
             if (currentYearIndexSave == 0) {
@@ -937,7 +949,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
 
                 if (!isTrend) {
                     if (costElement4.getCostElementYearses().size() > 0) {
-                        if (costElement4.getCostElementYearses().get(0).getCostFrequencyUnit() == 0) {
+                        if (costElement4.getCostElementYearses().get(0).getCostFrequencyUnit() == 1) {
                             int eleCount = 0;
                             harvestFreDisp = 0;
 
@@ -1168,7 +1180,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 if (dialogRadioGroup.getCheckedRadioButtonId() == R.id.radio_button_negative) {
-                    if(timePeriod.equals("one-time"))
+                    if((timePeriod.equals("one-time") || timePeriod.equals("एक बार")))
                         dialogEditFrequency.setEnabled(false);
                     else
                         dialogEditFrequency.setEnabled(true);
@@ -1195,9 +1207,17 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
         });
         dialogSpinnerTimePeriod.setAdapter(dialog_timePeriod_adapter);
         dialogSpinnerQuantityUnit.setAdapter(dialog_unit_adapter);
-        Quantity quantity = realm.where(Quantity.class)
-                .equalTo("quantityName", mQuaUnit)
-                .findFirst();
+        Quantity quantity;
+
+        if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi"))   {
+            quantity = realm.where(Quantity.class)
+                    .equalTo("quantityNameHindi", mQuaUnit)
+                    .findFirst();
+        } else {
+            quantity = realm.where(Quantity.class)
+                    .equalTo("quantityName", mQuaUnit)
+                    .findFirst();
+        }
         Frequency frequency = realm.where(Frequency.class)
                 .equalTo("frequencyValue", (int) mFreqUnit)
                 .findFirst();
@@ -1263,7 +1283,7 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                 timePeriod = parent.getItemAtPosition(pos).toString();
 
                 // Log.e("Time period ",timePeriod);
-                if (timePeriod.equals("one-time") && !currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))) {
+                if ((timePeriod.equals("one-time") || timePeriod.equals("एक बार")) && !currentSocialCapitalSurvey.equals(getString(R.string.string_pastureland))) {
                     dialogEditFrequency.setText("1");
                     dialogEditFrequency.setEnabled(false);
                 } else {
@@ -1335,13 +1355,25 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
 
                             SharedCostElementYears costElementTrend = realm.createObject(SharedCostElementYears.class);
 
+                            Quantity quantity;
+                            Frequency frequency;
 
-                            Quantity quantity = realm.where(Quantity.class)
-                                    .equalTo("quantityName", unit)
-                                    .findFirst();
-                            Frequency frequency = realm.where(Frequency.class)
-                                    .equalTo("harvestFrequency", timePeriod)
-                                    .findFirst();
+                            if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi"))   {
+                                quantity = realm.where(Quantity.class)
+                                        .equalTo("quantityNameHindi", unit)
+                                        .findFirst();
+                                frequency = realm.where(Frequency.class)
+                                        .equalTo("harvestFrequencyHindi", timePeriod)
+                                        .findFirst();
+                            } else {
+                                quantity = realm.where(Quantity.class)
+                                        .equalTo("quantityName", unit)
+                                        .findFirst();
+                                frequency = realm.where(Frequency.class)
+                                        .equalTo("harvestFrequency", timePeriod)
+                                        .findFirst();
+                            }
+
 
                             double harvestFre = mHarvestFre;
                             double harvestTimes = mHarvestTimes;
