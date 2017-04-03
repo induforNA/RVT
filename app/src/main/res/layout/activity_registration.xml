@@ -51,78 +51,53 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:paddingLeft="5dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginRight="10dp"
-                            android:textSize="@dimen/textfield_size_lower"
-                            android:text="@string/date_hint"/>
+                        android:textColorHint="@color/black"
+                        android:textColorHighlight="@color/black"
+                        android:layout_height="wrap_content">
 
-                        <EditText
+                        <AutoCompleteTextView
                             android:id="@+id/edittext_date"
-                            android:layout_width="match_parent"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:nextFocusDown="@+id/edittext_surveyor"
-                            android:onClick="setDate"
-                            android:textSize="@dimen/textfield_size" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                            android:hint="@string/date_hint"
+                            android:textColorHint="@color/black"
+                            android:textColorHighlight="@color/black"
+                            android:layout_marginTop="45dp"/>
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginTop="5dp"
-                            android:paddingLeft="5dp"
-                            android:textSize="@dimen/textfield_size_lower"
-                            android:text="@string/community_hint"/>
+                        android:textColorHint="@color/black"
+                        android:layout_marginTop="8dp"
+                        android:textColorHighlight="@color/black"
+                        android:layout_height="wrap_content">
 
-                        <EditText
+                        <AutoCompleteTextView
                             android:id="@+id/edittext_community"
-                            android:layout_width="match_parent"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:maxLines="1"
-                            android:nextFocusDown="@+id/edittext_respondent_group"
-                            android:singleLine="true"
-                            android:textSize="@dimen/textfield_size" />
-                    </LinearLayout>
-                    <LinearLayout
+                            android:hint="@string/community_hint"
+                            android:textColorHint="@color/black"
+                            android:textColorHighlight="@color/black"
+                            android:layout_marginTop="45dp"/>
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginTop="5dp"
-                            android:paddingLeft="5dp"
-                            android:textSize="@dimen/textfield_size_lower"
-                            android:text="@string/district_hint"/>
+                        android:textColorHint="@color/black"
+                        android:layout_marginTop="8dp"
+                        android:textColorHighlight="@color/black">
 
-                        <EditText
+                        <AutoCompleteTextView
                             android:id="@+id/edittext_district"
-                            android:layout_width="match_parent"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:maxLines="1"
-                            android:nextFocusDown="@+id/edittext_state"
-                            android:singleLine="true"
-                            android:textSize="@dimen/textfield_size" />
-                    </LinearLayout>
+                            android:hint="@string/district_hint"
+                            android:textColorHint="@color/black"
+                            android:textColorHighlight="@color/black"
+                            android:layout_marginTop="45dp"/>
+                    </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>
 
@@ -133,82 +108,55 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <LinearLayout
+
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginTop="5dp"
-                            android:paddingLeft="5dp"
-                            android:textSize="@dimen/textfield_size_lower"
-                            android:text="@string/surveyor_hint"/>
+                        android:textColorHint="@color/black"
+                        android:textColorHighlight="@color/black">
 
-                        <EditText
+                        <AutoCompleteTextView
                             android:id="@+id/edittext_surveyor"
-                            android:layout_width="match_parent"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:maxLines="1"
-                            android:nextFocusDown="@+id/edittext_community"
-                            android:singleLine="true"
-                            android:textSize="@dimen/textfield_size" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                            android:hint="@string/surveyor_hint"
+                            android:textColorHint="@color/black"
+                            android:textColorHighlight="@color/black"
+                            android:layout_marginTop="45dp"/>
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginTop="5dp"
-                            android:paddingLeft="5dp"
-                            android:textSize="@dimen/textfield_size_lower"
-                            android:text="@string/respondent_group_hint"/>
+                        android:textColorHint="@color/black"
+                        android:layout_marginTop="8dp"
+                        android:textColorHighlight="@color/black">
 
-                        <EditText
+                        <AutoCompleteTextView
                             android:id="@+id/edittext_respondent_group"
-                            android:layout_width="match_parent"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:maxLines="1"
-                            android:nextFocusDown="@+id/edittext_district"
-                            android:singleLine="true"
-                            android:textSize="@dimen/textfield_size" />
-                    </LinearLayout>
-
-
-
-                    <LinearLayout
+                            android:textColorHint="@color/black"
+                            android:textColorHighlight="@color/black"
+                            android:hint="@string/respondent_group_hint"
+                            android:layout_marginTop="45dp"/>
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginTop="5dp"
-                            android:paddingLeft="5dp"
-                            android:textSize="@dimen/textfield_size_lower"
-                            android:text="@string/state_hint"/>
+                        android:textColorHint="@color/black"
+                        android:layout_marginTop="8dp"
+                        android:textColorHighlight="@color/black">
 
-                        <EditText
+                        <AutoCompleteTextView
                             android:id="@+id/edittext_state"
-                            android:layout_width="match_parent"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:maxLines="1"
-                            android:nextFocusDown="@+id/spinner_country"
-                            android:singleLine="true"
-                            android:textSize="@dimen/textfield_size" />
-                    </LinearLayout>
+                            android:textColorHint="@color/black"
+                            android:textColorHighlight="@color/black"
+                            android:hint="@string/state_hint"
+                            android:layout_marginTop="45dp"/>
+                    </android.support.design.widget.TextInputLayout>
+
                 </LinearLayout>
             </LinearLayout>
 
@@ -250,7 +198,6 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -272,6 +219,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="5dp"
                         android:textSize="@dimen/textfield_size"
+                        android:textColor="@color/black"
                         android:text="@string/risk_rate_hint"/>
                     <EditText
                         android:id="@+id/reg_risk_rate"
@@ -281,7 +229,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="10dp"
-                        android:gravity="center_horizontal"
+                        android:gravity="center_horizontal|bottom"
                         android:inputType="numberDecimal"
                         android:nextFocusDown="@+id/reg_inflation_rate"
                         android:textSize="@dimen/textfield_size" />
@@ -349,6 +297,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="5dp"
                         android:textSize="@dimen/textfield_size"
+                        android:textColor="@color/black"
                         android:text="@string/inflation_rate_hint"/>
                     <EditText
                         android:id="@+id/reg_inflation_rate"
@@ -357,7 +306,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="10dp"
-                        android:gravity="center_horizontal"
+                        android:gravity="center_horizontal|bottom"
                         android:nextFocusDown="@+id/button_sign_up"
                         android:inputType="numberDecimal"
                         android:textSize="@dimen/textfield_size" />

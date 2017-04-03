@@ -364,7 +364,7 @@
     },
     {
       "questionno": 14,
-      "question": "How much of your community's use of the resources/products",
+      "question": "How much of your community's use of the resources/products associated with this land use activity comes from this specific parcel?",
       "questionHindi": "इस सामग्रियों के इस्तेमाल से जुड़े संसाधनों / उत्पादों के आपके समुदाय का कितना उपयोग इस विशिष्ट पार्सल से आता है?",
       "weight": "5",
       "optiontype": "single",

@@ -21,6 +21,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -64,7 +65,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
     private double inflationRate = 0.05;
     private double riskRate;
     private Realm realm;
-    private EditText dateView;
+    private AutoCompleteTextView dateView;
     private int surveyId;
     private Date date;
     private SharedPreferences preferences;
@@ -75,11 +76,11 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
     private Button signUp;
     private Button login;
     private Button about;
-    private EditText respondentGroup;
-    private EditText state;
-    private EditText district;
-    private EditText community;
-    private EditText surveyor;
+    private AutoCompleteTextView respondentGroup;
+    private AutoCompleteTextView state;
+    private AutoCompleteTextView district;
+    private AutoCompleteTextView community;
+    private AutoCompleteTextView surveyor;
     private EditText editRiskRate;
     private EditText editInflationRate;
 //    private EditText country;
@@ -118,12 +119,12 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         login = (Button) findViewById(R.id.button_login);
         about = (Button) findViewById(R.id.button_about);
 
-        respondentGroup = (EditText) findViewById(R.id.edittext_respondent_group);
-        state = (EditText) findViewById(R.id.edittext_state);
-        district = (EditText) findViewById(R.id.edittext_district);
-        community = (EditText) findViewById(R.id.edittext_community);
-        surveyor = (EditText) findViewById(R.id.edittext_surveyor);
-        dateView = (EditText) findViewById(R.id.edittext_date);
+        respondentGroup = (AutoCompleteTextView) findViewById(R.id.edittext_respondent_group);
+        state = (AutoCompleteTextView) findViewById(R.id.edittext_state);
+        district = (AutoCompleteTextView) findViewById(R.id.edittext_district);
+        community = (AutoCompleteTextView) findViewById(R.id.edittext_community);
+        surveyor = (AutoCompleteTextView) findViewById(R.id.edittext_surveyor);
+        dateView = (AutoCompleteTextView) findViewById(R.id.edittext_date);
         editRiskRate = (EditText) findViewById(R.id.reg_risk_rate);
         editInflationRate = (EditText) findViewById(R.id.reg_inflation_rate);
 //
