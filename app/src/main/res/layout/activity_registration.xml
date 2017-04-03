@@ -53,7 +53,6 @@
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:textColorHint="@color/black"
                         android:textColorHighlight="@color/black"
                         android:layout_height="wrap_content">
 
@@ -62,13 +61,13 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/date_hint"
-                            android:textColorHint="@color/black"
+                            android:nextFocusDown="@+id/edittext_surveyor"
                             android:textColorHighlight="@color/black"
+
                             android:layout_marginTop="45dp"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:textColorHint="@color/black"
                         android:layout_marginTop="8dp"
                         android:textColorHighlight="@color/black"
                         android:layout_height="wrap_content">
@@ -78,14 +77,13 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/community_hint"
-                            android:textColorHint="@color/black"
+                            android:nextFocusDown="@+id/edittext_respondent_group"
                             android:textColorHighlight="@color/black"
                             android:layout_marginTop="45dp"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColorHint="@color/black"
                         android:layout_marginTop="8dp"
                         android:textColorHighlight="@color/black">
 
@@ -94,7 +92,7 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/district_hint"
-                            android:textColorHint="@color/black"
+                            android:nextFocusDown="@+id/edittext_state"
                             android:textColorHighlight="@color/black"
                             android:layout_marginTop="45dp"/>
                     </android.support.design.widget.TextInputLayout>
@@ -112,7 +110,6 @@
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColorHint="@color/black"
                         android:textColorHighlight="@color/black">
 
                         <AutoCompleteTextView
@@ -120,14 +117,13 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/surveyor_hint"
-                            android:textColorHint="@color/black"
+                            android:nextFocusDown="@+id/edittext_community"
                             android:textColorHighlight="@color/black"
                             android:layout_marginTop="45dp"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColorHint="@color/black"
                         android:layout_marginTop="8dp"
                         android:textColorHighlight="@color/black">
 
@@ -135,15 +131,14 @@
                             android:id="@+id/edittext_respondent_group"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:textColorHint="@color/black"
                             android:textColorHighlight="@color/black"
                             android:hint="@string/respondent_group_hint"
+                            android:nextFocusDown="@+id/edittext_district"
                             android:layout_marginTop="45dp"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColorHint="@color/black"
                         android:layout_marginTop="8dp"
                         android:textColorHighlight="@color/black">
 
@@ -151,9 +146,9 @@
                             android:id="@+id/edittext_state"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:textColorHint="@color/black"
                             android:textColorHighlight="@color/black"
                             android:hint="@string/state_hint"
+                            android:nextFocusDown="@+id/spinner_country"
                             android:layout_marginTop="45dp"/>
                     </android.support.design.widget.TextInputLayout>
 
@@ -229,6 +224,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="10dp"
+                        android:hint="0.0"
                         android:gravity="center_horizontal|bottom"
                         android:inputType="numberDecimal"
                         android:nextFocusDown="@+id/reg_inflation_rate"
@@ -306,6 +302,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="10dp"
+                        android:hint="0.0"
                         android:gravity="center_horizontal|bottom"
                         android:nextFocusDown="@+id/button_sign_up"
                         android:inputType="numberDecimal"
