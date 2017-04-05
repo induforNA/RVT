@@ -46,6 +46,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.RegistrationActivity"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="landscape" />
         <activity
             android:name=".view.LoginActivity"
