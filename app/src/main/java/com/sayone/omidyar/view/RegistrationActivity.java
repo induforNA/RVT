@@ -161,7 +161,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         ArrayAdapter<CharSequence> language_adapter = ArrayAdapter.createFromResource(this,
                 R.array.language_array, android.R.layout.simple_spinner_dropdown_item);
         language_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        final ArrayAdapter<CharSequence> currency_adapter = ArrayAdapter.createFromResource(this,
+        ArrayAdapter<CharSequence> currency_adapter = ArrayAdapter.createFromResource(this,
                 R.array.currency_array, android.R.layout.simple_spinner_dropdown_item);
         currency_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
