@@ -886,6 +886,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
         if(currentSocialCapitalServey.equals(getString(R.string.string_pastureland))){
             dialogQuestionHarvest.setText(getString(R.string.text_question_livestock, revenueProduct.getName()));
+            dialogQuestionPerHousehold.setText(getString(R.string.text_quantity_question_livestock, revenueProduct.getName()));
+            dialogQuestionPerUnit.setText(getString(R.string.text_product_question_livestock, revenueProduct.getName()));
             dialogQuestionHouseholds.setText(getString(R.string.text_question_number_livestock));
             containerTimePeriod.setVisibility(View.GONE);
             containerArea.setVisibility(View.GONE);
@@ -1433,12 +1435,13 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                             harvestFreDisp = 0;
                             for (RevenueProductYears revenueProductYears : revenueProduct4.getRevenueProductYearses()) {
                                 if (revenueProductYears.getProjectedIndex() < 0) {
-                                    if (currentSocialCapitalServey.equals(getString(R.string.string_pastureland)))
+                                    if (currentSocialCapitalServey.equals(getString(R.string.string_pastureland))) {
                                         harvestFreDisp += revenueProductYears.getHarvestFrequencyValue();
-                                    else
-                                        harvestFreDisp += harvestFre;
-
-                                    harvestFre = 0;
+                                        harvestFre += revenueProductYears.getHarvestFrequencyValue();
+                                    } else {
+                                        harvestFreDisp += revenueProductYears.getHarvestFrequencyValue();
+                                        harvestFre = 0;
+                                    }
                                    /* if (harvestTimes < revenueProductYears.getQuantityValue()) {
                                         harvestTimes = revenueProductYears.getQuantityValue();
                                     }
@@ -1458,6 +1461,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
                                     eleCount++;
                                 }
                             }
+                            harvestFre = harvestFre / eleCount;
                             harvestFreDisp = harvestFreDisp / eleCount;
                             harvestTimes = harvestTimes / eleCount;
                             harvestPrice = harvestPrice / eleCount;
@@ -1479,7 +1483,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
                                 if (revenueProductYears.getProjectedIndex() < 0) {
 
-                                    double harvestFreTemp ;
+                                    double harvestFreTemp;
                                     double previousFreqTemp = previousFrequencyUnit == 2 ? 1 : previousFrequencyUnit;
 
                                     harvestTimes = harvestTimes + revenueProductYears.getQuantityValue();

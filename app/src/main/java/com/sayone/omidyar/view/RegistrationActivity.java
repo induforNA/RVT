@@ -38,6 +38,7 @@ import com.sayone.omidyar.model.DevIdSend;
 import com.sayone.omidyar.model.ForestLand;
 import com.sayone.omidyar.model.LandKind;
 import com.sayone.omidyar.model.MiningLand;
+import com.sayone.omidyar.model.ParcelLocation;
 import com.sayone.omidyar.model.PastureLand;
 import com.sayone.omidyar.model.Survey;
 import com.sayone.omidyar.model.UniqueId;
@@ -395,7 +396,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
 
         realm.beginTransaction();
         Survey survey = realm.createObject(Survey.class);
-        survey.setId(surveyId);
+        survey.setId(getNextKeyComponent());
         survey.setSurveyId(formattediId);
         editor = preferences.edit();
         editor.putString("surveyId", formattediId);
@@ -506,5 +507,9 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
                     }
                 }
         }
+    }
+
+    public int getNextKeyComponent() {
+        return realm.where(ParcelLocation.class).max("id").intValue() + 1;
     }
 }

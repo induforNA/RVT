@@ -228,7 +228,10 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
             gpsCoordinate_4.setText(coordinate_4);
             gpsCoordinate_5.setText(coordinate_5);
             gpsCoordinate_6.setText(coordinate_6);
-            parcelSize.setText(Float.toString(parcelArea) + " ha");
+            if(parcelArea != 0)
+                parcelSize.setText(Float.toString(parcelArea) + " ha");
+            else
+                parcelSize.setText("Not Available");
         }
 
 
