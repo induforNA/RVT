@@ -971,11 +971,11 @@ public class NaturalCapitalSharedCostActivityC extends BaseActivity implements V
                                     priceCurrency = costElementYears.getCostPerUnitUnit();
                                     eleCount++;
                                 }
-                                harvestFreDisp = harvestFreDisp / eleCount;
-                                harvestTimes = harvestTimes / eleCount;
-                                harvestPrice = harvestPrice / eleCount;
-                                household = household / eleCount;
                             }
+                            harvestFreDisp = harvestFreDisp / eleCount;
+                            harvestTimes = harvestTimes / eleCount;
+                            harvestPrice = harvestPrice / eleCount;
+                            household = household / eleCount;
                         } else {
                             int eleCount = 0;
                             for (SharedCostElementYears costElementYears : costElement4.getCostElementYearses()) {

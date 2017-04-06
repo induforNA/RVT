@@ -676,17 +676,17 @@ public class NaturalCapitalSharedCostOutlayB extends BaseActivity {
         currentYearIndex = totalYears - 1;
         currentItemIndex = totalIems - 1;
 
-        if (j < i) {
+      /*  if (j < i) {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("currentSocialCapitalSurvey", landKindRealmResults.get(j).getName());
             editor.apply();
 
             Intent intent = new Intent(getApplicationContext(), StartLandTypeActivity.class);
             startActivity(intent);
-        } else {
+        } else {*/
             Intent intent = new Intent(getApplicationContext(), NewCertificateActivity.class);
             startActivity(intent);
-        }
+      //  }
     }
 
     public void toggleMenuDrawer() {

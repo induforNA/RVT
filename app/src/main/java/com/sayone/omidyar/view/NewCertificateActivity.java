@@ -236,7 +236,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
 
 
         for (LandKind landKind : landKinds) {
-            if (landKind.getName().equals(getString(R.string.string_forestland))) {
+            if (landKind.getName().equals(getString(R.string.string_forestland)) && landKind.getStatus().equals("active")) {
                 forestlandLayout.setVisibility(View.VISIBLE);
                 socialCapital = landKind.getSocialCapitals();
                 if (socialCapital.isDiscountFlag()) {
@@ -274,7 +274,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                 }
             }
 
-            if (landKind.getName().equals(getString(R.string.string_cropland))) {
+            if (landKind.getName().equals(getString(R.string.string_cropland))  && landKind.getStatus().equals("active")) {
                 croplandLayout.setVisibility(View.VISIBLE);
                 socialCapital = landKind.getSocialCapitals();
                 if (socialCapital.isDiscountFlag()) {
@@ -311,7 +311,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                 }
             }
 
-            if (landKind.getName().equals(getString(R.string.string_pastureland))) {
+            if (landKind.getName().equals(getString(R.string.string_pastureland))  && landKind.getStatus().equals("active")) {
                 pasturelandLayout.setVisibility(View.VISIBLE);
                 socialCapital = landKind.getSocialCapitals();
                 if (socialCapital.isDiscountFlag()) {
@@ -349,7 +349,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
                 }
             }
 
-            if (landKind.getName().equals(getString(R.string.string_miningland))) {
+            if (landKind.getName().equals(getString(R.string.string_miningland)) && landKind.getStatus().equals("active")) {
                 mininglandLayout.setVisibility(View.VISIBLE);
                 socialCapital = landKind.getSocialCapitals();
                 if (socialCapital.isDiscountFlag()) {

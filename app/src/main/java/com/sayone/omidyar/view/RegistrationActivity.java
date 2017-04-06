@@ -161,7 +161,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
         ArrayAdapter<CharSequence> language_adapter = ArrayAdapter.createFromResource(this,
                 R.array.language_array, android.R.layout.simple_spinner_dropdown_item);
         language_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ArrayAdapter<CharSequence> currency_adapter = ArrayAdapter.createFromResource(this,
+        final ArrayAdapter<CharSequence> currency_adapter = ArrayAdapter.createFromResource(this,
                 R.array.currency_array, android.R.layout.simple_spinner_dropdown_item);
         currency_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -198,7 +198,6 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
                 Configuration conf = res.getConfiguration();
                 conf.locale = myLocale;
                 res.updateConfiguration(conf, dm);
-
             }
 
             @Override
@@ -510,6 +509,6 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
     }
 
     public int getNextKeyComponent() {
-        return realm.where(ParcelLocation.class).max("id").intValue() + 1;
+        return realm.where(Survey.class).max("id").intValue() + 1;
     }
 }
