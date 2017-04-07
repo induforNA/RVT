@@ -231,7 +231,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
             if(parcelArea != 0)
                 parcelSize.setText(Float.toString(parcelArea) + " ha");
             else
-                parcelSize.setText("Not Available");
+                parcelSize.setText(getString(R.string.text_not_available));
         }
 
 
@@ -417,13 +417,16 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         if (surveyCheck.getComponents() != null)
             totalVal = totalVal + surveyCheck.getComponents().getSharedCostValue();
 
-        parcelArea = parcelArea > 0 ? parcelArea : 1;
-        parcelVal = totalVal / parcelArea;
+
         if (totalVal > 500) {
             if (totalVal >= 1000) {
                 totalVal = (Math.round(totalVal / 1000)) * 1000;
             } else totalVal = 1000;
+        } else if(totalVal < 0) {
+            totalVal =  (Math.round(totalVal / 1000)) * 1000;
         }
+        int parcel = parcelArea > 0 ? (int) parcelArea : 1;
+        parcelVal = totalVal / parcel;
         parcelVal = Math.round(parcelVal);
 
         String totalValStr = formattedString(Long.valueOf(String.valueOf((long) totalVal)));
@@ -447,7 +450,7 @@ public class NewCertificateActivity extends BaseActivity implements View.OnClick
         inflationRate.setText(inflation + "%");
         countryRiskRate.setText(sovereign + "%");
 
-        String parcelValStr = formattedString(Long.valueOf(String.valueOf((long) parcelVal)));
+        String parcelValStr =  parcelArea != 0 ? formattedString(Long.valueOf(String.valueOf((long) parcelVal))) : getString(R.string.text_not_available);
         parcelValue.setText(parcelValStr);
     }
 

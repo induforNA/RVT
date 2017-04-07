@@ -872,7 +872,7 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
         dialogQuestionArea.setText(R.string.percentage_area_harvested);
         if(currentSocialCapitalServey.equals(getString(R.string.string_miningland))){
             dialogQuestionHarvest.setText(getString(R.string.qn_natural_complex_1_2, revenueProduct.getName()));
-            dialogQuestionHouseholds.setText(getString(R.string.string_household_harvest, revenueProduct.getName()));
+            dialogQuestionHouseholds.setText(getString(R.string.string_household_extract, revenueProduct.getName()));
             dialogQuestionPerHousehold.setText(getString(R.string.text_question_quantity_extract, revenueProduct.getName()));
             dialogQuestionArea.setText(R.string.percentage_area_extracted);
         }
@@ -886,8 +886,8 @@ public class NaturalCapitalSurveyActivityD extends BaseActivity implements View.
 
         if(currentSocialCapitalServey.equals(getString(R.string.string_pastureland))){
             dialogQuestionHarvest.setText(getString(R.string.text_question_livestock, revenueProduct.getName()));
-            dialogQuestionPerHousehold.setText(getString(R.string.text_quantity_question_livestock, revenueProduct.getName()));
-            dialogQuestionPerUnit.setText(getString(R.string.text_product_question_livestock, revenueProduct.getName()));
+            dialogQuestionPerHousehold.setText(getString(R.string.text_quantity_question_livestock));
+            dialogQuestionPerUnit.setText(getString(R.string.text_product_question_livestock));
             dialogQuestionHouseholds.setText(getString(R.string.text_question_number_livestock));
             containerTimePeriod.setVisibility(View.GONE);
             containerArea.setVisibility(View.GONE);

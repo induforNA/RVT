@@ -1092,11 +1092,11 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
 //                                    household = costElementYears.getHouseholds();
                                     eleCount++;
                                 }
-                                harvestFreDisp = harvestFreDisp / eleCount;
-                                harvestTimes = harvestTimes / eleCount;
-                                harvestPrice = harvestPrice / eleCount;
-                                household = household / eleCount;
                             }
+                            harvestFreDisp = harvestFreDisp / eleCount;
+                            harvestTimes = harvestTimes / eleCount;
+                            harvestPrice = harvestPrice / eleCount;
+                            household = household / eleCount;
                         } else {
                             int eleCount = 0;
                             for (CostElementYears costElementYears : costElement4.getCostElementYearses()) {
@@ -1424,8 +1424,8 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         dialogQuesOverride.setText(getString(R.string.question_override,costElement.getName()));
         dialogQuestionHarvest.setText(getString(R.string.qn_natural_cost_1_1, costElement.getName()));
         dialogQuestionHouseholds.setText(getString(R.string.string_household_cost, costElement.getName()));
-        dialogQuestionPerHousehold.setText(getString(R.string.qn_natural_capital_1, costElement.getName()));
-        dialogQuestionPerUnit.setText(getString(R.string.text_question_price, costElement.getName()));
+        dialogQuestionPerHousehold.setText(getString(R.string.qn_natural_cost_2, costElement.getName()));
+        dialogQuestionPerUnit.setText(getString(R.string.qn_natural_cost_3, costElement.getName()));
         dialogFrequency.setText(String.valueOf(roundToTwoDecimal(harvestFreDisp)));
         dialogHouseholds.setText(String.valueOf(roundToTwoDecimal(mHousehold)));
         dialogQuantity.setText(String.valueOf(roundToTwoDecimal(mHarvestTimes)));

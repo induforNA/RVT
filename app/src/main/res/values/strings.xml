@@ -598,6 +598,7 @@
 
     <string name="qn_natural_capital_1">What was the quantity of %1$s harvested each time?</string>
     <string name="qn_natural_capital_1_extract">What was the quantity of %1$s extracted each time?</string>
+    <string name="qn_natural_capital_1_incur">What was the quantity of %1$s incurred each time?</string>
 
     <string name="question_override">We will project cash flows for the next 15 years based on the average of the data you entered for %1$s. Does this average seem realistic? If not, please enter your estimate.</string>
     <string name="label_your_estimate">New estimate (overrides average)</string>
@@ -672,6 +673,7 @@
     <string name="text_searching">Searching</string>
     <string name="text_gps_unavailable">GPS not available</string>
     <string name="text_gps_enable_request">Your GPS seems to be disabled, do you want to enable it?</string>
+    <string name="text_not_available">Not Available</string>
     <string-array name="genders">
         <item>Male</item>
         <item>Female</item>
