@@ -107,7 +107,7 @@
     <string name="string_miningland">खनन</string>
     <string name="string_cropland">कृषि</string>
 
-    <string name="title_natural_capital">प्राकृतिक पूंजी (वास्तविक)</string>
+    <string name="title_natural_capital">प्राकृतिक पूंजी</string>
     <string name="title_social_capital">सामाजिक पूंजी सर्वेक्षण</string>
     <string name="heading_survey_login">सर्वेक्षण लॉगिन</string>
     <string name="survey_hash">सर्वेक्षण #</string>
@@ -322,6 +322,7 @@
     <string name="text_enable_gps">जीपीएस सक्षम करें</string>
     <string name="text_gps_enable_request">आपके जीपीएस को निष्क्रिय किया जा रहा है, क्या आप इसे सक्षम करना चाहते हैं?</string>
     <string name="text_gps_coordinates">जीपीएस समन्वय : %1$s</string>
+    <string name="text_not_available">उपलब्ध नहीं </string>
 
     <string-array name="genders">
         <item>पुस्र्ष</item>

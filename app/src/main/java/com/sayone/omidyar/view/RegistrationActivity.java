@@ -192,7 +192,7 @@ public class RegistrationActivity extends BaseActivity implements View.OnClickLi
             public void onItemSelected(AdapterView<?> parent,
                                        View view, int pos, long id) {
                 language = parent.getItemAtPosition(pos).toString();
-                Locale myLocale = new Locale(language);
+                Locale myLocale = new Locale(language.substring(0,2).toLowerCase());
                 Resources res = getResources();
                 DisplayMetrics dm = res.getDisplayMetrics();
                 Configuration conf = res.getConfiguration();
