@@ -1316,6 +1316,40 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
                 .equalTo("frequencyValue", (int) mFreqUnit)
                 .findFirst();
 
+        dialogRadioGroup.check(R.id.radio_button_positive);
+        dialogEditFrequency.setEnabled(false);
+        dialogEditHousehold.setEnabled(false);
+        dialogEditQuantity.setEnabled(false);
+        dialogEditPrice.setEnabled(false);
+        dialogEditArea.setEnabled(false);
+        dialogSpinnerTimePeriod.setEnabled(false);
+        dialogSpinnerQuantityUnit.setEnabled(false);
+        dialogRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                if (dialogRadioGroup.getCheckedRadioButtonId() == R.id.radio_button_negative) {
+                    if((timePeriod.equals("one-time") || timePeriod.equals("एक बार")))
+                        dialogEditFrequency.setEnabled(false);
+                    else
+                        dialogEditFrequency.setEnabled(true);
+                    dialogEditHousehold.setEnabled(true);
+                    dialogEditQuantity.setEnabled(true);
+                    dialogEditPrice.setEnabled(true);
+                    dialogEditArea.setEnabled(true);
+                    dialogSpinnerTimePeriod.setEnabled(true);
+                    dialogSpinnerQuantityUnit.setEnabled(true);
+                } else if (dialogRadioGroup.getCheckedRadioButtonId() == R.id.radio_button_positive) {
+                    dialogEditFrequency.setEnabled(false);
+                    dialogEditHousehold.setEnabled(false);
+                    dialogEditQuantity.setEnabled(false);
+                    dialogEditPrice.setEnabled(false);
+                    dialogEditArea.setEnabled(false);
+                    dialogSpinnerTimePeriod.setEnabled(false);
+                    dialogSpinnerQuantityUnit.setEnabled(false);
+                }
+            }
+        });
+
         CostElementYears costElementTrend = costElement.getCostElementTrend();
         if(costElementTrend != null){
             dialogRadioNegative.setChecked(true);
@@ -1441,39 +1475,7 @@ public class NaturalCapitalCostActivityC extends BaseActivity implements View.On
         } else
             dialogEditFrequency.setFocusable(true);*/
 
-        dialogRadioGroup.check(R.id.radio_button_positive);
-        dialogEditFrequency.setEnabled(false);
-        dialogEditHousehold.setEnabled(false);
-        dialogEditQuantity.setEnabled(false);
-        dialogEditPrice.setEnabled(false);
-        dialogEditArea.setEnabled(false);
-        dialogSpinnerTimePeriod.setEnabled(false);
-        dialogSpinnerQuantityUnit.setEnabled(false);
-        dialogRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                if (dialogRadioGroup.getCheckedRadioButtonId() == R.id.radio_button_negative) {
-                    if((timePeriod.equals("one-time") || timePeriod.equals("एक बार")))
-                        dialogEditFrequency.setEnabled(false);
-                    else
-                        dialogEditFrequency.setEnabled(true);
-                    dialogEditHousehold.setEnabled(true);
-                    dialogEditQuantity.setEnabled(true);
-                    dialogEditPrice.setEnabled(true);
-                    dialogEditArea.setEnabled(true);
-                    dialogSpinnerTimePeriod.setEnabled(true);
-                    dialogSpinnerQuantityUnit.setEnabled(true);
-                } else if (dialogRadioGroup.getCheckedRadioButtonId() == R.id.radio_button_positive) {
-                    dialogEditFrequency.setEnabled(false);
-                    dialogEditHousehold.setEnabled(false);
-                    dialogEditQuantity.setEnabled(false);
-                    dialogEditPrice.setEnabled(false);
-                    dialogEditArea.setEnabled(false);
-                    dialogSpinnerTimePeriod.setEnabled(false);
-                    dialogSpinnerQuantityUnit.setEnabled(false);
-                }
-            }
-        });
+
 
         dialogBack.setOnClickListener(new View.OnClickListener() {
             @Override
