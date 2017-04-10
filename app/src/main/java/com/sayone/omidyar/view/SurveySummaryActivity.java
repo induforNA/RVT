@@ -101,6 +101,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
     private Realm realm;
 
     String emailIdsStr;
+    private Survey mSurvey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -289,6 +290,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                 for (Survey survey : surveys) {
                     Log.e("setsend:", setsend);
                     Log.e("surveyId:", survey.getSurveyId());
+                    mSurvey = survey;
                     if (survey.getSurveyId().equals(setsend)) {
                         Log.e("AA ", "ok");
                         jsonObject = new JSONObject();
@@ -745,8 +747,26 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
                     jsonObjectLandKind.put("surveyId", landKind.getSurveyId());
                 if (landKind.getName() == null) {
                     jsonObjectLandKind.put("name", "");
-                } else
-                    jsonObjectLandKind.put("name", landKind.getName());
+                } else {
+                    if (mSurvey.getLanguage().equals("English"))
+                        jsonObjectLandKind.put("name", landKind.getName());
+                    else {
+                        switch (landKind.getName()) {
+                            case "वानिकी" :
+                                jsonObjectLandKind.put("name", "Forestry");
+                                break;
+                            case "चराई" :
+                                jsonObjectLandKind.put("name", "Grazing");
+                                break;
+                            case "खनन" :
+                                jsonObjectLandKind.put("name", "Mining");
+                                break;
+                            case "कृषि" :
+                                jsonObjectLandKind.put("name", "Agriculture");
+                                break;
+                        }
+                    }
+                }
                 if (landKind.getSocialCapitals() == null) {
                     jsonObjectLandKind.put("socialCapitals", "");
                 } else
@@ -1075,8 +1095,60 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
                 if (revenueProductYear.getQuantityUnit() == null) {
                     jsonObjectRevenueProductYear.put("quantityUnit", "");
-                } else
+                } else {
                     jsonObjectRevenueProductYear.put("quantityUnit", revenueProductYear.getQuantityUnit());
+                        /*  switch (costElementYears.getCostPerPeriodUnit()) {
+                            case "किलोग्राम":
+                                jsonObjectCostElementYears.put("quantityUnit", "Kilogram");
+                                break;
+                            case "ग्राम":
+                                jsonObjectCostElementYears.put("quantityUnit", "Gram");
+                                break;
+                            case "मिलिग्रॅम":
+                                jsonObjectCostElementYears.put("quantityUnit", "Milligram");
+                                break;
+                            case "क्यूबिक मीटर":
+                                jsonObjectCostElementYears.put("quantityUnit", "Cubic Meter");
+                                break;
+                            case "क्यूबिक किलोमीटर":
+                                jsonObjectCostElementYears.put("quantityUnit", "Cubic Kilometer");
+                                break;
+                            case "क्यूबिक सेनटीमीटर":
+                                jsonObjectCostElementYears.put("quantityUnit", "Cubic Centimeter");
+                                break;
+                            case "क्यूबिक मिल्लीमीटर":
+                                jsonObjectCostElementYears.put("quantityUnit", "Cubic Millimeter");
+                                break;
+                            case "लिटेर":
+                                jsonObjectCostElementYears.put("quantityUnit", "Liter");
+                                break;
+                            case "मिल्लीलीटेर":
+                                jsonObjectCostElementYears.put("quantityUnit", "Milliliter");
+                                break;
+                            case "पौंड":
+                                jsonObjectCostElementYears.put("quantityUnit", "Pound");
+                                break;
+                            case "आउन्स":
+                                jsonObjectCostElementYears.put("quantityUnit", "Ounce");
+                                break;
+                            case "मीटर":
+                                jsonObjectCostElementYears.put("quantityUnit", "Meter");
+                                break;
+                            case "दिन":
+                                jsonObjectCostElementYears.put("quantityUnit", "Days");
+                                break;
+                            case "घंटे":
+                                jsonObjectCostElementYears.put("quantityUnit", "Hours");
+                                break;
+                            case "अन्य":
+                                jsonObjectCostElementYears.put("quantityUnit", "Others");
+                                break;
+                            default:
+                                jsonObjectCostElementYears.put("quantityUnit", costElementYears.getCostPerPeriodUnit());
+                                break;
+
+                        }*/
+                }
                 if (revenueProductYear.getRevenueProductId() == 0) {
                     jsonObjectRevenueProductYear.put("revenueProductId", "");
                 } else

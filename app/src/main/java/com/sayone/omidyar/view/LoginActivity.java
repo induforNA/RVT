@@ -82,7 +82,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                 editor = preferences.edit();
                                 editor.putString("surveyId", survey);
                                 editor.apply();
-                                Locale myLocale = new Locale(surveyCheck.getLanguage());
+                                Locale myLocale = new Locale(surveyCheck.getLanguage().substring(0,2).toLowerCase());
                                 Resources res = getResources();
                                 DisplayMetrics dm = res.getDisplayMetrics();
                                 Configuration conf = res.getConfiguration();
