@@ -997,9 +997,22 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                         freq = "1";
                         timePeriod = "per year";
 
-                        if(outlayYears1.getYear() >=  Integer.parseInt(spinnerYear.getSelectedItem().toString())) {
+//                        if(outlayYears1.getYear() >=  Integer.parseInt(spinnerYear.getSelectedItem().toString())) {
+//                            realm.beginTransaction();
+//                            outlayYears1.setPrice(outlayYears1.getPrice()+value);
+//                            outlayYears1.setFrequency(Double.parseDouble(freq));
+//                            outlayYears1.setTimePeriod(timePeriod);
+//                            realm.commitTransaction();
+//                        }
+                        if(outlayYears1.getYear() >  Integer.parseInt(spinnerYear.getSelectedItem().toString())) {
                             realm.beginTransaction();
                             outlayYears1.setPrice(outlayYears1.getPrice()+value);
+                            outlayYears1.setFrequency(Double.parseDouble(freq));
+                            outlayYears1.setTimePeriod(timePeriod);
+                            realm.commitTransaction();
+                        } else if(outlayYears1.getYear() ==  Integer.parseInt(spinnerYear.getSelectedItem().toString())) {
+                            realm.beginTransaction();
+                            outlayYears1.setPrice(value);
                             outlayYears1.setFrequency(Double.parseDouble(freq));
                             outlayYears1.setTimePeriod(timePeriod);
                             realm.commitTransaction();
