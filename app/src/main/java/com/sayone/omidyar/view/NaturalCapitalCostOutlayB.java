@@ -965,17 +965,48 @@ public class NaturalCapitalCostOutlayB extends BaseActivity {
                 String val = costValue.getText().toString();
                 String freq = frequencyNumber.getText().toString();
                 String timePeriod = spinnerOccurence.getSelectedItem().toString();
+
+                Frequency frequency;
+                if (language.equals("हिन्दी") || language.equalsIgnoreCase("Hindi")) {
+                    frequency = realm.where(Frequency.class)
+                            .equalTo("harvestFrequencyHindi", timePeriod)
+                            .findFirst();
+                } else {
+                    frequency = realm.where(Frequency.class)
+                            .equalTo("harvestFrequency", timePeriod)
+                            .findFirst();
+                }
+
                 if (val.equals("")) {
                     val = "0";
                 }
+
                 if (freq.equals("")) {
-                    freq = "0";
+                    freq = "1";
                 }
-                realm.beginTransaction();
-                outlayYears.setPrice(Double.parseDouble(val));
-                outlayYears.setFrequency(Double.parseDouble(freq));
-                outlayYears.setTimePeriod(timePeriod);
-                realm.commitTransaction();
+
+                if (frequency.getFrequencyValue() == 1) {
+                    realm.beginTransaction();
+                    outlayYears.setPrice(Double.parseDouble(val));
+                    outlayYears.setFrequency(Double.parseDouble(freq));
+                    outlayYears.setTimePeriod(timePeriod);
+                    realm.commitTransaction();
+                } else {
+                    for (OutlayYears outlayYears1 : outlayResult.getOutlayYearses()) {
+                        double value = Double.parseDouble(freq) * ( frequency.getFrequencyValue() ==2 ? 1 : frequency.getFrequencyValue()) * Double.parseDouble(val);
+                        freq = "1";
+                        timePeriod = "per year";
+
+                        if(outlayYears1.getYear() >=  Integer.parseInt(spinnerYear.getSelectedItem().toString())) {
+                            realm.beginTransaction();
+                            outlayYears1.setPrice(outlayYears1.getPrice()+value);
+                            outlayYears1.setFrequency(Double.parseDouble(freq));
+                            outlayYears1.setTimePeriod(timePeriod);
+                            realm.commitTransaction();
+                        }
+
+                    }
+                }
 
             }
         }

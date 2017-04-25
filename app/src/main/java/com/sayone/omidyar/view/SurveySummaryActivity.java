@@ -102,6 +102,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
 
     String emailIdsStr;
     private Survey mSurvey;
+    private boolean sentFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -407,14 +408,21 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             handler.postDelayed(new Runnable() {
                 public void run() {
                     progress.dismiss();
-                    for(String temp : set) {
-                        Survey survey = realm.where(Survey.class).equalTo("surveyId", temp).findFirst();
-                        realm.beginTransaction();
-                        survey.setSendStatus(true);
-                        realm.commitTransaction();                    }
-                    Toast toast = Toast.makeText(context, getResources().getText(R.string.completed_text), Toast.LENGTH_SHORT);
-                    toast.show();
-                    surveyAdapter.notifyDataSetChanged();
+                    if(sentFlag) {
+                        for (String temp : set) {
+                            Survey survey = realm.where(Survey.class).equalTo("surveyId", temp).findFirst();
+                            realm.beginTransaction();
+                            survey.setSendStatus(true);
+                            realm.commitTransaction();
+                        }
+                        Toast toast = Toast.makeText(context, getResources().getText(R.string.completed_text), Toast.LENGTH_SHORT);
+                        toast.show();
+                        surveyAdapter.notifyDataSetChanged();
+                    }
+                    else {
+                        Toast toast = Toast.makeText(context, getResources().getText(R.string.save_failed), Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
                 }
             }, 3000);
 
@@ -645,6 +653,7 @@ public class SurveySummaryActivity extends BaseActivity implements View.OnClickL
             @Override
             public void onResponse(JSONObject response) {
                 Log.e("RES ", response.toString());
+                sentFlag = true;
             }
         }, new Response.ErrorListener() {
 
