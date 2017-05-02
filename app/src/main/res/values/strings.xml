@@ -463,6 +463,7 @@
     <string name="select_all">Select all</string>
     <string name="text_survey2">Survey2</string>
     <string name="button_reset_data">Reset all data</string>
+    <string name="button_reset">Reset</string>
     <string name="button_send_to_server">Send data to server</string>
     <string name="parcel_id">Parcel ID</string>
     <string name="site">Respondent Group</string>

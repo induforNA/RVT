@@ -82,6 +82,7 @@
     <string name="select_all">सब चुने </string>
     <string name="text_survey2">सर्वेक्षण2</string>
     <string name="button_reset_data">सभी डेटा रीसेट करे </string>
+    <string name="button_reset">रीसेट</string>
     <string name="button_send_to_server">सर्वर को डेटा भेजें</string>
     <string name="parcel_id">पार्सल आईडी</string>
     <string name="site">प्रतिवादी समूह</string>
