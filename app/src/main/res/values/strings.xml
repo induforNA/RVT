@@ -554,7 +554,7 @@
 
     <string name="natural_outlay_qn1">Give details of future costs</string>
     <string name="natural_outlay_qn2">Choose outlay item</string>
-    <string name="natural_outlay_qn3">In which year do you expect to first incur the cost?</string>
+    <string name="natural_outlay_qn3">In which year does the cost incur? </string>
     <string name="natural_outlay_qn4">Total cost</string>
     <string name="natural_outlay_qn6">How often does this expense occur?</string>
     <string name="natural_outlay_a_qn1">Future costs</string>
