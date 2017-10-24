@@ -7,10 +7,10 @@ Indufor North America partnered with the Foundation for Ecological Security (FES
 
 Downloads:
 
-- [Android app](https://github.com/induforNA/RVT/RVT_Android_app.apk)
-- [Excel model](https://github.com/induforNA/RVT/RVT_Excel_model.xlsx)
-- [Field manual](https://github.com/induforNA/RVT/RVT_Field_manual.pdf)
-- [Learning report](https://github.com/induforNA/RVT/RVT_Learning_report.pdf)
+- [Android app](https://github.com/induforNA/RVT/blob/omidyar_phase_two_final/RVT_Android_app.apk)
+- [Excel model](https://github.com/induforNA/RVT/blob/omidyar_phase_two_final/Rural%20Valuation%20Tool%20-%20Excel-based%20Version.xlsx)
+- [Field manual](https://github.com/induforNA/RVT/blob/omidyar_phase_two_final/Rural%20Valuation%20Tool%20-%20Field%20Manual.pdf)
+- [Learning report](https://github.com/induforNA/RVT/blob/omidyar_phase_two_final/Rural%20Valuation%20Tool%20-%20Learning%20Report.pdf)
 
 The code underlying the Android app version of the Rural Valuation Tool is available here on [Github](https://github.com/induforNA/RVT).
 
