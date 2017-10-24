@@ -7,6 +7,9 @@ Indufor North America partnered with the Foundation for Ecological Security (FES
 
 The code underlying the Android app version of the Rural Valuation Tool is available here on [Github](https://github.com/induforNA/RVT).
 
-The Excel-based version of the valuation model, along with a field guide, are in the process of being finalized and will be soon be made available. 
+- [Android app](https://github.com/induforNA/RVT/RVT_Android_app.apk)
+- [Excel model](https://github.com/induforNA/RVT/RVT_Excel_model.xlsx)
+- [Field manual](https://github.com/induforNA/RVT/RVT_Field_manual.pdf)
+- [Learning report](https://github.com/induforNA/RVT/RVT_Learning_report.pdf)
 
 Please address any questions to jeffrey.hatcher@indufor-na.com or yijia.chen@indufor-na.com
