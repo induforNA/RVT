@@ -1,5 +1,5 @@
 # Rural Valuation Tool
-_Developed by [Indufor North America](www.indufor-na.com), Foundation for Ecological Security and Ulster University_
+_Developed by [Indufor North America](https://www.indufor-na.com), Foundation for Ecological Security and Ulster University_
 
 _Funded by Omidyar Network_
 
